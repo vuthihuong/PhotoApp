@@ -18,6 +18,18 @@ export default class AlbumPose extends Component {
     static navigationOptions = {
       tabBarLabel: 'Cách tạo dáng'
   }
+
+  static navigationOptions = ({navigation}) => {
+    const {params = {}} = navigation.state;
+    let tabBarLabel = 'Cách tạo dáng';
+    // let tabBarIcon = () => (
+        // <Image 
+        //     source={home}
+        //     style={{width: 26, height: 26, }}
+        // />
+    // );
+    return {tabBarLabel}
+}
      render()
      {
         return(

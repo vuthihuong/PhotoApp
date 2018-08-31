@@ -7,12 +7,10 @@ import { createTabNavigator} from 'react-navigation'
 
 import HamburgerIcon from './HamburgerIcon'
 
-import home from '../../assets/img/menu/home.png'
 
+import event from '../../assets/img/menu/eventLetter.png'
 
-
-
-export default class Menu extends Component {
+export default class Event extends Component {
     constructor(props) {
       super(props);   
       YellowBox.ignoreWarnings([
@@ -23,10 +21,10 @@ export default class Menu extends Component {
 
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
-        let tabBarLabel = 'Trang chủ';
+        let tabBarLabel = 'Tạo sự kiện';
         let tabBarIcon = () => (
             <Image 
-                source={home}
+                source={event}
                 style={{width: 26, height: 26, }}
             />
         );
@@ -36,8 +34,8 @@ export default class Menu extends Component {
        render()
        {
           return(
-             <View style={{flex: 1,backgroundColor: 'white'}}>
-                <Text style={{fontSize: 23}}> This is Activity - 3 </Text> 
+             <View style={{flex: 1, backgroundColor: 'white' }}>
+                <Text style={{fontSize: 23}}> This is Activity - 4 </Text> 
              </View>
           );
        }
@@ -47,8 +45,7 @@ export default class Menu extends Component {
         MainContainer :{ 
          flex:1,
          paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
-        //  alignItems: 'center',
-        //  justifyContent: 'center',    
-         backgroundColor: 'white'
+         alignItems: 'center',
+         justifyContent: 'center',    
          }
        })

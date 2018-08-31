@@ -64,7 +64,8 @@ export  class InfoCustomer extends Component {
                </View>
                <View style ={styles.textInput}>
                  <Image source={iconUser} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Nguyễn Kim Thu</TextInput>
+                 <TextInput underlineColorAndroid='transparent' 
+                      style={{fontSize: 10}}>Phan Thu Phương</TextInput>
                </View>
 
                <View style ={styles.textInputMargin}>

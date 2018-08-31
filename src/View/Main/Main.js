@@ -12,14 +12,15 @@ import InfoCustomer from '../Info/InfoCustomer'
 import HistoryContract from './HistoryContract'
 import ManageContract from './ManageContract'
 import AlbumPose from './AlbumPose'
+import MenuTabBar from './MenuTabBar'
 
-// import notifi from '../../../src/assets/img/menu/notifi.png'
+import notifi from '../../assets/img/menu/notifi.png'
 
 const InfoCustomerStack = createStackNavigator({
     InfoCustomer: { 
       screen: InfoCustomer, 
       navigationOptions: ({ navigation }) => ({
-        title: 'Nguyễn Kim Thu',
+        title: 'Phan Thu Phương',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         // headerRight :  <Image source={notifi} style={{width: 30, height: 30}} />,
         // headerRight :  <Image source={notifi} style={{width: 30, height: 30, tintColor: 'green'}} />,
@@ -36,12 +37,14 @@ const InfoCustomerStack = createStackNavigator({
   });
 
 const MenuStack = createStackNavigator({
-    Menu: { 
-      screen: Menu, 
+    MenuTabBar: { 
+      screen: MenuTabBar, 
       navigationOptions: ({ navigation }) => ({
         title: 'Trang chủ',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        // headerRight :  <Image source={notifi} style={{width: 30, height: 30}} />,
+        headerRight : <TouchableOpacity>
+                         <Image source={notifi} style={{width: 30, height: 30}} />
+                    </TouchableOpacity> ,
         headerTitleStyle: styles.titleMenu,
         headerStyle: {
           backgroundColor: 'white',            
@@ -120,7 +123,7 @@ const MenuStack = createStackNavigator({
       screen: InfoCustomerStack,
       navigationOptions: {
         // title: 'Trần Nam Anh',
-        drawerLabel: 'Nguyễn Kim Thu',
+        drawerLabel: 'Phan Thu Phương',
         
       //   drawerIcon: ({ tintColor }) => (
       //   <Image
@@ -131,7 +134,7 @@ const MenuStack = createStackNavigator({
     },
   },
   
-    Menu: { 
+    MenuTabBar: { 
       screen: MenuStack,
       navigationOptions: {
         // title: 'Trang chủ',
@@ -159,19 +162,19 @@ const MenuStack = createStackNavigator({
     },
     },
   
-    AlbumPose: { 
-      screen: AlbumPoseStack,
-      navigationOptions: {
-        // title: 'Trang chủ',
-        drawerLabel: 'Cách tạo dáng',
-        // drawerIcon: ({ tintColor }) => (
-        // <Image
-        //   source={home}
-        //   style={[{width: 30, height: 30}, {tintColor: tintColor}]}
-        // />
-      // ),
-    },
-    },
+    // AlbumPose: { 
+    //   screen: AlbumPoseStack,
+    //   navigationOptions: {
+    //     // title: 'Trang chủ',
+    //     drawerLabel: 'Cách tạo dáng',
+    //     // drawerIcon: ({ tintColor }) => (
+    //     // <Image
+    //     //   source={home}
+    //     //   style={[{width: 30, height: 30}, {tintColor: tintColor}]}
+    //     // />
+    //   // ),
+    // },
+    // },
   
     HistoryContract: { 
       screen: HistoryContractStack,
@@ -231,7 +234,7 @@ const MenuStack = createStackNavigator({
       // paddingTop: 80, // This only works if you modify DrawerNavigator.js to pass style props. See link
   
     },
-    initialRouteName: 'Menu',
+    initialRouteName: 'MenuTabBar',
     headerMode: 'none'  
   });
 

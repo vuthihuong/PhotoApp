@@ -5,7 +5,7 @@ import { createDrawerNavigator } from 'react-navigation';
 
 import { createStackNavigator } from 'react-navigation'
 
-import menu from './../../img/menu/menu.png'
+import menu from '../../assets/img/menu/menu.png'
 
 export default class HamburgerIcon extends Component {
     toggleDrawer=()=>{
