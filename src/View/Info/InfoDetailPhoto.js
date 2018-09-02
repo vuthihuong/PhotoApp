@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity
+    StyleSheet, View, Text, Image, TouchableOpacity, ScrollView
 } from 'react-native'
+
+import { Table, Row, Rows, Col, Cols } from 'react-native-table-component';
 
 // import { CheckBox } from 'react-native-elements'
 
@@ -13,89 +15,122 @@ import dateBirth from '../../assets/img/info/icon_date_birth.png'
 import address from '../../assets/img/info/location.png'
 import photoIcon from '../../assets/img/info/photoDetail.png'
 import right from '../../assets/img/info/iconRight.png'
+import contract from '../../assets/img/info/contract.png'
 
 export default class InfoDetailPhoto extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+          tableHead: ['Thể loại', 'Giá', 'Mô tả'],
+          tableData: [
+            ['Giá chụp đơn', 'Học sinh: 99k/'],
+            ['Giá chụp đôi', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
+            ['Giá chụp nhóm', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
+            ['Giá ảnh cưới', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
+          ]
+        }
+      }
     render(){
+        const state = this.state;
         return(
-            <View style={styles.container}>
+          <ScrollView>
+              <View style={styles.container}>
                 <View style={styles.headDetailPhoto}>
-                    <Image source={iconInfo} style={{width: 70, height: 70}}/>
-                    <Text>Trần Nam Anh</Text>
-                    <View style={{flexDirection: "row"}}>
-                        <Image source={like} style={{width: 20, height: 20, marginRight: 5,
-                            tintColor: 'gray'}}/>
-                        <Text>1</Text>
-                        <Image source={comment} style={{width: 20, height: 20, marginLeft: 20,
-                             marginRight: 5, tintColor: 'gray'}}/>
-                        <Text>1</Text>
+                    <Image source={iconInfo} style={{width: 70, height: 70, tintColor: '#EE3B3B'}}/>
+                    <View style={styles.proDetail} >
+                        <Text style={{color: 'black'}}>Trần Nam Anh</Text>
+                        <View style={{flexDirection:'row'}}>
+                            <View>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Image source={iconGender} style={{width: 30, height: 30,}} />
+                                    <Text style={{fontSize: 13, color: 'black',marginTop: 5}}>Nam</Text>
+                                </View>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Image source={like} style={{width: 15, height: 15, marginLeft: 5}}/>
+                                     <Text style={{marginTop: -3, marginLeft: 5}}>1</Text>
+                                </View>
+                            </View>
+                            <View>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Image source={dateBirth} style={{width: 20, height: 20, marginTop: 5, }} />
+                                    <Text style={{fontSize: 13, color: 'black',marginTop: 7}}>19/8/1995</Text>
+                                </View>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Image source={contract} style={{width: 20, height: 20, }}/>
+                                    <Text style={{ marginLeft: 5}}>1</Text>
+                                </View>
+                            </View>
+                        </View>
                     </View>
                 </View>
-
                 <View style={styles.bodyDetailPhoto}>
-                   
-                    <View style ={styles.textBody}>
-                        <Image source={iconGender} style={{width: 30, height: 30,tintColor: '#1E90FF'}} />
-                        <Text style={{fontSize: 13, color: 'black'}}>Nam</Text>
-                        
-                    </View>
-
-                    <View style ={styles.textBody}>
-                        <Image source={dateBirth} style={{width: 30, height: 30, tintColor: '#1E90FF'}} />
-                        <Text style={{fontSize: 13, color: 'black'}}>19/8/1995</Text>
-                    </View>
-
-                    <View style ={styles.textBody}>
-                        <Image source={address} style={{width: 30, height: 30, tintColor: '#1E90FF',}} />
+                    <View style={{flexDirection:'row'}}>
+                        <Image source={address} style={{width: 30, height: 30, marginTop: -5}} />
                         <Text style={{fontSize: 13, color: 'black'}}>152 Phố Huế, Hai Bà Trưng, Hà Nội</Text>
-                    </View>
+                     </View>
 
                      <View style ={styles.textBody}>
                         {/* <Image source={photoIcon} style={{width: 30, height: 20}} /> */}
                         <Text style={{fontSize: 13, color: 'black'}}>Nhận chụp ảnh các thể loại:</Text>
                         
                     </View>
-                    <View style={styles.textBody}>
-                        <Image source={right} style={{width: 15, height: 15, marginLeft: 30}}/>
-                        <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh cá nhân</Text>
+
+                     <View style={styles.textBody}>
+                        <View>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
+                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh cá nhân</Text>
+                            </View>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
+                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh đôi</Text>
+                            </View>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>   
+                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh nhóm</Text>
+                            </View>
+                        </View>
+                        <View>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
+                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh kỷ yếu</Text>
+                            </View>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
+                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh cưới</Text>
+                            </View>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
+                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh quảng cáo</Text>
+                            </View>
+                        </View>
                      </View>
 
-                      <View style={styles.textBody}>
-                        <Image source={right} style={{width: 15, height: 15, marginLeft: 30}}/>
-                        <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh nhóm</Text>
-                     </View>
-
-                      <View style={styles.textBody}>
-                        <Image source={right} style={{width: 15, height: 15, marginLeft: 30}}/>
-                        <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh kỷ yếu</Text>
-                     </View>
-
-                      <View style={styles.textBody}>
-                        <Image source={right} style={{width: 15, height: 15, marginLeft: 30}}/>
-                        <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh cưới</Text>
-                     </View>
-
-                      <View style={styles.textBody}>
-                        <Image source={right} style={{width: 15, height: 15, marginLeft: 30}}/>
-                        <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh quảng cáo</Text>
-                     </View>
-
-                     <View style ={styles.textBody}>
+                      <View style ={styles.textBody}>
                         <TouchableOpacity>
-                             <Text style={{fontSize: 13, color: '#1E90FF',textDecorationLine: 'underline',}}>
-                                Bảng giá ảnh</Text>
+                                <Text style={{fontSize: 13, color: '#EE3B3B', textDecorationLine: 'underline',}}>
+                                    Album ảnh</Text>
                         </TouchableOpacity>
-                        
                     </View>
 
-                     <View style ={styles.textBody}>
-                     <TouchableOpacity>
-                            <Text style={{fontSize: 13, color: '#1E90FF', textDecorationLine: 'underline',}}>
-                                Album ảnh</Text>
-                     </TouchableOpacity>
-                        
+                    <View style ={styles.price}>
+                        <Text style={{fontSize: 13, color: '#EE3B3B', 
+                            textDecorationLine: 'underline',}}>Bảng giá ảnh</Text>
+                    </View>
+                    <View style={styles.tbl}>
+                        <Table borderStyle={{borderWidth: 1, borderColor: 'black'}}>
+                            <Row data={state.tableHead} widthArr={[80,270]} textStyle={{color: 'black', textAlign: 'center'}} 
+                                style={styles.head} style={styles.text}/>
+                            <Rows data={state.tableData} widthArr={[80,270]} textStyle={{color: 'black',textAlign: 'center'}} 
+                                    style={styles.text}>
+                                    
+                            </Rows>
+                        </Table>
                     </View>
                 </View>
             </View>
+        </ScrollView>
+           
         )
     }
 }
@@ -104,25 +139,32 @@ styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: "white"
-        
     },
     headDetailPhoto: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 20,
+        flexDirection: 'row'
     },
     bodyDetailPhoto: {
         marginLeft: 20, marginTop: 20
     },
     textBody: {
-        // marginTop: 5,
-        marginLeft: 20, marginRight: 20,
-        borderRadius: 20,
-        // borderWidth: 1,
-        // borderColor: "gray",
         flexDirection: 'row',
-        // justifyContent: 'center',
-        alignItems: 'center',
-        height:35
+       marginTop: 10
     },
+    price: {
+        alignItems: 'center',
+        marginTop: 20
+    },
+    tbl: { 
+          paddingTop: 20,  paddingRight: 10
+    },
+    headTbl: {
+         height: 40,
+        },
+    textTbl: {
+         margin: 6 , color: 'black',
+        }
+
 })
