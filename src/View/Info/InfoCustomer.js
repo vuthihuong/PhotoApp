@@ -9,7 +9,7 @@ import phone from '../../assets/img/info/phone.png'
 import iconDateBirth from '../../assets/img/info/icon_date_birth.png'
 import iconLocation from '../../assets/img/info/location.png'
 import iconGender from '../../assets/img/info/gender.png'
-import photo from '../../assets/img/info/photo.jpg'
+import photo from '../../assets/img/info/photo.png'
 // import menu from '../../assets/img/menu/menu.png'
 
 import { createStackNavigator } from 'react-navigation';
@@ -19,7 +19,7 @@ import ResetPass from './ResetPass'
 
 
 
-export  class InfoCustomer extends Component {
+export default class InfoCustomer extends Component {
 
     constructor(props) {
    
@@ -36,54 +36,69 @@ export  class InfoCustomer extends Component {
     
     }
 
-    static navigationOptions = 
- {
-    title: 'Thông tin cá nhân',
-    // header: null
+//     static navigationOptions = 
+//  {
+//     title: 'Thông tin cá nhân',
+//     // header: null
    
- };
+//  };
      
-     FunctionToOpenSecondActivity = () =>
-     {
-        this.props.navigation.navigate('Second');
-        
-        
-     }
+    //  FunctionToOpenSecondActivity = () => {
+    //       this.props.navigation.navigate('Second');
+    //   }
      
        render()
        {
         const {navigate} = this.props.navigation;
           return(
      
-             <View style={styles.containerCus}>    
-               <View style={styles.iconInfo}>
-                 <Image source={info} style={{width: 75, height: 75}} />
-                 <TouchableOpacity style={{marginTop: -30, marginLeft: 40}}>
-                      <Image source={photo} style={{width: 40, height: 40, }} />
+            //  <View style={styles.containerCus}> 
+             <View style={{flex:1, backgroundColor: '#F8F8FF'}}>  
+                {/* <View style={styles.iconInfo}   */}
+               <View style={{ justifyContent: 'center',alignItems: 'center',
+                               marginTop: 20, marginBottom: 10,}}>
+                 <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
+                 <TouchableOpacity style={{marginTop: -35, marginLeft: 40}}>
+                      <Image source={photo} style={{width: 50, height: 50,}} />
                   </TouchableOpacity>
                </View>
-               <View style ={styles.textInput}>
+               {/* <View style ={styles.textInput}> */}
+               <View style ={{ marginTop: 20,  marginLeft: 20, marginRight: 20,
+                               borderRadius: 20, borderWidth: 1, borderColor: "gray",
+                               flexDirection: 'row',alignItems: 'center',height:35}}>
                  <Image source={iconUser} style={{width: 30, height: 30}} />
                  <TextInput underlineColorAndroid='transparent' 
                       style={{fontSize: 10}}>Phan Thu Phương</TextInput>
                </View>
 
-               <View style ={styles.textInputMargin}>
+               {/* <View style ={styles.textInputMargin}> */}
+               <View style ={{ marginTop: 10,marginLeft: 20, marginRight: 20,
+                              borderRadius: 20, borderWidth: 1,  borderColor: "gray",
+                               flexDirection: 'row',alignItems: 'center', height:35}}>
                  <Image source={phone} style={{width: 20, height: 20,  marginLeft: 5}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>0973261255</TextInput>
                </View>
 
-               <View style ={styles.textInputMargin}>
+               {/* <View style ={styles.textInputMargin}> */}
+               <View style ={{ marginTop: 10,marginLeft: 20, marginRight: 20,
+                              borderRadius: 20, borderWidth: 1,  borderColor: "gray",
+                               flexDirection: 'row',alignItems: 'center', height:35}}>
                  <Image source={iconDateBirth} style={{width: 20, height: 20, marginLeft: 5}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>20/8/1995</TextInput>
                </View>
 
-               <View style ={styles.textInputMargin}>
+               {/* <View style ={styles.textInputMargin}> */}
+               <View style ={{ marginTop: 10,marginLeft: 20, marginRight: 20,
+                              borderRadius: 20, borderWidth: 1,  borderColor: "gray",
+                               flexDirection: 'row',alignItems: 'center', height:35}}>
                  <Image source={iconLocation} style={{width: 15, height: 20, marginLeft: 7, marginRight: 3}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Số 196, Giải Phóng, Hà Nội</TextInput>
                </View>
 
-               <View style ={styles.textInputMargin}>
+               {/* <View style ={styles.textInputMargin}> */}
+               <View style ={{ marginTop: 10,marginLeft: 20, marginRight: 20,
+                              borderRadius: 20, borderWidth: 1,  borderColor: "gray",
+                               flexDirection: 'row',alignItems: 'center', height:35}}>
                  <Image source={iconGender} style={{width: 30, height: 30}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Nữ</TextInput>
                 
@@ -100,16 +115,15 @@ export  class InfoCustomer extends Component {
                  </Picker>
                </View> */}
 
-               <View style = {styles.infoFooter}> 
-                  <TouchableOpacity style={{ borderColor: '#6495ED',
-                                          borderWidth: 1, width: 160  , height: 30, borderRadius: 10,
-                                          backgroundColor: '#1E90FF', marginLeft: 20, marginTop: 50 }}>
+                {/* <View style = {styles.infoFooter}>  */}
+               <View style = {{ flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',}}> 
+                  <TouchableOpacity style={{ width: 160  , height: 30, borderRadius: 10,
+                                          backgroundColor: '#EE3B3B', marginLeft: 20, marginTop: 50 }}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Lưu</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ borderColor: '#6495ED',
-                                          borderWidth: 1, width: 160, height: 30, borderRadius: 10, 
-                                          backgroundColor: '#1E90FF',marginRight: 20, marginTop: 50 }}
-                                          onPress = { this.FunctionToOpenSecondActivity }>
+                    <TouchableOpacity style={{ width: 160, height: 30, borderRadius: 10, 
+                                          backgroundColor: '#EE3B3B',marginRight: 20, marginTop: 50 }}
+                                          onPress={() => this.props.navigation.navigate('ResetPass')}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Đổi mật khẩu</Text>
                     </TouchableOpacity>
                </View>
@@ -119,21 +133,21 @@ export  class InfoCustomer extends Component {
        }
     }
     
-    export default Project = createStackNavigator(
-      {
-       First: { screen: InfoCustomer,
-          navigationOptions: ({ navigation }) => ({
-            header: null
-          })
-      },
+    // export default Project = createStackNavigator(
+    //   {
+    //    First: { screen: InfoCustomer,
+    //       navigationOptions: ({ navigation }) => ({
+    //         header: null
+    //       })
+    //   },
        
-       Second: { screen: ResetPass, 
+    //    Second: { screen: ResetPass, 
              
-      },
+    //   },
 
-      },
-        // {headerMode: 'modal'}
-      );
+    //   },
+    //     // {headerMode: 'modal'}
+    //   );
 
     styles = StyleSheet.create({
       containerCus:{
@@ -145,7 +159,7 @@ export  class InfoCustomer extends Component {
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20,
-        marginBottom: 10
+        marginBottom: 10,
       },
       
       textInput: {
@@ -178,40 +192,5 @@ export  class InfoCustomer extends Component {
         justifyContent: 'space-between',
         alignItems: 'center',
       },
-
-
-      container: {
-        flex:1
-    },
-    headGoBack: {
-        flex:1,
-    
-    },
-    textPass:{
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    bodyPass: {
-        flex: 3,
-        // justifyContent: 'center',
-        // alignItems: "center"
-    },
-    passOld: {
-        marginTop: 20,
-        marginLeft: 20, marginRight: 20,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: "gray",
-        flexDirection: 'row',
-        // justifyContent: 'center',
-        alignItems: 'center',
-        height:35
-    },
-    buttonSave: {
-      borderColor: '#6495ED',
-      borderWidth: 1  , height: 30, borderRadius: 10,
-      backgroundColor: '#1E90FF', marginLeft: 20, marginTop: 50,
-      marginRight: 20
-  }
     })
      

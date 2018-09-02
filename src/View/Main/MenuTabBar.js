@@ -4,43 +4,90 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } 
 import { createDrawerNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation'
 import { createBottomTabNavigator} from 'react-navigation'
+import { createMaterialTopTabNavigator} from 'react-navigation'
+
 
 import HamburgerIcon from './HamburgerIcon'
 import Event from './Event'
-import Menu from './Menu'
 import AlbumPose from './AlbumPose'
+import PostTabBar from './../Post/PostTabBar'
+import Menu from './Menu'
 
-let routeConfigs = {
+
+// let routeConfigs = {
+//     Menu: {
+//         screen: Menu
+//     },
+//     AlbumPose: {
+//         screen: AlbumPose
+//     },
+//     Event: {
+//         screen: Event
+//     }
+// };
+
+// let tabNavigatorConfig = {
+//     // tabBarPosition: 'top',
+//     // animationEnabled: true,
+//     // swipeEnabled: true,
+//     tabBarOptions : {
+//         tabBarActiveTintColor: 'red',
+// 		tabBarInactiveTintColor: 'green',
+//         // inactiveTintcolor: 'black',
+//             activeBackgroundColor: '#EE3B3B',
+//         // inactiveBackgroundColor: '#F0F8FF',
+//         labelStyle: {
+//             fontSize: 10,  color: 'black'
+//         },
+//         style: {
+//             backgroundColor: 'white',
+           
+//         },
+//         tabStyle: {
+//            height: 40
+//           },
+//     },
+//     // initialRouteName: Event
+// };
+
+// const MenuTabBar = createMaterialTopTabNavigator(routeConfigs, tabNavigatorConfig)
+
+
+const MenuTabBar = createMaterialTopTabNavigator({
     Menu: {
         screen: Menu
     },
     AlbumPose: {
         screen: AlbumPose
     },
-    Event: {
-        screen: Event
-    }
-};
-
-let tabNavigatorConfig = {
-    tabBarPosition: 'top',
-    animationEnabled: true,
-    swipeEnabled: true,
-    tabBarOptions: {
-        activeTintColor: 'white',
-        inactiveTintcolor: 'black',
-        activeBackgroundColor: '#008080',
-        inactiveBackgroundColor: '#F0F8FF',
-        labelStyle: {
-            fontSize: 13, color: 'black'
-        },
-        style: {
-            backgroundColor: 'lightgray'
+    // Event: {
+    //     screen: Event
+    // }, 
+     PostTabBar: {
+        screen: PostTabBar,
+        navigationOptions: {
+            title: 'Tạo sự kiện'
         }
-    },
-    // initialRouteName: Event
-};
+    }, 
+  }, {
+    tabBarOptions: {
+        labelStyle: {
+            fontSize: 10, 
+        },
+            activeTintColor: '#EE3B3B',
+            inactiveTintColor: 'black',
+            activeBackgroundColor: '#EE3B3B',
+            inactiveBackgroundColor: 'white',
+        style: {
+            backgroundColor: 'white',
+         },
 
-const MenuTabBar = createBottomTabNavigator(routeConfigs, tabNavigatorConfig)
+         tabStyle: {
+             height: 30
+         },
+         indicatorStyle: {
+            backgroundColor: '#EE3B3B',
+        }
+  }});
 
 export default MenuTabBar;

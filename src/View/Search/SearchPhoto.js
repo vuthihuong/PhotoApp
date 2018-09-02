@@ -1,0 +1,172 @@
+import React, { Component } from 'react';
+import {
+    StyleSheet, Text,
+    View, Image, TextInput,
+    TouchableOpacity
+} from 'react-native';
+
+import { Dropdown } from 'react-native-material-dropdown';
+
+import gobackIcon from '../../assets/img/info/goback.png'
+import address from '../../assets/img/info/location.png'
+import dollar from '../../assets/img/search/dollar.png'
+import category from '../../assets/img/search/category.png'
+import row from '../../assets/img/info/row.png'
+
+export default class SearchPhoto extends Component{
+    render(){
+
+        let data = [{
+            value: '10k - 50k',
+          }, {
+            value: '50k - 100k',
+          }, {
+            value: '100k - 500k',
+          }, {
+            value: '500k - 1000k',
+          }, {
+            value: '1000k - 5000k',
+          }, {
+            value: '5000k - 10000k',
+          }, {
+            value: '10000k - 30000k',
+          }, {
+            value: '30000k - 50000k',
+          }, {
+            value: '> 50000k',
+          }];
+
+          let theloai = [{
+            value: 'Chụp ảnh cá nhân'
+           },{
+          value: 'Chụp ảnh đôi'
+          },{
+              value: 'Chụp ảnh nhóm'
+          },{
+              value: 'Chụp ảnh kỷ yếu'
+          },{
+              value: 'Chụp ảnh cưới'
+          },{
+              value: 'Chụp ảnh quảng cáo'
+          },];
+         
+        return(
+            <View style={styles.container}>
+                <View style={styles.headGoBack}>
+                    <TouchableOpacity>
+                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15, marginTop: 15}}/>
+                    </TouchableOpacity>
+                    <View style={styles.textPass}>
+                        <Text style={{fontSize: 20, color: 'black', }}>
+                                Tìm kiếm nhiếp ảnh gia</Text>
+                    </View>
+                </View>
+                <View style ={{justifyContent: 'center',
+                                        alignItems: 'center', marginBottom: 20}}>
+                    <TextInput  underlineColorAndroid='transparent'
+                                style={{ height: 40, width: 350, borderWidth: 1, borderColor: '#CFCFCF',
+                                            marginTop: 30, 
+                                        }}
+                                placeholder="Tìm kiếm"
+                                onChangeText={(text) => this.setState({ text })}                            
+                            />
+                </View>
+                <TouchableOpacity>
+                    <View style={styles.textBodySearch}>
+                        <View style ={styles.textBody}>
+                            <Image source={address} style={{width: 30, height: 30, tintColor: '#1E90FF',
+                                    marginTop: 10, marginLeft: -5}} />
+                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Địa điểm</Text>
+                        </View>
+                        <View style={styles.textBody}>
+                            <Image source={row} style={{width: 15, height: 20, tintColor: '#1E90FF',
+                                    marginRight: 10, marginTop: 10}} />
+                        </View>  
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <View style={styles.textBodySearch}>
+                        <View style ={styles.textBody}>
+                            <Image source={dollar} style={{width: 15, height: 20, tintColor: '#1E90FF',
+                                    marginRight: 10, marginTop: 10}} />
+                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Giá</Text>
+                           
+                        </View>
+                        
+                        <View style={{width: 200}}>
+                        <Dropdown  data={data} pickerStyle={{borderWidth: 1, borderColor:'black'}} />
+                        </View>    
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                    <View style={styles.textBodySearch}>
+                        <View style ={styles.textBody}>
+                            <Image source={category} style={{width: 20, height: 20, tintColor: '#1E90FF',
+                                    marginRight: 10, marginTop: 10}} />
+                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Thể loại</Text>
+                        </View>
+                        
+                        <View style={{width: 200}}>
+                        <Dropdown  data={theloai} pickerStyle={{borderWidth: 1, borderColor:'black'}} />
+                        </View>    
+                    </View>
+                </TouchableOpacity>
+
+                <View style={{}}>
+                    <TouchableOpacity style={{ borderColor: '#6495ED',
+                                          borderWidth: 1, width: 345  , height: 30, borderRadius: 10,
+                                          backgroundColor: '#1E90FF', marginLeft: 20, marginTop: 50 }}>
+                        <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tìm kiếm</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+}
+
+styles = StyleSheet.create({
+    container: {
+        flex:1,
+        backgroundColor: 'white'
+    },
+   
+
+    textPass:{
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    textBody: {
+        // marginTop: 5,
+       
+        flexDirection: 'row',
+       
+        alignItems: 'center',
+       
+        
+    },
+
+    textBodySearch: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderTopWidth: 1, borderColor: '#CFCFCF',
+        marginLeft: 10, 
+        marginRight: 10,
+        marginTop: 10,
+       
+    },
+
+    textBodySearch1: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderTopWidth: 1, borderColor: '#CFCFCF',
+        borderBottomWidth:1, 
+        marginBottom: 10,
+        marginLeft: 10, 
+        marginRight: 10,
+        marginTop: 10,
+       
+    }
+
+})

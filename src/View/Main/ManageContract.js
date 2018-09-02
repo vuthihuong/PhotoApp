@@ -19,8 +19,8 @@ export default class ManageContract extends Component{
          render()
          {
             return(     
-               <View>    
-                  <Text style={{fontSize: 23}}> This is Activity - 4 </Text>           
+               <View style={styles.MainContainer}>    
+                  <Text style={{fontSize: 23}}> Quản lý hợp đồng</Text>           
                </View>
             );
          }
@@ -34,7 +34,7 @@ export default class ManageContract extends Component{
            paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
            alignItems: 'center',
            justifyContent: 'center',
-             
+            backgroundColor: 'white'
            }
          
          })

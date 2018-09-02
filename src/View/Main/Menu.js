@@ -37,7 +37,7 @@ export default class Menu extends Component {
        {
           return(
              <View style={{flex: 1,backgroundColor: 'white'}}>
-                <Text style={{fontSize: 23}}> This is Activity - 3 </Text> 
+                {/* <Text style={{fontSize: 23}}> This is Activity - 3 </Text>  */}
              </View>
           );
        }

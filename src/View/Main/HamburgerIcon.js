@@ -18,7 +18,7 @@ export default class HamburgerIcon extends Component {
           <TouchableOpacity onPress={this.toggleDrawer.bind(this)} >
             <Image
               source={menu}
-              style={{ width: 25, height: 25, marginLeft: 5}}
+              style={{ width: 20, height: 20, marginLeft: 5, tintColor: '#EE3B3B'}}
               // style={{ width: 25, height: 25, marginLeft: 5, tintColor: 'green'}}
             />     
             {/* <Icon name="menu" style={{color: 'white', padding: 10, marginLeft:10, fontSize: 20}}/> */}

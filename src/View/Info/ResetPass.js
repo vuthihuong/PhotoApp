@@ -6,55 +6,60 @@ import lock from '../../assets/img/info/lock.png'
 
 
 export default class ResetPass extends Component {
-    static navigationOptions = {
-        title: 'Đổi mật khẩu',
-        headerMode: 'none' 
-      
-     }; 
-
     render () {
-        const {navigate} = this.props.navigation;
+        // const {navigate} = this.props.navigation;
         return(
-            <View style={styles.container}>
-                {/* <View style={styles.headGoBack}>
-                    <TouchableOpacity>
-                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15, marginTop: 15}}/>
+            <View style={{flex:1, backgroundColor:'white'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoCustomer')}>
+                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
+                                     marginTop: 15, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
-                    <View style={styles.textPass}>
-                         <Text style={{fontSize: 20, color: 'black'}}>
+                    <View style={{justifyContent:'center', alignItems:'center',paddingTop: 15}}>
+                         <Text style={{fontSize: 20, color: '#EE3B3B'}}>
                                 Đổi mật khẩu</Text>
                     </View>
+                    <View><Text></Text></View>
                     
                     
-                </View> */}
-                <View style={styles.bodyPass}>
-                    <View style ={styles.passOld}>
+                </View>
+                <View style={{justifyContent:'center', alignContent: 'center', flex:2}}>
+                    <View style ={{flexDirection: 'row', marginTop: 20, marginLeft: 20, marginRight: 20,
+                             borderRadius: 20, borderWidth: 1, borderColor: "gray",
+                            alignItems: 'center',height:35}}>
                         <Image source={lock} style={{width: 20, height: 20, marginLeft: 10}} />
                         <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}} value="Mật khẩu cũ" />
                     
                     </View>
 
-                     <View style ={styles.passOld}>
+                     <View style ={{flexDirection: 'row', marginTop: 20, marginLeft: 20, marginRight: 20,
+                             borderRadius: 20, borderWidth: 1, borderColor: "gray",
+                            alignItems: 'center',height:35}}>
                         <Image source={lock} style={{width: 20, height: 20, marginLeft: 10}} />
                         <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}} value="Mật khẩu mới" />
                     
                     </View>
 
 
-                     <View style ={styles.passOld}>
+                    <View style ={{flexDirection: 'row', marginTop: 20, marginLeft: 20, marginRight: 20,
+                             borderRadius: 20, borderWidth: 1, borderColor: "gray",
+                            alignItems: 'center',height:35}}>
                         <Image source={lock} style={{width: 20, height: 20, marginLeft: 10}} />
                         <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}} 
                                     value="Nhập lại mật khẩu mới" />
                     
                     </View>
-
-                     <View style = {styles.infoFooter}> 
-                  <TouchableOpacity style={styles.buttonSave}>
-                        <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Lưu</Text>
+                </View>
+                <View style = {{flex: 2}}> 
+                  <TouchableOpacity style={{ height: 30, width: 350,
+                        borderRadius: 10, backgroundColor: '#EE3B3B', marginLeft: 20, marginTop: 50,
+                         marginRight: 20}}
+                        
+                        >
+                        <Text style={{ textAlign:"center", color: 'white', marginTop: 5, }}>Lưu</Text>
                     </TouchableOpacity>
                     
                </View>
-                </View>
                 
             </View>
         );
@@ -62,11 +67,12 @@ export default class ResetPass extends Component {
 }
 
 styles = StyleSheet.create({
-    container: {
-        flex:1
+    containerReset: {
+        flex:1,
+        backgroundColor: 'white'
     },
     headGoBack: {
-        flex:1,
+        // flex:1,
     
     },
     textPass:{

@@ -22,14 +22,13 @@ const InfoCustomerStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Phan Thu Phương',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        // headerRight :  <Image source={notifi} style={{width: 30, height: 30}} />,
-        // headerRight :  <Image source={notifi} style={{width: 30, height: 30, tintColor: 'green'}} />,
-        // headerTitleStyle: styles.titleMenu,
-        // headerStyle: {
-        //   backgroundColor: 'white',           
-        // },
-        // headerTintColor: 'green', 
-        headerMode: 'none'
+        headerTintColor: '#EE3B3B', 
+        headerMode: 'none',
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
       })
     },
   },{ 
@@ -40,16 +39,19 @@ const MenuStack = createStackNavigator({
     MenuTabBar: { 
       screen: MenuTabBar, 
       navigationOptions: ({ navigation }) => ({
-        title: 'Trang chủ',
+        title: 'TRANG CHỦ',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerRight : <TouchableOpacity>
-                         <Image source={notifi} style={{width: 30, height: 30}} />
+                         <Image source={notifi} style={{width: 20, height: 20, tintColor: '#EE3B3B'}} />
                     </TouchableOpacity> ,
-        headerTitleStyle: styles.titleMenu,
+        headerTitleStyle: {fontSize: 15},
         headerStyle: {
-          backgroundColor: 'white',            
+          backgroundColor: 'white',    
+          height: 35,    
+          
         },
-        // headerTintColor: 'green',          
+        headerTintColor: '#EE3B3B',   
+        borderHeaderBottomColor: '#EE3B3B'        
       })
     },
   });
@@ -63,7 +65,12 @@ const MenuStack = createStackNavigator({
         headerStyle: {
           backgroundColor: 'white'
         },
-        headerTintColor: 'green',
+        headerTintColor: '#EE3B3B', 
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
       })
     },
   });
@@ -74,14 +81,12 @@ const MenuStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Lịch sử hợp đồng',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        // headerRight :  <Image source={menu} style={{width: 30, height: 30}} />,
-
+        headerTintColor: '#EE3B3B', 
         headerStyle: {
-          backgroundColor: '#FF9800',
-        //  paddingTop: -330
+          backgroundColor: 'white',    
+          height: 35,    
+          
         },
-        headerTitleStyle: styles.titleMenu,
-        headerTintColor: '#fff',
       })
     },
   });
@@ -92,13 +97,12 @@ const MenuStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Quản lý hợp đồng',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        //  headerRight :  <Image source={menu} style={{width: 30, height: 30}} />,
+        headerTintColor: '#EE3B3B', 
         headerStyle: {
-          backgroundColor: '#FF9800',
-        //  paddingTop: -330
+          backgroundColor: 'white',    
+          height: 35,    
+          
         },
-        headerTitleStyle: styles.titleMenu,
-        // headerTintColor: '#fff',
       })
     },
   });
@@ -111,9 +115,12 @@ const MenuStack = createStackNavigator({
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTitleStyle: styles.titleMenu,
         headerStyle: {
-          backgroundColor: 'white',           
+          backgroundColor: 'white',    
+          height: 35,    
+          
         },
-        // headerTintColor: 'green', 
+        headerTintColor: '#EE3B3B', 
+        
       })
     },
   });
@@ -122,15 +129,12 @@ const MenuStack = createStackNavigator({
     InfoCustomer: {
       screen: InfoCustomerStack,
       navigationOptions: {
-        // title: 'Trần Nam Anh',
         drawerLabel: 'Phan Thu Phương',
-        
-      //   drawerIcon: ({ tintColor }) => (
-      //   <Image
-      //     source={person}
-      //     style={[{width: 70, height: 50}, {tintColor: tintColor}]}
-      //   />
-      // ),
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
     },
   },
   
@@ -139,26 +143,31 @@ const MenuStack = createStackNavigator({
       navigationOptions: {
         // title: 'Trang chủ',
         drawerLabel: 'Trang chủ',
-      //   drawerIcon: ({ tintColor }) => (
-      //   <Image
-      //     source={home}
-      //     style={[{width: 30, height: 30}, {tintColor: tintColor}]}
-      //   />
-      // ),
-    },
+       
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/menu/house.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
+          />
+        ),
+    }
     },
   
     ListFavorite: { 
       screen: ListFavoriteStack,
       navigationOptions: {
-        // title: 'Trang chủ',
         drawerLabel: 'Danh sách yêu thích',
-        // drawerIcon: ({ tintColor }) => (
-        // <Image
-        //   source={home}
-        //   style={[{width: 30, height: 30}, {tintColor: tintColor}]}
-        // />
-      // ),
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/info/heart.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
     },
     },
   
@@ -179,14 +188,18 @@ const MenuStack = createStackNavigator({
     HistoryContract: { 
       screen: HistoryContractStack,
       navigationOptions: {
-        // title: 'Trang chủ',
         drawerLabel: 'Lịch sử hợp đồng',
-      //   drawerIcon: ({ tintColor }) => (
-      //   <Image
-      //     source={home}
-      //     style={[{width: 30, height: 30}, {tintColor: tintColor}]}
-      //   />
-      // ),
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/info/manaContract.png')}
+            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
     },
     }, 
   
@@ -194,23 +207,18 @@ const MenuStack = createStackNavigator({
       screen: ManageContractStack,
       navigationOptions: {
         drawerLabel: 'Quản lý hợp đồng',
-      //   drawerIcon:({tintColor}) => (
-      //     <Image 
-      //         source={home}
-      //         style={[{tintColor:'pink', width: 20, height: 20}]}
-      //     />
-      // ),
-        drawerOpenRoute: 'DrawerOpen',
-        drawerCloseRoute: 'DrawerClose',
-        activeBackgroundColor: '#10ACBB',
-        style:{margin: 100}
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/info/manaContract.png')}
+            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
       },
-      contentOptions: {
-        activeTintColor: 'white',
-        activeBackgroundColor: '#10ACBB',
-        // inactiveTintColor: 'black',
-        labelStyle: 'normal'
-      }
     },
   
     // Guide: { 
@@ -231,10 +239,15 @@ const MenuStack = createStackNavigator({
     drawerPosition: 'left',
     
     style: {
-      // paddingTop: 80, // This only works if you modify DrawerNavigator.js to pass style props. See link
-  
+      // paddingTop: 80, // This only works if you modify DrawerNavigator.js to pass style props. See link 
     },
     initialRouteName: 'MenuTabBar',
+    contentOptions: {
+      activeTintColor :'#EE3B3B',
+      //  inactiveTintColor :'#1999CE',
+      activeBackgroundColor :'white',
+      // inactiveBackgroundColor :'#ffffff',
+    },
     headerMode: 'none'  
   });
 
@@ -253,6 +266,5 @@ const MenuStack = createStackNavigator({
      icon1: {
        width:10,
        height: 10
-     }
-   
+     } 
    });

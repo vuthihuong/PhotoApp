@@ -14,6 +14,8 @@ import {createStackNavigator} from 'react-navigation'
 import Login from './src/View/Login/login'
 import Signup from './src/View/Login/singup'
 import Main from './src/View/Main/Main'
+import InfoCustomer from './src/View/Info/InfoCustomer'
+import ResetPass from './src/View/Info/ResetPass'
 
 
 const instructions = Platform.select({
@@ -26,17 +28,24 @@ const instructions = Platform.select({
 
 const Mainapp = createStackNavigator({
     Login: {
-      screen: Login,
-      //  navigationOptions: {
-      //      headerTitle: 'Login'
-      //  }
-    },
+        screen: Login,
+        //  navigationOptions: {
+        //      headerTitle: 'Login'
+        //  }
+        },
     Signup: {
-      screen: Signup,
-    },
-       Main: {
-           screen: Main
-       }
+        screen: Signup  },
+
+    Main: {
+        screen: Main },
+
+    InfoCustomer: {
+        screen: InfoCustomer,
+        headerBackTitle : 'Đổi mật khẩu' },
+    
+    ResetPass: {
+        screen: ResetPass
+    }
     },{
       headerMode:'none'
     });

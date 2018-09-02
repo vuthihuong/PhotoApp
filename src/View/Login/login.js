@@ -23,12 +23,12 @@ export  default  class Login extends Component {
                 </View>
                 <View>
                     <View style={styles.textLogin}>
-                        <TextInput  placeholderTextColor="#008080" 
+                        <TextInput  placeholderTextColor="#FF6A6A" 
                             style={styles.textInputLogin}
                             placeholder="Nhập số điện thoại"
                             onChangeText={(text) => this.setState({ text })}                            
                         />
-                        <TextInput placeholderTextColor="#008080" 
+                        <TextInput placeholderTextColor="#FF6A6A" 
                             style={styles.textInputLogin}
                             placeholder="Nhập mật khẩu"
                             onChangeText={(text) => this.setState({ text })}
@@ -44,7 +44,7 @@ export  default  class Login extends Component {
                 <View style={{marginTop: 130, marginLeft: 120}}>
                     <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('Signup')}>
-                        <Text style={{textDecorationLine: 'underline', color:'#008080'}}>
+                        <Text style={{textDecorationLine: 'underline', color:'#CD5555'}}>
                             Bạn chưa có tài khoản?
                         </Text>
                     </TouchableOpacity>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         height: 30,
         alignItems: 'center',
         borderColor: 1,
-        backgroundColor: '#008080',
+        backgroundColor: '#EE3B3B',
         borderRadius: 15
     }
 })

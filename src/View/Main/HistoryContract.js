@@ -17,8 +17,8 @@ export default class Historycontract extends Component {
        render()
        {
           return(
-             <View>
-                <Text style={{fontSize: 23}}> This is Activity - 3 </Text> 
+             <View style={styles.MainContainer}>
+                <Text style={{fontSize: 23}}> Lịch sử hợp đồng </Text> 
              </View>
           );
        }
@@ -29,6 +29,7 @@ export default class Historycontract extends Component {
          flex:1,
          paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
          alignItems: 'center',
-         justifyContent: 'center',    
+         justifyContent: 'center',   
+         backgroundColor: 'white' 
          }
        })

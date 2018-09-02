@@ -30,9 +30,11 @@ export default class ListFavorite extends Component {
           return(
      
              <View style = { styles.containerFavor }>
-                <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'space-between', 
+                          borderBottomWidth: 1, borderBottomColor: '#EE3B3B', paddingBottom: 10}}>
                     <View style={ styles.likeperson }>
-                        <Image source={iconInfo} style={{width: 50, height: 50, marginRight: 20}} />
+                        <Image source={iconInfo} style={{width: 50, height: 50, marginRight: 20, 
+                                          tintColor: '#EE3B3B'}} />
                         <View style={styles.details}>
                           <Text>Trần Nam Anh</Text>
                           <View style={styles.rate}>
@@ -51,6 +53,29 @@ export default class ListFavorite extends Component {
                       <View><Image source={row} style={{width: 20, height: 20,
                                   marginTop: 35, marginRight: 20}} /></View>
                 </TouchableOpacity>
+
+                {/* //</View> <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'space-between', 
+                //           borderWidth: 1, borderColor: '#10ACBB', paddingBottom: 10}}>
+                //     <View style={ styles.likeperson }>
+                //         <Image source={iconInfo} style={{width: 50, height: 50, marginRight: 20}} />
+                //         <View style={styles.details}>
+                //           <Text>Nguyễn Minh Tuấn</Text>
+                //           <View style={styles.rate}>
+                //               <Image source ={heart} style={{width: 20, height: 20, 
+                //                                         marginRight: 5, marginTop:10}} />
+                //               <Text style={{marginTop: 10}}>1</Text>
+                //               <Image source ={comment} style={{width: 20, height: 20, 
+                //                                         marginLeft: 20, marginTop: 10, marginRight: 5}} />
+                //               <Text style={{marginTop: 10}}>1</Text>
+                //           </View>
+                        
+                //         </View>
+                      
+                //       </View>
+
+                //       <View><Image source={row} style={{width: 20, height: 20,
+                //                   marginTop: 35, marginRight: 20}} /></View>
+                // </TouchableOpacity> */}
                  
              </View>
           );
@@ -60,7 +85,7 @@ export default class ListFavorite extends Component {
     
         containerFavor :{
             flex: 1,
-            backgroundColor: 'white'
+            backgroundColor: 'white', 
          },
          likeperson: {
            flexDirection: 'row',
