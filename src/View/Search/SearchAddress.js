@@ -153,89 +153,104 @@ export default class SearchAddress extends Component {
             value: 'Cà Mau',
           }];
         return(
-            <View style={styles.container}>
-                <View style={styles.headGoBack}>
-                    <TouchableOpacity>
-                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15, marginTop: 15}}/>
+            <View style={stylesAddress.container}>
+                <View style={stylesAddress.headGoBack}>
+                    <TouchableOpacity
+                         onPress={() => this.props.navigation.navigate('SearchPhoto')}
+                      >
+                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15}}/>
                     </TouchableOpacity>
-                    <View style={styles.textPass}>
-                        <Text style={{fontSize: 20, color: 'black', }}>
-                                Địa điểm</Text>
+                    <View style={stylesAddress.textPass}>
+                        <Text style={{fontSize: 20, color: 'black', }}>Địa điểm</Text>
                     </View>
+                    <View><Text></Text></View>
                 </View>
 
                 <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                        <Image source={address} style={{width: 30, height: 30, tintColor: '#1E90FF',
-                                    marginRight: 10, marginTop: 10}} />
+                    <View style={stylesAddress.textBodySearch}>
+                        <View style ={stylesAddress.textBody}>
+                        <Image source={address} style={stylesAddress.imgAddress} />
                             <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Tỉnh/Thành</Text>
                         </View>
-                        <View style={{width: 200}}>
+                        <View style={stylesAddress.dropAddress}>
                             <Dropdown  data={data} pickerStyle={{borderWidth: 1, borderColor:'black'}} />
                         </View>  
                     </View>
                 </TouchableOpacity>
 
                  <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                        <Image source={address} style={{width: 30, height: 30, tintColor: '#1E90FF',
-                                    marginRight: 10, marginTop: 10}} />
+                    <View style={stylesAddress.textBodySearch}>
+                        <View style ={stylesAddress.textBody}>
+                        <Image source={address} style={stylesAddress.imgAddress} />
                             <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Quận/Huyện</Text>
                         </View>
-                        <View style={{width: 200}}>
+                        <View style={stylesAddress.dropAddress}>
                             <Dropdown  data={data} pickerStyle={{borderWidth: 1, borderColor:'black'}} />
                         </View>    
                     </View>
                 </TouchableOpacity>
 
                  <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                             <Image source={address} style={{width: 30, height: 30, tintColor: '#1E90FF',
-                                    marginRight: 10, marginTop: 10}} />
+                    <View style={stylesAddress.textBodySearch}>
+                        <View style ={stylesAddress.textBody}>
+                             <Image source={address} style={stylesAddress.imgAddress} />
                             <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Xã/Phường</Text>
                         </View>
                         {/* <View style={styles.textBody}>
                             <Image source={row} style={{width: 15, height: 20, tintColor: '#1E90FF',
                                     marginRight: 10, marginTop: 10}} />
                         </View>   */}
-                        <View style={{width: 200}}>
+                        <View style={stylesAddress.dropAddress}>
                             <Dropdown  data={data} pickerStyle={{borderWidth: 1, borderColor:'black'}} />
                         </View>  
                     </View>
                 </TouchableOpacity>
+
+                <View style = {{flex: 2}}> 
+                  <TouchableOpacity 
+                       onPress={() => this.props.navigation.navigate('SearchPhoto')}
+                      
+                      style={stylesAddress.footAddress}>
+                        <Text style={{ textAlign:"center", color: 'white', marginTop: 5, }}>OK</Text>
+                    </TouchableOpacity>
+               </View>
             </View>
         )
     }
 }
 
-styles = StyleSheet.create({
+stylesAddress = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: 'white'
     },
-   
 
+    headGoBack: {
+      flexDirection: 'row', justifyContent: 'space-between',
+      marginTop: 20
+    },
     textPass:{
         justifyContent: 'center',
         alignItems: 'center'
     },
 
     textBody: {
-        // marginTop: 5,
        
         flexDirection: 'row',
-       
         alignItems: 'center',
-       
-        
     },
+    imgAddress: {
+        width: 30, height: 30, tintColor: '#1E90FF',
+        marginRight: 10, marginTop: 10
+      },
+    dropAddress: {
+        width: 200, marginTop: -5
+    },
+
     textBodySearch: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderTopWidth: 1, borderColor: '#CFCFCF',
+        // borderTopWidth: 1, borderColor: '#CFCFCF',
         marginLeft: 10, 
         marginRight: 10,
         marginTop: 10,
@@ -252,5 +267,10 @@ styles = StyleSheet.create({
         marginRight: 10,
         marginTop: 10,
        
-    }
+    },
+    footAddress: {
+      backgroundColor: '#EE3B3B',height: 30, width: 350,
+      borderRadius: 10, marginLeft: 20, marginTop: 50,
+       marginRight: 20
+  }
 })

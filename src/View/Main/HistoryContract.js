@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
 
-import { createDrawerNavigator } from 'react-navigation';
+import iconInfo from '../../assets/img/info/iconInfo.png'
+import heart from '../../assets/img/info/heart.png'
+import comment from '../../assets/img/info/contract.png'
+import row from '../../assets/img/info/row.png'
 
-import { createStackNavigator } from 'react-navigation'
-import HamburgerIcon from './HamburgerIcon'
 
 export default class Historycontract extends Component {
     constructor(props) {
@@ -14,22 +15,57 @@ export default class Historycontract extends Component {
        'Warning: componentWillReceiveProps is deprecated',
      ]);    
     }
-       render()
-       {
-          return(
-             <View style={styles.MainContainer}>
-                <Text style={{fontSize: 23}}> Lịch sử hợp đồng </Text> 
-             </View>
-          );
-       }
+    render()
+    {
+       return(
+  
+          <View style = { stylesHistoryCont.containerHisCont }>
+             <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto')}
+                  style={stylesHistoryCont.contHisCont}>
+                 <View style={ stylesHistoryCont.likeperson }>
+                    
+                     <View style={stylesHistoryCont.details}>
+                       <Text style={stylesHistoryCont.txtHisCont}>Hợp đồng với người chụp ảnh Trần Nam Anh  </Text>
+                       <Text style={stylesHistoryCont.txtHisCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text>
+                     </View>
+                   </View>
+                   {/* <View><Image source={row} style={{width: 20, height: 20,
+                               marginTop: 35, marginRight: 20}} /></View> */}
+             </TouchableOpacity>
+             <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto')}
+                  style={stylesHistoryCont.contHisCont}>
+                 <View style={ stylesHistoryCont.likeperson }>
+                    
+                     <View style={stylesHistoryCont.details}>
+                     <Text style={stylesHistoryCont.txtHisCont}>Hợp đồng với người chụp ảnh Trần Nam Anh</Text>
+                     <Text style={stylesHistoryCont.txtHisCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text>
+                     </View>
+                   </View>
+             </TouchableOpacity>
+              
+          </View>
+       );
     }
+ }
+const stylesHistoryCont = StyleSheet.create({
+ 
+ containerHisCont :{
+     flex: 1,
+     backgroundColor: 'white', 
+  },
+
+  contHisCont: {
+     flexDirection: 'row', justifyContent: 'space-between', 
+     borderBottomWidth: 1, borderBottomColor: '#EE3B3B', paddingBottom: 10
+  },
+
+ likeperson: {
+     flexDirection: 'row',
+     marginLeft: 20, marginRight: 20, marginTop: 20
+ },
+ 
+ txtHisCont: {
+   color: 'black'
+ }
     
-    const styles = StyleSheet.create({
-        MainContainer :{ 
-         flex:1,
-         paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
-         alignItems: 'center',
-         justifyContent: 'center',   
-         backgroundColor: 'white' 
-         }
-       })
+})

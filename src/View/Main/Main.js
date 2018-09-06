@@ -14,6 +14,7 @@ import ManageContract from './ManageContract'
 import AlbumPose from './AlbumPose'
 import MenuTabBar from './MenuTabBar'
 
+
 import notifi from '../../assets/img/menu/notifi.png'
 
 const InfoCustomerStack = createStackNavigator({
@@ -124,7 +125,8 @@ const MenuStack = createStackNavigator({
       })
     },
   });
-
+ 
+  
   export default MyDrawerNavigator = createDrawerNavigator({
     InfoCustomer: {
       screen: InfoCustomerStack,

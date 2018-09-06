@@ -58,13 +58,12 @@ export default class AlbumPose extends Component {
               }];
 
         return(
-           <View style = { styles.container }>
+           <View style = { stylesAlPose.container }>
               <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                            <Image source={view} style={{width: 30, height: 30,
-                                    marginRight: 10, marginTop: 10}} />
-                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Bối cảnh, View</Text>
+                    <View style={stylesAlPose.textBodySearch}>
+                        <View style ={stylesAlPose.textBody}>
+                            <Image source={view} style={stylesAlPose.imgPose} />
+                            <Text style={stylesAlPose.textPose}>Bối cảnh, View</Text>
                            
                         </View>
                         
@@ -75,11 +74,10 @@ export default class AlbumPose extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                            <Image source={bracelet} style={{width: 30, height: 30,
-                                    marginRight: 10, marginTop: 10}} />
-                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Phụ kiện</Text>
+                    <View style={stylesAlPose.textBodySearch}>
+                        <View style ={stylesAlPose.textBody}>
+                            <Image source={bracelet} style={stylesAlPose.imgPose} />
+                            <Text style={stylesAlPose.textPose}>Phụ kiện</Text>
                            
                         </View>
                         
@@ -90,11 +88,10 @@ export default class AlbumPose extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                            <Image source={clothes} style={{width: 35, height: 35, tintColor: '#EE3B3B',
-                                    marginRight: 10, marginTop: 10}} />
-                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Trang phục</Text>
+                    <View style={stylesAlPose.textBodySearch}>
+                        <View style ={stylesAlPose.textBody}>
+                            <Image source={clothes} style={stylesAlPose.imgPose} />
+                            <Text style={stylesAlPose.textPose}>Trang phục</Text>
                            
                         </View>
                         
@@ -105,11 +102,10 @@ export default class AlbumPose extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                            <Image source={gender} style={{width: 40, height: 40, tintColor: '#EE3B3B',
-                                    marginRight: 10, marginTop: 10}} />
-                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Giới tính</Text>
+                    <View style={stylesAlPose.textBodySearch}>
+                        <View style ={stylesAlPose.textBody}>
+                            <Image source={gender} style={stylesAlPose.imgPose} />
+                            <Text style={stylesAlPose.textPose}>Giới tính</Text>
                            
                         </View>
                         
@@ -120,11 +116,10 @@ export default class AlbumPose extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                            <Image source={marriage} style={{width: 30, height: 30,
-                                    marginRight: 10, marginTop: 10}} />
-                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Ảnh cưới</Text>
+                    <View style={stylesAlPose.textBodySearch}>
+                        <View style ={stylesAlPose.textBody}>
+                            <Image source={marriage} style={stylesAlPose.imgPose} />
+                            <Text style={stylesAlPose.textPose}>Ảnh cưới</Text>
                            
                         </View>
                         
@@ -144,12 +139,11 @@ export default class AlbumPose extends Component {
      }
   }
 
-  const styles = StyleSheet.create({
+  const stylesAlPose = StyleSheet.create({
     container: {
       flex:1,
-      backgroundColor: 'white'
+      backgroundColor: 'white',
   },
- 
 
   textPass:{
       justifyContent: 'center',
@@ -157,22 +151,22 @@ export default class AlbumPose extends Component {
   },
 
   textBody: {
-      // marginTop: 5,
-     
       flexDirection: 'row',
-     
       alignItems: 'center',
-     
-      
   },
 
   textBodySearch: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      // borderTopWidth: 1, borderColor: '#CFCFCF',
       marginLeft: 10, 
       marginRight: 10,
       marginTop: 10,
-     
   },
-   })
+  imgPose: {
+    width: 30, height: 30,
+    marginRight: 10, marginTop: 10
+  },
+  textPose: {
+    fontSize: 13, color: 'black', marginTop: 10
+  }
+})

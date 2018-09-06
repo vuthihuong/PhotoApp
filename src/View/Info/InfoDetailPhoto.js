@@ -5,6 +5,7 @@ import {
 
 import { Table, Row, Rows, Col, Cols } from 'react-native-table-component';
 
+
 // import { CheckBox } from 'react-native-elements'
 
 import iconInfo from '../../assets/img/info/iconInfo.png'
@@ -23,7 +24,7 @@ export default class InfoDetailPhoto extends Component{
         this.state = {
           tableHead: ['Thể loại', 'Giá', 'Mô tả'],
           tableData: [
-            ['Giá chụp đơn', 'Học sinh: 99k/'],
+            ['Giá chụp đơn', 'Học sinh: 99k/bộ ảnh'],
             ['Giá chụp đôi', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
             ['Giá chụp nhóm', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
             ['Giá ảnh cưới', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
@@ -34,10 +35,10 @@ export default class InfoDetailPhoto extends Component{
         const state = this.state;
         return(
           <ScrollView>
-              <View style={styles.container}>
-                <View style={styles.headDetailPhoto}>
+              <View style={stylesInfoDetailPhoto.container}>
+                <View style={stylesInfoDetailPhoto.headDetailPhoto}>
                     <Image source={iconInfo} style={{width: 70, height: 70, tintColor: '#EE3B3B'}}/>
-                    <View style={styles.proDetail} >
+                    <View style={stylesInfoDetailPhoto.proDetail} >
                         <Text style={{color: 'black'}}>Trần Nam Anh</Text>
                         <View style={{flexDirection:'row'}}>
                             <View>
@@ -63,19 +64,19 @@ export default class InfoDetailPhoto extends Component{
                         </View>
                     </View>
                 </View>
-                <View style={styles.bodyDetailPhoto}>
+                <View style={stylesInfoDetailPhoto.bodyDetailPhoto}>
                     <View style={{flexDirection:'row'}}>
                         <Image source={address} style={{width: 30, height: 30, marginTop: -5}} />
                         <Text style={{fontSize: 13, color: 'black'}}>152 Phố Huế, Hai Bà Trưng, Hà Nội</Text>
                      </View>
 
-                     <View style ={styles.textBody}>
+                     <View style ={stylesInfoDetailPhoto.textBody}>
                         {/* <Image source={photoIcon} style={{width: 30, height: 20}} /> */}
                         <Text style={{fontSize: 13, color: 'black'}}>Nhận chụp ảnh các thể loại:</Text>
                         
                     </View>
 
-                     <View style={styles.textBody}>
+                     <View style={stylesInfoDetailPhoto.textBody}>
                         <View>
                             <View style={{flexDirection:'row'}}>
                                 <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
@@ -106,23 +107,27 @@ export default class InfoDetailPhoto extends Component{
                         </View>
                      </View>
 
-                      <View style ={styles.textBody}>
+                      <View style ={stylesInfoDetailPhoto.textBody}>
                         <TouchableOpacity>
                                 <Text style={{fontSize: 13, color: '#EE3B3B', textDecorationLine: 'underline',}}>
                                     Album ảnh</Text>
                         </TouchableOpacity>
                     </View>
 
-                    <View style ={styles.price}>
+                    <View style ={stylesInfoDetailPhoto.price}>
                         <Text style={{fontSize: 13, color: '#EE3B3B', 
                             textDecorationLine: 'underline',}}>Bảng giá ảnh</Text>
                     </View>
-                    <View style={styles.tbl}>
+                    <View style={stylesInfoDetailPhoto.tbl}>
                         <Table borderStyle={{borderWidth: 1, borderColor: 'black'}}>
-                            <Row data={state.tableHead} widthArr={[80,270]} textStyle={{color: 'black', textAlign: 'center'}} 
-                                style={styles.head} style={styles.text}/>
-                            <Rows data={state.tableData} widthArr={[80,270]} textStyle={{color: 'black',textAlign: 'center'}} 
-                                    style={styles.text}>
+                            <Row data={state.tableHead} widthArr={[90,260]} 
+                                    textStyle={{color: 'black', textAlign: 'center'}} 
+                                // style={styles.head} style={styles.text}/
+                                />
+                            <Rows data={state.tableData} widthArr={[90,260]} 
+                                    textStyle={{color: 'black',textAlign: 'center'}} 
+                                    // style={styles.text}
+                                    >
                                     
                             </Rows>
                         </Table>
@@ -135,7 +140,7 @@ export default class InfoDetailPhoto extends Component{
     }
 }
 
-styles = StyleSheet.create({
+stylesInfoDetailPhoto = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: "white"
@@ -158,7 +163,8 @@ styles = StyleSheet.create({
         marginTop: 20
     },
     tbl: { 
-          paddingTop: 20,  paddingRight: 10
+          paddingTop: 20,
+          marginBottom: 20
     },
     headTbl: {
          height: 40,

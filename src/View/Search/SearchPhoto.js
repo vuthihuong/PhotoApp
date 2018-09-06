@@ -51,15 +51,16 @@ export default class SearchPhoto extends Component{
           },];
          
         return(
-            <View style={styles.container}>
-                <View style={styles.headGoBack}>
+            <View style={stylesPhoto.container}>
+                <View style={stylesPhoto.headGoBack}>
                     <TouchableOpacity>
-                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15, marginTop: 15}}/>
+                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15}}/>
                     </TouchableOpacity>
-                    <View style={styles.textPass}>
+                    <View style={stylesPhoto.textPass}>
                         <Text style={{fontSize: 20, color: 'black', }}>
                                 Tìm kiếm nhiếp ảnh gia</Text>
                     </View>
+                    <View><Text></Text></View>
                 </View>
                 <View style ={{justifyContent: 'center',
                                         alignItems: 'center', marginBottom: 20}}>
@@ -71,23 +72,25 @@ export default class SearchPhoto extends Component{
                                 onChangeText={(text) => this.setState({ text })}                            
                             />
                 </View>
-                <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                            <Image source={address} style={{width: 30, height: 30, tintColor: '#1E90FF',
+                <TouchableOpacity 
+                         onPress={() => this.props.navigation.navigate('SearchAddress')}>
+                    {/* > */}
+                    <View style={stylesPhoto.textBodySearch}>
+                        <View style ={stylesPhoto.textBody}>
+                            <Image source={address} style={{width: 30, height: 30,
                                     marginTop: 10, marginLeft: -5}} />
                             <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Địa điểm</Text>
                         </View>
-                        <View style={styles.textBody}>
-                            <Image source={row} style={{width: 15, height: 20, tintColor: '#1E90FF',
+                        <View style={stylesPhoto.textBody}>
+                            <Image source={row} style={{width: 15, height: 20,
                                     marginRight: 10, marginTop: 10}} />
                         </View>  
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                            <Image source={dollar} style={{width: 15, height: 20, tintColor: '#1E90FF',
+                    <View style={stylesPhoto.textBodySearch}>
+                        <View style ={stylesPhoto.textBody}>
+                            <Image source={dollar} style={{width: 15, height: 20,
                                     marginRight: 10, marginTop: 10}} />
                             <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Giá</Text>
                            
@@ -100,9 +103,9 @@ export default class SearchPhoto extends Component{
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                    <View style={styles.textBodySearch}>
-                        <View style ={styles.textBody}>
-                            <Image source={category} style={{width: 20, height: 20, tintColor: '#1E90FF',
+                    <View style={stylesPhoto.textBodySearch}>
+                        <View style ={stylesPhoto.textBody}>
+                            <Image source={category} style={{width: 20, height: 20,
                                     marginRight: 10, marginTop: 10}} />
                             <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Thể loại</Text>
                         </View>
@@ -114,9 +117,8 @@ export default class SearchPhoto extends Component{
                 </TouchableOpacity>
 
                 <View style={{}}>
-                    <TouchableOpacity style={{ borderColor: '#6495ED',
-                                          borderWidth: 1, width: 345  , height: 30, borderRadius: 10,
-                                          backgroundColor: '#1E90FF', marginLeft: 20, marginTop: 50 }}>
+                    <TouchableOpacity style={{ width: 345  , height: 30, borderRadius: 10,
+                                          backgroundColor: '#EE3B3B', marginLeft: 20, marginTop: 50 }}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tìm kiếm</Text>
                     </TouchableOpacity>
                 </View>
@@ -125,12 +127,16 @@ export default class SearchPhoto extends Component{
     }
 }
 
-styles = StyleSheet.create({
+stylesPhoto = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: 'white'
     },
-   
+    headGoBack: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20   
+    },
 
     textPass:{
         justifyContent: 'center',
@@ -138,19 +144,13 @@ styles = StyleSheet.create({
     },
 
     textBody: {
-        // marginTop: 5,
-       
         flexDirection: 'row',
-       
         alignItems: 'center',
-       
-        
     },
 
     textBodySearch: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderTopWidth: 1, borderColor: '#CFCFCF',
         marginLeft: 10, 
         marginRight: 10,
         marginTop: 10,
@@ -160,7 +160,6 @@ styles = StyleSheet.create({
     textBodySearch1: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderTopWidth: 1, borderColor: '#CFCFCF',
         borderBottomWidth:1, 
         marginBottom: 10,
         marginLeft: 10, 

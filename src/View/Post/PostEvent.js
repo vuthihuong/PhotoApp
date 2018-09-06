@@ -57,37 +57,38 @@ export default class PostEvent extends Component {
           const { selectedHours, selectedMinutes } = this.state;
           return(
             <ScrollView>
-                 <View style={styles.container}>
-                    <View style={styles.headGoBack}>
-                        <View style={styles.textPass}>
+                 <View style={stylesPostEvent.container}>
+                    <View style={stylesPostEvent.headGoBack}>
+                        <View style={stylesPostEvent.textPass}>
                             <Text style={{fontSize: 20, color: '#EE3B3B', marginTop: 5  }}> Sự kiện</Text>
                         </View>
                     </View>
-                    <View style={styles.title}>
-                        <Text style={{marginRight:15, }}>Tiêu đề</Text>
+                    <View style={stylesPostEvent.title}>
+                        <Text style={{marginRight:15, color: 'black'}}>Tiêu đề</Text>
                         <View style={{marginBottom: 20}}>
                             <CheckBox
                                 label='Giao lưu nhiếp ảnh gia'
+                                labelStyle={{color: 'black'}}
                                 //   checked={true}
                                 checkboxStyle = {{width:15, height: 15,}}
                                 // onChange={(checked) => console.log('I am checked', checked)} 
                             />
                             <CheckBox
                                 label='Hướng dẫn chụp ảnh'
+                                labelStyle={{color: 'black'}}
                                 //   checked={true}
                                 checkboxStyle = {{width:15, height: 15,}}
                                 // onChange={(checked) => console.log('I am checked', checked)} 
                             />
                         </View>
                     </View>
-                    <View style={styles.title}>
-                        <Text style={{marginRight:10, marginTop: 15 }}>Nội dung</Text>
+                    <View style={stylesPostEvent.title}>
+                        <Text style={stylesPostEvent.txtPostEvent}>Nội dung</Text>
                             <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                                style={{ height: 100, width: 290, marginTop: -30, borderColor: 'black', 
-                                borderWidth: 1}} />
+                                style={stylesPostEvent.txtInputPostEvent} />
                     </View>
-                    <View style={styles.title}>
-                        <Text style={{marginRight: 10, marginTop: -10 }}>Địa điểm</Text>
+                    <View style={stylesPostEvent.title}>
+                        <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
                         
                             <View style={{marginTop: -50, width: 290, height: 100 }}>
                             <Dropdown 
@@ -96,8 +97,8 @@ export default class PostEvent extends Component {
                         </View>        
                     </View>
 
-                    <View style={styles.title}>
-                        <Text style ={{marginRight: 10, marginTop: -25}}>Thời gian từ:</Text>
+                    <View style={stylesPostEvent.title}>
+                        <Text style ={{marginRight: 10, marginTop: -25, color: 'black'}}>Thời gian từ:</Text>
                         <DatePicker
                             style={{width: 200, marginTop: -35, marginLeft: 10}}
                             date={this.state.datetime}
@@ -113,8 +114,8 @@ export default class PostEvent extends Component {
                             onDateChange={(datetime) => {this.setState({datetime: datetime})}}
                             />
                         </View>
-                        <View style={styles.title}>
-                        <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25}}>đến:</Text>
+                        <View style={stylesPostEvent.title}>
+                        <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25, color: 'black'}}>đến:</Text>
                             <DatePicker
                             style={{width: 200, marginTop: -30}}
                             date={this.state.datetime1}
@@ -130,30 +131,28 @@ export default class PostEvent extends Component {
                             onDateChange={(datetime1) => {this.setState({datetime1: datetime1})}}
                             />
                         </View>
-                        <View style={styles.title}>
-                            <Text style={{marginTop: 35}}>Chi phí:</Text>
-                            <TextInput multiline={true} style={{marginLeft: 10, marginTop: -30, 
-                                            width: 270, height: 90}}/>
+                        <View style={stylesPostEvent.title}>
+                            <Text style={stylesPostEvent.txtPostEvent }>Chi phí</Text>
+                            <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
+                                style={stylesPostEvent.txtInputPostEvent} />
                         </View>
-                         <View style={[styles.title, styles.buttonCreate]}>
-                            <TouchableOpacity style={{ width: 160  , height: 30, borderRadius: 10,
-                                                        backgroundColor: '#EE3B3B', marginLeft: 20,  }}>
-                                    <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Gửi yêu cầu</Text>
+                         <View style={[stylesPostEvent.title, stylesPostEvent.buttonCreate]}>
+                            <TouchableOpacity style={stylesPostEvent.btnPostEvent}>
+                                    <Text style={stylesPostEvent.txtBtnEvent}>Gửi yêu cầu</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={{width: 160, height: 30, borderRadius: 10, 
-                                                        backgroundColor: '#EE3B3B',marginRight: 20,  }}
+                                <TouchableOpacity style={stylesPostEvent.btnPostEvent}
                                                         onPress = { this.FunctionToOpenSecondActivity }>
-                                    <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
+                                    <Text style={stylesPostEvent.txtBtnEvent}>Tạo</Text>
                                 </TouchableOpacity>
                             
-                            </View>
+                        </View>
             </View>
-       </ScrollView>
-          );
+        </ScrollView>
+        );
        }
     }
     
-    const styles = StyleSheet.create({
+    const stylesPostEvent = StyleSheet.create({
         container: {
             flex:1,
             backgroundColor: 'white'
@@ -203,5 +202,19 @@ export default class PostEvent extends Component {
             // marginTop: 20,
             // marginRight: 30,
            
+        },
+        txtPostEvent: {
+            marginRight:10, marginTop: 15, color: 'black'
+        },
+        txtInputPostEvent: {
+            height: 100, width: 290, marginTop: -20, 
+            borderColor: 'black',   borderWidth: 1
+        },
+        btnPostEvent: {
+            width: 160, height: 30, borderRadius: 10, 
+            backgroundColor: '#EE3B3B',marginRight: 15, 
+         },
+        txtBtnEvent: {
+             textAlign:"center", color: 'white', marginTop: 5 
         }
        })

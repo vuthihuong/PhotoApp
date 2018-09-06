@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
 
-import { createDrawerNavigator } from 'react-navigation';
-
-import { createStackNavigator } from 'react-navigation'
-import HamburgerIcon from './HamburgerIcon'
+import iconInfo from '../../assets/img/info/iconInfo.png'
+import heart from '../../assets/img/info/heart.png'
+import comment from '../../assets/img/info/contract.png'
+import row from '../../assets/img/info/row.png'
 
 export default class ManageContract extends Component{
     constructor(props) {
@@ -16,25 +16,49 @@ export default class ManageContract extends Component{
          'Warning: componentWillReceiveProps is deprecated',
        ]);      
       }  
-         render()
-         {
-            return(     
-               <View style={styles.MainContainer}>    
-                  <Text style={{fontSize: 23}}> Quản lý hợp đồng</Text>           
-               </View>
-            );
-         }
-      }
-      
-      const styles = StyleSheet.create({
-      
-          MainContainer :{
-          
-           flex:1,
-           paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
-           alignItems: 'center',
-           justifyContent: 'center',
-            backgroundColor: 'white'
-           }
-         
-         })
+      render() {
+       return(
+  
+          <View style = { stylesManagCont.containerManagCont }>
+            <View style={stylesManagCont.bodyManaCont}>
+                <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
+                    style={stylesManagCont.contManagCont}>
+                        <Text style={stylesManagCont.txtManagCont}>Hợp đồng với người chụp ảnh Trần Nam Anh  </Text>
+                        <Text style={stylesManagCont.txtManagCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text>
+                 
+                </TouchableOpacity>
+                <View style={ stylesManagCont.txtConfirm }>
+                    <TouchableOpacity><Text style={stylesManagCont.txtManagCont}>Đang tìm</Text></TouchableOpacity>
+                    <TouchableOpacity><Text style={stylesManagCont.txtManagCont}>Chưa hoàn thành</Text></TouchableOpacity>
+                </View>
+            </View>
+          </View>
+       );
+    }
+ }
+const stylesManagCont = StyleSheet.create({
+ 
+ containerManagCont :{
+     flex: 1,
+     backgroundColor: 'white', 
+    
+  },
+  bodyManaCont: {
+    flexDirection: 'row', justifyContent: 'space-between', 
+    borderBottomWidth: 1, borderBottomColor: '#EE3B3B', paddingBottom: 10,
+    marginTop: 15
+  },
+
+  contManagCont: {
+        marginLeft: 10, width: 280
+  },
+ 
+ txtManagCont: {
+   color: 'black',
+  
+ },
+ txtConfirm: {
+    width: 70
+ }
+    
+})

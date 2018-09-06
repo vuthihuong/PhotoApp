@@ -57,14 +57,14 @@ export default class PostPhoto extends Component {
           const { selectedHours, selectedMinutes } = this.state;
           return(
             <ScrollView>
-            <View style={styles.container}>
-           <View style={styles.headGoBack}>
-               <View style={styles.textPass}>
+            <View style={stylesPostPhoto.container}>
+           <View style={stylesPostPhoto.headGoBack}>
+               <View style={stylesPostPhoto.textPass}>
                    <Text style={{fontSize: 20, color: '#EE3B3B', marginTop: 5  }}> Tìm nháy ảnh</Text>
                </View>
            </View>
-           <View style={styles.title}>
-               <Text style={{marginRight: 10, marginTop: 10 }}>Thể loại</Text>
+           <View style={stylesPostPhoto.title}>
+               <Text style={{marginRight: 10, marginTop: 10,color:'black' }}>Thể loại</Text>
              
                 <View style={{marginTop: -30, width: 290, height: 100 }}>
                    <Dropdown 
@@ -73,14 +73,13 @@ export default class PostPhoto extends Component {
                        />
                </View>        
            </View>
-           <View style={styles.title}>
-               <Text style={{marginRight:10, marginTop: 10 }}>Nội dung</Text>
+           <View style={stylesPostPhoto.title}>
+               <Text style={{marginRight:10, marginTop: 10,color:'black' }}>Nội dung</Text>
                 <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                     style={{ height: 100, width: 290, marginTop: -30, borderColor: 'black', 
-                       borderWidth: 1}} />
+                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -30}]} />
            </View>
-           <View style={styles.title}>
-               <Text style={{marginRight: 10, marginTop: -10 }}>Địa điểm</Text>
+           <View style={stylesPostPhoto.title}>
+               <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
              
                 <View style={{marginTop: -50, width: 290, height: 100 }}>
                    <Dropdown 
@@ -89,8 +88,8 @@ export default class PostPhoto extends Component {
                </View>        
            </View>
 
-           <View style={styles.title}>
-               <Text style ={{marginRight: 10, marginTop: -25}}>Thời gian từ:</Text>
+           <View style={stylesPostPhoto.title}>
+               <Text style ={{marginRight: 10, marginTop: -25, color:'black'}}>Thời gian từ:</Text>
                <DatePicker
                    style={{width: 200, marginTop: -35, marginLeft: 10}}
                    date={this.state.datetime}
@@ -106,8 +105,8 @@ export default class PostPhoto extends Component {
                    onDateChange={(datetime) => {this.setState({datetime: datetime})}}
                   />
                </View>
-               <View style={styles.title}>
-                    <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25}}>đến:</Text>
+               <View style={stylesPostPhoto.title}>
+                    <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25,color:'black'}}>đến:</Text>
                         <DatePicker
                         style={{width: 200, marginTop: -30}}
                         date={this.state.datetime1}
@@ -123,18 +122,16 @@ export default class PostPhoto extends Component {
                         onDateChange={(datetime1) => {this.setState({datetime1: datetime1})}}
                         />
                </View>
-           <View style={styles.title}>
-               <Text style={{marginTop: 35}}>Chi phí:</Text>
-               <TextInput multiline={true} style={{marginLeft: 10, marginTop: -30, 
-                               width: 270, height: 90}}/>
+            <View style={stylesPostPhoto.title}>
+               <Text style={{marginRight:10, marginTop: 30,color:'black' }}>Chi phí</Text>
+                <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
+                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -10, }]} />
            </View>
-           <View style={[styles.title, styles.buttonCreate]}>
-           <TouchableOpacity style={{  width: 160  , height: 30, borderRadius: 10,
-                                     backgroundColor: '#EE3B3B', marginLeft: 20,  }}>
+           <View style={[stylesPostPhoto.title, stylesPostPhoto.buttonCreate]}>
+           <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}>
                    <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Gửi yêu cầu</Text>
                </TouchableOpacity>
-               <TouchableOpacity style={{width: 160, height: 30, borderRadius: 10, 
-                                     backgroundColor: '#EE3B3B',marginRight: 20,  }}
+               <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}
                                      onPress = { this.FunctionToOpenSecondActivity }>
                    <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
                </TouchableOpacity>
@@ -146,7 +143,7 @@ export default class PostPhoto extends Component {
        }
     }
     
-    const styles = StyleSheet.create({
+    const stylesPostPhoto = StyleSheet.create({
         container: {
             flex:1,
             backgroundColor: 'white'
@@ -196,5 +193,14 @@ export default class PostPhoto extends Component {
             // marginTop: 20,
             // marginRight: 30,
            
+        },
+        txtPostPhoto: {
+            height: 100, width: 290,
+            borderColor: 'black', 
+            borderWidth: 1
+        },
+        txtBtnPostPhoto: {
+            width: 160, height: 30, borderRadius: 10, 
+            backgroundColor: '#EE3B3B',marginRight: 15,  
         }
        })

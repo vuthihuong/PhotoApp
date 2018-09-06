@@ -1,12 +1,5 @@
 import React, {Component} from 'react';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
-
-import { createDrawerNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation'
-import { createTabNavigator} from 'react-navigation'
-
-import HamburgerIcon from './HamburgerIcon'
-
 import home from '../../assets/img/menu/home.png'
 
 

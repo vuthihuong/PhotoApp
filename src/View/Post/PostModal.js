@@ -52,31 +52,33 @@ export default class PostModal extends Component {
           const { selectedHours, selectedMinutes } = this.state;
         return (
             <ScrollView>
-                 <View style={styles.container}>
-                <View style={styles.headGoBack}>
+                 <View style={stylesPostModal.container}>
+                <View style={stylesPostModal.headGoBack}>
                     {/* <TouchableOpacity>
                         <Image source={gobackIcon} style={{width: 20, height: 20, 
                             marginLeft: 15, marginTop: 15}}/>
                     </TouchableOpacity> */}
-                    <View style={styles.textPass}>
+                    <View style={stylesPostModal.textPass}>
                         <Text style={{fontSize: 20, color: '#EE3B3B',  }}> Tìm mẫu ảnh</Text>
                     </View>
                 </View>
-                <View style={styles.title}>
-                    <Text style={{marginRight:10, }}>Tìm mẫu ảnh</Text>
+                <View style={stylesPostModal.title}>
+                    <Text style={{marginRight:10, color: 'black'}}>Tìm mẫu ảnh</Text>
                     {/* <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
                           style={{ height: 60, width: 260, marginTop: -15, borderColor: 'black', 
                             borderWidth: 1}} /> */}
                     <CheckBox
                         label='Nam'
+                        labelStyle={{color: 'black'}}
                          //   checked={true}
-                         checkboxStyle = {{width:15, height: 15, marginTop: -5}}
+                         checkboxStyle = {stylesPostModal.txtBoxPostModal}
                         // onChange={(checked) => console.log('I am checked', checked)} 
                         />
                     <CheckBox
                         label='Nữ'
+                        labelStyle={{color: 'black'}}
                         //   checked={true}
-                        checkboxStyle = {{width:15, height: 15, marginTop: -5}}
+                        checkboxStyle = {stylesPostModal.txtBoxPostModal}
                         // onChange={(checked) => console.log('I am checked', checked)} 
                         />
                 </View>
@@ -95,17 +97,16 @@ export default class PostModal extends Component {
                         // onChange={(checked) => console.log('I am checked', checked)} 
                         /> */}
                 {/* </View> */}
-                <View style={styles.title}>
-                    <Text style={{marginRight:10, marginTop: 25 }}>Nội dung</Text>
+                <View style={stylesPostModal.title}>
+                    <Text style={stylesPostModal.boxPostModal}>Nội dung</Text>
                     {/* <TextInput 
                          style={{ height: 40, width: 290,  marginTop: -25                     
                      }}></TextInput> */}
                      <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                          style={{ height: 100, width: 290, marginTop: -15, borderColor: 'black', 
-                            borderWidth: 1}} />
+                          style={stylesPostModal.txtPostModal} />
                 </View>
-                <View style={styles.title}>
-                    <Text style={{marginRight: 10, marginTop: -10 }}>Địa điểm</Text>
+                <View style={stylesPostModal.title}>
+                    <Text style={{marginRight: 10, marginTop: -10, color:'black' }}>Địa điểm</Text>
                   
                      <View style={{marginTop: -50, width: 290, height: 100 }}>
                         <Dropdown 
@@ -115,8 +116,8 @@ export default class PostModal extends Component {
                     </View>        
                 </View>
 
-                <View style={styles.title}>
-                    <Text style ={{marginRight: 10, marginTop: -35}}>Thời gian từ:</Text>
+                <View style={stylesPostModal.title}>
+                    <Text style ={{marginRight: 10, marginTop: -35,color: 'black'}}>Thời gian từ:</Text>
                     <DatePicker
                         style={{width: 200, marginTop: -45, marginLeft: 10}}
                         date={this.state.datetime}
@@ -144,8 +145,8 @@ export default class PostModal extends Component {
                         onDateChange={(datetime) => {this.setState({datetime: datetime})}}
                        />
                     </View>
-                    <View style={styles.title}>
-                    <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25}}>đến:</Text>
+                    <View style={stylesPostModal.title}>
+                    <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25, color:'black'}}>đến:</Text>
                        <DatePicker
                         style={{width: 200, marginTop: -30}}
                         date={this.state.datetime1}
@@ -200,11 +201,11 @@ export default class PostModal extends Component {
                     onChange={(hours, minutes) => this.setState({ selectedHours: hours, selectedMinutes: minutes })}
                     />
                 </View> */}
-                <View style={styles.title}>
-                    <Text style={{marginTop: -5}}>Yêu cầu</Text>
-                    <TextInput placeholder="Số đo" style={styles.inputWeight}/>
-                    <TextInput placeholder="Chiều cao" style={styles.inputWeight}/>
-                    <TextInput placeholder="Cân nặng" style={styles.inputWeight}/>
+                <View style={stylesPostModal.title}>
+                    <Text style={{marginTop: -5, color: 'black'}}>Yêu cầu</Text>
+                    <TextInput placeholder="Số đo" style={stylesPostModal.inputWeight}/>
+                    <TextInput placeholder="Chiều cao" style={stylesPostModal.inputWeight}/>
+                    <TextInput placeholder="Cân nặng" style={stylesPostModal.inputWeight}/>
                     
                 </View>
                 <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
@@ -212,78 +213,79 @@ export default class PostModal extends Component {
                     <View>
                         <CheckBox
                             label='Tự make up'
-                            labelStyle={{fontSize: 13}}
+                            labelStyle={{fontSize: 13, color: 'black'}}
                             checkboxStyle = {{width:12, height: 12}} />
                         <CheckBox
                             label='Không phục trang phục'
-                            labelStyle={{fontSize: 13, marginRight: 13}}
+                            labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
                             checkboxStyle = {{width:12, height: 12}} /> 
                         
                         <CheckBox
                             label='Không phục vụ ăn trưa'
-                            labelStyle={{fontSize: 13, marginRight: 13}}
+                            labelStyle={{fontSize: 13, marginRight: 13, color: 'black'}}
                             checkboxStyle = {{width:12, height: 12}} /> 
                     </View>
 
                       <View>
                         <CheckBox
                             label='Có phục vụ make up'
-                            labelStyle={{fontSize: 13}}
+                            labelStyle={{fontSize: 13, color:'black'}}
                             checkboxStyle = {{width:12, height: 12}}
                              />
                         <CheckBox
                             label='Có phục vụ trang phục'
-                            labelStyle={{fontSize: 13, marginRight: 13}}
+                            labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
                             checkboxStyle = {{width:12, height: 12}} /> 
                        
                         <CheckBox
                             label='Có phục vụ ăn trưa'
-                            labelStyle={{fontSize: 13, marginRight: 13}}
+                            labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
                             checkboxStyle = {{width:12, height: 12}} /> 
                     </View>
                 </View>
 
                 <View style={{flexDirection: 'row', marginTop: 30}}>
-                    <Text style={{marginLeft: 10, marginRight: 10}}>Quyền lợi</Text>
+                    <Text style={{marginLeft: 10, marginRight: 10, color:'black'}}>Quyền lợi</Text>
                     <View style={{flexDirection: 'row'}}>
                         <View>
                             <CheckBox
                                 label='Có trả phí'
-                                labelStyle={{fontSize: 13, marginRight: 13}}
+                                labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
                                 checkboxStyle = {{width:12, height: 12}} /> 
                             
                             <CheckBox
                                 label='Được trả ảnh'
-                                labelStyle={{fontSize: 13, marginRight: 13}}
+                                labelStyle={{fontSize: 13, marginRight: 13, color: 'black'}}
                                 checkboxStyle = {{width:12, height: 12}} /> 
                         </View>
                         <View>
                             <CheckBox
                                 label='Không trả phí'
-                                labelStyle={{fontSize: 13, marginRight: 13}}
+                                labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
                                 checkboxStyle = {{width:12, height: 12}} /> 
                             
                             <CheckBox
                                 label='Không được trả ảnh'
-                                labelStyle={{fontSize: 13, marginRight: 13}}
+                                labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
                                 checkboxStyle = {{width:12, height: 12}} /> 
                         </View>
                      </View>
                 </View>
                
                
-                <View style={styles.title}>
-                    <Text style={{marginTop: 45}}>Chi phí mẫu:</Text>
-                    <TextInput multiline={true} style={{marginLeft: 10, marginTop: -20, 
-                                    width: 270, height: 90}}/>
+                <View style={stylesPostModal.title}>
+                    <Text style={stylesPostModal.boxPostModal}>Chi phí</Text>
+                    {/* <TextInput 
+                         style={{ height: 40, width: 290,  marginTop: -25                     
+                     }}></TextInput> */}
+                     <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
+                          style={stylesPostModal.txtPostModal} />
                 </View>
-                <View style={[styles.title, styles.buttonCreate]}>
-                <TouchableOpacity style={{ width: 160  , height: 30, borderRadius: 10,
-                                          backgroundColor: '#EE3B3B', marginLeft: 20,  }}>
-                        <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Gửi yêu cầu</Text>
+                <View style={[stylesPostModal.title, stylesPostModal.buttonCreate]}>
+                <TouchableOpacity style={stylesPostModal.txtBtnPostModal}>
+                        <Text style={{ textAlign:"center", color: 'white', marginTop: 5}}>Gửi yêu cầu</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{width: 160, height: 30, borderRadius: 10, 
-                                          backgroundColor: '#EE3B3B',marginRight: 20,  }}
+                    <TouchableOpacity style={stylesPostModal.txtBtnPostModal}
                                           onPress = { this.FunctionToOpenSecondActivity }>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
                     </TouchableOpacity>
@@ -296,7 +298,7 @@ export default class PostModal extends Component {
     }
 }
 
-styles = StyleSheet.create({
+stylesPostModal = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: 'white'
@@ -306,6 +308,10 @@ styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10
+    },
+
+    txtBoxPostModal: {
+        width:15, height: 15, marginTop: -5
     },
 
     textBody: {
@@ -346,5 +352,16 @@ styles = StyleSheet.create({
         // marginTop: 20,
         // marginRight: 30,
        
+    },
+    boxPostModal: {
+        marginRight:10, marginTop: 25,color:'black'
+    },
+    txtPostModal: {
+        height: 100, width: 290, marginTop: -15,
+        borderColor: 'black',   borderWidth: 1
+    },
+    txtBtnPostModal: {
+       width: 160, height: 30, borderRadius: 10, 
+        backgroundColor: '#EE3B3B',marginRight: 15,  
     }
 })

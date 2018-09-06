@@ -11,6 +11,7 @@ import {
 // import Signup from './signup'
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+import CheckBox from 'react-native-checkbox';
 
 import logo from './../../assets/img/login/login.jpg'
 
@@ -26,40 +27,57 @@ export default class Signup extends Component {
                 </View>
                 <View>
                     <View style={styles.textLogin}>
-                        <TextInput  placeholderTextColor="#008080" 
+                        <TextInput 
+                             placeholderTextColor="#EE3B3B"  underlineColorAndroid='#EE3B3B'
                             style={styles.textInputLogin}
                             placeholder="Nhập số điện thoại"
                             onChangeText={(text) => this.setState({ text })}                            
                         />
-                        <TextInput placeholderTextColor="#008080" 
+                        <TextInput 
+                            placeholderTextColor="#EE3B3B" underlineColorAndroid='#EE3B3B'
                             style={styles.textInputLogin}
                             placeholder="Nhập mật khẩu"
                             onChangeText={(text) => this.setState({ text })}
                         />
-
+                        {/* <Text style={styles.textCheckbox}>Chọn loại người dùng</Text> */}
+                        <View style={{flexDirection: 'row',  }}>
+                            <CheckBox
+                                label='Người thuê chụp ảnh' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
+                                checkboxStyle={{borderColor: '#EE3B3B'}}
+                                //   checked={true}
+                                checkboxStyle = {{width:13, height: 13,borderColor: '#EE3B3B',
+                                        }}
+                                // onChange={(checked) => console.log('I am checked', checked)} 
+                                />
+                            <CheckBox
+                                label='Nhiếp ảnh gia' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
+                                //   checked={true}
+                                checkboxStyle = {{width:13, height: 13, borderColor: '#EE3B3B'}}
+                                // onChange={(checked) => console.log('I am checked', checked)} 
+                                />
+                        </View>
                         <TouchableOpacity style={[styles.boxLogin, styles.boxTwo]}
-                            // onPress={() => this.props.navigation.navigate('Main ')}
+                             onPress={() => this.props.navigation.navigate('Login')}
                             >
                               <Text style={{marginTop: 4, color:'white'}}>Đăng ký</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{marginTop: 130, marginLeft: 150}}>
+                <View style={{marginTop: 110, marginLeft: 150}}>
                     <TouchableOpacity
                          onPress={() => this.props.navigation.navigate('Login')}
                     >
-                        <Text style={{textDecorationLine: 'underline', color:'#008080'}}>
+                        <Text style={{textDecorationLine: 'underline', color:'#EE3B3B'}}>
                            Đã có tài khoản
                         </Text>
                     </TouchableOpacity>
-                    
+                </View>
+                <View>
                 </View>
             </View>
         )
     }
 }
-
-
 
 
 const styles = StyleSheet.create({
@@ -80,8 +98,11 @@ const styles = StyleSheet.create({
     },
 
     textInputLogin: {
-        height: 40, width: 280
+        height: 40, width: 300
     },
+    // textCheckbox: {
+    //     color: '#EE3B3B'
+    // },
    
     boxLogin: {
         marginTop: 20,
@@ -89,7 +110,7 @@ const styles = StyleSheet.create({
         height: 30,
         alignItems: 'center',
         borderColor: 1,
-        backgroundColor: '#008080',
+        backgroundColor: '#EE3B3B',
         borderRadius: 15
     }
 })
