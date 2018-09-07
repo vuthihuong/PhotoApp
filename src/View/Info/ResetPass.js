@@ -37,7 +37,7 @@ export default class ResetPass extends Component {
                                     value="Nhập lại mật khẩu mới" />
                     </View>
                 </View>
-                <View style = {{flex: 2}}> 
+                <View style = {{flex: 2, justifyContent: 'center', marginRight: 10}}> 
                   <TouchableOpacity style={styles.footReset}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5, }}>Lưu</Text>
                     </TouchableOpacity>
@@ -66,7 +66,7 @@ styles = StyleSheet.create({
         alignItems: 'center',height:35
     },
     footReset: {
-        backgroundColor: '#EE3B3B',height: 30, width: 350,
+        backgroundColor: '#EE3B3B',height: 30, 
         borderRadius: 10, marginLeft: 20, marginTop: 50,
          marginRight: 20
     }

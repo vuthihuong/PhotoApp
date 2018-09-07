@@ -90,7 +90,7 @@ export default class PostEvent extends Component {
                     <View style={stylesPostEvent.title}>
                         <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
                         
-                            <View style={{marginTop: -50, width: 290, height: 100 }}>
+                            <View style={{marginTop: -50, height: 100, width: 250, marginRight: 15 }}>
                             <Dropdown 
                                 data={data}
                                 />
@@ -174,7 +174,7 @@ export default class PostEvent extends Component {
             flexDirection: 'row',  
             //justifyContent: 'space-between'
             marginTop: 20,
-            marginLeft: 15,
+            marginLeft: 15,marginRight: 15
             
         },
         gender: {
@@ -207,7 +207,7 @@ export default class PostEvent extends Component {
             marginRight:10, marginTop: 15, color: 'black'
         },
         txtInputPostEvent: {
-            height: 100, width: 290, marginTop: -20, 
+            height: 100, width: 250, marginTop: -20, marginRight: 15,
             borderColor: 'black',   borderWidth: 1
         },
         btnPostEvent: {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text,
     View, Image, TextInput,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 
 // import { createStackNavigator } from 'react-navigation';
@@ -16,9 +16,21 @@ import CheckBox from 'react-native-checkbox';
 import logo from './../../assets/img/login/login.jpg'
 
 export default class Signup extends Component {
-    constructor(props) {
-        super(props);
-    }
+    constructor() {
+        super();
+    
+        this.state = {
+          checked: false
+        };
+      }
+
+      login(){
+          if(this.state.checked === false && this.state.label == 'Người thuê chụp ảnh' ){
+              this.props.navigation.navigate('Main')
+          }else if(this.state.checked === true && check.label == "Nhiếp ảnh gia") {
+              this.props.navigation.navigate('MainPhoto')
+          }
+      }
     render() {   
         return (
             <View style={styles.container}>
@@ -44,20 +56,20 @@ export default class Signup extends Component {
                             <CheckBox
                                 label='Người thuê chụp ảnh' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
                                 checkboxStyle={{borderColor: '#EE3B3B'}}
-                                //   checked={true}
+                                //   checked={false}
                                 checkboxStyle = {{width:13, height: 13,borderColor: '#EE3B3B',
                                         }}
-                                // onChange={(checked) => console.log('I am checked', checked)} 
+                                onChange={(checked) => console.log('I am checked', checked)} 
                                 />
                             <CheckBox
                                 label='Nhiếp ảnh gia' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
-                                //   checked={true}
+                                //   checked={false}
                                 checkboxStyle = {{width:13, height: 13, borderColor: '#EE3B3B'}}
-                                // onChange={(checked) => console.log('I am checked', checked)} 
+                                onChange={(checked) => console.log('I am checked', checked)} 
                                 />
                         </View>
                         <TouchableOpacity style={[styles.boxLogin, styles.boxTwo]}
-                             onPress={() => this.props.navigation.navigate('Login')}
+                             onPress={() => this.login()}
                             >
                               <Text style={{marginTop: 4, color:'white'}}>Đăng ký</Text>
                         </TouchableOpacity>

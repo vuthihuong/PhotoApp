@@ -66,7 +66,7 @@ export default class PostPhoto extends Component {
            <View style={stylesPostPhoto.title}>
                <Text style={{marginRight: 10, marginTop: 10,color:'black' }}>Thể loại</Text>
              
-                <View style={{marginTop: -30, width: 290, height: 100 }}>
+                <View style={{marginTop: -30, width: 250, height: 100, marginRight: 15 }}>
                    <Dropdown 
                        // label='Favorite Fruit'
                        data={category}
@@ -76,12 +76,12 @@ export default class PostPhoto extends Component {
            <View style={stylesPostPhoto.title}>
                <Text style={{marginRight:10, marginTop: 10,color:'black' }}>Nội dung</Text>
                 <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -30}]} />
+                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -30, marginRight: 15}]} />
            </View>
            <View style={stylesPostPhoto.title}>
                <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
              
-                <View style={{marginTop: -50, width: 290, height: 100 }}>
+                <View style={{marginTop: -50, width: 250, height: 100, marginRight: 15 }}>
                    <Dropdown 
                        data={data}
                        />
@@ -125,7 +125,7 @@ export default class PostPhoto extends Component {
             <View style={stylesPostPhoto.title}>
                <Text style={{marginRight:10, marginTop: 30,color:'black' }}>Chi phí</Text>
                 <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -10, }]} />
+                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -10,marginRight: 15 }]} />
            </View>
            <View style={[stylesPostPhoto.title, stylesPostPhoto.buttonCreate]}>
            <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}>
@@ -164,7 +164,7 @@ export default class PostPhoto extends Component {
         title: {
             flexDirection: 'row',  
             //justifyContent: 'space-between'
-            marginTop: 20,
+            marginTop: 20, marginRight: 15,
             marginLeft: 15,
             
         },
@@ -195,7 +195,7 @@ export default class PostPhoto extends Component {
            
         },
         txtPostPhoto: {
-            height: 100, width: 290,
+            height: 100, width: 250,
             borderColor: 'black', 
             borderWidth: 1
         },

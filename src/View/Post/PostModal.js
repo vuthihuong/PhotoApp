@@ -108,7 +108,7 @@ export default class PostModal extends Component {
                 <View style={stylesPostModal.title}>
                     <Text style={{marginRight: 10, marginTop: -10, color:'black' }}>Địa điểm</Text>
                   
-                     <View style={{marginTop: -50, width: 290, height: 100 }}>
+                     <View style={{marginTop: -50, width: 250, height: 100 }}>
                         <Dropdown 
                             // label='Favorite Fruit'
                             data={data}
@@ -209,7 +209,7 @@ export default class PostModal extends Component {
                     
                 </View>
                 <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
-                            marginTop: 20}}>
+                            marginTop: 20, marginLeft: 5}}>
                     <View>
                         <CheckBox
                             label='Tự make up'
@@ -311,7 +311,7 @@ stylesPostModal = StyleSheet.create({
     },
 
     txtBoxPostModal: {
-        width:15, height: 15, marginTop: -5
+        width:15, height: 15, marginTop: -5, marginRight: 10
     },
 
     textBody: {
@@ -324,7 +324,7 @@ stylesPostModal = StyleSheet.create({
         flexDirection: 'row',  
         //justifyContent: 'space-between'
         marginTop: 20,
-        marginLeft: 15,
+        marginLeft: 15, marginRight: 15
         
     },
     gender: {
@@ -357,8 +357,8 @@ stylesPostModal = StyleSheet.create({
         marginRight:10, marginTop: 25,color:'black'
     },
     txtPostModal: {
-        height: 100, width: 290, marginTop: -15,
-        borderColor: 'black',   borderWidth: 1
+        height: 100, width: 250, marginTop: -15,
+        borderColor: 'black',   borderWidth: 1, marginRight: 15
     },
     txtBtnPostModal: {
        width: 160, height: 30, borderRadius: 10, 

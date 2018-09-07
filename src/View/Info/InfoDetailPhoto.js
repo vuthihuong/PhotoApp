@@ -79,30 +79,30 @@ export default class InfoDetailPhoto extends Component{
                      <View style={stylesInfoDetailPhoto.textBody}>
                         <View>
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
-                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh cá nhân</Text>
+                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh cá nhân</Text>
                             </View>
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
-                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh đôi</Text>
+                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh đôi</Text>
                             </View>
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>   
-                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh nhóm</Text>
+                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>   
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh nhóm</Text>
                             </View>
                         </View>
                         <View>
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
-                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh kỷ yếu</Text>
+                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh kỷ yếu</Text>
                             </View>
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
-                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh cưới</Text>
+                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh cưới</Text>
                             </View>
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={{width: 15, height: 15, marginLeft: 30, tintColor: '#EE3B3B'}}/>
-                                <Text style={{fontSize: 13, color: 'black', marginLeft: 20}}>Chụp ảnh quảng cáo</Text>
+                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh quảng cáo</Text>
                             </View>
                         </View>
                      </View>
@@ -119,12 +119,12 @@ export default class InfoDetailPhoto extends Component{
                             textDecorationLine: 'underline',}}>Bảng giá ảnh</Text>
                     </View>
                     <View style={stylesInfoDetailPhoto.tbl}>
-                        <Table borderStyle={{borderWidth: 1, borderColor: 'black'}}>
-                            <Row data={state.tableHead} widthArr={[90,260]} 
+                        <Table borderStyle={{borderWidth: 1, borderColor: 'black', marginRight: 15}}>
+                            <Row data={state.tableHead} widthArr={[90,230]} 
                                     textStyle={{color: 'black', textAlign: 'center'}} 
                                 // style={styles.head} style={styles.text}/
                                 />
-                            <Rows data={state.tableData} widthArr={[90,260]} 
+                            <Rows data={state.tableData} widthArr={[90,230]} 
                                     textStyle={{color: 'black',textAlign: 'center'}} 
                                     // style={styles.text}
                                     >
@@ -156,15 +156,21 @@ stylesInfoDetailPhoto = StyleSheet.create({
     },
     textBody: {
         flexDirection: 'row',
-       marginTop: 10
+       marginTop: 10, marginRight: 5
     },
+    imgCheckInfoPhoto: {
+        width: 15, height: 15, marginLeft: 20, tintColor: '#EE3B3B'
+    },
+    txtCheckInfoPhoto: {
+        fontSize: 13, color: 'black', marginLeft: 20, 
+},
     price: {
         alignItems: 'center',
         marginTop: 20
     },
     tbl: { 
           paddingTop: 20,
-          marginBottom: 20
+          marginBottom: 20, marginRight: 10
     },
     headTbl: {
          height: 40,
