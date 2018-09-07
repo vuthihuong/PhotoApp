@@ -20,14 +20,53 @@ export default class Signup extends Component {
         super();
     
         this.state = {
-          checked: false
+          checked1: false,
+          checked2: false
         };
+      }
+      change1(){
+        if(this.state.checked1 === true){
+            this.setState({
+                checked1: false
+            });
+           this.setState({
+               checked2: true
+           })
+        }
+        else if(this.state.checked1 === false){
+            this.setState({
+                checked1: true
+            });
+            this.setState({
+                checked2: false
+            });
+           
+        }
+    }
+        change2(){
+          if(this.state.checked2 === true){
+              this.setState({
+                  checked2: false
+              });
+              this.setState({
+                checked1: true
+            })
+          }
+          else if(this.state.checked2 === false){
+              this.setState({
+                  checked2: true
+              });
+              this.setState({
+                  checked1: false
+              });
+          }
+         
       }
 
       login(){
-          if(this.state.checked === false && this.state.label == 'Người thuê chụp ảnh' ){
+          if(this.state.checked1 === true){
               this.props.navigation.navigate('Main')
-          }else if(this.state.checked === true && check.label == "Nhiếp ảnh gia") {
+          }else if(this.state.checked2 === true ) {
               this.props.navigation.navigate('MainPhoto')
           }
       }
@@ -56,16 +95,16 @@ export default class Signup extends Component {
                             <CheckBox
                                 label='Người thuê chụp ảnh' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
                                 checkboxStyle={{borderColor: '#EE3B3B'}}
-                                //   checked={false}
+                                  checked={this.state.checked1}
                                 checkboxStyle = {{width:13, height: 13,borderColor: '#EE3B3B',
                                         }}
-                                onChange={(checked) => console.log('I am checked', checked)} 
+                                onChange={(checked) => {this.change1()}} 
                                 />
                             <CheckBox
                                 label='Nhiếp ảnh gia' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
-                                //   checked={false}
+                                checked={this.state.checked2}
                                 checkboxStyle = {{width:13, height: 13, borderColor: '#EE3B3B'}}
-                                onChange={(checked) => console.log('I am checked', checked)} 
+                                onChange={(checked) => {this.change2()}} 
                                 />
                         </View>
                         <TouchableOpacity style={[styles.boxLogin, styles.boxTwo]}

@@ -15,6 +15,26 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTIm
 import logo from './../../assets/img/login/login.jpg'
 
 export  default  class Login extends Component {
+    constructor() {
+        super();
+    
+        this.state = {
+          name: '',
+          pass: ''
+        };
+      }
+
+      login(){
+          if(this.state.name == '1234' && this.state.pass == 'a' ){
+              this.props.navigation.navigate('Main')
+          }
+          else if (this.state.name === '2345' && this.state.pass === 'b' ){
+                this.props.navigation.navigate('MainPhoto')
+          }
+          else {
+              alert("Số điện thoại hoặc mật khẩu không đúng!")
+          }
+      }
     render() {   
         return (
             <View style={styles.container}>
@@ -26,17 +46,19 @@ export  default  class Login extends Component {
                         <TextInput  placeholderTextColor="#FF6A6A" underlineColorAndroid='#EE3B3B'
                             style={styles.textInputLogin}
                             placeholder="Nhập số điện thoại"
-                            onChangeText={(text) => this.setState({ text })}                            
-                        />
+                            onChangeText={(name) => this.setState({ name })}                            
+                        >{this.state.name}</TextInput>
                         <TextInput placeholderTextColor="#FF6A6A" underlineColorAndroid='#EE3B3B'
                             style={styles.textInputLogin}
+                            secureTextEntry={true}
                             placeholder="Nhập mật khẩu"
-                            onChangeText={(text) => this.setState({ text })}
-                        />
+                            onChangeText={(pass) => this.setState({ pass })}
+                        >{this.state.pass}</TextInput>
 
                         <TouchableOpacity style={[styles.boxLogin, styles.boxTwo]}
-                            onPress={() => this.props.navigation.navigate('Main')}
+                            // onPress={() => this.props.navigation.navigate('Main')}
                               // onPress={() => this.props.navigation.navigate('MainPhoto')}
+                              onPress={() => {this.login()}}
                             >
                               <Text style={{marginTop: 4, color:'white'}}>Đăng nhập</Text>
                         </TouchableOpacity>
