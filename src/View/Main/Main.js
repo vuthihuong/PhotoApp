@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
+import { StyleSheet, Platform, View, Text, Button, Image, TouchableOpacity, YellowBox, FlatList} from 'react-native';
 
-import { createDrawerNavigator } from 'react-navigation';
+import {Container, Header, Icon, Content, Left, Body, Right, List, ListItem} from 'native-base'
+ 
+import { createDrawerNavigator, DrawerItems, } from 'react-navigation';
 
 import { createStackNavigator } from 'react-navigation'
 
@@ -14,8 +16,11 @@ import ManageContract from './ManageContract'
 import AlbumPose from './AlbumPose'
 import MenuTabBar from './MenuTabBar'
 
+import iconInfo from './../../assets/img/info/icon_info.png'
+
 
 import notifi from '../../assets/img/menu/notifi.png'
+
 
 const InfoCustomerStack = createStackNavigator({
     InfoCustomer: { 
@@ -126,8 +131,54 @@ const MenuStack = createStackNavigator({
     },
   });
  
+  const CustomDrawerContent = (props)=> {
+      return (
+          <Container>
+              {/* <Header style={{backgroundColor: '#3a455c', height: 90}}>
+
+              </Header>
+              <Content>
+                  <FlatList 
+                    data={[
+                      'MenuTabbar', 'ListFavorite', 'HistoryContract'
+                    ]}
+
+                    renderItem={({item})=> (
+                      <ListItem>
+                        <Text>{item}</Text>
+                      </ListItem>
+                    )}
+
+                  /> */}
+              {/* </Content> */}
+              <Header  style={{backgroundColor: '#EE3B3B', height: 150, }}
+               screen={<InfoCustomerStack />} >
+                <Body style={{justifyContent: 'center', alignItems:'center'}}>
+                  <Image  onPress={() => this.props.navigation.navigate("DrawerOpen")} source={iconInfo} style={{width: 100,height: 100, tintColor: 'white'}}/>
+                  {/* <TouchableOpacity  onPress={() => this.login()}> */}
+                 
+                  {/* <Button
+                     
+                      onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                >Hello </Button> */}
+             
+                  <Text style={{color: 'white'}} >Phan Thu Phương</Text>
+              
+                  
+                 
+                  {/* </TouchableOpacity> */}
+                 
+                </Body> 
+              </Header>
+              <Content>
+                <DrawerItems {...props} />
+              </Content>
+          </Container>
+      )
+  }
   
   export default MyDrawerNavigator = createDrawerNavigator({
+
     InfoCustomer: {
       screen: InfoCustomerStack,
       navigationOptions: {
@@ -135,6 +186,7 @@ const MenuStack = createStackNavigator({
         headerStyle: {
           backgroundColor: 'white',    
           height: 35,    
+       
           
         },
     },
@@ -239,6 +291,7 @@ const MenuStack = createStackNavigator({
   }, {
     drawerWidth: 250,
     drawerPosition: 'left',
+    contentComponent: CustomDrawerContent,  
     
     style: {
       // paddingTop: 80, // This only works if you modify DrawerNavigator.js to pass style props. See link 

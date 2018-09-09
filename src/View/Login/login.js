@@ -27,12 +27,24 @@ export  default  class Login extends Component {
       login(){
           if(this.state.name == '1234' && this.state.pass == 'a' ){
               this.props.navigation.navigate('Main')
+              this.setState({
+                  name: '',
+                  pass: ''
+              })
           }
           else if (this.state.name === '2345' && this.state.pass === 'b' ){
                 this.props.navigation.navigate('MainPhoto')
+                this.setState({
+                    name: '',
+                    pass: ''
+                })
           }
           else {
               alert("Số điện thoại hoặc mật khẩu không đúng!")
+            //   this.setState({
+            //     name: '',
+            //     pass: ''
+            // })
           }
       }
     render() {   

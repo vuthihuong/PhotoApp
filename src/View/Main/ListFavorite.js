@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
+import {Icon, Button, Container, Header, Content} from 'native-base'
 
 import iconInfo from '../../assets/img/info/iconInfo.png'
 import heart from '../../assets/img/info/heart.png'

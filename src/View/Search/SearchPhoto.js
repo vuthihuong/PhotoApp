@@ -53,7 +53,7 @@ export default class SearchPhoto extends Component{
         return(
             <View style={stylesPhoto.container}>
                 <View style={stylesPhoto.headGoBack}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Menu')}>
                         <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15}}/>
                     </TouchableOpacity>
                     <View style={stylesPhoto.textPass}>

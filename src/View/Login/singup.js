@@ -29,9 +29,6 @@ export default class Signup extends Component {
             this.setState({
                 checked1: false
             });
-           this.setState({
-               checked2: true
-           })
         }
         else if(this.state.checked1 === false){
             this.setState({
@@ -40,34 +37,62 @@ export default class Signup extends Component {
             this.setState({
                 checked2: false
             });
-           
+            this.setState({
+                checked3: false
+            })
         }
+        
     }
         change2(){
           if(this.state.checked2 === true){
               this.setState({
                   checked2: false
               });
-              this.setState({
-                checked1: true
-            })
           }
           else if(this.state.checked2 === false){
               this.setState({
                   checked2: true
               });
               this.setState({
-                  checked1: false
-              });
+                checked1: false
+            })
+            this.setState({
+                checked3: false
+            })
           }
+        
          
       }
+
+      change3(){
+        if(this.state.checked3 === true){
+            this.setState({
+                checked3: false
+            });
+           
+        }
+        else if(this.state.checked3 === false){
+            this.setState({
+                checked3: true
+            });
+            this.setState({
+                checked1: false
+            })
+            this.setState({
+                checked2: false
+            })
+        }
+      
+    }
 
       login(){
           if(this.state.checked1 === true){
               this.props.navigation.navigate('Main')
           }else if(this.state.checked2 === true ) {
               this.props.navigation.navigate('MainPhoto')
+          }
+          else if(this.state.checked3 === true){
+              this.props.navigation.navigate('Main')
           }
       }
     render() {   
@@ -105,6 +130,12 @@ export default class Signup extends Component {
                                 checked={this.state.checked2}
                                 checkboxStyle = {{width:13, height: 13, borderColor: '#EE3B3B'}}
                                 onChange={(checked) => {this.change2()}} 
+                                />
+                             <CheckBox
+                                label='Mẫu ảnh' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
+                                checked={this.state.checked3}
+                                checkboxStyle = {{width:13, height: 13, borderColor: '#EE3B3B'}}
+                                onChange={(checked) => {this.change3()}} 
                                 />
                         </View>
                         <TouchableOpacity style={[styles.boxLogin, styles.boxTwo]}
