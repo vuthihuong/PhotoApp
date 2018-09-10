@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
+import {Container, Header, Icon, Content, Left, Body, Right, List, ListItem} from 'native-base'
 
-import { createDrawerNavigator } from 'react-navigation';
+import { createDrawerNavigator,DrawerItems } from 'react-navigation';
 
 import { createStackNavigator } from 'react-navigation'
 
@@ -12,9 +13,11 @@ import InfoPhoto from '../Info/InfoPhoto'
 import HistoryContract from './HistoryContract'
 import ManageContract from './ManageContract'
 import AlbumPose from './AlbumPose'
-import MenuTabBar from './MenuTabBar'
+import MenuPhotoTabBar from './MenuPhotoTabBar'
+import Setting from './../Setting/Setting'
 
 import notifi from '../../assets/img/menu/notifi.png'
+import iconInfo from './../../assets/img/info/icon_info.png'
 
 const InfoPhotoStack = createStackNavigator({
     InfoPhoto: { 
@@ -36,25 +39,25 @@ const InfoPhotoStack = createStackNavigator({
   });
 
 const MenuPhotoStack = createStackNavigator({
-    MenuPhoto: { 
-      screen: MenuPhoto, 
-      navigationOptions: ({ navigation }) => ({
-        title: 'TRANG CHỦ',
-        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        headerRight : <TouchableOpacity>
-                         <Image source={notifi} style={{width: 20, height: 20, tintColor: '#EE3B3B'}} />
-                    </TouchableOpacity> ,
-        headerTitleStyle: {fontSize: 15},
-        headerStyle: {
-          backgroundColor: 'white',    
-          height: 35,    
-          
-        },
-        headerTintColor: '#EE3B3B',   
-        borderHeaderBottomColor: '#EE3B3B'        
-      })
-    },
-  });
+  MenuPhotoTabBar: { 
+    screen: MenuPhotoTabBar, 
+    navigationOptions: ({ navigation }) => ({
+      title: 'TRANG CHỦ',
+      headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+      headerRight : <TouchableOpacity>
+                       <Image source={notifi} style={{width: 20, height: 20, tintColor: '#EE3B3B'}} />
+                  </TouchableOpacity> ,
+      headerTitleStyle: {fontSize: 15},
+      headerStyle: {
+        backgroundColor: 'white',    
+        height: 35,    
+        
+      },
+      headerTintColor: '#EE3B3B',   
+      borderHeaderBottomColor: '#EE3B3B'        
+    })
+  },
+});
 
 //   const ListFavoriteStack = createStackNavigator({
 //     ListFavorite: { 
@@ -113,7 +116,7 @@ const MenuPhotoStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Cách tạo dáng chụp ảnh',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        headerTitleStyle: styles.titleMenu,
+        headerTitleStyle: stylesMainPhoto.titleMenu,
         headerStyle: {
           backgroundColor: 'white',    
           height: 35,    
@@ -124,6 +127,54 @@ const MenuPhotoStack = createStackNavigator({
       })
     },
   });
+  const SettingStack = createStackNavigator({
+    Setting: { 
+      screen: Setting, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Cài đặt',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerStyle: {
+          backgroundColor: 'white'
+        },
+        headerTintColor: '#EE3B3B', 
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
+      })
+    },
+  });
+
+  const CustomDrawerContent = (props)=> {
+    return (
+        <Container>
+            <Header  style={stylesMainPhoto.headDrawer}>
+                <Body style={stylesMainPhoto.bodyDrawer}>
+                  <TouchableOpacity onPress={() => props.navigation.navigate('InfoPhoto') }>
+                       <Image  
+                            source={iconInfo} style={stylesMainPhoto.iconHeadDrawer}/>
+                      
+                        <Text style={stylesMainPhoto.labelMainDrawer}>Trần Nam Anh</Text>
+                  </TouchableOpacity>
+                </Body> 
+            </Header>
+            <Content>
+              <DrawerItems {...props} />
+              <TouchableOpacity  onPress={() => props.navigation.navigate('Login') }>
+                  <View style={stylesMainPhoto.itemLogout}>
+                    <View style={stylesMainPhoto.iconContainerLogout}>
+                      <Image source={require('./../../assets/img/login/logout.png')} 
+                              style={stylesMainPhoto.iconLogout}></Image>
+                    </View>
+                    <Text style={stylesMainPhoto.labelLogout}>Logout</Text>
+                  </View>
+              </TouchableOpacity>
+            </Content>
+           
+        </Container>
+    )
+}
 
   export default MyDrawerNavigator = createDrawerNavigator({
     InfoPhoto: {
@@ -220,6 +271,25 @@ const MenuPhotoStack = createStackNavigator({
         },
       },
     },
+
+    
+
+    Setting: { 
+      screen: SettingStack,
+      navigationOptions: {
+        // title: 'Trang chủ',
+        drawerLabel: 'Cài đặt',
+       
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/menu/setting.png')}
+            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+          />
+        ),
+    }
+    },
+    
+   
   
     // Guide: { 
     //   screen: GuideStack,
@@ -237,6 +307,7 @@ const MenuPhotoStack = createStackNavigator({
   }, {
     drawerWidth: 250,
     drawerPosition: 'left',
+    contentComponent: CustomDrawerContent, 
     
     style: {
       // paddingTop: 80, // This only works if you modify DrawerNavigator.js to pass style props. See link 
@@ -252,7 +323,7 @@ const MenuPhotoStack = createStackNavigator({
   });
 
 
-  const styles = StyleSheet.create({
+  const stylesMainPhoto = StyleSheet.create({
     
     MainContainer :{
      flex:1,
@@ -260,11 +331,36 @@ const MenuPhotoStack = createStackNavigator({
      alignItems: 'center',
      justifyContent: 'center',
      },
-     titleMenu: {
-       // marginTop: 100
-     },
-     icon1: {
-       width:10,
-       height: 10
-     } 
+     headDrawer: {
+      backgroundColor: '#EE3B3B', height: 150
+    },
+    bodyDrawer: {
+      justifyContent: 'center', alignItems:'center'
+    },
+    iconHeadDrawer: {
+      width: 100,height: 100, tintColor: 'white'
+    },
+    labelMainDrawer: { 
+      color: 'white'
+    },
+     iconLogout: { 
+      width: 20,
+      height: 20,
+      tintColor: '#EE3B3B'
+    },
+    iconContainerLogout: { 
+      marginHorizontal: 14,
+      width: 24,
+      alignItems: 'center',
+    },
+
+    itemLogout: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    labelLogout: { 
+      margin: 16,
+      fontWeight: 'bold',
+      color: 'rgba(0, 0, 0, .87)',
+    }
    });

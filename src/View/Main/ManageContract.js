@@ -28,8 +28,12 @@ export default class ManageContract extends Component{
                  
                 </TouchableOpacity>
                 <View style={ stylesManagCont.txtConfirm }>
-                    <TouchableOpacity><Text style={stylesManagCont.txtManagCont}>Đang tìm</Text></TouchableOpacity>
-                    <TouchableOpacity><Text style={stylesManagCont.txtManagCont}>Chưa hoàn thành</Text></TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={[stylesManagCont.txtManagCont,{color:'blue'}]}>Đang tìm</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Chưa hoàn thành</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
           </View>

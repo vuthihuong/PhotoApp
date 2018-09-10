@@ -97,25 +97,25 @@ export default class Signup extends Component {
       }
     render() {   
         return (
-            <View style={styles.container}>
+            <View style={stylesSignUp.container}>
                 <View>
-                    <Image source={logo} style={styles.img} />
+                    <Image source={logo} style={stylesSignUp.img} />
                 </View>
                 <View>
-                    <View style={styles.textLogin}>
+                    <View style={stylesSignUp.textLogin}>
                         <TextInput 
                              placeholderTextColor="#EE3B3B"  underlineColorAndroid='#EE3B3B'
-                            style={styles.textInputLogin}
+                            style={stylesSignUp.textInputLogin}
                             placeholder="Nhập số điện thoại"
                             onChangeText={(text) => this.setState({ text })}                            
                         />
                         <TextInput 
                             placeholderTextColor="#EE3B3B" underlineColorAndroid='#EE3B3B'
-                            style={styles.textInputLogin}
+                            style={stylesSignUp.textInputLogin}
                             placeholder="Nhập mật khẩu"
                             onChangeText={(text) => this.setState({ text })}
                         />
-                        {/* <Text style={styles.textCheckbox}>Chọn loại người dùng</Text> */}
+                        {/* <Text style={stylesSignUp.textCheckbox}>Chọn loại người dùng</Text> */}
                         <View style={{flexDirection: 'row',  }}>
                             <CheckBox
                                 label='Người thuê chụp ảnh' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
@@ -138,7 +138,7 @@ export default class Signup extends Component {
                                 onChange={(checked) => {this.change3()}} 
                                 />
                         </View>
-                        <TouchableOpacity style={[styles.boxLogin, styles.boxTwo]}
+                        <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
                              onPress={() => this.login()}
                             >
                               <Text style={{marginTop: 4, color:'white'}}>Đăng ký</Text>
@@ -162,7 +162,7 @@ export default class Signup extends Component {
 }
 
 
-const styles = StyleSheet.create({
+const stylesSignUp = StyleSheet.create({
     container: {
         flex:1,
         flexDirection: 'column',

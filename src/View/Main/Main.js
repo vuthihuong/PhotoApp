@@ -15,6 +15,7 @@ import HistoryContract from './HistoryContract'
 import ManageContract from './ManageContract'
 import AlbumPose from './AlbumPose'
 import MenuTabBar from './MenuTabBar'
+import Setting from './../Setting/Setting'
 
 import iconInfo from './../../assets/img/info/icon_info.png'
 
@@ -119,7 +120,7 @@ const MenuStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Cách tạo dáng chụp ảnh',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        headerTitleStyle: styles.titleMenu,
+        headerTitleStyle: stylesMain.titleMenu,
         headerStyle: {
           backgroundColor: 'white',    
           height: 35,    
@@ -130,6 +131,26 @@ const MenuStack = createStackNavigator({
       })
     },
   });
+
+  const SettingStack = createStackNavigator({
+    Setting: { 
+      screen: Setting, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Cài đặt',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerStyle: {
+          backgroundColor: 'white'
+        },
+        headerTintColor: '#EE3B3B', 
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
+      })
+    },
+  });
+
  
   const CustomDrawerContent = (props)=> {
       return (
@@ -151,28 +172,36 @@ const MenuStack = createStackNavigator({
 
                   /> */}
               {/* </Content> */}
-              <Header  style={{backgroundColor: '#EE3B3B', height: 150, }}
-               screen={<InfoCustomerStack />} >
-                <Body style={{justifyContent: 'center', alignItems:'center'}}>
-                  <Image  onPress={() => this.props.navigation.navigate("DrawerOpen")} source={iconInfo} style={{width: 100,height: 100, tintColor: 'white'}}/>
-                  {/* <TouchableOpacity  onPress={() => this.login()}> */}
-                 
-                  {/* <Button
-                     
-                      onPress={() => this.props.navigation.navigate("DrawerOpen")}
-                >Hello </Button> */}
-             
-                  <Text style={{color: 'white'}} >Phan Thu Phương</Text>
-              
-                  
-                 
-                  {/* </TouchableOpacity> */}
-                 
+              <Header  style={stylesMain.headDrawer}>
+                <Body style={stylesMain.bodyDrawer}>
+                  <TouchableOpacity onPress={() => props.navigation.navigate('InfoCustomer') }>
+                       <Image  
+                            source={iconInfo} style={stylesMain.iconHeadDrawer}/>
+                        {/* <Image source={require('./img/logout.png')} style={styles.icon}></Image> */}
+                        <Text style={stylesMain.labelMainDrawer}>Phan Thu Phương</Text>
+                  </TouchableOpacity>
                 </Body> 
               </Header>
               <Content>
                 <DrawerItems {...props} />
+                 {/* <Button
+                style={{backgroundColor: 'white'}}
+                title="Logout"
+                onPress={() => props.navigation.navigate('Login') }/> */}
+               
+               <TouchableOpacity  onPress={() => props.navigation.navigate('Login') }>
+                  <View style={stylesMain.itemLogout}>
+                    <View style={stylesMain.iconContainerLogout}>
+                      <Image source={require('./../../assets/img/login/logout.png')} 
+                              style={stylesMain.iconLogout}></Image>
+                    </View>
+                    <Text style={stylesMain.labelLogout}>Logout</Text>
+                  </View>
+                </TouchableOpacity>
               </Content>
+             
+             
+             
           </Container>
       )
   }
@@ -274,6 +303,20 @@ const MenuStack = createStackNavigator({
         },
       },
     },
+    Setting: { 
+      screen: SettingStack,
+      navigationOptions: {
+        // title: 'Trang chủ',
+        drawerLabel: 'Cài đặt',
+       
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/menu/setting.png')}
+            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+          />
+        ),
+    }
+    },
   
     // Guide: { 
     //   screen: GuideStack,
@@ -307,19 +350,37 @@ const MenuStack = createStackNavigator({
   });
 
 
-  const styles = StyleSheet.create({
-    
-    MainContainer :{
-     flex:1,
-     paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
-     alignItems: 'center',
-     justifyContent: 'center',
-     },
-     titleMenu: {
-       // marginTop: 100
-     },
-     icon1: {
-       width:10,
-       height: 10
-     } 
+  const stylesMain = StyleSheet.create({
+    headDrawer: {
+      backgroundColor: '#EE3B3B', height: 150
+    },
+    bodyDrawer: {
+      justifyContent: 'center', alignItems:'center'
+    },
+    iconHeadDrawer: {
+      width: 100,height: 100, tintColor: 'white'
+    },
+    labelMainDrawer: { 
+      color: 'white'
+    },
+    iconLogout: { 
+      width: 20,
+      height: 20,
+      tintColor: '#EE3B3B'
+    },
+    iconContainerLogout: { 
+      marginHorizontal: 14,
+      width: 24,
+      alignItems: 'center',
+    },
+
+    itemLogout: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    labelLogout: { 
+      margin: 16,
+      fontWeight: 'bold',
+      color: 'rgba(0, 0, 0, .87)',
+    }
    });

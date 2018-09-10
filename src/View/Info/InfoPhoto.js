@@ -188,11 +188,11 @@ export default class InfoPhoto extends Component {
                       <View style={stylesInfoPhoto.tbl}>
                         <Table borderStyle={{borderWidth: 1, borderColor: 'black'}}>
                             <Row data={state.tableHead} widthArr={[70,230, 30,30]} 
-                                    textStyle={{color: 'black', textAlign: 'center'}} 
+                                    textStyle={stylesInfoPhoto.tblTxt} 
                                 // style={styles.head} style={styles.text}/
                                 />
                             <Rows data={state.tableData} widthArr={[70,230,30,30]} 
-                                    textStyle={{color: 'black',textAlign: 'center'}} 
+                                    textStyle={stylesInfoPhoto.tblTxt} 
                                     // style={styles.text}
                                     >
                                     
@@ -202,16 +202,13 @@ export default class InfoPhoto extends Component {
                 </View>
                
 
-               <View style = {{ flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',}}> 
-                  <TouchableOpacity style={{ width: 160  , height: 30, borderRadius: 10,
-                                          backgroundColor: '#EE3B3B', marginLeft: 20, marginBottom: 20,
-                                          marginRight: 10 }}>
-                        <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Lưu</Text>
+               <View style = {stylesInfoPhoto.btnSubmit}> 
+                  <TouchableOpacity style={[stylesInfoPhoto.btnSubmitPhoto,{ marginRight: 10 }]}>
+                        <Text style={stylesInfoPhoto.btnSubmitTxt}>Lưu</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ width: 160, height: 30, borderRadius: 10, 
-                                          backgroundColor: '#EE3B3B',marginRight: 20, marginBottom: 20 }}
-                                        >
-                        <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ResetPass') }
+                    style={stylesInfoPhoto.btnSubmitPhoto} >
+                        <Text style={stylesInfoPhoto.btnSubmitTxt}>
                                 Đổi mật khẩu</Text>
                     </TouchableOpacity>
                </View>
@@ -271,6 +268,19 @@ export default class InfoPhoto extends Component {
           },
       textTbl: {
           margin: 6 , color: 'black',
-          }
+          },
+       btnSubmit: { 
+           flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center'
+        },
+        btnSubmitPhoto: { 
+            width: 160, height: 30, borderRadius: 10, 
+            backgroundColor: '#EE3B3B',marginRight: 20, marginBottom: 20
+         },
+        btnSubmitTxt: {
+             textAlign:"center", color: 'white', marginTop: 5 
+        },
+        textTbl: {
+            color: 'black',textAlign: 'center'
+        }
     })
      

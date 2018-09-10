@@ -33,22 +33,86 @@ export default class MenuPhoto extends Component {
         return {tabBarLabel, tabBarIcon}
     }
 
-       render()
-       {
-          return(
-             <View style={{flex: 1,backgroundColor: 'white'}}>
-                {/* <Text style={{fontSize: 23}}> This is Activity - 3 </Text>  */}
+    render() {
+        return(
+   
+           <View style = { stylesMenuPhoto.containerManagCont }>
+             <View style={stylesMenuPhoto.bodyManaCont}>
+                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
+                     style={stylesMenuPhoto.contManagCont}>
+                         <Text style={stylesMenuPhoto.txtManagCont}>Phan Thu Phương đang có yêu cầu chụp ảnh ở gần bạn</Text>
+                         {/* <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text> */}
+                  
+                 </TouchableOpacity>
+                 <View style={ stylesMenuPhoto.txtConfirm }>
+                     <TouchableOpacity>
+                         <Text style={[stylesMenuPhoto.txtManagCont, {color: 'blue'}]}>OK</Text>
+                    </TouchableOpacity>
+                     <TouchableOpacity>
+                         <Text style={[stylesMenuPhoto.txtManagCont,{color:'#EE3B3B'}]}>Hủy</Text>
+                    </TouchableOpacity>
+                 </View>
              </View>
-          );
-       }
-    }
-    
-    const styles = StyleSheet.create({
-        MainContainer :{ 
-         flex:1,
-         paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
-        //  alignItems: 'center',
-        //  justifyContent: 'center',    
-         backgroundColor: 'white'
-         }
-       })
+
+              <View style={stylesMenuPhoto.bodyManaCont}>
+                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
+                     style={stylesMenuPhoto.contManagCont}>
+                         <Text style={stylesMenuPhoto.txtManagCont}>Phạm Lan Hương đang gửi yêu cầu chụp ảnh tới bạn</Text>
+                         {/* <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text> */}
+                  
+                 </TouchableOpacity>
+                 <View style={ stylesMenuPhoto.txtConfirm }>
+                     <TouchableOpacity>
+                         <Text style={[stylesMenuPhoto.txtManagCont, {color: 'blue'}]}>OK</Text>
+                    </TouchableOpacity>
+                     <TouchableOpacity>
+                         <Text style={[stylesMenuPhoto.txtManagCont,{color:'#EE3B3B'}]}>Hủy</Text>
+                    </TouchableOpacity>
+                 </View>
+             </View>
+             <View style={stylesMenuPhoto.bodyManaCont}>
+                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
+                     style={stylesMenuPhoto.contManagCont}>
+                         <Text style={stylesMenuPhoto.txtManagCont}>Nguyễn Thu Vân có bài viết mới</Text>
+                         {/* <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text> */}
+                  
+                 </TouchableOpacity>
+                 <View style={ stylesMenuPhoto.txtConfirm }>
+                     <TouchableOpacity>
+                         <Text style={[stylesMenuPhoto.txtManagCont, {color: 'blue'}]}>Tham gia</Text>
+                    </TouchableOpacity>
+                     <TouchableOpacity>
+                         <Text style={[stylesMenuPhoto.txtManagCont,{color:'#EE3B3B'}]}>Hủy</Text>
+                    </TouchableOpacity>
+                 </View>
+             </View>
+           </View>
+        );
+     }
+  }
+ const stylesMenuPhoto = StyleSheet.create({
+  
+  containerManagCont :{
+      flex: 1,
+      backgroundColor: 'white', 
+     
+   },
+   bodyManaCont: {
+     flexDirection: 'row', justifyContent: 'space-between', 
+     borderBottomWidth: 1, borderBottomColor: '#EE3B3B', paddingBottom: 10,
+     marginTop: 15
+   },
+ 
+   contManagCont: {
+         marginLeft: 10, width: 280
+   },
+  
+  txtManagCont: {
+    color: 'black',
+   
+  },
+  txtConfirm: {
+     width: 70
+  }
+     
+ })

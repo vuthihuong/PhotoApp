@@ -28,8 +28,8 @@ export default class Menu extends Component {
 
     render() {
         return (
-          <View style ={styles.container}>
-              <View style={styles.txt}>
+          <View style ={stylesMenu.container}>
+              <View style={stylesMenu.txt}>
               <TouchableOpacity   style={{width: 290, height: 35, borderWidth: 1,
                        borderColor: '#EE3B3B', borderRadius: 10}}  
                        onPress={() => this.props.navigation.navigate('SearchPhoto')}>
@@ -39,7 +39,7 @@ export default class Menu extends Component {
                 </TouchableOpacity>
               </View>
             <MapView
-             style={styles.map}
+             style={stylesMenu.map}
              region={{
               latitude:21.0055596,
               longitude:105.8412741,
@@ -53,8 +53,10 @@ export default class Menu extends Component {
       }
     }
     
-    const styles = StyleSheet.create({
+    const stylesMenu = StyleSheet.create({
       container: {
+        flex:1,
+        backgroundColor: 'white',
         position: 'absolute',
         top: 0,
         left: 0,

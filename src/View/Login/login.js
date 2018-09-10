@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text,
     View, Image, TextInput,
-    TouchableOpacity
+    TouchableOpacity, Alert
 } from 'react-native';
 
 import { createStackNavigator } from 'react-navigation';
@@ -40,7 +40,7 @@ export  default  class Login extends Component {
                 })
           }
           else {
-              alert("Số điện thoại hoặc mật khẩu không đúng!")
+              Alert.alert("Thông báo","Số điện thoại hoặc mật khẩu của bạn không đúng!")
             //   this.setState({
             //     name: '',
             //     pass: ''
@@ -49,25 +49,25 @@ export  default  class Login extends Component {
       }
     render() {   
         return (
-            <View style={styles.container}>
+            <View style={stylesLogin.container}>
                 <View>
-                    <Image source={logo} style={styles.img} />
+                    <Image source={logo} style={stylesLogin.img} />
                 </View>
                 <View>
-                    <View style={styles.textLogin}>
+                    <View style={stylesLogin.textLogin}>
                         <TextInput  placeholderTextColor="#FF6A6A" underlineColorAndroid='#EE3B3B'
-                            style={styles.textInputLogin}
+                            style={stylesLogin.textInputLogin}
                             placeholder="Nhập số điện thoại"
                             onChangeText={(name) => this.setState({ name })}                            
                         >{this.state.name}</TextInput>
                         <TextInput placeholderTextColor="#FF6A6A" underlineColorAndroid='#EE3B3B'
-                            style={styles.textInputLogin}
+                            style={stylesLogin.textInputLogin}
                             secureTextEntry={true}
                             placeholder="Nhập mật khẩu"
                             onChangeText={(pass) => this.setState({ pass })}
                         >{this.state.pass}</TextInput>
 
-                        <TouchableOpacity style={[styles.boxLogin, styles.boxTwo]}
+                        <TouchableOpacity style={[stylesLogin.boxLogin, stylesLogin.boxTwo]}
                             // onPress={() => this.props.navigation.navigate('Main')}
                               // onPress={() => this.props.navigation.navigate('MainPhoto')}
                               onPress={() => {this.login()}}
@@ -90,7 +90,7 @@ export  default  class Login extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const stylesLogin = StyleSheet.create({
     container: {
         flex:1,
         flexDirection: 'column',
