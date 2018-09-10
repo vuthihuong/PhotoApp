@@ -269,8 +269,8 @@ stylesAddress = StyleSheet.create({
        
     },
     footAddress: {
-      backgroundColor: '#EE3B3B',height: 30, width: 350,
+      backgroundColor: '#EE3B3B',height: 30, 
       borderRadius: 10, marginLeft: 20, marginTop: 50,
-       marginRight: 20
+      marginRight: 20
   }
 })

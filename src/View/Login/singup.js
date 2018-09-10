@@ -118,7 +118,9 @@ export default class Signup extends Component {
                         {/* <Text style={stylesSignUp.textCheckbox}>Chọn loại người dùng</Text> */}
                         <View style={{flexDirection: 'row',  }}>
                             <CheckBox
-                                label='Người thuê chụp ảnh' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
+                                label='Người thuê chụp ảnh' 
+                                labelStyle={{fontSize: 14, color: '#EE3B3B'}}
+                                numberOfLines = {2}
                                 checkboxStyle={{borderColor: '#EE3B3B'}}
                                   checked={this.state.checked1}
                                 checkboxStyle = {{width:13, height: 13,borderColor: '#EE3B3B',
@@ -126,7 +128,7 @@ export default class Signup extends Component {
                                 onChange={(checked) => {this.change1()}} 
                                 />
                             <CheckBox
-                                label='Nhiếp ảnh gia' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
+                                label='Nháy ảnh' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
                                 checked={this.state.checked2}
                                 checkboxStyle = {{width:13, height: 13, borderColor: '#EE3B3B'}}
                                 onChange={(checked) => {this.change2()}} 
@@ -180,7 +182,7 @@ const stylesSignUp = StyleSheet.create({
     },
 
     textInputLogin: {
-        height: 40, width: 300
+        height: 40, width: 320
     },
     // textCheckbox: {
     //     color: '#EE3B3B'
@@ -188,7 +190,7 @@ const stylesSignUp = StyleSheet.create({
    
     boxLogin: {
         marginTop: 20,
-        width: 280,
+        width: 300,
         height: 30,
         alignItems: 'center',
         borderColor: 1,

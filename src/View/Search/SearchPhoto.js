@@ -117,8 +117,7 @@ export default class SearchPhoto extends Component{
                 </TouchableOpacity>
 
                 <View style={{}}>
-                    <TouchableOpacity style={{ width: 345  , height: 30, borderRadius: 10,
-                                          backgroundColor: '#EE3B3B', marginLeft: 20, marginTop: 50 }}>
+                    <TouchableOpacity style={stylesPhoto.footPhoto}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tìm kiếm</Text>
                     </TouchableOpacity>
                 </View>
@@ -166,6 +165,11 @@ stylesPhoto = StyleSheet.create({
         marginRight: 10,
         marginTop: 10,
        
+    },
+    footPhoto: {
+        backgroundColor: '#EE3B3B',height: 30, 
+        borderRadius: 10, marginLeft: 20, marginTop: 50,
+         marginRight: 20
     }
 
 })

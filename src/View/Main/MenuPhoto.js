@@ -8,6 +8,7 @@ import { createTabNavigator} from 'react-navigation'
 import HamburgerIcon from './HamburgerIcon'
 
 import home from '../../assets/img/menu/home.png'
+import ToggleSwitch from 'toggle-switch-react-native'
 
 
 
@@ -18,7 +19,26 @@ export default class MenuPhoto extends Component {
       YellowBox.ignoreWarnings([
        'Warning: componentWillMount is deprecated',
        'Warning: componentWillReceiveProps is deprecated',
-     ]);    
+     ]);   
+     this.state = {
+        isOn: false,
+        status: 'offline'
+      };
+    }
+    change(){
+        if(this.state.isOn === false){ 
+            this.setState({
+                isOn: true,
+                status: 'online'
+            })
+        }
+        else if(this.state.isOn === true){ 
+            this.setState({
+                isOn: false,
+                status: 'offline'
+            })
+        }
+       
     }
 
     static navigationOptions = ({navigation}) => {
@@ -37,7 +57,21 @@ export default class MenuPhoto extends Component {
         return(
    
            <View style = { stylesMenuPhoto.containerManagCont }>
+             <View style={stylesMenuPhoto.bodyBtnToggle}>
+                <View style={stylesMenuPhoto.btnToggle}>
+                    <Text style={[stylesMenuPhoto.txtManagCont]}>Trạng thái {this.state.status}</Text>
+                    <ToggleSwitch
+                        isOn={this.state.isOn}
+                        onColor='green'
+                        offColor='gray'
+                        size='small'
+                        onToggle={ (isOn) => this.change() } />
+                </View>
+            </View>
+           
+           
              <View style={stylesMenuPhoto.bodyManaCont}>
+            
                  <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
                      style={stylesMenuPhoto.contManagCont}>
                          <Text style={stylesMenuPhoto.txtManagCont}>Phan Thu Phương đang có yêu cầu chụp ảnh ở gần bạn</Text>
@@ -105,6 +139,14 @@ export default class MenuPhoto extends Component {
  
    contManagCont: {
          marginLeft: 10, width: 280
+   },
+   bodyBtnToggle: { 
+        borderBottomWidth: 1, borderBottomColor: '#EE3B3B', paddingBottom: 10,
+        marginTop: 15
+   },
+   btnToggle: {
+       flexDirection: 'row',justifyContent: 'space-between',
+       marginLeft: 10, marginRight: 10
    },
   
   txtManagCont: {
