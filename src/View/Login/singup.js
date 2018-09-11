@@ -21,7 +21,8 @@ export default class Signup extends Component {
     
         this.state = {
           checked1: false,
-          checked2: false
+          checked2: false,
+          checked3: false
         };
       }
       change1(){
@@ -92,7 +93,7 @@ export default class Signup extends Component {
               this.props.navigation.navigate('MainPhoto')
           }
           else if(this.state.checked3 === true){
-              this.props.navigation.navigate('Main')
+              this.props.navigation.navigate('MainModal')
           }
       }
     render() {   

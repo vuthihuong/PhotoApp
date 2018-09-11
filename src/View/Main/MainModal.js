@@ -1,29 +1,33 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
-import {Container, Header, Icon, Content, Left, Body, Right, List, ListItem} from 'native-base'
+import { StyleSheet, Platform, View, Text, Button, Image, TouchableOpacity, YellowBox, FlatList} from 'react-native';
 
-import { createDrawerNavigator,DrawerItems } from 'react-navigation';
+import {Container, Header, Icon, Content, Left, Body, Right, List, ListItem} from 'native-base'
+ 
+import { createDrawerNavigator, DrawerItems, } from 'react-navigation';
 
 import { createStackNavigator } from 'react-navigation'
 
-import MenuPhoto from './MenuPhoto'
+import Menu from './Menu'
 import HamburgerIcon from './HamburgerIcon'
-
-import InfoPhoto from '../Info/InfoPhoto'
+import ListFavorite from './ListFavorite'
+import InfoModal from '../Info/InfoModal'
 import HistoryContract from './HistoryContract'
 import ManageContract from './ManageContract'
 import AlbumPose from './AlbumPose'
-import MenuPhotoTabBar from './MenuPhotoTabBar'
+import MenuTabBar from './MenuTabBar'
 import Setting from './../Setting/Setting'
 
-import notifi from '../../assets/img/menu/notifi.png'
 import iconInfo from './../../assets/img/info/icon_info.png'
 
-const InfoPhotoStack = createStackNavigator({
-    InfoPhoto: { 
-      screen: InfoPhoto, 
+
+import notifi from '../../assets/img/menu/notifi.png'
+
+
+const InfoModalStack = createStackNavigator({
+    InfoModal: { 
+      screen: InfoModal, 
       navigationOptions: ({ navigation }) => ({
-        title: 'Trần Nam Anh',
+        title: 'Đặng Mỹ Hạnh',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTintColor: '#EE3B3B', 
         headerMode: 'none',
@@ -38,45 +42,45 @@ const InfoPhotoStack = createStackNavigator({
     headerMode: 'screen' 
   });
 
-const MenuPhotoStack = createStackNavigator({
-  MenuPhotoTabBar: { 
-    screen: MenuPhotoTabBar, 
-    navigationOptions: ({ navigation }) => ({
-      title: 'TRANG CHỦ',
-      headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-      headerRight : <TouchableOpacity>
-                       <Image source={notifi} style={{width: 20, height: 20, tintColor: '#EE3B3B'}} />
-                  </TouchableOpacity> ,
-      headerTitleStyle: {fontSize: 15},
-      headerStyle: {
-        backgroundColor: 'white',    
-        height: 35,    
-        
-      },
-      headerTintColor: '#EE3B3B',   
-      borderHeaderBottomColor: '#EE3B3B'        
-    })
-  },
-});
-
-//   const ListFavoriteStack = createStackNavigator({
-//     ListFavorite: { 
-//       screen: ListFavorite, 
-//       navigationOptions: ({ navigation }) => ({
-//         title: 'Danh sách yêu thích',
-//         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-//         headerStyle: {
-//           backgroundColor: 'white'
-//         },
-//         headerTintColor: '#EE3B3B', 
-//         headerStyle: {
-//           backgroundColor: 'white',    
-//           height: 35,    
+const MenuStack = createStackNavigator({
+    MenuTabBar: { 
+      screen: MenuTabBar, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'TRANG CHỦ',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerRight : <TouchableOpacity>
+                         <Image source={notifi} style={{width: 20, height: 20, tintColor: '#EE3B3B'}} />
+                    </TouchableOpacity> ,
+        headerTitleStyle: {fontSize: 15},
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
           
-//         },
-//       })
-//     },
-//   });
+        },
+        headerTintColor: '#EE3B3B',   
+        borderHeaderBottomColor: '#EE3B3B'        
+      })
+    },
+  });
+
+  const ListFavoriteStack = createStackNavigator({
+    ListFavorite: { 
+      screen: ListFavorite, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Danh sách yêu thích',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerStyle: {
+          backgroundColor: 'white'
+        },
+        headerTintColor: '#EE3B3B', 
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
+      })
+    },
+  });
 
   const HistoryContractStack = createStackNavigator({
     HistoryContract: { 
@@ -116,7 +120,7 @@ const MenuPhotoStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Cách tạo dáng chụp ảnh',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        headerTitleStyle: stylesMainPhoto.titleMenu,
+        headerTitleStyle: stylesMain.titleMenu,
         headerStyle: {
           backgroundColor: 'white',    
           height: 35,    
@@ -127,6 +131,7 @@ const MenuPhotoStack = createStackNavigator({
       })
     },
   });
+
   const SettingStack = createStackNavigator({
     Setting: { 
       screen: Setting, 
@@ -146,51 +151,78 @@ const MenuPhotoStack = createStackNavigator({
     },
   });
 
+ 
   const CustomDrawerContent = (props)=> {
-    return (
-        <Container>
-            <Header  style={stylesMainPhoto.headDrawer}>
-                <Body style={stylesMainPhoto.bodyDrawer}>
-                  <TouchableOpacity onPress={() => props.navigation.navigate('InfoPhoto') }>
+      return (
+          <Container>
+              {/* <Header style={{backgroundColor: '#3a455c', height: 90}}>
+
+              </Header>
+              <Content>
+                  <FlatList 
+                    data={[
+                      'MenuTabbar', 'ListFavorite', 'HistoryContract'
+                    ]}
+
+                    renderItem={({item})=> (
+                      <ListItem>
+                        <Text>{item}</Text>
+                      </ListItem>
+                    )}
+
+                  /> */}
+              {/* </Content> */}
+              <Header  style={stylesMain.headDrawer}>
+                <Body style={stylesMain.bodyDrawer}>
+                  <TouchableOpacity onPress={() => props.navigation.navigate('InfoModal') }>
                        <Image  
-                            source={iconInfo} style={stylesMainPhoto.iconHeadDrawer}/>
-                      
-                        <Text style={stylesMainPhoto.labelMainDrawer}>Trần Nam Anh</Text>
+                            source={iconInfo} style={stylesMain.iconHeadDrawer}/>
+                        {/* <Image source={require('./img/logout.png')} style={styles.icon}></Image> */}
+                        <Text style={stylesMain.labelMainDrawer}>Đặng Mỹ Hạnh</Text>
                   </TouchableOpacity>
                 </Body> 
-            </Header>
-            <Content>
-              <DrawerItems {...props} />
-              <TouchableOpacity  onPress={() => props.navigation.navigate('Login') }>
-                  <View style={stylesMainPhoto.itemLogout}>
-                    <View style={stylesMainPhoto.iconContainerLogout}>
+              </Header>
+              <Content>
+                <DrawerItems {...props} />
+                 {/* <Button
+                style={{backgroundColor: 'white'}}
+                title="Logout"
+                onPress={() => props.navigation.navigate('Login') }/> */}
+               
+               <TouchableOpacity  onPress={() => props.navigation.navigate('Login') }>
+                  <View style={stylesMain.itemLogout}>
+                    <View style={stylesMain.iconContainerLogout}>
                       <Image source={require('./../../assets/img/login/logout.png')} 
-                              style={stylesMainPhoto.iconLogout}></Image>
+                              style={stylesMain.iconLogout}></Image>
                     </View>
-                    <Text style={stylesMainPhoto.labelLogout}>Đăng xuất</Text>
+                    <Text style={stylesMain.labelLogout}>Đăng xuât</Text>
                   </View>
-              </TouchableOpacity>
-            </Content>
-           
-        </Container>
-    )
-}
-
+                </TouchableOpacity>
+              </Content>
+             
+             
+             
+          </Container>
+      )
+  }
+  
   export default MyDrawerNavigator = createDrawerNavigator({
-    InfoPhoto: {
-      screen: InfoPhotoStack,
+
+    InfoModal: {
+      screen: InfoModalStack,
       navigationOptions: {
-        drawerLabel: 'Trần Nam Anh',
+        drawerLabel: 'Đặng Mỹ Hạnh',
         headerStyle: {
           backgroundColor: 'white',    
           height: 35,    
+       
           
         },
     },
   },
   
-    MenuPhoto: { 
-      screen: MenuPhotoStack,
+    MenuTabBar: { 
+      screen: MenuStack,
       navigationOptions: {
         // title: 'Trang chủ',
         drawerLabel: 'Trang chủ',
@@ -204,38 +236,23 @@ const MenuPhotoStack = createStackNavigator({
     }
     },
   
-    // ListFavorite: { 
-    //   screen: ListFavoriteStack,
-    //   navigationOptions: {
-    //     drawerLabel: 'Danh sách yêu thích',
-    //     drawerIcon: () => (
-    //       <Image
-    //         source={require('../../assets/img/info/heart.png')}
-    //         style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
-    //       />
-    //     ),
-    //     headerStyle: {
-    //       backgroundColor: 'white',    
-    //       height: 35,    
+    ListFavorite: { 
+      screen: ListFavoriteStack,
+      navigationOptions: {
+        drawerLabel: 'Danh sách yêu thích',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/info/heart.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
           
-    //     },
-    // },
-    // },
-  
-    // AlbumPose: { 
-    //   screen: AlbumPoseStack,
-    //   navigationOptions: {
-    //     // title: 'Trang chủ',
-    //     drawerLabel: 'Cách tạo dáng',
-    //     // drawerIcon: ({ tintColor }) => (
-    //     // <Image
-    //     //   source={home}
-    //     //   style={[{width: 30, height: 30}, {tintColor: tintColor}]}
-    //     // />
-    //   // ),
-    // },
-    // },
-  
+        },
+    },
+    },
     HistoryContract: { 
       screen: HistoryContractStack,
       navigationOptions: {
@@ -271,9 +288,6 @@ const MenuPhotoStack = createStackNavigator({
         },
       },
     },
-
-    
-
     Setting: { 
       screen: SettingStack,
       navigationOptions: {
@@ -288,50 +302,25 @@ const MenuPhotoStack = createStackNavigator({
         ),
     }
     },
-    
-   
-  
-    // Guide: { 
-    //   screen: GuideStack,
-    //   navigationOptions: {
-    //     // title: 'Trang chủ',
-    //     drawerLabel: 'Hướng dẫn chụp ảnh an toàn ',
-    //     // drawerIcon: ({ tintColor }) => (
-    //     // <Image
-    //     //   source={home}
-    //     //   style={[{width: 30, height: 30}, {tintColor: tintColor}]}
-    //     // />
-    //   // ),
-    // },
-    // },
   }, {
     drawerWidth: 250,
     drawerPosition: 'left',
-    contentComponent: CustomDrawerContent, 
+    contentComponent: CustomDrawerContent,  
     
     style: {
       // paddingTop: 80, // This only works if you modify DrawerNavigator.js to pass style props. See link 
     },
-    initialRouteName: 'MenuPhoto',
+    initialRouteName: 'MenuTabBar',
     contentOptions: {
       activeTintColor :'#EE3B3B',
-      //  inactiveTintColor :'#1999CE',
       activeBackgroundColor :'white',
-      // inactiveBackgroundColor :'#ffffff',
     },
     headerMode: 'none'  
   });
 
 
-  const stylesMainPhoto = StyleSheet.create({
-    
-    MainContainer :{
-     flex:1,
-     paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
-     alignItems: 'center',
-     justifyContent: 'center',
-     },
-     headDrawer: {
+  const stylesMain = StyleSheet.create({
+    headDrawer: {
       backgroundColor: '#EE3B3B', height: 150
     },
     bodyDrawer: {
@@ -343,7 +332,7 @@ const MenuPhotoStack = createStackNavigator({
     labelMainDrawer: { 
       color: 'white'
     },
-     iconLogout: { 
+    iconLogout: { 
       width: 20,
       height: 20,
       tintColor: '#EE3B3B'

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
-          TextInput, Picker, Item } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, YellowBox,
+          TextInput, ScrollView} from 'react-native';
 import DatePicker from 'react-native-datepicker'
 
 import info from '../../assets/img/info/iconInfo.png'
@@ -10,10 +10,9 @@ import iconDateBirth from '../../assets/img/info/icon_date_birth.png'
 import iconLocation from '../../assets/img/info/location.png'
 import iconGender from '../../assets/img/info/gender.png'
 import photo from '../../assets/img/info/photo.png'
-// import menu from '../../assets/img/menu/menu.png'
 
 
-export default class InfoCustomer extends Component {
+export default class InfoModal extends Component {
 
     constructor(props) {
    
@@ -31,31 +30,30 @@ export default class InfoCustomer extends Component {
     
     }
      
-       render()
-       {
-        const {navigate} = this.props.navigation;
+       render()  {
+        // const {navigate} = this.props.navigation;
           return(
-     
-             <View style={stylesInfoCus.containerCus}> 
-               <View style={stylesInfoCus.iconInfo}>
+            <ScrollView>
+              <View style={stylesInfoModal.containerCus}> 
+               <View style={stylesInfoModal.iconInfo}>
                  <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
                  <TouchableOpacity style={{marginTop: -35, marginLeft: 40}}>
                       <Image source={photo} style={{width: 50, height: 50,}} />
                   </TouchableOpacity>
                </View>
 
-               <View style ={stylesInfoCus.textInput}>
+               <View style ={stylesInfoModal.textInput}>
                  <Image source={iconUser} style={{width: 30, height: 30}} />
                  <TextInput underlineColorAndroid='transparent' 
                       style={{fontSize: 10}}>Phan Thu Phương</TextInput>
                </View>
 
-               <View style ={stylesInfoCus.textInputMargin}>
+               <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={phone} style={{width: 20, height: 20,  marginLeft: 5}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>0973261255</TextInput>
                </View>
 
-               <View style ={stylesInfoCus.textInputMargin}>
+               <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconDateBirth} style={{width: 20, height: 20, marginLeft: 5}} />
                  {/* <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>20/8/1995</TextInput> */}
                  <DatePicker
@@ -83,39 +81,62 @@ export default class InfoCustomer extends Component {
                        />
                </View>
 
-               <View style ={stylesInfoCus.textInputMargin}>
+               <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconLocation} style={{width: 30, height: 30}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Số 196, Giải Phóng, Hà Nội</TextInput>
                </View>
 
-               <View style ={stylesInfoCus.textInputMargin}>
+               <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconGender} style={{width: 30, height: 30}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Nữ</TextInput>
                 
                </View>
-                <View style = {stylesInfoCus.infoFooter}> 
-                  <TouchableOpacity style={[stylesInfoCus.btnInfo, {marginRight: 10}]}>
+               <View style ={stylesInfoModal.textInputMargin}>
+                 <Image source={iconGender} style={{width: 30, height: 30}} />
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Số đo 3 vòng</TextInput>
+                
+               </View>
+               <View style ={stylesInfoModal.textInputMargin}>
+                 <Image source={iconGender} style={{width: 30, height: 30}} />
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Chiều cao</TextInput>
+                
+               </View>
+               <View style ={stylesInfoModal.textInputMargin}>
+                 <Image source={iconGender} style={{width: 30, height: 30}} />
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Cân nặng</TextInput>
+                
+               </View>
+               <View style = {[stylesInfoModal.infoFooter,{marginTop: 15}]}> 
+                    <TouchableOpacity>
+                      <Text style={{fontSize: 13, color: '#EE3B3B', 
+                                textDecorationLine: 'underline',}}>Album ảnh</Text>
+                    </TouchableOpacity>
+                    
+                </View>
+                <View style = {[stylesInfoModal.infoFooter, {marginBottom: 15}]}> 
+                  <TouchableOpacity style={[stylesInfoModal.btnInfo, {marginRight: 10}]}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Lưu</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesInfoCus.btnInfo}
+                    <TouchableOpacity style={stylesInfoModal.btnInfo}
                            onPress={() => this.props.navigation.navigate('ResetPass')}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Đổi mật khẩu</Text>
                     </TouchableOpacity>
                </View>
               
              </View>
+            </ScrollView>
+            
           );
        }
     }
 
 
-    stylesInfoCus = StyleSheet.create({
+    stylesInfoModal = StyleSheet.create({
       containerCus:{
           backgroundColor: '#F8F8FF',
           flex: 1
       },
       iconInfo: {    
-        // flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20,
@@ -140,7 +161,6 @@ export default class InfoCustomer extends Component {
           borderWidth: 1,
           borderColor: "gray",
           flexDirection: 'row',
-          // justifyContent: 'center',
           alignItems: 'center',
           height:35
       },

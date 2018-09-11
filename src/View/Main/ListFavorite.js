@@ -45,6 +45,18 @@ export default class ListFavorite extends Component {
                       <View><Image source={row} style={{width: 20, height: 20,
                                   marginTop: 35, marginRight: 20}} /></View>
                 </TouchableOpacity>
+                <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailModal')}
+                     style={stylesFavor.contFavor}>
+                    <View style={ stylesFavor.likeperson }>
+                        <Image source={iconInfo} style={{width: 50, height: 50, marginRight: 20, 
+                                          tintColor: '#EE3B3B'}} />
+                       
+                          <Text style={{marginTop: 15}}>Đặng Mỹ Hạnh</Text>
+                        
+                      </View>
+                      <View><Image source={row} style={{width: 20, height: 20,
+                                  marginTop: 35, marginRight: 20}} /></View>
+                </TouchableOpacity>
                  
              </View>
           );

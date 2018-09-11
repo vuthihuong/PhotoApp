@@ -39,6 +39,9 @@ export  default  class Login extends Component {
                     pass: ''
                 })
           }
+          else if(this.state.name === '3456' && this.state.pass === 'c'){
+              this.props.navigation.navigate('MainModal')
+          }
           else {
               Alert.alert("Thông báo","Số điện thoại hoặc mật khẩu của bạn không đúng!")
             //   this.setState({

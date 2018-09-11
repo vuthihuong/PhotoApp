@@ -36,6 +36,14 @@ export default class InfoDetailPhoto extends Component{
         return(
           <ScrollView>
               <View style={stylesInfoDetailPhoto.container}>
+                <View>
+                    <TouchableOpacity onPress={() => this.props.navigation.goBack() }>
+                        <Image source={require('./../../assets/img/info/goback.png')}
+                            style={{width: 20, height: 20, marginTop: 15, marginLeft: 10}}
+                        />
+                    </TouchableOpacity>
+                   
+                </View>
                 <View style={stylesInfoDetailPhoto.headDetailPhoto}>
                     <Image source={iconInfo} style={{width: 70, height: 70, tintColor: '#EE3B3B'}}/>
                     <View style={stylesInfoDetailPhoto.proDetail} >

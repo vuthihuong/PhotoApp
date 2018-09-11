@@ -26,6 +26,9 @@ import PostDetailPhoto from './src/View/Post/PostDetailPhoto'
 import PostDetailModal from './src/View/Post/PostDetailModal'
 import PostDetailEvent from './src/View/Post/PostDetailEvent'
 
+import MainModal from './src/View/Main/MainModal'
+import InfoDetailModal from './src/View/Info/InfoDetailModal'
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -79,6 +82,12 @@ const Mainapp = createStackNavigator({
     },
     PostDetailEvent: {
         screen: PostDetailEvent
+    },
+    MainModal: {
+        screen: MainModal
+    },
+    InfoDetailModal: { 
+        screen: InfoDetailModal
     }
     },{
       headerMode:'none'

@@ -195,7 +195,7 @@ const MenuStack = createStackNavigator({
                       <Image source={require('./../../assets/img/login/logout.png')} 
                               style={stylesMain.iconLogout}></Image>
                     </View>
-                    <Text style={stylesMain.labelLogout}>Logout</Text>
+                    <Text style={stylesMain.labelLogout}>Đăng xuât</Text>
                   </View>
                 </TouchableOpacity>
               </Content>
