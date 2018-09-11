@@ -12,6 +12,8 @@ import iconGender from '../../assets/img/info/gender.png'
 import photo from '../../assets/img/info/photo.png'
 // import menu from '../../assets/img/menu/menu.png'
 
+import pick from './../Main/AlbumImg'
+
 
 export default class InfoCustomer extends Component {
 
@@ -27,19 +29,30 @@ export default class InfoCustomer extends Component {
      this.state={
        selected: '',
        date: '', 
+       avatarSource: null
      }
-    
+    }
+
+    show(){
+      pick(source => this.setState({avatarSource: source}));
+        
     }
      
        render()
        {
         const {navigate} = this.props.navigation;
+        let img = this.state.avatarSource = null? null:
+        <Image 
+           source={this.state.avatarSource}
+           style={{width: 200, height: 200}}
+        />
           return(
      
              <View style={stylesInfoCus.containerCus}> 
                <View style={stylesInfoCus.iconInfo}>
                  <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
-                 <TouchableOpacity style={{marginTop: -35, marginLeft: 40}}>
+                 <TouchableOpacity onPress={this.show.bind(this)}
+                         style={{marginTop: -35, marginLeft: 40}}>
                       <Image source={photo} style={{width: 50, height: 50,}} />
                   </TouchableOpacity>
                </View>

@@ -202,10 +202,33 @@ export default class PostModal extends Component {
                     />
                 </View> */}
                 <View style={stylesPostModal.title}>
-                    <Text style={{marginTop: -5, color: 'black'}}>Yêu cầu</Text>
-                    <TextInput placeholder="Số đo" style={stylesPostModal.inputWeight}/>
+                    <Text style={{marginTop: -5, color: 'black'}}>Yêu cầu:</Text>
+                    {/* <TextInput placeholder="" style={stylesPostModal.inputWeight}/>
                     <TextInput placeholder="Chiều cao" style={stylesPostModal.inputWeight}/>
-                    <TextInput placeholder="Cân nặng" style={stylesPostModal.inputWeight}/>
+                    <TextInput placeholder="Cân nặng" style={stylesPostModal.inputWeight}/> */}
+                    
+                </View>
+                <View style={[stylesPostModal.title, {marginLeft: 40}]}>
+                    <Text style={{marginTop: -5, color: 'black'}}>Số đo</Text>
+                    <TextInput placeholder="vòng 1" style={stylesPostModal.inputWeight}/>
+                    <TextInput placeholder="vòng 2" style={stylesPostModal.inputWeight}/>
+                    <TextInput placeholder="vòng 3" style={stylesPostModal.inputWeight}/>
+                    
+                </View>
+                <View style={[stylesPostModal.title,{marginLeft: 40}]}>
+                    <Text style={{marginTop: -5, color: 'black'}}>Chiều cao</Text>
+                    {/* <TextInput placeholder="Số đo" style={stylesPostModal.inputWeight}/> */}
+                    <TextInput placeholder="Chiều cao" 
+                        style={[stylesPostModal.inputWeight, {width: 220}]}/>
+                    {/* <TextInput placeholder="Cân nặng" style={stylesPostModal.inputWeight}/> */}
+                    
+                </View>
+                <View style={[stylesPostModal.title,{marginLeft: 40}]}>
+                    <Text style={{marginTop: -5, color: 'black'}}>Cân nặng</Text>
+                    {/* <TextInput placeholder="Số đo" style={stylesPostModal.inputWeight}/> */}
+                    <TextInput placeholder="Cân nặng" 
+                            style={[stylesPostModal.inputWeight,{width: 220}]}/>
+                    {/* <TextInput placeholder="Cân nặng" style={stylesPostModal.inputWeight}/> */}
                     
                 </View>
                 <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
@@ -334,7 +357,7 @@ stylesPostModal = StyleSheet.create({
         // marginLeft: 100  
     },
     inputWeight: {
-        width: 95,
+        width: 80,
         marginTop: -30  ,
         marginLeft: 5
     },

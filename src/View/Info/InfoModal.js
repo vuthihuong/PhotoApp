@@ -11,6 +11,8 @@ import iconLocation from '../../assets/img/info/location.png'
 import iconGender from '../../assets/img/info/gender.png'
 import photo from '../../assets/img/info/photo.png'
 
+import pick from './../Main/AlbumImg'
+
 
 export default class InfoModal extends Component {
 
@@ -26,9 +28,15 @@ export default class InfoModal extends Component {
      this.state={
        selected: '',
        date: '', 
+       avatarSource: null
      }
     
     }
+
+    show(){
+      pick(source => this.setState({avatarSource: source}));
+        
+  }
      
        render()  {
         // const {navigate} = this.props.navigation;
@@ -37,7 +45,8 @@ export default class InfoModal extends Component {
               <View style={stylesInfoModal.containerCus}> 
                <View style={stylesInfoModal.iconInfo}>
                  <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
-                 <TouchableOpacity style={{marginTop: -35, marginLeft: 40}}>
+                 <TouchableOpacity onPress={this.show.bind(this)}
+                        style={{marginTop: -35, marginLeft: 40}}>
                       <Image source={photo} style={{width: 50, height: 50,}} />
                   </TouchableOpacity>
                </View>

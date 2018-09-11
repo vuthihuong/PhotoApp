@@ -10,6 +10,7 @@ import iconLocation from '../../assets/img/info/location.png'
 import iconGender from '../../assets/img/info/gender.png'
 import photo from '../../assets/img/info/photo.png'
 import background from '../../assets/img/info/background_info.jpg'
+import pick from './../Main/AlbumImg'
 
 import DatePicker from 'react-native-datepicker'
 import { Dropdown } from 'react-native-material-dropdown';
@@ -45,10 +46,15 @@ export default class InfoPhoto extends Component {
               ['Giá chụp đôi', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina', 'x', 'x'],
               ['Giá chụp nhóm', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina', 'x', 'x'],
               ['Giá ảnh cưới', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina','x', 'x'],
-            ]
-          
-          }
-      }
+            ],
+            avatarSource: null
+         }
+    }
+
+    show(){
+      pick(source => this.setState({avatarSource: source}));
+        
+    }
        render(){
         let data = [{
             value: 'Nam',
@@ -66,7 +72,8 @@ export default class InfoPhoto extends Component {
                     >  */}
                 <View style={stylesInfoPhoto.iconInfo}>
                   <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
-                  <TouchableOpacity style={{marginTop: -35, marginLeft: 40}}>
+                  <TouchableOpacity onPress={this.show.bind(this)}
+                                style={{marginTop: -35, marginLeft: 40}}>
                         <Image source={photo} style={{width: 50, height: 50,}} />
                     </TouchableOpacity>
                 </View>
