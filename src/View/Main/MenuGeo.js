@@ -7,13 +7,7 @@ import MapView from 'react-native-maps';
 
 export default class Menu extends Component {
     constructor(props) {
-      super(props);   
-      arrayMarkers=[
-        {
-          latitude:21.0055596,
-          longitude:105.8412741,
-        }
-      ]
+      super(props); 
       YellowBox.ignoreWarnings([
        'Warning: componentWillMount is deprecated',
        'Warning: componentWillReceiveProps is deprecated',
@@ -25,39 +19,12 @@ export default class Menu extends Component {
             latitudeDelta:0.01,
             longitudeDelta:0.01
        },
-       markers: arrayMarkers
+      marker: { 
+        latitude:21.0055596,
+        longitude:105.8412741,
+          
+      }
      }  
-    }
-
-    onRegionChange(data){
-      // console.log(data)
-      this.setState({ 
-          latitude: data.latitude,
-          longitude: data.longitude,
-          latitudeDelta:0.01,
-            longitudeDelta:0.01
-      })
-    }
-
-    onPress(data){ 
-      let latitude = data.nativeEvent.coordinate.latitude;
-      let longitude = data.nativeEvent.coordinate.longitude;
-      arrayMarkers.push({
-        latitude: latitude,
-        longitude: longitude
-      });
-      this.setState({markers:arrayMarkers})
-    }
-    renderMarkers(){ 
-      markers=[];
-        for(marker of this.state.markers){ 
-            markers.push(
-              <MapView.Marker key={marker.latitude}  title={'toi o day'+ marker.latitude}
-                                description={'day la mo ta'} 
-                                coordinate={marker} />
-            )
-        }
-        return markers;
     }
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
@@ -70,6 +37,29 @@ export default class Menu extends Component {
         );
         return {tabBarLabel, tabBarIcon}  
     }
+
+    componentWillMount(){ 
+      navigator.geolocation.getCurrentPosition(
+       (position) => {
+         this.setState({
+          region:{ 
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta:0.01,
+            longitudeDelta:0.01
+       },
+          marker: { 
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+          }
+         });
+         
+       },
+       (error) => this.setState({ error: error.message }),
+       { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
+     );
+
+  }
 
     render() {
         return (
@@ -86,12 +76,9 @@ export default class Menu extends Component {
             <MapView
                 style={stylesMenu.map}
                 initialRegion={this.state.region}
-                onRegionChange={this.onRegionChange.bind(this)}
-                onPress={this.onPress.bind(this)}
+              
             >
-            {/* <MapView.Marker  title={'toi o day'} description={'day la mo ta'} 
-                      coordinate={this.state.region} /> */}
-            {this.renderMarkers()}
+              <MapView.Marker coordinate={this.state.marker} />
            </MapView>
           </View>
         );

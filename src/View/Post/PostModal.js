@@ -22,8 +22,55 @@ export default class PostModal extends Component {
             selectedMinutes: 0, 
             datetime1: '',
             selectedHours1: 0,
-            selectedMinutes1: 0,}
+            selectedMinutes1: 0,
+            title: '', content: '', place:'',
+            circle1: '', circle2:'', circle3:'',
+            height:'', weight: '', cost: '',
+            checkedPostModal1: false, checkedPostModal2: false,
+            boy: '', girl: '',
+            // value:''
+        }
       }
+
+      checkPostModal1(){
+        if(this.state.checkedPostModal1 === true){
+            this.setState({
+                checkedPostModal1: false
+            });
+            this.setState({ 
+                boy: ''
+            });
+        }
+        else if(this.state.checkedPostModal1 === false){
+            this.setState({
+                checkedPostModal1: true
+            });
+            this.setState({
+                boy: 'nam,'
+            });
+         
+        }
+    }
+
+    checkPostModal2(){
+        if(this.state.checkedPostModal2 === true){
+            this.setState({
+                checkedPostModal2: false
+            });
+            this.setState({
+                girl: ''
+            });
+        }
+        else if(this.state.checkedPostModal2 === false){
+            this.setState({
+                checkedPostModal2: true
+            });
+            this.setState({
+                girl: 'nữ,'
+            });
+         
+        }
+    }
 
       static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
@@ -70,16 +117,16 @@ export default class PostModal extends Component {
                     <CheckBox
                         label='Nam'
                         labelStyle={{color: 'black'}}
-                         //   checked={true}
+                        checked={this.state.checkedPostModal1}
                          checkboxStyle = {stylesPostModal.txtBoxPostModal}
-                        // onChange={(checked) => console.log('I am checked', checked)} 
+                         onChange={(checked) => {this.checkPostModal1()}} 
                         />
                     <CheckBox
                         label='Nữ'
                         labelStyle={{color: 'black'}}
-                        //   checked={true}
+                          checked={this.state.checkedPostModal2}
                         checkboxStyle = {stylesPostModal.txtBoxPostModal}
-                        // onChange={(checked) => console.log('I am checked', checked)} 
+                        onChange={(checked) => {this.checkPostModal2()}} 
                         />
                 </View>
 
@@ -103,7 +150,8 @@ export default class PostModal extends Component {
                          style={{ height: 40, width: 290,  marginTop: -25                     
                      }}></TextInput> */}
                      <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                          style={stylesPostModal.txtPostModal} />
+                            onChangeText={(content) => this.setState({ content })}
+                            style={stylesPostModal.txtPostModal} >{this.state.content}</TextInput>
                 </View>
                 <View style={stylesPostModal.title}>
                     <Text style={{marginRight: 10, marginTop: -10, color:'black' }}>Địa điểm</Text>
@@ -111,7 +159,9 @@ export default class PostModal extends Component {
                      <View style={{marginTop: -50, width: 250, height: 100 }}>
                         <Dropdown 
                             // label='Favorite Fruit'
+                            ref='picker'
                             data={data}
+                            onChangeText={(value) => { value= this.setState({value}) }}
                             />
                     </View>        
                 </View>
@@ -210,16 +260,31 @@ export default class PostModal extends Component {
                 </View>
                 <View style={[stylesPostModal.title, {marginLeft: 40}]}>
                     <Text style={{marginTop: -5, color: 'black'}}>Số đo</Text>
-                    <TextInput placeholder="vòng 1" style={stylesPostModal.inputWeight}/>
-                    <TextInput placeholder="vòng 2" style={stylesPostModal.inputWeight}/>
-                    <TextInput placeholder="vòng 3" style={stylesPostModal.inputWeight}/>
+                    <TextInput 
+                         onChangeText={(circle1) => this.setState({ circle1 })}
+                        placeholder="vòng 1" style={stylesPostModal.inputWeight}>
+                        {this.state.circle1}
+                    </TextInput>
+                    <TextInput 
+                        onChangeText={(circle2) => this.setState({ circle2 })}
+                        placeholder="vòng 2" style={stylesPostModal.inputWeight}>
+                        {this.state.circle2}
+                    </TextInput>
+                    <TextInput 
+                        onChangeText={(circle3) => this.setState({ circle3 })}
+                        placeholder="vòng 3" style={stylesPostModal.inputWeight}>
+                        {this.state.circle3}
+                    </TextInput>
                     
                 </View>
                 <View style={[stylesPostModal.title,{marginLeft: 40}]}>
                     <Text style={{marginTop: -5, color: 'black'}}>Chiều cao</Text>
                     {/* <TextInput placeholder="Số đo" style={stylesPostModal.inputWeight}/> */}
                     <TextInput placeholder="Chiều cao" 
-                        style={[stylesPostModal.inputWeight, {width: 220}]}/>
+                         onChangeText={(height) => this.setState({ height })}
+                        style={[stylesPostModal.inputWeight, {width: 220}]}>
+                        {this.state.height}
+                    </TextInput>
                     {/* <TextInput placeholder="Cân nặng" style={stylesPostModal.inputWeight}/> */}
                     
                 </View>
@@ -227,7 +292,10 @@ export default class PostModal extends Component {
                     <Text style={{marginTop: -5, color: 'black'}}>Cân nặng</Text>
                     {/* <TextInput placeholder="Số đo" style={stylesPostModal.inputWeight}/> */}
                     <TextInput placeholder="Cân nặng" 
-                            style={[stylesPostModal.inputWeight,{width: 220}]}/>
+                             onChangeText={(weight) => this.setState({ weight })}
+                            style={[stylesPostModal.inputWeight,{width: 220}]}>
+                            {this.state.weight}
+                    </TextInput>
                     {/* <TextInput placeholder="Cân nặng" style={stylesPostModal.inputWeight}/> */}
                     
                 </View>
@@ -237,7 +305,10 @@ export default class PostModal extends Component {
                         <CheckBox
                             label='Tự make up'
                             labelStyle={{fontSize: 13, color: 'black'}}
-                            checkboxStyle = {{width:12, height: 12}} />
+                            checkboxStyle = {{width:12, height: 12}} 
+                            // onSelect={(label) => {this.setState({label: label})}}
+                            onChange={(checked) => {label= this.state.label}}
+                            />
                         <CheckBox
                             label='Không phục trang phục'
                             labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
@@ -254,6 +325,7 @@ export default class PostModal extends Component {
                             label='Có phục vụ make up'
                             labelStyle={{fontSize: 13, color:'black'}}
                             checkboxStyle = {{width:12, height: 12}}
+                            // onSelectionsChange={(label) => { value= this.setState({label}) }}
                              />
                         <CheckBox
                             label='Có phục vụ trang phục'
@@ -302,14 +374,32 @@ export default class PostModal extends Component {
                          style={{ height: 40, width: 290,  marginTop: -25                     
                      }}></TextInput> */}
                      <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                          style={stylesPostModal.txtPostModal} />
+                            onChangeText={(cost) => this.setState({ cost })}
+                          style={stylesPostModal.txtPostModal} >{this.state.cost}</TextInput>
                 </View>
                 <View style={[stylesPostModal.title, stylesPostModal.buttonCreate]}>
-                <TouchableOpacity style={stylesPostModal.txtBtnPostModal}>
+                    <TouchableOpacity 
+                        style={stylesPostModal.txtBtnPostModal}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5}}>Gửi yêu cầu</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostModal.txtBtnPostModal}
-                                          onPress = { this.FunctionToOpenSecondActivity }>
+                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal', 
+                        {
+                            content: this.state.content,
+                            cost: this.state.cost,
+                            datetime: this.state.datetime,
+                            datetime1: this.state.datetime1,
+                            value: this.state.value,
+                            label: this.state.label,
+                            circle1: this.state.circle1,
+                            cirlce2: this.state.circle2,
+                            circle3: this.state.circle3,
+                            weight: this.state.weight,
+                            height: this.state.height,
+                            boy: this.state.boy,
+                            girl: this.state.girl
+                        })}
+                            style={stylesPostModal.txtBtnPostModal}
+                                         >
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
                     </TouchableOpacity>
                        

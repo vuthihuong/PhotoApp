@@ -40,11 +40,17 @@ export default class InfoModal extends Component {
      
        render()  {
         // const {navigate} = this.props.navigation;
+        let img = this.state.avatarSource = null? null:
+        <Image 
+           source={this.state.avatarSource}
+           style={{width: 75, height: 75}}
+        />
           return(
             <ScrollView>
               <View style={stylesInfoModal.containerCus}> 
                <View style={stylesInfoModal.iconInfo}>
                  <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
+                 {img}
                  <TouchableOpacity onPress={this.show.bind(this)}
                         style={{marginTop: -35, marginLeft: 40}}>
                       <Image source={photo} style={{width: 50, height: 50,}} />

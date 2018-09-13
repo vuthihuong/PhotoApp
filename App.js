@@ -22,9 +22,13 @@ import InfoDetailPhoto from './src/View/Info/InfoDetailPhoto'
 import MainPhoto from './src/View/Main/MainPhoto'
 import SearchAddress from './src/View/Search/SearchAddress'
 import SearchPhoto from './src/View/Search/SearchPhoto'
+
 import PostDetailPhoto from './src/View/Post/PostDetailPhoto'
 import PostDetailModal from './src/View/Post/PostDetailModal'
 import PostDetailEvent from './src/View/Post/PostDetailEvent'
+import PostModal from './src/View/Post/PostModal'
+import PostPhoto from './src/View/Post/PostPhoto'
+import PostEvent from './src/View/Post/PostEvent'
 
 import MainModal from './src/View/Main/MainModal'
 import InfoDetailModal from './src/View/Info/InfoDetailModal'
@@ -88,6 +92,15 @@ const Mainapp = createStackNavigator({
     },
     InfoDetailModal: { 
         screen: InfoDetailModal
+    },
+    PostModal: { 
+        screen: PostModal
+    },
+    PostPhoto: { 
+        screen: PostPhoto
+    },
+    PostEvent: { 
+        screen: PostEvent
     }
     },{
       headerMode:'none'

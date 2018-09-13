@@ -13,7 +13,7 @@ export default class PostDetailModal extends Component {
         return(
             <View style={stylesPostDetailModal.container}>
                 <View style={stylesPostDetailModal.title}>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ManageContract')}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.goBack()}>
                         <Image source={gobackIcon} style={{width: 20, height: 20,
                                     marginLeft: 15, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
@@ -28,11 +28,35 @@ export default class PostDetailModal extends Component {
                     
                 </View>
                 <View style={stylesPostDetailModal.content}>
-                    <Text>Tìm mẫu nữ</Text>
-                    <Text>Nội dung: chụp ảnh quảng cáo cho sản phẩm</Text>
-                    <Text>Trang phục đã được cung cấp </Text>
-                    <Text>Thời gian ngày 30/10/2018 từ 7h đến 17h</Text>
-                    <Text>Chi phí khoảng từ 300k - 500k</Text>
+                    <Text>Tìm mẫu {this.props.navigation.state.params.boy} 
+                                  {this.props.navigation.state.params.girl}</Text>
+                    
+                    {this.props.navigation.state.params.content != ''?  
+                        <Text>Nội dung:{this.props.navigation.state.params.content}</Text>: null }
+
+                    {this.props.navigation.state.params.value != null?  
+                        <Text>Địa điểm: {this.props.navigation.state.params.value} </Text>: null }
+
+                    {(this.props.navigation.state.params.datetime != '' && this.props.navigation.state.params.datetime1 != '')?  
+                        <Text>Thời gian:{this.props.navigation.state.params.datetime} -
+                                        {this.props.navigation.state.params.datetime1}</Text>: null }
+
+                    {(this.props.navigation.state.params.circle1 != ''&& this.props.navigation.state.params.circle2 != '' 
+                            && this.props.navigation.state.params.circle3 != '')?                    
+                            <Text>Yêu cầu:</Text>: null }
+                    {(this.props.navigation.state.params.circle1 != ''&& this.props.navigation.state.params.circle2 != '' 
+                            && this.props.navigation.state.params.circle3 != '')?   
+                            <Text>Số đo: {this.props.navigation.state.params.circle1} -
+                                         {this.props.navigation.state.params.circle2} -   
+                                         {this.props.navigation.state.params.circle3}
+                            </Text>: null }
+                    {this.props.navigation.state.params.height != ''?
+                            <Text>Chiều cao:{this.props.navigation.state.params.height}</Text>: null }
+                    {this.props.navigation.state.params.weight != ''?
+                            <Text>Cân nặng: {this.props.navigation.state.params.weight}</Text>: null }
+                    {this.props.navigation.state.params.cost != ''?
+                             <Text>Chi phí: {this.props.navigation.state.params.cost}</Text>: null }
+                    <Text>{this.props.navigation.state.params.label}</Text>
                 </View>
                 <View style={stylesPostDetailModal.btnSubmit}>
                     <TouchableOpacity style={{ height: 30, width: 330,

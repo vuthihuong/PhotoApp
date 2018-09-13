@@ -44,13 +44,14 @@ export default class InfoCustomer extends Component {
         let img = this.state.avatarSource = null? null:
         <Image 
            source={this.state.avatarSource}
-           style={{width: 200, height: 200}}
+           style={{width: 75, height: 75}}
         />
           return(
      
              <View style={stylesInfoCus.containerCus}> 
                <View style={stylesInfoCus.iconInfo}>
                  <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
+                 {img}
                  <TouchableOpacity onPress={this.show.bind(this)}
                          style={{marginTop: -35, marginLeft: 40}}>
                       <Image source={photo} style={{width: 50, height: 50,}} />

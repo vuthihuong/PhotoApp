@@ -71,9 +71,9 @@ let pick = (cb) => {
       // You can also display the image using data:
       // let source = { uri: 'data:image/jpeg;base64,' + response.data };
   
-      this.setState({
-        avatarSource: source
-      });
+      // this.setState({
+      //   avatarSource: source
+      // });
     }
   });
 }
