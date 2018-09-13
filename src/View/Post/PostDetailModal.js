@@ -45,8 +45,8 @@ export default class PostDetailModal extends Component {
                         <Text>Thời gian: Từ {this.props.navigation.state.params.datetime} đến {this.props.navigation.state.params.datetime1}</Text>: null }
 
                     {(this.props.navigation.state.params.circle1 != ''
-                            || this.props.navigation.state.params.circle2 != '' 
-                            || this.props.navigation.state.params.circle3 != ''
+                            && this.props.navigation.state.params.circle2 != '' 
+                            && this.props.navigation.state.params.circle3 != ''
                             || this.props.navigation.state.params.weight != ''
                             || this.props.navigation.state.params.height != ''
                             || this.props.navigation.state.params.labelRequireModal1 != ''

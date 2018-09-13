@@ -13,7 +13,7 @@ export default class PostDetailEvent extends Component {
         return(
             <View style={stylesPostDtailEvent.container}>
                 <View style={stylesPostDtailEvent.title}>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ManageContract')}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
                          <Image source={gobackIcon} style={{width: 20, height: 20,
                                      marginLeft: 15, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
@@ -28,10 +28,31 @@ export default class PostDetailEvent extends Component {
                     
                 </View>
                 <View style={stylesPostDtailEvent.content}>
-                    <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>Giao lưu chụp ảnh</Text>
-                    <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>Nội dung: </Text>
-                    <Text  style={stylesPostDtailEvent.txtPostDetailPhoto}>Địa điểm tại Công viên Yên Sở</Text>
-                    <Text  style={stylesPostDtailEvent.txtPostDetailPhoto}>Thời gian ngày 30/10/2018 từ 7h đến 17h</Text>
+                    {(this.props.navigation.state.params.labelEvent1 != '' 
+                       || this.props.navigation.state.params.labelEvent2 != '')?
+                       <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>
+                            {this.props.navigation.state.params.labelEvent1}
+                            {this.props.navigation.state.params.labelEvent2} </Text> : null }
+
+                    {this.props.navigation.state.params.contentEvent != '' ?
+                        <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>
+                        Nội dung: {this.props.navigation.state.params.contentEvent}</Text>: null }
+
+                    {this.props.navigation.state.params.valuePlaceEvent != '' ?
+                        <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>
+                        Địa điểm: {this.props.navigation.state.params.valuePlaceEvent}</Text>: null }
+
+                    {(this.props.navigation.state.params.datetimeEvent != ''
+                        || this.props.navigation.state.params.datetimeEvent1 != ''
+                        ) ?
+                        <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>
+                        Thời gian: Từ {this.props.navigation.state.params.datetimeEvent} đến {this.props.navigation.state.params.datetimeEvent1}</Text>: null }
+                   
+                    {this.props.navigation.state.params.costEvent != '' ?
+                        <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>
+                        Chi phí: {this.props.navigation.state.params.costEvent}</Text>: null }
+                  
+                   
                    
                 </View>
                 <View style={stylesPostDtailEvent.btnSubmit}>

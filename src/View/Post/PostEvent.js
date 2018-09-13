@@ -13,13 +13,70 @@ export default class PostEvent extends Component {
         this.state = {
             date: '', 
             time: '00:00',
-            datetime: '',
+            datetimeEvent: '',
             selectedHours: 0,
             selectedMinutes: 0,
-            datetime1: '',
+            datetimeEvent1: '',
             selectedHours1: 0,
-            selectedMinutes1: 0,}
+            selectedMinutes1: 0,
+            checkedEvent1: false, checkedEvent2: false,
+            labelEvent1:'', labelEvent2: '',
+        
+        }
       }
+
+      checkEvent1(){
+        if(this.state.checkedEvent1 === true){
+            this.setState({
+                checkedEvent1: false
+            });
+            this.setState({
+                labelEvent1: ''
+            });
+        }
+        else if(this.state.checkedEvent1 === false){
+            this.setState({
+                checkedEvent1: true
+            });
+            this.setState({
+                checkedEvent2: false
+            });
+            this.setState({
+                labelEvent1: 'Giao lưu nhiếp ảnh gia'
+            });
+            this.setState({
+                labelEvent2: ''
+            });
+         
+        }
+    }
+
+    checkEvent2(){
+        if(this.state.checkedEvent2 === true){
+            this.setState({
+                checkedEvent2: false
+            });
+            this.setState({
+                labelEvent2: ''
+            });
+        }
+        else if(this.state.checkedEvent2 === false){
+            this.setState({
+                checkedEvent2: true
+            });
+            this.setState({
+                checkedEvent1: false
+            });
+            this.setState({
+                labelEvent2: 'Hướng dẫn chụp ảnh'
+            });
+            this.setState({
+                labelEvent1: ''
+            });
+         
+        }
+    }
+
 
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
@@ -69,23 +126,26 @@ export default class PostEvent extends Component {
                             <CheckBox
                                 label='Giao lưu nhiếp ảnh gia'
                                 labelStyle={{color: 'black'}}
-                                //   checked={true}
                                 checkboxStyle = {{width:15, height: 15,}}
-                                // onChange={(checked) => console.log('I am checked', checked)} 
+                                checked={this.state.checkedEvent1}
+                                onChange={(checked) => {this.checkEvent1()}} 
                             />
+                            
                             <CheckBox
                                 label='Hướng dẫn chụp ảnh'
                                 labelStyle={{color: 'black'}}
-                                //   checked={true}
                                 checkboxStyle = {{width:15, height: 15,}}
-                                // onChange={(checked) => console.log('I am checked', checked)} 
+                                checked={this.state.checkedEvent2}
+                                onChange={(checked) => {this.checkEvent2()}}
                             />
                         </View>
                     </View>
                     <View style={stylesPostEvent.title}>
                         <Text style={stylesPostEvent.txtPostEvent}>Nội dung</Text>
                             <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                                style={stylesPostEvent.txtInputPostEvent} />
+                                style={stylesPostEvent.txtInputPostEvent}
+                                onChangeText={(contentEvent) => this.setState({ contentEvent })}
+                                style={stylesPostModal.txtPostModal} >{this.state.content}</TextInput>
                     </View>
                     <View style={stylesPostEvent.title}>
                         <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
@@ -93,6 +153,7 @@ export default class PostEvent extends Component {
                             <View style={{marginTop: -50, height: 100, width: 250, marginRight: 15 }}>
                             <Dropdown 
                                 data={data}
+                                onChangeText={(valuePlaceEvent) => { valuePlaceEvent= this.setState({valuePlaceEvent}) }}
                                 />
                         </View>        
                     </View>
@@ -101,7 +162,7 @@ export default class PostEvent extends Component {
                         <Text style ={{marginRight: 10, marginTop: -25, color: 'black'}}>Thời gian từ:</Text>
                         <DatePicker
                             style={{width: 200, marginTop: -35, marginLeft: 10}}
-                            date={this.state.datetime}
+                            date={this.state.datetimeEvent}
                             mode="datetime"
                             placeholder=""
                             format="YYYY-MM-DD HH:mm"
@@ -111,14 +172,14 @@ export default class PostEvent extends Component {
                             customStyles={{
                                         dateInput: { height: 25 }
                             }}
-                            onDateChange={(datetime) => {this.setState({datetime: datetime})}}
+                            onDateChange={(datetimeEvent) => {this.setState({datetimeEvent: datetimeEvent})}}
                             />
                         </View>
                         <View style={stylesPostEvent.title}>
                         <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25, color: 'black'}}>đến:</Text>
                             <DatePicker
                             style={{width: 200, marginTop: -30}}
-                            date={this.state.datetime1}
+                            date={this.state.datetimeEvent1}
                             mode="datetime"
                             placeholder=""
                             format="YYYY-MM-DD HH:mm"
@@ -128,20 +189,32 @@ export default class PostEvent extends Component {
                             customStyles={{
                                     dateInput: { height: 25 }
                             }}
-                            onDateChange={(datetime1) => {this.setState({datetime1: datetime1})}}
+                            onDateChange={(datetimeEvent1) => {this.setState({datetimeEvent1: datetimeEvent1})}}
                             />
                         </View>
                         <View style={stylesPostEvent.title}>
                             <Text style={stylesPostEvent.txtPostEvent }>Chi phí</Text>
                             <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                                style={stylesPostEvent.txtInputPostEvent} />
+                                style={stylesPostEvent.txtInputPostEvent}
+                                onChangeText={(costEvent) => this.setState({ costEvent })}
+                                >{this.state.cost}</TextInput>
+                               
                         </View>
                          <View style={[stylesPostEvent.title, stylesPostEvent.buttonCreate]}>
                             <TouchableOpacity style={stylesPostEvent.btnPostEvent}>
                                     <Text style={stylesPostEvent.txtBtnEvent}>Gửi yêu cầu</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={stylesPostEvent.btnPostEvent}
-                                                        onPress = { this.FunctionToOpenSecondActivity }>
+                                     onPress={() => this.props.navigation.navigate('PostDetailEvent',{
+                                            labelEvent1: this.state.labelEvent1,
+                                            labelEvent2: this.state.labelEvent2,
+                                            contentEvent: this.state.contentEvent,
+                                            valuePlaceEvent: this.state.valuePlaceEvent,
+                                            datetimeEvent: this.state.datetimeEvent,
+                                            datetimeEvent1: this.state.datetimeEvent1,
+                                            costEvent: this.state.costEvent
+
+                                     })}>
                                     <Text style={stylesPostEvent.txtBtnEvent}>Tạo</Text>
                                 </TouchableOpacity>
                             

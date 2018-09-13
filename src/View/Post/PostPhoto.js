@@ -12,10 +12,10 @@ export default class PostPhoto extends Component {
         this.state = {
             date: '', 
             time: '00:00',
-            datetime: '',
+            datetimePhoto: '',
             selectedHours: 0,
             selectedMinutes: 0,
-            datetime1: '',
+            datetimePhoto1: '',
             selectedHours1: 0,
             selectedMinutes1: 0,}
       }
@@ -70,13 +70,15 @@ export default class PostPhoto extends Component {
                    <Dropdown 
                        // label='Favorite Fruit'
                        data={category}
+                       onChangeText={(valueCategoryPhoto1) => { valueCategoryPhoto1= this.setState({valueCategoryPhoto1}) }}
                        />
                </View>        
            </View>
            <View style={stylesPostPhoto.title}>
                <Text style={{marginRight:10, marginTop: 10,color:'black' }}>Nội dung</Text>
                 <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -30, marginRight: 15}]} />
+                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -30, marginRight: 15}]} 
+                     onChangeText={(contentPhoto) => this.setState({ contentPhoto })}/>
            </View>
            <View style={stylesPostPhoto.title}>
                <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
@@ -84,6 +86,7 @@ export default class PostPhoto extends Component {
                 <View style={{marginTop: -50, width: 250, height: 100, marginRight: 15 }}>
                    <Dropdown 
                        data={data}
+                       onChangeText={(valuePlacePhoto) => { valuePlacePhoto= this.setState({valuePlacePhoto}) }}
                        />
                </View>        
            </View>
@@ -92,7 +95,7 @@ export default class PostPhoto extends Component {
                <Text style ={{marginRight: 10, marginTop: -25, color:'black'}}>Thời gian từ:</Text>
                <DatePicker
                    style={{width: 200, marginTop: -35, marginLeft: 10}}
-                   date={this.state.datetime}
+                   date={this.state.datetimePhoto}
                    mode="datetime"
                    placeholder=""
                    format="YYYY-MM-DD HH:mm"
@@ -102,14 +105,14 @@ export default class PostPhoto extends Component {
                    customStyles={{
                             dateInput: { height: 25 }
                    }}
-                   onDateChange={(datetime) => {this.setState({datetime: datetime})}}
+                   onDateChange={(datetimePhoto) => {this.setState({datetimePhoto: datetimePhoto})}}
                   />
                </View>
                <View style={stylesPostPhoto.title}>
                     <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25,color:'black'}}>đến:</Text>
                         <DatePicker
                         style={{width: 200, marginTop: -30}}
-                        date={this.state.datetime1}
+                        date={this.state.datetimePhoto1}
                         mode="datetime"
                         placeholder=""
                         format="YYYY-MM-DD HH:mm"
@@ -119,20 +122,32 @@ export default class PostPhoto extends Component {
                         customStyles={{
                                 dateInput: { height: 25 }
                         }}
-                        onDateChange={(datetime1) => {this.setState({datetime1: datetime1})}}
+                        onDateChange={(datetimePhoto1) => {this.setState({datetimePhoto1: datetimePhoto1})}}
                         />
                </View>
             <View style={stylesPostPhoto.title}>
                <Text style={{marginRight:10, marginTop: 30,color:'black' }}>Chi phí</Text>
                 <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -10,marginRight: 15 }]} />
+                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -10,marginRight: 15 }]} 
+                     onChangeText={(costPhoto) => this.setState({ costPhoto })}/>
            </View>
            <View style={[stylesPostPhoto.title, stylesPostPhoto.buttonCreate]}>
            <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}>
                    <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Gửi yêu cầu</Text>
                </TouchableOpacity>
                <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}
-                                     onPress = { this.FunctionToOpenSecondActivity }>
+                         onPress={() => this.props.navigation.navigate('PostDetailPhoto',{
+                                valueCategoryPhoto1: this.state.valueCategoryPhoto1,
+                                contentPhoto: this.state.contentPhoto,
+                                valuePlacePhoto: this.state.valuePlacePhoto,
+                                datetimePhoto: this.state.datetimePhoto,
+                                datetimePhoto1: this.state.datetimePhoto1,
+                                costPhoto: this.state.costPhoto,
+
+                        
+
+
+                         })}>
                    <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
                </TouchableOpacity>
                   

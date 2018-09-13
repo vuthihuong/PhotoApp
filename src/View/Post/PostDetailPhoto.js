@@ -13,7 +13,7 @@ export default class PostDetailPhoto extends Component {
         return(
             <View style={stylesPostDePhoto.container}>
                 <View style={stylesPostDePhoto.title}>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ManageContract')}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
                          <Image source={gobackIcon} style={{width: 20, height: 20,
                                      marginLeft: 15, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
@@ -28,11 +28,32 @@ export default class PostDetailPhoto extends Component {
                     
                 </View>
                 <View style={stylesPostDePhoto.content}>
-                    <Text style={stylesPostDePhoto.txtPostDetailPhoto}>Thể loại: chụp ảnh cá nhân</Text>
-                    <Text style={stylesPostDePhoto.txtPostDetailPhoto}>Nội dung: </Text>
-                    <Text  style={stylesPostDePhoto.txtPostDetailPhoto}>Địa điểm tại Công viên Yên Sở</Text>
-                    <Text  style={stylesPostDePhoto.txtPostDetailPhoto}>Thời gian ngày 30/10/2018 từ 7h đến 17h</Text>
-                    <Text  style={stylesPostDePhoto.txtPostDetailPhoto}>Chi phí khoảng từ 300k - 500k</Text>
+                    {this.props.navigation.state.params.valueCategoryPhoto1 != '' ?
+                        <Text style={stylesPostDePhoto.txtPostDetailPhoto}>
+                        Thể loại: {this.props.navigation.state.params.valueCategoryPhoto1}</Text>: null}
+                    
+                    {this.props.navigation.state.params.contentPhoto != '' ?
+                        <Text style={stylesPostDePhoto.txtPostDetailPhoto}>
+                        Nội dung: {this.props.navigation.state.params.contentPhoto}</Text>: null}
+
+
+                    {this.props.navigation.state.params.valuePlacePhoto != '' ?
+                        <Text style={stylesPostDePhoto.txtPostDetailPhoto}>
+                        Địa điểm: {this.props.navigation.state.params.valuePlacePhoto}</Text>: null}
+
+                      {(this.props.navigation.state.params.datetimePhoto != '' 
+                            || this.props.navigation.state.params.datetimePhoto1 != ''
+                            )?
+                        <Text style={stylesPostDePhoto.txtPostDetailPhoto}>
+                         Thời gian: Từ {this.props.navigation.state.params.datetimePhoto} đến {this.props.navigation.state.params. datetimePhoto1}
+                         
+                         </Text>: null}
+                    {this.props.navigation.state.params.costPhoto != '' ?
+                        <Text style={stylesPostDePhoto.txtPostDetailPhoto}>
+                        Chi phí: {this.props.navigation.state.params.costPhoto}</Text>: null}
+                   
+                   
+                   
                 </View>
                 <View style={stylesPostDePhoto.btnSubmit}>
                     <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto} >
