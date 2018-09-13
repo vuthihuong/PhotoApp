@@ -28,6 +28,20 @@ export default class PostModal extends Component {
             height:'', weight: '', cost: '',
             checkedPostModal1: false, checkedPostModal2: false,
             boy: '', girl: '',
+            checkedRequireModal1: false, checkedRequireModal11: false,
+            labelRequireModal1:'', labelRequireModal11: '',
+
+            checkedRequireModal2: false, checkedRequireModal22: false,
+            labelRequireModal2:'', labelRequireModal22: '',
+
+            checkedRequireModal3: false, checkedRequireModal33: false,
+            labelRequireModal3:'', labelRequireModal33: '',
+
+            checkedRightModal1: false, checkedRightModal11: false,
+            labelRightModal1:'', labelRightModal11: '',
+
+            checkedRightModal2: false, checkedRightModal22: false,
+            labelRightModal2:'', labelRightModal22: ''
             // value:''
         }
       }
@@ -71,6 +85,268 @@ export default class PostModal extends Component {
          
         }
     }
+    checkRequireModal1(){
+        if(this.state.checkedRequireModal1 === true){
+            this.setState({
+                checkedRequireModal1: false
+            });
+            this.setState({
+                labelRequireModal1: ''
+            });
+        }
+        else if(this.state.checkedRequireModal1 === false){
+            this.setState({
+                checkedRequireModal1: true
+            });
+            this.setState({
+                checkedRequireModal11: false
+            });
+            this.setState({
+                labelRequireModal1: 'tự make up,'
+            });
+            this.setState({
+                labelRequireModal11: ''
+            });
+         
+        }
+    }
+
+    checkRequireModal11(){
+        if(this.state.checkedRequireModal11 === true){
+            this.setState({
+                checkedRequireModal11: false
+            });
+            this.setState({
+                labelRequireModal11: ''
+            });
+        }
+        else if(this.state.checkedRequireModal11 === false){
+            this.setState({
+                checkedRequireModal11: true
+            });
+            this.setState({
+                checkedRequireModal1: false
+            });
+            this.setState({
+                labelRequireModal11: 'có phục vụ make up,'
+            });
+            this.setState({
+                labelRequireModal1: ''
+            });
+         
+        }
+    }
+
+    checkRequireModal2(){
+        if(this.state.checkedRequireModal2 === true){
+            this.setState({
+                checkedRequireModal2: false
+            });
+            this.setState({
+                labelRequireModal2: ''
+            });
+        }
+        else if(this.state.checkedRequireModal2 === false){
+            this.setState({
+                checkedRequireModal2: true
+            });
+            this.setState({
+                checkedRequireModal22: false
+            });
+            this.setState({
+                labelRequireModal2: ' không phục vụ trang phục,'
+            });
+            this.setState({
+                labelRequireModal22: ''
+            });
+         
+        }
+    }
+
+    checkRequireModal22(){
+        if(this.state.checkedRequireModal22 === true){
+            this.setState({
+                checkedRequireModal22: false
+            });
+            this.setState({
+                labelRequireModal22: ''
+            });
+        }
+        else if(this.state.checkedRequireModal22 === false){
+            this.setState({
+                checkedRequireModal22: true
+            });
+            this.setState({
+                checkedRequireModal2: false
+            });
+            this.setState({
+                labelRequireModal22: ' có phục vụ trang phục,'
+            });
+            this.setState({
+                labelRequireModal2: ''
+            });
+         
+        }
+    }
+
+    checkRequireModal3(){
+        if(this.state.checkedRequireModal3 === true){
+            this.setState({
+                checkedRequireModal3: false
+            });
+            this.setState({
+                labelRequireModal3: ''
+            });
+        }
+        else if(this.state.checkedRequireModal3 === false){
+            this.setState({
+                checkedRequireModal3: true
+            });
+            this.setState({
+                checkedRequireModal33: false
+            });
+            this.setState({
+                labelRequireModal3: ' không phục vụ ăn trưa,'
+            });
+            this.setState({
+                labelRequireModal33: ''
+            });
+         
+        }
+    }
+
+    checkRequireModal33(){
+        if(this.state.checkedRequireModal33 === true){
+            this.setState({
+                checkedRequireModal33: false
+            });
+            this.setState({
+                labelRequireModal33: ''
+            });
+        }
+        else if(this.state.checkedRequireModal33 === false){
+            this.setState({
+                checkedRequireModal33: true
+            });
+            this.setState({
+                checkedRequireModal3: false
+            });
+            this.setState({
+                labelRequireModal33: ' có phục vụ ăn trưa,'
+            });
+            this.setState({
+                labelRequireModal3: ''
+            });
+         
+        }
+    }
+
+    checkRightModal1(){
+        if(this.state.checkedRightModal1 === true){
+            this.setState({
+                checkedRightModal1: false
+            });
+            this.setState({
+                labelRightModal1: ''
+            });
+        }
+        else if(this.state.checkedRightModal1 === false){
+            this.setState({
+                checkedRightModal1: true
+            });
+            this.setState({
+                checkedRightModal11: false
+            });
+            this.setState({
+                labelRightModal1: ' Có trả phí,'
+            });
+            this.setState({
+                labelRightModal11: ''
+            });
+         
+        }
+    }
+
+    checkRightModal11(){
+        if(this.state.checkedRightModal11 === true){
+            this.setState({
+                checkedRightModal11: false
+            });
+            this.setState({
+                labelRightModal11: ''
+            });
+        }
+        else if(this.state.checkedRightModal11 === false){
+            this.setState({
+                checkedRightModal11: true
+            });
+            this.setState({
+                checkedRightModal1: false
+            });
+            this.setState({
+                labelRightModal11: ' Không trả phí,'
+            });
+            this.setState({
+                labelRightModal1: ''
+            });
+         
+        }
+    }
+
+
+    checkRightModal2(){
+        if(this.state.checkedRightModal2 === true){
+            this.setState({
+                checkedRightModal2: false
+            });
+            this.setState({
+                labelRightModal2: ''
+            });
+        }
+        else if(this.state.checkedRightModal2 === false){
+            this.setState({
+                checkedRightModal2: true
+            });
+            this.setState({
+                checkedRightModal22: false
+            });
+            this.setState({
+                labelRightModal2: ' được trả ảnh,'
+            });
+            this.setState({
+                labelRightModal22: ''
+            });
+         
+        }
+    }
+
+    checkRightModal22(){
+        if(this.state.checkedRightModal22 === true){
+            this.setState({
+                checkedRightModal22: false
+            });
+            this.setState({
+                labelRightModal22: ''
+            });
+        }
+        else if(this.state.checkedRightModal22 === false){
+            this.setState({
+                checkedRightModal22: true
+            });
+            this.setState({
+                checkedRightModal2: false
+            });
+            this.setState({
+                labelRightModal22: ' Không được trả ảnh,'
+            });
+            this.setState({
+                labelRightModal2: ''
+            });
+         
+        }
+    }
+
+
 
       static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
@@ -305,19 +581,26 @@ export default class PostModal extends Component {
                         <CheckBox
                             label='Tự make up'
                             labelStyle={{fontSize: 13, color: 'black'}}
-                            checkboxStyle = {{width:12, height: 12}} 
-                            // onSelect={(label) => {this.setState({label: label})}}
-                            onChange={(checked) => {label= this.state.label}}
+                            checkboxStyle = {{width:12, height: 12}}
+                            checked={this.state.checkedRequireModal1}
+                            onChange={(checked) => {this.checkRequireModal1()}} 
                             />
                         <CheckBox
                             label='Không phục trang phục'
                             labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                            checkboxStyle = {{width:12, height: 12}} /> 
+                            checkboxStyle = {{width:12, height: 12}} 
+                            checked={this.state.checkedRequireModal2}
+                            onChange={(checked) => {this.checkRequireModal2()}} 
+                            /> 
                         
                         <CheckBox
                             label='Không phục vụ ăn trưa'
                             labelStyle={{fontSize: 13, marginRight: 13, color: 'black'}}
-                            checkboxStyle = {{width:12, height: 12}} /> 
+                            checkboxStyle = {{width:12, height: 12}} 
+                            checked={this.state.checkedRequireModal3}
+                            onChange={(checked) => {this.checkRequireModal3()}}
+                            
+                            /> 
                     </View>
 
                       <View>
@@ -325,17 +608,24 @@ export default class PostModal extends Component {
                             label='Có phục vụ make up'
                             labelStyle={{fontSize: 13, color:'black'}}
                             checkboxStyle = {{width:12, height: 12}}
-                            // onSelectionsChange={(label) => { value= this.setState({label}) }}
+                            checked={this.state.checkedRequireModal11}
+                            onChange={(checked) => {this.checkRequireModal11()}} 
                              />
                         <CheckBox
                             label='Có phục vụ trang phục'
                             labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                            checkboxStyle = {{width:12, height: 12}} /> 
+                            checkboxStyle = {{width:12, height: 12}} 
+                            checked={this.state.checkedRequireModal22}
+                            onChange={(checked) => {this.checkRequireModal22()}} 
+                            /> 
                        
                         <CheckBox
                             label='Có phục vụ ăn trưa'
                             labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                            checkboxStyle = {{width:12, height: 12}} /> 
+                            checkboxStyle = {{width:12, height: 12}} 
+                            checked={this.state.checkedRequireModal33}
+                            onChange={(checked) => {this.checkRequireModal33()}} 
+                            /> 
                     </View>
                 </View>
 
@@ -346,23 +636,35 @@ export default class PostModal extends Component {
                             <CheckBox
                                 label='Có trả phí'
                                 labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:12, height: 12}} /> 
+                                checkboxStyle = {{width:12, height: 12}} 
+                                checked={this.state.checkedRightModal1}
+                                onChange={(checked) => {this.checkRightModal1()}} 
+                                /> 
                             
                             <CheckBox
                                 label='Được trả ảnh'
                                 labelStyle={{fontSize: 13, marginRight: 13, color: 'black'}}
-                                checkboxStyle = {{width:12, height: 12}} /> 
+                                checkboxStyle = {{width:12, height: 12}} 
+                                checked={this.state.checkedRightModal2}
+                                onChange={(checked) => {this.checkRightModal2()}} 
+                                /> 
                         </View>
                         <View>
                             <CheckBox
                                 label='Không trả phí'
                                 labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:12, height: 12}} /> 
+                                checkboxStyle = {{width:12, height: 12}} 
+                                checked={this.state.checkedRightModal11}
+                                onChange={(checked) => {this.checkRightModal11()}} 
+                                /> 
                             
                             <CheckBox
                                 label='Không được trả ảnh'
                                 labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:12, height: 12}} /> 
+                                checkboxStyle = {{width:12, height: 12}} 
+                                checked={this.state.checkedRightModal22}
+                                onChange={(checked) => {this.checkRightModal22()}} 
+                                /> 
                         </View>
                      </View>
                 </View>
@@ -389,9 +691,18 @@ export default class PostModal extends Component {
                             datetime: this.state.datetime,
                             datetime1: this.state.datetime1,
                             value: this.state.value,
-                            label: this.state.label,
+                            labelRequireModal1: this.state.labelRequireModal1,
+                            labelRequireModal11: this.state.labelRequireModal11,
+                            labelRequireModal2: this.state.labelRequireModal2,
+                            labelRequireModal22: this.state.labelRequireModal22,
+                            labelRequireModal3: this.state.labelRequireModal3,
+                            labelRequireModal33: this.state.labelRequireModal33,
+                            labelRightModal1: this.state.labelRightModal1,
+                            labelRightModal11: this.state.labelRightModal11,
+                            labelRightModal2: this.state.labelRightModal2,
+                            labelRightModal22: this.state.labelRightModal22,
                             circle1: this.state.circle1,
-                            cirlce2: this.state.circle2,
+                            circle2: this.state.circle2,
                             circle3: this.state.circle3,
                             weight: this.state.weight,
                             height: this.state.height,
