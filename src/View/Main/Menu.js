@@ -52,7 +52,7 @@ export default class Menu extends Component {
       markers=[];
         for(marker of this.state.markers){ 
             markers.push(
-              <MapView.Marker key={marker.latitude}  title={'toi o day'+ marker.latitude}
+              <MapView.Marker key={marker.latitude}  title={marker.latitude}
                                 description={'day la mo ta'} 
                                 coordinate={marker} />
             )
