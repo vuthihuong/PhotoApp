@@ -11,7 +11,7 @@ export default class ResetPass extends Component {
         return(
             <View style={styles.containerReset}>
                 <View style={styles.iconResetPass}>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoCustomer')}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
                         <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
                                     tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>

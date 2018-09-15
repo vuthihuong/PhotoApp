@@ -782,7 +782,8 @@ stylesPostModal = StyleSheet.create({
     },
     txtPostModal: {
         height: 100, width: 250, marginTop: -15,
-        borderColor: 'black',   borderWidth: 1, marginRight: 15
+        borderColor: 'black',   borderWidth: 1, marginRight: 15,
+        color: 'black'
     },
     txtBtnPostModal: {
        width: 160, height: 30, borderRadius: 10, 

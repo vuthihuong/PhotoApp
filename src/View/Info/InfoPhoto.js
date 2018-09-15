@@ -162,7 +162,7 @@ export default class InfoPhoto extends Component {
                                         backgroundColor: '#EE3B3B', color: 'white'}}>Thêm</Text>
                          
                       </TouchableOpacity>
-                      <View style={styles.container}>
+                      <View >
                             <PopupDialog
                                 dialogTitle={<DialogTitle title="Thêm" color='red' />
                                     }

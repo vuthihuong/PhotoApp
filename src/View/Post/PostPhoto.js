@@ -78,7 +78,8 @@ export default class PostPhoto extends Component {
                <Text style={{marginRight:10, marginTop: 10,color:'black' }}>Nội dung</Text>
                 <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
                      style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -30, marginRight: 15}]} 
-                     onChangeText={(contentPhoto) => this.setState({ contentPhoto })}/>
+                     onChangeText={(contentPhoto) => this.setState({contentPhoto})}>
+                     {this.state.contentPhoto}</TextInput>
            </View>
            <View style={stylesPostPhoto.title}>
                <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
@@ -129,7 +130,8 @@ export default class PostPhoto extends Component {
                <Text style={{marginRight:10, marginTop: 30,color:'black' }}>Chi phí</Text>
                 <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
                      style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -10,marginRight: 15 }]} 
-                     onChangeText={(costPhoto) => this.setState({ costPhoto })}/>
+                     onChangeText={(costPhoto) => this.setState({costPhoto})}>
+                     {this.state.costPhoto}</TextInput>
            </View>
            <View style={[stylesPostPhoto.title, stylesPostPhoto.buttonCreate]}>
            <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}>

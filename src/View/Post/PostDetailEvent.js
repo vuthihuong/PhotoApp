@@ -38,7 +38,7 @@ export default class PostDetailEvent extends Component {
                         <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>
                         Nội dung: {this.props.navigation.state.params.contentEvent}</Text>: null }
 
-                    {this.props.navigation.state.params.valuePlaceEvent != '' ?
+                    {this.props.navigation.state.params.valuePlaceEvent != null ?
                         <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>
                         Địa điểm: {this.props.navigation.state.params.valuePlaceEvent}</Text>: null }
 

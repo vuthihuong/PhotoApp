@@ -28,16 +28,16 @@ export default class PostDetailPhoto extends Component {
                     
                 </View>
                 <View style={stylesPostDePhoto.content}>
-                    {this.props.navigation.state.params.valueCategoryPhoto1 != '' ?
+                    {this.props.navigation.state.params.valueCategoryPhoto1 != null ?
                         <Text style={stylesPostDePhoto.txtPostDetailPhoto}>
                         Thể loại: {this.props.navigation.state.params.valueCategoryPhoto1}</Text>: null}
                     
-                    {this.props.navigation.state.params.contentPhoto != '' ?
+                    {this.props.navigation.state.params.contentPhoto != ''?  
                         <Text style={stylesPostDePhoto.txtPostDetailPhoto}>
-                        Nội dung: {this.props.navigation.state.params.contentPhoto}</Text>: null}
+                        Nội dung: {this.props.navigation.state.params.contentPhoto}</Text>: null }
 
 
-                    {this.props.navigation.state.params.valuePlacePhoto != '' ?
+                    {this.props.navigation.state.params.valuePlacePhoto != null ?
                         <Text style={stylesPostDePhoto.txtPostDetailPhoto}>
                         Địa điểm: {this.props.navigation.state.params.valuePlacePhoto}</Text>: null}
 
