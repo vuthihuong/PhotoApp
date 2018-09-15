@@ -5,6 +5,7 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
 import { Dropdown } from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker'
 import CheckBox from 'react-native-checkbox';
+import gobackIcon from './../../assets/img/info/goback.png'
 
 export default class PostPhoto extends Component {
     constructor(props){
@@ -57,22 +58,29 @@ export default class PostPhoto extends Component {
           const { selectedHours, selectedMinutes } = this.state;
           return(
             <ScrollView>
-            <View style={stylesPostPhoto.container}>
-           <View style={stylesPostPhoto.headGoBack}>
-               <View style={stylesPostPhoto.textPass}>
-                   <Text style={{fontSize: 20, color: '#EE3B3B', marginTop: 5  }}> Tìm nháy ảnh</Text>
-               </View>
-           </View>
-           <View style={stylesPostPhoto.title}>
-               <Text style={{marginRight: 10, marginTop: 10,color:'black' }}>Thể loại</Text>
-             
-                <View style={{marginTop: -30, width: 250, height: 100, marginRight: 15 }}>
-                   <Dropdown 
-                       // label='Favorite Fruit'
-                       data={category}
-                       onChangeText={(valueCategoryPhoto1) => { valueCategoryPhoto1= this.setState({valueCategoryPhoto1}) }}
-                       />
-               </View>        
+                <View style={stylesPostPhoto.container}>
+                    <View style={stylesPostPhoto.headerPostPhoto}>
+                        <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
+                            <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
+                                        tintColor: '#EE3B3B'}}/>
+                        </TouchableOpacity>
+                        <View>
+                            <Text style={{fontSize: 20, color: '#EE3B3B'}}>
+                                    Tìm nháy ảnh</Text>
+                        </View>
+                        <View><Text></Text></View>
+                        
+                    </View>
+                <View style={stylesPostPhoto.title}>
+                    <Text style={{marginRight: 10, marginTop: 10,color:'black' }}>Thể loại</Text>
+                    
+                        <View style={{marginTop: -30, width: 250, height: 100, marginRight: 15 }}>
+                        <Dropdown 
+                            // label='Favorite Fruit'
+                            data={category}
+                            onChangeText={(valueCategoryPhoto1) => { valueCategoryPhoto1= this.setState({valueCategoryPhoto1}) }}
+                            />
+                </View>        
            </View>
            <View style={stylesPostPhoto.title}>
                <Text style={{marginRight:10, marginTop: 10,color:'black' }}>Nội dung</Text>
@@ -164,6 +172,10 @@ export default class PostPhoto extends Component {
         container: {
             flex:1,
             backgroundColor: 'white'
+        },
+        headerPostPhoto: { 
+            flexDirection: 'row', justifyContent: 'space-between',
+            marginTop: 20
         },
        
         textPass:{

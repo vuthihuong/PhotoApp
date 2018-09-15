@@ -29,6 +29,8 @@ import PostDetailEvent from './src/View/Post/PostDetailEvent'
 import PostModal from './src/View/Post/PostModal'
 import PostPhoto from './src/View/Post/PostPhoto'
 import PostEvent from './src/View/Post/PostEvent'
+import Menu from './src/View/Main/Menu'
+import PostTabBar from './src/View/Post/PostTabBar'
 
 import MainModal from './src/View/Main/MainModal'
 import InfoDetailModal from './src/View/Info/InfoDetailModal'
@@ -54,6 +56,9 @@ const Mainapp = createStackNavigator({
 
     Main: {
         screen: Main },
+    Menu: { 
+        screen: Menu
+    },
 
     MainPhoto: {
          screen: MainPhoto },

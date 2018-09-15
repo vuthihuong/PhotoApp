@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text,
     View, TextInput,
-    TouchableOpacity, ScrollView
+    TouchableOpacity, ScrollView, Image
 } from 'react-native';
 
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-checkbox';
 import DatePicker from 'react-native-datepicker'
 import TimePicker from 'react-native-simple-time-picker';   
+
+import gobackIcon from './../../assets/img/info/goback.png'
 
 
 export default class PostModal extends Component {
@@ -375,15 +377,18 @@ export default class PostModal extends Component {
           const { selectedHours, selectedMinutes } = this.state;
         return (
             <ScrollView>
-                 <View style={stylesPostModal.container}>
-                <View style={stylesPostModal.headGoBack}>
-                    {/* <TouchableOpacity>
-                        <Image source={gobackIcon} style={{width: 20, height: 20, 
-                            marginLeft: 15, marginTop: 15}}/>
-                    </TouchableOpacity> */}
-                    <View style={stylesPostModal.textPass}>
-                        <Text style={{fontSize: 20, color: '#EE3B3B',  }}> Tìm mẫu ảnh</Text>
+              <View style={stylesPostModal.container}>
+              <View style={stylesPostModal.headerPostModal}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
+                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
+                                    tintColor: '#EE3B3B'}}/>
+                    </TouchableOpacity>
+                    <View>
+                         <Text style={{fontSize: 20, color: '#EE3B3B'}}>
+                                Tìm mẫu ảnh</Text>
                     </View>
+                    <View><Text></Text></View>
+                    
                 </View>
                 <View style={stylesPostModal.title}>
                     <Text style={{marginRight:10, color: 'black'}}>Tìm mẫu ảnh</Text>
@@ -726,6 +731,11 @@ stylesPostModal = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: 'white'
+    },
+
+    headerPostModal: { 
+        flexDirection: 'row', justifyContent: 'space-between',
+        marginTop: 20
     },
    
     textPass:{

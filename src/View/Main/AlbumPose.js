@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
+            ScrollView
+    } from 'react-native';
 
 import { createDrawerNavigator } from 'react-navigation';
 
@@ -58,7 +60,8 @@ export default class AlbumPose extends Component {
               }];
 
         return(
-           <View style = { stylesAlPose.container }>
+            <ScrollView>
+                    <View style = { stylesAlPose.container }>
               <TouchableOpacity>
                     <View style={stylesAlPose.textBodySearch}>
                         <View style ={stylesAlPose.textBody}>
@@ -135,6 +138,8 @@ export default class AlbumPose extends Component {
                     </TouchableOpacity>
                 </View>
            </View>
+            </ScrollView>
+           
         );
      }
   }

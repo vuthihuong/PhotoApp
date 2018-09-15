@@ -5,6 +5,7 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
 import { Dropdown } from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker'
 import CheckBox from 'react-native-checkbox';
+import gobackIcon from './../../assets/img/info/goback.png'
 
 
 export default class PostEvent extends Component {
@@ -115,11 +116,18 @@ export default class PostEvent extends Component {
           return(
             <ScrollView>
                  <View style={stylesPostEvent.container}>
-                    <View style={stylesPostEvent.headGoBack}>
-                        <View style={stylesPostEvent.textPass}>
-                            <Text style={{fontSize: 20, color: '#EE3B3B', marginTop: 5  }}> Sự kiện</Text>
-                        </View>
+                 <View style={stylesPostEvent.headerPostEvent}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
+                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
+                                    tintColor: '#EE3B3B'}}/>
+                    </TouchableOpacity>
+                    <View>
+                         <Text style={{fontSize: 20, color: '#EE3B3B'}}>
+                                Tạo sự kiện</Text>
                     </View>
+                    <View><Text></Text></View>
+                    
+                </View>
                     <View style={stylesPostEvent.title}>
                         <Text style={{marginRight:15, color: 'black'}}>Tiêu đề</Text>
                         <View style={{marginBottom: 20}}>
@@ -229,6 +237,11 @@ export default class PostEvent extends Component {
         container: {
             flex:1,
             backgroundColor: 'white'
+        },
+
+        headerPostEvent: { 
+            flexDirection: 'row', justifyContent: 'space-between',
+            marginTop: 20
         },
        
         textPass:{
