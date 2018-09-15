@@ -62,7 +62,7 @@ export default class MenuPhoto extends Component {
                     <Text style={[stylesMenuPhoto.txtManagCont]}>Trạng thái {this.state.status}</Text>
                     <ToggleSwitch
                         isOn={this.state.isOn}
-                        onColor='green'
+                        onColor='#FA8072'
                         offColor='gray'
                         size='small'
                         onToggle={ (isOn) => this.change() } />
@@ -133,7 +133,7 @@ export default class MenuPhoto extends Component {
    },
    bodyManaCont: {
      flexDirection: 'row', justifyContent: 'space-between', 
-     borderBottomWidth: 1, borderBottomColor: '#EE3B3B', paddingBottom: 10,
+     borderBottomWidth: 1, borderBottomColor: '#FA8072', paddingBottom: 10,
      marginTop: 15
    },
  
@@ -141,7 +141,7 @@ export default class MenuPhoto extends Component {
          marginLeft: 10, width: 280
    },
    bodyBtnToggle: { 
-        borderBottomWidth: 1, borderBottomColor: '#EE3B3B', paddingBottom: 10,
+        borderBottomWidth: 1, borderBottomColor: '#FA8072', paddingBottom: 10,
         marginTop: 15
    },
    btnToggle: {

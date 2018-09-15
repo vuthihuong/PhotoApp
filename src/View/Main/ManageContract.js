@@ -49,7 +49,7 @@ const stylesManagCont = StyleSheet.create({
   },
   bodyManaCont: {
     flexDirection: 'row', justifyContent: 'space-between', 
-    borderBottomWidth: 1, borderBottomColor: '#EE3B3B', paddingBottom: 10,
+    borderBottomWidth: 1, borderBottomColor: '#FA8072', paddingBottom: 10,
     marginTop: 15
   },
 

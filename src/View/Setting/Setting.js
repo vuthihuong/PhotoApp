@@ -57,7 +57,7 @@ export default class Setting extends Component {
                         <Text style ={stylesSetting.txtSetting}>Nhận thông báo từ tất cả các sự kiện</Text>
                         <ToggleSwitch
                                 isOn={this.state.isOn1}
-                                onColor='green'
+                                onColor='#FA8072'
                                 offColor='gray'
                                 size='small'
                                 onToggle={ (isOn) => this.change1() }
@@ -70,7 +70,7 @@ export default class Setting extends Component {
                         <Text style ={stylesSetting.txtSetting}>Nhận thông báo từ các nhiếp ảnh gia yêu thích</Text>
                         <ToggleSwitch
                                 isOn={this.state.isOn2}
-                                onColor='green'
+                                onColor='#FA8072'
                                 offColor='gray'
                                 size='small'
                                 onToggle={ (isOn) => this.change2() }
@@ -83,7 +83,7 @@ export default class Setting extends Component {
                         <Text style ={stylesSetting.txtSetting}>Nhận thông báo từ các mẫu ảnh</Text>
                         <ToggleSwitch
                                 isOn={this.state.isOn3}
-                                onColor='green'
+                                onColor='#FA8072'
                                 offColor='gray'
                                 size='small'
                                 onToggle={ (isOn) => this.change3() }
@@ -105,7 +105,7 @@ stylesSetting = StyleSheet.create({
         backgroundColor: 'white'
     },
     bodySetting: { 
-        borderBottomWidth: 1, borderBottomColor: '#EE3B3B'
+        borderBottomWidth: 1, borderBottomColor: '#FA8072'
     },
     bodySettingTxt: { 
         flexDirection: 'row',

@@ -29,12 +29,13 @@ const InfoCustomerStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Phan Thu Phương',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        headerTintColor: '#EE3B3B', 
+        headerTintColor: 'white', 
         headerMode: 'none',
         headerStyle: {
-          backgroundColor: 'white',    
-          height: 35,    
-          
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
         },
       })
     },
@@ -49,15 +50,22 @@ const MenuStack = createStackNavigator({
         title: 'TRANG CHỦ',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerRight : <TouchableOpacity>
-                         <Image source={notifi} style={{width: 20, height: 20, tintColor: '#EE3B3B'}} />
+                         <Image source={notifi} style={{width: 25, height: 25, tintColor: 'white'}} />
                     </TouchableOpacity> ,
         headerTitleStyle: {fontSize: 15},
         headerStyle: {
-          backgroundColor: 'white',    
-          height: 35,    
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          // shadowColor: 'transparent',
+          // shadowRadius: 0,
+          // shadowOffset: {
+          //     height: 0,
+          // },
+          elevation: 0,
+          shadowOpacity: 0
           
         },
-        headerTintColor: '#EE3B3B',   
+        headerTintColor: 'white',   
         borderHeaderBottomColor: '#EE3B3B'        
       })
     },
@@ -70,13 +78,14 @@ const MenuStack = createStackNavigator({
         title: 'Danh sách yêu thích',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerStyle: {
-          backgroundColor: 'white'
+          backgroundColor: '#EE3B3B'
         },
-        headerTintColor: '#EE3B3B', 
+        headerTintColor: 'white', 
         headerStyle: {
-          backgroundColor: 'white',    
-          height: 35,    
-          
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
         },
       })
     },
@@ -88,11 +97,12 @@ const MenuStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Lịch sử hợp đồng',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        headerTintColor: '#EE3B3B', 
+        headerTintColor: 'white', 
         headerStyle: {
-          backgroundColor: 'white',    
-          height: 35,    
-          
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
         },
       })
     },
@@ -104,11 +114,12 @@ const MenuStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'Quản lý hợp đồng',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        headerTintColor: '#EE3B3B', 
+        headerTintColor: 'white', 
         headerStyle: {
-          backgroundColor: 'white',    
-          height: 35,    
-          
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
         },
       })
     },
@@ -122,11 +133,12 @@ const MenuStack = createStackNavigator({
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTitleStyle: stylesMain.titleMenu,
         headerStyle: {
-          backgroundColor: 'white',    
-          height: 35,    
-          
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
         },
-        headerTintColor: '#EE3B3B', 
+        headerTintColor: 'white', 
         
       })
     },
@@ -139,13 +151,14 @@ const MenuStack = createStackNavigator({
         title: 'Cài đặt',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerStyle: {
-          backgroundColor: 'white'
+          backgroundColor: '#EE3B3B'
         },
-        headerTintColor: '#EE3B3B', 
+        headerTintColor: 'white', 
         headerStyle: {
-          backgroundColor: 'white',    
-          height: 35,    
-          
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
         },
       })
     },
@@ -213,7 +226,7 @@ const MenuStack = createStackNavigator({
       navigationOptions: {
         drawerLabel: 'Phan Thu Phương',
         headerStyle: {
-          backgroundColor: 'white',    
+          backgroundColor: '#EE3B3B',    
           height: 35,    
        
           
@@ -247,7 +260,7 @@ const MenuStack = createStackNavigator({
           />
         ),
         headerStyle: {
-          backgroundColor: 'white',    
+          backgroundColor: '#EE3B3B',    
           height: 35,    
           
         },
@@ -279,7 +292,7 @@ const MenuStack = createStackNavigator({
           />
         ),
         headerStyle: {
-          backgroundColor: 'white',    
+          backgroundColor: '#EE3B3B',    
           height: 35,    
           
         },
@@ -297,7 +310,7 @@ const MenuStack = createStackNavigator({
           />
         ),
         headerStyle: {
-          backgroundColor: 'white',    
+          backgroundColor: '#EE3B3B',    
           height: 35,    
           
         },

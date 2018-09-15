@@ -74,19 +74,22 @@ const MenuTabBar = createMaterialTopTabNavigator({
         labelStyle: {
             fontSize: 10, 
         },
-            activeTintColor: '#EE3B3B',
+            activeTintColor: '#FA8072',
             inactiveTintColor: 'black',
-            activeBackgroundColor: '#EE3B3B',
+            activeBackgroundColor: '#FA8072',
             inactiveBackgroundColor: 'white',
         style: {
             backgroundColor: 'white',
+            elevation: 0,
+            shadowOpacity: 0
+           
          },
 
          tabStyle: {
-             height: 30
+             height: 35,
          },
          indicatorStyle: {
-            backgroundColor: '#EE3B3B',
+            backgroundColor: '#FA8072',
         }
   }});
 
