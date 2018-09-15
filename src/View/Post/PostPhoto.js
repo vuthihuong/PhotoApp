@@ -57,115 +57,111 @@ export default class PostPhoto extends Component {
           }]
           const { selectedHours, selectedMinutes } = this.state;
           return(
-            <ScrollView>
+            // <ScrollView>
                 <View style={stylesPostPhoto.container}>
-                    <View style={stylesPostPhoto.headerPostPhoto}>
-                        <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
-                            <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
-                                        tintColor: '#EE3B3B'}}/>
-                        </TouchableOpacity>
-                        <View>
-                            <Text style={{fontSize: 20, color: '#EE3B3B'}}>
-                                    Tìm nháy ảnh</Text>
+                    <View style={stylesPostPhoto.containerPostPhoto}>
+                        <View style={stylesPostPhoto.headerPostPhoto}>
+                            <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
+                                <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
+                                            tintColor: '#EE3B3B'}}/>
+                            </TouchableOpacity>
+                            <View>
+                                <Text style={{fontSize: 20, color: '#EE3B3B'}}>
+                                        Tìm nháy ảnh</Text>
+                            </View>
+                            <View><Text></Text></View>
+                            
                         </View>
-                        <View><Text></Text></View>
-                        
+                        <View style={stylesPostPhoto.title}>
+                            <Text style={{marginRight: 10, marginTop: 10,color:'black' }}>Thể loại</Text>
+                            
+                            <View style={{marginTop: -30, width: 230, height: 100 }}>
+                                <Dropdown 
+                                    // label='Favorite Fruit'
+                                    data={category}
+                                    onChangeText={(valueCategoryPhoto1) => { valueCategoryPhoto1= this.setState({valueCategoryPhoto1}) }}
+                                    />
+                            </View>        
+                        </View>
+                        <View style={stylesPostPhoto.title}>
+                            <Text style={{marginRight:10, marginTop: 10,color:'black' }}>Nội dung</Text>
+                            <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
+                                    style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -30}]} 
+                                    onChangeText={(contentPhoto) => this.setState({contentPhoto})}>
+                                    {this.state.contentPhoto}</TextInput>
+                        </View>
+                        <View style={stylesPostPhoto.title}>
+                            <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
+                            
+                            <View style={{marginTop: -50, width: 230, height: 100 }}>
+                                <Dropdown 
+                                    data={data}
+                                    onChangeText={(valuePlacePhoto) => { valuePlacePhoto= this.setState({valuePlacePhoto}) }}
+                                    />
+                            </View>        
+                        </View>
+
+                        <View style={stylesPostPhoto.title}>
+                            <Text style ={{marginRight: 10, marginTop: -25, color:'black'}}>Thời gian từ:</Text>
+                            <DatePicker
+                                style={{width: 200, marginTop: -35}}
+                                date={this.state.datetimePhoto}
+                                mode="datetime"
+                                placeholder=""
+                                format="YYYY-MM-DD HH:mm"
+                                confirmBtnText="Confirm"
+                                cancelBtnText="Cancel"
+                                showIcon={false}
+                                customStyles={{
+                                            dateInput: { height: 25 }
+                                }}
+                                onDateChange={(datetimePhoto) => {this.setState({datetimePhoto: datetimePhoto})}}
+                                />
+                        </View>
+                        <View style={stylesPostPhoto.title}>
+                            <Text style ={{marginLeft: 52,marginRight: 10, marginTop: -25,color:'black'}}>đến:</Text>
+                                <DatePicker
+                                    style={{width: 200, marginTop: -30}}
+                                    date={this.state.datetimePhoto1}
+                                    mode="datetime"
+                                    placeholder=""
+                                    format="YYYY-MM-DD HH:mm"
+                                    confirmBtnText="Confirm"
+                                    cancelBtnText="Cancel"
+                                    showIcon={false}
+                                    customStyles={{
+                                        dateInput: { height: 25 }
+                                    }}
+                                    onDateChange={(datetimePhoto1) => {this.setState({datetimePhoto1: datetimePhoto1})}}
+                                />
+                        </View>
+                        <View style={stylesPostPhoto.title}>
+                            <Text style={{marginRight:10, marginTop: 30,color:'black' }}>Chi phí</Text>
+                            <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
+                                style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -10}]} 
+                                onChangeText={(costPhoto) => this.setState({costPhoto})}>
+                                {this.state.costPhoto}</TextInput>
+                        </View>
+                        <View style={[stylesPostPhoto.title, stylesPostPhoto.buttonCreate]}>
+                            <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}>
+                                <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Gửi yêu cầu</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}
+                                    onPress={() => this.props.navigation.navigate('PostDetailPhoto',{
+                                        valueCategoryPhoto1: this.state.valueCategoryPhoto1,
+                                        contentPhoto: this.state.contentPhoto,
+                                        valuePlacePhoto: this.state.valuePlacePhoto,
+                                        datetimePhoto: this.state.datetimePhoto,
+                                        datetimePhoto1: this.state.datetimePhoto1,
+                                        costPhoto: this.state.costPhoto,
+                                    })}>
+                                <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                <View style={stylesPostPhoto.title}>
-                    <Text style={{marginRight: 10, marginTop: 10,color:'black' }}>Thể loại</Text>
-                    
-                        <View style={{marginTop: -30, width: 250, height: 100, marginRight: 15 }}>
-                        <Dropdown 
-                            // label='Favorite Fruit'
-                            data={category}
-                            onChangeText={(valueCategoryPhoto1) => { valueCategoryPhoto1= this.setState({valueCategoryPhoto1}) }}
-                            />
-                </View>        
-           </View>
-           <View style={stylesPostPhoto.title}>
-               <Text style={{marginRight:10, marginTop: 10,color:'black' }}>Nội dung</Text>
-                <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -30, marginRight: 15}]} 
-                     onChangeText={(contentPhoto) => this.setState({contentPhoto})}>
-                     {this.state.contentPhoto}</TextInput>
-           </View>
-           <View style={stylesPostPhoto.title}>
-               <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
-             
-                <View style={{marginTop: -50, width: 250, height: 100, marginRight: 15 }}>
-                   <Dropdown 
-                       data={data}
-                       onChangeText={(valuePlacePhoto) => { valuePlacePhoto= this.setState({valuePlacePhoto}) }}
-                       />
-               </View>        
-           </View>
-
-           <View style={stylesPostPhoto.title}>
-               <Text style ={{marginRight: 10, marginTop: -25, color:'black'}}>Thời gian từ:</Text>
-               <DatePicker
-                   style={{width: 200, marginTop: -35, marginLeft: 10}}
-                   date={this.state.datetimePhoto}
-                   mode="datetime"
-                   placeholder=""
-                   format="YYYY-MM-DD HH:mm"
-                   confirmBtnText="Confirm"
-                   cancelBtnText="Cancel"
-                   showIcon={false}
-                   customStyles={{
-                            dateInput: { height: 25 }
-                   }}
-                   onDateChange={(datetimePhoto) => {this.setState({datetimePhoto: datetimePhoto})}}
-                  />
-               </View>
-               <View style={stylesPostPhoto.title}>
-                    <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25,color:'black'}}>đến:</Text>
-                        <DatePicker
-                        style={{width: 200, marginTop: -30}}
-                        date={this.state.datetimePhoto1}
-                        mode="datetime"
-                        placeholder=""
-                        format="YYYY-MM-DD HH:mm"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        showIcon={false}
-                        customStyles={{
-                                dateInput: { height: 25 }
-                        }}
-                        onDateChange={(datetimePhoto1) => {this.setState({datetimePhoto1: datetimePhoto1})}}
-                        />
-               </View>
-            <View style={stylesPostPhoto.title}>
-               <Text style={{marginRight:10, marginTop: 30,color:'black' }}>Chi phí</Text>
-                <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
-                     style={[stylesPostPhoto.txtPostPhoto,{ marginTop: -10,marginRight: 15 }]} 
-                     onChangeText={(costPhoto) => this.setState({costPhoto})}>
-                     {this.state.costPhoto}</TextInput>
-           </View>
-           <View style={[stylesPostPhoto.title, stylesPostPhoto.buttonCreate]}>
-           <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}>
-                   <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Gửi yêu cầu</Text>
-               </TouchableOpacity>
-               <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}
-                         onPress={() => this.props.navigation.navigate('PostDetailPhoto',{
-                                valueCategoryPhoto1: this.state.valueCategoryPhoto1,
-                                contentPhoto: this.state.contentPhoto,
-                                valuePlacePhoto: this.state.valuePlacePhoto,
-                                datetimePhoto: this.state.datetimePhoto,
-                                datetimePhoto1: this.state.datetimePhoto1,
-                                costPhoto: this.state.costPhoto,
-
-                        
-
-
-                         })}>
-                   <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
-               </TouchableOpacity>
-                  
-           </View>
-       </View>
-       </ScrollView>
-          );
-       }
+                </View>
+            //  </ScrollView>
+            )}
     }
     
     const stylesPostPhoto = StyleSheet.create({
@@ -173,9 +169,23 @@ export default class PostPhoto extends Component {
             flex:1,
             backgroundColor: 'white'
         },
+
+        containerPostPhoto: { 
+            marginRight: 10, marginLeft: 10,
+            
+        },
+        
         headerPostPhoto: { 
             flexDirection: 'row', justifyContent: 'space-between',
             marginTop: 20
+        },
+
+        title: {
+            flexDirection: 'row',  
+            justifyContent: 'space-between',
+            marginTop: 20,
+            paddingLeft: 15, paddingRight: 15
+            
         },
        
         textPass:{
@@ -183,53 +193,19 @@ export default class PostPhoto extends Component {
             alignItems: 'center',
             marginTop: 10
         },
-    
-        textBody: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            
-        },
-    
-        title: {
-            flexDirection: 'row',  
-            //justifyContent: 'space-between'
-            marginTop: 20, marginRight: 15,
-            marginLeft: 15,
-            
-        },
-        gender: {
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: 10,
-            // marginLeft: 100  
-        },
-        inputWeight: {
-            width: 95,
-            marginTop: -30  ,
-            marginLeft: 5
-        },
-        requireCheck: {
-           justifyContent: 'space-between',
-           marginTop: 10,
-        },
-        textRight: {
-            marginTop: 10
-        },
+
         buttonCreate: {
             flexDirection: 'row',
             justifyContent: 'space-between',
             marginBottom: 20
-            // marginTop: 20,
-            // marginRight: 30,
-           
         },
         txtPostPhoto: {
-            height: 100, width: 250,
+            height: 100, width: 230,
             borderColor: 'black', 
             borderWidth: 1
         },
         txtBtnPostPhoto: {
-            width: 160, height: 30, borderRadius: 10, 
+            width: 150, height: 30, borderRadius: 10, 
             backgroundColor: '#EE3B3B',marginRight: 15,  
         }
-       })
+    })
