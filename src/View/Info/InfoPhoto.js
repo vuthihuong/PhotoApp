@@ -142,7 +142,7 @@ export default class InfoPhoto extends Component {
                     </View>        
                </View>
                 <View style = {stylesInfoPhoto.infoFooter}> 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=> {this.props.navigation.navigate('UpImgPhoto')}}>
                       <Text style={{fontSize: 13, color: '#EE3B3B', 
                                 textDecorationLine: 'underline',}}>Album ảnh</Text>
                     </TouchableOpacity>

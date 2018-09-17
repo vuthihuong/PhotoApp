@@ -261,7 +261,7 @@ export default class PostEvent extends Component {
         buttonCreate: {
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginBottom: 20
+            marginBottom: 20,marginTop: 30
         },
         txtPostEvent: {
             marginRight:10, marginTop: 15, color: 'black'
@@ -272,7 +272,7 @@ export default class PostEvent extends Component {
         },
         btnPostEvent: {
             width: 150, height: 30, borderRadius: 10, 
-            backgroundColor: '#EE3B3B',marginRight: 15, 
+            backgroundColor: '#EE3B3B'
          },
         txtBtnEvent: {
              textAlign:"center", color: 'white', marginTop: 5 

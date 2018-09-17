@@ -197,7 +197,7 @@ export default class PostPhoto extends Component {
         buttonCreate: {
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginBottom: 20
+            marginBottom: 20, marginTop: 30
         },
         txtPostPhoto: {
             height: 100, width: 230,
@@ -206,6 +206,6 @@ export default class PostPhoto extends Component {
         },
         txtBtnPostPhoto: {
             width: 150, height: 30, borderRadius: 10, 
-            backgroundColor: '#EE3B3B',marginRight: 15,  
+            backgroundColor: '#EE3B3B',
         }
     })

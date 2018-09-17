@@ -38,7 +38,7 @@ const MenuPhotoTabBar = createMaterialTopTabNavigator({
          },
 
          tabStyle: {
-             height: 35,
+             height: 40,
             
          },
          indicatorStyle: {

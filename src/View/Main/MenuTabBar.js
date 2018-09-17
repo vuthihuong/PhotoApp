@@ -86,7 +86,7 @@ const MenuTabBar = createMaterialTopTabNavigator({
          },
 
          tabStyle: {
-             height: 35,
+             height: 40,
          },
          indicatorStyle: {
             backgroundColor: 'white',

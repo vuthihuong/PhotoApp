@@ -91,22 +91,22 @@ class PostTabBar extends Component {
                     <View>
                         <CheckBox
                                 label='Tìm người mẫu'
-                                labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:15, height: 15}} 
+                                labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
+                                checkboxStyle = {{width:20, height: 20}} 
                                 checked={this.state.checkedPostModal}
                                 onChange={(checked) => {this.checkPostModal()}} 
                                 /> 
                         <CheckBox
                                 label='Tìm nhiếp ảnh gia'
-                                labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:15, height: 15}} 
+                                labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
+                                checkboxStyle = {{width:20, height: 20}} 
                                 checked={this.state.checkedPostPhoto}
                                 onChange={(checked) => {this.checkPostPhoto()}} 
                                 /> 
                         <CheckBox
                                 label='Tạo sự kiện'
-                                labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:15, height: 15}} 
+                                labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
+                                checkboxStyle = {{width:20, height: 20}} 
                                 checked={this.state.checkedPostEvent}
                                 onChange={(checked) => {this.checkPostEvent()}} 
                                 /> 
@@ -142,7 +142,7 @@ stylesPostTabBar = StyleSheet.create({
     },
     txtPostTabBar: { 
         color: 'black',
-        fontSize: 15
+        fontSize: 25
     },
     bodyPostTabBar: { 
         flexDirection: 'row',
@@ -152,7 +152,7 @@ stylesPostTabBar = StyleSheet.create({
     tailPostTabBar: { 
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40,
+        marginTop: 80,
        
     },
     btnSubmitPostTabBar: { 

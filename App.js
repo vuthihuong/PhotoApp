@@ -35,6 +35,9 @@ import PostTabBar from './src/View/Post/PostTabBar'
 import MainModal from './src/View/Main/MainModal'
 import InfoDetailModal from './src/View/Info/InfoDetailModal'
 
+import UpImgModal from './src/View/Upload/UpImgModal'
+import UpImgPhoto from './src/View/Upload/UpImgPhoto'
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -106,6 +109,12 @@ const Mainapp = createStackNavigator({
     },
     PostEvent: { 
         screen: PostEvent
+    },
+    UpImgModal: { 
+        screen: UpImgModal
+    },
+    UpImgPhoto: { 
+        screen: UpImgPhoto
     }
     },{
       headerMode:'none'
