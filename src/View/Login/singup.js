@@ -4,25 +4,23 @@ import {
     View, Image, TextInput,
     TouchableOpacity, ScrollView
 } from 'react-native';
-
-// import { createStackNavigator } from 'react-navigation';
-// import { createDrawerNavigator } from 'react-navigation';
-// import MyDrawerNavigator from './../../AppDemo'
-// import Signup from './signup'
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
-import CheckBox from 'react-native-checkbox';
 
-import logo from './../../assets/img/login/login.jpg'
+import CheckBox from 'react-native-checkbox';
+import SignupController from './../../Controller/SignupController';
 
 export default class Signup extends Component {
+    onItem(item){
+        SignupController.abc();
+    }
+
     constructor() {
         super();
     
         this.state = {
-          checked1: false,
-          checked2: false,
-          checked3: false
+          checked1: false,  checked2: false, checked3: false,
+          checkedGender1: false, checkedGender2: false
         };
       }
       change1(){
@@ -84,7 +82,42 @@ export default class Signup extends Component {
             })
         }
       
-    }
+     }
+
+     checkGender1(){
+        if(this.state.checkedGender1 === true){
+            this.setState({
+                checkedGender1: false
+            });
+           
+        }
+        else if(this.state.checkedGender1 === false){
+            this.setState({
+                checkedGender1: true
+            });
+            this.setState({
+                checkedGender2: false
+            })
+        }
+      
+     }
+     checkGender2(){
+        if(this.state.checkedGender2 === true){
+            this.setState({
+                checkedGender2: false
+            });
+           
+        }
+        else if(this.state.checkedGender2 === false){
+            this.setState({
+                checkedGender2: true
+            });
+            this.setState({
+                checkedGender1: false
+            })
+        }
+      
+     }
 
       login(){
           if(this.state.checked1 === true){
@@ -123,16 +156,16 @@ export default class Signup extends Component {
                                 labelStyle={{fontSize: 14, color: 'black'}}
                                 numberOfLines = {2}
                                 checkboxStyle={{borderColor: 'black'}}
-                                  checked={this.state.checked1}
+                                  checked={this.state.checkedGender1}
                                 checkboxStyle = {{width:13, height: 13,borderColor: 'black',
                                         }}
-                                onChange={(checked) => {this.change1()}} 
+                                onChange={(checked) => {this.checkGender1()}} 
                                 />
                             <CheckBox
                                 label='Nữ' labelStyle={{fontSize: 14, color: 'black'}}
-                                checked={this.state.checked2}
+                                checked={this.state.checkedGender2}
                                 checkboxStyle = {{width:13, height: 13, borderColor: 'black'}}
-                                onChange={(checked) => {this.change2()}} 
+                                onChange={(checked) => {this.checkGender2()}} 
                                 />
                         </View>
                          <Text style={{color: 'black'}}>Email</Text>
@@ -183,9 +216,12 @@ export default class Signup extends Component {
                                 />
                         </View>
                         <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
-                             onPress={() => this.login()}
-                            >
-                              <Text style={{marginTop: 4, color:'white'}}>Đăng ký</Text>
+                                onPress={this.onItem.bind(this)}>
+                                {/* <Text>Click Me !</Text> */}
+                                
+                                <Text style={{marginTop: 4, color:'white'}}>Đăng ký</Text>
+                                {/* <SignupController ref={ref => (this._b = ref)} /> */}
+                             
                         </TouchableOpacity>
                     </View>
                 </View>

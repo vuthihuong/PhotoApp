@@ -200,11 +200,11 @@ export default class InfoPhoto extends Component {
                      
                       <View style={stylesInfoPhoto.tbl}>
                         <Table borderStyle={{borderWidth: 1, borderColor: 'black'}}>
-                            <Row data={state.tableHead} widthArr={[70,230, 30,30]} 
+                            <Row data={state.tableHead} widthArr={[70,200, 30,30]} 
                                     textStyle={stylesInfoPhoto.tblTxt} 
                                 // style={styles.head} style={styles.text}/
                                 />
-                            <Rows data={state.tableData} widthArr={[70,230,30,30]} 
+                            <Rows data={state.tableData} widthArr={[70,200,30,30]} 
                                     textStyle={stylesInfoPhoto.tblTxt} 
                                     // style={styles.text}
                                     >

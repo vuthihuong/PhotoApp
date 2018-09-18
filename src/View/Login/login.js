@@ -5,10 +5,6 @@ import {
     TouchableOpacity, Alert
 } from 'react-native';
 
-import { createStackNavigator } from 'react-navigation';
-import { createDrawerNavigator } from 'react-navigation';
-// import MyDrawerNavigator from './../../AppDemo'
-
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
@@ -44,10 +40,6 @@ export  default  class Login extends Component {
           }
           else {
               Alert.alert("Thông báo","Số điện thoại hoặc mật khẩu của bạn không đúng!")
-            //   this.setState({
-            //     name: '',
-            //     pass: ''
-            // })
           }
       }
     render() {   
