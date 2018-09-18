@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text,
     View, Image, TextInput,
-    TouchableOpacity, ScrollView
+    TouchableOpacity, ScrollView, Alert
 } from 'react-native';
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 import CheckBox from 'react-native-checkbox';
 import SignupController from './../../Controller/SignupController';
+import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 export default class Signup extends Component {
     onItem(item){
@@ -20,7 +21,8 @@ export default class Signup extends Component {
     
         this.state = {
           checked1: false,  checked2: false, checked3: false,
-          checkedGender1: false, checkedGender2: false
+          checkedGender1: false, checkedGender2: false,
+          email: '', password: ''
         };
       }
       change1(){
@@ -129,6 +131,44 @@ export default class Signup extends Component {
               this.props.navigation.navigate('MainModal')
           }
       }
+
+      Signup(){ 
+            FirebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then(() => { 
+            Alert.alert(
+                'Thông báo',
+                'Bạn đã đăng ký thành công'+this.state.email,
+                [
+                // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'OK', onPress: () => {this.props.navigation.navigate('Main')}},
+                ],
+                { cancelable: false }
+            )
+            this.setState({ 
+                email: '', password: ''
+            })
+
+            })  
+            .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            Alert.alert(
+                'Thông báo',
+                'Bạn đã đăng ký thất bại',
+                [
+                // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            )
+
+
+            });
+        }
     render() {   
         return (
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -173,7 +213,8 @@ export default class Signup extends Component {
                             //  placeholderTextColor="black"  underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
                             placeholder="Email"
-                            onChangeText={(text) => this.setState({ text })}                            
+                            onChangeText={(email) => this.setState({ email })}     
+                            value={this.state.email}                       
                         />
                          <Text style={{color: 'black'}}>Số điện thoại</Text>
                         <TextInput 
@@ -187,7 +228,8 @@ export default class Signup extends Component {
                             // placeholderTextColor="black" underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
                             placeholder="Mật khẩu"
-                            onChangeText={(text) => this.setState({ text })}
+                            onChangeText={(password) => this.setState({ password })}
+                            value={this.state.password}
                         />
                          <Text style={{color: 'black'}}>Loại người dùng</Text>
                         {/* <Text style={stylesSignUp.textCheckbox}>Chọn loại người dùng</Text> */}
@@ -216,7 +258,11 @@ export default class Signup extends Component {
                                 />
                         </View>
                         <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
-                                onPress={this.onItem.bind(this)}>
+                                // onPress={this.onSignup.bind(this)}
+                                //  onPress={() => this.props.navigation.navigate('Login')}
+                                onPress={this.Signup.bind(this)}
+                                
+                        >
                                 {/* <Text>Click Me !</Text> */}
                                 
                                 <Text style={{marginTop: 4, color:'white'}}>Đăng ký</Text>
