@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
+        ScrollView } from 'react-native';
 import {Icon, Button, Container, Header, Content} from 'native-base'
 
 import iconInfo from '../../assets/img/info/iconInfo.png'
@@ -25,7 +26,7 @@ export default class ListFavorite extends Component {
        render()
        {
           return(
-     
+            <ScrollView style={{flex:1, backgroundColor: 'white'}}>
              <View style = { stylesFavor.containerFavor }>
                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto')}
                      style={stylesFavor.contFavor}>
@@ -59,6 +60,7 @@ export default class ListFavorite extends Component {
                 </TouchableOpacity>
                  
              </View>
+            </ScrollView>
           );
        }
     }

@@ -69,7 +69,7 @@ export default class InfoPhoto extends Component {
         />
           return(
      
-           <ScrollView>
+            <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style={stylesInfoPhoto.container}  >
               {/* <ImageBackground
                       source={background}

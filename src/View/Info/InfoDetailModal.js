@@ -18,7 +18,7 @@ export default class InfoDetailModal extends Component{
     render(){
         const state = this.state;
         return(
-          <ScrollView style={{backgroundColor: 'white'}}>
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesInfoDetailModal.container}>
                 <View>
                     <TouchableOpacity onPress={() => this.props.navigation.goBack() }>

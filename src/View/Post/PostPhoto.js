@@ -57,7 +57,7 @@ export default class PostPhoto extends Component {
           }]
           const { selectedHours, selectedMinutes } = this.state;
           return(
-            // <ScrollView>
+            <ScrollView style={{flex:1, backgroundColor: 'white'}}>
                 <View style={stylesPostPhoto.container}>
                     <View style={stylesPostPhoto.containerPostPhoto}>
                         <View style={stylesPostPhoto.headerPostPhoto}>
@@ -160,7 +160,7 @@ export default class PostPhoto extends Component {
                         </View>
                     </View>
                 </View>
-            //  </ScrollView>
+              </ScrollView>
             )}
     }
     

@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
+        ScrollView } from 'react-native';
 
-import { createDrawerNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation'
-import { createTabNavigator} from 'react-navigation'
-
-import HamburgerIcon from './HamburgerIcon'
 
 
 import event from '../../assets/img/menu/eventLetter.png'
@@ -34,9 +30,11 @@ export default class Event extends Component {
        render()
        {
           return(
-             <View style={{flex: 1, backgroundColor: 'white' }}>
-                <Text style={{fontSize: 23}}> This is Activity - 4 </Text> 
-             </View>
+            <ScrollView style={{flex:1, backgroundColor: 'white'}}>
+                <View style={{flex: 1, backgroundColor: 'white' }}>
+                    <Text style={{fontSize: 23}}> This is Activity - 4 </Text> 
+                </View>
+            </ScrollView>
           );
        }
     }

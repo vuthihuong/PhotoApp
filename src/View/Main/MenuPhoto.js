@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
-
-import { createDrawerNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation'
-import { createTabNavigator} from 'react-navigation'
-
-import HamburgerIcon from './HamburgerIcon'
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
+            ScrollView } from 'react-native';
 
 import home from '../../assets/img/menu/home.png'
 import ToggleSwitch from 'toggle-switch-react-native'
-
-
 
 
 export default class MenuPhoto extends Component {
@@ -55,7 +48,7 @@ export default class MenuPhoto extends Component {
 
     render() {
         return(
-   
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
            <View style = { stylesMenuPhoto.containerManagCont }>
              <View style={stylesMenuPhoto.bodyBtnToggle}>
                 <View style={stylesMenuPhoto.btnToggle}>
@@ -121,6 +114,7 @@ export default class MenuPhoto extends Component {
                  </View>
              </View>
            </View>
+          </ScrollView>
         );
      }
   }

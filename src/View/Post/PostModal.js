@@ -376,7 +376,7 @@ export default class PostModal extends Component {
           }]
           const { selectedHours, selectedMinutes } = this.state;
         return (
-            <ScrollView>
+            <ScrollView style={{flex:1, backgroundColor: 'white'}}> 
                <View style={stylesPostModal.container}>
                   <View style={stylesPostModal.containerPostModal}>
                     <View style={stylesPostModal.headerPostModal}>

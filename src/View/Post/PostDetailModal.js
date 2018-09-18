@@ -11,6 +11,7 @@ import edit from '../../assets/img/pose/edit.png'
 export default class PostDetailModal extends Component {
     render(){
         return(
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesPostDetailModal.container}>
                 <View style={stylesPostDetailModal.title}>
                     <TouchableOpacity  onPress={() => this.props.navigation.goBack()}>
@@ -139,6 +140,7 @@ export default class PostDetailModal extends Component {
                    
                 </View>
             </View>
+          </ScrollView>
         )
     }
 }

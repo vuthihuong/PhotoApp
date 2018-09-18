@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, TextInput } from 'react-native';
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, TextInput,
+        ScrollView } from 'react-native';
 import home from '../../assets/img/menu/home.png'
 import MapView from 'react-native-maps';
 
@@ -28,6 +29,7 @@ export default class MenuModal extends Component {
 
     render() {
         return (
+         <ScrollView style={{flex:1, backgroundColor: 'white'}}>
           <View style ={stylesMenu.container}>
               <View style={stylesMenu.txt}>
               <TouchableOpacity   style={{width: 290, height: 35, borderWidth: 1,
@@ -49,6 +51,7 @@ export default class MenuModal extends Component {
             >
            </MapView>
           </View>
+        </ScrollView>
         );
       }
     }

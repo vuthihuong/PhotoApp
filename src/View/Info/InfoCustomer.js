@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
-          TextInput, Picker, Item } from 'react-native';
+          TextInput, ScrollView} from 'react-native';
 import DatePicker from 'react-native-datepicker'
 
 import info from '../../assets/img/info/iconInfo.png'
@@ -47,7 +47,7 @@ export default class InfoCustomer extends Component {
            style={{width: 75, height: 75}}
         />
           return(
-     
+            <ScrollView style={{flex:1, backgroundColor: 'white'}}>
              <View style={stylesInfoCus.containerCus}> 
                <View style={stylesInfoCus.iconInfo}>
                  <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
@@ -118,6 +118,7 @@ export default class InfoCustomer extends Component {
                </View>
               
              </View>
+            </ScrollView>
           );
        }
     }

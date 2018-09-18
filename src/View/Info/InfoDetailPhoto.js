@@ -34,7 +34,7 @@ export default class InfoDetailPhoto extends Component{
     render(){
         const state = this.state;
         return(
-          <ScrollView>
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style={stylesInfoDetailPhoto.container}>
                 <View>
                     <TouchableOpacity onPress={() => this.props.navigation.goBack() }>

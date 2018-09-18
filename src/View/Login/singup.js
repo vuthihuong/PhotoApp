@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text,
     View, Image, TextInput,
-    TouchableOpacity,
+    TouchableOpacity, ScrollView
 } from 'react-native';
 
 // import { createStackNavigator } from 'react-navigation';
@@ -98,46 +98,87 @@ export default class Signup extends Component {
       }
     render() {   
         return (
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesSignUp.container}>
-                <View>
+                {/* <View>
                     <Image source={logo} style={stylesSignUp.img} />
+                </View> */}
+                <View style={stylesSignUp.textLogin1}>
+                    <Text style={{color: 'white', fontSize: 18}}>Đăng ký tài khoản</Text>
                 </View>
                 <View>
                     <View style={stylesSignUp.textLogin}>
+                        <Text style={{color: 'black'}}>Họ tên</Text>
                         <TextInput 
-                             placeholderTextColor="#EE3B3B"  underlineColorAndroid='#EE3B3B'
+                            //  placeholderTextColor="black"  
+                            //  underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
-                            placeholder="Nhập số điện thoại"
+                            placeholder="Họ tên"
                             onChangeText={(text) => this.setState({ text })}                            
                         />
-                        <TextInput 
-                            placeholderTextColor="#EE3B3B" underlineColorAndroid='#EE3B3B'
-                            style={stylesSignUp.textInputLogin}
-                            placeholder="Nhập mật khẩu"
-                            onChangeText={(text) => this.setState({ text })}
-                        />
-                        {/* <Text style={stylesSignUp.textCheckbox}>Chọn loại người dùng</Text> */}
-                        <View style={{flexDirection: 'row',  }}>
+                         {/* <Text style={{color: 'black'}}>Giới tính</Text> */}
+                         <View style={{flexDirection: 'row', marginBottom: 10 }}>
                             <CheckBox
-                                label='Người thuê chụp ảnh' 
-                                labelStyle={{fontSize: 14, color: '#EE3B3B'}}
+                                label='Nam' 
+                                labelStyle={{fontSize: 14, color: 'black'}}
                                 numberOfLines = {2}
-                                checkboxStyle={{borderColor: '#EE3B3B'}}
+                                checkboxStyle={{borderColor: 'black'}}
                                   checked={this.state.checked1}
-                                checkboxStyle = {{width:13, height: 13,borderColor: '#EE3B3B',
+                                checkboxStyle = {{width:13, height: 13,borderColor: 'black',
                                         }}
                                 onChange={(checked) => {this.change1()}} 
                                 />
                             <CheckBox
-                                label='Nháy ảnh' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
+                                label='Nữ' labelStyle={{fontSize: 14, color: 'black'}}
                                 checked={this.state.checked2}
-                                checkboxStyle = {{width:13, height: 13, borderColor: '#EE3B3B'}}
+                                checkboxStyle = {{width:13, height: 13, borderColor: 'black'}}
+                                onChange={(checked) => {this.change2()}} 
+                                />
+                        </View>
+                         <Text style={{color: 'black'}}>Email</Text>
+                        <TextInput 
+                            //  placeholderTextColor="black"  underlineColorAndroid='black'
+                            style={stylesSignUp.textInputLogin}
+                            placeholder="Email"
+                            onChangeText={(text) => this.setState({ text })}                            
+                        />
+                         <Text style={{color: 'black'}}>Số điện thoại</Text>
+                        <TextInput 
+                            //  placeholderTextColor="black"  underlineColorAndroid='black'
+                            style={stylesSignUp.textInputLogin}
+                            placeholder="Số điện thoại"
+                            onChangeText={(text) => this.setState({ text })}                            
+                        />
+                        <Text style={{color: 'black'}}>Mật khẩu</Text>
+                        <TextInput 
+                            // placeholderTextColor="black" underlineColorAndroid='black'
+                            style={stylesSignUp.textInputLogin}
+                            placeholder="Mật khẩu"
+                            onChangeText={(text) => this.setState({ text })}
+                        />
+                         <Text style={{color: 'black'}}>Loại người dùng</Text>
+                        {/* <Text style={stylesSignUp.textCheckbox}>Chọn loại người dùng</Text> */}
+                        <View style={{flexDirection: 'row', marginTop: 15  }}>
+                            <CheckBox
+                                label='Người thuê chụp ảnh' 
+                                labelStyle={{fontSize: 14, color: 'black'}}
+                                numberOfLines = {2}
+                                checkboxStyle={{borderColor: 'black'}}
+                                  checked={this.state.checked1}
+                                checkboxStyle = {{width:13, height: 13,borderColor: 'black',
+                                        }}
+                                onChange={(checked) => {this.change1()}} 
+                                />
+                            <CheckBox
+                                label='Nháy ảnh' labelStyle={{fontSize: 14, color: 'black'}}
+                                checked={this.state.checked2}
+                                checkboxStyle = {{width:13, height: 13, borderColor: 'black'}}
                                 onChange={(checked) => {this.change2()}} 
                                 />
                              <CheckBox
-                                label='Mẫu ảnh' labelStyle={{fontSize: 14, color: '#EE3B3B'}}
+                                label='Mẫu ảnh' labelStyle={{fontSize: 14, color: 'black'}}
                                 checked={this.state.checked3}
-                                checkboxStyle = {{width:13, height: 13, borderColor: '#EE3B3B'}}
+                                checkboxStyle = {{width:13, height: 13, borderColor: 'black'}}
                                 onChange={(checked) => {this.change3()}} 
                                 />
                         </View>
@@ -148,11 +189,11 @@ export default class Signup extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{marginTop: 110, marginLeft: 150}}>
+                <View style={[stylesSignUp.textLogin, {marginTop: 10}]}>
                     <TouchableOpacity
                          onPress={() => this.props.navigation.navigate('Login')}
                     >
-                        <Text style={{textDecorationLine: 'underline', color:'#EE3B3B'}}>
+                        <Text style={{textDecorationLine: 'underline', color:'#FA8072'}}>
                            Đã có tài khoản
                         </Text>
                     </TouchableOpacity>
@@ -160,6 +201,7 @@ export default class Signup extends Component {
                 <View>
                 </View>
             </View>
+          </ScrollView>
         )
     }
 }
@@ -169,12 +211,20 @@ const stylesSignUp = StyleSheet.create({
     container: {
         flex:1,
         flexDirection: 'column',
-        backgroundColor: '#E8E8E8'
+        // backgroundColor: '#E8E8E8'
+        backgroundColor: 'white',
     },
   
     img: {
         width: 500,
         height: 250
+    },
+    textLogin1: { 
+        flexDirection: 'column',
+        alignItems: 'center',
+       justifyContent: 'center',
+        // marginTop: 30,
+        backgroundColor: '#EE3B3B', height: 50
     },
     textLogin: {
         flexDirection: 'column',
@@ -183,7 +233,8 @@ const stylesSignUp = StyleSheet.create({
     },
 
     textInputLogin: {
-        height: 40, width: 320
+        height: 40, width: 320,
+        marginBottom: 15,
     },
     // textCheckbox: {
     //     color: '#EE3B3B'
@@ -191,11 +242,11 @@ const stylesSignUp = StyleSheet.create({
    
     boxLogin: {
         marginTop: 20,
-        width: 300,
+        width: 330,
         height: 30,
         alignItems: 'center',
         borderColor: 1,
         backgroundColor: '#EE3B3B',
-        borderRadius: 15
+        borderRadius: 10
     }
 })

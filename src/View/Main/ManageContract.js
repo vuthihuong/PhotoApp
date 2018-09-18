@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
+            ScrollView } from 'react-native';
 
 import iconInfo from '../../assets/img/info/iconInfo.png'
 import heart from '../../assets/img/info/heart.png'
@@ -18,7 +19,7 @@ export default class ManageContract extends Component{
       }  
       render() {
        return(
-  
+        <ScrollView style={{flex:1, backgroundColor: 'white'}}>
           <View style = { stylesManagCont.containerManagCont }>
             <View style={stylesManagCont.bodyManaCont}>
                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
@@ -37,6 +38,7 @@ export default class ManageContract extends Component{
                 </View>
             </View>
           </View>
+         </ScrollView> 
        );
     }
  }

@@ -11,6 +11,7 @@ import edit from '../../assets/img/pose/edit.png'
 export default class PostDetailEvent extends Component {
     render(){
         return(
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesPostDtailEvent.container}>
                 <View style={stylesPostDtailEvent.title}>
                     <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
@@ -63,6 +64,7 @@ export default class PostDetailEvent extends Component {
                    
                 </View>
             </View>
+          </ScrollView>
         )
     }
 }

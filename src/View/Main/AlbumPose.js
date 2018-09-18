@@ -60,7 +60,7 @@ export default class AlbumPose extends Component {
               }];
 
         return(
-            <ScrollView>
+            // <ScrollView>
                     <View style = { stylesAlPose.container }>
               <TouchableOpacity>
                     <View style={stylesAlPose.textBodySearch}>
@@ -138,7 +138,7 @@ export default class AlbumPose extends Component {
                     </TouchableOpacity>
                 </View>
            </View>
-            </ScrollView>
+            // </ScrollView>
            
         );
      }

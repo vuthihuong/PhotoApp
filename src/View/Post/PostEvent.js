@@ -114,7 +114,7 @@ export default class PostEvent extends Component {
           }]
           const { selectedHours, selectedMinutes } = this.state;
           return(
-            // <ScrollView>
+            <ScrollView style={{flex:1, backgroundColor: 'white'}}>
                 <View style={stylesPostEvent.container}>
                     <View style={stylesPostEvent.containerPostEvent}>
                         <View style={stylesPostEvent.headerPostEvent}>
@@ -230,7 +230,7 @@ export default class PostEvent extends Component {
                         </View>
                     </View>
                 </View>
-            // </ScrollView>
+            </ScrollView>
         );
        }
     }

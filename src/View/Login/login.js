@@ -58,12 +58,14 @@ export  default  class Login extends Component {
                 </View>
                 <View>
                     <View style={stylesLogin.textLogin}>
-                        <TextInput  placeholderTextColor="#FF6A6A" underlineColorAndroid='#EE3B3B'
+                        <TextInput  
+                        // placeholderTextColor="black" underlineColorAndroid='black'
                             style={stylesLogin.textInputLogin}
                             placeholder="Nhập số điện thoại"
                             onChangeText={(name) => this.setState({ name })}                            
                         >{this.state.name}</TextInput>
-                        <TextInput placeholderTextColor="#FF6A6A" underlineColorAndroid='#EE3B3B'
+                        <TextInput
+                        //  placeholderTextColor="black" underlineColorAndroid='black'
                             style={stylesLogin.textInputLogin}
                             secureTextEntry={true}
                             placeholder="Nhập mật khẩu"
@@ -79,7 +81,7 @@ export  default  class Login extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{marginTop: 130, marginLeft: 120}}>
+                <View style={[stylesLogin.textLogin]}>
                     <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('Signup')}>
                         <Text style={{textDecorationLine: 'underline', color:'#CD5555'}}>
@@ -122,6 +124,6 @@ const stylesLogin = StyleSheet.create({
         alignItems: 'center',
         borderColor: 1,
         backgroundColor: '#EE3B3B',
-        borderRadius: 15
+        borderRadius: 10
     }
-})
+})  

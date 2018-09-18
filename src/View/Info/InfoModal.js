@@ -46,7 +46,7 @@ export default class InfoModal extends Component {
            style={{width: 75, height: 75}}
         />
           return(
-            <ScrollView>
+            <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style={stylesInfoModal.containerCus}> 
                <View style={stylesInfoModal.iconInfo}>
                  <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />

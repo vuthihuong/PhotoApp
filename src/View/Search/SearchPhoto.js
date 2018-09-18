@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text,
     View, Image, TextInput,
-    TouchableOpacity
+    TouchableOpacity, ScrollView
 } from 'react-native';
 
 import { Dropdown } from 'react-native-material-dropdown';
@@ -51,6 +51,7 @@ export default class SearchPhoto extends Component{
           },];
          
         return(
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesPhoto.container}>
                 <View style={stylesPhoto.headGoBack}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Menu')}>
@@ -122,6 +123,7 @@ export default class SearchPhoto extends Component{
                     </TouchableOpacity>
                 </View>
             </View>
+          </ScrollView>
         )
     }
 }

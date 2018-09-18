@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity,TextInput} from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity,TextInput, ScrollView} from 'react-native';
 import CheckBox from 'react-native-checkbox';
 
 class PostTabBar extends Component { 
@@ -156,7 +156,7 @@ stylesPostTabBar = StyleSheet.create({
        
     },
     btnSubmitPostTabBar: { 
-        backgroundColor: '#EE3B3B', width: 290, borderRadius: 20,
+        backgroundColor: '#EE3B3B', width: 290, borderRadius: 10,
         height: 30
     }
 })

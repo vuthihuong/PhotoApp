@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text,
     View, Image, TextInput,
-    TouchableOpacity
+    TouchableOpacity, ScrollView
 } from 'react-native';
 
 import { Dropdown } from 'react-native-material-dropdown';
@@ -153,6 +153,7 @@ export default class SearchAddress extends Component {
             value: 'Cà Mau',
           }];
         return(
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesAddress.container}>
                 <View style={stylesAddress.headGoBack}>
                     <TouchableOpacity
@@ -215,6 +216,7 @@ export default class SearchAddress extends Component {
                     </TouchableOpacity>
                </View>
             </View>
+          </ScrollView>
         )
     }
 }

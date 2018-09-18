@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, Image, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import {View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 
 import gobackIcon from '../../assets/img/info/goback.png'
 import lock from '../../assets/img/info/lock.png'
@@ -28,6 +28,7 @@ export default class UpImgModal extends Component {
            source={this.state.avatarSource}
            style={{width: 125, height: 125}} />
         return(
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesUpImgModal.container}>
                 <View style={stylesUpImgModal.icon}>
                     <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
@@ -52,6 +53,7 @@ export default class UpImgModal extends Component {
                </View>
                 
             </View>
+          </ScrollView>
         );
     }
 }
