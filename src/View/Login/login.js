@@ -4,6 +4,7 @@ import {
     View, Image, TextInput,
     TouchableOpacity, Alert
 } from 'react-native';
+import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
@@ -16,7 +17,8 @@ export  default  class Login extends Component {
     
         this.state = {
           name: '',
-          pass: ''
+          pass: '',
+          email: '', password: ''
         };
       }
 
@@ -42,6 +44,46 @@ export  default  class Login extends Component {
               Alert.alert("Thông báo","Số điện thoại hoặc mật khẩu của bạn không đúng!")
           }
       }
+
+      Login1(){ 
+        FirebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => { 
+            this.props.navigation.navigate(this.state.email ? 'Main' : 'Signup')
+
+        // Alert.alert(
+        //     'Thông báo',
+        //     'Bạn đã đăng nhập thành công'+this.state.email,
+        //     [
+        //     // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+        //     {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        //     {text: 'OK', onPress: () => {this.props.navigation.navigate('Main')}},
+        //     ],
+        //     { cancelable: false }
+        // )
+        this.setState({ 
+            email: '', password: ''
+        })
+
+        })  
+        .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        Alert.alert(
+            'Thông báo',
+            'Bạn đã đăng nhập thất bại',
+            [
+            // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            { cancelable: false }
+        )
+
+
+        });
+    }
     render() {   
         return (
             <View style={stylesLogin.container}>
@@ -54,20 +96,28 @@ export  default  class Login extends Component {
                         // placeholderTextColor="black" underlineColorAndroid='black'
                             style={stylesLogin.textInputLogin}
                             placeholder="Nhập số điện thoại"
-                            onChangeText={(name) => this.setState({ name })}                            
-                        >{this.state.name}</TextInput>
+                            // onChangeText={(name) => this.setState({ name })}  
+                            onChangeText={(email) => this.setState({ email })}     
+                            value={this.state.email}                           
+                        >
+                        {/* {this.state.name} */}
+                        </TextInput>
                         <TextInput
                         //  placeholderTextColor="black" underlineColorAndroid='black'
                             style={stylesLogin.textInputLogin}
                             secureTextEntry={true}
                             placeholder="Nhập mật khẩu"
-                            onChangeText={(pass) => this.setState({ pass })}
-                        >{this.state.pass}</TextInput>
+                            // onChangeText={(pass) => this.setState({ pass })}
+                            onChangeText={(password) => this.setState({ password })}     
+                            value={this.state.password} 
+                        >
+                        {/* {this.state.pass} */}
+                        </TextInput>
 
                         <TouchableOpacity style={[stylesLogin.boxLogin, stylesLogin.boxTwo]}
                             // onPress={() => this.props.navigation.navigate('Main')}
                               // onPress={() => this.props.navigation.navigate('MainPhoto')}
-                              onPress={() => {this.login()}}
+                              onPress={() => {this.Login1()}}
                             >
                               <Text style={{marginTop: 4, color:'white'}}>Đăng nhập</Text>
                         </TouchableOpacity>

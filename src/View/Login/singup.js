@@ -141,7 +141,7 @@ export default class Signup extends Component {
                 [
                 // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
                 {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                {text: 'OK', onPress: () => {this.props.navigation.navigate('Main')}},
+                {text: 'OK', onPress: () => {this.props.navigation.navigate('Login')}},
                 ],
                 { cancelable: false }
             )
@@ -227,6 +227,7 @@ export default class Signup extends Component {
                         <TextInput 
                             // placeholderTextColor="black" underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
+                            secureTextEntry={true}
                             placeholder="Mật khẩu"
                             onChangeText={(password) => this.setState({ password })}
                             value={this.state.password}
