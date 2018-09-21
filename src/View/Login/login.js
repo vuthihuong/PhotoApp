@@ -8,6 +8,7 @@ import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+console.ignoredYellowBox = [ 'Setting a timer' ];
 
 import logo from './../../assets/img/login/login.jpg'
 
@@ -18,9 +19,10 @@ export  default  class Login extends Component {
         this.state = {
           name: '',
           pass: '',
-          email: '', password: ''
+          email: '', password: '', 
         };
       }
+      
 
       login(){
           if(this.state.name == '1234' && this.state.pass == 'a' ){
@@ -46,40 +48,48 @@ export  default  class Login extends Component {
       }
 
       Login1(){ 
+      
         FirebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => { 
-            this.props.navigation.navigate(this.state.email ? 'Main' : 'Signup')
-
-        // Alert.alert(
-        //     'Thông báo',
-        //     'Bạn đã đăng nhập thành công'+this.state.email,
-        //     [
-        //     // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-        //     {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        //     {text: 'OK', onPress: () => {this.props.navigation.navigate('Main')}},
-        //     ],
-        //     { cancelable: false }
-        // )
-        this.setState({ 
-            email: '', password: ''
-        })
+                FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(this.state.email).on('value', function (snapshot) {
+                    //snapshot would have list of NODES that satisfies the condition
+                    // Alert.alert(snapshot.;
+                    snapshot.forEach(function(childSnapshot) {
+                            var key = childSnapshot.key;
+                            let childData = childSnapshot.val();
+                            category1 = (childData.category)
+                        
+                    })
+                 })
+                 if(category1 === "Người thuê chụp ảnh"){
+                     this.props.navigation.navigate('Main')
+                 }
+                 else if(category1 === "Nháy ảnh"){ 
+                     this.props.navigation.navigate('MainPhoto')
+                 }
+                 else if(category1 === "Mẫu ảnh"){ 
+                     this.props.navigation.navigate('MainModal')
+                 }
+                this.setState({ 
+                    email: '', password: ''
+                })
 
         })  
         .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-        Alert.alert(
-            'Thông báo',
-            'Bạn đã đăng nhập thất bại',
-            [
-            // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ],
-            { cancelable: false }
-        )
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            Alert.alert(
+                'Thông báo',
+                'Bạn đã đăng nhập thất bại',
+                [
+                // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            )
 
 
         });

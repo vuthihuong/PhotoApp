@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, Text,
-    View, Image, TextInput,
-    TouchableOpacity, ScrollView, Alert
-} from 'react-native';
+    StyleSheet, Text, View, TextInput,  TouchableOpacity, ScrollView, Alert
+        } from 'react-native';
 import { YellowBox } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+        YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+import DatePicker from 'react-native-datepicker'
 
 import CheckBox from 'react-native-checkbox';
 import SignupController from './../../Controller/SignupController';
@@ -15,15 +14,17 @@ export default class Signup extends Component {
     onItem(item){
         SignupController.abc();
     }
-
     constructor() {
         super();
-    
         this.state = {
+            date: '', 
           checked1: false,  checked2: false, checked3: false,
           checkedGender1: false, checkedGender2: false,
-          email: '', password: ''
+          email: '', password: '',
+          name: '', phone: '', address: ''
         };
+        this.itemRef = FirebaseApp.database();
+        console.ignoredYellowBox = [ 'Setting a timer' ];
       }
       change1(){
         if(this.state.checked1 === true){
@@ -42,9 +43,8 @@ export default class Signup extends Component {
                 checked3: false
             })
         }
-        
-    }
-        change2(){
+      }
+      change2(){
           if(this.state.checked2 === true){
               this.setState({
                   checked2: false
@@ -61,8 +61,6 @@ export default class Signup extends Component {
                 checked3: false
             })
           }
-        
-         
       }
 
       change3(){
@@ -83,15 +81,12 @@ export default class Signup extends Component {
                 checked2: false
             })
         }
-      
      }
-
      checkGender1(){
         if(this.state.checkedGender1 === true){
             this.setState({
                 checkedGender1: false
             });
-           
         }
         else if(this.state.checkedGender1 === false){
             this.setState({
@@ -101,14 +96,12 @@ export default class Signup extends Component {
                 checkedGender2: false
             })
         }
-      
      }
      checkGender2(){
         if(this.state.checkedGender2 === true){
             this.setState({
                 checkedGender2: false
             });
-           
         }
         else if(this.state.checkedGender2 === false){
             this.setState({
@@ -118,9 +111,7 @@ export default class Signup extends Component {
                 checkedGender1: false
             })
         }
-      
      }
-
       login(){
           if(this.state.checked1 === true){
               this.props.navigation.navigate('Main')
@@ -131,44 +122,101 @@ export default class Signup extends Component {
               this.props.navigation.navigate('MainModal')
           }
       }
-
       Signup(){ 
-            FirebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+         FirebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => { 
-            Alert.alert(
-                'Thông báo',
-                'Bạn đã đăng ký thành công'+this.state.email,
-                [
-                // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                {text: 'OK', onPress: () => {this.props.navigation.navigate('Login')}},
-                ],
-                { cancelable: false }
-            )
-            this.setState({ 
-                email: '', password: ''
-            })
+                Alert.alert(
+                    'Thông báo',
+                    'Bạn đã đăng ký thành công '+ this.state.email,
+                    [
+                    // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: () => {this.props.navigation.navigate('Login')}},
+                    ],
+                    { cancelable: false }
+                )
+                var email = this.state.email
+                var name = this.state.name
+                var phone = this.state.phone
+                var gender = ''
+                var date = this.state.date
+                var address = this.state.address
+                var password = this.state.password
+                var category = ''
+                
+                if(this.state.checkedGender1 === true){ 
+                    gender = 'nam'
+                }
+                else if(this.state.checkedGender2 === true){ 
+                gender = 'nữ'
+                }
 
-            })  
-            .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-            Alert.alert(
-                'Thông báo',
-                'Bạn đã đăng ký thất bại',
-                [
-                // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
-                ],
-                { cancelable: false }
-            )
+                if(this.state.checked1 === true){ 
+                    category = 'Người thuê chụp ảnh'
+                }
+                else if(this.state.checked2 === true){ 
+                    category = 'Nháy ảnh'
+                }
+                else if(this.state.checked3 === true){ 
+                    category = 'Mẫu ảnh'
+                }
+               
 
+                this.itemRef.ref('Customer').push({
+                 
+                        username: name,
+                        gender: gender,
+                        date: date, 
+                        email: email, 
+                        address: address,
+                        phone: phone,
+                        password: password,
+                        category: category
+                  
+                  
+                })
+                this.setState({ 
+                    email: '', password: ''
+                })
 
-            });
+                })  
+                .catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                
+                // if(errorCode === 'auth/wrong-password'){ 
+                //     Alert.alert(" Mật khẩu ít nhất 6 k")
+                // }
+                // switch(errorCode){ 
+                //     case " EMAIL_TAKEN": 
+                //         Alert.alert("The new user account cannot be created because the email is already in use.");
+                //         break;
+                //     case "INVALID_EMAIL":
+                //         Alert.alert("The specified email is not a valid email.");
+                //             break;
+                //     case "auth/wrong-password": 
+                //         Alert.alert('Password ít nhất 6 ký tự ')
+                //     default:
+                //             alert("Error creating user:");
+                        
+                // }
+                
+               
+                Alert.alert(
+                    'Thông báo',
+                    'Email không hợp lệ' ,
+                    [
+                        // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                )
+             });
         }
+
+
     render() {   
         return (
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -187,7 +235,8 @@ export default class Signup extends Component {
                             //  underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
                             placeholder="Họ tên"
-                            onChangeText={(text) => this.setState({ text })}                            
+                            onChangeText={(name) => this.setState({ name })}   
+                            value={this.state.name}                         
                         />
                          {/* <Text style={{color: 'black'}}>Giới tính</Text> */}
                          <View style={{flexDirection: 'row', marginBottom: 10 }}>
@@ -208,7 +257,32 @@ export default class Signup extends Component {
                                 onChange={(checked) => {this.checkGender2()}} 
                                 />
                         </View>
-                         <Text style={{color: 'black'}}>Email</Text>
+                        <Text style={{color: 'black'}}>Ngày sinh</Text>
+                        <View style={{ borderBottomWidth: 1, borderColor: "gray", width: 320, marginBottom: 5}}>
+                        <DatePicker
+                        // style={{width: 200}}
+                      
+                        date={this.state.date}
+                        mode="date"
+                        placeholder=""
+                        format="YYYY-MM-DD"
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        showIcon={false}
+                        customStyles={{
+                            dateInput: { height: 25,  borderWidth: 0,
+                                alignItems: "flex-start",
+                                justifyContent: "flex-start",
+                              },
+                            dateText: {
+                                paddingTop: 10
+                            }
+                            }
+                          }
+                        onDateChange={(date) => {this.setState({date: date})}}
+                       />
+                       </View>
+                         <Text style={{color: 'black', marginTop: 10}}>Email</Text>
                         <TextInput 
                             //  placeholderTextColor="black"  underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
@@ -216,12 +290,21 @@ export default class Signup extends Component {
                             onChangeText={(email) => this.setState({ email })}     
                             value={this.state.email}                       
                         />
-                         <Text style={{color: 'black'}}>Số điện thoại</Text>
+                        <Text style={{color: 'black'}}>Địa chỉ</Text>
+                        <TextInput 
+                            //  placeholderTextColor="black"  underlineColorAndroid='black'
+                            style={stylesSignUp.textInputLogin}
+                            placeholder="Địa chỉ"
+                            onChangeText={(address) => this.setState({ address })}  
+                            value={this.state.address}                          
+                        />
+                        <Text style={{color: 'black'}}>Số điện thoại</Text>
                         <TextInput 
                             //  placeholderTextColor="black"  underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
                             placeholder="Số điện thoại"
-                            onChangeText={(text) => this.setState({ text })}                            
+                            onChangeText={(phone) => this.setState({ phone })}     
+                            value={this.state.phone}                       
                         />
                         <Text style={{color: 'black'}}>Mật khẩu</Text>
                         <TextInput 

@@ -1,6 +1,7 @@
 import firebase from '@firebase/app'
-import firebasse from '@firebase/auth'
-
+// var firebase = require('firebase/app');
+require('firebase/auth');
+require('firebase/database');
 var config = {
     apiKey: "AIzaSyCnKHP42pOqDkrz5IlAW513pEvPZcQCVb8",
     authDomain: "photoapp-859b5.firebaseapp.com",
