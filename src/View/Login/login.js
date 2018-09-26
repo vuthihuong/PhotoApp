@@ -48,32 +48,29 @@ export  default  class Login extends Component {
       }
 
       Login1(){ 
-      
+      var category1;
         FirebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => { 
-                FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(this.state.email).on('value', function (snapshot) {
-                    //snapshot would have list of NODES that satisfies the condition
-                    // Alert.alert(snapshot.;
+                FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(this.state.email)
+                    .on('value', (function (snapshot) {
                     snapshot.forEach(function(childSnapshot) {
                             var key = childSnapshot.key;
                             let childData = childSnapshot.val();
                             category1 = (childData.category)
-                        
                     })
-                 })
-                 if(category1 === "Người thuê chụp ảnh"){
-                     this.props.navigation.navigate('Main')
-                 }
-                 else if(category1 === "Nháy ảnh"){ 
-                     this.props.navigation.navigate('MainPhoto')
-                 }
-                 else if(category1 === "Mẫu ảnh"){ 
-                     this.props.navigation.navigate('MainModal')
-                 }
-                this.setState({ 
-                    email: '', password: ''
-                })
-
+                    if(category1 === "Người thuê chụp ảnh"){
+                        this.props.navigation.navigate('Main')
+                    }
+                    else if(category1 === "Nháy ảnh"){ 
+                        this.props.navigation.navigate('MainPhoto')
+                    }
+                    else if(category1 === "Mẫu ảnh"){ 
+                        this.props.navigation.navigate('MainModal')
+                    }
+                   this.setState({ 
+                       email: '', password: ''
+                   })
+                 }).bind(this))
         })  
         .catch(function(error) {
             // Handle Errors here.

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, YellowBox,
-          TextInput, ScrollView} from 'react-native';
+          TextInput, ScrollView, Alert} from 'react-native';
 import DatePicker from 'react-native-datepicker'
+import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 import info from '../../assets/img/info/iconInfo.png'
 import iconUser from '../../assets/img/info/icon_info.png'
@@ -14,32 +15,57 @@ import photo from '../../assets/img/info/photo.png'
 import pick from './../Main/AlbumImg'
 
 
-export default class InfoModal extends Component {
 
+export default class InfoModal extends Component {
     constructor(props) {
-   
       super(props);
-    
       YellowBox.ignoreWarnings([
        'Warning: componentWillMount is deprecated',
        'Warning: componentWillReceiveProps is deprecated',
      ]);
 
-     this.state={
-       selected: '',
-       date: '', 
-       avatarSource: null
+      this.state={
+        selected: '',
+        date: '', 
+        avatarSource: null,
+        username: ''
      }
-    
     }
 
     show(){
       pick(source => this.setState({avatarSource: source}));
-        
-  }
-     
-       render()  {
-        // const {navigate} = this.props.navigation;
+   }
+  
+   componentWillMount() {
+      tmp = FirebaseApp.auth().currentUser.email
+      FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                 .on('value', function (snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+                       key = childSnapshot.key;
+            var childData = childSnapshot.val();
+                username1 = (childData.username);
+                address = (childData.address)
+                category = (childData.category)
+                date = (childData.date)
+                email = (childData.email)
+                gender = (childData.gender)
+                password = (childData.password)
+                telephone = (childData.phone)
+              
+        })  
+      })
+      this.setState({
+          username: username1,
+          date: date
+      })
+    }   
+    save(){ 
+      FirebaseApp.database().ref('Customer/'+key).update({
+         username: this.state.username
+    });
+    Alert.alert('done')
+    }
+      render()  {
         let img = this.state.avatarSource = null? null:
         <Image 
            source={this.state.avatarSource}
@@ -60,12 +86,13 @@ export default class InfoModal extends Component {
                <View style ={stylesInfoModal.textInput}>
                  <Image source={iconUser} style={{width: 30, height: 30}} />
                  <TextInput underlineColorAndroid='transparent' 
-                      style={{fontSize: 10}}>Phan Thu Phương</TextInput>
+                     onChangeText={(username) => this.setState({ username })} 
+                      style={{fontSize: 10}}>{this.state.username}</TextInput>
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={phone} style={{width: 20, height: 20,  marginLeft: 5}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>0973261255</TextInput>
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>{telephone} </TextInput>
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
@@ -98,12 +125,12 @@ export default class InfoModal extends Component {
 
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconLocation} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Số 196, Giải Phóng, Hà Nội</TextInput>
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>{address}</TextInput>
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconGender} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Nữ</TextInput>
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>{gender}</TextInput>
                 
                </View>
                <View style ={stylesInfoModal.textInputMargin}>
@@ -129,7 +156,9 @@ export default class InfoModal extends Component {
                     
                 </View>
                 <View style = {[stylesInfoModal.infoFooter, {marginBottom: 15}]}> 
-                  <TouchableOpacity style={[stylesInfoModal.btnInfo, {marginRight: 10}]}>
+                  <TouchableOpacity style={[stylesInfoModal.btnInfo, {marginRight: 10}]}
+                       onPress={() => this.save()}
+                      >
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Lưu</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={stylesInfoModal.btnInfo}
