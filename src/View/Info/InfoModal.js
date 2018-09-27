@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, YellowBox,
           TextInput, ScrollView, Alert} from 'react-native';
 import DatePicker from 'react-native-datepicker'
+import { Dropdown } from 'react-native-material-dropdown';
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 import info from '../../assets/img/info/iconInfo.png'
@@ -28,7 +29,10 @@ export default class InfoModal extends Component {
         selected: '',
         date: '', 
         avatarSource: null,
-        username: ''
+        username: '', telephone: '', gender: '',
+        addresDist: '', addressCity: '' ,
+        circle1: '', circle2: '', circle3: '',
+        heightt: '', weight: ''
      }
     }
 
@@ -42,26 +46,50 @@ export default class InfoModal extends Component {
                  .on('value', function (snapshot) {
         snapshot.forEach(function(childSnapshot) {
                        key = childSnapshot.key;
-            var childData = childSnapshot.val();
-                username1 = (childData.username);
-                address = (childData.address)
-                category = (childData.category)
-                date = (childData.date)
-                email = (childData.email)
-                gender = (childData.gender)
-                password = (childData.password)
-                telephone = (childData.phone)
+          var childData = childSnapshot.val();
+              username1 = (childData.username);
+              addresDist = (childData.addresDist)
+              addressCity = (childData.addressCity)
+              category = (childData.category)
+              date = (childData.date)
+              email = (childData.email)
+              gender = (childData.gender)
+              password = (childData.password)
+              telephone = (childData.phone)
+              circle1 = (childData.circle1)
+              circle2 = (childData.circle2)
+              circle3 = (childData.circle3)
+              weight = (childData.weight)
+              heightt = (childData.heightt)
               
         })  
       })
       this.setState({
           username: username1,
-          date: date
+          date: date,
+          addresDist: addresDist, 
+          addressCity: addressCity,
+          category: category,
+          gender: gender,
+          telephone: telephone,
+          circle1: circle1, circle2: circle2, circle3: circle3,
+          heightt: heightt, weight: weight
       })
     }   
     save(){ 
       FirebaseApp.database().ref('Customer/'+key).update({
-         username: this.state.username
+         username: this.state.username,
+         date: this.state.date,
+         addresDist: this.state.addresDist,
+         addressCity: this.state.addressCity,
+         category: this.state.category,
+         gender: this.state.gender,
+         telephone: telephone,
+         circle1: this.state.circle1,
+         circle2: this.state.circle2,
+         circle3: this.state.circle3,
+         weight: this.state.weight,
+         heightt: this.state.heightt
     });
     Alert.alert('done')
     }
@@ -71,6 +99,11 @@ export default class InfoModal extends Component {
            source={this.state.avatarSource}
            style={{width: 75, height: 75}}
         />
+        let data = [{
+            value: 'Nam',
+          }, {
+            value: 'Nữ',
+          }];
           return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style={stylesInfoModal.containerCus}> 
@@ -83,24 +116,25 @@ export default class InfoModal extends Component {
                   </TouchableOpacity>
                </View>
 
-               <View style ={stylesInfoModal.textInput}>
+               <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconUser} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' 
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13
+                 }}
                      onChangeText={(username) => this.setState({ username })} 
-                      style={{fontSize: 10}}>{this.state.username}</TextInput>
+                     value={this.state.username}/>
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={phone} style={{width: 20, height: 20,  marginLeft: 5}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>{telephone} </TextInput>
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 5}}
+                       onChangeText={(telephone) => this.setState({ telephone })} 
+                       value={this.state.telephone} />
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconDateBirth} style={{width: 20, height: 20, marginLeft: 5}} />
-                 {/* <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>20/8/1995</TextInput> */}
                  <DatePicker
                         // style={{width: 200}}
-                      
                         date={this.state.date}
                         mode="date"
                         placeholder=""
@@ -109,43 +143,73 @@ export default class InfoModal extends Component {
                         cancelBtnText="Cancel"
                         showIcon={false}
                         customStyles={{
-                            dateInput: { height: 25,  borderWidth: 0,
-                              alignItems: "flex-start",
+                            dateInput: { height: 25,  borderWidth: 0,  alignItems: "flex-start",
                               justifyContent: "flex-start", marginLeft: 10
                               },
-                            
-                            dateText: {
-                              fontSize: 10, marginTop: 5
-                            }
-                            }
-                          }
+                            dateText: { fontSize: 13, marginTop: 5 }
+                         }
+                      }
                         onDateChange={(date) => {this.setState({date: date})}}
                        />
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconLocation} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>{address}</TextInput>
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13}}
+                       onChangeText={(addressCity) => this.setState({ addressCity })} 
+                       value={this.state.addressCity}/>
+               </View>
+               <View style ={stylesInfoModal.textInputMargin}>
+                 <Image source={iconLocation} style={{width: 30, height: 30}} />
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13}}
+                        onChangeText={(addresDist) => this.setState({ addresDist })} 
+                        value={this.state.addresDist}/>
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
-                 <Image source={iconGender} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>{gender}</TextInput>
+                 <Image source={iconGender} style={{width: 30, height: 30, marginRight: 5}} />
+                 <View style={{ width: 280, height: 90, marginTop: 10 }}>
+                          <Dropdown fontSize={13}
+                              inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                              data={data}
+                              value={this.state.gender}
+                              onChangeText={(gender) => { addresDist= this.setState({gender}) }}
+                              />
+                    </View>  
+                
+               </View>
+               <View style ={stylesInfoModal.textInput}>
+                 <Text style={{color: 'black', fontSize: 13}}>Số đo 3 vòng:</Text>
+                 <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+                   <TextInput underlineColorAndroid='transparent'
+                         style={stylesInfoModal.txtCircle}
+                        onChangeText={(circle1) => this.setState({ circle1 })} 
+                        value={this.state.circle1}/>
+                    <TextInput underlineColorAndroid='transparent' 
+                        style={stylesInfoModal.txtCircle}
+                        onChangeText={(circle2) => this.setState({ circle2 })} 
+                        value={this.state.circle2}/>
+                    <TextInput underlineColorAndroid='transparent' 
+                        style={stylesInfoModal.txtCircle}
+                        onChangeText={(circle3) => this.setState({ circle3 })} 
+                        value={this.state.circle3}/>
+
+                 </View>
                 
                </View>
                <View style ={stylesInfoModal.textInputMargin}>
-                 <Image source={iconGender} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Số đo 3 vòng</TextInput>
+                 <Text style={{color: 'black', fontSize: 13}}>Chiều cao:</Text>
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 15}}
+                         onChangeText={(heightt) => this.setState({ heightt })} 
+                         value={this.state.heightt}/>
                 
                </View>
                <View style ={stylesInfoModal.textInputMargin}>
-                 <Image source={iconGender} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Chiều cao</TextInput>
-                
-               </View>
-               <View style ={stylesInfoModal.textInputMargin}>
-                 <Image source={iconGender} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>Cân nặng</TextInput>
+                 <Text style={{color: 'black', fontSize: 13}}>Cân nặng:</Text>
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 15 }}
+                           onChangeText={(weight) => this.setState({ weight })} 
+                           value={this.state.weight}/>
+               
                 
                </View>
                <View style = {[stylesInfoModal.infoFooter,{marginTop: 15}]}> 
@@ -190,23 +254,22 @@ export default class InfoModal extends Component {
       textInput: {
           marginTop: 20,
           marginLeft: 20, marginRight: 20,
-          borderRadius: 20,
-          borderWidth: 1,
-          borderColor: "gray",
           flexDirection: 'row',
-          // justifyContent: 'center',
           alignItems: 'center',
           height:35
       },
       textInputMargin: {
           marginTop: 10,
           marginLeft: 20, marginRight: 20,
-          borderRadius: 20,
-          borderWidth: 1,
+          borderBottomWidth: 1,
           borderColor: "gray",
           flexDirection: 'row',
           alignItems: 'center',
           height:35
+      },
+      txtCircle: {
+        fontSize: 13, width:72, marginLeft: 15, borderBottomWidth: 1, 
+        borderColor: "gray",textAlign: 'center'
       },
       infoFooter: {
         flexDirection: 'row',
@@ -215,7 +278,7 @@ export default class InfoModal extends Component {
       },
       btnInfo: {
         width: 160, height: 30, borderRadius: 10, 
-        backgroundColor: '#EE3B3B', marginTop: 50 
+        backgroundColor: '#EE3B3B', marginTop: 30, marginBottom: 15
       }
     })
      

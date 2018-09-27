@@ -140,7 +140,7 @@ export default class InfoCustomer extends Component {
       textInput: {
           marginTop: 20,
           marginLeft: 20, marginRight: 20,
-          borderRadius: 20,
+          borderRadius: 10,
           borderWidth: 1,
           borderColor: "gray",
           flexDirection: 'row',
@@ -151,7 +151,7 @@ export default class InfoCustomer extends Component {
       textInputMargin: {
           marginTop: 10,
           marginLeft: 20, marginRight: 20,
-          borderRadius: 20,
+          borderRadius: 10,
           borderWidth: 1,
           borderColor: "gray",
           flexDirection: 'row',
