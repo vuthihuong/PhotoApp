@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
+import { StyleSheet, View, Text, Image, TouchableOpacity, YellowBox,
             ScrollView
     } from 'react-native';
-
-import { createDrawerNavigator } from 'react-navigation';
-
-import { createStackNavigator } from 'react-navigation'
-import HamburgerIcon from './HamburgerIcon'
-
 
 import { Dropdown } from 'react-native-material-dropdown';
 

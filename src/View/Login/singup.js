@@ -5,6 +5,7 @@ import {
 import { YellowBox } from 'react-native';
         YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 import DatePicker from 'react-native-datepicker'
+import { Dropdown } from 'react-native-material-dropdown';
 
 import CheckBox from 'react-native-checkbox';
 import SignupController from './../../Controller/SignupController';
@@ -18,67 +19,68 @@ export default class Signup extends Component {
         super();
         this.state = {
             date: '', 
-          checked1: false,  checked2: false, checked3: false,
-          checkedGender1: false, checkedGender2: false,
-          email: '', password: '',
-          name: '', phone: '', address: ''
+            checkedCategory1: false,  checkedCategory2: false, checkedCategory3: false,
+            checkedGender1: false, checkedGender2: false,
+            email: '', password: '',
+            name: '', phone: '', addressCity: '', addresDist: '',
+            circle1: '', circle2: '', circle3: '', weight: '', heightt: ''
         };
         this.itemRef = FirebaseApp.database();
         console.ignoredYellowBox = [ 'Setting a timer' ];
       }
-      change1(){
-        if(this.state.checked1 === true){
+      changeCatg1(){
+        if(this.state.checkedCategory1 === true){
             this.setState({
-                checked1: false
+                checkedCategory1: false
             });
         }
-        else if(this.state.checked1 === false){
+        else if(this.state.checkedCategory1 === false){
             this.setState({
-                checked1: true
+                checkedCategory1: true
             });
             this.setState({
-                checked2: false
+                checkedCategory2: false
             });
             this.setState({
-                checked3: false
+                checkedCategory3: false
             })
         }
       }
-      change2(){
-          if(this.state.checked2 === true){
+      changeCatg2(){
+          if(this.state.checkedCategory2 === true){
               this.setState({
-                  checked2: false
+                checkedCategory2: false
               });
           }
-          else if(this.state.checked2 === false){
+          else if(this.state.checkedCategory2 === false){
               this.setState({
-                  checked2: true
+                checkedCategory2: true
               });
               this.setState({
-                checked1: false
+                checkedCategory1: false
             })
             this.setState({
-                checked3: false
+                checkedCategory3: false
             })
           }
       }
 
-      change3(){
-        if(this.state.checked3 === true){
+      changeCatg3(){
+        if(this.state.checkedCategory3 === true){
             this.setState({
-                checked3: false
+                checkedCategory3: false
             });
            
         }
-        else if(this.state.checked3 === false){
+        else if(this.state.checkedCategory3 === false){
             this.setState({
-                checked3: true
+                checkedCategory3: true
             });
             this.setState({
-                checked1: false
+                checkedCategory1: false
             })
             this.setState({
-                checked2: false
+                checkedCategory2: false
             })
         }
      }
@@ -112,112 +114,100 @@ export default class Signup extends Component {
             })
         }
      }
-      login(){
-          if(this.state.checked1 === true){
-              this.props.navigation.navigate('Main')
-          }else if(this.state.checked2 === true ) {
-              this.props.navigation.navigate('MainPhoto')
-          }
-          else if(this.state.checked3 === true){
-              this.props.navigation.navigate('MainModal')
-          }
-      }
+     
       Signup(){ 
          FirebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => { 
-                Alert.alert(
-                    'Thông báo',
-                    'Bạn đã đăng ký thành công '+ this.state.email,
-                    [
-                    // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                    {text: 'OK', onPress: () => {this.props.navigation.navigate('Login')}},
-                    ],
-                    { cancelable: false }
-                )
                 var email = this.state.email
                 var name = this.state.name
                 var phone = this.state.phone
                 var gender = ''
                 var date = this.state.date
-                var address = this.state.address
+                var addressCity = this.state.addressCity
+                var addressCity = this.state.addresDist
                 var password = this.state.password
                 var category = ''
+                var circle1 = this.state.circle1
+                var circle2 = this.state.circle2
+                var circle3 = this.state.circle3
+                var heightt = this.state.heightt
+                var weight = this.state.weight
+               
                 
                 if(this.state.checkedGender1 === true){ 
                     gender = 'nam'
                 }
                 else if(this.state.checkedGender2 === true){ 
-                gender = 'nữ'
+                    gender = 'nữ'
                 }
 
-                if(this.state.checked1 === true){ 
+                if(this.state.checkedCategory1 === true){ 
                     category = 'Người thuê chụp ảnh'
                 }
-                else if(this.state.checked2 === true){ 
+                else if(this.state.checkedCategory2 === true){ 
                     category = 'Nháy ảnh'
                 }
-                else if(this.state.checked3 === true){ 
+                else if(this.state.checkedCategory3 === true){ 
                     category = 'Mẫu ảnh'
                 }
-               
-
-                this.itemRef.ref('Customer').push({
-                 
-                        username: name,
-                        gender: gender,
-                        date: date, 
-                        email: email, 
-                        address: address,
-                        phone: phone,
-                        password: password,
-                        category: category
-                  
-                  
-                })
+                if(this.state.checkedCategory3 === true){ 
+                    this.itemRef.ref('Customer').push({
+                        username: name,  gender: gender,
+                        date: date,   email: email, 
+                        addressCity: addressCity,
+                        addresDist: addresDist,
+                        phone: phone, password: password,
+                        category: category, circle1: circle1,
+                        circle2: circle2, circle3: circle3,
+                        heightt: heightt, weight: weight
+                    })
+                }
+                else { 
+                    this.itemRef.ref('Customer').push({
+                        username: name, gender: gender,
+                        date: date, email: email, 
+                        addressCity: addressCity,
+                        addresDist: addresDist,
+                        phone: phone, password: password,
+                        category: category,
+                    })
+                }
+                Alert.alert(
+                    'Thông báo',
+                    'Bạn đã đăng ký thành công '+ this.state.email,
+                    [
+                        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                        {text: 'OK', onPress: () => {this.props.navigation.navigate('Login')}},
+                    ],
+                        { cancelable: false }
+                )
+              
                 this.setState({ 
                     email: '', password: ''
                 })
 
                 })  
                 .catch(function(error) {
-                // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                
-                // if(errorCode === 'auth/wrong-password'){ 
-                //     Alert.alert(" Mật khẩu ít nhất 6 k")
-                // }
-                // switch(errorCode){ 
-                //     case " EMAIL_TAKEN": 
-                //         Alert.alert("The new user account cannot be created because the email is already in use.");
-                //         break;
-                //     case "INVALID_EMAIL":
-                //         Alert.alert("The specified email is not a valid email.");
-                //             break;
-                //     case "auth/wrong-password": 
-                //         Alert.alert('Password ít nhất 6 ký tự ')
-                //     default:
-                //             alert("Error creating user:");
-                        
-                // }
-                
-               
-                Alert.alert(
-                    'Thông báo',
-                    'Email không hợp lệ' ,
-                    [
-                        // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                    {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    { cancelable: false }
-                )
+                alert(errorMessage)
              });
         }
 
-
     render() {   
+        let data = [{
+            value: 'Hà Nội',
+          }, {
+            value: 'Hải Dương',
+          }, {
+            value: 'Hải Phòng',
+          }, {
+            value: 'Quảng Ninh',
+          }, {
+            value: 'Nam Định',
+          }, {
+            value: 'Hồ Chí Minh',
+          }];
         return (
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesSignUp.container}>
@@ -231,15 +221,12 @@ export default class Signup extends Component {
                     <View style={stylesSignUp.textLogin}>
                         <Text style={{color: 'black'}}>Họ tên</Text>
                         <TextInput 
-                            //  placeholderTextColor="black"  
-                            //  underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
                             placeholder="Họ tên"
                             onChangeText={(name) => this.setState({ name })}   
                             value={this.state.name}                         
                         />
-                         {/* <Text style={{color: 'black'}}>Giới tính</Text> */}
-                         <View style={{flexDirection: 'row', marginBottom: 10 }}>
+                        <View style={{flexDirection: 'row', marginBottom: 10 }}>
                             <CheckBox
                                 label='Nam' 
                                 labelStyle={{fontSize: 14, color: 'black'}}
@@ -260,8 +247,6 @@ export default class Signup extends Component {
                         <Text style={{color: 'black'}}>Ngày sinh</Text>
                         <View style={{ borderBottomWidth: 1, borderColor: "gray", width: 320, marginBottom: 5}}>
                         <DatePicker
-                        // style={{width: 200}}
-                      
                         date={this.state.date}
                         mode="date"
                         placeholder=""
@@ -284,72 +269,123 @@ export default class Signup extends Component {
                        </View>
                          <Text style={{color: 'black', marginTop: 10}}>Email</Text>
                         <TextInput 
-                            //  placeholderTextColor="black"  underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
                             placeholder="Email"
                             onChangeText={(email) => this.setState({ email })}     
                             value={this.state.email}                       
                         />
                         <Text style={{color: 'black'}}>Địa chỉ</Text>
-                        <TextInput 
-                            //  placeholderTextColor="black"  underlineColorAndroid='black'
-                            style={stylesSignUp.textInputLogin}
-                            placeholder="Địa chỉ"
-                            onChangeText={(address) => this.setState({ address })}  
-                            value={this.state.address}                          
-                        />
+                        <View style={[stylesSignUp.circleCss, {marginTop: -20}]}>
+                            <View style={{width: 150, marginRight: 10}}>
+                                <Dropdown  data={data} 
+                                    style={{fontSize: 14 }}
+                                    placeholder='Thành phố/Tỉnh'
+                                    pickerStyle={{borderBottomWidth: 1, borderColor: 'black'}}
+                                    onChangeText={(addressCity) => { address= this.setState({addressCity}) }}
+                                    value = {this.state.addressCity}
+                                    />
+                            </View>
+                           
+                            <View style={{width: 150}}>
+                                <Dropdown  data={data} 
+                                    style={{fontSize: 14 }}
+                                    placeholder='Quận/Huyện'
+                                    pickerStyle={{borderBottomWidth: 1, borderColor: 'black'}}
+                                    onChangeText={(addresDist) => { addresDist= this.setState({addresDist}) }}
+                                    value = {this.state.addresDist}
+                                    />
+                            </View>
+                        </View>  
                         <Text style={{color: 'black'}}>Số điện thoại</Text>
                         <TextInput 
-                            //  placeholderTextColor="black"  underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
                             placeholder="Số điện thoại"
                             onChangeText={(phone) => this.setState({ phone })}     
                             value={this.state.phone}                       
                         />
+                        
                         <Text style={{color: 'black'}}>Mật khẩu</Text>
                         <TextInput 
-                            // placeholderTextColor="black" underlineColorAndroid='black'
                             style={stylesSignUp.textInputLogin}
                             secureTextEntry={true}
                             placeholder="Mật khẩu"
                             onChangeText={(password) => this.setState({ password })}
                             value={this.state.password}
                         />
-                         <Text style={{color: 'black'}}>Loại người dùng</Text>
-                        {/* <Text style={stylesSignUp.textCheckbox}>Chọn loại người dùng</Text> */}
+                        <Text style={{color: 'black'}}>Loại người dùng</Text>
                         <View style={{flexDirection: 'row', marginTop: 15  }}>
                             <CheckBox
                                 label='Người thuê chụp ảnh' 
                                 labelStyle={{fontSize: 14, color: 'black'}}
                                 numberOfLines = {2}
                                 checkboxStyle={{borderColor: 'black'}}
-                                  checked={this.state.checked1}
+                                  checked={this.state.checkedCategory1}
                                 checkboxStyle = {{width:13, height: 13,borderColor: 'black',
                                         }}
-                                onChange={(checked) => {this.change1()}} 
+                                onChange={(checked) => {this.changeCatg1()}} 
                                 />
                             <CheckBox
                                 label='Nháy ảnh' labelStyle={{fontSize: 14, color: 'black'}}
-                                checked={this.state.checked2}
+                                checked={this.state.checkedCategory2}
                                 checkboxStyle = {{width:13, height: 13, borderColor: 'black'}}
-                                onChange={(checked) => {this.change2()}} 
+                                onChange={(checked) => {this.changeCatg2()}} 
                                 />
                              <CheckBox
                                 label='Mẫu ảnh' labelStyle={{fontSize: 14, color: 'black'}}
-                                checked={this.state.checked3}
+                                checked={this.state.checkedCategory3}
                                 checkboxStyle = {{width:13, height: 13, borderColor: 'black'}}
-                                onChange={(checked) => {this.change3()}} 
+                                onChange={(checked) => {this.changeCatg3()}} 
                                 />
                         </View>
+                        {this.state.checkedCategory3 === true?  
+                        <Text style={{color: 'black',marginTop: 15}}>Số đo 3 vòng</Text>: null }
+                           
+                       
+                        {this.state.checkedCategory3 === true? 
+                        (<View style={stylesSignUp.circleCss}>
+                            <TextInput 
+                                style={stylesSignUp.circleTxt}
+                                placeholder="Vòng 1"
+                                onChangeText={(circle1) => this.setState({ circle1 })}     
+                                value={this.state.circle1}                       
+                            />
+                             <TextInput 
+                                style={stylesSignUp.circleTxt}
+                                placeholder="Vòng 2"
+                                onChangeText={(circle2) => this.setState({ circle2 })}     
+                                value={this.state.circle2}                       
+                            />
+                             <TextInput 
+                                style={stylesSignUp.circleTxt}
+                                placeholder="Vòng 3"
+                                onChangeText={(circle3) => this.setState({ circle3 })}     
+                                value={this.state.circle3}                       
+                            />
+                        </View>):null}
+                        {this.state.checkedCategory3 === true? 
+                            <Text style={{color: 'black'}}>Chiều cao</Text>:null}
+
+                        {this.state.checkedCategory3 === true?  
+                             <TextInput 
+                                style={stylesSignUp.textInputLogin}
+                                placeholder="Chiều cao (đơn vị cm)"
+                                onChangeText={(heightt) => this.setState({ heightt })}     
+                                value={this.state.heightt}                       
+                            />:null}
+
+                        {this.state.checkedCategory3 === true? 
+                            <Text style={{color: 'black'}}>Cân nặng</Text>:null}
+                        {this.state.checkedCategory3 === true? 
+                            <TextInput 
+                                style={stylesSignUp.textInputLogin}
+                                placeholder="Cân nặng (đơn vị Kg)"
+                                onChangeText={(weight) => this.setState({ weight })}     
+                                value={this.state.weight}                       
+                            />:null}
+                      
                         <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
-                                // onPress={this.onSignup.bind(this)}
-                                //  onPress={() => this.props.navigation.navigate('Login')}
-                                onPress={this.Signup.bind(this)}
-                                
-                        >
-                                {/* <Text>Click Me !</Text> */}
-                                
-                                <Text style={{marginTop: 4, color:'white'}}>Đăng ký</Text>
+                            onPress={this.Signup.bind(this)}>
+                            <Text style={{marginTop: 4, color:'white'}}>Đăng ký</Text>
                                 {/* <SignupController ref={ref => (this._b = ref)} /> */}
                              
                         </TouchableOpacity>
@@ -357,8 +393,7 @@ export default class Signup extends Component {
                 </View>
                 <View style={[stylesSignUp.textLogin, {marginTop: 10}]}>
                     <TouchableOpacity
-                         onPress={() => this.props.navigation.navigate('Login')}
-                    >
+                            onPress={() => this.props.navigation.navigate('Login')} >
                         <Text style={{textDecorationLine: 'underline', color:'#FA8072'}}>
                            Đã có tài khoản
                         </Text>
@@ -377,7 +412,6 @@ const stylesSignUp = StyleSheet.create({
     container: {
         flex:1,
         flexDirection: 'column',
-        // backgroundColor: '#E8E8E8'
         backgroundColor: 'white',
     },
   
@@ -389,7 +423,6 @@ const stylesSignUp = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
        justifyContent: 'center',
-        // marginTop: 30,
         backgroundColor: '#EE3B3B', height: 50
     },
     textLogin: {
@@ -402,9 +435,13 @@ const stylesSignUp = StyleSheet.create({
         height: 40, width: 320,
         marginBottom: 15,
     },
-    // textCheckbox: {
-    //     color: '#EE3B3B'
-    // },
+    circleCss: { 
+        flexDirection: 'row', justifyContent: 'space-between',
+         marginBottom: 15,
+    },
+    circleTxt: { 
+        width: 105
+    },
    
     boxLogin: {
         marginTop: 20,

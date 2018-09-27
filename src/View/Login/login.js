@@ -17,38 +17,11 @@ export  default  class Login extends Component {
         super();
     
         this.state = {
-          name: '',
-          pass: '',
           email: '', password: '', 
         };
       }
-      
 
-      login(){
-          if(this.state.name == '1234' && this.state.pass == 'a' ){
-              this.props.navigation.navigate('Main')
-              this.setState({
-                  name: '',
-                  pass: ''
-              })
-          }
-          else if (this.state.name === '2345' && this.state.pass === 'b' ){
-                this.props.navigation.navigate('MainPhoto')
-                this.setState({
-                    name: '',
-                    pass: ''
-                })
-          }
-          else if(this.state.name === '3456' && this.state.pass === 'c'){
-              this.props.navigation.navigate('MainModal')
-          }
-          else {
-              Alert.alert("Thông báo","Số điện thoại hoặc mật khẩu của bạn không đúng!")
-          }
-      }
-
-      Login1(){ 
-      var category1;
+      Login(){ 
         FirebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => { 
                 FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(this.state.email)
@@ -73,22 +46,9 @@ export  default  class Login extends Component {
                  }).bind(this))
         })  
         .catch(function(error) {
-            // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            // ...
-            Alert.alert(
-                'Thông báo',
-                'Bạn đã đăng nhập thất bại',
-                [
-                // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
-                ],
-                { cancelable: false }
-            )
-
-
+           alert(errorMessage)
         });
     }
     render() {   
@@ -106,26 +66,18 @@ export  default  class Login extends Component {
                             // onChangeText={(name) => this.setState({ name })}  
                             onChangeText={(email) => this.setState({ email })}     
                             value={this.state.email}                           
-                        >
-                        {/* {this.state.name} */}
-                        </TextInput>
+                        />
+                      
                         <TextInput
-                        //  placeholderTextColor="black" underlineColorAndroid='black'
                             style={stylesLogin.textInputLogin}
                             secureTextEntry={true}
                             placeholder="Nhập mật khẩu"
-                            // onChangeText={(pass) => this.setState({ pass })}
                             onChangeText={(password) => this.setState({ password })}     
                             value={this.state.password} 
-                        >
-                        {/* {this.state.pass} */}
-                        </TextInput>
+                        />
 
                         <TouchableOpacity style={[stylesLogin.boxLogin, stylesLogin.boxTwo]}
-                            // onPress={() => this.props.navigation.navigate('Main')}
-                              // onPress={() => this.props.navigation.navigate('MainPhoto')}
-                              onPress={() => {this.Login1()}}
-                            >
+                                onPress={() => {this.Login()}}>
                               <Text style={{marginTop: 4, color:'white'}}>Đăng nhập</Text>
                         </TouchableOpacity>
                     </View>
