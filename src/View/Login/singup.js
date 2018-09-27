@@ -124,7 +124,7 @@ export default class Signup extends Component {
                 var gender = ''
                 var date = this.state.date
                 var addressCity = this.state.addressCity
-                var addressCity = this.state.addresDist
+                var addresDist = this.state.addresDist
                 var password = this.state.password
                 var category = ''
                 var circle1 = this.state.circle1
@@ -391,7 +391,7 @@ export default class Signup extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={[stylesSignUp.textLogin, {marginTop: 10}]}>
+                <View style={[stylesSignUp.textLogin, {marginTop: 25, marginBottom: 25}]}>
                     <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('Login')} >
                         <Text style={{textDecorationLine: 'underline', color:'#FA8072'}}>
