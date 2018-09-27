@@ -47,6 +47,7 @@ export default class InfoModal extends Component {
         snapshot.forEach(function(childSnapshot) {
                        key = childSnapshot.key;
           var childData = childSnapshot.val();
+          // lấy các giá trị trong bảng customer tương ứng với email đăng nhập
               username1 = (childData.username);
               addresDist = (childData.addresDist)
               addressCity = (childData.addressCity)
@@ -91,7 +92,7 @@ export default class InfoModal extends Component {
          weight: this.state.weight,
          heightt: this.state.heightt
     });
-    Alert.alert('done')
+      Alert.alert('Thay đổi thông tin thành công')
     }
       render()  {
         let img = this.state.avatarSource = null? null:

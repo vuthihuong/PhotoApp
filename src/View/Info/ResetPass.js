@@ -1,13 +1,56 @@
 import React, {Component} from 'react'
-import {View, Text, Image, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import {View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert} from 'react-native'
+import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 import gobackIcon from '../../assets/img/info/goback.png'
 import lock from '../../assets/img/info/lock.png'
 
 
 export default class ResetPass extends Component {
+    constructor(props) {
+        super(props);
+  
+        this.state={
+            oldPass: '', newPass: '', reNewPass: ''
+       }
+      }
+      componentWillMount() {
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         key = childSnapshot.key;
+            var childData = childSnapshot.val();
+                oldPass = childData.password
+          })  
+        })
+        this.setState({
+            oldPass: oldPass
+        })
+    }
+    save(){ 
+        let user = FirebaseApp.auth().currentUser;
+            if((this.state.oldPass === oldPass) && (this.state.reNewPass === this.state.newPass)){
+                user.updatePassword(this.state.newPass).then(() => {
+                        // Update successful.
+                        }, (error) => {
+                        // An error happened.
+                        });
+                    FirebaseApp.database().ref('Customer/'+key).update({
+                        password: this.state.newPass
+                    });
+                Alert.alert('Thay đổi thông tin thành công')
+            }
+            else if(this.state.oldPass !== oldPass){ 
+                Alert.alert('Nhập mật khẩu cũ không đúng')
+            }
+            else if( this.state.reNewPass !== this.state.newPass){ 
+                Alert.alert("Nhập xác nhận mật khẩu không trùng khớp mật khẩu mới")
+            }
+
+           
+      }
     render () {
-        // const {navigate} = this.props.navigation;
         return(
             <View style={styles.containerReset}>
                 <View style={styles.iconResetPass}>
@@ -24,21 +67,34 @@ export default class ResetPass extends Component {
                 </View>
                 <View style={styles.bodyResetPass}>
                     <View style ={styles.bodyContReset}>
-                        <Image source={lock} style={{width: 20, height: 20, marginLeft: 10}} />
-                        <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}} value="Mật khẩu cũ" />              
+                        <Image source={lock} style={{width: 20, height: 20}} />
+                        <TextInput underlineColorAndroid='transparent' style={styles.txtReset} 
+                            secureTextEntry={true}
+                            placeholder="Mật khẩu cũ"
+                            onChangeText={(oldPass) => this.setState({ oldPass })} 
+                            />
+                                    
                     </View>
                      <View style ={styles.bodyContReset}>
-                        <Image source={lock} style={{width: 20, height: 20, marginLeft: 10}} />
-                        <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}} value="Mật khẩu mới" />               
+                        <Image source={lock} style={{width: 20, height: 20}} />
+                        <TextInput underlineColorAndroid='transparent' style={styles.txtReset} 
+                            secureTextEntry={true}
+                            placeholder="Mật khẩu mới"
+                            onChangeText={(newPass) => this.setState({ newPass })} 
+                            />             
                     </View>
                     <View style ={styles.bodyContReset}>
-                        <Image source={lock} style={{width: 20, height: 20, marginLeft: 10}} />
-                        <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}} 
-                                    value="Nhập lại mật khẩu mới" />
+                        <Image source={lock} style={{width: 20, height: 20}} />
+                        <TextInput underlineColorAndroid='transparent' style={styles.txtReset} 
+                            secureTextEntry={true}
+                            placeholder="Nhập lại mật khẩu mới"
+                            onChangeText={(reNewPass) => this.setState({ reNewPass })} 
+                            />
                     </View>
                 </View>
                 <View style = {{flex: 2, justifyContent: 'center', marginRight: 10}}> 
-                  <TouchableOpacity style={styles.footReset}>
+                  <TouchableOpacity style={styles.footReset}
+                        onPress={() => this.save()}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5, }}>Lưu</Text>
                     </TouchableOpacity>
                </View>
@@ -60,10 +116,13 @@ styles = StyleSheet.create({
     bodyResetPass: {
         justifyContent:'center', alignContent: 'center', flex:2
     },
+    txtReset: {
+        fontSize: 13, width: 300, marginLeft: 15
+    },
     bodyContReset: {
         flexDirection: 'row', marginTop: 20, marginLeft: 20, marginRight: 20,
-        borderRadius: 20, borderWidth: 1, borderColor: "gray",
-        alignItems: 'center',height:35
+        borderBottomWidth: 1, borderColor: "gray",
+        alignItems: 'center',height:35,
     },
     footReset: {
         backgroundColor: '#EE3B3B',height: 30, 
