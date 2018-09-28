@@ -13,7 +13,19 @@ import iconLocation from '../../assets/img/info/location.png'
 import iconGender from '../../assets/img/info/gender.png'
 import photo from '../../assets/img/info/photo.png'
 
-import pick from './../Main/AlbumImg'
+// import pick from './../Main/AlbumImg'
+var ImagePicker = require('react-native-image-picker');
+
+var options = {
+  title: 'Select Avatar',
+  customButtons: [
+    {name: 'fb', title: 'Choose Photo from Facebook'},
+  ],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
 
 
 
@@ -28,17 +40,37 @@ export default class InfoModal extends Component {
       this.state={
         selected: '',
         date: '', 
-        avatarSource: null,
         username: '', telephone: '', gender: '',
         addresDist: '', addressCity: '' ,
         circle1: '', circle2: '', circle3: '',
-        heightt: '', weight: ''
+        heightt: '', weight: '',
+        avatarSource: require('../../assets/img/info/User.png'),
      }
     }
 
-    show(){
-      pick(source => this.setState({avatarSource: source}));
-   }
+  //   show(){
+  //     pick(source => this.setState({avatarSource: source}));
+  //  }
+  pickImg(){ 
+    ImagePicker.showImagePicker(options, (response) => {
+    
+      if (response.didCancel) {
+      }
+      else if (response.error) {
+      }
+      else if (response.customButton) {
+      }
+      else {
+        let source = { uri: response.uri };
+    
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+    
+        this.setState({
+          avatarSource: source
+        });
+      }
+    })};
   
    componentWillMount() {
       tmp = FirebaseApp.auth().currentUser.email
@@ -95,11 +127,11 @@ export default class InfoModal extends Component {
       Alert.alert('Thay đổi thông tin thành công')
     }
       render()  {
-        let img = this.state.avatarSource = null? null:
-        <Image 
-           source={this.state.avatarSource}
-           style={{width: 75, height: 75}}
-        />
+        // let img = this.state.avatarSource = null? null:
+        // <Image 
+        //    source={this.state.avatarSource}
+        //    style={{width: 75, height: 75}}
+        // />
         let data = [{
             value: 'Nam',
           }, {
@@ -109,9 +141,8 @@ export default class InfoModal extends Component {
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style={stylesInfoModal.containerCus}> 
                <View style={stylesInfoModal.iconInfo}>
-                 <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
-                 {img}
-                 <TouchableOpacity onPress={this.show.bind(this)}
+               <Image source={this.state.avatarSource} style={{height: 150, width: 150}} />
+                  <TouchableOpacity onPress={() => this.pickImg()}
                         style={{marginTop: -35, marginLeft: 40}}>
                       <Image source={photo} style={{width: 50, height: 50,}} />
                   </TouchableOpacity>

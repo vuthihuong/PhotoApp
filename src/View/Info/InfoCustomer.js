@@ -41,7 +41,7 @@ export default class InfoCustomer extends Component {
      this.state={
        selected: '',
        date: '', 
-       avatarSource: require('../../assets/img/info/icon_user.png')
+       avatarSource: require('../../assets/img/info/User.png')
      }
     }
    
@@ -71,12 +71,12 @@ export default class InfoCustomer extends Component {
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
              <View style={stylesInfoCus.containerCus}> 
                <View style={stylesInfoCus.iconInfo}>
-                 {/* <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} /> */}
                  <Image source={this.state.avatarSource} style={{height: 150, width: 150}} />
                   <TouchableOpacity onPress={() => this.pickImg()}
                         style={{marginTop: -35, marginLeft: 40}}>
                       <Image source={photo} style={{width: 50, height: 50,}} />
                   </TouchableOpacity>
+                 
                </View>
               
 

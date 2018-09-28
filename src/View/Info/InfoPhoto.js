@@ -17,6 +17,18 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { Table, Row, Rows, Col, Cols } from 'react-native-table-component';
 // import PopupDialog from 'react-native-popup-dialog';
 import PopupDialog, { DialogTitle } from 'react-native-popup-dialog';
+var ImagePicker = require('react-native-image-picker');
+
+var options = {
+  title: 'Select Avatar',
+  customButtons: [
+    {name: 'fb', title: 'Choose Photo from Facebook'},
+  ],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
 
 
 export default class InfoPhoto extends Component {
@@ -47,14 +59,34 @@ export default class InfoPhoto extends Component {
               ['Giá chụp nhóm', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina', 'x', 'x'],
               ['Giá ảnh cưới', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina','x', 'x'],
             ],
-            avatarSource: null
+            avatarSource: require('../../assets/img/info/User.png')
          }
     }
 
-    show(){
-      pick(source => this.setState({avatarSource: source}));
+    // show(){
+    //   pick(source => this.setState({avatarSource: source}));
         
-    }
+    // }
+    pickImg(){ 
+        ImagePicker.showImagePicker(options, (response) => {
+        
+          if (response.didCancel) {
+          }
+          else if (response.error) {
+          }
+          else if (response.customButton) {
+          }
+          else {
+            let source = { uri: response.uri };
+        
+            // You can also display the image using data:
+            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        
+            this.setState({
+              avatarSource: source
+            });
+          }
+        })};
        render(){
         let data = [{
             value: 'Nam',
@@ -62,11 +94,11 @@ export default class InfoPhoto extends Component {
             value: 'Nữ',
           }];
           const state = this.state;
-          let img = this.state.avatarSource = null? null:
-        <Image 
-           source={this.state.avatarSource}
-           style={{width: 75, height: 75}}
-        />
+        //   let img = this.state.avatarSource = null? null:
+        // <Image 
+        //    source={this.state.avatarSource}
+        //    style={{width: 75, height: 75}}
+        // />
           return(
      
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -76,10 +108,9 @@ export default class InfoPhoto extends Component {
                       style={{width: '100%', height: '70%'}}
                     >  */}
                 <View style={stylesInfoPhoto.iconInfo}>
-                  <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
-                  {img}
-                  <TouchableOpacity onPress={this.show.bind(this)}
-                                style={{marginTop: -35, marginLeft: 40}}>
+                    <Image source={this.state.avatarSource} style={{height: 150, width: 150}} />
+                    <TouchableOpacity onPress={() => this.pickImg()}
+                            style={{marginTop: -35, marginLeft: 40}}>
                         <Image source={photo} style={{width: 50, height: 50,}} />
                     </TouchableOpacity>
                 </View>
@@ -243,6 +274,8 @@ export default class InfoPhoto extends Component {
         backgroundColor: 'white'
       },
       iconInfo: {
+        justifyContent: 'center',
+        alignItems: 'center',
           marginTop: 20, marginBottom: 10,
       },
       
