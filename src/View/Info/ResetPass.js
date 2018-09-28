@@ -55,41 +55,38 @@ export default class ResetPass extends Component {
             <View style={styles.containerReset}>
                 <View style={styles.iconResetPass}>
                     <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
-                        <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
-                                    tintColor: '#EE3B3B'}}/>
+                        <Image source={gobackIcon} 
+                            style={{width: 20, height: 20, marginLeft: 15, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
                     <View>
-                         <Text style={{fontSize: 20, color: '#EE3B3B'}}>
-                                Đổi mật khẩu</Text>
+                         <Text style={{fontSize: 20, color: '#EE3B3B'}}>Đổi mật khẩu</Text>
                     </View>
                     <View><Text></Text></View>
                     
                 </View>
                 <View style={styles.bodyResetPass}>
                     <View style ={styles.bodyContReset}>
-                        <Image source={lock} style={{width: 20, height: 20}} />
+                        <Image source={lock} style={styles.imgReset} />
                         <TextInput underlineColorAndroid='transparent' style={styles.txtReset} 
                             secureTextEntry={true}
                             placeholder="Mật khẩu cũ"
-                            onChangeText={(oldPass) => this.setState({ oldPass })} 
-                            />
-                                    
+                            onChangeText={(oldPass) => this.setState({ oldPass })} />
                     </View>
+
                      <View style ={styles.bodyContReset}>
-                        <Image source={lock} style={{width: 20, height: 20}} />
+                        <Image source={lock} style={styles.imgReset} />
                         <TextInput underlineColorAndroid='transparent' style={styles.txtReset} 
                             secureTextEntry={true}
                             placeholder="Mật khẩu mới"
-                            onChangeText={(newPass) => this.setState({ newPass })} 
-                            />             
+                            onChangeText={(newPass) => this.setState({ newPass })} />             
                     </View>
+
                     <View style ={styles.bodyContReset}>
-                        <Image source={lock} style={{width: 20, height: 20}} />
+                        <Image source={lock} style={styles.imgReset} />
                         <TextInput underlineColorAndroid='transparent' style={styles.txtReset} 
                             secureTextEntry={true}
                             placeholder="Nhập lại mật khẩu mới"
-                            onChangeText={(reNewPass) => this.setState({ reNewPass })} 
-                            />
+                            onChangeText={(reNewPass) => this.setState({ reNewPass })} />
                     </View>
                 </View>
                 <View style = {{flex: 2, justifyContent: 'center', marginRight: 10}}> 
@@ -110,8 +107,7 @@ styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     iconResetPass: {
-        flexDirection: 'row', justifyContent: 'space-between',
-        marginTop: 20
+        flexDirection: 'row', justifyContent: 'space-between',marginTop: 20
     },
     bodyResetPass: {
         justifyContent:'center', alignContent: 'center', flex:2
@@ -119,14 +115,15 @@ styles = StyleSheet.create({
     txtReset: {
         fontSize: 13, width: 300, marginLeft: 15
     },
+    imgReset: {
+        width: 20, height: 20
+    },
     bodyContReset: {
         flexDirection: 'row', marginTop: 20, marginLeft: 20, marginRight: 20,
-        borderBottomWidth: 1, borderColor: "gray",
-        alignItems: 'center',height:35,
+        borderBottomWidth: 1, borderColor: "gray",alignItems: 'center',height:35,
     },
     footReset: {
         backgroundColor: '#EE3B3B',height: 30, 
-        borderRadius: 10, marginLeft: 20, marginTop: 50,
-         marginRight: 20
+        borderRadius: 10, marginLeft: 20, marginTop: 50, marginRight: 20
     }
 })

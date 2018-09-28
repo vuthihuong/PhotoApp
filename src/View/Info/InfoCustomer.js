@@ -12,7 +12,19 @@ import iconGender from '../../assets/img/info/gender.png'
 import photo from '../../assets/img/info/photo.png'
 // import menu from '../../assets/img/menu/menu.png'
 
-import pick from './../Main/AlbumImg'
+// import pick from './../Main/AlbumImg'
+var ImagePicker = require('react-native-image-picker');
+
+var options = {
+  title: 'Select Avatar',
+  customButtons: [
+    {name: 'fb', title: 'Choose Photo from Facebook'},
+  ],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
 
 
 export default class InfoCustomer extends Component {
@@ -29,34 +41,44 @@ export default class InfoCustomer extends Component {
      this.state={
        selected: '',
        date: '', 
-       avatarSource: null
+       avatarSource: require('../../assets/img/info/icon_user.png')
      }
     }
-
-    show(){
-      pick(source => this.setState({avatarSource: source}));
-        
-    }
+   
+    pickImg(){ 
+      ImagePicker.showImagePicker(options, (response) => {
+      
+        if (response.didCancel) {
+        }
+        else if (response.error) {
+        }
+        else if (response.customButton) {
+        }
+        else {
+          let source = { uri: response.uri };
+      
+          // You can also display the image using data:
+          // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+      
+          this.setState({
+            avatarSource: source
+          });
+        }
+      })};
      
-       render()
-       {
-        const {navigate} = this.props.navigation;
-        let img = this.state.avatarSource = null? null:
-        <Image 
-           source={this.state.avatarSource}
-           style={{width: 75, height: 75}}
-        />
+       render() {
           return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
              <View style={stylesInfoCus.containerCus}> 
                <View style={stylesInfoCus.iconInfo}>
-                 <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} />
-                 {img}
-                 <TouchableOpacity onPress={this.show.bind(this)}
-                         style={{marginTop: -35, marginLeft: 40}}>
+                 {/* <Image source={info} style={{width: 75, height: 75,tintColor: '#EE3B3B'}} /> */}
+                 <Image source={this.state.avatarSource} style={{height: 150, width: 150}} />
+                  <TouchableOpacity onPress={() => this.pickImg()}
+                        style={{marginTop: -35, marginLeft: 40}}>
                       <Image source={photo} style={{width: 50, height: 50,}} />
                   </TouchableOpacity>
                </View>
+              
 
                <View style ={stylesInfoCus.textInput}>
                  <Image source={iconUser} style={{width: 30, height: 30}} />
@@ -71,10 +93,7 @@ export default class InfoCustomer extends Component {
 
                <View style ={stylesInfoCus.textInputMargin}>
                  <Image source={iconDateBirth} style={{width: 20, height: 20, marginLeft: 5}} />
-                 {/* <TextInput underlineColorAndroid='transparent' style={{fontSize: 10}}>20/8/1995</TextInput> */}
                  <DatePicker
-                        // style={{width: 200}}
-                      
                         date={this.state.date}
                         mode="date"
                         placeholder=""
@@ -85,12 +104,9 @@ export default class InfoCustomer extends Component {
                         customStyles={{
                             dateInput: { height: 25,  borderWidth: 0,
                               alignItems: "flex-start",
-                              justifyContent: "flex-start", marginLeft: 10
-                              },
-                            
+                              justifyContent: "flex-start", marginLeft: 10 },
                             dateText: {
-                              fontSize: 10, marginTop: 5
-                            }
+                              fontSize: 10, marginTop: 5 }
                             }
                           }
                         onDateChange={(date) => {this.setState({date: date})}}
@@ -129,8 +145,7 @@ export default class InfoCustomer extends Component {
           backgroundColor: '#F8F8FF',
           flex: 1
       },
-      iconInfo: {    
-        // flexDirection: 'column',
+      iconInfo: {  
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20,
@@ -144,7 +159,6 @@ export default class InfoCustomer extends Component {
           borderWidth: 1,
           borderColor: "gray",
           flexDirection: 'row',
-          // justifyContent: 'center',
           alignItems: 'center',
           height:35
       },
@@ -155,7 +169,6 @@ export default class InfoCustomer extends Component {
           borderWidth: 1,
           borderColor: "gray",
           flexDirection: 'row',
-          // justifyContent: 'center',
           alignItems: 'center',
           height:35
       },
@@ -166,7 +179,7 @@ export default class InfoCustomer extends Component {
       },
       btnInfo: {
         width: 160, height: 30, borderRadius: 10, 
-        backgroundColor: '#EE3B3B', marginTop: 50 
+        backgroundColor: '#EE3B3B', marginTop: 40, marginBottom: 15 
       }
     })
      
