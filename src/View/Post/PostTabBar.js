@@ -89,37 +89,46 @@ class PostTabBar extends Component {
                 </View>
                 <View style={stylesPostTabBar.bodyPostTabBar}>
                     <View>
-                        <CheckBox
-                                label='Tìm người mẫu'
-                                labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:20, height: 20}} 
-                                checked={this.state.checkedPostModal}
-                                onChange={(checked) => {this.checkPostModal()}} 
-                                /> 
-                        <CheckBox
-                                label='Tìm nhiếp ảnh gia'
-                                labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:20, height: 20}} 
-                                checked={this.state.checkedPostPhoto}
-                                onChange={(checked) => {this.checkPostPhoto()}} 
-                                /> 
-                        <CheckBox
-                                label='Tạo sự kiện'
-                                labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:20, height: 20}} 
-                                checked={this.state.checkedPostEvent}
-                                onChange={(checked) => {this.checkPostEvent()}} 
-                                /> 
+                        <TouchableOpacity onPress={() =>  this.props.navigation.navigate('PostModal')} >
+                            <Text style={stylesPostTabBar.txtCheckbox}>Tìm người mẫu</Text>
+                            {/* <CheckBox 
+                                    label='Tìm người mẫu'
+                                    labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
+                                    checkboxStyle = {{width:20, height: 20}} 
+                                    checked={this.state.checkedPostModal}
+                                    onChange={(checked) => {this.checkPostModal()}} 
+                                    /> */}
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() =>  this.props.navigation.navigate('PostPhoto')} >
+                            <Text style={stylesPostTabBar.txtCheckbox}>Tìm nhiếp ảnh gia</Text>
+                            {/* <CheckBox 
+                                    label='Tìm người mẫu'
+                                    labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
+                                    checkboxStyle = {{width:20, height: 20}} 
+                                    checked={this.state.checkedPostModal}
+                                    onChange={(checked) => {this.checkPostModal()}} 
+                                    /> */}
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() =>  this.props.navigation.navigate('PostEvent')} >
+                            <Text style={stylesPostTabBar.txtCheckbox}>Tạo sự kiện</Text>
+                            {/* <CheckBox 
+                                    label='Tìm người mẫu'
+                                    labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
+                                    checkboxStyle = {{width:20, height: 20}} 
+                                    checked={this.state.checkedPostModal}
+                                    onChange={(checked) => {this.checkPostModal()}} 
+                                    /> */}
+                        </TouchableOpacity>
                     </View>
                    
                 </View>
-                <View style={stylesPostTabBar.tailPostTabBar}>
+                {/* <View style={stylesPostTabBar.tailPostTabBar}>
                     <TouchableOpacity onPress={() => this.checkPost()}
                         style={stylesPostTabBar.btnSubmitPostTabBar}
                         >
                         <Text style={{textAlign:'center',marginTop:5,color:'white'}} >OK</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
                 
             </View>
         )
@@ -148,6 +157,9 @@ stylesPostTabBar = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 40,
+    },
+    txtCheckbox: { 
+        fontSize: 18, color: 'black', marginBottom: 15
     },
     tailPostTabBar: { 
         justifyContent: 'center',

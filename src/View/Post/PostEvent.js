@@ -132,7 +132,7 @@ export default class PostEvent extends Component {
                         </View>
                         <View style={stylesPostEvent.titleHeader}>
                             <Text style={{marginRight:35,color: 'black'}}>Tiêu đề</Text>
-                            <View style={{marginBottom: 20}}>
+                            <View style={{marginBottom: 20, marginLeft: 10}}>
                                 <CheckBox
                                     label='Giao lưu nhiếp ảnh gia'
                                     labelStyle={{color: 'black'}}
@@ -144,7 +144,7 @@ export default class PostEvent extends Component {
                                 <CheckBox
                                     label='Hướng dẫn chụp ảnh'
                                     labelStyle={{color: 'black'}}
-                                    checkboxStyle = {{width:15, height: 15,}}
+                                    checkboxStyle = {{width:15, height: 15}}
                                     checked={this.state.checkedEvent2}
                                     onChange={(checked) => {this.checkEvent2()}}
                                 />
@@ -155,7 +155,7 @@ export default class PostEvent extends Component {
                             <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
                                     style={stylesPostEvent.txtInputPostEvent}
                                     onChangeText={(contentEvent) => this.setState({ contentEvent })}
-                                    style={stylesPostModal.txtPostModal} >{this.state.content}</TextInput>
+                                   >{this.state.content}</TextInput>
                         </View>
                         <View style={stylesPostEvent.title}>
                             <Text style={{marginRight: 10, marginTop: -10,color:'black' }}>Địa điểm</Text>
@@ -169,9 +169,9 @@ export default class PostEvent extends Component {
                         </View>
 
                         <View style={stylesPostEvent.title}>
-                            <Text style ={{marginRight: 10, marginTop: -25, color: 'black'}}>Thời gian từ:</Text>
+                            <Text style ={{marginTop: -25, color: 'black'}}>Thời gian từ</Text>
                             <DatePicker
-                                style={{width: 200, marginTop: -35}}
+                                style={{width: 230, marginTop: -35}}
                                 date={this.state.datetimeEvent}
                                 mode="datetime"
                                 placeholder=""
@@ -186,9 +186,9 @@ export default class PostEvent extends Component {
                                 />
                         </View>
                         <View style={stylesPostEvent.title}>
-                            <Text style ={{marginLeft: 52,marginRight: 10, marginTop: -25, color: 'black'}}>đến:</Text>
+                            <Text style ={{marginLeft: 52,marginRight: 10, marginTop: -25, color: 'black'}}>đến</Text>
                                 <DatePicker
-                                style={{width: 200, marginTop: -30}}
+                                style={{width: 230, marginTop: -30}}
                                 date={this.state.datetimeEvent1}
                                 mode="datetime"
                                 placeholder=""
@@ -203,7 +203,7 @@ export default class PostEvent extends Component {
                                 />
                             </View>
                             <View style={stylesPostEvent.title}>
-                                <Text style={[stylesPostEvent.txtPostEvent,{marginTop:40}]}>Chi phí</Text>
+                                <Text style={[stylesPostEvent.txtPostEvent,{marginTop:40}]}>Lợi nhuận</Text>
                                 <TextInput  multiline={true} numberOfLines={10}  
                                     underlineColorAndroid='transparent'
                                     style={stylesPostEvent.txtInputPostEvent}
@@ -242,7 +242,7 @@ export default class PostEvent extends Component {
             backgroundColor: 'white'
         },
         containerPostEvent: { 
-            marginRight: 10, marginLeft: 10,
+            marginRight: 5, marginLeft: 5,
         },
         headerPostEvent: { 
             flexDirection: 'row', justifyContent: 'space-between',
@@ -268,7 +268,7 @@ export default class PostEvent extends Component {
             marginRight:10, marginTop: 15, color: 'black'
         },
         txtInputPostEvent: {
-            height: 100, width: 230,
+            height: 100, width: 230, marginTop: -10,
             borderColor: 'black',   borderWidth: 1
         },
         btnPostEvent: {

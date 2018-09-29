@@ -104,9 +104,9 @@ export default class PostPhoto extends Component {
                         </View>
 
                         <View style={stylesPostPhoto.title}>
-                            <Text style ={{marginRight: 10, marginTop: -25, color:'black'}}>Thời gian từ:</Text>
+                            <Text style ={{marginRight: 10, marginTop: -25, color:'black'}}>Thời gian từ</Text>
                             <DatePicker
-                                style={{width: 200, marginTop: -35}}
+                                style={{width: 230, marginTop: -35}}
                                 date={this.state.datetimePhoto}
                                 mode="datetime"
                                 placeholder=""
@@ -121,9 +121,9 @@ export default class PostPhoto extends Component {
                                 />
                         </View>
                         <View style={stylesPostPhoto.title}>
-                            <Text style ={{marginLeft: 52,marginRight: 10, marginTop: -25,color:'black'}}>đến:</Text>
+                            <Text style ={{marginLeft: 52, marginTop: -25,color:'black'}}>đến</Text>
                                 <DatePicker
-                                    style={{width: 200, marginTop: -30}}
+                                    style={{width: 230, marginTop: -30}}
                                     date={this.state.datetimePhoto1}
                                     mode="datetime"
                                     placeholder=""
@@ -173,7 +173,7 @@ export default class PostPhoto extends Component {
         },
 
         containerPostPhoto: { 
-            marginRight: 10, marginLeft: 10,
+            marginRight: 5, marginLeft: 5,
             
         },
         

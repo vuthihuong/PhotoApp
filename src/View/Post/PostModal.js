@@ -392,7 +392,7 @@ export default class PostModal extends Component {
                     
                     </View>
                     <View style={stylesPostModal.title}>
-                        <Text style={{marginRight:10, color: 'black'}}>Tìm mẫu ảnh:</Text>
+                        <Text style={stylesPostModal.boxPostModal}>Tìm mẫu ảnh</Text>
                         <CheckBox
                             label='Nam'
                             labelStyle={{color: 'black'}}
@@ -409,13 +409,13 @@ export default class PostModal extends Component {
                             />
                     </View>
                     <View style={stylesPostModal.title}>
-                        <Text style={stylesPostModal.boxPostModal}>Nội dung</Text>
+                        <Text style={[stylesPostModal.boxPostModal,{ marginTop: 25}]}>Nội dung</Text>
                         <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
                                 onChangeText={(content) => this.setState({ content })}
-                                style={stylesPostModal.txtPostModal} >{this.state.content}</TextInput>
+                                style={[stylesPostModal.txtPostModal,{height:100}]} >{this.state.content}</TextInput>
                     </View>
                     <View style={stylesPostModal.title}>
-                        <Text style={{ marginTop: -10, color:'black' }}>Địa điểm</Text>
+                        <Text style={[stylesPostModal.boxPostModal,{ marginTop: -10 }]}>Địa điểm</Text>
                   
                         <View style={{marginTop: -50, width: 230, height: 100 }}>
                             <Dropdown 
@@ -428,191 +428,88 @@ export default class PostModal extends Component {
                     </View>
 
                     <View style={stylesPostModal.title}>
-                        <Text style ={{marginRight: 10, marginTop: -35,color: 'black'}}>Thời gian từ:</Text>
+                        <Text style ={[stylesPostModal.boxPostModal,{ marginTop: -35}]}>Thời gian từ</Text>
                         <DatePicker
-                            style={{width: 200, marginTop: -45, marginLeft: 10}}
+                            style={{width: 230, marginTop: -45}}
                             date={this.state.datetime}
                             mode="datetime"
                             placeholder=""
                             format="YYYY-MM-DD HH:mm"
-                            // minDate="2016-05-01"
-                            // maxDate="2016-06-01"
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
                             showIcon={false}
                             customStyles={{
-                            // dateIcon: {
-                            //     position: 'absolute',
-                            //     left: 0,
-                            //     top: 4,
-                            //     // marginLeft: 30,
-                            //     marginTop: 5,
-                            //     height: 20,
-                            //     // showIcon: false,
-                            // },
-                            
-                            dateInput: { height: 25 }
-                            }}
+                                dateInput: { height: 25 }
+                                }}
                             onDateChange={(datetime) => {this.setState({datetime: datetime})}}
                         />
                     </View>
                     <View style={stylesPostModal.title}>
-                        <Text style ={{marginLeft: 52,marginRight: 20, marginTop: -25, color:'black'}}>đến:</Text>
+                        <Text style ={{marginLeft: 52, marginTop: -25, 
+                                        color:'black',fontWeight: 'bold'}}>đến</Text>
                         <DatePicker
-                            style={{width: 200, marginTop: -30}}
+                            style={{width: 230, marginTop: -30}}
                             date={this.state.datetime1}
                             mode="datetime"
                             placeholder=""
                             format="YYYY-MM-DD HH:mm"
-                            // minDate="2016-05-01"
-                            // maxDate="2016-06-01"
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
                             showIcon={false}
                             customStyles={{
-                            // dateIcon: {
-                            //     position: 'absolute',
-                            //     left: 0,
-                            //     top: 4,
-                            //     // marginLeft: 30,
-                            //     marginTop: 5,
-                            //     height: 20,
-                            //     // showIcon: false,
-                            // },
-                            
-                            dateInput: { height: 25 }
-                            }}
+                                dateInput: { height: 25 }
+                                }}
                             onDateChange={(datetime1) => {this.setState({datetime1: datetime1})}}
                         />
                     </View>
-                            {/* <DatePicker
-                            style={{width: 200, marginTop: -45}}
-                            time={this.state.time}
-                            mode="time"
-                            format="HH:mm"
-                            // minDate="2016-05-01"
-                            // maxDate="2016-06-01"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            customStyles={{
-                        
-                            
-                            timeInput: {
-                                marginLeft: 50, height: 25
-                            }
-                            }}
-                            onDateChange={(date) => {this.setState({time: time})}}
-                        /> */}
-                    {/* </View > */}
-                    {/* <View >
-                        <Text>{selectedHours} giờ:{selectedMinutes} phút</Text>
-                        <TimePicker
-                        selectedHours={selectedHours}
-                        selectedMinutes={selectedMinutes}
-                        onChange={(hours, minutes) => this.setState({ selectedHours: hours, selectedMinutes: minutes })}
-                        />
-                    </View> */}
                     <View style={stylesPostModal.title}>
-                        <Text style={{marginTop: -5, color: 'black'}}>Yêu cầu:</Text>
+                        <Text style={[stylesPostModal.boxPostModal,{marginTop: -5}]}>Yêu cầu</Text>
                     </View>
-                    <View style={[stylesPostModal.title, {marginLeft: 10}]}>
+                    <View style={[stylesPostModal.title, {marginLeft: 15}]}>
                         <Text style={{marginTop: -5, color: 'black'}}>Số đo</Text>
-                        <TextInput 
-                            onChangeText={(circle1) => this.setState({ circle1 })}
-                            placeholder="vòng 1" style={stylesPostModal.inputWeight}>
-                            {this.state.circle1}
-                        </TextInput>
-                        <TextInput 
-                            onChangeText={(circle2) => this.setState({ circle2 })}
-                            placeholder="vòng 2" style={stylesPostModal.inputWeight}>
-                            {this.state.circle2}
-                        </TextInput>
-                        <TextInput 
-                            onChangeText={(circle3) => this.setState({ circle3 })}
-                            placeholder="vòng 3" style={stylesPostModal.inputWeight}>
-                            {this.state.circle3}
-                        </TextInput>
+                        <View>
+                            <TextInput 
+                                onChangeText={(circle1) => this.setState({ circle1 })}
+                                placeholder="vòng 1" style={stylesPostModal.inputWeight}>
+                                {this.state.circle1}
+                            </TextInput>
+                            <TextInput 
+                                onChangeText={(circle2) => this.setState({ circle2 })}
+                                placeholder="vòng 2" style={[stylesPostModal.inputWeight, {marginTop: -15}]}>
+                                {this.state.circle2}
+                            </TextInput>
+                            <TextInput 
+                                onChangeText={(circle3) => this.setState({ circle3 })}
+                                placeholder="vòng 3"  style={[stylesPostModal.inputWeight, {marginTop: -15}]}>
+                                {this.state.circle3}
+                            </TextInput>
+                        </View>
+                        
                     
                     </View>
-                    <View style={[stylesPostModal.title,{marginLeft: 10}]}>
+                    <View style={[stylesPostModal.title,{marginLeft: 15}]}>
                         <Text style={{marginTop: -5, color: 'black'}}>Chiều cao</Text>
-                        {/* <TextInput placeholder="Số đo" style={stylesPostModal.inputWeight}/> */}
-                            <TextInput placeholder="Chiều cao" 
+                        <TextInput placeholder="Chiều cao" 
                             onChangeText={(height) => this.setState({ height })}
-                            style={[stylesPostModal.inputWeight, {width: 200}]}>
+                            style={stylesPostModal.inputWeight}>
                             {this.state.height}
                         </TextInput>
-                        {/* <TextInput placeholder="Cân nặng" style={stylesPostModal.inputWeight}/> */}
                         
                     </View>
-                    <View style={[stylesPostModal.title,{marginLeft: 10}]}>
+                    <View style={[stylesPostModal.title,{marginLeft: 15}]}>
                         <Text style={{marginTop: -5, color: 'black'}}>Cân nặng</Text>
-                        {/* <TextInput placeholder="Số đo" style={stylesPostModal.inputWeight}/> */}
                         <TextInput placeholder="Cân nặng" 
                                 onChangeText={(weight) => this.setState({ weight })}
-                                style={[stylesPostModal.inputWeight,{width: 200}]}>
+                                style={stylesPostModal.inputWeight}>
                                 {this.state.weight}
                         </TextInput>
-                        {/* <TextInput placeholder="Cân nặng" style={stylesPostModal.inputWeight}/> */}
-                        
+                    </View>
+                    <View style={stylesPostModal.title}>
+                        <Text style={[stylesPostModal.boxPostModal,{marginTop: -5}]}>Quyền lợi</Text>
                     </View>
                     <View style={[stylesPostModal.title]}>
-                        <View>
-                            <CheckBox
-                                label='Tự make up'
-                                labelStyle={{fontSize: 13, color: 'black'}}
-                                checkboxStyle = {{width:12, height: 12}}
-                                checked={this.state.checkedRequireModal1}
-                                onChange={(checked) => {this.checkRequireModal1()}} 
-                                />
-                            <CheckBox
-                                label='Không phục trang phục'
-                                labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:12, height: 12}} 
-                                checked={this.state.checkedRequireModal2}
-                                onChange={(checked) => {this.checkRequireModal2()}} 
-                                /> 
-                        
-                            <CheckBox
-                                label='Không phục vụ ăn trưa'
-                                labelStyle={{fontSize: 13, marginRight: 13, color: 'black'}}
-                                checkboxStyle = {{width:12, height: 12}} 
-                                checked={this.state.checkedRequireModal3}
-                                onChange={(checked) => {this.checkRequireModal3()}}
-                                
-                                /> 
-                        </View>
-
-                        <View>
-                            <CheckBox
-                                label='Có phục vụ make up'
-                                labelStyle={{fontSize: 13, color:'black'}}
-                                checkboxStyle = {{width:12, height: 12}}
-                                checked={this.state.checkedRequireModal11}
-                                onChange={(checked) => {this.checkRequireModal11()}} 
-                                />
-                            <CheckBox
-                                label='Có phục vụ trang phục'
-                                labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:12, height: 12}} 
-                                checked={this.state.checkedRequireModal22}
-                                onChange={(checked) => {this.checkRequireModal22()}} 
-                                /> 
-                       
-                            <CheckBox
-                                label='Có phục vụ ăn trưa'
-                                labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
-                                checkboxStyle = {{width:12, height: 12}} 
-                                checked={this.state.checkedRequireModal33}
-                                onChange={(checked) => {this.checkRequireModal33()}} 
-                                /> 
-                        </View>
-                    </View>
-
-                    <View style={[stylesPostModal.title]}>
-                        <Text style={{marginRight: 10, color:'black'}}>Quyền lợi</Text>
                         <View style={{flexDirection: 'row'}}>
-                            <View>
+                            <View >
                                 <CheckBox
                                     label='Có trả phí'
                                     labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
@@ -628,6 +525,28 @@ export default class PostModal extends Component {
                                     checked={this.state.checkedRightModal2}
                                     onChange={(checked) => {this.checkRightModal2()}} 
                                     /> 
+                                <CheckBox
+                                    label='Có phục vụ make up'
+                                    labelStyle={{fontSize: 13, color:'black'}}
+                                    checkboxStyle = {{width:12, height: 12}}
+                                    checked={this.state.checkedRequireModal11}
+                                    onChange={(checked) => {this.checkRequireModal11()}} 
+                                    />
+                                <CheckBox
+                                    label='Có phục vụ trang phục'
+                                    labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
+                                    checkboxStyle = {{width:12, height: 12}} 
+                                    checked={this.state.checkedRequireModal22}
+                                    onChange={(checked) => {this.checkRequireModal22()}} 
+                                    /> 
+                       
+                                <CheckBox
+                                    label='Có phục vụ ăn trưa'
+                                    labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
+                                    checkboxStyle = {{width:12, height: 12}} 
+                                    checked={this.state.checkedRequireModal33}
+                                    onChange={(checked) => {this.checkRequireModal33()}} 
+                                    />                             
                             </View>
                              <View>
                                 <CheckBox
@@ -645,19 +564,38 @@ export default class PostModal extends Component {
                                     checked={this.state.checkedRightModal22}
                                     onChange={(checked) => {this.checkRightModal22()}} 
                                     /> 
+                                <CheckBox
+                                    label='Tự make up'
+                                    labelStyle={{fontSize: 13, color: 'black'}}
+                                    checkboxStyle = {{width:12, height: 12}}
+                                    checked={this.state.checkedRequireModal1}
+                                    onChange={(checked) => {this.checkRequireModal1()}} 
+                                    />
+                                <CheckBox
+                                    label='Tự chuẩn bị trang phục'
+                                    labelStyle={{fontSize: 13, marginRight: 13, color:'black'}}
+                                    checkboxStyle = {{width:12, height: 12}} 
+                                    checked={this.state.checkedRequireModal2}
+                                    onChange={(checked) => {this.checkRequireModal2()}} 
+                                    /> 
+                        
+                                <CheckBox
+                                    label='Tự chuẩn bị ăn trưa'
+                                    labelStyle={{fontSize: 13, marginRight: 13, color: 'black'}}
+                                    checkboxStyle = {{width:12, height: 12}} 
+                                    checked={this.state.checkedRequireModal3}
+                                    onChange={(checked) => {this.checkRequireModal3()}}
+                                    /> 
                              </View>
                          </View>
                     </View>
                
                
                     <View style={stylesPostModal.title}>
-                        <Text style={stylesPostModal.boxPostModal}>Chi phí</Text>
-                        {/* <TextInput 
-                            style={{ height: 40, width: 290,  marginTop: -25                     
-                        }}></TextInput> */}
-                        <TextInput  multiline={true} numberOfLines={10}  underlineColorAndroid='transparent'
+                        <Text style={stylesPostModal.boxPostModal}>Lợi nhuận</Text>
+                        <TextInput  
                             onChangeText={(cost) => this.setState({ cost })}
-                          style={stylesPostModal.txtPostModal} >{this.state.cost}</TextInput>
+                            style={stylesPostModal.inputWeight}>{this.state.cost}</TextInput>
                     </View>
                     <View style={[stylesPostModal.title, stylesPostModal.buttonCreate]}>
                         <TouchableOpacity 
@@ -726,10 +664,9 @@ stylesPostModal = StyleSheet.create({
         
     },
     txtPostModal: {
-        height: 100, width: 230, marginTop: -15,
+        width: 230, marginTop: -15, color: 'black',
         borderColor: 'black',   borderWidth: 1, 
-        // marginRight: 15,
-        color: 'black'
+        
     },
     
     txtBoxPostModal: {
@@ -737,7 +674,7 @@ stylesPostModal = StyleSheet.create({
     },
 
     inputWeight: {
-        width: 75,
+        width: 230,
         marginTop: -30  ,
         marginLeft: 5
     },
@@ -748,7 +685,7 @@ stylesPostModal = StyleSheet.create({
         marginBottom: 20
     },
     boxPostModal: {
-        marginRight:10, marginTop: 25,color:'black'
+        marginRight:10,color:'black', fontWeight: 'bold'
     },
    
     txtBtnPostModal: {
