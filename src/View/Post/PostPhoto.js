@@ -18,7 +18,9 @@ export default class PostPhoto extends Component {
             selectedMinutes: 0,
             datetimePhoto1: '',
             selectedHours1: 0,
-            selectedMinutes1: 0,}
+            selectedMinutes1: 0,
+            contentPhoto: '', costPhoto:''
+        }
       }
 
     static navigationOptions = ({navigation}) => {

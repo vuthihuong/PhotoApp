@@ -22,6 +22,7 @@ export default class PostEvent extends Component {
             selectedMinutes1: 0,
             checkedEvent1: false, checkedEvent2: false,
             labelEvent1:'', labelEvent2: '',
+            contentEvent: '', costEvent:''
         
         }
       }

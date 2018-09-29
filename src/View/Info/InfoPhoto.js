@@ -108,7 +108,7 @@ export default class InfoPhoto extends Component {
                       style={{width: '100%', height: '70%'}}
                     >  */}
                 <View style={stylesInfoPhoto.iconInfo}>
-                    <Image source={this.state.avatarSource} style={{height: 150, width: 150}} />
+                    <Image source={this.state.avatarSource} style={{height: 120, width: 120}} />
                     <TouchableOpacity onPress={() => this.pickImg()}
                             style={{marginTop: -35, marginLeft: 40}}>
                         <Image source={photo} style={{width: 50, height: 50,}} />

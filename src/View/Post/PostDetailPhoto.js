@@ -11,7 +11,7 @@ import edit from '../../assets/img/pose/edit.png'
 export default class PostDetailPhoto extends Component {
     render(){
         return(
-          <ScrollView style={{flex:1, backgroundColor: 'white'}}>  
+        //   <ScrollView style={{flex:1, backgroundColor: 'white'}}>  
             <View style={stylesPostDePhoto.container}>
                 <View style={stylesPostDePhoto.title}>
                     <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
@@ -64,7 +64,7 @@ export default class PostDetailPhoto extends Component {
                    
                 </View>
             </View>
-          </ScrollView>
+        //   </ScrollView>
         )
     }
 }
@@ -81,16 +81,16 @@ stylesPostDePhoto = StyleSheet.create({
     },
 
     content: {
-        flex:1,
-        justifyContent:'center', marginLeft: 25, marginRight: 25
+        marginLeft: 25, marginRight: 25, marginTop: 30
     },
     txtPostDetailPhoto: {
         color: 'black'
     },
     btnSubmit: {
-        flex:1,
+        flex:2,
         flexDirection:'row',
         justifyContent: 'center',
+        alignItems:'center'
        
     },
     btnConfirmPhoto: {

@@ -11,7 +11,7 @@ import edit from '../../assets/img/pose/edit.png'
 export default class PostDetailModal extends Component {
     render(){
         return(
-          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
+        //   <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesPostDetailModal.container}>
                 <View style={stylesPostDetailModal.title}>
                     <TouchableOpacity  onPress={() => this.props.navigation.goBack()}>
@@ -140,7 +140,7 @@ export default class PostDetailModal extends Component {
                    
                 </View>
             </View>
-          </ScrollView>
+        //   </ScrollView>
         )
     }
 }
@@ -157,14 +157,15 @@ stylesPostDetailModal = StyleSheet.create({
     },
 
     content: {
-        flex:1,
-        justifyContent:'center', marginLeft: 25, marginRight: 25
+        marginTop: 30,
+         marginLeft: 25, marginRight: 25
     },
 
     btnSubmit: {
-        flex:1,
+        flex:2,
         flexDirection:'row',
-        justifyContent: 'space-between',
         marginLeft: 20,
+        justifyContent: 'center',
+        alignItems:'center'
     }
 })

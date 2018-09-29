@@ -1,4 +1,5 @@
 import firebase from '@firebase/app'
+import 'firebase/storage'
 // var firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');

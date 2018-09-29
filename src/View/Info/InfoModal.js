@@ -141,7 +141,7 @@ export default class InfoModal extends Component {
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style={stylesInfoModal.containerCus}> 
                <View style={stylesInfoModal.iconInfo}>
-               <Image source={this.state.avatarSource} style={{height: 150, width: 150}} />
+               <Image source={this.state.avatarSource} style={{height: 120, width: 120}} />
                   <TouchableOpacity onPress={() => this.pickImg()}
                         style={{marginTop: -35, marginLeft: 40}}>
                       <Image source={photo} style={{width: 50, height: 50,}} />
