@@ -61,10 +61,10 @@ export default class InfoModal extends Component {
       else if (response.customButton) {
       }
       else {
-        let source = { uri: response.uri };
+        // let source = { uri: response.uri };
     
         // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        let source = { uri: 'data:image/png;base64,' + response.data };
     
         this.setState({
           avatarSource: source
@@ -94,6 +94,7 @@ export default class InfoModal extends Component {
               circle3 = (childData.circle3)
               weight = (childData.weight)
               heightt = (childData.heightt)
+              avatarSource = (childData.avatarSource)
               
         })  
       })
@@ -106,7 +107,8 @@ export default class InfoModal extends Component {
           gender: gender,
           telephone: telephone,
           circle1: circle1, circle2: circle2, circle3: circle3,
-          heightt: heightt, weight: weight
+          heightt: heightt, weight: weight,
+          avatarSource: avatarSource
       })
     }   
     save(){ 
@@ -122,7 +124,8 @@ export default class InfoModal extends Component {
          circle2: this.state.circle2,
          circle3: this.state.circle3,
          weight: this.state.weight,
-         heightt: this.state.heightt
+         heightt: this.state.heightt,
+         avatarSource: this.state.avatarSource
     });
       Alert.alert('Thay đổi thông tin thành công')
     }
@@ -300,7 +303,7 @@ export default class InfoModal extends Component {
           height:35
       },
       txtCircle: {
-        fontSize: 13, width:72, marginLeft: 15, borderBottomWidth: 1, 
+        fontSize: 13, width:68, marginLeft: 15, borderBottomWidth: 1, 
         borderColor: "gray",textAlign: 'center'
       },
       infoFooter: {

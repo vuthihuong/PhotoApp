@@ -23,7 +23,8 @@ export default class Signup extends Component {
             checkedGender1: false, checkedGender2: false,
             email: '', password: '',
             name: '', phone: '', addressCity: '', addresDist: '',
-            circle1: '', circle2: '', circle3: '', weight: '', heightt: ''
+            circle1: '', circle2: '', circle3: '', weight: '', heightt: '',
+            avatarSource: require('../../assets/img/info/User.png'),
         };
         this.itemRef = FirebaseApp.database();
         console.ignoredYellowBox = [ 'Setting a timer' ];
@@ -132,6 +133,7 @@ export default class Signup extends Component {
                 var circle3 = this.state.circle3
                 var heightt = this.state.heightt
                 var weight = this.state.weight
+                var avatarSource = this.state.avatarSource
                
                 
                 if(this.state.checkedGender1 === true){ 
@@ -159,7 +161,8 @@ export default class Signup extends Component {
                         phone: phone, password: password,
                         category: category, circle1: circle1,
                         circle2: circle2, circle3: circle3,
-                        heightt: heightt, weight: weight
+                        heightt: heightt, weight: weight,
+                        avatarSource: avatarSource
                     })
                 }
                 else { 
@@ -170,6 +173,7 @@ export default class Signup extends Component {
                         addresDist: addresDist,
                         phone: phone, password: password,
                         category: category,
+                        avatarSource: avatarSource
                     })
                 }
                 Alert.alert(
