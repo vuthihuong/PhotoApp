@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, YellowBox,
-            ScrollView, TextInput, 
+            ScrollView, TextInput, ListView
     } from 'react-native';
 
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-checkbox';
+import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 export default class AlbumPose extends Component{ 
     constructor(){ 
@@ -12,8 +13,10 @@ export default class AlbumPose extends Component{
 
         this.state = { 
             checkedPersonOne: false, checkedPersonTwo: false, checkedPersonGroup: false,
-            checkedSecondGender1: false, checkedSecondGender2: false
+            checkedSecondGender1: false, checkedSecondGender2: false,
+             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2})
         }
+        this.itemRef = FirebaseApp.database();
       
     }
     static navigationOptions = {
@@ -127,6 +130,22 @@ export default class AlbumPose extends Component{
             checkedSecondGender2: false
         })
     }
+    listenForItems(itemRef){ 
+        var items  = [];
+          this.itemRef.ref('ImagePose').on('child_added', (dataSnapshot)=> { 
+            var childData = dataSnapshot.val();
+              items.push({ 
+                name: dataSnapshot.val(),
+                key: dataSnapshot.key,
+                url: (childData.url),
+              
+                
+              });
+              this.setState({ 
+                dataSource: this.state.dataSource.cloneWithRows(items)
+              });
+          });
+      }
 
     render(){ 
         let data = [{
@@ -473,10 +492,24 @@ export default class AlbumPose extends Component{
                             
                             </View>): null}
                     </View>
+                    <View>
+                        <Text>List View</Text>
+                        <ListView 
+                        dataSource = {this.state.dataSource}
+                            renderRow = {(rowData)=> 
+                                <View>
+                                <Image source= {{uri: `${rowData.url}`}}style={{height: 120, width: 120}} />
+                                </View>
+                            }
+                        />
+               </View>
                 </View>
             </ScrollView>
         )
     }
+    componentDidMount(){ 
+        this.listenForItems(this.itemRef);
+      }
 }
 
 stylesAlbumPose = StyleSheet.create({ 
