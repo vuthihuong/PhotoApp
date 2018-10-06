@@ -39,9 +39,7 @@ export default class AlbumPose extends Component{
               });
           });
     }
-
     checkPersonOne(){ 
-       
         if(this.state.checkedPersonOne === false){ 
             this.setState({ 
                 checkedPersonOne: true,
@@ -55,7 +53,6 @@ export default class AlbumPose extends Component{
             this.actGetData('ImagePose/OnePerson/Male/Coat',items);
             this.actGetData('ImagePose/OnePerson/FeMale/AoDai',items);
             this.actGetData('ImagePose/OnePerson/Male/AoDai',items);
-              
         }
         else if(this.state.checkedPersonOne === true ){ 
             this.setState({ 
@@ -1113,47 +1110,52 @@ export default class AlbumPose extends Component{
       }
 
     render(){ 
-        let dataClother = [{
-            value: 'Áo dài',
-          },
-        //    {
-        //     value: 'Áo khoác',
-        //   },
-           {
-            value: 'Đồng phục',
-          }, {
-            value: 'Váy',
-          }];
+        var dataClother1 = [];
+        var dataClother = [];
+        
+            FirebaseApp.database().ref('DataCategoryImage/Clother/').on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    dataClother1.push(childData) // mảng hai chiều
+                    
+                });
+            }))
+         // biến đổi về mảng một chiều
+                for(var i = 0; i < dataClother1.length; i++) {
+                    dataClother = dataClother.concat(dataClother1[i]);
+                }
+        var dataPose1 = [];
+        var dataPose = [];
+                
+            FirebaseApp.database().ref('DataCategoryImage/Pose/').on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    dataPose1.push(childData) // mảng hai chiều
+                        
+                    });
+                 }))
+                 // biến đổi về mảng một chiều
+             for(var i = 0; i < dataPose1.length; i++) {
+                    dataPose = dataPose.concat(dataPose1[i]);
+                }
 
-          let dataView = [{
-            value: 'Hồ, sông, biển',
-          }, {
-            value: 'Đầm sen',
-          }, {
-            value: 'Núi',
-          }, {
-            value: 'Cầu thang',
-          }, {
-            value: 'Khung cửa',
-          }, {
-            value: 'Công viên',
-          }];
-          let dataPose = [{
-            value: 'Đứng',
-          }, 
-        //   {
-        //     value: 'Nằm',
-        //   },
-           {
-            value: 'Ngồi',
-          }];
-          let dataAccom = [{
-            value: 'Bóng bay',
-          }, {
-            value: 'Bó hoa',
-          }, {
-            value: 'Xe đạp',
-          }];
+        var dataView1 = [];
+        var dataView = [];
+                        
+            FirebaseApp.database().ref('DataCategoryImage/View/').on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                var key = childSnapshot.key;
+                let childData = childSnapshot.val();
+                dataView1.push(childData) // mảng hai chiều
+                                
+                });
+            }))
+            // biến đổi về mảng một chiều
+            for(var i = 0; i < dataView1.length; i++) {
+                dataView = dataView.concat(dataView1[i]);
+            }
         return(
             <ScrollView style={stylesAlbumPose.container}>
                 <View style={stylesAlbumPose.container}>
