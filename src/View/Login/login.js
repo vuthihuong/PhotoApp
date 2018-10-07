@@ -24,6 +24,7 @@ export  default  class Login extends Component {
       Login(){ 
         FirebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => { 
+
                 FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(this.state.email)
                     .on('value', (function (snapshot) {
                     snapshot.forEach(function(childSnapshot) {
@@ -31,13 +32,15 @@ export  default  class Login extends Component {
                             let childData = childSnapshot.val();
                             category1 = (childData.category)
                     })
-                    if(category1 === "Người thuê chụp ảnh"){
+                    var user = FirebaseApp.auth().currentUser;
+                    // alert(user.emailVerified);
+                    if(category1 === "Người thuê chụp ảnh" && user.emailVerified === true){
                         this.props.navigation.navigate('Main')
                     }
-                    else if(category1 === "Nháy ảnh"){ 
+                    else if(category1 === "Nháy ảnh" && user.emailVerified === true){
                         this.props.navigation.navigate('MainPhoto')
                     }
-                    else if(category1 === "Mẫu ảnh"){ 
+                    else if(category1 === "Mẫu ảnh" && user.emailVerified === true){
                         this.props.navigation.navigate('MainModal')
                     }
                    this.setState({ 

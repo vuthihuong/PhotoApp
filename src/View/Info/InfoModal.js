@@ -195,10 +195,14 @@ export default class InfoModal extends Component {
                        value={this.state.addressCity}/>
                </View>
                <View style ={stylesInfoModal.textInputMargin}>
-                 <Image source={iconLocation} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13}}
-                        onChangeText={(addresDist) => this.setState({ addresDist })} 
-                        value={this.state.addresDist}/>
+                  <TouchableOpacity  onPress={() => this.props.navigation.navigate('AddressMap')}>
+                    {/* <Image source={iconLocation} style={{width: 30, height: 30}} /> */}
+                    {/* <TextInput underlineColorAndroid='transparent' style={{fontSize: 13}}
+                          onChangeText={(addresDist) => this.setState({ addresDist })} 
+                          value={this.state.addresDist}/> */}
+                          <Text>Địa chỉ</Text>
+                  </TouchableOpacity>
+                 
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>

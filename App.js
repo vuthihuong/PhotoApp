@@ -38,6 +38,9 @@ import InfoDetailModal from './src/View/Info/InfoDetailModal'
 import UpImgModal from './src/View/Upload/UpImgModal'
 import UpImgPhoto from './src/View/Upload/UpImgPhoto'
 
+import AddressMap from './src/View/Info/AddressMap'
+
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -115,6 +118,9 @@ const Mainapp = createStackNavigator({
     },
     UpImgPhoto: { 
         screen: UpImgPhoto
+    },
+    AddressMap: { 
+        screen: AddressMap
     }
     },{
       headerMode:'none'

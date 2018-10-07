@@ -3,6 +3,10 @@ import 'firebase/storage'
 // var firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');
+require("firebase/firestore");
+require("firebase/messaging");
+require("firebase/functions");
+
 var config = {
     apiKey: "AIzaSyCnKHP42pOqDkrz5IlAW513pEvPZcQCVb8",
     authDomain: "photoapp-859b5.firebaseapp.com",
