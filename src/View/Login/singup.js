@@ -23,7 +23,7 @@ export default class Signup extends Component {
             checkedCategory1: false,  checkedCategory2: false, checkedCategory3: false,
             checkedGender1: false, checkedGender2: false,
             email: '', password: '',
-            name: '', phone: '', addressCity: '', addresDist: '', address: '',
+            name: '', telephone: '', addressCity: '', addresDist: '', address: '',
             circle1: '', circle2: '', circle3: '', weight: '', heightt: '',
             avatarSource: require('../../assets/img/info/User.png'),
             checkViewName: true, checkTextName: false,
@@ -564,7 +564,7 @@ export default class Signup extends Component {
             .then(() => { 
                 var email = this.state.email
                 var name = this.state.name
-                var phone = this.state.phone
+                var telephone = this.state.telephone
                 var gender = ''
                 var date = this.state.date
                 var address = this.state.address
@@ -609,7 +609,7 @@ export default class Signup extends Component {
                         address: address,
                         // addressCity: addressCity,
                         // addresDist: addresDist,
-                        phone: phone,
+                        telephone: telephone,
                         password: password,
                         category: category, circle1: circle1,
                         circle2: circle2, circle3: circle3,
@@ -624,7 +624,7 @@ export default class Signup extends Component {
                         // addressCity: addressCity,
                         // addresDist: addresDist,
                         address: address,
-                        phone: phone, 
+                        telephone: telephone, 
                         password: password,
                         category: category,
                         avatarSource: avatarSource

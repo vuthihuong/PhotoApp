@@ -4,6 +4,9 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, A
 import DatePicker from 'react-native-datepicker'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 import { Dropdown } from 'react-native-material-dropdown';
+import WebImage from 'react-native-web-image'
+
+
 
 import info from '../../assets/img/info/iconInfo.png'
 import iconUser from '../../assets/img/info/icon_info.png'
@@ -85,7 +88,7 @@ export default class InfoCustomer extends Component {
                 email = (childData.email)
                 gender = (childData.gender)
                 password = (childData.password)
-                telephone = (childData.phone)
+                telephone = (childData.telephone)
                 avatarSource = (childData.avatarSource)
                 
           })  
@@ -108,7 +111,7 @@ export default class InfoCustomer extends Component {
           //  addressCity: this.state.addressCity,
            category: this.state.category,
            gender: this.state.gender,
-           telephone: telephone,
+           telephone: this.state.telephone,
            avatarSource: this.state.avatarSource
       });
         Alert.alert('Thay đổi thông tin thành công')
@@ -120,37 +123,41 @@ export default class InfoCustomer extends Component {
         }, {
           value: 'Nữ',
         }];
+        const imageUri = 'https://placeholdit.imgix.net/~text?txtsize=33&txt=200x150&w=200&h=150'
           return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
              <View style={stylesInfoCus.containerCus}> 
                <View style={{marginLeft: 15, marginRight: 15}}>
                   <View style={stylesInfoCus.iconInfo}>
-                    <Image source={this.state.avatarSource} style={{height: 120, width: 120}} />
+                    <WebImage source={this.state.avatarSource} style={{height: 150, width: 150}} />
                       <TouchableOpacity onPress={() => this.pickImg()}
-                            style={{marginTop: -35, marginLeft: 40}}>
-                          <Image source={photo} style={{width: 50, height: 50,}} />
+                            style={{marginTop: -40, marginLeft: 40}}>
+                          <WebImage source={photo} style={{width: 50, height: 50,}} />
                       </TouchableOpacity>
                     
                   </View>
                   <View style ={stylesInfoCus.textInput}>
-                    <Image source={iconUser} style={{width: 30, height: 30}} />
-                    <TextInput underlineColorAndroid='transparent' 
-                          style={{fontSize: 10, width: 200}}
-                        placeholder='Họ tên'
+                    {/* <Image source={iconUser} style={{width: 30, height: 30}} /> */}
+                    <WebImage style={{width: 40, height: 40}} source={iconUser}/>
+                    <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, width: 200 }}
+                        // placeholder='Họ tên'
                         onChangeText={(username) => this.setState({ username })} 
                         value={this.state.username}/>
                   </View>
 
                   <View style ={stylesInfoCus.textInputMargin}>
-                    <Image source={phone} style={{width: 20, height: 20,  marginLeft: 5}} />
-                    <TextInput underlineColorAndroid='transparent' style={{fontSize: 10, width: 200}} 
-                      placeholder='Điện thoại'
+                    {/* <Image source={phone} style={{width: 20, height: 20,  marginLeft: 5}} /> */}
+                    <WebImage style={{width: 25, height: 25, marginLeft: 5}} source={phone}/>
+                    <TextInput underlineColorAndroid='transparent' 
+                        style={{fontSize: 13, width: 200, marginLeft: 10 }}
+                      // placeholder='Điện thoại' 
+                      // placeholderStyle={{marginLeft: 15, marginTop: 3 }}
                       onChangeText={(telephone) => this.setState({ telephone })} 
                       value={this.state.telephone}/>
                   </View>
 
                   <View style ={stylesInfoCus.textInputMargin}>
-                    <Image source={iconDateBirth} style={{width: 20, height: 20, marginLeft: 5}} />
+                    <WebImage source={iconDateBirth} style={{width: 30, height: 30, marginLeft: 5}} />
                     <DatePicker
                             date={this.state.date}
                             mode="date"
@@ -164,7 +171,7 @@ export default class InfoCustomer extends Component {
                                   alignItems: "flex-start",
                                   justifyContent: "flex-start", marginLeft: 10 },
                                 dateText: {
-                                  fontSize: 10, marginTop: 5 }
+                                  fontSize: 13, marginTop: 5 }
                                 }
                               }
                               onDateChange={(date) => {this.setState({date: date})}}
@@ -172,16 +179,20 @@ export default class InfoCustomer extends Component {
                   </View>
 
                   <View style ={stylesInfoCus.textInputMargin}>
-                    <Image source={iconLocation} style={{width: 30, height: 30}} />
-                    <TextInput underlineColorAndroid='transparent' style={{fontSize: 10, width: 200}}
-                        placeholder = 'Địa chỉ'
+                    {/* <Image source={iconLocation} style={{width: 30, height: 30}} /> */}
+                    <WebImage style={{width: 35, height: 35}} source={iconLocation}/>
+                    <TextInput underlineColorAndroid='transparent' 
+                          style={{fontSize: 13, width: 200, marginLeft: 10 }}
+                        // placeholder = 'Địa chỉ'
+                        // placeholderStyle={{ marginTop: 3 }}
                         onChangeText={(address) => this.setState({ address })} 
                         value={this.state.address}/> 
                   </View>
 
                   <View style ={stylesInfoCus.textInputMargin}>
-                    <Image source={iconGender} style={{width: 30, height: 30}} />
-                    <View style={{ width: 280, height: 90, marginTop: 10 }}>
+                    {/* <Image source={iconGender} style={{width: 30, height: 30}} /> */}
+                    <WebImage style={{width: 35, height: 35, marginLeft: 5}} source={iconGender}/>
+                    <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
                               <Dropdown fontSize={13}
                                   inputContainerStyle={{ borderBottomColor: 'transparent' }}
                                   data={data}

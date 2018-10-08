@@ -6,6 +6,8 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, YellowBox,
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-checkbox';
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
+import WebImage from 'react-native-web-image'
+
 
 export default class AlbumPose extends Component{ 
     constructor(){ 
@@ -1748,7 +1750,7 @@ export default class AlbumPose extends Component{
                                     dataSource = {this.state.dataSource}
                                     renderRow = {(rowData)=> 
                                         <View>
-                                            <Image source= {{uri: `${rowData.url}`}}style={{height: 160, width: 160, marginBottom:10}} />
+                                            <WebImage source= {{uri: `${rowData.url}`}} style={{height: 160, width: 160, marginBottom:10, flex:1}} />
                                         </View>
                                     }
                                 />

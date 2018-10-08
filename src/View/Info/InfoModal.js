@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, YellowBox,
 import DatePicker from 'react-native-datepicker'
 import { Dropdown } from 'react-native-material-dropdown';
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
+import WebImage from 'react-native-web-image'
 
 import info from '../../assets/img/info/iconInfo.png'
 import iconUser from '../../assets/img/info/icon_info.png'
@@ -41,10 +42,10 @@ export default class InfoModal extends Component {
         selected: '',
         date: '', 
         username: '', telephone: '', gender: '',
-        addresDist: '', addressCity: '' ,
+        addresDist: '', addressCity: '' , address: '',
         circle1: '', circle2: '', circle3: '',
         heightt: '', weight: '',
-        avatarSource: require('../../assets/img/info/User.png'),
+        avatarSource: require('../../assets/img/info/User.png')
      }
     }
 
@@ -61,10 +62,10 @@ export default class InfoModal extends Component {
       else if (response.customButton) {
       }
       else {
-        // let source = { uri: response.uri };
+        let source = { uri: response.uri };
     
         // You can also display the image using data:
-        let source = { uri: 'data:image/png;base64,' + response.data };
+        // let source = { uri: 'data:image/png;base64,' + response.data };
     
         this.setState({
           avatarSource: source
@@ -81,14 +82,15 @@ export default class InfoModal extends Component {
           var childData = childSnapshot.val();
           // lấy các giá trị trong bảng customer tương ứng với email đăng nhập
               username1 = (childData.username);
-              addresDist = (childData.addresDist)
-              addressCity = (childData.addressCity)
+              // addresDist = (childData.addresDist)
+              // addressCity = (childData.addressCity)
+              address = (childData.address)
               category = (childData.category)
               date = (childData.date)
               email = (childData.email)
               gender = (childData.gender)
               password = (childData.password)
-              telephone = (childData.phone)
+              telephone = (childData.telephone)
               circle1 = (childData.circle1)
               circle2 = (childData.circle2)
               circle3 = (childData.circle3)
@@ -101,8 +103,9 @@ export default class InfoModal extends Component {
       this.setState({
           username: username1,
           date: date,
-          addresDist: addresDist, 
-          addressCity: addressCity,
+          // addresDist: addresDist, 
+          // addressCity: addressCity,
+          address: address,
           category: category,
           gender: gender,
           telephone: telephone,
@@ -115,11 +118,12 @@ export default class InfoModal extends Component {
       FirebaseApp.database().ref('Customer/'+key).update({
          username: this.state.username,
          date: this.state.date,
-         addresDist: this.state.addresDist,
-         addressCity: this.state.addressCity,
+        //  addresDist: this.state.addresDist,
+        //  addressCity: this.state.addressCity,
+        address: this.state.address,
          category: this.state.category,
          gender: this.state.gender,
-         telephone: telephone,
+         telephone: this.state.telephone,
          circle1: this.state.circle1,
          circle2: this.state.circle2,
          circle3: this.state.circle3,
@@ -144,15 +148,15 @@ export default class InfoModal extends Component {
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style={stylesInfoModal.containerCus}> 
                <View style={stylesInfoModal.iconInfo}>
-               <Image source={this.state.avatarSource} style={{height: 120, width: 120}} />
+               <WebImage source={this.state.avatarSource} style={{height: 160, width: 160}} />
                   <TouchableOpacity onPress={() => this.pickImg()}
-                        style={{marginTop: -35, marginLeft: 40}}>
-                      <Image source={photo} style={{width: 50, height: 50,}} />
+                        style={{marginTop: -40, marginLeft: 45}}>
+                      <WebImage source={photo} style={{width: 50, height: 50,}} />
                   </TouchableOpacity>
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
-                 <Image source={iconUser} style={{width: 30, height: 30}} />
+                 <WebImage source={iconUser} style={{width: 40, height: 40}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, width: 200 }}
                     placeholder='Họ tên'
                      onChangeText={(username) => this.setState({ username })} 
@@ -160,15 +164,15 @@ export default class InfoModal extends Component {
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
-                 <Image source={phone} style={{width: 20, height: 20,  marginLeft: 5}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 5, width: 200}}
-                      placeholder='Điện thoại'
+                 <WebImage source={phone} style={{width: 25, height: 25,  marginLeft: 5}} />
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 10, width: 200}}
+                      // placeholder='Điện thoại'
                        onChangeText={(telephone) => this.setState({ telephone })} 
                        value={this.state.telephone} />
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
-                 <Image source={iconDateBirth} style={{width: 20, height: 20, marginLeft: 5}} />
+                 <WebImage source={iconDateBirth} style={{width: 30, height: 30, marginLeft: 5}} />
                  <DatePicker
                         // style={{width: 200}}
                         date={this.state.date}
@@ -207,8 +211,8 @@ export default class InfoModal extends Component {
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
-                 <Image source={iconGender} style={{width: 30, height: 30, marginRight: 5}} />
-                 <View style={{ width: 280, height: 90, marginTop: 10 }}>
+                 <Image source={iconGender} style={{width: 35, height: 35, marginRight: 5}} />
+                 <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
                           <Dropdown fontSize={13}
                               inputContainerStyle={{ borderBottomColor: 'transparent' }}
                               data={data}
