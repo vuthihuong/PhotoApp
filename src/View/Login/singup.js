@@ -23,7 +23,7 @@ export default class Signup extends Component {
             checkedCategory1: false,  checkedCategory2: false, checkedCategory3: false,
             checkedGender1: false, checkedGender2: false,
             email: '', password: '',
-            name: '', phone: '', addressCity: '', addresDist: '',
+            name: '', phone: '', addressCity: '', addresDist: '', address: '',
             circle1: '', circle2: '', circle3: '', weight: '', heightt: '',
             avatarSource: require('../../assets/img/info/User.png'),
             checkViewName: true, checkTextName: false,
@@ -567,6 +567,7 @@ export default class Signup extends Component {
                 var phone = this.state.phone
                 var gender = ''
                 var date = this.state.date
+                var address = this.state.address
                 var addressCity = this.state.addressCity
                 var addresDist = this.state.addresDist
                 var password = this.state.password
@@ -605,9 +606,10 @@ export default class Signup extends Component {
                     this.itemRef.ref('Customer').push({
                         username: name,  gender: gender,
                         date: date,   email: email, 
-                            // addressCity: addressCity,
-                            // addresDist: addresDist,
-                            // phone: phone,
+                        address: address,
+                        // addressCity: addressCity,
+                        // addresDist: addresDist,
+                        phone: phone,
                         password: password,
                         category: category, circle1: circle1,
                         circle2: circle2, circle3: circle3,
@@ -621,7 +623,8 @@ export default class Signup extends Component {
                         date: date, email: email, 
                         // addressCity: addressCity,
                         // addresDist: addresDist,
-                        // phone: phone, 
+                        address: address,
+                        phone: phone, 
                         password: password,
                         category: category,
                         avatarSource: avatarSource

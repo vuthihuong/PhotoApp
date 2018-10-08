@@ -153,15 +153,16 @@ export default class InfoModal extends Component {
 
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconUser} style={{width: 30, height: 30}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13
-                 }}
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, width: 200 }}
+                    placeholder='Họ tên'
                      onChangeText={(username) => this.setState({ username })} 
                      value={this.state.username}/>
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={phone} style={{width: 20, height: 20,  marginLeft: 5}} />
-                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 5}}
+                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 5, width: 200}}
+                      placeholder='Điện thoại'
                        onChangeText={(telephone) => this.setState({ telephone })} 
                        value={this.state.telephone} />
                </View>
@@ -188,12 +189,12 @@ export default class InfoModal extends Component {
                        />
                </View>
 
-               <View style ={stylesInfoModal.textInputMargin}>
+               {/* <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconLocation} style={{width: 30, height: 30}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 13}}
                        onChangeText={(addressCity) => this.setState({ addressCity })} 
                        value={this.state.addressCity}/>
-               </View>
+               </View> */}
                <View style ={stylesInfoModal.textInputMargin}>
                   <TouchableOpacity  onPress={() => this.props.navigation.navigate('AddressMap')}>
                     {/* <Image source={iconLocation} style={{width: 30, height: 30}} /> */}
@@ -221,15 +222,15 @@ export default class InfoModal extends Component {
                  <Text style={{color: 'black', fontSize: 13}}>Số đo 3 vòng:</Text>
                  <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                    <TextInput underlineColorAndroid='transparent'
-                         style={stylesInfoModal.txtCircle}
+                         style={stylesInfoModal.txtCircle} placeholder='Vòng 1'
                         onChangeText={(circle1) => this.setState({ circle1 })} 
                         value={this.state.circle1}/>
                     <TextInput underlineColorAndroid='transparent' 
-                        style={stylesInfoModal.txtCircle}
+                        style={stylesInfoModal.txtCircle}  placeholder='Vòng 2'
                         onChangeText={(circle2) => this.setState({ circle2 })} 
                         value={this.state.circle2}/>
                     <TextInput underlineColorAndroid='transparent' 
-                        style={stylesInfoModal.txtCircle}
+                        style={stylesInfoModal.txtCircle}  placeholder='Vòng 3'
                         onChangeText={(circle3) => this.setState({ circle3 })} 
                         value={this.state.circle3}/>
 
@@ -243,14 +244,14 @@ export default class InfoModal extends Component {
                          value={this.state.heightt}/>
                 
                </View>
-               <View style ={stylesInfoModal.textInputMargin}>
+               {/* <View style ={stylesInfoModal.textInputMargin}>
                  <Text style={{color: 'black', fontSize: 13}}>Cân nặng:</Text>
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 15 }}
                            onChangeText={(weight) => this.setState({ weight })} 
                            value={this.state.weight}/>
                
                 
-               </View>
+               </View> */}
                <View style = {[stylesInfoModal.infoFooter,{marginTop: 15}]}> 
                     <TouchableOpacity onPress={()=> {this.props.navigation.navigate('UpImgModal')}}>
                       <Text style={{fontSize: 13, color: '#EE3B3B', 
