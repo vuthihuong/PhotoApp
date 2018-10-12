@@ -141,6 +141,37 @@ export default class InfoPhoto extends Component {
           });
             Alert.alert('Thay đổi thông tin thành công')
           }
+
+          getDataCostImg(){ 
+              var tableData1 = [];
+              var tmp = [];
+            FirebaseApp.database().ref('DataCostImg').on('value', function (snapshot) {
+              snapshot.forEach(function(childSnapshot) {
+                             key = childSnapshot.key;
+                var childData = childSnapshot.val();
+                // lấy các giá trị trong bảng customer tương ứng với email đăng nhập
+                groupCost = (childData.groupCost);
+                value = (childData.value)
+                    // alert(key);
+                    // alert(value);
+                    // alert(groupCost);
+                    tableData1.push(childData)
+                    // alert(tableData1)
+                    // var result = Object.keys(obj).map(function(key) {
+                    //     return [Number(key), obj[key]];
+                    //   });
+                  
+                  
+                    // }
+                  
+                })  
+            })
+            for(var i = 0; i < tableData1.length; i++) {
+                tmp = tmp.concat(tableData1[i]);
+            }
+            //    var  arr = Object.keys(tableData1).map(function (key) { return tableData1[key]; });
+               alert(tmp);
+          }
        render(){
         let data = [{
             value: 'Nam',
@@ -153,6 +184,26 @@ export default class InfoPhoto extends Component {
         //    source={this.state.avatarSource}
         //    style={{width: 75, height: 75}}
         // />
+        var tableData1 = [];
+        var tmp = [];
+        FirebaseApp.database().ref('DataCostImg').on('value', function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                           key = childSnapshot.key;
+              var childData = childSnapshot.val();
+              // lấy các giá trị trong bảng customer tương ứng với email đăng nhập
+              groupCost = (childData.groupCost);
+              value = (childData.value)
+                //   alert(key);
+                //   alert(value);
+                //   alert(groupCost);
+                  tableData1.push()
+                //   alert(tableData1);
+              })  
+          })
+          for(var i = 0; i < tableData1.length; i++) {
+            tmp = tmp.concat(tableData1[i]);
+        }
+        
         const element = (data, index) => (
            
             <View style={stylesInfoPhoto.btn}>
@@ -308,14 +359,15 @@ export default class InfoPhoto extends Component {
                             </View>
                         </View>
                     
-
+                       
                     <View style = {stylesInfoCus.infoFooter}> 
                         <TouchableOpacity style={[stylesInfoCus.btnInfo, {marginRight: 10}]}
                             onPress={() => this.save()}>
                                 <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Lưu</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={stylesInfoCus.btnInfo}
-                                onPress={() => this.props.navigation.navigate('ResetPass')}>
+                                // onPress={() => this.props.navigation.navigate('ResetPass')}>
+                                 onPress={() => this. getDataCostImg()}>
                                 <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Đổi mật khẩu</Text>
                             </TouchableOpacity>
                     </View>

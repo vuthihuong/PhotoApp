@@ -5,7 +5,6 @@ import {
 import { YellowBox } from 'react-native';
         YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 import DatePicker from 'react-native-datepicker'
-import { Dropdown } from 'react-native-material-dropdown';
 
 import CheckBox from 'react-native-checkbox';
 import SignupController from './../../Controller/SignupController';
@@ -28,10 +27,9 @@ export default class Signup extends Component {
             avatarSource: require('../../assets/img/info/User.png'),
             checkViewName: true, checkTextName: false,
             checkViewGender: false, checkTextGender: false,
-            checkViewBirth: false, checkTextBirth: false,
-            checkViewCategory: false, checkTextCategory: false,
-            checkViewPass: false, checkTextPass: false, checkTextPassLength: false,
-            checkTextCircle: false, checkViewEmail: false, checkTextEmail: false, 
+            checkTextBirth: false, checkTextCategory: false,
+            checkTextPass: false, checkTextPassLength: false,
+            checkTextCircle: false, checkTextEmail: false, 
         };
         this.itemRef = FirebaseApp.database();
         console.ignoredYellowBox = [ 'Setting a timer' ];
@@ -143,59 +141,45 @@ export default class Signup extends Component {
              })
              this.nextPage();
          }
-         else if(this.state.checkViewBirth === true){ 
-            this.setState({ 
-                checkViewGender: true, checkViewBirth: false
-            })
-            this.nextPage();
-        }
-        else if(this.state.checkViewCategory === true){ 
-            this.setState({ 
-                checkViewBirth: true, checkViewCategory: false
-            })
-            this.nextPage();
-        }
-        else if(this.state.checkViewEmail === true){ 
-            this.setState({ 
-                checkViewCategory: true, checkViewEmail: false
-            })
-            this.nextPage();
-        }
-        else if(this.state.checkViewPass === true){ 
-            this.setState({ 
-                checkViewEmail: true, checkViewPass: false
-            })
-            this.nextPage();
-        }
-        
      }
-     errorView(){ 
+     errorViewName(){ 
          if(this.state.checkTextName === true){
             return(
                 <Text style ={{color: 'red', marginTop: 5}}>Bạn chưa nhập đủ thông tin</Text>
             )
          }
+        }
+    errorViewGender(){
          if(this.state.checkTextGender === true){ 
              return(
                 <Text style ={{color: 'red', marginTop: 5}}>Bạn chưa chọn giới tính</Text>
              )
          }
+        }
+    errorViewBirth(){
          if(this.state.checkTextBirth === true){ 
              return(
                 <Text style ={{color: 'red', marginTop: 5}}>Bạn chưa chọn ngày sinh</Text>
              )
          }
+        }
+    errorViewCategory(){
          if(this.state.checkTextCategory === true){ 
             return(
                 <Text style ={{color: 'red', marginTop: 5}}>Bạn chưa chọn loại người dùng</Text>
              )
          }
+        }
+    errorViewCircle(){
+       
          
          if(this.state.checkTextCircle === true){ 
             return(
                 <Text style ={{color: 'red', marginTop: 5}}>Bạn chưa điền đủ thông tin</Text>
              ) 
          }
+        }
+    errorViewEmail(){
          if(this.state.checkTextEmail === true){ 
             return(
                 <Text style ={{color: 'red', marginTop: 5}}>Bạn chưa nhập email</Text>
@@ -206,6 +190,8 @@ export default class Signup extends Component {
                 <Text style ={{color: 'red', marginTop: 5}}>Định danh email không đúng</Text>
              ) 
          }
+        }
+    errorViewPass(){
          if(this.state.checkTextPass === true){ 
             return(
                 <Text style ={{color: 'red', marginTop: 5}}>Bạn chưa nhập password, ít nhất có 6 ký tự</Text>
@@ -216,8 +202,6 @@ export default class Signup extends Component {
                 <Text style ={{color: 'red', marginTop: 5}}>Password ít nhất có 6 ký tự</Text>
              )
          }
-         
-        
      }
 
      nextPage(){
@@ -225,72 +209,24 @@ export default class Signup extends Component {
              return(
                  <View>
                     <View style={stylesSignUp.textLogin}>
-                        <Text style={{color: 'black'}}>Họ tên của bạn là gì?</Text>
-                        {this.errorView()}
+                        {/* <Text style={{color: 'black'}}>Họ tên của bạn là gì?</Text> */}
+                        {this.errorViewName()}
                         <TextInput 
                             style={stylesSignUp.textInputLogin}
-                            placeholder="Họ tên"
+                            placeholder="Họ tên" label="Họ tên"
                             onChangeText={(name) => this.setState({ name })}   
                             value={this.state.name}                         
                         />
                     </View>
-                    <View style={stylesSignUp.footSignup}>
-                        <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
-                            onPress={this.goNextPageName.bind(this)}>
-                            <Text style={{marginTop: 4, color:'white'}}>Tiếp</Text>
-                                {/* <SignupController ref={ref => (this._b = ref)} /> */}
-                        </TouchableOpacity>
-                    </View>
-                 </View>
-             )
-         }
-         else if(this.state.checkViewGender === true){ 
-            return(
-                <View>
+                   
                     <View style={stylesSignUp.textLogin}>
-                        <Text style={{color: 'black'}}>Giới tính của bạn là gì?</Text>
-                        {this.errorView()}
-                        <View style={{flexDirection: 'row', marginTop: 20 }}>
-                            <CheckBox
-                                label='Nam' 
-                                labelStyle={{fontSize: 14, color: 'black'}}
-                                numberOfLines = {2}
-                                checkboxStyle={{borderColor: 'black'}}
-                                  checked={this.state.checkedGender1}
-                                checkboxStyle = {{width:13, height: 13,borderColor: 'black',
-                                        }}
-                                onChange={(checked) => {this.checkGender1()}} 
-                                />
-                            <CheckBox
-                                label='Nữ' labelStyle={{fontSize: 14, color: 'black'}}
-                                checked={this.state.checkedGender2}
-                                checkboxStyle = {{width:13, height: 13, borderColor: 'black'}}
-                                onChange={(checked) => {this.checkGender2()}} 
-                                />
-                        </View>
-                    </View>
-                    <View style={stylesSignUp.footSignup}>
-                        <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
-                            onPress={this.goNextPageGender.bind(this)}>
-                            <Text style={{marginTop: 4, color:'white'}}>Tiếp</Text>
-                                {/* <SignupController ref={ref => (this._b = ref)} /> */}
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                
-             )
-         }
-         else if(this.state.checkViewBirth === true){ 
-            return(
-                <View>
-                     <View style={stylesSignUp.textLogin}>
-                        <Text style={{color: 'black'}}>Ngày sinh của bạn là gì?</Text>
-                        {this.errorView()}
+                        {/* <Text style={{color: 'black'}}>Ngày sinh của bạn là gì?</Text> */}
+                        {this.errorViewBirth()}
                         <View style={{ borderBottomWidth: 1, borderColor: "gray", width: 320, marginBottom: 5}}>
                             <DatePicker
                                 date={this.state.date}
                                 mode="date"
-                                placeholder=""
+                                placeholder="Ngày sinh"
                                 format="YYYY-MM-DD"
                                 confirmBtnText="Confirm"
                                 cancelBtnText="Cancel"
@@ -309,50 +245,93 @@ export default class Signup extends Component {
                             />
                         </View>
                     </View>
+                    <View style={stylesSignUp.textLogin}>
+                        {/* <Text style={{color: 'black', marginTop: 10}}>Email</Text> */}
+                        {this.errorViewEmail()}
+                            <TextInput 
+                                style={stylesSignUp.textInputLogin}
+                                placeholder="Email"
+                                onChangeText={(email) => this.setState({ email })}     
+                                value={this.state.email}                       
+                            />
+                    </View>
+                    <View style={stylesSignUp.textLogin}>
+                        {/* <Text style={{color: 'black'}}>Mật khẩu</Text> */}
+                        {this.errorViewPass()}
+                        <TextInput 
+                                style={stylesSignUp.textInputLogin}
+                                secureTextEntry={true}
+                                placeholder="Mật khẩu"
+                                onChangeText={(password) => this.setState({ password })}
+                                value={this.state.password}
+                            />
+                  
+                    </View>
                     <View style={stylesSignUp.footSignup}>
-                            <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
-                                onPress={this.goNextPageBirth.bind(this)}>
-                                <Text style={{marginTop: 4, color:'white'}}>Tiếp</Text>
-                                    {/* <SignupController ref={ref => (this._b = ref)} /> */}
-                            </TouchableOpacity>
-                        
-                     </View>
-                </View>
+                        <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
+                            onPress={this.goNextPageName.bind(this)}>
+                            <Text style={{marginTop: 4, color:'white'}}>Tiếp</Text>
+                                {/* <SignupController ref={ref => (this._b = ref)} /> */}
+                        </TouchableOpacity>
+                    </View>
+                 </View>
              )
-           
          }
-        else if(this.state.checkViewCategory === true){ 
+         else if(this.state.checkViewGender === true){ 
              return(
                 <View>
-                    <View style={stylesSignUp.textLogin}>
-                        <Text style={{color: 'black'}}>Chọn loại người dùng</Text>
-                        {this.errorView()}
-                        <View style={{flexDirection: 'row', marginTop: 15  }}>
+                     <View style={stylesSignUp.textLoginGender}>
+                        {this.errorViewGender()}
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <Text style={{color: 'black', fontWeight: 'bold', fontSize: 16}}>Giới tính</Text>
+                            <CheckBox
+                                label='Nam' 
+                                labelStyle={{fontSize: 15, color: 'black'}}
+                                numberOfLines = {2}
+                                checkboxStyle={{borderColor: 'black'}}
+                                  checked={this.state.checkedGender1}
+                                checkboxStyle = {{width:15, height: 15,borderColor: 'black',
+                                        }}
+                                onChange={(checked) => {this.checkGender1()}} 
+                                />
+                            <CheckBox
+                                label='Nữ' labelStyle={{fontSize: 15, color: 'black'}}
+                                checked={this.state.checkedGender2}
+                                checkboxStyle = {{width:15, height: 15, borderColor: 'black'}}
+                                onChange={(checked) => {this.checkGender2()}} 
+                                />
+                        </View>
+                    </View>
+                    <View style={stylesSignUp.textLoginGender}>
+                        <Text style={{color: 'black', fontWeight: 'bold', fontSize: 16}}>Chọn loại người dùng</Text>
+                        {this.errorViewCategory()}
+                        <View style={{ marginTop: 15  }}>
                             <CheckBox
                                 label='Người thuê chụp ảnh' 
-                                labelStyle={{fontSize: 14, color: 'black'}}
+                                labelStyle={{fontSize: 15, color: 'black'}}
                                 numberOfLines = {2}
                                 checkboxStyle={{borderColor: 'black'}}
                                   checked={this.state.checkedCategory1}
-                                checkboxStyle = {{width:13, height: 13,borderColor: 'black',
+                                checkboxStyle = {{width:15, height: 15,borderColor: 'black',
                                         }}
                                 onChange={(checked) => {this.changeCatg1()}} 
                                 />
                             <CheckBox
-                                label='Nháy ảnh' labelStyle={{fontSize: 14, color: 'black'}}
+                                label='Nháy ảnh' labelStyle={{fontSize: 15, color: 'black'}}
                                 checked={this.state.checkedCategory2}
-                                checkboxStyle = {{width:13, height: 13, borderColor: 'black'}}
+                                checkboxStyle = {{width:15, height: 15, borderColor: 'black'}}
                                 onChange={(checked) => {this.changeCatg2()}} 
                                 />
                              <CheckBox
-                                label='Mẫu ảnh' labelStyle={{fontSize: 14, color: 'black'}}
+                                label='Mẫu ảnh' labelStyle={{fontSize: 15, color: 'black'}}
                                 checked={this.state.checkedCategory3}
-                                checkboxStyle = {{width:13, height: 13, borderColor: 'black'}}
+                                checkboxStyle = {{width:15, height: 15, borderColor: 'black'}}
                                 onChange={(checked) => {this.changeCatg3()}} 
                                 />
                         </View>
                         {this.state.checkedCategory3 === true?  
                         <Text style={{color: 'black',marginTop: 15}}>Số đo 3 vòng</Text>: null }
+                        {this.errorViewCircle()}
                            
                        
                         {this.state.checkedCategory3 === true? 
@@ -390,8 +369,8 @@ export default class Signup extends Component {
                     
                     <View style={stylesSignUp.footSignup}>
                         <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
-                                onPress={this.goNextPageCategory.bind(this)}>
-                                <Text style={{marginTop: 4, color:'white'}}>Tiếp</Text>
+                                onPress={this.goNextPageGender.bind(this)}>
+                                <Text style={{marginTop: 4, color:'white'}}>Đăng ký</Text>
                                     {/* <SignupController ref={ref => (this._b = ref)} /> */}
                         </TouchableOpacity>
                         
@@ -399,166 +378,146 @@ export default class Signup extends Component {
                  </View>
              )
          }
-        else if(this.state.checkViewEmail === true){ 
-            return(
-                <View>
-                    <View style={stylesSignUp.textLogin}>
-                        <Text style={{color: 'black', marginTop: 10}}>Email</Text>
-                        {this.errorView()}
-                            <TextInput 
-                                style={stylesSignUp.textInputLogin}
-                                placeholder="Email"
-                                onChangeText={(email) => this.setState({ email })}     
-                                value={this.state.email}                       
-                            />
-                    </View>
-                    <View style={stylesSignUp.footSignup}>
-                        <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
-                                onPress={this.goNextPageEmail.bind(this)}>
-                                <Text style={{marginTop: 4, color:'white'}}>Tiếp</Text>
-                                    {/* <SignupController ref={ref => (this._b = ref)} /> */}
-                        </TouchableOpacity>
-                        
-                     </View>
-                </View>
-            )
-        }
-        else if(this.state.checkViewPass === true){ 
-            return(
-                <View>
-                    <View style={stylesSignUp.textLogin}>
-                        <Text style={{color: 'black'}}>Mật khẩu</Text>
-                        {this.errorView()}
-                        <TextInput 
-                                style={stylesSignUp.textInputLogin}
-                                secureTextEntry={true}
-                                placeholder="Mật khẩu"
-                                onChangeText={(password) => this.setState({ password })}
-                                value={this.state.password}
-                            />
-                    </View>
-                    <View style={stylesSignUp.footSignup}>
-                            <TouchableOpacity style={[stylesSignUp.boxLogin, stylesSignUp.boxTwo]}
-                                onPress={this.goNextPagePass.bind(this)}>
-                                <Text style={{marginTop: 4, color:'white'}}>Đăng ký tài khoản</Text>
-                                    {/* <SignupController ref={ref => (this._b = ref)} /> */}
-                            </TouchableOpacity>
-                    </View>
-                </View>
-            )
-         }
-         
-         
      }
     goNextPageName(){ 
-         if(this.state.name !== ''){ 
+        if(this.state.name === ''){ 
             this.setState({ 
-                checkViewName: false, checkTextName: false, checkViewGender: true, checkTextGender: false
-             })
-         }
-         else if(this.state.name === ''){ 
-            this.setState({ 
-                checkViewName: true, checkTextName: true, checkViewGender: false, checkTextGender: false
+                checkViewName: true, checkTextName: true, checkViewGender: false, checkTextGender: false,
             })
         }
+        if(this.state.date === ''){ 
+            this.setState({ 
+                checkViewName: true, checkTextBirth: true, checkViewGender: false, checkTextGender: false,
+            })
+        }
+        if(this.state.email === ''){ 
+            this.setState({ 
+                checkViewName: true, checkTextEmail: true, checkViewGender: false, checkTextGender: false,
+                checkTextEmailIndentify: false, 
+            })
+        }
+        if(this.state.password === ''){ 
+            this.setState({ 
+                checkViewName: true, checkTextPass: true, checkViewGender: false, checkTextGender: false,
+                checkTextPassLength: false
+            })
+        }
+         if(this.state.name !== ''){ 
+            this.setState({ 
+                checkTextName: false, 
+             })
+         }
+
+         if(this.state.date !== ''){ 
+            this.setState({ 
+                checkTextBirth: false
+            })
+        }
+         if(this.state.email !== ''){ 
+            const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (reg.test(this.state.email) === true){
+                this.setState({ 
+                   checkTextEmail: false,  checkTextEmailIndentify: false
+                })
+            }
+            else{
+                this.setState({ 
+                    checkTextEmail: false, checkTextEmailIndentify: true, 
+                })
+            }
+        }
+         if(this.state.password !== ''){ 
+            this.setState({ 
+                checkTextPass: false, checkTextPassLength: false,
+            })
+        }
+        else if(this.state.password.length < 6){ 
+            this.setState({ 
+                checkTextPassLength: true, checkTextPass: false
+            })
+        }
+       
+        if(this.state.name !== '' && this.state.date !== ''  
+                && this.state.email !== '' && this.state.password !== ''){ 
+                    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (reg.test(this.state.email) === true){
+                    this.setState({ 
+                    checkTextEmail: false,  checkTextEmailIndentify: false,
+                    })
+                   
+                }
+                else if (reg.test(this.state.email) === false){
+                    this.setState({ 
+                        checkTextEmail: false, checkTextEmailIndentify: true, 
+                    })
+                }
+                if(this.state.password.length < 6){ 
+                    this.setState({ 
+                         checkTextPassLength: true, checkTextPass: false
+                    })
+                }
+                else if(this.state.password.length >= 6 ){ 
+                    this.setState({ 
+                        checkTextPassLength: false, checkTextPass: false
+                    })
+                }
+                if((this.state.password.length) >= 6 && (reg.test(this.state.email) === true)){ 
+                    this.setState({ 
+                        checkViewName: false, checkViewGender: true, checkTextGender: false,
+                        checkTextPassLength: false, checkTextPass: false
+                    })
+                }
+            }
     }       
     goNextPageGender(){ 
         if(this.state.checkedGender1 === true || this.state.checkedGender2 === true){ 
             this.setState({ 
-                checkViewGender: false, checkTextGender: false, checkViewBirth: true
+               checkTextGender: false, 
             })
         }
         else if(this.state.checkedGender1 === false && this.state.checkedGender2 === false){ 
             this.setState({ 
-                checkViewGender: true, checkTextGender: true, checkViewBirth: false
+                checkTextGender: true
             })
         }
-
-    }
-    goNextPageBirth(){ 
-        if(this.state.date === null){ 
-            this.setState({ 
-                checkViewBirth: true, checkTextBirth: true, checkViewCategory: false
-            })
-        }
-        else if(this.state.date !== null){ 
-            this.setState({ 
-                checkViewBirth: false, checkTextBirth: false, checkViewCategory: true
-            })
-        }
-    }
-    goNextPageCategory(){
+   
        if(this.state.checkedCategory1 === true){ 
             this.setState({ 
-               checkViewCategory: false, checkTextCategory: false, checkViewEmail: true, checkTextCircle: false
+               checkTextCategory: false, checkTextCircle: false
            })
        }
        else if(this.state.checkedCategory2 === true){ 
            this.setState({ 
-               checkViewCategory: false, checkTextCategory: false, checkViewEmail: true, checkTextCircle: false
+             checkTextCategory: false, checkTextCircle: false
            })
        }
        else if(this.state.checkedCategory3 === true){ 
            if(this.state.circle1 === '' || this.state.circle2 === '' 
                 || this.state.circle3 === '' || this.state.heightt === ''){ 
                     this.setState({ 
-                        checkViewCategory: true, checkTextCircle: true, 
-                        checkViewEmail: false, checkTextCategory: false
+                        checkViewGender: true, checkTextCircle: true, checkTextCategory: false
                     })
                 }
             else { 
                 this.setState({ 
-                    checkViewCategory: false, checkTextCategory: false, 
-                    checkViewEmail: true, checkTextCircle: false
+                     checkTextCategory: false, checkTextCircle: false
                 })
             }
        }
        else if(this.state.checkedCategory1 === false || this.state.checkedCategory2 === false
             || this.state.checkedCategory3 === false){ 
                 this.setState({ 
-                    checkViewCategory: true, checkTextCategory: true, checkViewEmail: false, 
-                    checkTextCircle: false
+                    checkViewGender: true, checkTextCategory: true, checkTextCircle: false
                 })
             }
-    }
-    goNextPageEmail(){ 
-        if(this.state.email === ''){ 
-            this.setState({ 
-                checkViewEmail: true, checkTextEmail: true, checkViewPass: false
-            })
-        }
-        else if(this.state.email !== ''){ 
-            const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if (reg.test(this.state.email) === true){
-                this.setState({ 
-                    checkViewEmail: false, checkTextEmail: false, checkViewPass: true, checkTextEmailIndentify: false
-                })
-            }
-            else{
-                this.setState({ 
-                    checkViewEmail: true, checkTextEmail: false, checkTextEmailIndentify: true, checkVie: false
-                })
-            }
-        }
-    }
-    goNextPagePass(){ 
-        if(this.state.password === ''){ 
-            this.setState({ 
-                checkViewPass: true, checkTextPass: true, checkTextPassLength: false
-            })
-        }
-        else if(this.state.password.length < 6){ 
-            this.setState({ 
-                checkViewPass: true, checkTextPassLength: true, checkTextPass: false
-            })
-        }
-        else {
+        if((this.state.checkedGender1 === true || this.state.checkedGender2 === true) 
+                && (this.state.checkedCategory1 === true || this.state.checkedCategory2 === true 
+                    || (this.state.checkedCategory3 === true && this.state.circle1 !== ''
+                        && this.state.circle2 !== '' && this.state.circle3 !== '' && this.state.heightt !== ''))
+        ){ 
             this.Signup();
         }
     }
-
-
-
       Signup(){ 
          FirebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => { 
@@ -688,13 +647,11 @@ export default class Signup extends Component {
 const stylesSignUp = StyleSheet.create({
     container: {
         flex:1,
-        flexDirection: 'column',
-        backgroundColor: 'white',
+        flexDirection: 'column', backgroundColor: 'white',
     },
   
     img: {
-        width: 500,
-        height: 250
+        width: 500, height: 250
     },
     headerSignup: { 
         flexDirection: 'row',
@@ -705,13 +662,17 @@ const stylesSignUp = StyleSheet.create({
     textLogin: {
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: 60
+        marginTop: 20
+    },
+    textLoginGender: { 
+        flexDirection: 'column',
+        marginTop: 40, marginLeft: 20, marginRight: 20
     },
 
     footSignup: { 
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: 60
+        marginTop: 30
     },
 
     textInputLogin: {

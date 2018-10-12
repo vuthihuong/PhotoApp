@@ -1134,7 +1134,7 @@ export default class AlbumPose extends Component{
                 snapshot.forEach(function(childSnapshot) {
                     var key = childSnapshot.key;
                     let childData = childSnapshot.val();
-                    dataPose1.push(childData) // mảng hai chiều
+                    dataPose1.push(childData) // mảng hai chiều object [[{},{}], [{},{}]]
                         
                     });
                  }))
