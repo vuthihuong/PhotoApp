@@ -18,6 +18,7 @@ import InfoCustomer from './src/View/Info/InfoCustomer'
 import ResetPass from './src/View/Info/ResetPass'
 import ListFavorite from './src/View/Main/ListFavorite'
 import InfoDetailPhoto from './src/View/Info/InfoDetailPhoto'
+import ForgotPass from './src/View/Login/forgotPass'
 
 import MainPhoto from './src/View/Main/MainPhoto'
 import SearchAddress from './src/View/Search/SearchAddress'
@@ -121,6 +122,9 @@ const Mainapp = createStackNavigator({
     },
     AddressMap: { 
         screen: AddressMap
+    },
+    ForgotPass: { 
+        screen: ForgotPass
     }
     },{
       headerMode:'none'

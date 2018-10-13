@@ -380,7 +380,7 @@ export default class AlbumPose extends Component{
 
     listenForItems(itemRef){ 
         var items  = [];
-            this.itemRef.ref().on('child_added', (dataSnapshot)=> { 
+            this.itemRef.ref('ImagePose/OnePerson/FeMale/AoDai/').on('child_added', (dataSnapshot)=> { 
                 var childData = dataSnapshot.val();
                   items.push({ 
                     name: dataSnapshot.val(),
@@ -1158,6 +1158,21 @@ export default class AlbumPose extends Component{
             for(var i = 0; i < dataView1.length; i++) {
                 dataView = dataView.concat(dataView1[i]);
             }
+            var dataAccom1 = [];
+            var dataAccom = [];
+                            
+                FirebaseApp.database().ref('DataCategoryImage/Accomodation/').on('value', (function (snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    dataAccom1.push(childData) // mảng hai chiều
+                                    
+                    });
+                }))
+                // biến đổi về mảng một chiều
+                for(var i = 0; i < dataAccom1.length; i++) {
+                    dataAccom = dataAccom.concat(dataAccom1[i]);
+                }
         return(
             <ScrollView style={stylesAlbumPose.container}>
                 <View style={stylesAlbumPose.container}>
@@ -1564,7 +1579,7 @@ export default class AlbumPose extends Component{
                             
                             </View>) : null}
                         
-                        {/* {(this.state.checkedSecondGender1 === true && 
+                        {(this.state.checkedSecondGender1 === true && 
                             (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) )
                             || (this.state.checkedSecondGender2 === true && 
@@ -1572,7 +1587,7 @@ export default class AlbumPose extends Component{
                                     || this.state.checkedPersonGroup) ) ?
                             
                            ( <View style={stylesAlbumPose.checkThird}>
-                                <View style={{width: 320}}>
+                                <View style={{width: 160}}>
                                     <Dropdown  data={dataClother} label='Trang phục' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(clother) => { clother= this.setState({clother}) }}
@@ -1586,7 +1601,7 @@ export default class AlbumPose extends Component{
                                         value = {this.state.accom}
                                         />
                                 </View>
-                            </View>) :null} */}
+                            </View>) :null}
                         {(this.state.checkedSecondGender1 === true && 
                             (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) )
@@ -1595,21 +1610,15 @@ export default class AlbumPose extends Component{
                                     || this.state.checkedPersonGroup) ) ?
 
                             (<View style={stylesAlbumPose.checkThird}>
-                                <View style={{width: 100}}>
-                                    <Dropdown  data={dataClother} label='Trang phục' fontSize = {13}
-                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
-                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
-                                        value = {this.state.clother}
-                                        />
-                                </View>
-                                <View style={{width: 100}}>
+                                
+                                <View style={{width: 160}}>
                                     <Dropdown  data={dataView} label='Bối cảnh' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(view) => { view= this.setState({view}) }}
                                         value = {this.state.view}
                                         />
                                 </View>
-                                <View style={{width: 100}}>
+                                <View style={{width: 160}}>
                                     <Dropdown  data={dataPose} label='Tư thế'  fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(pose) => { pose= this.setState({pose}) }}
@@ -1620,7 +1629,7 @@ export default class AlbumPose extends Component{
                             </View>): null}
 
 
-                        {/* {(this.state.checkedSecondDoubleGender1 === true && 
+                        {(this.state.checkedSecondDoubleGender1 === true && 
                             (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) )
                             || (this.state.checkedSecondDoubleGender2 === true && 
@@ -1631,7 +1640,7 @@ export default class AlbumPose extends Component{
                                     || this.state.checkedPersonGroup)) ?
                             
                            ( <View style={stylesAlbumPose.checkThird}>
-                                <View style={{width: 320}}>
+                                <View style={{width: 160}}>
                                     <Dropdown  data={dataClother} label='Trang phục' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(clother) => { clother= this.setState({clother}) }}
@@ -1645,7 +1654,7 @@ export default class AlbumPose extends Component{
                                         value = {this.state.accom}
                                         />
                                 </View>
-                            </View>) :null} */}
+                            </View>) :null}
                         {(this.state.checkedSecondDoubleGender1 === true && 
                             (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) )
@@ -1657,21 +1666,14 @@ export default class AlbumPose extends Component{
                                     || this.state.checkedPersonGroup)) ?
 
                             (<View style={stylesAlbumPose.checkThird}>
-                                 <View style={{width: 100}}>
-                                    <Dropdown  data={dataClother} label='Trang phục' fontSize = {13}
-                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
-                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
-                                        value = {this.state.clother}
-                                        />
-                                </View>
-                                <View style={{width: 100}}>
+                                <View style={{width: 160}}>
                                     <Dropdown  data={dataView} label='Bối cảnh' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(view) => { view= this.setState({view}) }}
                                         value = {this.state.view}
                                         />
                                 </View>
-                                <View style={{width: 100}}>
+                                <View style={{width: 160}}>
                                     <Dropdown  data={dataPose} label='Tư thế'  fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(pose) => { pose= this.setState({pose}) }}
@@ -1681,7 +1683,7 @@ export default class AlbumPose extends Component{
                             
                             </View>): null}
 
-                        {/* {(this.state.checkedSecondGroupGender1 === true && 
+                        {(this.state.checkedSecondGroupGender1 === true && 
                             (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) )
                             || (this.state.checkedSecondGroupGender2 === true && 
@@ -1692,7 +1694,7 @@ export default class AlbumPose extends Component{
                                     || this.state.checkedPersonGroup)) ?
                             
                            ( <View style={stylesAlbumPose.checkThird}>
-                                <View style={{width: 100}}>
+                                <View style={{width: 160}}>
                                     <Dropdown  data={dataClother} label='Trang phục' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(clother) => { clother= this.setState({clother}) }}
@@ -1706,7 +1708,7 @@ export default class AlbumPose extends Component{
                                         value = {this.state.accom}
                                         />
                                 </View>
-                            </View>) :null} */}
+                            </View>) :null}
                         {(this.state.checkedSecondGroupGender1 === true && 
                             (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) )
@@ -1718,21 +1720,14 @@ export default class AlbumPose extends Component{
                                     || this.state.checkedPersonGroup)) ?
 
                             (<View style={stylesAlbumPose.checkThird}>
-                                <View style={{width: 100}}>
-                                    <Dropdown  data={dataClother} label='Trang phục' fontSize = {13}
-                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
-                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
-                                        value = {this.state.clother}
-                                        />
-                                </View>
-                                <View style={{width: 100}}>
+                                <View style={{width: 160}}>
                                     <Dropdown  data={dataView} label='Bối cảnh' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(view) => { view= this.setState({view}) }}
                                         value = {this.state.view}
                                         />
                                 </View>
-                                <View style={{width: 100}}>
+                                <View style={{width: 160}}>
                                     <Dropdown  data={dataPose} label='Tư thế'  fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(pose) => { pose= this.setState({pose}) }}
@@ -1750,7 +1745,7 @@ export default class AlbumPose extends Component{
                                     dataSource = {this.state.dataSource}
                                     renderRow = {(rowData)=> 
                                         <View>
-                                            <WebImage source= {{uri: `${rowData.url}`}} style={{height: 160, width: 160, marginBottom:10, flex:1}} />
+                                            <WebImage source= {{uri: `${rowData.url}`}}   resizeMode={'cover'}  style={{height: 160, width: 160, marginBottom:10, flex:1}} />
                                         </View>
                                     }
                                 />

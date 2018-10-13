@@ -30,7 +30,8 @@ export default class ResetPass extends Component {
     }
     save(){ 
         let user = FirebaseApp.auth().currentUser;
-            if((this.state.oldPass === oldPass) && (this.state.reNewPass === this.state.newPass)){
+            if((this.state.oldPass === oldPass) && (this.state.reNewPass === this.state.newPass) 
+                        && this.state.newPass.length >=6){
                 user.updatePassword(this.state.newPass).then(() => {
                         // Update successful.
                         }, (error) => {
@@ -46,6 +47,9 @@ export default class ResetPass extends Component {
             }
             else if( this.state.reNewPass !== this.state.newPass){ 
                 Alert.alert("Nhập xác nhận mật khẩu không trùng khớp mật khẩu mới")
+            }
+            else if(this.state.newPass.length < 6){ 
+                Alert.alert("Mật khẩu có ít nhất 6 ký tự")
             }
 
            

@@ -366,8 +366,8 @@ export default class InfoPhoto extends Component {
                                 <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Lưu</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={stylesInfoCus.btnInfo}
-                                // onPress={() => this.props.navigation.navigate('ResetPass')}>
-                                 onPress={() => this. getDataCostImg()}>
+                                onPress={() => this.props.navigation.navigate('ResetPass')}>
+                                 {/* onPress={() => this. getDataCostImg()}> */}
                                 <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Đổi mật khẩu</Text>
                             </TouchableOpacity>
                     </View>
