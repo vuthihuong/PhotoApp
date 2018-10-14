@@ -30,6 +30,7 @@ export default class MenuModal extends Component {
     render() {
         return (
          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
+           <StatusBar translucent backgroundColor="rgba(0,0,0,0.2)"/>
           <View style ={stylesMenu.container}>
               <View style={stylesMenu.txt}>
               <TouchableOpacity   style={{width: 290, height: 35, borderWidth: 1,

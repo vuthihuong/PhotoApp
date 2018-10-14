@@ -19,6 +19,8 @@ export default class AlbumPose extends Component{
             checkedSecondDoubleGender1: false, checkedSecondDoubleGender2: false,
             checkedSecondDoubleGender3: false, checkedSecondGroupGender1: false,
             checkedSecondGroupGender2: false, checkedSecondGroupGender3: false,
+            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false, checkedThsAgeOnePerson3: false,
+            checkedThsAgeOnePerson4: false, checkedThsAgeOnePerson5: false,
             clother: '', view: '', accom: '', pose: '', search: '',
              dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2})
         }
@@ -244,12 +246,101 @@ export default class AlbumPose extends Component{
             })
         }
     }
+    checkThsAgeOnePerson1(){
+        if(this.state.checkedThsAgeOnePerson1 === false){ 
+            this.setState({ 
+                checkedThsAgeOnePerson1: true,
+                checkedThsAgeOnePerson2: false,
+                checkedThsAgeOnePerson3: false,
+                checkedThsAgeOnePerson4: false,
+                checkedThsAgeOnePerson5: false
+            })
+        }
+        else if(this.state.checkedThsAgeOnePerson1 === true){ 
+            this.setState({ 
+                checkedThsAgeOnePerson1: false
+            })
+        }
+    }
+
+    checkThsAgeOnePerson2(){
+        if(this.state.checkedThsAgeOnePerson2 === false){ 
+            this.setState({ 
+                checkedThsAgeOnePerson2: true,
+                checkedThsAgeOnePerson1: false,
+                checkedThsAgeOnePerson3: false,
+                checkedThsAgeOnePerson4: false,
+                checkedThsAgeOnePerson5: false
+            })
+        }
+        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+            this.setState({ 
+                checkedThsAgeOnePerson2: false
+            })
+        }
+    }
+    checkThsAgeOnePerson3(){
+        if(this.state.checkedThsAgeOnePerson3 === false){ 
+            this.setState({ 
+                checkedThsAgeOnePerson3: true,
+                checkedThsAgeOnePerson2: false,
+                checkedThsAgeOnePerson1: false,
+                checkedThsAgeOnePerson4: false,
+                checkedThsAgeOnePerson5: false
+            })
+        }
+        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+            this.setState({ 
+                checkedThsAgeOnePerson3: false
+            })
+        }
+    }
+
+    checkThsAgeOnePerson4(){
+        if(this.state.checkedThsAgeOnePerson4 === false){ 
+            this.setState({ 
+                checkedThsAgeOnePerson4: true,
+                checkedThsAgeOnePerson2: false,
+                checkedThsAgeOnePerson3: false,
+                checkedThsAgeOnePerson1: false,
+                checkedThsAgeOnePerson5: false
+            })
+        }
+        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+            this.setState({ 
+                checkedThsAgeOnePerson4: false
+            })
+        }
+    }
+
+    checkThsAgeOnePerson5(){
+        if(this.state.checkedThsAgeOnePerson5 === false){ 
+            this.setState({ 
+                checkedThsAgeOnePerson5: true,
+                checkedThsAgeOnePerson2: false,
+                checkedThsAgeOnePerson3: false,
+                checkedThsAgeOnePerson4: false,
+                checkedThsAgeOnePerson1: false
+            })
+        }
+        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+            this.setState({ 
+                checkedThsAgeOnePerson5: false
+            })
+        }
+    }
 
     changeStatusPersonOne(){ 
         this.setState({ 
             checkedPersonOne: false,
             checkedSecondGender1: false,
-            checkedSecondGender1: false, 
+            checkedSecondGender2: false, 
+            checkedThsAgeOnePerson1: false,
+            checkedThsAgeOnePerson2: false,
+            checkedThsAgeOnePerson3: false,
+            checkedThsAgeOnePerson4: false,
+            checkedThsAgeOnePerson5: false,
+
         })
         var items = [];
         this.actGetData('ImagePose/OnePerson/FeMale/AoDai/', items);
@@ -289,7 +380,12 @@ export default class AlbumPose extends Component{
     changeStatusGender1(){ 
         this.setState({ 
             checkedSecondGender1: false,
-            checkedSecondGender2: false
+            checkedSecondGender2: false,
+            checkedThsAgeOnePerson1: false,
+            checkedThsAgeOnePerson2: false,
+            checkedThsAgeOnePerson3: false,
+            checkedThsAgeOnePerson4: false,
+            checkedThsAgeOnePerson5: false,
         })
         if(this.state.checkedPersonOne === true){ 
             var items = [];
@@ -301,14 +397,54 @@ export default class AlbumPose extends Component{
     changeStatusGender2(){ 
         this.setState({ 
             checkedSecondGender1: false,
-            checkedSecondGender2: false
+            checkedSecondGender2: false,
+            checkedThsAgeOnePerson1: false,
+            checkedThsAgeOnePerson2: false,
+            checkedThsAgeOnePerson3: false,
+            checkedThsAgeOnePerson4: false,
+            checkedThsAgeOnePerson5: false,
         })
         if(this.state.checkedPersonOne === true){ 
             var items = [];
             this.actGetData('ImagePose/OnePerson/FeMale/Coat/', items);
             this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
-            this.actGetData('ImagePose/OnePerson/Male/Uniform/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Uniform/', items);``
             }
+    }
+    changeStatusAgePersonOne1(){ 
+        this.setState({ 
+            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
+            checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
+            checkedThsAgeOnePerson5: false,
+        })
+    }
+    changeStatusAgePersonOne2(){ 
+        this.setState({ 
+            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
+            checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
+            checkedThsAgeOnePerson5: false,
+        })
+    }
+    changeStatusAgePersonOne3(){ 
+        this.setState({ 
+            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
+            checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
+            checkedThsAgeOnePerson5: false,
+        })
+    }
+    changeStatusAgePersonOne4(){ 
+        this.setState({ 
+            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
+            checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
+            checkedThsAgeOnePerson5: false,
+        })
+    }
+    changeStatusAgePersonOne5(){ 
+        this.setState({ 
+            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
+            checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
+            checkedThsAgeOnePerson5: false,
+        })
     }
 
     changeStatusDoubleGender1(){ 
@@ -1225,7 +1361,13 @@ export default class AlbumPose extends Component{
                                 
                             </View>): null}
                         {(this.state.checkedPersonOne === true 
-                            && this.state.checkedSecondGender1 === true) ? 
+                            && this.state.checkedSecondGender1 === true
+                            && ( this.state.checkedThsAgeOnePerson1 === false 
+                                &&  this.state.checkedThsAgeOnePerson2 === false
+                                &&  this.state.checkedThsAgeOnePerson3 === false
+                                &&  this.state.checkedThsAgeOnePerson4 === false
+                                &&  this.state.checkedThsAgeOnePerson5 === false
+                               )) ? 
                             <View style={stylesAlbumPose.checkCondition1}>
                                 <TouchableOpacity
                                     onPress={() => this.changeStatusPersonOne()} 
@@ -1253,7 +1395,13 @@ export default class AlbumPose extends Component{
                                     
                             </View>: null}
                         {(this.state.checkedPersonOne === true 
-                            && this.state.checkedSecondGender2 === true) ? 
+                            && this.state.checkedSecondGender2 === true 
+                                && ( this.state.checkedThsAgeOnePerson1 === false 
+                                     &&  this.state.checkedThsAgeOnePerson2 === false
+                                     &&  this.state.checkedThsAgeOnePerson3 === false
+                                     &&  this.state.checkedThsAgeOnePerson4 === false
+                                     &&  this.state.checkedThsAgeOnePerson5 === false
+                                    ))  ? 
                             <View style={stylesAlbumPose.checkCondition1}>
                                 <TouchableOpacity
                                     onPress={() => this.changeStatusPersonOne()} 
@@ -1276,6 +1424,379 @@ export default class AlbumPose extends Component{
                                     >
                                     <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                             Nữ
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender2 === true 
+                                && this.state.checkedThsAgeOnePerson1 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne1()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nữ
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Thiếu nhi
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender2 === true 
+                                && this.state.checkedThsAgeOnePerson2 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne2()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nữ
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Thiếu niên
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender2 === true 
+                                && this.state.checkedThsAgeOnePerson3 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne3()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nữ
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Thanh niên
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender2 === true 
+                                && this.state.checkedThsAgeOnePerson4 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne4()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nữ
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Trung niên
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender2 === true 
+                                && this.state.checkedThsAgeOnePerson5 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne5()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nữ
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Người cao tuổi
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender1 === true 
+                                && this.state.checkedThsAgeOnePerson1 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne1()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nam
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Thiếu nhi
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender1 === true 
+                                && this.state.checkedThsAgeOnePerson2 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne2()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nam
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Thiếu niên
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender1 === true 
+                                && this.state.checkedThsAgeOnePerson3 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne3()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nam
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Thanh niên
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender1 === true 
+                                && this.state.checkedThsAgeOnePerson4 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne4()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nam
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Trung niên
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>: null}
+                        {(this.state.checkedPersonOne === true 
+                            && this.state.checkedSecondGender1 === true 
+                                && this.state.checkedThsAgeOnePerson5 === true) ? 
+                            <View style={stylesAlbumPose.checkCondition1}>
+                                <TouchableOpacity
+                                    onPress={() => this.changeStatusPersonOne()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                        Tất cả
+                                    </Text>
+                                 </TouchableOpacity>
+                                        <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusGender2()} 
+                                            >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Một người
+                                    </Text>
+                                </TouchableOpacity>
+                                         <Text> --> </Text>
+                                <TouchableOpacity
+                                        onPress={() => this.changeStatusAgePersonOne5()} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Nam
+
+                                    </Text>
+                                </TouchableOpacity>
+                                     <Text> --> </Text>
+                                <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Login')} 
+                                    >
+                                    <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
+                                            Người cao tuổi
                                     </Text>
                                 </TouchableOpacity>
                             </View>: null}
@@ -1579,11 +2100,68 @@ export default class AlbumPose extends Component{
                             
                             </View>) : null}
                         
-                        {(this.state.checkedSecondGender1 === true && 
-                            (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
-                                    || this.state.checkedPersonGroup) )
-                            || (this.state.checkedSecondGender2 === true && 
-                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                        {((this.state.checkedSecondGender1 === true || this.state.checkedSecondGender2 === true)  
+                            && (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                                    || this.state.checkedPersonGroup === true) && 
+                                (this.state.checkedThsAgeOnePerson1 === false && this.state.checkedThsAgeOnePerson2 === false 
+                                    && this.state.checkedThsAgeOnePerson3 === false && this.state.checkedThsAgeOnePerson4 === false
+                                    && this.state.checkedThsAgeOnePerson5 === false) )?
+                            
+                                    (<View style={stylesAlbumPose.checkSecond}>
+                                        <CheckBox 
+                                            label='Thiếu nhi'
+                                            labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                            checkboxStyle = {{width:15, height: 15}} 
+                                            checked={this.state.checkedThsAgeOnePerson1}
+                                            onChange={(checked) => {this.checkThsAgeOnePerson1()}} 
+                                                            /> 
+                                        <CheckBox 
+                                            label='Thiếu niên'
+                                            labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                            checkboxStyle = {{width:15, height: 15}} 
+                                            checked={this.state.checkedThsAgeOnePerson2}
+                                            onChange={(checked) => {this.checkThsAgeOnePerson2()}} 
+                                                            /> 
+                                        <CheckBox 
+                                            label='Thanh niên'
+                                            labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                            checkboxStyle = {{width:15, height: 15}} 
+                                            checked={this.state.checkedThsAgeOnePerson3}
+                                            onChange={(checked) => {this.checkThsAgeOnePerson3()}} 
+                                                            /> 
+                                    
+                                    </View>) : null}
+                        {((this.state.checkedSecondGender1 === true || this.state.checkedSecondGender2) 
+                            && (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                                        || this.state.checkedPersonGroup === true) && 
+                                    (this.state.checkedThsAgeOnePerson1 === false && this.state.checkedThsAgeOnePerson2 === false 
+                                        && this.state.checkedThsAgeOnePerson3 === false && this.state.checkedThsAgeOnePerson4 === false
+                                        && this.state.checkedThsAgeOnePerson5 === false) ) ?
+
+                                    (<View style={stylesAlbumPose.checkSecond}>
+                                        <CheckBox 
+                                            label='Trung niên'
+                                            labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                            checkboxStyle = {{width:15, height: 15}} 
+                                            checked={this.state.checkedThsAgeOnePerson4}
+                                            onChange={(checked) => {this.checkThsAgeOnePerson4()}} 
+                                                            /> 
+                                        <CheckBox 
+                                            label='Người cao tuổi'
+                                            labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                            checkboxStyle = {{width:15, height: 15}} 
+                                            checked={this.state.checkedThsAgeOnePerson5}
+                                            onChange={(checked) => {this.checkThsAgeOnePerson5()}} 
+                                                            /> 
+                                    </View>) : null}
+
+
+                        {((this.state.checkedSecondGender1 === true || this.state.checkedSecondGender2 === true)
+                            && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
+                                || this.state.checkedThsAgeOnePerson3 === true 
+                                    || this.state.checkedThsAgeOnePerson4 === true 
+                                        || this.state.checkedThsAgeOnePerson5 === true )
+                            && (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) ) ?
                             
                            ( <View style={stylesAlbumPose.checkThird}>
@@ -1602,15 +2180,15 @@ export default class AlbumPose extends Component{
                                         />
                                 </View>
                             </View>) :null}
-                        {(this.state.checkedSecondGender1 === true && 
-                            (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                        {((this.state.checkedSecondGender1 === true || this.state.checkedSecondGender2 === true)
+                            && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
+                                || this.state.checkedThsAgeOnePerson3 === true 
+                                    || this.state.checkedThsAgeOnePerson4 === true 
+                                        || this.state.checkedThsAgeOnePerson5 === true )
+                            && (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) )
-                            || (this.state.checkedSecondGender2 === true && 
-                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
-                                    || this.state.checkedPersonGroup) ) ?
-
+                             ?
                             (<View style={stylesAlbumPose.checkThird}>
-                                
                                 <View style={{width: 160}}>
                                     <Dropdown  data={dataView} label='Bối cảnh' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
@@ -1627,8 +2205,7 @@ export default class AlbumPose extends Component{
                                 </View>
                             
                             </View>): null}
-
-
+                        
                         {(this.state.checkedSecondDoubleGender1 === true && 
                             (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) )
@@ -1655,6 +2232,36 @@ export default class AlbumPose extends Component{
                                         />
                                 </View>
                             </View>) :null}
+                        {(this.state.checkedSecondDoubleGender1 === true && 
+                            (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                                    || this.state.checkedPersonGroup) )
+                            || (this.state.checkedSecondDoubleGender2 === true && 
+                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                                    || this.state.checkedPersonGroup) )
+                            || (this.state.checkedSecondDoubleGender3 === true &&
+                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                                    || this.state.checkedPersonGroup)) ?
+
+                            (<View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataView} label='Bối cảnh' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(view) => { view= this.setState({view}) }}
+                                        value = {this.state.view}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataPose} label='Tư thế'  fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(pose) => { pose= this.setState({pose}) }}
+                                        value = {this.state.pose}
+                                        />
+                                </View>
+                            
+                            </View>): null}
+                        
+
+
                         {(this.state.checkedSecondDoubleGender1 === true && 
                             (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
                                     || this.state.checkedPersonGroup) )
