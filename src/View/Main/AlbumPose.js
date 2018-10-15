@@ -1406,67 +1406,144 @@ export default class AlbumPose extends Component{
       }
 
     render(){ 
-        var dataClother1 = [];
-        var dataClother = [];
+        var dataClotherFemale1 = [];
+        var dataClotherFemale = [];
         
-            FirebaseApp.database().ref('DataCategoryImage/Clother/').on('value', (function (snapshot) {
+            FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/Clother/').on('value', (function (snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     var key = childSnapshot.key;
                     let childData = childSnapshot.val();
-                    dataClother1.push(childData) // mảng hai chiều
+                    dataClotherFemale1.push(childData) // mảng hai chiều
                     
                 });
             }))
          // biến đổi về mảng một chiều
-                for(var i = 0; i < dataClother1.length; i++) {
-                    dataClother = dataClother.concat(dataClother1[i]);
+                for(var i = 0; i < dataClotherFemale1.length; i++) {
+                    dataClotherFemale = dataClotherFemale.concat(dataClotherFemale1[i]);
                 }
-        var dataPose1 = [];
-        var dataPose = [];
+        var dataPoseFemale1 = [];
+        var dataPoseFemale = [];
                 
-            FirebaseApp.database().ref('DataCategoryImage/Pose/').on('value', (function (snapshot) {
+            FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/Pose/').on('value', (function (snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     var key = childSnapshot.key;
                     let childData = childSnapshot.val();
-                    dataPose1.push(childData) // mảng hai chiều object [[{},{}], [{},{}]]
+                    dataPoseFemale1.push(childData) // mảng hai chiều object [[{},{}], [{},{}]]
                         
                     });
                  }))
                  // biến đổi về mảng một chiều
-             for(var i = 0; i < dataPose1.length; i++) {
-                    dataPose = dataPose.concat(dataPose1[i]);
+             for(var i = 0; i < dataPoseFemale1.length; i++) {
+                dataPoseFemale = dataPoseFemale.concat(dataPoseFemale1[i]);
                 }
 
-        var dataView1 = [];
-        var dataView = [];
+        var dataViewFemale1 = [];
+        var dataViewFemale = [];
                         
-            FirebaseApp.database().ref('DataCategoryImage/View/').on('value', (function (snapshot) {
+            FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/View/').on('value', (function (snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                 var key = childSnapshot.key;
                 let childData = childSnapshot.val();
-                dataView1.push(childData) // mảng hai chiều
+                dataViewFemale1.push(childData) // mảng hai chiều
                                 
                 });
             }))
             // biến đổi về mảng một chiều
-            for(var i = 0; i < dataView1.length; i++) {
-                dataView = dataView.concat(dataView1[i]);
+            for(var i = 0; i < dataViewFemale1.length; i++) {
+                dataViewFemale = dataViewFemale.concat(dataViewFemale1[i]);
             }
-            var dataAccom1 = [];
-            var dataAccom = [];
+            var dataAccomFemale1 = [];
+            var dataAccomFemale = [];
                             
-                FirebaseApp.database().ref('DataCategoryImage/Accomodation/').on('value', (function (snapshot) {
+                FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/Accomodation/').on('value', (function (snapshot) {
                     snapshot.forEach(function(childSnapshot) {
                     var key = childSnapshot.key;
                     let childData = childSnapshot.val();
-                    dataAccom1.push(childData) // mảng hai chiều
+                    dataAccomFemale1.push(childData) // mảng hai chiều
                                     
                     });
                 }))
                 // biến đổi về mảng một chiều
-                for(var i = 0; i < dataAccom1.length; i++) {
-                    dataAccom = dataAccom.concat(dataAccom1[i]);
+                for(var i = 0; i < dataAccomFemale1.length; i++) {
+                    dataAccomFemale = dataAccomFemale.concat(dataAccomFemale1[i]);
                 }
+                var dataClotherMaleOldAge1= [];
+                var dataClotherMaleOldAge = [];
+                                
+                    FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/ClotherOldAge/').on('value', (function (snapshot) {
+                        snapshot.forEach(function(childSnapshot) {
+                        var key = childSnapshot.key;
+                        let childData = childSnapshot.val();
+                        dataClotherMaleOldAge1.push(childData) // mảng hai chiều
+                                        
+                        });
+                    }))
+                    // biến đổi về mảng một chiều
+                    for(var i = 0; i < dataClotherMaleOldAge1.length; i++) {
+                        dataClotherMaleOldAge = dataClotherMaleOldAge.concat(dataClotherMaleOldAge1[i]);
+                    }
+                
+                        var dataClotherMale1 = [];
+                        var dataClotherMale = [];
+                        
+                            FirebaseApp.database().ref('DataCategoryImage/OnePerson/Male/Clother/').on('value', (function (snapshot) {
+                                snapshot.forEach(function(childSnapshot) {
+                                    var key = childSnapshot.key;
+                                    let childData = childSnapshot.val();
+                                    dataClotherMale1.push(childData) // mảng hai chiều
+                                    
+                                });
+                            }))
+                         // biến đổi về mảng một chiều
+                                for(var i = 0; i < dataClotherMale1.length; i++) {
+                                    dataClotherMale = dataClotherMale.concat(dataClotherMale1[i]);
+                                }
+                var dataPoseMale1 = [];
+                var dataPoseMale = [];
+                        
+                    FirebaseApp.database().ref('DataCategoryImage/OnePerson/Male/Pose/').on('value', (function (snapshot) {
+                        snapshot.forEach(function(childSnapshot) {
+                            var key = childSnapshot.key;
+                            let childData = childSnapshot.val();
+                            dataPoseMale1.push(childData) // mảng hai chiều object [[{},{}], [{},{}]]
+                                
+                            });
+                         }))
+                         // biến đổi về mảng một chiều
+                     for(var i = 0; i < dataPoseMale1.length; i++) {
+                        dataPoseMale = dataPoseMale.concat(dataPoseMale1[i]);
+                        }
+        
+                var dataViewMale1 = [];
+                var dataViewMale = [];
+                                
+                    FirebaseApp.database().ref('DataCategoryImage/OnePerson/Male/View/').on('value', (function (snapshot) {
+                        snapshot.forEach(function(childSnapshot) {
+                        var key = childSnapshot.key;
+                        let childData = childSnapshot.val();
+                        dataViewMale1.push(childData) // mảng hai chiều
+                                        
+                        });
+                    }))
+                    // biến đổi về mảng một chiều
+                    for(var i = 0; i < dataViewMale1.length; i++) {
+                        dataViewMale = dataViewMale.concat(dataViewMale1[i]);
+                    }
+                    var dataAccomMale1 = [];
+                    var dataAccomMale = [];
+                                    
+                        FirebaseApp.database().ref('DataCategoryImage/OnePerson/Male/Accomodation/').on('value', (function (snapshot) {
+                            snapshot.forEach(function(childSnapshot) {
+                            var key = childSnapshot.key;
+                            let childData = childSnapshot.val();
+                            dataAccomMale1.push(childData) // mảng hai chiều
+                                            
+                            });
+                        }))
+                        // biến đổi về mảng một chiều
+                        for(var i = 0; i < dataAccomMale1.length; i++) {
+                            dataAccomMale = dataAccomMale.concat(dataAccomMale1[i]);
+                        }
             var dataTwoPerson1 = [];
             var dataTwoPerson = [];
                                 
@@ -1636,6 +1713,12 @@ export default class AlbumPose extends Component{
                                             Thiếu nhi
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
 
                         {(this.state.checkedPersonOne === true 
@@ -1674,6 +1757,12 @@ export default class AlbumPose extends Component{
                                             Thiếu niên
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
                         {(this.state.checkedPersonOne === true 
                             && this.state.checkedSecondGender2 === true 
@@ -1711,6 +1800,12 @@ export default class AlbumPose extends Component{
                                             Thanh niên
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
                         {(this.state.checkedPersonOne === true 
                             && this.state.checkedSecondGender2 === true 
@@ -1748,6 +1843,12 @@ export default class AlbumPose extends Component{
                                             Trung niên
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
                         {(this.state.checkedPersonOne === true 
                             && this.state.checkedSecondGender2 === true 
@@ -1785,6 +1886,12 @@ export default class AlbumPose extends Component{
                                             Người cao tuổi
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
 
                         {(this.state.checkedPersonOne === true 
@@ -1823,6 +1930,12 @@ export default class AlbumPose extends Component{
                                             Thiếu nhi
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
 
                         {(this.state.checkedPersonOne === true 
@@ -1861,6 +1974,12 @@ export default class AlbumPose extends Component{
                                             Thiếu niên
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
                         {(this.state.checkedPersonOne === true 
                             && this.state.checkedSecondGender1 === true 
@@ -1898,6 +2017,12 @@ export default class AlbumPose extends Component{
                                             Thanh niên
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
                         {(this.state.checkedPersonOne === true 
                             && this.state.checkedSecondGender1 === true 
@@ -1935,6 +2060,12 @@ export default class AlbumPose extends Component{
                                             Trung niên
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
                         {(this.state.checkedPersonOne === true 
                             && this.state.checkedSecondGender1 === true 
@@ -1972,6 +2103,12 @@ export default class AlbumPose extends Component{
                                             Người cao tuổi
                                     </Text>
                                 </TouchableOpacity>
+                                <View style={{marginLeft: 10, marginTop: -5}}>
+                                    <TouchableOpacity onPress={() => this.submit()}
+                                        style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
+                                        <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>: null}
                         {(this.state.checkedPersonTwo === true
                             && this.state.checkedSecondDoubleGender1 === false 
@@ -4540,30 +4677,113 @@ export default class AlbumPose extends Component{
                                     </View>) : null}
 
 
-                        {((this.state.checkedSecondGender1 === true || this.state.checkedSecondGender2 === true)
+                        {((this.state.checkedSecondGender1 === true)
                             && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
                                 || this.state.checkedThsAgeOnePerson3 === true 
-                                    || this.state.checkedThsAgeOnePerson4 === true 
-                                        || this.state.checkedThsAgeOnePerson5 === true )
+                                    || this.state.checkedThsAgeOnePerson4 === true )
                             && (this.state.checkedPersonOne === true) ) ?
                             
                            ( <View style={stylesAlbumPose.checkThird}>
                                 <View style={{width: 160}}>
-                                    <Dropdown  data={dataClother} label='Trang phục' fontSize = {13}
+                                    <Dropdown  data={dataClotherMale} label='Trang phục' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(clother) => { clother= this.setState({clother}) }}
                                         value = {this.state.clother}
                                         />
                                 </View>
                                 <View style={{width: 160}}>
-                                    <Dropdown  data={dataAccom} label='Phụ kiện' fontSize = {13}
+                                    <Dropdown  data={dataAccomMale} label='Phụ kiện' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(accom) => { accom= this.setState({accom}) }}
                                         value = {this.state.accom}
                                         />
                                 </View>
                             </View>) :null}
-                        {((this.state.checkedSecondGender1 === true || this.state.checkedSecondGender2 === true)
+                        {((this.state.checkedSecondGender1 === true)
+                            && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
+                                || this.state.checkedThsAgeOnePerson3 === true 
+                                    || this.state.checkedThsAgeOnePerson4 === true
+                                        || this.state.checkedThsAgeOnePerson5 === true )
+                            && (this.state.checkedPersonOne === true) )?
+                            (<View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataViewMale} label='Bối cảnh' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(view) => { view= this.setState({view}) }}
+                                        value = {this.state.view}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataPoseMale} label='Tư thế'  fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(pose) => { pose= this.setState({pose}) }}
+                                        value = {this.state.pose}
+                                        />
+                                </View>
+                            
+                            </View>): null}
+                        {((this.state.checkedSecondGender1 === true || this.state.checkedSecondDoubleGender2 === true)
+                            && this.state.checkedThsAgeOnePerson5 === true
+                                && this.state.checkedPersonOne === true ) ?
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherMaleOldAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomMale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {/* {(this.state.checkedSecondGender1 === true
+                            && this.state.checkedThsAgeOnePerson5 === true 
+                                 && this.state.checkedPersonOne === true )?
+                            (<View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataViewMale} label='Bối cảnh' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(view) => { view= this.setState({view}) }}
+                                        value = {this.state.view}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataPoseMale} label='Tư thế'  fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(pose) => { pose= this.setState({pose}) }}
+                                        value = {this.state.pose}
+                                        />
+                                </View>
+                            
+                            </View>): null} */}
+                        {(this.state.checkedSecondGender2 === true
+                            && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
+                                || this.state.checkedThsAgeOnePerson3 === true 
+                                    || this.state.checkedThsAgeOnePerson4 === true )
+                            && (this.state.checkedPersonOne === true) ) ?
+                            
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherFemale} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomFemale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {((this.state.checkedSecondGender2 === true)
                             && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
                                 || this.state.checkedThsAgeOnePerson3 === true 
                                     || this.state.checkedThsAgeOnePerson4 === true 
@@ -4572,14 +4792,14 @@ export default class AlbumPose extends Component{
                              ?
                             (<View style={stylesAlbumPose.checkThird}>
                                 <View style={{width: 160}}>
-                                    <Dropdown  data={dataView} label='Bối cảnh' fontSize = {13}
+                                    <Dropdown  data={dataViewFemale} label='Bối cảnh' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(view) => { view= this.setState({view}) }}
                                         value = {this.state.view}
                                         />
                                 </View>
                                 <View style={{width: 160}}>
-                                    <Dropdown  data={dataPose} label='Tư thế'  fontSize = {13}
+                                    <Dropdown  data={dataPoseFemale} label='Tư thế'  fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(pose) => { pose= this.setState({pose}) }}
                                         value = {this.state.pose}
@@ -4611,14 +4831,14 @@ export default class AlbumPose extends Component{
                             
                            ( <View style={stylesAlbumPose.checkThird}>
                                 <View style={{width: 160}}>
-                                    <Dropdown  data={dataClother} label='Trang phục' fontSize = {13}
+                                    <Dropdown  data={dataClotherFemale} label='Trang phục' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(clother) => { clother= this.setState({clother}) }}
                                         value = {this.state.clother}
                                         />
                                 </View>
                                 <View style={{width: 160}}>
-                                    <Dropdown  data={dataAccom} label='Phụ kiện' fontSize = {13}
+                                    <Dropdown  data={dataAccomFemale} label='Phụ kiện' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(accom) => { accom= this.setState({accom}) }}
                                         value = {this.state.accom}
@@ -4648,14 +4868,14 @@ export default class AlbumPose extends Component{
 
                             (<View style={stylesAlbumPose.checkThird}>
                                 <View style={{width: 160}}>
-                                    <Dropdown  data={dataView} label='Bối cảnh' fontSize = {13}
+                                    <Dropdown  data={dataViewFemale} label='Bối cảnh' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(view) => { view= this.setState({view}) }}
                                         value = {this.state.view}
                                         />
                                 </View>
                                 <View style={{width: 160}}>
-                                    <Dropdown  data={dataPose} label='Tư thế'  fontSize = {13}
+                                    <Dropdown  data={dataPoseFemale} label='Tư thế'  fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(pose) => { pose= this.setState({pose}) }}
                                         value = {this.state.pose}
