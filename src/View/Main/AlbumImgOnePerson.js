@@ -9,6 +9,7 @@ import {FirebaseApp} from './../../Controller/FirebaseConfig'
 import WebImage from 'react-native-web-image'
 import functionImgPose from './functionGetData'
 
+
 export default class AlbumImgOnePerson extends Component{ 
     constructor(){ 
         super();
@@ -175,3 +176,86 @@ export default class AlbumImgOnePerson extends Component{
         )
     }
 }
+
+//     if(this.state.search.toLowerCase().indexOf('ao dai nu') >= 0
+    //          || this.state.search.toLowerCase().indexOf('áo dài nữ') >= 0
+    //      ){
+    //     var items = [];
+    //     this.actGetData('ImagePose/OnePerson/FeMale/AoDai/', items);
+    //   }
+    //       if(this.state.search.toLowerCase().indexOf('ao dai nam') >= 0 
+    //             || this.state.search.toLocaleLowerCase().indexOf('áo dài nam')
+    //         ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/Male/AoDai/', items);
+    //         this.setState({ search: ''})
+    //       }
+           
+    //       else if(this.state.search.toLowerCase().indexOf('dong phuc nam') >= 0
+    //          || this.state.search.toLocaleLowerCase().indexOf('dong phuc nam')
+    //         ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/Male/Uniform/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('đồng phục nữ' ) >= 0
+    //          || this.state.search.toLowerCase().indexOf('dong phu nu') >= 0 
+    //         ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('váy') >= 0
+    //         || this.state.search.toLowerCase().indexOf('vay') >= 0 ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Skirt/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('biển') >= 0
+    //         || this.state.search.toLowerCase().indexOf('sông') >= 0 
+    //         || this.state.search.toLowerCase().indexOf('hồ') >= 0 
+    //         || this.state.search.toLowerCase().indexOf('bien') >= 0 
+    //         || this.state.search.toLowerCase().indexOf('song') >= 0 
+    //         || this.state.search.toLowerCase().indexOf('ho') >= 0 ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Beach/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('sen') >= 0){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Lotus/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('núi') >= 0
+    //         || this.state.search.toLowerCase().indexOf('nui') >= 0 ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Mountain/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('cửa') >= 0
+    //         || this.state.search.toLowerCase().indexOf('cua') >= 0 ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Door/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('cầu thang') >= 0 
+    //         || this.state.search.toLowerCase().indexOf('cau thang') >= 0 ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Stair/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('công viên') >= 0 
+    //         || this.state.search.toLowerCase().indexOf('cong vien') >= 0 ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Park/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('nằm') >= 0 
+    //       || this.state.search.toLowerCase().indexOf('nam') >= 0 ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Lie/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('đứng') >= 0
+    //         || this.state.search.toLowerCase().indexOf('dung') >= 0 ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Stand/', items);
+    //       }
+    //       else if(this.state.search.toLowerCase().indexOf('ngồi') >= 0
+    //         || this.state.search.toLowerCase().indexOf('ngoi') >= 0 ){
+    //         var items = [];
+    //         this.actGetData('ImagePose/OnePerson/FeMale/Seat/', items);
+    //       }
+    //       this.setState({ 
+    //         clother: '', search: '', pose: '', view: '', accom: ''
+    //      })

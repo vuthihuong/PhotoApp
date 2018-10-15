@@ -7,7 +7,8 @@ import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-checkbox';
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 import WebImage from 'react-native-web-image'
-
+import getDataDropDown from './functionGetData'
+import stylesAlbumPose from './../../assets/css/AlbumPoseCss'
 
 export default class AlbumPose extends Component{ 
     constructor(){ 
@@ -24,9 +25,8 @@ export default class AlbumPose extends Component{
             checkedThsAgeOnePerson7: false, checkedThsAgeOnePerson8: false, checkedThsAgeOnePerson9: false,
             checkedThsAgeOnePerson10: false, checkedThsAgeOnePerson11: false, checkedThsAgeOnePerson12: false,
             checkedThsAgeOnePerson13: false, checkedThsAgeOnePerson14: false, checkedThsAgeOnePerson15: false,
-            clother: '', view: '', accom: '', pose: '', search: '',
-            dataImgTwo: '',
-             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2})
+            clother: '', view: '', accom: '', pose: '', search: '', dataImgTwo: '',
+             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
     }
@@ -50,17 +50,14 @@ export default class AlbumPose extends Component{
     checkPersonOne(){ 
         if(this.state.checkedPersonOne === false){ 
             this.setState({ 
-                checkedPersonOne: true,
-                checkedPersonTwo: false,
-                checkedPersonGroup: false,
+                checkedPersonOne: true, checkedPersonTwo: false, checkedPersonGroup: false,
             })
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Coat/',items);
-            this.actGetData('ImagePose/OnePerson/FeMale/Uniform/',items);
-            this.actGetData('ImagePose/OnePerson/Male/Uniform/',items);
-            this.actGetData('ImagePose/OnePerson/Male/Coat',items);
-            this.actGetData('ImagePose/OnePerson/FeMale/AoDai',items);
-            this.actGetData('ImagePose/OnePerson/Male/AoDai',items);
+        var items = [];
+        var urlImg = ['ImagePose/OnePerson/FeMale/Coat/','ImagePose/OnePerson/FeMale/Uniform/',
+                       'ImagePose/OnePerson/Male/Uniform/', 'ImagePose/OnePerson/Male/Coat',
+                       'ImagePose/OnePerson/FeMale/AoDai', 'ImagePose/OnePerson/Male/AoDai' ]
+            for(var i = 0; i < urlImg.length; i ++){
+                this.actGetData(urlImg[i],items); }
         }
         else if(this.state.checkedPersonOne === true ){ 
             this.setState({ 
@@ -72,19 +69,16 @@ export default class AlbumPose extends Component{
     checkPersonTwo(){ 
         if(this.state.checkedPersonTwo === false){ 
             this.setState({ 
-                checkedPersonTwo: true,
-                checkedPersonOne: false,
-                checkedPersonGroup: false
+                checkedPersonTwo: true, checkedPersonOne: false, checkedPersonGroup: false
             })
             var items = [];
-            this.actGetData('ImagePose/TwoPerson/DoubleMale/Uniform/', items);
-            this.actGetData('ImagePose/TwoPerson/FeMaleAndMale/Uniform/', items);
-            // this.actGetData('ImagePose/TwoPerson/FeMale/Coat/');
-            // this.actGetData('ImagePose/TwoPerson/FeMale/Uniform/');
-            // this.actGetData('ImagePose/TwoPerson/Male/Uniform/');
-            // this.actGetData('ImagePose/TwoPerson/Male/Coat');
-            // this.actGetData('ImagePose/TwoPerson/FeMale/AoDai');
-            // this.actGetData('ImagePose/TwoPerson/Male/AoDai');
+            var urlImg = ['ImagePose/TwoPerson/DoubleMale/Uniform/', 'ImagePose/TwoPerson/FeMaleAndMale/Uniform/',
+                          'ImagePose/TwoPerson/FeMale/Coat/', 'ImagePose/TwoPerson/FeMale/Uniform/',
+                          'ImagePose/TwoPerson/Male/Uniform/', 'ImagePose/TwoPerson/Male/Coat',
+                          'ImagePose/TwoPerson/FeMale/AoDai', 'ImagePose/TwoPerson/Male/AoDai']
+            for(var i = 0; i < urlImg.length; i ++){
+                this.actGetData(urlImg[i],items);
+            }
         }
         else if(this.state.checkedPersonTwo === true){ 
             this.setState({ 
@@ -96,14 +90,14 @@ export default class AlbumPose extends Component{
     checkPersonGroup(){ 
         if(this.state.checkedPersonGroup === false){ 
             this.setState({ 
-                checkedPersonGroup: true,
-                checkedPersonOne: false,
-                checkedPersonTwo: false
+                checkedPersonGroup: true, checkedPersonOne: false, checkedPersonTwo: false
             })
             var items = [];
-            this.actGetData('ImagePose/GroupPerson/FeMaleAndMale/Uniform/', items);
-            this.actGetData('ImagePose/GroupPerson/FeMale/Uniform/', items);
-            this.actGetData('ImagePose/GroupPerson/Male/Uniform/', items);
+            var urlImg = ['ImagePose/GroupPerson/FeMaleAndMale/Uniform/', 'ImagePose/GroupPerson/FeMale/Uniform/',
+                        'ImagePose/GroupPerson/Male/Uniform/']
+                for(var i = 0; i < urlImg.length; i ++){
+                    this.actGetData(urlImg[i],items);
+                }
         }
         else if(this.state.checkedPersonGroup === true){ 
             this.setState({ 
@@ -119,10 +113,10 @@ export default class AlbumPose extends Component{
                 checkedSecondGender2: false
             })
             var items = [];
-            this.actGetData('ImagePose/OnePerson/Male/Uniform/', items);
-            this.actGetData('ImagePose/OnePerson/Male/Coat/', items);
-            this.actGetData('ImagePose/OnePerson/Male/AoDai/', items);
-            
+            var urlImg = ['ImagePose/OnePerson/Male/Uniform/', 'ImagePose/OnePerson/Male/Coat/', 'ImagePose/OnePerson/Male/AoDai/']
+            for(var i = 0; i < urlImg.length; i ++){
+                this.actGetData(urlImg[i],items);
+            }
         }
         else if(this.state.checkedSecondGender1 === true){ 
             this.setState({ 
@@ -138,9 +132,11 @@ export default class AlbumPose extends Component{
                 checkedSecondGender1: false
             })
             var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
-            this.actGetData('ImagePose/OnePerson/FeMale/Coat/', items);
-            this.actGetData('ImagePose/OnePerson/FeMale/AoDai/', items);
+            var urlImg = ['ImagePose/OnePerson/FeMale/Uniform/', 'ImagePose/OnePerson/FeMale/Coat/', 
+                          'ImagePose/OnePerson/FeMale/AoDai/']
+            for(var i = 0; i < urlImg.length; i ++){
+                this.actGetData(urlImg[i],items);
+            }
         }
         else if(this.state.checkedSecondGender2 === true){ 
             this.setState({ 
@@ -157,7 +153,10 @@ export default class AlbumPose extends Component{
                checkedSecondDoubleGender3: false
            })
            var items = [];
-           this.actGetData('ImagePose/TwoPerson/DoubleMale/Uniform/', items);
+           var urlImg = ['ImagePose/TwoPerson/DoubleMale/Uniform/']
+           for(var i = 0; i < urlImg.length; i ++){
+            this.actGetData(urlImg[i],items);
+            }
         }
         else if(this.state.checkedSecondDoubleGender1 === true){ 
             this.setState({ 
@@ -174,7 +173,10 @@ export default class AlbumPose extends Component{
                 checkedSecondDoubleGender3: false
             })
             var items = [];
-            this.actGetData('ImagePose/TwoPerson/FeMaleAndMale/Uniform/', items);
+            var urlImg = ['ImagePose/TwoPerson/FeMaleAndMale/Uniform/']
+            for(var i = 0; i < urlImg.length; i ++){
+                this.actGetData(urlImg[i],items);
+                }
          }
          else if(this.state.checkedSecondDoubleGender2 === true){ 
              this.setState({ 
@@ -191,7 +193,10 @@ export default class AlbumPose extends Component{
                 checkedSecondDoubleGender2: false
             })
             var items = [];
-            this.actGetData('ImagePose/TwoPerson/DoubleFeMale/Uniform/', items);
+            var urlImg = ['ImagePose/TwoPerson/DoubleFeMale/Uniform/'];
+            for(var i = 0; i < urlImg.length; i ++){
+                this.actGetData(urlImg[i],items);
+                }
          }
          else if(this.state.checkedSecondDoubleGender3 === true){ 
              this.setState({ 
@@ -261,8 +266,6 @@ export default class AlbumPose extends Component{
                 checkedThsAgeOnePerson10: false, checkedThsAgeOnePerson11: false,
                 checkedThsAgeOnePerson12: false, checkedThsAgeOnePerson13: false,
                 checkedThsAgeOnePerson14: false, checkedThsAgeOnePerson15: false,
-                
-
             })
         }
         else if(this.state.checkedThsAgeOnePerson1 === true){ 
@@ -369,9 +372,8 @@ export default class AlbumPose extends Component{
         this.actGetData('ImagePose/OnePerson/Male/AoDai/', items)
         this.actGetData('ImagePose/OnePerson/FeMale/Coat/', items);
         this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
-        
-              
         }
+
     changeStatusPersonTwo(){ 
         this.setState({ 
             checkedPersonTwo: false,
@@ -429,13 +431,9 @@ export default class AlbumPose extends Component{
     }
     changeStatusGender2(){ 
         this.setState({ 
-            checkedSecondGender1: false,
-            checkedSecondGender2: false,
-            checkedThsAgeOnePerson1: false,
-            checkedThsAgeOnePerson2: false,
-            checkedThsAgeOnePerson3: false,
-            checkedThsAgeOnePerson4: false,
-            checkedThsAgeOnePerson5: false,
+            checkedSecondGender1: false, checkedSecondGender2: false,
+            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false, checkedThsAgeOnePerson3: false,
+            checkedThsAgeOnePerson4: false, checkedThsAgeOnePerson5: false,
         })
         if(this.state.checkedPersonOne === true){ 
             var items = [];
@@ -468,33 +466,11 @@ export default class AlbumPose extends Component{
             checkedThsAgeOnePerson15: false,
         })
     }
-    changeStatusAgePersonOne3(){ 
-        this.setState({ 
-            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
-            checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
-            checkedThsAgeOnePerson5: false,
-        })
-    }
-    changeStatusAgePersonOne4(){ 
-        this.setState({ 
-            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
-            checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
-            checkedThsAgeOnePerson5: false,
-        })
-    }
-    changeStatusAgePersonOne5(){ 
-        this.setState({ 
-            checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
-            checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
-            checkedThsAgeOnePerson5: false,
-        })
-    }
 
     changeStatusDoubleGender1(){ 
         this.setState({ 
-            checkedSecondDoubleGender1: false,
-            checkedSecondDoubleGender2: false,
-            checkedSecondDoubleGender3: false,
+            checkedSecondDoubleGender1: false, checkedSecondDoubleGender2: false,
+            checkedSecondDoubleGender3: false, checkedThsAgeOnePerson15: false,
             checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
             checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
             checkedThsAgeOnePerson5: false, checkedThsAgeOnePerson6: false, 
@@ -502,7 +478,6 @@ export default class AlbumPose extends Component{
             checkedThsAgeOnePerson9: false, checkedThsAgeOnePerson10: false,
             checkedThsAgeOnePerson11: false, checkedThsAgeOnePerson12: false,
             checkedThsAgeOnePerson13: false, checkedThsAgeOnePerson14: false,
-            checkedThsAgeOnePerson15: false,
         })
         var items = [];
         this.actGetData('ImagePose/TwoPerson/DoubleMale/Uniform/', items);
@@ -510,9 +485,8 @@ export default class AlbumPose extends Component{
     }
     changeStatusDoubleGender2(){ 
         this.setState({ 
-            checkedSecondDoubleGender1: false,
-            checkedSecondDoubleGender2: false,
-            checkedSecondDoubleGender3: false,
+            checkedSecondDoubleGender1: false, checkedSecondDoubleGender2: false,
+            checkedSecondDoubleGender3: false,  checkedThsAgeOnePerson15: false,
             checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
             checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
             checkedThsAgeOnePerson5: false, checkedThsAgeOnePerson6: false, 
@@ -520,7 +494,6 @@ export default class AlbumPose extends Component{
             checkedThsAgeOnePerson9: false, checkedThsAgeOnePerson10: false,
             checkedThsAgeOnePerson11: false, checkedThsAgeOnePerson12: false,
             checkedThsAgeOnePerson13: false, checkedThsAgeOnePerson14: false,
-            checkedThsAgeOnePerson15: false,
         })
         var items = [];
         this.actGetData('ImagePose/TwoPerson/DoubleMale/Uniform/', items);
@@ -528,9 +501,8 @@ export default class AlbumPose extends Component{
     }
     changeStatusDoubleGender3(){ 
         this.setState({ 
-            checkedSecondDoubleGender1: false,
-            checkedSecondDoubleGender2: false,
-            checkedSecondDoubleGender3: false,
+            checkedSecondDoubleGender1: false, checkedSecondDoubleGender2: false,
+            checkedSecondDoubleGender3: false,  checkedThsAgeOnePerson15: false,
             checkedThsAgeOnePerson1: false, checkedThsAgeOnePerson2: false,
             checkedThsAgeOnePerson3: false, checkedThsAgeOnePerson4: false,
             checkedThsAgeOnePerson5: false, checkedThsAgeOnePerson6: false, 
@@ -538,7 +510,7 @@ export default class AlbumPose extends Component{
             checkedThsAgeOnePerson9: false, checkedThsAgeOnePerson10: false,
             checkedThsAgeOnePerson11: false, checkedThsAgeOnePerson12: false,
             checkedThsAgeOnePerson13: false, checkedThsAgeOnePerson14: false,
-            checkedThsAgeOnePerson15: false,
+           
         })
         var items = [];
         this.actGetData('ImagePose/TwoPerson/DoubleMale/Uniform/', items);
@@ -547,9 +519,7 @@ export default class AlbumPose extends Component{
 
     changeStatusGroupGender1(){ 
         this.setState({ 
-            checkedSecondGroupGender1: false,
-            checkedSecondGroupGender2: false,
-            checkedSecondGroupGender3: false
+          checkedSecondGroupGender1: false, checkedSecondGroupGender2: false, checkedSecondGroupGender3: false
         })
         var items = [];
         this.actGetData('ImagePose/GroupPerson/FeMaleAndMale/Uniform/', items);
@@ -559,9 +529,7 @@ export default class AlbumPose extends Component{
 
     changeStatusGroupGender2(){ 
         this.setState({ 
-            checkedSecondGroupGender1: false,
-            checkedSecondGroupGender2: false,
-            checkedSecondGroupGender3: false
+          checkedSecondGroupGender1: false, checkedSecondGroupGender2: false,checkedSecondGroupGender3: false
         })
         var items = [];
         this.actGetData('ImagePose/GroupPerson/FeMaleAndMale/Uniform/', items);
@@ -571,9 +539,7 @@ export default class AlbumPose extends Component{
 
     changeStatusGroupGender3(){ 
         this.setState({ 
-            checkedSecondGroupGender1: false,
-            checkedSecondGroupGender2: false,
-            checkedSecondGroupGender3: false
+         checkedSecondGroupGender1: false, checkedSecondGroupGender2: false, checkedSecondGroupGender3: false
         })
         var items = [];
         this.actGetData('ImagePose/GroupPerson/FeMaleAndMale/Uniform/', items);
@@ -583,74 +549,15 @@ export default class AlbumPose extends Component{
 
     listenForItems(itemRef){ 
         var items  = [];
-            this.itemRef.ref('ImagePose/OnePerson/FeMale/AoDai/').on('child_added', (dataSnapshot)=> { 
-                var childData = dataSnapshot.val();
-                  items.push({ 
-                    name: dataSnapshot.val(),
-                    key: dataSnapshot.key,
-                    url: (childData.url),
-                  })
-                  this.setState({ 
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                  });
-              });
-              this.itemRef.ref('ImagePose/OnePerson/Male/AoDai/').on('child_added', (dataSnapshot)=> { 
-                var childData = dataSnapshot.val();
-                  items.push({ 
-                    name: dataSnapshot.val(),
-                    key: dataSnapshot.key,
-                    url: (childData.url),
-                  })
-                  this.setState({ 
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                  });
-              });
-              this.itemRef.ref('ImagePose/OnePerson/FeMale/Coat/').on('child_added', (dataSnapshot)=> { 
-                var childData = dataSnapshot.val();
-                  items.push({ 
-                    name: dataSnapshot.val(),
-                    key: dataSnapshot.key,
-                    url: (childData.url),
-                  })
-                  this.setState({ 
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                  });
-              });
-              this.itemRef.ref('ImagePose/OnePerson/FeMale/Uniform/').on('child_added', (dataSnapshot)=> { 
-                var childData = dataSnapshot.val();
-                  items.push({ 
-                    name: dataSnapshot.val(),
-                    key: dataSnapshot.key,
-                    url: (childData.url),
-                  })
-                  this.setState({ 
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                  });
-              });
-              this.itemRef.ref('ImagePose/OnePerson/Male/Coat/').on('child_added', (dataSnapshot)=> { 
-                var childData = dataSnapshot.val();
-                  items.push({ 
-                    name: dataSnapshot.val(),
-                    key: dataSnapshot.key,
-                    url: (childData.url),
-                  })
-                  this.setState({ 
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                  });
-              });
-               this.itemRef.ref('ImagePose/OnePerson/Male/Uniform/').on('child_added', (dataSnapshot)=> { 
-                var childData = dataSnapshot.val();
-                  items.push({ 
-                    name: dataSnapshot.val(),
-                    key: dataSnapshot.key,
-                    url: (childData.url),
-                  })
-                  this.setState({ 
-                    dataSource: this.state.dataSource.cloneWithRows(items)
-                  });
-              });
-              
+            this.actGetData('ImagePose/OnePerson/FeMale/AoDai/', items);
+            this.actGetData('ImagePose/OnePerson/FeMale/Coat/', items);
+            this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
+            this.actGetData('ImagePose/OnePerson/FeMale/Beach/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Uniform/', items);
+            this.actGetData('ImagePose/OnePerson/Male/AoDai/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Coat/', items);
       }
+    
       submit(){ 
           if(this.state.dataImgTwo === "Thiếu nhi"){ 
               this.setState({ 
@@ -1321,244 +1228,85 @@ export default class AlbumPose extends Component{
         //         this.actGetData('ImagePose/GroupPerson/FeMale/Park/', items)
         //       }
         //   }
-        if(this.state.search.toLowerCase().indexOf('ao dai nu') >= 0
-             || this.state.search.toLowerCase().indexOf('áo dài nữ') >= 0
-         ){
-        var items = [];
-        this.actGetData('ImagePose/OnePerson/FeMale/AoDai/', items);
-      }
-          if(this.state.search.toLowerCase().indexOf('ao dai nam') >= 0 
-                || this.state.search.toLocaleLowerCase().indexOf('áo dài nam')
-            ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/Male/AoDai/', items);
-            this.setState({ search: ''})
-          }
-           
-          else if(this.state.search.toLowerCase().indexOf('dong phuc nam') >= 0
-             || this.state.search.toLocaleLowerCase().indexOf('dong phuc nam')
-            ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/Male/Uniform/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('đồng phục nữ' ) >= 0
-             || this.state.search.toLowerCase().indexOf('dong phu nu') >= 0 
-            ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('váy') >= 0
-            || this.state.search.toLowerCase().indexOf('vay') >= 0 ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Skirt/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('biển') >= 0
-            || this.state.search.toLowerCase().indexOf('sông') >= 0 
-            || this.state.search.toLowerCase().indexOf('hồ') >= 0 
-            || this.state.search.toLowerCase().indexOf('bien') >= 0 
-            || this.state.search.toLowerCase().indexOf('song') >= 0 
-            || this.state.search.toLowerCase().indexOf('ho') >= 0 ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Beach/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('sen') >= 0){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Lotus/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('núi') >= 0
-            || this.state.search.toLowerCase().indexOf('nui') >= 0 ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Mountain/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('cửa') >= 0
-            || this.state.search.toLowerCase().indexOf('cua') >= 0 ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Door/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('cầu thang') >= 0 
-            || this.state.search.toLowerCase().indexOf('cau thang') >= 0 ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Stair/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('công viên') >= 0 
-            || this.state.search.toLowerCase().indexOf('cong vien') >= 0 ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Park/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('nằm') >= 0 
-          || this.state.search.toLowerCase().indexOf('nam') >= 0 ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Lie/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('đứng') >= 0
-            || this.state.search.toLowerCase().indexOf('dung') >= 0 ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Stand/', items);
-          }
-          else if(this.state.search.toLowerCase().indexOf('ngồi') >= 0
-            || this.state.search.toLowerCase().indexOf('ngoi') >= 0 ){
-            var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Seat/', items);
-          }
-          this.setState({ 
-            clother: '', search: '', pose: '', view: '', accom: ''
-         })
+    
       }
 
     render(){ 
         var dataClotherFemale1 = [];
         var dataClotherFemale = [];
-        
-            FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/Clother/').on('value', (function (snapshot) {
-                snapshot.forEach(function(childSnapshot) {
-                    var key = childSnapshot.key;
-                    let childData = childSnapshot.val();
-                    dataClotherFemale1.push(childData) // mảng hai chiều
-                    
-                });
-            }))
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Female/Clother/', dataClotherFemale1, dataClotherFemale)
          // biến đổi về mảng một chiều
-                for(var i = 0; i < dataClotherFemale1.length; i++) {
-                    dataClotherFemale = dataClotherFemale.concat(dataClotherFemale1[i]);
-                }
+            for(var i = 0; i < dataClotherFemale1.length; i++) {
+                dataClotherFemale = dataClotherFemale.concat(dataClotherFemale1[i]);
+            }
         var dataPoseFemale1 = [];
         var dataPoseFemale = [];
-                
-            FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/Pose/').on('value', (function (snapshot) {
-                snapshot.forEach(function(childSnapshot) {
-                    var key = childSnapshot.key;
-                    let childData = childSnapshot.val();
-                    dataPoseFemale1.push(childData) // mảng hai chiều object [[{},{}], [{},{}]]
-                        
-                    });
-                 }))
-                 // biến đổi về mảng một chiều
-             for(var i = 0; i < dataPoseFemale1.length; i++) {
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Female/Pose/', dataPoseFemale1, dataPoseFemale)
+            //      // biến đổi về mảng một chiều
+            for(var i = 0; i < dataPoseFemale1.length; i++) {
                 dataPoseFemale = dataPoseFemale.concat(dataPoseFemale1[i]);
-                }
+            }
 
         var dataViewFemale1 = [];
         var dataViewFemale = [];
-                        
-            FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/View/').on('value', (function (snapshot) {
-                snapshot.forEach(function(childSnapshot) {
-                var key = childSnapshot.key;
-                let childData = childSnapshot.val();
-                dataViewFemale1.push(childData) // mảng hai chiều
-                                
-                });
-            }))
-            // biến đổi về mảng một chiều
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Female/View/', dataViewFemale1, dataViewFemale)
+            // // biến đổi về mảng một chiều
             for(var i = 0; i < dataViewFemale1.length; i++) {
                 dataViewFemale = dataViewFemale.concat(dataViewFemale1[i]);
             }
-            var dataAccomFemale1 = [];
-            var dataAccomFemale = [];
-                            
-                FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/Accomodation/').on('value', (function (snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                    var key = childSnapshot.key;
-                    let childData = childSnapshot.val();
-                    dataAccomFemale1.push(childData) // mảng hai chiều
-                                    
-                    });
-                }))
-                // biến đổi về mảng một chiều
-                for(var i = 0; i < dataAccomFemale1.length; i++) {
+
+        var dataAccomFemale1 = [];
+        var dataAccomFemale = [];
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Female/Accomodation/', dataAccomFemale1, dataAccomFemale)  
+                // // biến đổi về mảng một chiều
+            for(var i = 0; i < dataAccomFemale1.length; i++) {
                     dataAccomFemale = dataAccomFemale.concat(dataAccomFemale1[i]);
                 }
-                var dataClotherMaleOldAge1= [];
-                var dataClotherMaleOldAge = [];
-                                
-                    FirebaseApp.database().ref('DataCategoryImage/OnePerson/Female/ClotherOldAge/').on('value', (function (snapshot) {
-                        snapshot.forEach(function(childSnapshot) {
-                        var key = childSnapshot.key;
-                        let childData = childSnapshot.val();
-                        dataClotherMaleOldAge1.push(childData) // mảng hai chiều
-                                        
-                        });
-                    }))
-                    // biến đổi về mảng một chiều
-                    for(var i = 0; i < dataClotherMaleOldAge1.length; i++) {
-                        dataClotherMaleOldAge = dataClotherMaleOldAge.concat(dataClotherMaleOldAge1[i]);
-                    }
-                
-                        var dataClotherMale1 = [];
-                        var dataClotherMale = [];
-                        
-                            FirebaseApp.database().ref('DataCategoryImage/OnePerson/Male/Clother/').on('value', (function (snapshot) {
-                                snapshot.forEach(function(childSnapshot) {
-                                    var key = childSnapshot.key;
-                                    let childData = childSnapshot.val();
-                                    dataClotherMale1.push(childData) // mảng hai chiều
-                                    
-                                });
-                            }))
-                         // biến đổi về mảng một chiều
-                                for(var i = 0; i < dataClotherMale1.length; i++) {
-                                    dataClotherMale = dataClotherMale.concat(dataClotherMale1[i]);
-                                }
-                var dataPoseMale1 = [];
-                var dataPoseMale = [];
-                        
-                    FirebaseApp.database().ref('DataCategoryImage/OnePerson/Male/Pose/').on('value', (function (snapshot) {
-                        snapshot.forEach(function(childSnapshot) {
-                            var key = childSnapshot.key;
-                            let childData = childSnapshot.val();
-                            dataPoseMale1.push(childData) // mảng hai chiều object [[{},{}], [{},{}]]
-                                
-                            });
-                         }))
-                         // biến đổi về mảng một chiều
-                     for(var i = 0; i < dataPoseMale1.length; i++) {
-                        dataPoseMale = dataPoseMale.concat(dataPoseMale1[i]);
-                        }
-        
-                var dataViewMale1 = [];
-                var dataViewMale = [];
-                                
-                    FirebaseApp.database().ref('DataCategoryImage/OnePerson/Male/View/').on('value', (function (snapshot) {
-                        snapshot.forEach(function(childSnapshot) {
-                        var key = childSnapshot.key;
-                        let childData = childSnapshot.val();
-                        dataViewMale1.push(childData) // mảng hai chiều
-                                        
-                        });
-                    }))
-                    // biến đổi về mảng một chiều
-                    for(var i = 0; i < dataViewMale1.length; i++) {
-                        dataViewMale = dataViewMale.concat(dataViewMale1[i]);
-                    }
-                    var dataAccomMale1 = [];
-                    var dataAccomMale = [];
-                                    
-                        FirebaseApp.database().ref('DataCategoryImage/OnePerson/Male/Accomodation/').on('value', (function (snapshot) {
-                            snapshot.forEach(function(childSnapshot) {
-                            var key = childSnapshot.key;
-                            let childData = childSnapshot.val();
-                            dataAccomMale1.push(childData) // mảng hai chiều
-                                            
-                            });
-                        }))
-                        // biến đổi về mảng một chiều
-                        for(var i = 0; i < dataAccomMale1.length; i++) {
-                            dataAccomMale = dataAccomMale.concat(dataAccomMale1[i]);
-                        }
-            var dataTwoPerson1 = [];
-            var dataTwoPerson = [];
-                                
-                FirebaseApp.database().ref('DataPoseTwoPerson/TwoPerson').on('value', (function (snapshot) {
-                    snapshot.forEach(function(childSnapshot) {
-                    var key = childSnapshot.key;
-                    let childData = childSnapshot.val();
-                    dataTwoPerson1.push(childData) // mảng hai chiều
-                                        
-                    });
-                }))
-                    // biến đổi về mảng một chiều
-                for(var i = 0; i < dataTwoPerson1.length; i++) {
-                    dataTwoPerson = dataTwoPerson.concat(dataTwoPerson1[i]);
-                }
+
+        var dataClotherMaleOldAge1= [];
+        var dataClotherMaleOldAge = [];
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Female/ClotherOldAge/', dataClotherMaleOldAge1, dataClotherMaleOldAge) 
+                    // // biến đổi về mảng một chiều
+            for(var i = 0; i < dataClotherMaleOldAge1.length; i++) {
+                dataClotherMaleOldAge = dataClotherMaleOldAge.concat(dataClotherMaleOldAge1[i]);
+            }
+
+        var dataClotherMale1 = [];
+        var dataClotherMale = [];
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Male/Clother/', dataClotherMale1, dataClotherMale)
+            //  // biến đổi về mảng một chiều
+            for(var i = 0; i < dataClotherMale1.length; i++) {
+                dataClotherMale = dataClotherMale.concat(dataClotherMale1[i]);
+            }
+
+        var dataPoseMale1 = [];
+        var dataPoseMale = [];
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Male/Pose/', dataPoseMale1, dataPoseMale)
+            for(var i = 0; i < dataPoseMale1.length; i++) {
+                dataPoseMale = dataPoseMale.concat(dataPoseMale1[i]);
+            }
+
+        var dataViewMale1 = [];
+        var dataViewMale = [];
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Female/Pose/', dataViewMale1, dataViewMale)      
+            for(var i = 0; i < dataViewMale1.length; i++) {
+                dataViewMale = dataViewMale.concat(dataViewMale1[i]);
+            }
+
+        var dataAccomMale1 = [];
+        var dataAccomMale = [];
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Male/Accomodation/', dataAccomMale1, dataAccomMale)            
+            for(var i = 0; i < dataAccomMale1.length; i++) {
+                dataAccomMale = dataAccomMale.concat(dataAccomMale1[i]);
+            }
+
+        var dataTwoPerson1 = [];
+        var dataTwoPerson = [];
+            getDataDropDown.helper1('DataPoseTwoPerson/TwoPerson', dataTwoPerson1, dataTwoPerson)               
+            for(var i = 0; i < dataTwoPerson1.length; i++) {
+                dataTwoPerson = dataTwoPerson.concat(dataTwoPerson1[i]);
+            }
+
         return(
             <ScrollView style={stylesAlbumPose.container}>
                 <View style={stylesAlbumPose.container}>
@@ -1593,17 +1341,13 @@ export default class AlbumPose extends Component{
                             && this.state.checkedSecondGender1 === false 
                                     && this.state.checkedSecondGender2 === false )?
                             (<View style={stylesAlbumPose.checkCondition1}>
-                                <TouchableOpacity
-                                        onPress={() => this.changeStatusPersonOne()} 
-                                        >
+                                <TouchableOpacity onPress={() => this.changeStatusPersonOne()}>
                                     <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                         Tất cả
                                     </Text>
                                 </TouchableOpacity>
                                 <Text> --> </Text>
-                                <TouchableOpacity
-                                        // onPress={() => this.props.navigation.navigate('Login')} 
-                                        >
+                                <TouchableOpacity>
                                     <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                          Một người
                                     </Text>
@@ -4960,25 +4704,3 @@ export default class AlbumPose extends Component{
         this.listenForItems(this.itemRef);
       }
 }
-
-stylesAlbumPose = StyleSheet.create({ 
-    container: { 
-        flex:1, backgroundColor: 'white'
-    },
-    allmargin: { 
-        marginRight: 15, marginLeft: 15, marginBottom: 15, marginTop: 15
-    },
-    checkFirst: { 
-        flexDirection:'row', justifyContent: 'space-between'
-    },
-    checkSecond: { 
-        flexDirection: 'row', justifyContent: 'center', marginTop: 10
-
-    },
-    checkThird: { 
-        flexDirection:'row', justifyContent: 'space-between',
-    },
-    checkCondition1: {  
-        flexDirection: 'row'
-    },
-})
