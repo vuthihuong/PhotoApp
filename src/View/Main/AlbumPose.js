@@ -53,9 +53,9 @@ export default class AlbumPose extends Component{
                 checkedPersonOne: true, checkedPersonTwo: false, checkedPersonGroup: false,
             })
         var items = [];
-        var urlImg = ['ImagePose/OnePerson/FeMale/Coat/','ImagePose/OnePerson/FeMale/Uniform/',
-                       'ImagePose/OnePerson/Male/Uniform/', 'ImagePose/OnePerson/Male/Coat',
-                       'ImagePose/OnePerson/FeMale/AoDai', 'ImagePose/OnePerson/Male/AoDai' ]
+        var urlImg = ['ImagePose/OnePerson/FeMale/Baby/Coat/','ImagePose/OnePerson/FeMale/Baby/UniformPlay/',
+                       'ImagePose/OnePerson/Male/Baby/UniformPlay/', 'ImagePose/OnePerson/Male/Baby/Coat',
+                       'ImagePose/OnePerson/FeMale/Baby/AoDai', 'ImagePose/OnePerson/Male/Baby/AoDai' ]
             for(var i = 0; i < urlImg.length; i ++){
                 this.actGetData(urlImg[i],items); }
         }
@@ -113,7 +113,8 @@ export default class AlbumPose extends Component{
                 checkedSecondGender2: false
             })
             var items = [];
-            var urlImg = ['ImagePose/OnePerson/Male/Uniform/', 'ImagePose/OnePerson/Male/Coat/', 'ImagePose/OnePerson/Male/AoDai/']
+            var urlImg = ['ImagePose/OnePerson/Male/Baby/UniformPlay/', 'ImagePose/OnePerson/Male/Baby/Coat/', 
+                        'ImagePose/OnePerson/Male/Baby/AoDai/']
             for(var i = 0; i < urlImg.length; i ++){
                 this.actGetData(urlImg[i],items);
             }
@@ -132,8 +133,8 @@ export default class AlbumPose extends Component{
                 checkedSecondGender1: false
             })
             var items = [];
-            var urlImg = ['ImagePose/OnePerson/FeMale/Uniform/', 'ImagePose/OnePerson/FeMale/Coat/', 
-                          'ImagePose/OnePerson/FeMale/AoDai/']
+            var urlImg = ['ImagePose/OnePerson/FeMale/Baby/UniformPlay/', 'ImagePose/OnePerson/FeMale/Baby/Coat/', 
+                          'ImagePose/OnePerson/FeMale/Baby/AoDai/']
             for(var i = 0; i < urlImg.length; i ++){
                 this.actGetData(urlImg[i],items);
             }
@@ -267,6 +268,28 @@ export default class AlbumPose extends Component{
                 checkedThsAgeOnePerson12: false, checkedThsAgeOnePerson13: false,
                 checkedThsAgeOnePerson14: false, checkedThsAgeOnePerson15: false,
             })
+            if(this.state.checkedSecondGender1 === true){ 
+                this.setState({ 
+                    checkedSecondGender2: false
+                })
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Male/Baby/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Male/Baby/Coat/', items);
+                // this.actGetData('ImagePose/OnePerson/Male/Baby/UniformPlay/', items);
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+                this.setState({ 
+                    checkedSecondGender1: false
+                })
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Female/Baby/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Baby/Coat/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Baby/UniformPlay/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Baby/Skirt/', items);
+
+            }
+           
         }
         else if(this.state.checkedThsAgeOnePerson1 === true){ 
             this.setState({ 
@@ -287,6 +310,20 @@ export default class AlbumPose extends Component{
                 checkedThsAgeOnePerson12: false, checkedThsAgeOnePerson13: false,
                 checkedThsAgeOnePerson14: false, checkedThsAgeOnePerson15: false,
             })
+            if(this.state.checkedSecondGender1 === true){ 
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Male/Youth/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Male/Youth/Coat/', items);
+                this.actGetData('ImagePose/OnePerson/Male/Youth/UniformPlay/', items);
+                this.actGetData('ImagePose/OnePerson/Male/Youth/Skirt/', items);
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Female/Youth/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Youth/Coat/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Youth/UniformPlay/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Youth/Skirt/', items);
+            }
         }
         else if(this.state.checkedThsAgeOnePerson2 === true){ 
             this.setState({ 
@@ -306,6 +343,20 @@ export default class AlbumPose extends Component{
                 checkedThsAgeOnePerson12: false, checkedThsAgeOnePerson13: false,
                 checkedThsAgeOnePerson14: false, checkedThsAgeOnePerson15: false,
             })
+            if(this.state.checkedSecondGender1 === true){ 
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Male/Volunteer/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Male/Volunteer/Coat/', items);
+                this.actGetData('ImagePose/OnePerson/Male/Volunteer/UniformPlay/', items);
+                this.actGetData('ImagePose/OnePerson/Male/Volunteer/Skirt/', items);
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Female/Volunteer/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Volunteer/Coat/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Volunteer/UniformPlay/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Volunteer/Skirt/', items);
+            }
         }
         else if(this.state.checkedThsAgeOnePerson3 === true){ 
             this.setState({ 
@@ -326,6 +377,21 @@ export default class AlbumPose extends Component{
                 checkedThsAgeOnePerson12: false, checkedThsAgeOnePerson13: false,
                 checkedThsAgeOnePerson14: false, checkedThsAgeOnePerson15: false,
             })
+            if(this.state.checkedSecondGender1 === true){ 
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Male/MiddleAge/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Coat/', items);
+                this.actGetData('ImagePose/OnePerson/Male/MiddleAge/UniformPlay/', items);
+                this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Skirt/', items);
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Female/MiddleAge/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Coat/', items);
+                this.actGetData('ImagePose/OnePerson/Female/MiddleAge/UniformPlay/', items);
+                this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Skirt/', items);
+            }
+            
         }
         else if(this.state.checkedThsAgeOnePerson4 === true){ 
             this.setState({ 
@@ -346,6 +412,20 @@ export default class AlbumPose extends Component{
                 checkedThsAgeOnePerson12: false, checkedThsAgeOnePerson13: false,
                 checkedThsAgeOnePerson14: false, checkedThsAgeOnePerson15: false,
             })
+            if(this.state.checkedSecondGender1 === true){ 
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Male/OldAge/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Male/OldAge/Coat/', items);
+                this.actGetData('ImagePose/OnePerson/Male/OldAge/UniformPlay/', items);
+                this.actGetData('ImagePose/OnePerson/Male/OldAge/Skirt/', items);
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+                var items = [];
+                this.actGetData('ImagePose/OnePerson/Female/OldAge/AoDai/', items);
+                this.actGetData('ImagePose/OnePerson/Female/OldAge/Coat/', items);
+                this.actGetData('ImagePose/OnePerson/Female/OldAge/UniformPlay/', items);
+                this.actGetData('ImagePose/OnePerson/Female/OldAge/Skirt/', items);
+            }
         }
         else if(this.state.checkedThsAgeOnePerson5 === true){ 
             this.setState({ 
@@ -368,10 +448,13 @@ export default class AlbumPose extends Component{
             checkedThsAgeOnePerson15: false,
         })
         var items = [];
-        this.actGetData('ImagePose/OnePerson/FeMale/AoDai/', items);
-        this.actGetData('ImagePose/OnePerson/Male/AoDai/', items)
-        this.actGetData('ImagePose/OnePerson/FeMale/Coat/', items);
-        this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
+        this.actGetData('ImagePose/OnePerson/Female/Baby/AoDai/', items);
+        this.actGetData('ImagePose/OnePerson/Female/Baby/Coat/', items);
+        this.actGetData('ImagePose/OnePerson/Female/Baby/UniformPlay/', items);
+        this.actGetData('ImagePose/OnePerson/Female/Baby/Beach/', items);
+        this.actGetData('ImagePose/OnePerson/Male/Baby/Uniform/', items);
+        this.actGetData('ImagePose/OnePerson/Male/Baby/AoDai/', items);
+        this.actGetData('ImagePose/OnePerson/Male/Baby/Coat/', items);
         }
 
     changeStatusPersonTwo(){ 
@@ -424,9 +507,9 @@ export default class AlbumPose extends Component{
         })
         if(this.state.checkedPersonOne === true){ 
             var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Coat/', items);
-            this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
-            this.actGetData('ImagePose/OnePerson/Male/Uniform/', items);
+            this.actGetData('ImagePose/OnePerson/FeMale/Baby/Coat/', items);
+            this.actGetData('ImagePose/OnePerson/FeMale/Baby/UniformPlay/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Baby/UniformPlay/', items);
         }
     }
     changeStatusGender2(){ 
@@ -437,9 +520,9 @@ export default class AlbumPose extends Component{
         })
         if(this.state.checkedPersonOne === true){ 
             var items = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/Coat/', items);
-            this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
-            this.actGetData('ImagePose/OnePerson/Male/Uniform/', items);``
+            this.actGetData('ImagePose/OnePerson/FeMale/Baby/Coat/', items);
+            this.actGetData('ImagePose/OnePerson/FeMale/Baby/UniformPlay/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Baby/UniformPlay/', items);
             }
     }
     changeStatusAgePersonOne(){ 
@@ -453,6 +536,18 @@ export default class AlbumPose extends Component{
             checkedThsAgeOnePerson13: false, checkedThsAgeOnePerson14: false,
             checkedThsAgeOnePerson15: false,
         })
+        if(this.state.checkedSecondGender1 === true){ 
+            var items = [];
+            this.actGetData('ImagePose/OnePerson/Male/Baby/Coat/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Baby/UniformPlay/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Baby/AoDai/', items);
+        }
+        else if(this.state.checkedSecondGender2 === true){ 
+            var items = [];
+            this.actGetData('ImagePose/OnePerson/Female/Baby/Coat/', items);
+            this.actGetData('ImagePose/OnePerson/Female/Baby/UniformPlay/', items);
+            this.actGetData('ImagePose/OnePerson/Female/Baby/AoDai/', items);
+        }
     }
     changeStatusAgePersonTwo(){ 
         this.setState({ 
@@ -549,14 +644,1458 @@ export default class AlbumPose extends Component{
 
     listenForItems(itemRef){ 
         var items  = [];
-            this.actGetData('ImagePose/OnePerson/FeMale/AoDai/', items);
-            this.actGetData('ImagePose/OnePerson/FeMale/Coat/', items);
-            this.actGetData('ImagePose/OnePerson/FeMale/Uniform/', items);
-            this.actGetData('ImagePose/OnePerson/FeMale/Beach/', items);
-            this.actGetData('ImagePose/OnePerson/Male/Uniform/', items);
-            this.actGetData('ImagePose/OnePerson/Male/AoDai/', items);
-            this.actGetData('ImagePose/OnePerson/Male/Coat/', items);
+            this.actGetData('ImagePose/OnePerson/Female/Baby/AoDai/', items);
+            this.actGetData('ImagePose/OnePerson/Female/Baby/Coat/', items);
+            this.actGetData('ImagePose/OnePerson/Female/Baby/UniformPlay/', items);
+            this.actGetData('ImagePose/OnePerson/Female/Baby/Beach/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Baby/Uniform/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Baby/AoDai/', items);
+            this.actGetData('ImagePose/OnePerson/Male/Baby/Coat/', items);
       }
+
+      submitOnPerson(){ 
+         if(this.state.clother === "Áo dài"){ 
+             if(this.checkedSecondGender1 === true ){ 
+                 if(this.state.checkedThsAgeOnePerson1 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Male/Baby/AoDai/', items);
+                 }
+                 else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Male/Youth/AoDai/', items);
+                 }
+                 else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Male/Volunteer/AoDai/', items);
+                 }
+                 else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Male/MiddleAge/AoDai/', items);
+                 }
+                 else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Male/OldAge/AoDai/', items);
+                 }
+                
+             }
+             else if(this.state.checkedSecondGender2 === true){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Female/Baby/AoDai/', items);
+                 }
+                 else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Female/Youth/AoDai/', items);
+                 }
+                 else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Female/Volunteer/AoDai/', items);
+                 }
+                 else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Female/MiddleAge/AoDai/', items);
+                 }
+                 else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                    var items  = [];
+                    this.actGetData('ImagePose/OnePerson/Female/OldAge/AoDai/', items);
+                 }
+             }
+            
+         }
+         else if(this.state.clother === "Áo khoác"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/Coat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/Coat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/Coat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Coat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/Coat/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/Coat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/Coat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/Coat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Coat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/Coat/', items);
+                }
+            }
+           
+        }
+        else if(this.state.clother === "Quần áo thể thao"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/UniformPlay/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/UniformPlay/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/UniformPlay/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/UniformPlay/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/UniformPlay/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/UniformPlay/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/UniformPlay/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/UniformPlay/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/UniformPlay/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/UniformPlay/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.clother === "Đồng phục học sinh"){ 
+            if(this.checkedSecondGender1 === true ){ 
+               if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/UniformStudent/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/UniformStudent/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/UniformStudent/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/UniformStudent/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.clother === "Đồng phục công sở"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/UniformComple/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/UniformComple/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+              if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/UniformComple/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/UniformComple/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.clother === "Váy"){ 
+            if(this.state.checkedThsAgeOnePerson1 === true){ 
+                var items  = [];
+                this.actGetData('ImagePose/OnePerson/Female/Baby/skirt/', items);
+            }
+            else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                var items  = [];
+                this.actGetData('ImagePose/OnePerson/Female/Youth/skirt/', items);
+            }
+            else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                var items  = [];
+                this.actGetData('ImagePose/OnePerson/Female/Volunteer/skirt/', items);
+            }
+            else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                var items  = [];
+                this.actGetData('ImagePose/OnePerson/Female/MiddleAge/skirt/', items);
+            }
+        } 
+
+        if(this.state.accom === "Bóng bay"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/Balloon/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/Balloon/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/Balloon/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Balloon/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/Balloon/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/Balloon/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/Balloon/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/Balloon/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Balloon/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/Balloon/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.accom === "Xe đạp"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/Cycle/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/Cycle/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/Cycle/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Cycle/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/Cycle/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/Cycle/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/Cycle/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/Cycle/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Cycle/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/Cycle/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.accom === "Điện thoại"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/Phone/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/Phone/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/Phone/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Phone/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/Phone/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/Phone/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/Phone/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/Phone/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Phone/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/Phone/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.accom === "Ba lô hai dây"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/StringBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/StringBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/StringBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/StringBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/StringBag/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/StringBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/StringBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/StringBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/StringBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/StringBag/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.accom === "Ba lô dây chéo"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/CrossBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/CrossBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/CrossBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/CrossBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/CrossBag/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/CrossBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/CrossBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/CrossBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/CrossBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/CrossBag/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.accom === "Ô"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/Umbrella/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/Umbrella/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/Umbrella/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Umbrella/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/Umbrella/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/Umbrella/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/Umbrella/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/Umbrella/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Umbrella/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/Umbrella/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.accom === "Quả bóng"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/Ball/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/Ball/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/Ball/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Ball/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/Ball/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/Ball/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/Ball/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/Ball/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Ball/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/Ball/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.accom === "Sổ cầm tay"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/Book/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/Book/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/Book/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Book/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/Book/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/Book/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/Book/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/Book/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Book/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/Book/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.accom === "Mũ, nón"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/Hat/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/Hat/', items);
+                }
+            }
+           
+        } 
+        else if(this.state.accom === "Túi xách"){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/HandBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/HandBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/HandBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/HandBag/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/HandBag/', items);
+                }
+            }
+      
+      else if(this.state.accom === "Mũ, nón"){ 
+            if(this.checkedSecondGender1 === true ){ 
+                if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Baby/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Youth/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/Volunteer/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Male/OldAge/Hat/', items);
+                }
+               
+            }
+            else if(this.state.checkedSecondGender2 === true){ 
+               if(this.state.checkedThsAgeOnePerson1 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Baby/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Youth/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/Volunteer/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Hat/', items);
+                }
+                else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                   var items  = [];
+                   this.actGetData('ImagePose/OnePerson/Female/OldAge/Hat/', items);
+                }
+            }
+        }
+            if(this.state.accom === "Hồ, sông biển"){ 
+                if(this.checkedSecondGender1 === true ){ 
+                    if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Baby/Beach/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Youth/Beach/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Volunteer/Beach/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Beach/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/OldAge/Beach/', items);
+                    }
+                   
+                }
+                else if(this.state.checkedSecondGender2 === true){ 
+                   if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Baby/Beach/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Youth/Beach/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Volunteer/Beach/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Beach/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/OldAge/Beach/', items);
+                    }
+                }
+            } 
+            else if(this.state.accom === "Núi"){ 
+                if(this.checkedSecondGender1 === true ){ 
+                    if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Baby/Mountain/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Youth/Mountain/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Volunteer/Mountain/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Mountain/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/OldAge/Mountain/', items);
+                    }
+                   
+                }
+                else if(this.state.checkedSecondGender2 === true){ 
+                   if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Baby/Mountain/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Youth/Mountain/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Volunteer/Mountain/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Mountain/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/OldAge/Mountain/', items);
+                    }
+                }
+            } 
+            else if(this.state.accom === "Cầu thang"){ 
+                if(this.checkedSecondGender1 === true ){ 
+                    if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Baby/Stair/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Youth/Stair/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Volunteer/Stair/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Stair/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/OldAge/Stair/', items);
+                    }
+                   
+                }
+                else if(this.state.checkedSecondGender2 === true){ 
+                   if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Baby/Stair/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Youth/Stair/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Volunteer/Stair/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Stair/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/OldAge/Stair/', items);
+                    }
+                }
+            } 
+            else if(this.state.accom === "Khung cửa"){ 
+                if(this.checkedSecondGender1 === true ){ 
+                    if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Baby/Door/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Youth/Door/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Volunteer/Door/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Door/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/OldAge/Door/', items);
+                    }
+                   
+                }
+                else if(this.state.checkedSecondGender2 === true){ 
+                   if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Baby/Door/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Youth/Door/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Volunteer/Door/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Door/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/OldAge/Door/', items);
+                    }
+                }
+            } 
+            else if(this.state.accom === "Cây cối"){ 
+                if(this.checkedSecondGender1 === true ){ 
+                    if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Baby/Tree/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Youth/Tree/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Volunteer/Tree/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Tree/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/OldAge/Tree/', items);
+                    }
+                   
+                }
+                else if(this.state.checkedSecondGender2 === true){ 
+                   if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Baby/Tree/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Youth/Tree/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Volunteer/Tree/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Tree/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/OldAge/Tree/', items);
+                    }
+                }
+            } 
+            else if(this.state.accom === "Công viên"){ 
+                if(this.checkedSecondGender1 === true ){ 
+                    if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Baby/Park/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Youth/Park/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/Volunteer/Park/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Park/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Male/OldAge/Park/', items);
+                    }
+                   
+                }
+                else if(this.state.checkedSecondGender2 === true){ 
+                   if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Baby/Park/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Youth/Park/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Volunteer/Park/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Park/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/OldAge/Park/', items);
+                    }
+                }
+            } 
+            else if(this.state.accom === "Đầm sen"){ 
+                   if(this.state.checkedThsAgeOnePerson1 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Baby/Lotus/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Youth/Lotus/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/Volunteer/Lotus/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Lotus/', items);
+                    }
+                    else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                       var items  = [];
+                       this.actGetData('ImagePose/OnePerson/Female/OldAge/Lotus/', items);
+                    }
+                }
+
+                if(this.state.accom === "Đứng"){ 
+                    if(this.checkedSecondGender1 === true ){ 
+                        if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Baby/Stand/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Youth/Stand/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Volunteer/Stand/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Stand/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/OldAge/Stand/', items);
+                        }
+                       
+                    }
+                    else if(this.state.checkedSecondGender2 === true){ 
+                       if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Baby/Stand/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Youth/Stand/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Volunteer/Stand/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Stand/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/OldAge/Stand/', items);
+                        }
+                    }
+                } 
+                else if(this.state.accom === "Ngồi"){ 
+                    if(this.checkedSecondGender1 === true ){ 
+                        if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Baby/Seat/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Youth/Seat/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Volunteer/Seat/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Seat/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/OldAge/Seat/', items);
+                        }
+                       
+                    }
+                    else if(this.state.checkedSecondGender2 === true){ 
+                       if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Baby/Seat/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Youth/Seat/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Volunteer/Seat/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Seat/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/OldAge/Seat/', items);
+                        }
+                    }
+                } 
+                else if(this.state.accom === "Nằm"){ 
+                    if(this.checkedSecondGender1 === true ){ 
+                        if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Baby/Lie/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Youth/Lie/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Volunteer/Lie/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Lie/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/OldAge/Lie/', items);
+                        }
+                       
+                    }
+                    else if(this.state.checkedSecondGender2 === true){ 
+                       if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Baby/Lie/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Youth/Lie/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Volunteer/Lie/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Lie/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/OldAge/Lie/', items);
+                        }
+                    }
+                } 
+                else if(this.state.accom === "Đi"){ 
+                    if(this.checkedSecondGender1 === true ){ 
+                        if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Baby/Go/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Youth/Go/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Volunteer/Go/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Go/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/OldAge/Go/', items);
+                        }
+                       
+                    }
+                    else if(this.state.checkedSecondGender2 === true){ 
+                       if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Baby/Go/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Youth/Go/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Volunteer/Go/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Go/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/OldAge/Go/', items);
+                        }
+                    }
+                } 
+                else if(this.state.accom === "Chạy"){ 
+                    if(this.checkedSecondGender1 === true ){ 
+                        if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Baby/Run/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Youth/Run/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Volunteer/Run/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Run/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/OldAge/Run/', items);
+                        }
+                       
+                    }
+                    else if(this.state.checkedSecondGender2 === true){ 
+                       if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Baby/Run/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Youth/Run/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Volunteer/Run/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Run/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/OldAge/Run/', items);
+                        }
+                    }
+                } 
+                else if(this.state.accom === "Bật cao"){ 
+                    if(this.checkedSecondGender1 === true ){ 
+                        if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Baby/Jump/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Youth/Jump/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Volunteer/Jump/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Jump/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/OldAge/Jump/', items);
+                        }
+                       
+                    }
+                    else if(this.state.checkedSecondGender2 === true){ 
+                       if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Baby/Jump/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Youth/Jump/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Volunteer/Jump/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Jump/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/OldAge/Jump/', items);
+                        }
+                    }
+                } 
+                else if(this.state.accom === "Tựa"){ 
+                    if(this.checkedSecondGender1 === true ){ 
+                        if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Baby/Base/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Youth/Base/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Volunteer/Base/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Base/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/OldAge/Base/', items);
+                        }
+                       
+                    }
+                    else if(this.state.checkedSecondGender2 === true){ 
+                       if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Baby/Base/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Youth/Base/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Volunteer/Base/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Base/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/OldAge/Base/', items);
+                        }
+                    }
+                } 
+                else if(this.state.accom === "Bám"){ 
+                    if(this.checkedSecondGender1 === true ){ 
+                        if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Baby/Cling/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Youth/Cling/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Volunteer/Cling/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/MiddleAge/Cling/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/OldAge/Cling/', items);
+                        }
+                       
+                    }
+                    else if(this.state.checkedSecondGender2 === true){ 
+                       if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Baby/Cling/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Youth/Cling/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Volunteer/Cling/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Cling/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/OldAge/Cling/', items);
+                        }
+                    }
+                } 
+                else if(this.state.accom === "Nghiêng người"){ 
+                    if(this.checkedSecondGender1 === true ){ 
+                        if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Baby/TurnCircle/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Youth/TurnCircle/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/Volunteer/TurnCircle/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/MiddleAge/TurnCircle/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Male/OldAge/TurnCircle/', items);
+                        }
+                       
+                    }
+                    else if(this.state.checkedSecondGender2 === true){ 
+                       if(this.state.checkedThsAgeOnePerson1 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Baby/TurnCircle/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson2 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Youth/TurnCircle/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson3 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/Volunteer/TurnCircle/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson4 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/MiddleAge/TurnCircle/', items);
+                        }
+                        else if(this.state.checkedThsAgeOnePerson5 === true){ 
+                           var items  = [];
+                           this.actGetData('ImagePose/OnePerson/Female/OldAge/TurnCircle/', items);
+                        }
+                    }
+                } 
+        } 
     
       submit(){ 
           if(this.state.dataImgTwo === "Thiếu nhi"){ 
@@ -1270,6 +2809,20 @@ export default class AlbumPose extends Component{
             for(var i = 0; i < dataClotherMaleOldAge1.length; i++) {
                 dataClotherMaleOldAge = dataClotherMaleOldAge.concat(dataClotherMaleOldAge1[i]);
             }
+        var dataClotherFemaleYoungAge1= [];
+        var dataClotherFemaleYoungAge = [];
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Female/ClotherYoungAge/', dataClotherFemaleYoungAge1, dataClotherFemaleYoungAge) 
+                        // // biến đổi về mảng một chiều
+            for(var i = 0; i < dataClotherFemaleYoungAge1.length; i++) {
+                dataClotherFemaleYoungAge = dataClotherFemaleYoungAge.concat(dataClotherFemaleYoungAge1[i]);
+            }
+        var dataClotherMaleYoungAge1= [];
+        var dataClotherMaleYoungAge = [];
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Male/ClotherYoungAge/', dataClotherMaleYoungAge1, dataClotherMaleYoungAge1) 
+                            // // biến đổi về mảng một chiều
+            for(var i = 0; i < dataClotherMaleYoungAge1.length; i++) {
+                dataClotherMaleYoungAge = dataClotherMaleYoungAge.concat(dataClotherMaleYoungAge1[i]);
+            }
 
         var dataClotherMale1 = [];
         var dataClotherMale = [];
@@ -1288,14 +2841,14 @@ export default class AlbumPose extends Component{
 
         var dataViewMale1 = [];
         var dataViewMale = [];
-            getDataDropDown.helper1('DataCategoryImage/OnePerson/Female/Pose/', dataViewMale1, dataViewMale)      
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Male/View/', dataViewMale1, dataViewMale)      
             for(var i = 0; i < dataViewMale1.length; i++) {
                 dataViewMale = dataViewMale.concat(dataViewMale1[i]);
             }
 
         var dataAccomMale1 = [];
         var dataAccomMale = [];
-            getDataDropDown.helper1('DataCategoryImage/OnePerson/Male/Accomodation/', dataAccomMale1, dataAccomMale)            
+            getDataDropDown.helper1('DataCategoryImage/OnePerson/Male/AccomYoungAge/', dataAccomMale1, dataAccomMale)            
             for(var i = 0; i < dataAccomMale1.length; i++) {
                 dataAccomMale = dataAccomMale.concat(dataAccomMale1[i]);
             }
@@ -1458,7 +3011,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -1502,7 +3055,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -1545,7 +3098,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -1588,7 +3141,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -1631,7 +3184,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -1675,7 +3228,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -1719,7 +3272,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -1762,7 +3315,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -1805,7 +3358,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -1848,7 +3401,7 @@ export default class AlbumPose extends Component{
                                     </Text>
                                 </TouchableOpacity>
                                 <View style={{marginLeft: 10, marginTop: -5}}>
-                                    <TouchableOpacity onPress={() => this.submit()}
+                                    <TouchableOpacity onPress={() => this.submitOnPerson()}
                                         style={{width: 50, height:30, borderColor: 1, backgroundColor: 'gray', borderRadius: 10}}>
                                         <Text style={{color: "white", textAlign: 'center', marginTop: 5}} >OK</Text>
                                     </TouchableOpacity>
@@ -4420,9 +5973,83 @@ export default class AlbumPose extends Component{
                                                             /> 
                                     </View>) : null}
 
+                        {(this.state.checkedSecondGender1 === true && this.state.checkedThsAgeOnePerson1 === true
+                            && (this.state.checkedPersonOne === true) ) ?
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherMaleYoungAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomMale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {(this.state.checkedSecondGender1 === true && this.state.checkedThsAgeOnePerson1 === true
+                            && (this.state.checkedPersonOne === true) ) ?
+                            (<View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataViewMale} label='Bối cảnh' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(view) => { view= this.setState({view}) }}
+                                        value = {this.state.view}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataPoseMale} label='Tư thế'  fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(pose) => { pose= this.setState({pose}) }}
+                                        value = {this.state.pose}
+                                        />
+                                </View>
+                            
+                            </View>): null}
+                        {(this.state.checkedSecondGender2 === true && this.state.checkedThsAgeOnePerson1 === true
+                            && (this.state.checkedPersonOne === true) ) ?
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherFemaleYoungAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomMale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {(this.state.checkedSecondGender2 === true && this.state.checkedThsAgeOnePerson1 === true
+                            && (this.state.checkedPersonOne === true) ) ?
+                            (<View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataViewFemale} label='Bối cảnh' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(view) => { view= this.setState({view}) }}
+                                        value = {this.state.view}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataPoseFemale} label='Tư thế'  fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(pose) => { pose= this.setState({pose}) }}
+                                        value = {this.state.pose}
+                                        />
+                                </View>
+                            
+                            </View>): null}
 
                         {((this.state.checkedSecondGender1 === true)
-                            && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
+                            && (this.state.checkedThsAgeOnePerson2 === true 
                                 || this.state.checkedThsAgeOnePerson3 === true 
                                     || this.state.checkedThsAgeOnePerson4 === true )
                             && (this.state.checkedPersonOne === true) ) ?
@@ -4444,10 +6071,9 @@ export default class AlbumPose extends Component{
                                 </View>
                             </View>) :null}
                         {((this.state.checkedSecondGender1 === true)
-                            && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
+                            && (this.state.checkedThsAgeOnePerson2 === true 
                                 || this.state.checkedThsAgeOnePerson3 === true 
-                                    || this.state.checkedThsAgeOnePerson4 === true
-                                        || this.state.checkedThsAgeOnePerson5 === true )
+                                    || this.state.checkedThsAgeOnePerson4 === true )
                             && (this.state.checkedPersonOne === true) )?
                             (<View style={stylesAlbumPose.checkThird}>
                                 <View style={{width: 160}}>
@@ -4466,7 +6092,7 @@ export default class AlbumPose extends Component{
                                 </View>
                             
                             </View>): null}
-                        {((this.state.checkedSecondGender1 === true || this.state.checkedSecondDoubleGender2 === true)
+                        {((this.state.checkedSecondGender1 === true)
                             && this.state.checkedThsAgeOnePerson5 === true
                                 && this.state.checkedPersonOne === true ) ?
                            ( <View style={stylesAlbumPose.checkThird}>
@@ -4485,7 +6111,7 @@ export default class AlbumPose extends Component{
                                         />
                                 </View>
                             </View>) :null}
-                        {/* {(this.state.checkedSecondGender1 === true
+                        {(this.state.checkedSecondGender1 === true
                             && this.state.checkedThsAgeOnePerson5 === true 
                                  && this.state.checkedPersonOne === true )?
                             (<View style={stylesAlbumPose.checkThird}>
@@ -4504,9 +6130,9 @@ export default class AlbumPose extends Component{
                                         />
                                 </View>
                             
-                            </View>): null} */}
+                            </View>): null}
                         {(this.state.checkedSecondGender2 === true
-                            && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
+                            && (this.state.checkedThsAgeOnePerson2 === true 
                                 || this.state.checkedThsAgeOnePerson3 === true 
                                     || this.state.checkedThsAgeOnePerson4 === true )
                             && (this.state.checkedPersonOne === true) ) ?
@@ -4528,10 +6154,9 @@ export default class AlbumPose extends Component{
                                 </View>
                             </View>) :null}
                         {((this.state.checkedSecondGender2 === true)
-                            && (this.state.checkedThsAgeOnePerson1 === true || this.state.checkedThsAgeOnePerson2 === true 
+                            && (this.state.checkedThsAgeOnePerson2 === true 
                                 || this.state.checkedThsAgeOnePerson3 === true 
-                                    || this.state.checkedThsAgeOnePerson4 === true 
-                                        || this.state.checkedThsAgeOnePerson5 === true )
+                                    || this.state.checkedThsAgeOnePerson4 === true )
                             && (this.state.checkedPersonOne === true) )
                              ?
                             (<View style={stylesAlbumPose.checkThird}>
@@ -4551,7 +6176,45 @@ export default class AlbumPose extends Component{
                                 </View>
                             
                             </View>): null}
-                        
+                        {((this.state.checkedSecondGender2 === true)
+                            && this.state.checkedThsAgeOnePerson5 === true
+                                && this.state.checkedPersonOne === true ) ?
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherMaleOldAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomMale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {(this.state.checkedSecondGender2 === true
+                            && this.state.checkedThsAgeOnePerson5 === true 
+                                 && this.state.checkedPersonOne === true )?
+                            (<View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataViewFemale} label='Bối cảnh' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(view) => { view= this.setState({view}) }}
+                                        value = {this.state.view}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataPoseFemale} label='Tư thế'  fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(pose) => { pose= this.setState({pose}) }}
+                                        value = {this.state.pose}
+                                        />
+                                </View>
+                            
+                            </View>): null}
                         {((this.state.checkedSecondDoubleGender1 === true 
                                 || this.state.checkedSecondDoubleGender2 === true 
                                 || this.state.checkedSecondDoubleGender3 === true)
