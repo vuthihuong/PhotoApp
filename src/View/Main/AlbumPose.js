@@ -72,10 +72,10 @@ export default class AlbumPose extends Component{
                 checkedPersonTwo: true, checkedPersonOne: false, checkedPersonGroup: false
             })
             var items = [];
-            var urlImg = ['ImagePose/TwoPerson/DoubleMale/Uniform/', 'ImagePose/TwoPerson/FeMaleAndMale/Uniform/',
-                          'ImagePose/TwoPerson/FeMale/Coat/', 'ImagePose/TwoPerson/FeMale/Uniform/',
-                          'ImagePose/TwoPerson/Male/Uniform/', 'ImagePose/TwoPerson/Male/Coat',
-                          'ImagePose/TwoPerson/FeMale/AoDai', 'ImagePose/TwoPerson/Male/AoDai']
+            var urlImg = ['ImagePose/TwoPerson/DoubleMale/Volunteer/Uniform/', 'ImagePose/TwoPerson/MaleFemale/Volunteer/UniformStudent/',
+                          'ImagePose/TwoPerson/DoubleMale/Volunteer/Coat/', 'ImagePose/TwoPerson/MaleFemale/Volunteer/UniformPlay/',
+                          'ImagePose/TwoPerson/DoubleMale/Volunteer/UniformPlay/', 'ImagePose/TwoPerson/MaleFemale/Volunteer/Coat',
+                          'ImagePose/TwoPerson/DoubleFemale/Volunteer/AoDai', 'ImagePose/TwoPerson/MaleFemale/Volunteer/AoDai']
             for(var i = 0; i < urlImg.length; i ++){
                 this.actGetData(urlImg[i],items);
             }
@@ -2155,10 +2155,6 @@ export default class AlbumPose extends Component{
     
       submit(){ 
           if(this.state.dataImgTwo === "Thiếu nhi"){ 
-              this.setState({ 
-                checkedThsAgeOnePerson1: true,
-                dataImgTwo: ''
-              })
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/Baby/Coat/','ImagePose/TwoPerson/DoubleMale/Baby/UniformPlay/',
@@ -2183,12 +2179,12 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thiếu niên"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson2: true,
+              this.setState({ 
+                checkedThsAgeOnePerson1: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thiếu niên"){ 
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/Youth/Coat/','ImagePose/TwoPerson/DoubleMale/Youth/UniformPlay/',
@@ -2213,12 +2209,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thanh niên"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson3: true,
+              this.setState({ 
+                checkedThsAgeOnePerson2: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thanh niên"){ 
+           
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/Volunteer/Coat/','ImagePose/TwoPerson/DoubleMale/Volunteer/UniformPlay/',
@@ -2243,12 +2240,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Trung niên"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson4: true,
+              this.setState({ 
+                checkedThsAgeOnePerson3: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Trung niên"){ 
+           
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/MiddleAge/Coat/','ImagePose/TwoPerson/DoubleMale/MiddleAge/UniformPlay/',
@@ -2273,12 +2271,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Người cao tuổi"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson5: true,
+              this.setState({ 
+                checkedThsAgeOnePerson4: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Người cao tuổi"){ 
+           
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/OldAge/Coat/','ImagePose/TwoPerson/DoubleMale/OldAge/UniformPlay/',
@@ -2303,12 +2302,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
+                this.setState({ 
+                    checkedThsAgeOnePerson5: true,
+                    dataImgTwo: ''
+                })
           }
           if(this.state.dataImgTwo === "Thiếu nhi - Thiếu niên"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson6: true,
-                dataImgTwo: ''
-              })
+            
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/BabyYouth/Coat/','ImagePose/TwoPerson/DoubleMale/BabyYouth/UniformPlay/',
@@ -2333,12 +2333,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thiếu nhi - Thanh niên"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson7: true,
+              this.setState({ 
+                checkedThsAgeOnePerson6: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thiếu nhi - Thanh niên"){ 
+           
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/BabyVolunteer/Coat/','ImagePose/TwoPerson/DoubleMale/BabyVolunteer/UniformPlay/',
@@ -2363,12 +2364,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thiếu nhi - Trung niên"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson8: true,
+              this.setState({ 
+                checkedThsAgeOnePerson7: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thiếu nhi - Trung niên"){ 
+           
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/BabyMiddleAge/Coat/','ImagePose/TwoPerson/DoubleMale/BabyMiddleAge/UniformPlay/',
@@ -2393,12 +2395,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thiếu nhi - Người cao tuổi"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson9: true,
+              this.setState({ 
+                checkedThsAgeOnePerson8: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thiếu nhi - Người cao tuổi"){ 
+           
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/BabyOldAge/Coat/','ImagePose/TwoPerson/DoubleMale/BabyOldAge/UniformPlay/',
@@ -2423,12 +2426,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thiếu niên - Thanh niên"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson10: true,
+              this.setState({ 
+                checkedThsAgeOnePerson9: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thiếu niên - Thanh niên"){ 
+           
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/YouthVolunteer/Coat/','ImagePose/TwoPerson/DoubleMale/YouthVolunteer/UniformPlay/',
@@ -2453,12 +2457,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thiếu niên - Trung niên"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson11: true,
+              this.setState({ 
+                checkedThsAgeOnePerson10: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thiếu niên - Trung niên"){ 
+           
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/YouthMiddleAge/Coat/','ImagePose/TwoPerson/DoubleMale/YouthMiddleAge/UniformPlay/',
@@ -2483,12 +2488,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thiếu niên - Người cao tuổi"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson12: true,
+              this.setState({ 
+                checkedThsAgeOnePerson11: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thiếu niên - Người cao tuổi"){ 
+            
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/YouthOldAge/Coat/','ImagePose/TwoPerson/DoubleMale/YouthOldAge/UniformPlay/',
@@ -2513,12 +2519,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thanh niên - Trung niên"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson13: true,
+              this.setState({ 
+                checkedThsAgeOnePerson12: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thanh niên - Trung niên"){ 
+            
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/VolunteerMiddleAge/Coat/','ImagePose/TwoPerson/DoubleMale/VolunteerMiddleAge/UniformPlay/',
@@ -2543,12 +2550,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Thanh niên - Người cao tuổi"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson14: true,
+              this.setState({ 
+                checkedThsAgeOnePerson13: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Thanh niên - Người cao tuổi"){ 
+           
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/VolunteerOldAge/Coat/','ImagePose/TwoPerson/DoubleMale/VolunteerOldAge/UniformPlay/',
@@ -2573,12 +2581,13 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
-          }
-          if(this.state.dataImgTwo === "Trung niên - Người cao tuổi"){ 
-            this.setState({ 
-                checkedThsAgeOnePerson15: true,
+              this.setState({ 
+                checkedThsAgeOnePerson14: true,
                 dataImgTwo: ''
               })
+          }
+          if(this.state.dataImgTwo === "Trung niên - Người cao tuổi"){ 
+            
               if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
                 var urlImg = ['ImagePose/TwoPerson/DoubleMale/MiddleOldAge/Coat/','ImagePose/TwoPerson/DoubleMale/MiddleOldAge/UniformPlay/',
@@ -2603,6 +2612,10 @@ export default class AlbumPose extends Component{
                     for(var i = 0; i < urlImg.length; i ++){
                         this.actGetData(urlImg[i],items); }
               }
+              this.setState({ 
+                checkedThsAgeOnePerson15: true,
+                dataImgTwo: ''
+              })
           }
       }
 
@@ -2794,6 +2807,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/AoDai/', items);
                 }
             }
+            this.setState({ 
+                clother: ''
+            })
         }
         else if(this.state.clother === "Áo khoác"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -2982,6 +2998,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Coat/', items);
                 }
             }
+            this.setState({ 
+                clother: ''
+            })
         }
         else if(this.state.clother === "Đồng phục học sinh"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -3170,6 +3189,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/UniformStudent/', items);
                 }
             }
+            this.setState({ 
+                clother: ''
+            })
         }
         else if(this.state.clother === "Đồng phục công sở"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -3358,6 +3380,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/UniformComple/', items);
                 }
             }
+            this.setState({ 
+                clother: ''
+            })
         }
         else if(this.state.clother === "Quần áo thể thao"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -3546,6 +3571,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/UniformPlay/', items);
                 }
             }
+            this.setState({ 
+                clother: ''
+            })
         }
         else if(this.state.clother === "Váy"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -3734,6 +3762,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Skirt/', items);
                 }
             }
+            this.setState({ 
+                clother: ''
+            })
         }
         else if(this.state.clother === "Comple"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -3922,6 +3953,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Comple/', items);
                 }
             }
+            this.setState({ 
+                clother: ''
+            })
         }
         if(this.state.accom === "Bóng bay"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -4110,6 +4144,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Balloon/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Xe đạp"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -4298,6 +4335,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Cycle/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Hoa"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -4486,6 +4526,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Flower/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Điện thoại"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -4674,6 +4717,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Phone/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Túi xách"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -4862,6 +4908,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/HandBag/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Ba lô hai dây"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -5050,6 +5099,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/StringBag/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Ba lô dây chéo"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -5238,6 +5290,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/CrossBag/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Ô"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -5426,6 +5481,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Umbrella/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Quả bóng"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -5614,6 +5672,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Ball/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Sổ cầm tay"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -5802,6 +5863,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Book/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.accom === "Mũ, nón"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -5990,6 +6054,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Hat/', items);
                 }
             }
+            this.setState({ 
+                accom: ''
+            })
         }
         else if(this.state.view === "Hồ, sông, biển"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -6178,6 +6245,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Beach/', items);
                 }
             }
+            this.setState({ 
+                view: ''
+            })
         }
         else if(this.state.view === "Đầm sen"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -6366,6 +6436,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Lotus/', items);
                 }
             }
+            this.setState({ 
+                view: ''
+            })
         }
         else if(this.state.view === "Núi"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -6554,6 +6627,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Mountain/', items);
                 }
             }
+            this.setState({ 
+                view: ''
+            })
         }
         else if(this.state.view === "Cầu thang"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -6742,6 +6818,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Stair/', items);
                 }
             }
+            this.setState({ 
+                view: ''
+            })
         }
         else if(this.state.view === "Khung cửa"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -6930,6 +7009,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Door/', items);
                 }
             }
+            this.setState({ 
+                view: ''
+            })
         }
         else if(this.state.view === "Cây cối"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -7118,6 +7200,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Tree/', items);
                 }
             }
+            this.setState({ 
+                view: ''
+            })
         }
         else if(this.state.view === "Công viên"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -7306,6 +7391,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Park/', items);
                 }
             }
+            this.setState({ 
+                view: ''
+            })
         }
         if(this.state.pose === "Đứng"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -7494,6 +7582,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Stand/', items);
                 }
             }
+            this.setState({ 
+                pose: ''
+            })
         }
         else if(this.state.pose === "Ngồi"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -7682,6 +7773,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Seat/', items);
                 }
             }
+            this.setState({ 
+                pose: ''
+            })
         }
         else if(this.state.pose === "Nằm"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -7870,6 +7964,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Lie/', items);
                 }
             }
+            this.setState({ 
+                pose: ''
+            })
         }
         else if(this.state.pose === "Đi"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -8058,6 +8155,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Go/', items);
                 }
             }
+            this.setState({ 
+                pose: ''
+            })
         }
         else if(this.state.pose === "Nghiêng người"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -8246,6 +8346,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/TurnCircle/', items);
                 }
             }
+            this.setState({ 
+                pose: ''
+            })
         }
         else if(this.state.pose === "Tựa"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -8434,6 +8537,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Base/', items);
                 }
             }
+            this.setState({ 
+                pose: ''
+            })
         }
         else if(this.state.pose === "Bám"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -8622,6 +8728,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Cling/', items);
                 }
             }
+            this.setState({ 
+                pose: ''
+            })
         }
         else if(this.state.pose === "Bật cao"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -8810,6 +8919,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Jump/', items);
                 }
             }
+            this.setState({ 
+                pose: ''
+            })
         }
         else if(this.state.pose === "Chạy"){
             if(this.state.checkedSecondDoubleGender1 === true){ 
@@ -8998,6 +9110,9 @@ export default class AlbumPose extends Component{
                     this.actGetData('/ImagePose/TwoPerson/DoubleFemale/MiddleOldAge/Run/', items);
                 }
             }
+            this.setState({ 
+                pose: ''
+            })
         }
   
       }
@@ -11253,7 +11368,7 @@ export default class AlbumPose extends Component{
                                  </TouchableOpacity>
                                         <Text> --> </Text>
                                 <TouchableOpacity
-                                        onPress={() => this.changeStatusGender3()} 
+                                        onPress={() => this.changeStatusDoubleGender3()} 
                                             >
                                     <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                             Hai người
@@ -11427,7 +11542,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11476,7 +11591,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11525,7 +11640,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11574,7 +11689,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11623,7 +11738,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11672,7 +11787,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11721,7 +11836,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11770,7 +11885,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11819,7 +11934,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11868,7 +11983,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -11917,7 +12032,7 @@ export default class AlbumPose extends Component{
                                     </TouchableOpacity>
                                             <Text> --> </Text>
                                     <TouchableOpacity
-                                            onPress={() => this.changeStatusDoubleGender2()} 
+                                            onPress={() => this.changeStatusDoubleGender3()} 
                                                 >
                                         <Text style={{textDecorationLine: 'underline', fontWeight: 'bold'}}>
                                                 Hai người
@@ -12061,19 +12176,19 @@ export default class AlbumPose extends Component{
                     {( this.state.checkedSecondDoubleGender1 === true 
                                 || this.state.checkedSecondDoubleGender2 === true 
                                     || this.state.checkedSecondDoubleGender3 === true)  
-                            && (this.state.checkedPersonTwo === true || this.state.checkedPersonGroup === true) && 
-                                (this.state.checkedThsAgeOnePerson1 === false && this.state.checkedThsAgeOnePerson2 === false 
-                                    && this.state.checkedThsAgeOnePerson3 === false && this.state.checkedThsAgeOnePerson4 === false
-                                    && this.state.checkedThsAgeOnePerson5 === false && this.state.checkedThsAgeOnePerson6 === false
-                                    && this.state.checkedThsAgeOnePerson7 === false && this.state.checkedThsAgeOnePerson8 === false
-                                    && this.state.checkedThsAgeOnePerson9 === false && this.state.checkedThsAgeOnePerson10 === false
-                                    && this.state.checkedThsAgeOnePerson11 === false && this.state.checkedThsAgeOnePerson12 === false 
-                                    && this.state.checkedThsAgeOnePerson13 === false && this.state.checkedThsAgeOnePerson14 === false
-                                    && this.state.checkedThsAgeOnePerson15 === false)  ?
+                            && this.state.checkedPersonTwo === true   
+                                &&(this.state.checkedThsAgeOnePerson1 === false && this.state.checkedThsAgeOnePerson2 === false 
+                                && this.state.checkedThsAgeOnePerson3 === false && this.state.checkedThsAgeOnePerson4 === false
+                                && this.state.checkedThsAgeOnePerson5 === false && this.state.checkedThsAgeOnePerson6 === false
+                                && this.state.checkedThsAgeOnePerson7 === false && this.state.checkedThsAgeOnePerson8 === false
+                                && this.state.checkedThsAgeOnePerson9 === false && this.state.checkedThsAgeOnePerson10 === false
+                                && this.state.checkedThsAgeOnePerson11 === false && this.state.checkedThsAgeOnePerson12 === false 
+                                && this.state.checkedThsAgeOnePerson13 === false && this.state.checkedThsAgeOnePerson14 === false
+                                && this.state.checkedThsAgeOnePerson15 === false)  ?
                                    
 
                         <View style={stylesAlbumPose.checkFirst}>
-                             <View style={{width: 300, marginTop: -10}}>
+                             <View style={{width: 300}}>
                                     <Dropdown  data={dataTwoPerson} label='Nhóm tuổi' fontSize = {13}
                                         pickerStyle={{borderWidth: 1, borderColor:'black'}} 
                                         onChangeText={(dataImgTwo) => { clother= this.setState({dataImgTwo}) }}
