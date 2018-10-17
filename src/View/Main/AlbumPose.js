@@ -113,8 +113,8 @@ export default class AlbumPose extends Component{
                 checkedSecondGender2: false
             })
             var items = [];
-            var urlImg = ['ImagePose/OnePerson/Male/Baby/UniformPlay/', 'ImagePose/OnePerson/Male/Baby/Coat/', 
-                        'ImagePose/OnePerson/Male/Baby/AoDai/']
+            var urlImg = ['/ImagePose/OnePerson/Male/Baby/Coat/', 
+                        '/ImagePose/OnePerson/Male/Baby/AoDai/']
             for(var i = 0; i < urlImg.length; i ++){
                 this.actGetData(urlImg[i],items);
             }
@@ -133,8 +133,8 @@ export default class AlbumPose extends Component{
                 checkedSecondGender1: false
             })
             var items = [];
-            var urlImg = ['ImagePose/OnePerson/FeMale/Baby/UniformPlay/', 'ImagePose/OnePerson/FeMale/Baby/Coat/', 
-                          'ImagePose/OnePerson/FeMale/Baby/AoDai/']
+            var urlImg = ['ImagePose/OnePerson/Female/Baby/UniformPlay/', 'ImagePose/OnePerson/Female/Baby/Coat/', 
+                          'ImagePose/OnePerson/Female/Baby/AoDai/']
             for(var i = 0; i < urlImg.length; i ++){
                 this.actGetData(urlImg[i],items);
             }
@@ -269,9 +269,9 @@ export default class AlbumPose extends Component{
                 checkedThsAgeOnePerson14: false, checkedThsAgeOnePerson15: false,
             })
             if(this.state.checkedSecondGender1 === true){ 
-                this.setState({ 
-                    checkedSecondGender2: false
-                })
+                // this.setState({ 
+                //     checkedSecondGender2: false
+                // })
                 var items = [];
                 this.actGetData('ImagePose/OnePerson/Male/Baby/AoDai/', items);
                 this.actGetData('ImagePose/OnePerson/Male/Baby/Coat/', items);
@@ -279,9 +279,9 @@ export default class AlbumPose extends Component{
                
             }
             else if(this.state.checkedSecondGender2 === true){ 
-                this.setState({ 
-                    checkedSecondGender1: false
-                })
+                // this.setState({ 
+                //     checkedSecondGender1: false
+                // })
                 var items = [];
                 this.actGetData('ImagePose/OnePerson/Female/Baby/AoDai/', items);
                 this.actGetData('ImagePose/OnePerson/Female/Baby/Coat/', items);
@@ -655,7 +655,7 @@ export default class AlbumPose extends Component{
 
       submitOnPerson(){ 
          if(this.state.clother === "Áo dài"){ 
-             if(this.checkedSecondGender1 === true ){ 
+             if(this.state.checkedSecondGender1 === true ){ 
                  if(this.state.checkedThsAgeOnePerson1 === true){ 
                     var items  = [];
                     this.actGetData('ImagePose/OnePerson/Male/Baby/AoDai/', items);
@@ -700,10 +700,11 @@ export default class AlbumPose extends Component{
                     this.actGetData('ImagePose/OnePerson/Female/OldAge/AoDai/', items);
                  }
              }
+             this.setState({ clother: ''})
             
          }
          else if(this.state.clother === "Áo khoác"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/Coat/', items);
@@ -748,10 +749,11 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/Coat/', items);
                 }
             }
+            this.setState({ clother: ''})
            
         }
         else if(this.state.clother === "Quần áo thể thao"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/UniformPlay/', items);
@@ -796,10 +798,11 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/UniformPlay/', items);
                 }
             }
+            this.setState({ clother: ''})
            
         } 
         else if(this.state.clother === "Đồng phục học sinh"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                if(this.state.checkedThsAgeOnePerson2 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Youth/UniformStudent/', items);
@@ -820,10 +823,10 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/Volunteer/UniformStudent/', items);
                 }
             }
-           
+            this.setState({ clother: ''})
         } 
         else if(this.state.clother === "Đồng phục công sở"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson3 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Volunteer/UniformComple/', items);
@@ -844,29 +847,30 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/MiddleAge/UniformComple/', items);
                 }
             }
-           
+            this.setState({ clother: ''})
         } 
         else if(this.state.clother === "Váy"){ 
             if(this.state.checkedThsAgeOnePerson1 === true){ 
                 var items  = [];
-                this.actGetData('ImagePose/OnePerson/Female/Baby/skirt/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Baby/Skirt/', items);
             }
             else if(this.state.checkedThsAgeOnePerson2 === true){ 
                 var items  = [];
-                this.actGetData('ImagePose/OnePerson/Female/Youth/skirt/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Youth/Skirt/', items);
             }
             else if(this.state.checkedThsAgeOnePerson3 === true){ 
                 var items  = [];
-                this.actGetData('ImagePose/OnePerson/Female/Volunteer/skirt/', items);
+                this.actGetData('ImagePose/OnePerson/Female/Volunteer/Skirt/', items);
             }
             else if(this.state.checkedThsAgeOnePerson4 === true){ 
                 var items  = [];
-                this.actGetData('ImagePose/OnePerson/Female/MiddleAge/skirt/', items);
+                this.actGetData('ImagePose/OnePerson/Female/MiddleAge/Skirt/', items);
             }
+            this.setState({ clother: ''})
         } 
 
         if(this.state.accom === "Bóng bay"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/Balloon/', items);
@@ -911,10 +915,10 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/Balloon/', items);
                 }
             }
-           
+           c
         } 
         else if(this.state.accom === "Xe đạp"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/Cycle/', items);
@@ -959,7 +963,7 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/Cycle/', items);
                 }
             }
-           
+            this.setState({ accom: ''})
         } 
         else if(this.state.accom === "Điện thoại"){ 
             if(this.checkedSecondGender1 === true ){ 
@@ -1007,10 +1011,10 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/Phone/', items);
                 }
             }
-           
+            this.setState({ accom: ''})
         } 
         else if(this.state.accom === "Ba lô hai dây"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/StringBag/', items);
@@ -1055,10 +1059,10 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/StringBag/', items);
                 }
             }
-           
+            this.setState({ accom: ''})
         } 
         else if(this.state.accom === "Ba lô dây chéo"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/CrossBag/', items);
@@ -1103,10 +1107,10 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/CrossBag/', items);
                 }
             }
-           
+            this.setState({ accom: ''})
         } 
         else if(this.state.accom === "Ô"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/Umbrella/', items);
@@ -1151,10 +1155,10 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/Umbrella/', items);
                 }
             }
-           
+            this.setState({ accom: ''})
         } 
         else if(this.state.accom === "Quả bóng"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/Ball/', items);
@@ -1199,10 +1203,10 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/Ball/', items);
                 }
             }
-           
+            this.setState({ accom: ''})
         } 
         else if(this.state.accom === "Sổ cầm tay"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/Book/', items);
@@ -1247,10 +1251,10 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/Book/', items);
                 }
             }
-           
+            this.setState({ accom: ''})
         } 
         else if(this.state.accom === "Mũ, nón"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/Hat/', items);
@@ -1295,7 +1299,7 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/Hat/', items);
                 }
             }
-           
+            this.setState({ accom: ''})
         } 
         else if(this.state.accom === "Túi xách"){ 
                if(this.state.checkedThsAgeOnePerson1 === true){ 
@@ -1318,10 +1322,11 @@ export default class AlbumPose extends Component{
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/HandBag/', items);
                 }
+                this.setState({ accom: ''})
             }
       
       else if(this.state.accom === "Mũ, nón"){ 
-            if(this.checkedSecondGender1 === true ){ 
+            if(this.state.checkedSecondGender1 === true ){ 
                 if(this.state.checkedThsAgeOnePerson1 === true){ 
                    var items  = [];
                    this.actGetData('ImagePose/OnePerson/Male/Baby/Hat/', items);
@@ -1366,9 +1371,10 @@ export default class AlbumPose extends Component{
                    this.actGetData('ImagePose/OnePerson/Female/OldAge/Hat/', items);
                 }
             }
+            this.setState({ accom: ''})
         }
-            if(this.state.accom === "Hồ, sông biển"){ 
-                if(this.checkedSecondGender1 === true ){ 
+            if(this.state.view === "Hồ, sông biển"){ 
+                if(this.state.checkedSecondGender1 === true ){ 
                     if(this.state.checkedThsAgeOnePerson1 === true){ 
                        var items  = [];
                        this.actGetData('ImagePose/OnePerson/Male/Baby/Beach/', items);
@@ -1413,9 +1419,10 @@ export default class AlbumPose extends Component{
                        this.actGetData('ImagePose/OnePerson/Female/OldAge/Beach/', items);
                     }
                 }
+                this.setState({ view: ''})
             } 
-            else if(this.state.accom === "Núi"){ 
-                if(this.checkedSecondGender1 === true ){ 
+            else if(this.state.view === "Núi"){ 
+                if(this.state.checkedSecondGender1 === true ){ 
                     if(this.state.checkedThsAgeOnePerson1 === true){ 
                        var items  = [];
                        this.actGetData('ImagePose/OnePerson/Male/Baby/Mountain/', items);
@@ -1460,9 +1467,10 @@ export default class AlbumPose extends Component{
                        this.actGetData('ImagePose/OnePerson/Female/OldAge/Mountain/', items);
                     }
                 }
+                this.setState({ view: ''})
             } 
-            else if(this.state.accom === "Cầu thang"){ 
-                if(this.checkedSecondGender1 === true ){ 
+            else if(this.state.view === "Cầu thang"){ 
+                if(this.state.checkedSecondGender1 === true ){ 
                     if(this.state.checkedThsAgeOnePerson1 === true){ 
                        var items  = [];
                        this.actGetData('ImagePose/OnePerson/Male/Baby/Stair/', items);
@@ -1507,9 +1515,10 @@ export default class AlbumPose extends Component{
                        this.actGetData('ImagePose/OnePerson/Female/OldAge/Stair/', items);
                     }
                 }
+                this.setState({ view: ''})
             } 
-            else if(this.state.accom === "Khung cửa"){ 
-                if(this.checkedSecondGender1 === true ){ 
+            else if(this.state.view === "Khung cửa"){ 
+                if(this.state.checkedSecondGender1 === true ){ 
                     if(this.state.checkedThsAgeOnePerson1 === true){ 
                        var items  = [];
                        this.actGetData('ImagePose/OnePerson/Male/Baby/Door/', items);
@@ -1554,9 +1563,10 @@ export default class AlbumPose extends Component{
                        this.actGetData('ImagePose/OnePerson/Female/OldAge/Door/', items);
                     }
                 }
+                this.setState({ view: ''})
             } 
-            else if(this.state.accom === "Cây cối"){ 
-                if(this.checkedSecondGender1 === true ){ 
+            else if(this.state.view === "Cây cối"){ 
+                if(this.state.checkedSecondGender1 === true ){ 
                     if(this.state.checkedThsAgeOnePerson1 === true){ 
                        var items  = [];
                        this.actGetData('ImagePose/OnePerson/Male/Baby/Tree/', items);
@@ -1601,9 +1611,10 @@ export default class AlbumPose extends Component{
                        this.actGetData('ImagePose/OnePerson/Female/OldAge/Tree/', items);
                     }
                 }
+                this.setState({ view: ''})
             } 
-            else if(this.state.accom === "Công viên"){ 
-                if(this.checkedSecondGender1 === true ){ 
+            else if(this.state.view === "Công viên"){ 
+                if(this.state.checkedSecondGender1 === true ){ 
                     if(this.state.checkedThsAgeOnePerson1 === true){ 
                        var items  = [];
                        this.actGetData('ImagePose/OnePerson/Male/Baby/Park/', items);
@@ -1648,8 +1659,9 @@ export default class AlbumPose extends Component{
                        this.actGetData('ImagePose/OnePerson/Female/OldAge/Park/', items);
                     }
                 }
+                this.setState({ view: ''})
             } 
-            else if(this.state.accom === "Đầm sen"){ 
+            else if(this.state.view === "Đầm sen"){ 
                    if(this.state.checkedThsAgeOnePerson1 === true){ 
                        var items  = [];
                        this.actGetData('ImagePose/OnePerson/Female/Baby/Lotus/', items);
@@ -1670,10 +1682,11 @@ export default class AlbumPose extends Component{
                        var items  = [];
                        this.actGetData('ImagePose/OnePerson/Female/OldAge/Lotus/', items);
                     }
+                    this.setState({ view: ''})
                 }
 
-                if(this.state.accom === "Đứng"){ 
-                    if(this.checkedSecondGender1 === true ){ 
+                if(this.state.pose === "Đứng"){ 
+                    if(this.state.checkedSecondGender1 === true ){ 
                         if(this.state.checkedThsAgeOnePerson1 === true){ 
                            var items  = [];
                            this.actGetData('ImagePose/OnePerson/Male/Baby/Stand/', items);
@@ -1718,9 +1731,10 @@ export default class AlbumPose extends Component{
                            this.actGetData('ImagePose/OnePerson/Female/OldAge/Stand/', items);
                         }
                     }
+                    this.setState({ pose: ''})
                 } 
-                else if(this.state.accom === "Ngồi"){ 
-                    if(this.checkedSecondGender1 === true ){ 
+                else if(this.state.pose === "Ngồi"){ 
+                    if(this.state.checkedSecondGender1 === true ){ 
                         if(this.state.checkedThsAgeOnePerson1 === true){ 
                            var items  = [];
                            this.actGetData('ImagePose/OnePerson/Male/Baby/Seat/', items);
@@ -1765,9 +1779,10 @@ export default class AlbumPose extends Component{
                            this.actGetData('ImagePose/OnePerson/Female/OldAge/Seat/', items);
                         }
                     }
+                    this.setState({ pose: ''})
                 } 
-                else if(this.state.accom === "Nằm"){ 
-                    if(this.checkedSecondGender1 === true ){ 
+                else if(this.state.pose === "Nằm"){ 
+                    if(this.state.checkedSecondGender1 === true ){ 
                         if(this.state.checkedThsAgeOnePerson1 === true){ 
                            var items  = [];
                            this.actGetData('ImagePose/OnePerson/Male/Baby/Lie/', items);
@@ -1812,9 +1827,10 @@ export default class AlbumPose extends Component{
                            this.actGetData('ImagePose/OnePerson/Female/OldAge/Lie/', items);
                         }
                     }
+                    this.setState({ pose: ''})
                 } 
-                else if(this.state.accom === "Đi"){ 
-                    if(this.checkedSecondGender1 === true ){ 
+                else if(this.state.pose === "Đi"){ 
+                    if(this.state.checkedSecondGender1 === true ){ 
                         if(this.state.checkedThsAgeOnePerson1 === true){ 
                            var items  = [];
                            this.actGetData('ImagePose/OnePerson/Male/Baby/Go/', items);
@@ -1859,9 +1875,10 @@ export default class AlbumPose extends Component{
                            this.actGetData('ImagePose/OnePerson/Female/OldAge/Go/', items);
                         }
                     }
+                    this.setState({ pose: ''})
                 } 
-                else if(this.state.accom === "Chạy"){ 
-                    if(this.checkedSecondGender1 === true ){ 
+                else if(this.state.pose === "Chạy"){ 
+                    if(this.state.checkedSecondGender1 === true ){ 
                         if(this.state.checkedThsAgeOnePerson1 === true){ 
                            var items  = [];
                            this.actGetData('ImagePose/OnePerson/Male/Baby/Run/', items);
@@ -1906,9 +1923,10 @@ export default class AlbumPose extends Component{
                            this.actGetData('ImagePose/OnePerson/Female/OldAge/Run/', items);
                         }
                     }
+                    this.setState({ pose: ''})
                 } 
-                else if(this.state.accom === "Bật cao"){ 
-                    if(this.checkedSecondGender1 === true ){ 
+                else if(this.state.pose === "Bật cao"){ 
+                    if(this.state.checkedSecondGender1 === true ){ 
                         if(this.state.checkedThsAgeOnePerson1 === true){ 
                            var items  = [];
                            this.actGetData('ImagePose/OnePerson/Male/Baby/Jump/', items);
@@ -1953,9 +1971,10 @@ export default class AlbumPose extends Component{
                            this.actGetData('ImagePose/OnePerson/Female/OldAge/Jump/', items);
                         }
                     }
+                    this.setState({ pose: ''})
                 } 
-                else if(this.state.accom === "Tựa"){ 
-                    if(this.checkedSecondGender1 === true ){ 
+                else if(this.state.pose === "Tựa"){ 
+                    if(this.state.checkedSecondGender1 === true ){ 
                         if(this.state.checkedThsAgeOnePerson1 === true){ 
                            var items  = [];
                            this.actGetData('ImagePose/OnePerson/Male/Baby/Base/', items);
@@ -2000,9 +2019,10 @@ export default class AlbumPose extends Component{
                            this.actGetData('ImagePose/OnePerson/Female/OldAge/Base/', items);
                         }
                     }
+                    this.setState({ pose: ''})
                 } 
-                else if(this.state.accom === "Bám"){ 
-                    if(this.checkedSecondGender1 === true ){ 
+                else if(this.state.pose === "Bám"){ 
+                    if(this.state.checkedSecondGender1 === true ){ 
                         if(this.state.checkedThsAgeOnePerson1 === true){ 
                            var items  = [];
                            this.actGetData('ImagePose/OnePerson/Male/Baby/Cling/', items);
@@ -2047,9 +2067,10 @@ export default class AlbumPose extends Component{
                            this.actGetData('ImagePose/OnePerson/Female/OldAge/Cling/', items);
                         }
                     }
+                    this.setState({ pose: ''})
                 } 
-                else if(this.state.accom === "Nghiêng người"){ 
-                    if(this.checkedSecondGender1 === true ){ 
+                else if(this.state.pose === "Nghiêng người"){ 
+                    if(this.state.checkedSecondGender1 === true ){ 
                         if(this.state.checkedThsAgeOnePerson1 === true){ 
                            var items  = [];
                            this.actGetData('ImagePose/OnePerson/Male/Baby/TurnCircle/', items);
@@ -2094,6 +2115,7 @@ export default class AlbumPose extends Component{
                            this.actGetData('ImagePose/OnePerson/Female/OldAge/TurnCircle/', items);
                         }
                     }
+                    this.setState({ pose: ''})
                 } 
         } 
     
@@ -2192,35 +2214,35 @@ export default class AlbumPose extends Component{
           if(this.state.clother === "Áo dài"){
               if(this.state.checkedSecondGender2 === true){ 
                 var items = [];
-                this.actGetData('ImagePose/OnePerson/FeMale/AoDai/', items);
+                this.actGetData('/ImagePose/OnePerson/FeMale/AoDai/', items);
               }
               else if(this.state.checkedSecondGender1 === true){ 
                 var items = [];
-                this.actGetData('ImagePose/OnePerson/Male/AoDai/', items);
+                this.actGetData('/ImagePose/OnePerson/Male/AoDai/', items);
               }
               else if(this.state.checkedSecondDoubleGender1 === true){ 
                 var items = [];
-                this.actGetData('ImagePose/TwoPerson/DoubleMale/AoDai/', items);
+                this.actGetData('/ImagePose/TwoPerson/DoubleMale/AoDai/', items);
               }
               else if(this.state.checkedSecondDoubleGender2 === true){ 
                 var items = [];
-               this.actGetData('ImagePose/TwoPerson/FeMaleAndMale/AoDai/', items);
+               this.actGetData('/ImagePose/TwoPerson/FeMaleAndMale/AoDai/', items);
               }
               else if(this.state.checkedSecondDoubleGender3 === true){ 
                 var items = [];
-                this.actGetData('ImagePose/TwoPerson/DoubleFeMale/AoDai/', items);
+                this.actGetData('/ImagePose/TwoPerson/DoubleFeMale/AoDai/', items);
               }
               else if(this.state.checkedSecondGroupGender1 === true){ 
                 var items = [];
-               this.actGetData('ImagePose/GroupPerson/Male/AoDai/', items);
+               this.actGetData('/ImagePose/GroupPerson/Male/AoDai/', items);
               }
               else if(this.state.checkedSecondGroupGender2 === true){ 
                 var items = [];
-                this.actGetData('ImagePose/GroupPerson/FeMaleAndMale/AoDai/', items);
+                this.actGetData('/ImagePose/GroupPerson/FeMaleAndMale/AoDai/', items);
               }
               else if(this.state.checkedSecondGroupGender3 === true){ 
                 var items = [];
-                this.actGetData('ImagePose/GroupPerson/FeMale/AoDai/', items);
+                this.actGetData('/ImagePose/GroupPerson/FeMale/AoDai/', items);
               }
           }
           else if (this.state.clother === "Áo khoác"){ 
