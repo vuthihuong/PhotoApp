@@ -6371,14 +6371,9 @@ export default class AlbumPose extends Component{
                             
                             </View>): null}
                         {((this.state.checkedSecondDoubleGender1 === true 
-                                || this.state.checkedSecondDoubleGender2 === true 
-                                || this.state.checkedSecondDoubleGender3 === true)
-                            && (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
-                                    || this.state.checkedPersonGroup)
+                                || this.state.checkedSecondDoubleGender2 === true)
+                            &&  this.state.checkedPersonTwo === true 
                             && (this.state.checkedThsAgeOnePerson1 === true 
-                                    || this.state.checkedThsAgeOnePerson2 === true 
-                                    || this.state.checkedThsAgeOnePerson3 === true 
-                                    || this.state.checkedThsAgeOnePerson4 === true 
                                     || this.state.checkedThsAgeOnePerson5 === true
                                     || this.state.checkedThsAgeOnePerson6 === true 
                                     || this.state.checkedThsAgeOnePerson7 === true 
@@ -6390,6 +6385,139 @@ export default class AlbumPose extends Component{
                                     || this.state.checkedThsAgeOnePerson13 === true 
                                     || this.state.checkedThsAgeOnePerson14 === true 
                                     || this.state.checkedThsAgeOnePerson15 === true ) ) ?
+                            
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherMaleYoungAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomMale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {((this.state.checkedSecondDoubleGender1 === true 
+                                || this.state.checkedSecondDoubleGender2 === true)
+                            && this.state.checkedPersonTwo === true 
+                            &&  this.state.checkedThsAgeOnePerson2 === true) ?
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherMaleYouthAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomMale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {((this.state.checkedSecondDoubleGender1 === true 
+                                || this.state.checkedSecondDoubleGender2 === true)
+                            && this.state.checkedPersonTwo === true 
+                            && this.state.checkedThsAgeOnePerson3 === true) ?
+                            
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherMale} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomMale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {((this.state.checkedSecondDoubleGender1 === true 
+                                || this.state.checkedSecondDoubleGender2 === true)
+                            && this.state.checkedPersonTwo === true 
+                            &&  this.state.checkedThsAgeOnePerson4 === true) ?
+                            
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherMaleMiddleAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomMale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        
+                        {((this.state.checkedSecondDoubleGender3 === true )
+                            && this.state.checkedPersonTwo === true 
+                            && (this.state.checkedThsAgeOnePerson1 === true 
+                                    || this.state.checkedThsAgeOnePerson5 === true
+                                    || this.state.checkedThsAgeOnePerson6 === true 
+                                    || this.state.checkedThsAgeOnePerson7 === true 
+                                    || this.state.checkedThsAgeOnePerson8 === true 
+                                    || this.state.checkedThsAgeOnePerson9 === true 
+                                    || this.state.checkedThsAgeOnePerson10 === true 
+                                    || this.state.checkedThsAgeOnePerson11 === true 
+                                    || this.state.checkedThsAgeOnePerson12 === true 
+                                    || this.state.checkedThsAgeOnePerson13 === true 
+                                    || this.state.checkedThsAgeOnePerson14 === true 
+                                    || this.state.checkedThsAgeOnePerson15 === true ) ) ?
+                            
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherFemaleYoungAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomFemale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {((this.state.checkedSecondDoubleGender3 === true)
+                            && this.state.checkedPersonTwo === true 
+                            &&  this.state.checkedThsAgeOnePerson2 === true) ?
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherFemaleYoungAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomFemale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                        {( this.state.checkedSecondDoubleGender3 === true
+                            &&this.state.checkedPersonTwo === true 
+                            &&  this.state.checkedThsAgeOnePerson3 === true) ?
                             
                            ( <View style={stylesAlbumPose.checkThird}>
                                 <View style={{width: 160}}>
@@ -6407,7 +6535,92 @@ export default class AlbumPose extends Component{
                                         />
                                 </View>
                             </View>) :null}
-                        {((this.state.checkedSecondDoubleGender1 === true 
+                        {(this.state.checkedSecondDoubleGender3 === true 
+                            &&  this.state.checkedPersonTwo === true 
+                            && this.state.checkedThsAgeOnePerson4 === true ) ?
+                            
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClotherFemaleMiddleAge} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccomFemale} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+
+
+                        {/* {((this.state.checkedSecondDoubleGender1 === true 
+                                || this.state.checkedSecondDoubleGender2 === true 
+                                || this.state.checkedSecondDoubleGender3 === true)
+                            &&  this.state.checkedPersonTwo === true 
+                                && (this.state.checkedThsAgeOnePerson1 === true 
+                                            || this.state.checkedThsAgeOnePerson2 === true 
+                                            || this.state.checkedThsAgeOnePerson3 === true 
+                                            || this.state.checkedThsAgeOnePerson4 === true 
+                                            || this.state.checkedThsAgeOnePerson5 === true
+                                            || this.state.checkedThsAgeOnePerson6 === true 
+                                            || this.state.checkedThsAgeOnePerson7 === true 
+                                            || this.state.checkedThsAgeOnePerson8 === true 
+                                            || this.state.checkedThsAgeOnePerson9 === true 
+                                            || this.state.checkedThsAgeOnePerson10 === true 
+                                            || this.state.checkedThsAgeOnePerson11 === true 
+                                            || this.state.checkedThsAgeOnePerson12 === true 
+                                            || this.state.checkedThsAgeOnePerson13 === true 
+                                            || this.state.checkedThsAgeOnePerson14 === true 
+                                            || this.state.checkedThsAgeOnePerson15 === true ) ) ?
+
+                            (<View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataViewFemale} label='Bối cảnh' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(view) => { view= this.setState({view}) }}
+                                        value = {this.state.view}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataPoseFemale} label='Tư thế'  fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(pose) => { pose= this.setState({pose}) }}
+                                        value = {this.state.pose}
+                                        />
+                                </View>
+                            
+                            </View>): null} */}
+                        {(this.state.checkedSecondGroupGender1 === true && 
+                            (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                                    || this.state.checkedPersonGroup) )
+                            || (this.state.checkedSecondGroupGender2 === true && 
+                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                                    || this.state.checkedPersonGroup) )
+                            || (this.state.checkedSecondGroupGender3 === true &&
+                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
+                                    || this.state.checkedPersonGroup)) ?
+                            
+                           ( <View style={stylesAlbumPose.checkThird}>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataClother} label='Trang phục' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(clother) => { clother= this.setState({clother}) }}
+                                        value = {this.state.clother}
+                                        />
+                                </View>
+                                <View style={{width: 160}}>
+                                    <Dropdown  data={dataAccom} label='Phụ kiện' fontSize = {13}
+                                        pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                                        onChangeText={(accom) => { accom= this.setState({accom}) }}
+                                        value = {this.state.accom}
+                                        />
+                                </View>
+                            </View>) :null}
+                            {((this.state.checkedSecondDoubleGender1 === true 
                                 || this.state.checkedSecondDoubleGender2 === true 
                                 || this.state.checkedSecondDoubleGender3 === true)
                             && (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
@@ -6445,15 +6658,8 @@ export default class AlbumPose extends Component{
                                 </View>
                             
                             </View>): null}
-                        {(this.state.checkedSecondGroupGender1 === true && 
-                            (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
-                                    || this.state.checkedPersonGroup) )
-                            || (this.state.checkedSecondGroupGender2 === true && 
-                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
-                                    || this.state.checkedPersonGroup) )
-                            || (this.state.checkedSecondGroupGender3 === true &&
-                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
-                                    || this.state.checkedPersonGroup)) ?
+                        {(this.state.checkedSecondGroupGender1 === true  || this.state.checkedSecondGroupGender2 === true 
+                           || this.state.checkedSecondGroupGender3 === true) && this.state.checkedPersonGroup === true ?
                             
                            ( <View style={stylesAlbumPose.checkThird}>
                                 <View style={{width: 160}}>
@@ -6471,15 +6677,8 @@ export default class AlbumPose extends Component{
                                         />
                                 </View>
                             </View>) :null}
-                        {(this.state.checkedSecondGroupGender1 === true && 
-                            (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
-                                    || this.state.checkedPersonGroup) )
-                            || (this.state.checkedSecondGroupGender2 === true && 
-                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
-                                    || this.state.checkedPersonGroup) )
-                            || (this.state.checkedSecondGroupGender3 === true &&
-                                (this.state.checkedPersonOne === true || this.state.checkedPersonTwo === true 
-                                    || this.state.checkedPersonGroup)) ?
+                        {(this.state.checkedSecondGroupGender1 === true  || this.state.checkedSecondGroupGender2 === true 
+                           || this.state.checkedSecondGroupGender3 === true) && this.state.checkedPersonGroup === true ?
 
                             (<View style={stylesAlbumPose.checkThird}>
                                 <View style={{width: 160}}>
