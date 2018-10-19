@@ -17,6 +17,7 @@ export default class PostModal extends Component {
     constructor(props){
         super(props)
         this.state = {
+            id: this.props.navigation.state.params.id,
             content: this.props.navigation.state.params.contentEdit, 
             cost: this.props.navigation.state.params.costEdit,
             datetime: this.props.navigation.state.params.datetimeEdit, 
@@ -146,6 +147,27 @@ export default class PostModal extends Component {
             circle3: this.state.circle3,  value: this.state.value,
             height: this.state.height, boy: this.state.boy, 
             girl: this.state.girl})
+            this.props.navigation.navigate('PostDetailModal', {
+                id: this.state.id,
+                content: this.state.content, cost: this.state.cost, girl: this.state.girl,
+                datetime: this.state.datetime, datetime1: this.state.datetime1,
+                value: this.state.value,  height: this.state.height, boy: this.state.boy, 
+                labelRightModal1: this.state.labelRightModal1,
+                labelRightModal2: this.state.labelRightModal2,
+                labelRightModal3: this.state.labelRightModal3,
+                labelRightModal4: this.state.labelRightModal4,
+                labelRightModal5: this.state.labelRightModal5,
+                circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
+               })
+               alert('ok');
+        this.setState({ 
+            content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
+            datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
+            labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
+            checkedGenderModal1: false, checkedGenderModal2: false,
+            checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
+            checkedRightModal4: false, checkedRightModal5: false
+        })
     }  
     componentWillMount(){ 
         if(this.props.navigation.state.params.boyEdit === "nam,"){ 
