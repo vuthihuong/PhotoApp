@@ -40,6 +40,7 @@ import UpImgModal from './src/View/Upload/UpImgModal'
 import UpImgPhoto from './src/View/Upload/UpImgPhoto'
 
 import AddressMap from './src/View/Info/AddressMap'
+import PostModalEdit from './src/View/Post/PostModalEdit'
 
 
 
@@ -125,6 +126,9 @@ const Mainapp = createStackNavigator({
     },
     ForgotPass: { 
         screen: ForgotPass
+    },
+    PostModalEdit: { 
+        screen: PostModalEdit
     }
     },{
       headerMode:'none'

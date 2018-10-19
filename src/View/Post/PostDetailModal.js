@@ -6,9 +6,31 @@ import {
 } from 'react-native';
 
 import gobackIcon from '../../assets/img/info/goback.png'
-import edit from '../../assets/img/pose/edit.png'
+import edit from '../../assets/img/pose/edit.png' 
 
 export default class PostDetailModal extends Component {
+    editPostModal(){ 
+        this.props.navigation.navigate('PostModalEdit', { 
+            id: this.props.navigation.state.params.id,
+            contentEdit: this.props.navigation.state.params.content, 
+            costEdit: this.props.navigation.state.params.cost,
+            datetimeEdit: this.props.navigation.state.params.datetime, 
+            datetimeEdit1: this.props.navigation.state.params.datetime1,
+            valueEdit: this.props.navigation.state.params.value,
+            labelRightModalEdit1: this.props.navigation.state.params.labelRightModal1,
+            labelRightModalEdit2: this.props.navigation.state.params.labelRightModal2,
+            labelRightModalEdit3: this.props.navigation.state.params.labelRightModal3,
+            labelRightModalEdit4: this.props.navigation.state.params.labelRightModal4,
+            labelRightModalEdit5: this.props.navigation.state.params.labelRightModal5,
+            circleEdit1: this.props.navigation.state.params.circle1, 
+            circleEdit2: this.props.navigation.state.params.circle2,
+            circleEdit3: this.props.navigation.state.params.circle3,
+            heightEdit: this.props.navigation.state.params.height,
+            boyEdit: this.props.navigation.state.params.boy,
+            girlEdit: this.props.navigation.state.params.girl
+        });
+    }
+    
     render(){
         return(
         //   <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -22,7 +44,7 @@ export default class PostDetailModal extends Component {
                         <Text style={{fontSize: 20, color: '#EE3B3B'}}>
                                 Tìm mẫu ảnh</Text>
                     </View>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostPhoto')}>
+                    <TouchableOpacity  onPress={() => this.editPostModal()}>
                         <Image source={edit} style={{width: 25, height: 25, marginRight: 15,
                                     tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
@@ -48,15 +70,7 @@ export default class PostDetailModal extends Component {
                     {(this.props.navigation.state.params.circle1 != ''
                             && this.props.navigation.state.params.circle2 != '' 
                             && this.props.navigation.state.params.circle3 != ''
-                            || this.props.navigation.state.params.weight != ''
-                            || this.props.navigation.state.params.height != ''
-                            || this.props.navigation.state.params.labelRequireModal1 != ''
-                            || this.props.navigation.state.params.labelRequireModal2 != ''
-                            || this.props.navigation.state.params.labelRequireModal3 != ''
-                            || this.props.navigation.state.params.labelRequireModal11 != ''
-                            || this.props.navigation.state.params.labelRequireModal22 != ''
-                            || this.props.navigation.state.params.labelRequireModal33 != ''
-                            )?                    
+                            || this.props.navigation.state.params.height != '')?                    
                             <Text>Yêu cầu:</Text>: null }
                     {(this.props.navigation.state.params.circle1 != ''&& this.props.navigation.state.params.circle2 != '' 
                             && this.props.navigation.state.params.circle3 != '')?   
@@ -65,61 +79,26 @@ export default class PostDetailModal extends Component {
                                          {this.props.navigation.state.params.circle3} 
                             </Text>: null }
                     {this.props.navigation.state.params.height != ''?
-                            <Text>Chiều cao: {this.props.navigation.state.params.height}</Text>: null }
+                            <Text>Chiều cao: {this.props.navigation.state.params.height}
+                             </Text>: null }
 
-                    {this.props.navigation.state.params.weight != ''?
-                            <Text>Cân nặng: {this.props.navigation.state.params.weight}</Text>: null }
-
-                    {(this.props.navigation.state.params.labelRequireModal1 != ''
-                        || this.props.navigation.state.params.labelRequireModal2 != '' 
-                        || this.props.navigation.state.params.labelRequireModal3 != '' 
-                        || this.props.navigation.state.params.labelRequireModal11 != ''
-                        || this.props.navigation.state.params.labelRequireModal22 != ''
-                        || this.props.navigation.state.params.labelRequireModal33 != ''
-                        )?
-                            <Text>{this.props.navigation.state.params.labelRequireModal1}
-                                    {this.props.navigation.state.params.labelRequireModal2}
-                                    {this.props.navigation.state.params.labelRequireModal3}
-                                    {this.props.navigation.state.params.labelRequireModal11}
-                                    {this.props.navigation.state.params.labelRequireModal22}
-                                    {this.props.navigation.state.params.labelRequireModal33}
-                            
-                            </Text>: null }
-                    {/* {(this.props.navigation.state.params.labelRequireModal11 != ''
-                            || this.props.navigation.state.params.labelRequireModal22 != ''
-                            || this.props.navigation.state.params.labelRequireModal33 != ''
-                    
-                        )?
-                            <Text>{this.props.navigation.state.params.labelRequireModal11}
-                                    {this.props.navigation.state.params.labelRequireModal22}
-                                    {this.props.navigation.state.params.labelRequireModal33}
-                            
-                            </Text>: null } */}
-                   
-
-                    {(this.props.navigation.state.params.labelRightModal1 != ''
-                        || this.props.navigation.state.params.labelRightModal2 != ''
-                        || this.props.navigation.state.params.labelRightModal11 != ''
-                        || this.props.navigation.state.params.labelRightModal22 != ''
+                    {(this.props.navigation.state.params.labelRightModal1 !== ''
+                            || this.props.navigation.state.params.labelRightModal2 !== ''
+                            || this.props.navigation.state.params.labelRightModal3 !== ''
+                            || this.props.navigation.state.params.labelRightModal4 !== ''
+                            || this.props.navigation.state.params.labelRightModal5 !== ''
                         )?
                             <Text>Quyền lợi: {this.props.navigation.state.params.labelRightModal1}
                                             {this.props.navigation.state.params.labelRightModal2}
-                                            {this.props.navigation.state.params.labelRightModal11}
-                                            {this.props.navigation.state.params.labelRightModal22}
-                            
+                                            {this.props.navigation.state.params.labelRightModal3}
+                                            {this.props.navigation.state.params.labelRightModal4}
+                                            {this.props.navigation.state.params.labelRightModal5}
+                                            {this.props.navigation.state.params.id}
+
                             </Text>: null }
 
-                    {/* {(this.props.navigation.state.params.labelRightModal11 != ''
-                        ||this.props.navigation.state.params.labelRightModal22 != ''
-                    
-                        )?
-                            <Text>Quyền lợi:{this.props.navigation.state.params.labelRightModal11}
-                                        {this.props.navigation.state.params.labelRightModal22}
-                            
-                            </Text>: null } */}
-
                     {this.props.navigation.state.params.cost != ''?
-                             <Text>Chi phí: {this.props.navigation.state.params.cost}</Text>: null }
+                             <Text>Tiền công: {this.props.navigation.state.params.cost}</Text>: null }
                     <Text>{this.props.navigation.state.params.label}</Text>
                 </View>
                 <View style={stylesPostDetailModal.btnSubmit}>
@@ -127,8 +106,6 @@ export default class PostDetailModal extends Component {
                         borderRadius: 10, backgroundColor: '#EE3B3B'}} >
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5, }}>Tham gia</Text>
                     </TouchableOpacity>
-                    
-                   
                     {/* <TouchableOpacity style={{ height: 30, width: 120,
                         borderRadius: 10, backgroundColor: '#EE3B3B', marginRight: 20}} >
                       

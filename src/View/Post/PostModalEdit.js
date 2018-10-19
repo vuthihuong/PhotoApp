@@ -7,7 +7,7 @@ import {
 
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-checkbox';
-import DatePicker from 'react-native-datepicker'  
+import DatePicker from 'react-native-datepicker'
 import {FirebaseApp} from './../../Controller/FirebaseConfig' 
 
 import gobackIcon from './../../assets/img/info/goback.png'
@@ -17,12 +17,26 @@ export default class PostModal extends Component {
     constructor(props){
         super(props)
         this.state = {
-            datetime: '',  datetime1: '',  id: '',  height:'', cost: '',  boy: '', girl: '',  value: '',
+            content: this.props.navigation.state.params.contentEdit, 
+            cost: this.props.navigation.state.params.costEdit,
+            datetime: this.props.navigation.state.params.datetimeEdit, 
+            datetime1: this.props.navigation.state.params.datetimeEdit1,
+            value: this.props.navigation.state.params.valueEdit,
+            labelRightModal1: this.props.navigation.state.params.labelRightModalEdit1,
+            labelRightModal2: this.props.navigation.state.params.labelRightModalEdit2,
+            labelRightModal3: this.props.navigation.state.params.labelRightModalEdit3,
+            labelRightModal4: this.props.navigation.state.params.labelRightModalEdit4,
+            labelRightModal5: this.props.navigation.state.params.labelRightModalEdit5,
+            circle1: this.props.navigation.state.params.circleEdit1, 
+            circle2: this.props.navigation.state.params.circleEdit2,
+            circle3: this.props.navigation.state.params.circleEdit3,
+            height: this.props.navigation.state.params.heightEdit,
+            boy: this.props.navigation.state.params.boyEdit,
+            girl: this.props.navigation.state.params.girlEdit,
             checkedGenderModal1: false, checkedGenderModal2: false,
-            checkedRightModal1: false, checkedRightModal2: false,
-            checkedRightModal3: false, checkedRightModal4: false, checkedRightModal5: false,
-            content: '', place:'', circle1: '', circle2:'', circle3:'', labelRightModal5: '',
-            labelRightModal1: '', labelRightModal2: '', labelRightModal3: '', labelRightModal4: '', 
+            checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
+            checkedRightModal4: false, checkedRightModal5: false
+
         }
         this.itemRef = FirebaseApp.database();
       }
@@ -119,50 +133,57 @@ export default class PostModal extends Component {
       static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         let tabBarLabel = 'Tìm mẫu ảnh';
-        // let tabBarIcon = () => (
-        //     <Image 
-        //         source={event}
-        //         style={{width: 26, height: 26, }}
-        //     />
-        // );
         return {tabBarLabel}
     }
-   
-    createPostModal(){ 
-        this.itemRef.ref('PostModal').push({
+    editPostModal(){ 
+        this.itemRef.ref('PostModal').child(this.props.navigation.state.params.id).update({
             content: this.state.content, cost: this.state.cost,
             datetime: this.state.datetime, datetime1: this.state.datetime1,
             labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
             labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
-            labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
-            circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
-            value: this.state.value, height: this.state.height, boy: this.state.boy, 
-            }).then((snap) => { this.setState({  
-                                         id: snap.key })
-                 if(this.state.id !== ''){ 
-                    this.props.navigation.navigate('PostDetailModal', {
-                        id: this.state.id,
-                        content: this.state.content, cost: this.state.cost, girl: this.state.girl,
-                        datetime: this.state.datetime, datetime1: this.state.datetime1,
-                        value: this.state.value,  height: this.state.height, boy: this.state.boy, 
-                        labelRightModal1: this.state.labelRightModal1,
-                        labelRightModal2: this.state.labelRightModal2,
-                        labelRightModal3: this.state.labelRightModal3,
-                        labelRightModal4: this.state.labelRightModal4,
-                        labelRightModal5: this.state.labelRightModal5,
-                        circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
-                       })
-                 }
-                   this.setState({ 
-                        content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
-                        datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
-                        labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
-                        checkedGenderModal1: false, checkedGenderModal2: false,
-                        checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
-                        checkedRightModal4: false, checkedRightModal5: false
-                     })
-             })
+            labelRightModal5: this.state.labelRightModal5,
+            circle1: this.state.circle1, circle2: this.state.circle2,
+            circle3: this.state.circle3,  value: this.state.value,
+            height: this.state.height, boy: this.state.boy, 
+            girl: this.state.girl})
     }  
+    componentWillMount(){ 
+        if(this.props.navigation.state.params.boyEdit === "nam,"){ 
+            this.setState({ 
+                checkedGenderModal1: true
+            })
+        }
+        if(this.props.navigation.state.params.girlEdit === "nữ,"){ 
+            this.setState({ 
+                checkedGenderModal2: true
+            })
+        }
+        if(this.props.navigation.state.params.labelRightModalEdit1 === " được trả ảnh,"){ 
+            this.setState({ 
+                checkedRightModal1: true
+            })
+        }
+        if(this.props.navigation.state.params.labelRightModalEdit2 === " được hỗ trợ make up,"){ 
+            this.setState({ 
+                checkedRightModal2: true
+            })
+        }
+        if(this.props.navigation.state.params.labelRightModalEdit3 === " được hỗ trợ trang phục,"){ 
+            this.setState({ 
+                checkedRightModal3: true
+            })
+        }
+        if(this.props.navigation.state.params.labelRightModalEdit4 === " được hỗ trợ ăn trưa,"){ 
+            this.setState({ 
+                checkedRightModal4: true
+            })
+        }
+        if(this.props.navigation.state.params.labelRightModalEdit5 === " được trả phí,"){ 
+            this.setState({ 
+                checkedRightModal5: true
+            })
+        }
+    }
 
     render(){
         let data = [{
@@ -172,7 +193,6 @@ export default class PostModal extends Component {
           }, {
             value: 'Hải Phòng',
           }];
-          var tmp =0;
          
         return (
             <ScrollView style={{flex:1, backgroundColor: 'white'}}> 
@@ -192,6 +212,7 @@ export default class PostModal extends Component {
                     </View>
                     <View style={stylesPostModal.title}>
                         <Text style={stylesPostModal.boxPostModal}>Tìm mẫu ảnh</Text>
+                       
                         <CheckBox
                             label='Nam'
                             labelStyle={{color: 'black'}}
@@ -349,7 +370,7 @@ export default class PostModal extends Component {
                             style={stylesPostModal.txtBtnPostModal}>
                             <Text style={{ textAlign:"center", color: 'white', marginTop: 5}}>Gửi yêu cầu</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity  onPress={() => this.createPostModal()}
+                        <TouchableOpacity  onPress={() => this.editPostModal()}
                             style={stylesPostModal.txtBtnPostModal}
                                          >
                             <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
