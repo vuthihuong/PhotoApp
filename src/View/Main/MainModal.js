@@ -11,11 +11,13 @@ import Menu from './Menu'
 import HamburgerIcon from './HamburgerIcon'
 import ListFavorite from './ListFavorite'
 import InfoModal from '../Info/InfoModal'
-import HistoryContract from './HistoryContract'
-import ManageContract from './ManageContract'
+// import HistoryContract from './HistoryContract'
+// import ManageContract from './ManageContract'
+import ManageContract from './../ManageContract/ManageContract'
 import AlbumPose from './AlbumPose'
 import MenuTabBar from './MenuTabBar'
 import Setting from './../Setting/Setting'
+import ManagePost from './../ManagePost/ManagePost'
 
 import iconInfo from './../../assets/img/info/icon_info.png'
 
@@ -85,12 +87,15 @@ const MenuStack = createStackNavigator({
     },
   });
 
-  const HistoryContractStack = createStackNavigator({
-    HistoryContract: { 
-      screen: HistoryContract, 
+  const ManagePostStack = createStackNavigator({
+    ManagePost: { 
+      screen: ManagePost, 
       navigationOptions: ({ navigation }) => ({
-        title: 'Lịch sử hợp đồng',
+        title: 'Các bài viết đã tạo',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerStyle: {
+          backgroundColor: '#EE3B3B'
+        },
         headerTintColor: 'white', 
         headerStyle: {
           backgroundColor: '#EE3B3B',    
@@ -101,6 +106,23 @@ const MenuStack = createStackNavigator({
       })
     },
   });
+
+  // const HistoryContractStack = createStackNavigator({
+  //   HistoryContract: { 
+  //     screen: HistoryContract, 
+  //     navigationOptions: ({ navigation }) => ({
+  //       title: 'Lịch sử hợp đồng',
+  //       headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+  //       headerTintColor: 'white', 
+  //       headerStyle: {
+  //         backgroundColor: '#EE3B3B',    
+  //         height: 45,    
+  //         elevation: 0,
+  //         shadowOpacity: 0
+  //       },
+  //     })
+  //   },
+  // });
 
   const ManageContractStack = createStackNavigator({
     ManageContract: { 
@@ -260,23 +282,41 @@ const MenuStack = createStackNavigator({
         },
     },
     },
-    HistoryContract: { 
-      screen: HistoryContractStack,
+
+    ManagePost: { 
+      screen: ManagePostStack,
       navigationOptions: {
-        drawerLabel: 'Lịch sử hợp đồng',
+        drawerLabel: 'Các bài viết đã tạo',
         drawerIcon: () => (
           <Image
-            source={require('../../assets/img/info/manaContract.png')}
-            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+            source={require('../../assets/img/info/heart.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
           />
         ),
         headerStyle: {
-          backgroundColor: 'white',    
+          backgroundColor: '#EE3B3B',    
           height: 35,    
           
         },
     },
-    }, 
+    },
+    // HistoryContract: { 
+    //   screen: HistoryContractStack,
+    //   navigationOptions: {
+    //     drawerLabel: 'Lịch sử hợp đồng',
+    //     drawerIcon: () => (
+    //       <Image
+    //         source={require('../../assets/img/info/manaContract.png')}
+    //         style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+    //       />
+    //     ),
+    //     headerStyle: {
+    //       backgroundColor: 'white',    
+    //       height: 35,    
+          
+    //     },
+    // },
+    // }, 
   
     ManageContract: {
       screen: ManageContractStack,

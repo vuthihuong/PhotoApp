@@ -8,7 +8,7 @@ import { createMaterialTopTabNavigator} from 'react-navigation'
 
 
 import ContractGenerate from './../ManageContract/ContractGenerate'
-import HistoryContract from './../Main/HistoryContract'
+import HistoryContract from './../ManageContract/HistoryContract'
 
 
 const ManageContract = createMaterialTopTabNavigator({

@@ -26,6 +26,17 @@ export default class PostModal extends Component {
         }
         this.itemRef = FirebaseApp.database();
       }
+    
+      componentWillMount() {
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         key = childSnapshot.key;
+          })  
+        })
+        
+    }
 
     checkGenderModal1(){
         if(this.state.checkedGenderModal1 === true){
@@ -129,7 +140,9 @@ export default class PostModal extends Component {
     }
    
     createPostModal(){ 
+
         this.itemRef.ref('PostModal').push({
+            userId: key,
             content: this.state.content, cost: this.state.cost,
             datetime: this.state.datetime, datetime1: this.state.datetime1,
             labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
@@ -141,7 +154,7 @@ export default class PostModal extends Component {
                                          id: snap.key })
                  if(this.state.id !== ''){ 
                     this.props.navigation.navigate('PostDetailModal', {
-                        id: this.state.id,
+                        id: this.state.id, userId: key,
                         content: this.state.content, cost: this.state.cost, girl: this.state.girl,
                         datetime: this.state.datetime, datetime1: this.state.datetime1,
                         value: this.state.value,  height: this.state.height, boy: this.state.boy, 
