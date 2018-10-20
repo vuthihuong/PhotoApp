@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, ListView,
             ScrollView } from 'react-native';
 
-
+import {FirebaseApp} from './../../Controller/FirebaseConfig' 
 
 export default class ManagePost extends Component{
     constructor(props) {
@@ -16,27 +16,63 @@ export default class ManagePost extends Component{
          'Warning: componentWillMount is deprecated',
          'Warning: componentWillReceiveProps is deprecated',
        ]);      
+       this.itemRef = FirebaseApp.database();
+       
       }  
+      actGetData(url, items=[]){ 
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         key = childSnapshot.key;
+          })  
+        })
+        this.itemRef.ref(url).orderByChild("userId").equalTo(key).on('child_added', (dataSnapshot)=> { 
+            var childData = dataSnapshot.val();
+              items.push({ 
+                userId: (childData.userId), title: childData.title,
+                content: childData.content, cost: childData.cost, girl: childData.girl,
+                datetime: childData.datetime, datetime1: childData.datetime1,
+                value: childData.value,  height: childData.value, boy: childData.boy, 
+                labelRightModal1: childData.labelRightModal1, labelRightModal2: childData.labelRightModal2,
+                labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
+                labelRightModal5: childData.labelRightModal5,
+                circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3, 
+              })
+              this.setState({ 
+                dataSource: this.state.dataSource.cloneWithRows(items)
+              });
+          });
+    }
+    componentWillMount(){ 
+        var items  = [];
+            this.actGetData('PostModal/', items);
+    }
       render() {
        return(
         <ScrollView style={{flex:1, backgroundColor: 'white'}}>
           <View style = { stylesManagCont.containerManagCont }>
-            <View style={stylesManagCont.bodyManaCont}>
-                <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
-                    style={stylesManagCont.contManagCont}>
-                        <Text style={stylesManagCont.txtManagCont}>Hợp đồng với người chụp ảnh Trần Nam Anh  </Text>
-                        <Text style={stylesManagCont.txtManagCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text>
-                 
-                </TouchableOpacity>
-                <View style={ stylesManagCont.txtConfirm }>
-                    <TouchableOpacity>
-                        <Text style={[stylesManagCont.txtManagCont,{color:'blue'}]}>Đang tìm</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Chưa hoàn thành</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <ListView 
+                    dataSource = {this.state.dataSource}
+                    renderRow = {(rowData)=> 
+                        <View style={stylesManagCont.bodyManaCont}>
+                            <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
+                                style={stylesManagCont.contManagCont}>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.title} </Text>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.content}</Text>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.datetime} - {rowData.datetime}</Text>
+                            </TouchableOpacity>
+                            <View style={ stylesManagCont.txtConfirm }>
+                                {/* <TouchableOpacity>
+                                    <Text style={[stylesManagCont.txtManagCont,{color:'blue'}]}>Đang tìm</Text>
+                                </TouchableOpacity> */}
+                                <TouchableOpacity>
+                                    <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Xóa</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                                        }
+                />
           </View>
          </ScrollView> 
        );

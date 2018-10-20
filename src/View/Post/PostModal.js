@@ -142,7 +142,7 @@ export default class PostModal extends Component {
     createPostModal(){ 
 
         this.itemRef.ref('PostModal').push({
-            userId: key,
+            userId: key, title: "Tìm mẫu ảnh",
             content: this.state.content, cost: this.state.cost,
             datetime: this.state.datetime, datetime1: this.state.datetime1,
             labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
@@ -154,7 +154,7 @@ export default class PostModal extends Component {
                                          id: snap.key })
                  if(this.state.id !== ''){ 
                     this.props.navigation.navigate('PostDetailModal', {
-                        id: this.state.id, userId: key,
+                        id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
                         content: this.state.content, cost: this.state.cost, girl: this.state.girl,
                         datetime: this.state.datetime, datetime1: this.state.datetime1,
                         value: this.state.value,  height: this.state.height, boy: this.state.boy, 
@@ -227,9 +227,9 @@ export default class PostModal extends Component {
                                 style={[stylesPostModal.txtPostModal,{height:100}]} >{this.state.content}</TextInput>
                     </View>
                     <View style={stylesPostModal.title}>
-                        <Text style={[stylesPostModal.boxPostModal,{ marginTop: -10 }]}>Địa điểm</Text>
+                        <Text style={[stylesPostModal.boxPostModal]}>Địa điểm</Text>
                   
-                        <View style={{marginTop: -50, width: 230, height: 100 }}>
+                        <View style={{marginTop: -40, width: 230, height: 100 }}>
                             <Dropdown 
                                 // label='Favorite Fruit'
                                 ref='picker'
