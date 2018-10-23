@@ -10,6 +10,7 @@ import CheckBox from 'react-native-checkbox';
 import DatePicker from 'react-native-datepicker'  
 import {FirebaseApp} from './../../Controller/FirebaseConfig' 
 
+
 import gobackIcon from './../../assets/img/info/goback.png'
 
 
@@ -23,6 +24,7 @@ export default class PostModal extends Component {
             checkedRightModal3: false, checkedRightModal4: false, checkedRightModal5: false,
             content: '', place:'', circle1: '', circle2:'', circle3:'', labelRightModal5: '',
             labelRightModal1: '', labelRightModal2: '', labelRightModal3: '', labelRightModal4: '', 
+            labelErrorCost:false, labelErrorCircle: false
         }
         this.itemRef = FirebaseApp.database();
       }
@@ -126,6 +128,21 @@ export default class PostModal extends Component {
             });
         }
     }
+    onChanged(text){
+        let newText = '';
+        let numbers = '0123456789';
+    
+        for (var i=0; i < text.length; i++) {
+            if(numbers.indexOf(text[i]) > -1 ) {
+                newText = newText + text[i];
+            }
+            else {
+                // your call back function
+                alert("please enter numbers only");
+            }
+        }
+        this.setState({ myNumber: newText });
+    }
 
       static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
@@ -140,7 +157,58 @@ export default class PostModal extends Component {
     }
    
     createPostModal(){ 
-
+        const reg =  /^\+?[0-9][\d]*$/;
+        // if(this.state.circle1 === true){ 
+            
+        // }
+        if(this.state.checkedRightModal5 === true){ 
+           if(reg.test(this.state.cost) === false){ 
+               this.setState({ 
+                    labelErrorCost: true
+               })
+           }
+            else if (reg.test(this.state.cost) === true ){ 
+                this.setState({ 
+                    labelErrorCost: false
+                })
+                this.itemRef.ref('PostModal').push({
+                    userId: key, title: "Tìm mẫu ảnh",
+                    content: this.state.content, cost: this.state.cost,
+                    datetime: this.state.datetime, datetime1: this.state.datetime1,
+                    labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
+                    labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
+                    labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
+                    circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
+                    value: this.state.value, height: this.state.height, boy: this.state.boy, 
+                    }).then((snap) => { this.setState({  
+                                                 id: snap.key })
+                         if(this.state.id !== ''){ 
+                            this.props.navigation.navigate('PostDetailModal', {
+                                id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
+                                content: this.state.content, cost: this.state.cost, girl: this.state.girl,
+                                datetime: this.state.datetime, datetime1: this.state.datetime1,
+                                value: this.state.value,  height: this.state.height, boy: this.state.boy, 
+                                labelRightModal1: this.state.labelRightModal1,
+                                labelRightModal2: this.state.labelRightModal2,
+                                labelRightModal3: this.state.labelRightModal3,
+                                labelRightModal4: this.state.labelRightModal4,
+                                labelRightModal5: this.state.labelRightModal5,
+                                circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
+                               })
+                         }
+                           this.setState({ 
+                                content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
+                                datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
+                                labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
+                                checkedGenderModal1: false, checkedGenderModal2: false,
+                                checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
+                                checkedRightModal4: false, checkedRightModal5: false
+                             })
+                     })
+            }
+        }
+        else if(this.state.checkedRightModal5 === false) {
+          
         this.itemRef.ref('PostModal').push({
             userId: key, title: "Tìm mẫu ảnh",
             content: this.state.content, cost: this.state.cost,
@@ -175,7 +243,14 @@ export default class PostModal extends Component {
                         checkedRightModal4: false, checkedRightModal5: false
                      })
              })
-    }  
+            }  
+        }
+
+    showNoti(){
+        // PushNotification.localNotification({ 
+        //     message: "My notification message"
+        // })
+    }
 
     render(){
         let data = [{
@@ -227,6 +302,7 @@ export default class PostModal extends Component {
                                 style={[stylesPostModal.txtPostModal,{height:100}]} >{this.state.content}</TextInput>
                     </View>
                     <View style={stylesPostModal.title}>
+                        
                         <Text style={[stylesPostModal.boxPostModal]}>Địa điểm</Text>
                   
                         <View style={{marginTop: -40, width: 230, height: 100 }}>
@@ -280,6 +356,8 @@ export default class PostModal extends Component {
                     <View style={[stylesPostModal.title, {marginLeft: 15}]}>
                         <Text style={{marginTop: -5, color: 'black'}}>Số đo</Text>
                         <View>
+                            {this.state.labelErrorCircle === true? 
+                            <Text style={{color: "red", marginBottom: 15}}>Giá trị không hợp lệ, vui lòng nhập số</Text>: null}
                             <TextInput 
                                 onChangeText={(circle1) => this.setState({ circle1 })}
                                 placeholder="vòng 1" style={stylesPostModal.inputWeight}>
@@ -301,7 +379,7 @@ export default class PostModal extends Component {
                     </View>
                     <View style={[stylesPostModal.title,{marginLeft: 15}]}>
                         <Text style={{marginTop: -5, color: 'black'}}>Chiều cao</Text>
-                        <TextInput placeholder="Chiều cao" 
+                        <TextInput placeholder="Chiều cao (cm)" 
                             onChangeText={(height) => this.setState({ height })}
                             style={stylesPostModal.inputWeight}>
                             {this.state.height}
@@ -349,16 +427,20 @@ export default class PostModal extends Component {
                                     /> 
                          </View>
                     </View> 
-               
-               
+                {this.state.labelErrorCost === true? 
+                    <View style={stylesPostModal.title}>
+                        <Text style ={{ color: "red",}}>Giá trị không hợp lệ, bạn chỉ được nhập số</Text>
+                    </View>: null }
+                {this.state.checkedRightModal5 === true ?
                     <View style={stylesPostModal.title}>
                         <Text style={stylesPostModal.boxPostModal}>Tiền công</Text>
                         <TextInput  
+                             keyboardType='numeric'
                             onChangeText={(cost) => this.setState({ cost })}
                             style={stylesPostModal.inputWeight}>{this.state.cost}</TextInput>
-                    </View>
+                    </View>: null}
                     <View style={[stylesPostModal.title, stylesPostModal.buttonCreate]}>
-                        <TouchableOpacity 
+                        <TouchableOpacity  onPress={() => this.showNoti()}
                             style={stylesPostModal.txtBtnPostModal}>
                             <Text style={{ textAlign:"center", color: 'white', marginTop: 5}}>Gửi yêu cầu</Text>
                         </TouchableOpacity>

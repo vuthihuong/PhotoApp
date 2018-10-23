@@ -93,7 +93,6 @@ export default class PostDetailModal extends Component {
                                             {this.props.navigation.state.params.labelRightModal3}
                                             {this.props.navigation.state.params.labelRightModal4}
                                             {this.props.navigation.state.params.labelRightModal5}
-                                            {this.props.navigation.state.params.id}
 
                             </Text>: null }
 
