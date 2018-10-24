@@ -89,6 +89,10 @@ export default class PostPhoto extends Component {
             }
         else if(this.state.valueCategoryPhoto1 !== '' && this.state.valuePlacePhoto !== "" && reg.test(this.state.costPhoto )=== true
             && this.state.datetimePhoto !== '' && this.state.datetimePhoto1 !== '' && this.state.costPhoto !== ''){ 
+                this.setState({ 
+                    labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, labelErrorLessTime: false,
+                    labelErrorTime: false
+                })
                 this.itemRef.ref('PostPhoto').push({
                     userId: key, title: "Tìm nháy ảnh" + this.state.valueCategoryPhoto1,
                     contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
@@ -167,8 +171,9 @@ export default class PostPhoto extends Component {
                             
                             <View style={{marginTop: -30, width: 230, height: 100 }}>
                                 <Dropdown 
-                                    // label='Favorite Fruit'
+                                    // label='Thể loại'
                                     data={category}
+                                    value={this.state.valueCategoryPhoto1}
                                     onChangeText={(valueCategoryPhoto1) => { valueCategoryPhoto1= this.setState({valueCategoryPhoto1}) }}
                                     />
                             </View>        
@@ -190,6 +195,7 @@ export default class PostPhoto extends Component {
                             <View style={{marginTop: -40, width: 230, height: 100 }}>
                                 <Dropdown 
                                     data={data}
+                                    value={this.state.valuePlacePhoto}
                                     onChangeText={(valuePlacePhoto) => { valuePlacePhoto= this.setState({valuePlacePhoto}) }}
                                     />
                             </View>        
@@ -208,7 +214,7 @@ export default class PostPhoto extends Component {
                                 style={{width: 230, marginTop: -35}}
                                 date={this.state.datetimePhoto}
                                 mode="datetime"
-                                placeholder=""
+                                placeholder="Ngày - giờ"
                                 format="YYYY-MM-DD HH:mm"
                                 confirmBtnText="Confirm"
                                 cancelBtnText="Cancel"
@@ -225,7 +231,7 @@ export default class PostPhoto extends Component {
                                     style={{width: 230, marginTop: -30}}
                                     date={this.state.datetimePhoto1}
                                     mode="datetime"
-                                    placeholder=""
+                                    placeholder="Ngày - giờ"
                                     format="YYYY-MM-DD HH:mm"
                                     confirmBtnText="Confirm"
                                     cancelBtnText="Cancel"

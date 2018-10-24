@@ -24,7 +24,8 @@ export default class PostModal extends Component {
             checkedRightModal3: false, checkedRightModal4: false, checkedRightModal5: false,
             content: '', place:'', circle1: '', circle2:'', circle3:'', labelRightModal5: '',
             labelRightModal1: '', labelRightModal2: '', labelRightModal3: '', labelRightModal4: '', 
-            labelErrorCost:false, labelErrorCircle: false
+            labelErrorCostModal:false, labelErrorCircleModal: false, labelErrorAddressModal: false,
+            labelErrorGenderModal: false, labelErrortimeModal: false, labelErrorLessTimeModal: false
         }
         this.itemRef = FirebaseApp.database();
       }
@@ -158,93 +159,157 @@ export default class PostModal extends Component {
    
     createPostModal(){ 
         const reg =  /^\+?[0-9][\d]*$/;
-        // if(this.state.circle1 === true){ 
-            
-        // }
-        if(this.state.checkedRightModal5 === true){ 
-           if(reg.test(this.state.cost) === false){ 
-               this.setState({ 
-                    labelErrorCost: true
-               })
-           }
-            else if (reg.test(this.state.cost) === true ){ 
-                this.setState({ 
-                    labelErrorCost: false
+       if((this.state.checkedGenderModal1 === false && this.state.checkedGenderModal2 === false)
+            || this.state.value === '' || this.state.datetime === '' || this.state.datetime1 === '' ){ 
+            if(this.state.checkedGenderModal1 === false && this.state.checkedGenderModal2 === false){ 
+                this.setState({
+                    labelErrorGenderModal: true
                 })
-                this.itemRef.ref('PostModal').push({
-                    userId: key, title: "Tìm mẫu ảnh",
-                    content: this.state.content, cost: this.state.cost,
-                    datetime: this.state.datetime, datetime1: this.state.datetime1,
-                    labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
-                    labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
-                    labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
-                    circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
-                    value: this.state.value, height: this.state.height, boy: this.state.boy, 
-                    }).then((snap) => { this.setState({  
-                                                 id: snap.key })
-                         if(this.state.id !== ''){ 
-                            this.props.navigation.navigate('PostDetailModal', {
-                                id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
-                                content: this.state.content, cost: this.state.cost, girl: this.state.girl,
-                                datetime: this.state.datetime, datetime1: this.state.datetime1,
-                                value: this.state.value,  height: this.state.height, boy: this.state.boy, 
-                                labelRightModal1: this.state.labelRightModal1,
-                                labelRightModal2: this.state.labelRightModal2,
-                                labelRightModal3: this.state.labelRightModal3,
-                                labelRightModal4: this.state.labelRightModal4,
-                                labelRightModal5: this.state.labelRightModal5,
-                                circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
-                               })
-                         }
-                           this.setState({ 
+            }
+            else if(this.state.checkedGenderModal1 === true || this.state.checkedGenderModal2 === true){ 
+                this.setState({ 
+                    labelErrorGenderModal: false
+                })
+            }
+            if(this.state.value === ''){ 
+                this.setState({ 
+                    labelErrorAddressModal: true
+                })
+            }
+            else if(this.state.value !== ''){ 
+                this.setState({ 
+                    labelErrorAddressModal: false
+                })
+            }
+            if(this.state.datetime === '' || this.state.datetime1 === ''){ 
+                this.setState({ 
+                    labelErrortimeModal: true
+                })
+            }
+            else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
+                if(this.state.datetime >= this.state.datetime1){ 
+                    this.setState({ 
+                        labelErrorLessTimeModal: true, labelErrortimeModal: false
+                    })
+                }
+                else if(this.state.datetime < this.state.datetime1){ 
+                    this.setState({ 
+                        labelErrortimeModal: false, labelErrorLessTimeModal: false
+                    })
+                }
+            }
+            if(this.state.checkedRightModal5 === true){ 
+                if(this.state.cost === '' || reg.test(this.state.cost) === false ){ 
+                    this.setState({ 
+                        labelErrorCostModal: true
+                    })
+                }
+                else if(this.state.cost !== '' && reg.test(this.state.cost )=== true ){ 
+                    this.setState({ 
+                        labelErrorCostModal: false
+                    })
+                }
+            }
+            else if(this.state.checkedRightModal5 === false){ 
+                this.setState({ 
+                    labelErrorCostModal: false
+                })
+            }
+
+        }
+       
+        else if((this.state.checkedGenderModal1 === true || this.state.checkedGenderModal2 === true)
+                && this.state.value !== '' && this.state.datetime !== '' && this.state.datetime1 !== '') {
+            if(this.state.checkedRightModal5 === false){
+                this.setState({ 
+                    labelErrorAddressModal: false, labelErrorGenderModal: false, labelErrorLessTimeModal: false,
+                    labelErrortimeModal: false
+                })
+              this.itemRef.ref('PostModal').push({
+                  userId: key, title: "Tìm mẫu ảnh",
+                  content: this.state.content, cost: this.state.cost,
+                  datetime: this.state.datetime, datetime1: this.state.datetime1,
+                  labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
+                  labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
+                  labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
+                  circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
+                  value: this.state.value, height: this.state.height, boy: this.state.boy, 
+                  }).then((snap) => { this.setState({  
+                                               id: snap.key })
+                       if(this.state.id !== ''){ 
+                          this.props.navigation.navigate('PostDetailModal', {
+                              id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
+                              content: this.state.content, cost: this.state.cost, girl: this.state.girl,
+                              datetime: this.state.datetime, datetime1: this.state.datetime1,
+                              value: this.state.value,  height: this.state.height, boy: this.state.boy, 
+                              labelRightModal1: this.state.labelRightModal1,
+                              labelRightModal2: this.state.labelRightModal2,
+                              labelRightModal3: this.state.labelRightModal3,
+                              labelRightModal4: this.state.labelRightModal4,
+                              labelRightModal5: this.state.labelRightModal5,
+                              circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
+                             })
+                       }
+                         this.setState({ 
+                              content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
+                              datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
+                              labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
+                              checkedGenderModal1: false, checkedGenderModal2: false,
+                              checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
+                              checkedRightModal4: false, checkedRightModal5: false
+                           })
+                   })
+            }
+            else if(this.state.checkedRightModal5 === true){ 
+                if(this.state.cost === '' || reg.test(this.state.cost) === false ){ 
+                    this.setState({ 
+                        labelErrorCostModal: true,  labelErrorAddressModal: false, 
+                        labelErrorGenderModal: false, labelErrorLessTimeModal: false, labelErrortimeModal: false
+                    })
+                }
+                else if(this.state.cost !== '' && reg.test(this.state.cost )=== true ){
+                  this.itemRef.ref('PostModal').push({
+                      userId: key, title: "Tìm mẫu ảnh",
+                      content: this.state.content, cost: this.state.cost,
+                      datetime: this.state.datetime, datetime1: this.state.datetime1,
+                      labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
+                      labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
+                      labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
+                      circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
+                      value: this.state.value, height: this.state.height, boy: this.state.boy, 
+                      }).then((snap) => { this.setState({  
+                                                   id: snap.key })
+                           if(this.state.id !== ''){ 
+                              this.props.navigation.navigate('PostDetailModal', {
+                                  id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
+                                  content: this.state.content, cost: this.state.cost, girl: this.state.girl,
+                                  datetime: this.state.datetime, datetime1: this.state.datetime1,
+                                  value: this.state.value,  height: this.state.height, boy: this.state.boy, 
+                                  labelRightModal1: this.state.labelRightModal1,
+                                  labelRightModal2: this.state.labelRightModal2,
+                                  labelRightModal3: this.state.labelRightModal3,
+                                  labelRightModal4: this.state.labelRightModal4,
+                                  labelRightModal5: this.state.labelRightModal5,
+                                  circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
+                                 })
+                           }
+                             this.setState({ 
                                 content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
                                 datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
                                 labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
                                 checkedGenderModal1: false, checkedGenderModal2: false,
                                 checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
-                                checkedRightModal4: false, checkedRightModal5: false
-                             })
-                     })
-            }
-        }
-        else if(this.state.checkedRightModal5 === false) {
-          
-        this.itemRef.ref('PostModal').push({
-            userId: key, title: "Tìm mẫu ảnh",
-            content: this.state.content, cost: this.state.cost,
-            datetime: this.state.datetime, datetime1: this.state.datetime1,
-            labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
-            labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
-            labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
-            circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
-            value: this.state.value, height: this.state.height, boy: this.state.boy, 
-            }).then((snap) => { this.setState({  
-                                         id: snap.key })
-                 if(this.state.id !== ''){ 
-                    this.props.navigation.navigate('PostDetailModal', {
-                        id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
-                        content: this.state.content, cost: this.state.cost, girl: this.state.girl,
-                        datetime: this.state.datetime, datetime1: this.state.datetime1,
-                        value: this.state.value,  height: this.state.height, boy: this.state.boy, 
-                        labelRightModal1: this.state.labelRightModal1,
-                        labelRightModal2: this.state.labelRightModal2,
-                        labelRightModal3: this.state.labelRightModal3,
-                        labelRightModal4: this.state.labelRightModal4,
-                        labelRightModal5: this.state.labelRightModal5,
-                        circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
+                                checkedRightModal4: false, checkedRightModal5: false,
+                                labelErrorAddressModal: false, labelErrorGenderModal: false, labelErrorLessTimeModal: false,
+                                labelErrortimeModal: false,  labelErrorCostModal: false
+                              
+                               })
                        })
-                 }
-                   this.setState({ 
-                        content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
-                        datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
-                        labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
-                        checkedGenderModal1: false, checkedGenderModal2: false,
-                        checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
-                        checkedRightModal4: false, checkedRightModal5: false
-                     })
-             })
-            }  
-        }
+                }
+            }
+          
+        }  
+    }
 
     showNoti(){
         // PushNotification.localNotification({ 
@@ -278,6 +343,10 @@ export default class PostModal extends Component {
                         <View><Text></Text></View>
                     
                     </View>
+                    {this.state.labelErrorGenderModal === true? 
+                        <View style={stylesPostModal.title}>
+                            <Text style={{color: 'red'}}>Bạn chưa chọn loại mẫu</Text>
+                        </View>:null}
                     <View style={stylesPostModal.title}>
                         <Text style={stylesPostModal.boxPostModal}>Tìm mẫu ảnh</Text>
                         <CheckBox
@@ -301,6 +370,10 @@ export default class PostModal extends Component {
                                 onChangeText={(content) => this.setState({ content })}
                                 style={[stylesPostModal.txtPostModal,{height:100}]} >{this.state.content}</TextInput>
                     </View>
+                    {this.state.labelErrorAddressModal === true? 
+                        <View style={stylesPostModal.title}>
+                            <Text style={{color: 'red'}}>Bạn chưa chọn địa điểm</Text>
+                        </View>:null}
                     <View style={stylesPostModal.title}>
                         
                         <Text style={[stylesPostModal.boxPostModal]}>Địa điểm</Text>
@@ -310,10 +383,20 @@ export default class PostModal extends Component {
                                 // label='Favorite Fruit'
                                 ref='picker'
                                 data={data}
+                                value = {this.state.value}
                                 onChangeText={(value) => { value= this.setState({value}) }}
                                 />
                         </View>        
                     </View>
+                    
+                    {this.state.labelErrortimeModal === true? 
+                        <View style={[stylesPostModal.title, {marginTop: -20}]}>
+                            <Text style={{color:'red', marginBottom: 25}}>Bạn chưa chọn thời gian</Text>
+                        </View>:null}
+                    {this.state.labelErrorLessTimeModal === true? 
+                        <View style={[stylesPostModal.title, {marginTop: -20}]}>
+                            <Text style={{color:'red', marginBottom: 25}}>Thời gian kết thúc phải sau thời gian bắt đầu</Text>
+                        </View>:null}
 
                     <View style={stylesPostModal.title}>
                         <Text style ={[stylesPostModal.boxPostModal,{ marginTop: -35}]}>Thời gian từ</Text>
@@ -356,7 +439,7 @@ export default class PostModal extends Component {
                     <View style={[stylesPostModal.title, {marginLeft: 15}]}>
                         <Text style={{marginTop: -5, color: 'black'}}>Số đo</Text>
                         <View>
-                            {this.state.labelErrorCircle === true? 
+                            {this.state.labelErrorCircleModal === true? 
                             <Text style={{color: "red", marginBottom: 15}}>Giá trị không hợp lệ, vui lòng nhập số</Text>: null}
                             <TextInput 
                                 onChangeText={(circle1) => this.setState({ circle1 })}
@@ -427,9 +510,9 @@ export default class PostModal extends Component {
                                     /> 
                          </View>
                     </View> 
-                {this.state.labelErrorCost === true? 
+                {this.state.labelErrorCostModal === true? 
                     <View style={stylesPostModal.title}>
-                        <Text style ={{ color: "red",}}>Giá trị không hợp lệ, bạn chỉ được nhập số</Text>
+                        <Text style ={{ color: "red",}}>Vui lòng nhập giá trị dương</Text>
                     </View>: null }
                 {this.state.checkedRightModal5 === true ?
                     <View style={stylesPostModal.title}>
