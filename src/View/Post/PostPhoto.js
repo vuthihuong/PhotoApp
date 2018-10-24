@@ -90,15 +90,47 @@ export default class PostPhoto extends Component {
         else if(this.state.valueCategoryPhoto1 !== '' && this.state.valuePlacePhoto !== "" 
             && this.state.datetimePhoto !== '' && this.state.datetimePhoto1 !== '' && this.state.costPhoto !== ''){ 
                 if( reg.test(this.state.costPhoto )=== false){
+                    if(this.state.datetimePhoto === '' || this.state.datetimePhoto1 === ''){ 
+                        this.setState({ 
+                            labelErrorTime: true
+                        })
+                    }
+                    else if(this.state.datetimePhoto !== '' && this.state.datetimePhoto1 !== ''){ 
+                        if(this.state.datetimePhoto >= this.state.datetimePhoto1){
+                            this.setState({ 
+                                labelErrorLessTime: true
+                            })
+                        }
+                        else if(this.state.datetimePhoto < this.state.datetimePhoto1)
+                        this.setState({ 
+                            labelErrorTime: false, labelErrorLessTime: false
+                        })
+                    }
                     this.setState({ 
-                        labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: true, labelErrorLessTime: false,
-                        labelErrorTime: false
+                        labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: true, 
                     })
+                    
                 }
+
                 else if( reg.test(this.state.costPhoto )=== true){ 
+                    if(this.state.datetimePhoto === '' || this.state.datetimePhoto1 === ''){ 
+                        this.setState({ 
+                            labelErrorTime: true
+                        })
+                    }
+                    else if(this.state.datetimePhoto !== '' && this.state.datetimePhoto1 !== ''){ 
+                        if(this.state.datetimePhoto >= this.state.datetimePhoto1){
+                            this.setState({ 
+                                labelErrorLessTime: true
+                            })
+                        }
+                        else if(this.state.datetimePhoto < this.state.datetimePhoto1){
+                        this.setState({ 
+                            labelErrorTime: false, labelErrorLessTime: false
+                        })
+                   
                     this.setState({ 
-                        labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, labelErrorLessTime: false,
-                        labelErrorTime: false
+                        labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, 
                     })
                     this.itemRef.ref('PostPhoto').push({
                         userId: key, title: "Tìm nháy ảnh" + this.state.valueCategoryPhoto1,
@@ -124,10 +156,13 @@ export default class PostPhoto extends Component {
                                  contentPhoto: '', datetimePhoto: '', datetimePhoto1: '', costPhoto: ''
                              })
                         })
-                }
-        }
+                } }
+        }}
     
 }
+
+    
+
        render()  {
         var data = [];
         FirebaseApp.database().ref("DataAddress/").on('value', (function (snapshot) {
@@ -136,8 +171,10 @@ export default class PostPhoto extends Component {
                 let childData = childSnapshot.val();
                 data.push(childData)
             });
+           
         }))
-        
+    
+
         var category = [];
         FirebaseApp.database().ref("DataCatgPostPhoto/").on('value', (function (snapshot) {
             snapshot.forEach(function(childSnapshot) {
