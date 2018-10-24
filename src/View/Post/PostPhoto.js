@@ -15,7 +15,7 @@ export default class PostPhoto extends Component {
             date: '', time: '00:00', datetimePhoto: '', selectedHours: 0, selectedMinutes: 0,
             datetimePhoto1: '', selectedHours1: 0, selectedMinutes1: 0, contentPhoto: '', costPhoto:'',
             labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, labelErrorTime: false,
-            valueCategoryPhoto1: '', valuePlacePhoto: ''
+            valueCategoryPhoto1: '', valuePlacePhoto: '', labelErrorLessTime: false
         }
         this.itemRef = FirebaseApp.database();
       }
@@ -66,8 +66,14 @@ export default class PostPhoto extends Component {
                     })
                 }
                 else if(this.state.datetimePhoto !== '' && this.state.datetimePhoto1 !== ''){ 
+                    if(this.state.datetimePhoto >= this.state.datetimePhoto1){
+                        this.setState({ 
+                            labelErrorLessTime: true
+                        })
+                    }
+                    else if(this.state.datetimePhoto < this.state.datetimePhoto1)
                     this.setState({ 
-                        labelErrorTime: false
+                        labelErrorTime: false, labelErrorLessTime: false
                     })
                 }
                 if(this.state.costPhoto === '' || reg.test(this.state.costPhoto) === false ){ 
@@ -191,6 +197,10 @@ export default class PostPhoto extends Component {
                         {this.state.labelErrorTime === true ? 
                              <View style={[stylesPostPhoto.title, {marginBottom: 20}]}>
                                     <Text style={{color: 'red'}}>Bạn chưa chọn thời gian</Text>
+                             </View>: null}
+                         {this.state.labelErrorLessTime === true ? 
+                             <View style={[stylesPostPhoto.title, {marginBottom: 20}]}>
+                                    <Text style={{color: 'red'}}>Thời gian kết thúc phải sau thời gian bắt đầu</Text>
                              </View>: null}
                         <View style={stylesPostPhoto.title}>
                             <Text style ={{marginRight: 10, marginTop: -25, color:'black'}}>Thời gian từ</Text>
