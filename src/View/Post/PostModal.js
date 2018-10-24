@@ -159,6 +159,7 @@ export default class PostModal extends Component {
    
     createPostModal(){ 
         const reg =  /^\+?[0-9][\d]*$/;
+       
        if((this.state.checkedGenderModal1 === false && this.state.checkedGenderModal2 === false)
             || this.state.value === '' || this.state.datetime === '' || this.state.datetime1 === '' ){ 
             if(this.state.checkedGenderModal1 === false && this.state.checkedGenderModal2 === false){ 
@@ -215,27 +216,76 @@ export default class PostModal extends Component {
                     labelErrorCostModal: false
                 })
             }
+            if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                this.setState({ 
+                    labelErrorCircleModal: true
+                })
+            }
+            else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                this.setState({ 
+                    labelErrorCircleModal: false
+                })
+            }
 
         }
        
         else if((this.state.checkedGenderModal1 === true || this.state.checkedGenderModal2 === true)
                 && this.state.value !== '' && this.state.datetime !== '' && this.state.datetime1 !== '') {
             if(this.state.checkedRightModal5 === false){
+                
                 if(this.state.datetime === '' || this.state.datetime1 === ''){ 
                     this.setState({ 
                         labelErrortimeModal: true
                     })
+                    if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                        || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                        this.setState({ 
+                            labelErrorCircleModal: true
+                        })
+                    }
+                    else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                        && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                        this.setState({ 
+                            labelErrorCircleModal: false
+                        })
+                    }
                 }
                 else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
                     if(this.state.datetime >= this.state.datetime1){ 
                         this.setState({ 
                             labelErrorLessTimeModal: true, labelErrortimeModal: false
                         })
+                        if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                            || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                            this.setState({ 
+                                labelErrorCircleModal: true
+                            })
+                        }
+                        else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                            && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                            this.setState({ 
+                                labelErrorCircleModal: false
+                            })
+                        }
                     }
                     else if(this.state.datetime < this.state.datetime1){ 
                         this.setState({ 
                             labelErrortimeModal: false, labelErrorLessTimeModal: false
                         })
+                        if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                            || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                            this.setState({ 
+                                labelErrorCircleModal: true
+                            })
+                        }
+                        else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                            && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                            this.setState({ 
+                                labelErrorCircleModal: false
+                            })
+                       
                  
                 this.setState({ 
                     labelErrorAddressModal: false, labelErrorGenderModal: false,
@@ -277,6 +327,7 @@ export default class PostModal extends Component {
                    })
             }
         }
+        }
     }
     else if(this.state.checkedRightModal5 === true){ 
         if(this.state.cost === '' || reg.test(this.state.cost) === false ){ 
@@ -288,17 +339,53 @@ export default class PostModal extends Component {
                 this.setState({ 
                     labelErrortimeModal: true, labelErrorLessTimeModal: false
                 })
+                if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                    || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                    this.setState({ 
+                        labelErrorCircleModal: true
+                    })
+                }
+                else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                    && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                    this.setState({ 
+                        labelErrorCircleModal: false
+                    })
+                }
             }
             else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
                 if(this.state.datetime >= this.state.datetime1){ 
                     this.setState({ 
                         labelErrorLessTimeModal: true, labelErrortimeModal: false
                     })
+                    if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                        || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                        this.setState({ 
+                            labelErrorCircleModal: true
+                        })
+                    }
+                    else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                        && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                        this.setState({ 
+                            labelErrorCircleModal: false
+                        })
+                    }   
                 }
                 else if(this.state.datetime < this.state.datetime1){ 
                     this.setState({ 
                         labelErrortimeModal: false, labelErrorLessTimeModal: false
                     })
+                    if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                        || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                        this.setState({ 
+                            labelErrorCircleModal: true
+                        })
+                    }
+                    else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                        && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                        this.setState({ 
+                            labelErrorCircleModal: false
+                        })
+                    }
                 }
             }
            
@@ -308,17 +395,53 @@ export default class PostModal extends Component {
                 this.setState({ 
                     labelErrortimeModal: true
                 })
+                if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                    || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                    this.setState({ 
+                        labelErrorCircleModal: true
+                    })
+                }
+                else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                    && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                    this.setState({ 
+                        labelErrorCircleModal: false
+                    })
+                }
             }
             else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
                 if(this.state.datetime >= this.state.datetime1){ 
                     this.setState({ 
                         labelErrorLessTimeModal: true, labelErrortimeModal: false
                     })
+                    if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                        || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                        this.setState({ 
+                            labelErrorCircleModal: true
+                        })
+                    }
+                    else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                        && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                        this.setState({ 
+                            labelErrorCircleModal: false
+                        })
+                    }
                 }
                 else if(this.state.datetime < this.state.datetime1){ 
                     this.setState({ 
                         labelErrortimeModal: false, labelErrorLessTimeModal: false
                     })
+                    if(reg.test(this.state.circle1) === false || reg.test(this.state.circle2) === false 
+                        || reg.test(this.state.circle3) === false || reg.test(this.state.height) === false){ 
+                        this.setState({ 
+                            labelErrorCircleModal: true
+                        })
+                    }
+                    else if(reg.test(this.state.circle1) === true && reg.test(this.state.circle2) === true 
+                        && reg.test(this.state.circle3) === true && reg.test(this.state.height) === true){ 
+                        this.setState({ 
+                            labelErrorCircleModal: false
+                        })
+                  
                   this.itemRef.ref('PostModal').push({
                       userId: key, title: "Tìm mẫu ảnh",
                       content: this.state.content, cost: this.state.cost,
@@ -358,6 +481,7 @@ export default class PostModal extends Component {
                        })
                 }
             }
+        }
         }
             }
           
