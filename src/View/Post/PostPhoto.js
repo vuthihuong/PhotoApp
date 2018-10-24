@@ -87,43 +87,47 @@ export default class PostPhoto extends Component {
                     })
                 }
             }
-        else if(this.state.valueCategoryPhoto1 !== '' && this.state.valuePlacePhoto !== "" && reg.test(this.state.costPhoto )=== true
+        else if(this.state.valueCategoryPhoto1 !== '' && this.state.valuePlacePhoto !== "" 
             && this.state.datetimePhoto !== '' && this.state.datetimePhoto1 !== '' && this.state.costPhoto !== ''){ 
-                this.setState({ 
-                    labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, labelErrorLessTime: false,
-                    labelErrorTime: false
-                })
-                this.itemRef.ref('PostPhoto').push({
-                    userId: key, title: "Tìm nháy ảnh" + this.state.valueCategoryPhoto1,
-                    contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
-                    datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
-                    valuePlacePhoto: this.state.valuePlacePhoto
-                   
-                    }).then((snap) => { this.setState({  
-                                                 id: snap.key })
-                         if(this.state.id !== ''){ 
-                            this.props.navigation.navigate('PostDetailPhoto',{
-                                id: this.state.id, userId: key,
-                                valueCategoryPhoto1: this.state.valueCategoryPhoto1,
-                                contentPhoto: this.state.contentPhoto,
-                                valuePlacePhoto: this.state.valuePlacePhoto,
-                                datetimePhoto: this.state.datetimePhoto,
-                                datetimePhoto1: this.state.datetimePhoto1,
-                                costPhoto: this.state.costPhoto,
-                            })
-                         }
-                         this.setState({ 
-                             id: '', valueCategoryPhoto1: '', valuePlacePhoto: '',
-                             contentPhoto: '', datetimePhoto: '', datetimePhoto1: '', costPhoto: ''
-                         })
+                if( reg.test(this.state.costPhoto )=== false){
+                    this.setState({ 
+                        labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: true, labelErrorLessTime: false,
+                        labelErrorTime: false
                     })
-               
+                }
+                else if( reg.test(this.state.costPhoto )=== true){ 
+                    this.setState({ 
+                        labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, labelErrorLessTime: false,
+                        labelErrorTime: false
+                    })
+                    this.itemRef.ref('PostPhoto').push({
+                        userId: key, title: "Tìm nháy ảnh" + this.state.valueCategoryPhoto1,
+                        contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
+                        datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
+                        valuePlacePhoto: this.state.valuePlacePhoto
+                       
+                        }).then((snap) => { this.setState({  
+                                                     id: snap.key })
+                             if(this.state.id !== ''){ 
+                                this.props.navigation.navigate('PostDetailPhoto',{
+                                    id: this.state.id, userId: key,
+                                    valueCategoryPhoto1: this.state.valueCategoryPhoto1,
+                                    contentPhoto: this.state.contentPhoto,
+                                    valuePlacePhoto: this.state.valuePlacePhoto,
+                                    datetimePhoto: this.state.datetimePhoto,
+                                    datetimePhoto1: this.state.datetimePhoto1,
+                                    costPhoto: this.state.costPhoto,
+                                })
+                             }
+                             this.setState({ 
+                                 id: '', valueCategoryPhoto1: '', valuePlacePhoto: '',
+                                 contentPhoto: '', datetimePhoto: '', datetimePhoto1: '', costPhoto: ''
+                             })
+                        })
+                }
         }
     
 }
-
-    
-
        render()  {
         var data = [];
         FirebaseApp.database().ref("DataAddress/").on('value', (function (snapshot) {
@@ -132,10 +136,8 @@ export default class PostPhoto extends Component {
                 let childData = childSnapshot.val();
                 data.push(childData)
             });
-           
         }))
-    
-
+        
         var category = [];
         FirebaseApp.database().ref("DataCatgPostPhoto/").on('value', (function (snapshot) {
             snapshot.forEach(function(childSnapshot) {

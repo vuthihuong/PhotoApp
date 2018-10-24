@@ -9,6 +9,11 @@ import gobackIcon from '../../assets/img/info/goback.png'
 import edit from '../../assets/img/pose/edit.png'
 
 export default class PostDetailPhoto extends Component {
+    
+    editPostPhoto(){ 
+        this.props.navigation.navigate('PostPhoto')
+    }
+
     render(){
         return(
         //   <ScrollView style={{flex:1, backgroundColor: 'white'}}>  
@@ -22,7 +27,7 @@ export default class PostDetailPhoto extends Component {
                          <Text style={{fontSize: 20, color: '#EE3B3B'}}>
                                 Tìm nháy ảnh</Text>
                     </View>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostPhoto')}>
+                    <TouchableOpacity  onPress={() => this.editPostPhoto()}>
                         <Image source={edit} style={{width: 25, height: 25, marginRight: 15,
                                     tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
