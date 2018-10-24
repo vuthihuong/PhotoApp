@@ -11,7 +11,16 @@ import edit from '../../assets/img/pose/edit.png'
 export default class PostDetailPhoto extends Component {
     
     editPostPhoto(){ 
-        this.props.navigation.navigate('PostPhoto')
+        this.props.navigation.navigate('PostPhotoEdit', { 
+            id: this.props.navigation.state.params.id,
+            userId: this.props.navigation.state.params.userId,
+            valueCategoryPhotoEdit: this.props.navigation.state.params.valueCategoryPhoto1,
+            contentPhotoEdit: this.props.navigation.state.params.contentPhoto,
+            valuePlacePhotoEdit:this.props.navigation.state.params.valuePlacePhoto,
+            datetimePhotoEdit: this.props.navigation.state.params.datetimePhoto,
+            datetimePhotoEdit1: this.props.navigation.state.params.datetimePhoto1,
+            costPhotoEdit: this.props.navigation.state.params.costPhoto,
+        })
     }
 
     render(){

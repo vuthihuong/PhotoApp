@@ -68,7 +68,7 @@ export default class PostPhoto extends Component {
                 else if(this.state.datetimePhoto !== '' && this.state.datetimePhoto1 !== ''){ 
                     if(this.state.datetimePhoto >= this.state.datetimePhoto1){
                         this.setState({ 
-                            labelErrorLessTime: true
+                            labelErrorLessTime: true, labelErrorTime: false
                         })
                     }
                     else if(this.state.datetimePhoto < this.state.datetimePhoto1)
@@ -98,7 +98,7 @@ export default class PostPhoto extends Component {
                     else if(this.state.datetimePhoto !== '' && this.state.datetimePhoto1 !== ''){ 
                         if(this.state.datetimePhoto >= this.state.datetimePhoto1){
                             this.setState({ 
-                                labelErrorLessTime: true
+                                labelErrorLessTime: true, labelErrorTime: false
                             })
                         }
                         else if(this.state.datetimePhoto < this.state.datetimePhoto1)
@@ -121,7 +121,8 @@ export default class PostPhoto extends Component {
                     else if(this.state.datetimePhoto !== '' && this.state.datetimePhoto1 !== ''){ 
                         if(this.state.datetimePhoto >= this.state.datetimePhoto1){
                             this.setState({ 
-                                labelErrorLessTime: true
+                                labelErrorLessTime: true, labelErrorTime: false,
+                                 labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, 
                             })
                         }
                         else if(this.state.datetimePhoto < this.state.datetimePhoto1){
@@ -134,6 +135,7 @@ export default class PostPhoto extends Component {
                     })
                     this.itemRef.ref('PostPhoto').push({
                         userId: key, title: "Tìm nháy ảnh" + this.state.valueCategoryPhoto1,
+                        valueCategoryPhoto1: this.state.valueCategoryPhoto1,
                         contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
                         datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
                         valuePlacePhoto: this.state.valuePlacePhoto
