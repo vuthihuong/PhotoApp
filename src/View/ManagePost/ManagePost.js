@@ -33,7 +33,7 @@ export default class ManagePost extends Component{
                 userId: (childData.userId), title: childData.title,
                 content: childData.content, cost: childData.cost, girl: childData.girl,
                 datetime: childData.datetime, datetime1: childData.datetime1,
-                value: childData.value,  height: childData.value, boy: childData.boy, 
+                value: childData.value,  height: childData.height, boy: childData.boy, 
                 labelRightModal1: childData.labelRightModal1, labelRightModal2: childData.labelRightModal2,
                 labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
                 labelRightModal5: childData.labelRightModal5,
@@ -56,10 +56,20 @@ export default class ManagePost extends Component{
                     dataSource = {this.state.dataSource}
                     renderRow = {(rowData)=> 
                         <View style={stylesManagCont.bodyManaCont}>
-                            <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
+                            <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal',
+                               { id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
+                                content: rowData.content, cost: rowData.cost, girl: rowData.girl,
+                                datetime: this.state.datetime, datetime1: rowData.datetime1,
+                                value: rowData.value,  height: rowData.height, boy: rowData.boy, 
+                                labelRightModal1: rowData.labelRightModal1,
+                                labelRightModal2: rowData.labelRightModal2,
+                                labelRightModal3: rowData.labelRightModal3,
+                                labelRightModal4: rowData.labelRightModal4,
+                                labelRightModal5: rowData.labelRightModal5,
+                                circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,} )}
                                 style={stylesManagCont.contManagCont}>
-                                    <Text style={stylesManagCont.txtManagCont}>{rowData.title} </Text>
-                                    <Text style={stylesManagCont.txtManagCont}>{rowData.content}</Text>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.title} {rowData.boy} {rowData.girl} </Text>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.value}</Text>
                                     <Text style={stylesManagCont.txtManagCont}>{rowData.datetime} - {rowData.datetime}</Text>
                             </TouchableOpacity>
                             <View style={ stylesManagCont.txtConfirm }>

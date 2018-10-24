@@ -60,7 +60,7 @@ export default class PostDetailModal extends Component {
                     {this.props.navigation.state.params.content != ''?  
                         <Text>Nội dung: {this.props.navigation.state.params.content}</Text>: null }
 
-                    {this.props.navigation.state.params.value != null?  
+                    {this.props.navigation.state.params.value !== ''?  
                         <Text>Địa điểm: {this.props.navigation.state.params.value} </Text>: null }
 
                     {(this.props.navigation.state.params.datetime != '' 

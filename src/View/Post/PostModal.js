@@ -253,15 +253,15 @@ export default class PostModal extends Component {
     }
 
     render(){
-        let data = [{
-            value: 'Hà Nội',
-          }, {
-            value: 'Hải Dương',
-          }, {
-            value: 'Hải Phòng',
-          }];
-          var tmp =0;
-         
+        var data = [];
+        FirebaseApp.database().ref("DataAddress/").on('value', (function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var key = childSnapshot.key;
+                let childData = childSnapshot.val();
+                data.push(childData)
+            });
+           
+        }))
         return (
             <ScrollView style={{flex:1, backgroundColor: 'white'}}> 
                <View style={stylesPostModal.container}>
