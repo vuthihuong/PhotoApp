@@ -139,7 +139,7 @@ export default class PostPhoto extends Component {
                         labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, 
                     })
                     this.itemRef.ref('PostPhoto').child(this.props.navigation.state.params.id).update({
-                        title: "Tìm nháy ảnh " + this.state.valueCategoryPhoto1,
+                        title: "Tìm nháy ảnh ",
                         valueCategoryPhoto1: this.state.valueCategoryPhoto1,
                         contentPhoto: this.state.contentPhoto,
                         valuePlacePhoto:this.state.valuePlacePhoto,

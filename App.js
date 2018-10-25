@@ -42,6 +42,7 @@ import UpImgPhoto from './src/View/Upload/UpImgPhoto'
 import AddressMap from './src/View/Info/AddressMap'
 import PostModalEdit from './src/View/Post/PostModalEdit'
 import PostPhotoEdit from './src/View/Post/PostPhotoEdit'
+import PostEventEdit from './src/View/Post/PostEventEdit'
 
 
 
@@ -133,6 +134,9 @@ const Mainapp = createStackNavigator({
     },
     PostPhotoEdit: { 
         screen: PostPhotoEdit
+    },
+    PostEventEdit: { 
+        screen: PostEventEdit
     }
     },{
       headerMode:'none'

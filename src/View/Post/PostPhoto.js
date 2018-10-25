@@ -134,7 +134,7 @@ export default class PostPhoto extends Component {
                         labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, 
                     })
                     this.itemRef.ref('PostPhoto').push({
-                        userId: key, title: "Tìm nháy ảnh" + this.state.valueCategoryPhoto1,
+                        userId: key, title: "Tìm nháy ảnh",
                         valueCategoryPhoto1: this.state.valueCategoryPhoto1,
                         contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
                         datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
