@@ -59,7 +59,7 @@ export default class ManagePost extends Component{
                             <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal',
                                { id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
                                 content: rowData.content, cost: rowData.cost, girl: rowData.girl,
-                                datetime: this.state.datetime, datetime1: rowData.datetime1,
+                                datetime: rowData.datetime, datetime1: rowData.datetime1,
                                 value: rowData.value,  height: rowData.height, boy: rowData.boy, 
                                 labelRightModal1: rowData.labelRightModal1,
                                 labelRightModal2: rowData.labelRightModal2,

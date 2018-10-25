@@ -11,7 +11,7 @@ import edit from '../../assets/img/pose/edit.png'
 export default class PostDetailEvent extends Component {
     editPostEvent(){ 
         this.props.navigation.navigate('PostEventEdit', { 
-            id: this.props.navigation.state.params.id, 
+            id: this.props.navigation.state.params.id, title: this.props.navigation.state.params.title,
             numberModalEdit: this.props.navigation.state.params.numberModal, 
             costEventEdit: this.props.navigation.state.params.costEvent,
             labelEventEdit1: this.props.navigation.state.params.labelEvent1,  

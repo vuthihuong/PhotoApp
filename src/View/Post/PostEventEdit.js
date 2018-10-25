@@ -14,7 +14,7 @@ export default class PostEventEdit extends Component {
     constructor(props){
         super(props)
         this.state = {
-            id: this.props.navigation.state.params.id, 
+            id: this.props.navigation.state.params.id, title: 'Tạo sự kiện',
             numberModal: this.props.navigation.state.params.numberModalEdit, 
             costEvent: this.props.navigation.state.params.costEventEdit,
             labelEvent1: this.props.navigation.state.params.labelEventEdit1,  

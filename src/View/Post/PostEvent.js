@@ -150,6 +150,7 @@ export default class PostEvent extends Component {
                     })
 
                     this.itemRef.ref('PostEvent').push({
+                        title: 'Tạo sự kiện',
                         userId: key, numberModal: this.state.numberModal, costEvent: this.state.costEvent,
                         labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
                         contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,
@@ -158,7 +159,7 @@ export default class PostEvent extends Component {
                                                      id: snap.key })
                              if(this.state.id !== ''){ 
                                 this.props.navigation.navigate('PostDetailEvent',{
-                                    id: this.state.id, userId: key,
+                                    id: this.state.id, userId: key, title:'Tạo sự kiện',
                                     numberModal: this.state.numberModal, costEvent: this.state.costEvent,
                                     labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
                                     contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,

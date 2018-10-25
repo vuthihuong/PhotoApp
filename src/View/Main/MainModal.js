@@ -289,7 +289,7 @@ const MenuStack = createStackNavigator({
         drawerLabel: 'Các bài viết đã tạo',
         drawerIcon: () => (
           <Image
-            source={require('../../assets/img/info/heart.png')}
+            source={require('../../assets/img/info/contract.png')}
             style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
           />
         ),

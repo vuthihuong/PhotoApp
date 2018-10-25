@@ -1,23 +1,27 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, ListView,
             ScrollView } from 'react-native';
 
 import home from '../../assets/img/menu/home.png'
 import ToggleSwitch from 'toggle-switch-react-native'
+import {FirebaseApp} from './../../Controller/FirebaseConfig' 
 
 
 export default class MenuPhoto extends Component {
     constructor(props) {
-      super(props);   
+      super(props);  
       YellowBox.ignoreWarnings([
        'Warning: componentWillMount is deprecated',
        'Warning: componentWillReceiveProps is deprecated',
      ]);   
      this.state = {
-        isOn: false,
-        status: 'offline'
+        isOn: false,  status: 'offline',
+        dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
       };
+      this.itemRef = FirebaseApp.database();
     }
+
+
     change(){
         if(this.state.isOn === false){ 
             this.setState({
@@ -33,6 +37,69 @@ export default class MenuPhoto extends Component {
         }
        
     }
+    componentWillMount(){ 
+        var items  = [];
+            this.actGetData('PostModal/', items);
+            this.actGetData('PostPhoto/', items);
+            this.actGetData('PostEvent/', items);
+    }
+    actGetData(url, items=[]){ 
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         key = childSnapshot.key;
+          })  
+        })
+        if(url === 'PostModal/'){ 
+            this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
+                var childData = dataSnapshot.val();
+                items.push({ 
+                    userId: (childData.userId), title: childData.title,
+                    content: childData.content, cost: childData.cost, girl: childData.girl,
+                    datetime: childData.datetime, datetime1: childData.datetime1,
+                    value: childData.value,  height: childData.height, boy: childData.boy, 
+                    labelRightModal1: childData.labelRightModal1, labelRightModal2: childData.labelRightModal2,
+                    labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
+                    labelRightModal5: childData.labelRightModal5,
+                    circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3, 
+                })
+                this.setState({ 
+                    dataSource: this.state.dataSource.cloneWithRows(items)
+                });
+            });
+        }
+        else if(url === 'PostPhoto/'){ 
+            this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
+                var childData = dataSnapshot.val();
+                items.push({ 
+                    userId: (childData.userId), title: childData.title,
+                    contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
+                    datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
+                    valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+                })
+                this.setState({ 
+                    dataSource: this.state.dataSource.cloneWithRows(items)
+                });
+            });
+        }
+        else if(url === 'PostEvent/'){ 
+            this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
+                var childData = dataSnapshot.val();
+                items.push({ 
+                    userId: (childData.userId), title: childData.title,
+                    addressEvent: childData.addressEvent, contentEvent: childData.contentEvent,
+                    costEvent: childData.costEvent, datetimeEvent: childData.datetimeEvent,
+                    datetimeEvent1: childData.datetimeEvent1, labelEvent1: childData.labelEvent1,
+                    labelEvent2: childData.labelEvent2, numberModal: childData.numberModal
+                })
+                this.setState({ 
+                    dataSource: this.state.dataSource.cloneWithRows(items)
+                });
+            });
+        }
+    }
+       
 
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
@@ -60,43 +127,61 @@ export default class MenuPhoto extends Component {
                         size='small'
                         onToggle={ (isOn) => this.change() } />
                 </View>
+                
             </View>
-           
-           
-             <View style={stylesMenuPhoto.bodyManaCont}>
-            
-                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
-                     style={stylesMenuPhoto.contManagCont}>
-                         <Text style={stylesMenuPhoto.txtManagCont}>Phan Thu Phương đang có yêu cầu chụp ảnh ở gần bạn</Text>
-                         {/* <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text> */}
-                  
-                 </TouchableOpacity>
-                 <View style={ stylesMenuPhoto.txtConfirm }>
-                     <TouchableOpacity>
-                         <Text style={[stylesMenuPhoto.txtManagCont, {color: 'blue'}]}>OK</Text>
-                    </TouchableOpacity>
-                     <TouchableOpacity>
-                         <Text style={[stylesMenuPhoto.txtManagCont,{color:'#EE3B3B'}]}>Hủy</Text>
-                    </TouchableOpacity>
-                 </View>
-             </View>
 
-              <View style={stylesMenuPhoto.bodyManaCont}>
-                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
-                     style={stylesMenuPhoto.contManagCont}>
-                         <Text style={stylesMenuPhoto.txtManagCont}>Phạm Lan Hương đang gửi yêu cầu chụp ảnh tới bạn</Text>
-                         {/* <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text> */}
-                  
-                 </TouchableOpacity>
-                 <View style={ stylesMenuPhoto.txtConfirm }>
-                     <TouchableOpacity>
-                         <Text style={[stylesMenuPhoto.txtManagCont, {color: 'blue'}]}>OK</Text>
-                    </TouchableOpacity>
-                     <TouchableOpacity>
-                         <Text style={[stylesMenuPhoto.txtManagCont,{color:'#EE3B3B'}]}>Hủy</Text>
-                    </TouchableOpacity>
-                 </View>
-             </View>
+            <ListView  dataSource = {this.state.dataSource} renderRow = {(rowData)=> 
+                <View style={stylesMenuPhoto.bodyManaCont}>
+                    {rowData.title === "Tìm mẫu ảnh"?
+                    (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal',{
+                        id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
+                        content: rowData.content, cost: rowData.cost, girl: rowData.girl,
+                        datetime: rowData.datetime, datetime1: rowData.datetime1,
+                        value: rowData.value,  height: rowData.height, boy: rowData.boy, 
+                        labelRightModal1: rowData.labelRightModal1,
+                        labelRightModal2: rowData.labelRightModal2,
+                        labelRightModal3: rowData.labelRightModal3,
+                        labelRightModal4: rowData.labelRightModal4,
+                        labelRightModal5: rowData.labelRightModal5,
+                        circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,} )}
+                        style={stylesMenuPhoto.contManagCont}>
+                        <Text style={stylesMenuPhoto.txtManagCont}>{rowData.title} {rowData.boy} {rowData.girl} </Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Địa điểm: {rowData.value}</Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
+                    </TouchableOpacity>): null} 
+                    {rowData.title === "Tìm nháy ảnh"?
+                    (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailPhoto',{
+                        id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
+                        contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
+                        datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
+                        valueCategoryPhoto1: rowData.valueCategoryPhoto1, valuePlacePhoto: rowData.valuePlacePhoto} )}
+                        style={stylesMenuPhoto.contManagCont}>
+                        <Text style={stylesMenuPhoto.txtManagCont}>{rowData.title} </Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                    </TouchableOpacity>): null} 
+                    {rowData.title === "Tạo sự kiện"?
+                    (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailEvent',{
+                        id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
+                        addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
+                        costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
+                        datetimeEvent1: rowData.datetimeEvent1, labelEvent1: rowData.labelEvent1,
+                        labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal} )}
+                        style={stylesMenuPhoto.contManagCont}>
+                        <Text style={stylesMenuPhoto.txtManagCont}>{rowData.labelEvent1} {rowData.labelEvent2}</Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Địa điểm: {rowData.addressEvent}</Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                    </TouchableOpacity>): null} 
+                    <View style={ stylesMenuPhoto.txtConfirm }>
+                        <TouchableOpacity>
+                            <Text style={[stylesMenuPhoto.txtManagCont, {color: 'blue'}]}>OK</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Text style={[stylesMenuPhoto.txtManagCont,{color:'#EE3B3B'}]}>Hủy</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>}
+            />
              <View style={stylesMenuPhoto.bodyManaCont}>
                  <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
                      style={stylesMenuPhoto.contManagCont}>
