@@ -5,8 +5,8 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
 import { Dropdown } from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker'
 import CheckBox from 'react-native-checkbox';
-import gobackIcon from './../../assets/img/info/goback.png'
-import {FirebaseApp} from './../../Controller/FirebaseConfig' 
+import gobackIcon from '../../../assets/img/info/goback.png'
+import {FirebaseApp} from './../../../Controller/FirebaseConfig' 
 
 export default class PostPhoto extends Component {
     constructor(props){
@@ -151,7 +151,7 @@ export default class PostPhoto extends Component {
                         this.props.navigation.navigate('PostDetailPhoto',{
                             id: this.state.id, 
                             userId: this.state.userId,
-                            valueCategoryPhoto1: this.state.valueCategoryPhoto,
+                            valueCategoryPhoto1: this.state.valueCategoryPhoto1,
                             contentPhoto: this.state.contentPhoto,
                             valuePlacePhoto:this.state.valuePlacePhoto,
                             datetimePhoto: this.state.datetimePhoto,

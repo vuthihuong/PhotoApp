@@ -5,8 +5,8 @@ import {
     TouchableOpacity, ScrollView
 } from 'react-native';
 
-import gobackIcon from '../../assets/img/info/goback.png'
-import edit from '../../assets/img/pose/edit.png'
+import gobackIcon from '../../../assets/img/info/goback.png'
+import edit from '../../../assets/img/pose/edit.png'
 
 export default class PostDetailEvent extends Component {
     editPostEvent(){ 

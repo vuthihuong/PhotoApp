@@ -24,12 +24,12 @@ import MainPhoto from './src/View/Main/MainPhoto'
 import SearchAddress from './src/View/Search/SearchAddress'
 import SearchPhoto from './src/View/Search/SearchPhoto'
 
-import PostDetailPhoto from './src/View/Post/PostDetailPhoto'
-import PostDetailModal from './src/View/Post/PostDetailModal'
-import PostDetailEvent from './src/View/Post/PostDetailEvent'
-import PostModal from './src/View/Post/PostModal'
-import PostPhoto from './src/View/Post/PostPhoto'
-import PostEvent from './src/View/Post/PostEvent'
+import PostDetailPhoto from './src/View/Post/PostPhoto/PostDetailPhoto'
+import PostDetailModal from './src/View/Post/PostModal/PostDetailModal'
+import PostDetailEvent from './src/View/Post/PostEvent/PostDetailEvent'
+import PostModal from './src/View/Post/PostModal/PostModal'
+import PostPhoto from './src/View/Post/PostPhoto/PostPhoto'
+import PostEvent from './src/View/Post/PostEvent/PostEvent'
 import Menu from './src/View/Main/Menu'
 import PostTabBar from './src/View/Post/PostTabBar'
 
@@ -40,9 +40,9 @@ import UpImgModal from './src/View/Upload/UpImgModal'
 import UpImgPhoto from './src/View/Upload/UpImgPhoto'
 
 import AddressMap from './src/View/Info/AddressMap'
-import PostModalEdit from './src/View/Post/PostModalEdit'
-import PostPhotoEdit from './src/View/Post/PostPhotoEdit'
-import PostEventEdit from './src/View/Post/PostEventEdit'
+import PostModalEdit from './src/View/Post/PostModal/PostModalEdit'
+import PostPhotoEdit from './src/View/Post/PostPhoto/PostPhotoEdit'
+import PostEventEdit from './src/View/Post/PostEvent/PostEventEdit'
 
 
 

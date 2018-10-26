@@ -5,27 +5,21 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox,
 import { Dropdown } from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker'
 import CheckBox from 'react-native-checkbox';
-import gobackIcon from './../../assets/img/info/goback.png'
+import gobackIcon from '../../../assets/img/info/goback.png'
 
-import {FirebaseApp} from './../../Controller/FirebaseConfig' 
+import {FirebaseApp} from './../../../Controller/FirebaseConfig' 
 
 
-export default class PostEventEdit extends Component {
+export default class PostEvent extends Component {
     constructor(props){
         super(props)
         this.state = {
-            id: this.props.navigation.state.params.id, title: 'Tạo sự kiện',
-            numberModal: this.props.navigation.state.params.numberModalEdit, 
-            costEvent: this.props.navigation.state.params.costEventEdit,
-            labelEvent1: this.props.navigation.state.params.labelEventEdit1,  
-            labelEvent2: this.props.navigation.state.params.labelEventEdit2,
-            contentEvent: this.props.navigation.state.params.contentEventEdit, 
-            addressEvent: this.props.navigation.state.params.addressEventEdit,
-            datetimeEvent: this.props.navigation.state.params.datetimeEventEdit, 
-            datetimeEvent1: this.props.navigation.state.params.datetimeEventEdit1,
-            checkedEvent1: false, checkedEvent2: false,
+            datetimeEvent: '', datetimeEvent1: '',  contentEvent: '', costEvent:'', addressEvent: '',
+            checkedEvent1: false, checkedEvent2: false, numberModal: '', id: '',
             labelEvent1:'', labelEvent2: '', labelErrorTitle: false, labelErrorAddress: false,
             labelErrorTime: false, labelErrorLessTime: false,
+           
+        
         }
         this.itemRef = FirebaseApp.database();
       }
@@ -33,28 +27,55 @@ export default class PostEventEdit extends Component {
       checkEvent1(){
         if(this.state.checkedEvent1 === true){
             this.setState({
-                checkedEvent1: false,  labelEvent1: ''
+                checkedEvent1: false
+            });
+            this.setState({
+                labelEvent1: ''
             });
         }
         else if(this.state.checkedEvent1 === false){
             this.setState({
-                checkedEvent1: true, checkedEvent2: false,  labelEvent1: 'Giao lưu nhiếp ảnh gia',  labelEvent2: ''
+                checkedEvent1: true
             });
+            this.setState({
+                checkedEvent2: false
+            });
+            this.setState({
+                labelEvent1: 'Giao lưu nhiếp ảnh gia'
+            });
+            this.setState({
+                labelEvent2: ''
+            });
+         
         }
     }
 
     checkEvent2(){
         if(this.state.checkedEvent2 === true){
             this.setState({
-                checkedEvent2: false,  labelEvent2: ''
+                checkedEvent2: false
+            });
+            this.setState({
+                labelEvent2: ''
             });
         }
         else if(this.state.checkedEvent2 === false){
             this.setState({
-                checkedEvent2: true, checkedEvent1: false, labelEvent2: 'Hướng dẫn chụp ảnh', labelEvent1: ''
+                checkedEvent2: true
             });
+            this.setState({
+                checkedEvent1: false
+            });
+            this.setState({
+                labelEvent2: 'Hướng dẫn chụp ảnh'
+            });
+            this.setState({
+                labelEvent1: ''
+            });
+         
         }
     }
+
 
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
@@ -63,18 +84,16 @@ export default class PostEventEdit extends Component {
     }
 
     componentWillMount() {
-        if(this.props.navigation.state.params.labelEventEdit1 === "Giao lưu nhiếp ảnh gia"){ 
-            this.setState({ 
-                checkedEvent1: true
-            })
-        }
-        if(this.props.navigation.state.params.labelEventEdit2 === "Hướng dẫn chụp ảnh"){ 
-            this.setState({ 
-                checkedEvent2: true
-            })
-        }
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         key = childSnapshot.key;
+          })  
+        })
+        
     }
-    editPostEvent(){ 
+    createPostEvent(){ 
         if((this.state.checkedEvent1 === false && this.state.checkedEvent2 === false )
         || this.state.addressEvent === '' || this.state.datetimeEvent === '' || this.state.datetimeEvent1 === ''){ 
             if(this.state.checkedEvent1 === false && this.state.checkedEvent2 === false){ 
@@ -130,31 +149,35 @@ export default class PostEventEdit extends Component {
                         labelErrorTitle: false
                     })
 
-                    this.itemRef.ref('PostEvent').child(this.props.navigation.state.params.id).update({
-                        numberModal: this.state.numberModal, costEvent: this.state.costEvent,
+                    this.itemRef.ref('PostEvent').push({
+                        title: 'Tạo sự kiện',
+                        userId: key, numberModal: this.state.numberModal, costEvent: this.state.costEvent,
                         labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
                         contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,
                         datetimeEvent: this.state.datetimeEvent, datetimeEvent1: this.state.datetimeEvent1,
+                        }).then((snap) => { this.setState({  
+                                                     id: snap.key })
+                             if(this.state.id !== ''){ 
+                                this.props.navigation.navigate('PostDetailEvent',{
+                                    id: this.state.id, userId: key, title:'Tạo sự kiện',
+                                    numberModal: this.state.numberModal, costEvent: this.state.costEvent,
+                                    labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
+                                    contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,
+                                    datetimeEvent: this.state.datetimeEvent, datetimeEvent1: this.state.datetimeEvent1,
+                                })
+                             }
+                             this.setState({ 
+                                labelEvent1: '',labelEvent2: '', contentEvent: '', addressEvent: '',
+                                 datetimeEvent: '', datetimeEvent1: '', costEvent: '', numberModal: '', 
+                                 checkedEvent1: false, checkedEvent2: false
+                             })
                         })
-
-                    this.props.navigation.navigate('PostDetailEvent',{
-                        userId: key,
-                        numberModal: this.state.numberModal, costEvent: this.state.costEvent,
-                        labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
-                        contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,
-                        datetimeEvent: this.state.datetimeEvent, datetimeEvent1: this.state.datetimeEvent1,
-                    })
-               
-                    this.setState({ 
-                        labelEvent1: '',labelEvent2: '', contentEvent: '', addressEvent: '',
-                        datetimeEvent: '', datetimeEvent1: '', costEvent: '', numberModal: '', 
-                        checkedEvent1: false, checkedEvent2: false
-                    })
                 }
             }
+       
     }
 
-    render()  {
+       render()  {
         var data = [];
         FirebaseApp.database().ref("DataAddress/").on('value', (function (snapshot) {
             snapshot.forEach(function(childSnapshot) {
@@ -162,7 +185,10 @@ export default class PostEventEdit extends Component {
                 let childData = childSnapshot.val();
                 data.push(childData)
             });
+           
         }))
+       
+          const { selectedHours, selectedMinutes } = this.state;
           return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
                 <View style={stylesPostEvent.container}>
@@ -285,7 +311,7 @@ export default class PostEventEdit extends Component {
                                 <Text style={stylesPostEvent.txtBtnEvent}>Gửi yêu cầu</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={stylesPostEvent.btnPostEvent}
-                                onPress={() => this.editPostEvent()}>
+                                onPress={() => this.createPostEvent()}>
                                 <Text style={stylesPostEvent.txtBtnEvent}>Tạo</Text>
                             </TouchableOpacity>
                                 
