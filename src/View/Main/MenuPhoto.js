@@ -42,18 +42,19 @@ export default class MenuPhoto extends Component {
             this.actGetData('PostModal/', items);
             this.actGetData('PostPhoto/', items);
             this.actGetData('PostEvent/', items);
+            FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+            .on('value', function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                            userLogin = childSnapshot.key;
+                 })  
+            })
+            // alert(userLogin)
     }
     actGetData(url, items=[]){ 
         tmp = FirebaseApp.auth().currentUser.email
-        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
-                   .on('value', function (snapshot) {
-          snapshot.forEach(function(childSnapshot) {
-                         key = childSnapshot.key;
-          })  
-        })
+       
         if(url === 'PostModal/'){ 
             this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
-                
                 var childData = dataSnapshot.val();
                 items.push({ 
                     id: dataSnapshot.key,
@@ -136,7 +137,7 @@ export default class MenuPhoto extends Component {
 
             <ListView  dataSource = {this.state.dataSource} renderRow = {(rowData)=> 
                 <View style={stylesMenuPhoto.bodyManaCont}>
-                    {rowData.title === "Tìm mẫu ảnh"?
+                    {(rowData.title === "Tìm mẫu ảnh" && rowData.userId === userLogin)?
                     (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal',{
                         id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
                         content: rowData.content, cost: rowData.cost, girl: rowData.girl,
@@ -153,7 +154,24 @@ export default class MenuPhoto extends Component {
                         <Text style={stylesMenuPhoto.txtManagCont}>Địa điểm: {rowData.value}</Text>
                         <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
                     </TouchableOpacity>): null} 
-                    {rowData.title === "Tìm nháy ảnh"?
+                    {(rowData.title === "Tìm mẫu ảnh" && rowData.userId !== userLogin)?
+                    (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModalView',{
+                        id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
+                        content: rowData.content, cost: rowData.cost, girl: rowData.girl,
+                        datetime: rowData.datetime, datetime1: rowData.datetime1,
+                        value: rowData.value,  height: rowData.height, boy: rowData.boy, 
+                        labelRightModal1: rowData.labelRightModal1,
+                        labelRightModal2: rowData.labelRightModal2,
+                        labelRightModal3: rowData.labelRightModal3,
+                        labelRightModal4: rowData.labelRightModal4,
+                        labelRightModal5: rowData.labelRightModal5,
+                        circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,} )}
+                        style={stylesMenuPhoto.contManagCont}>
+                        <Text style={stylesMenuPhoto.txtManagCont}>{rowData.title} {rowData.boy} {rowData.girl} </Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Địa điểm: {rowData.value}</Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
+                    </TouchableOpacity>): null} 
+                    {(rowData.title === "Tìm nháy ảnh" && rowData.userId === userLogin)?
                     (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailPhoto',{
                         id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
                         contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
@@ -164,8 +182,31 @@ export default class MenuPhoto extends Component {
                         <Text style={stylesMenuPhoto.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
                         <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
                     </TouchableOpacity>): null} 
-                    {rowData.title === "Tạo sự kiện"?
+                    {(rowData.title === "Tìm nháy ảnh" && rowData.userId !== userLogin)?
+                    (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailPhotoView',{
+                        id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
+                        contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
+                        datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
+                        valueCategoryPhoto1: rowData.valueCategoryPhoto1, valuePlacePhoto: rowData.valuePlacePhoto} )}
+                        style={stylesMenuPhoto.contManagCont}>
+                        <Text style={stylesMenuPhoto.txtManagCont}>{rowData.title} </Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                    </TouchableOpacity>): null} 
+                    {(rowData.title === "Tạo sự kiện" && rowData.userId === userLogin)?
                     (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailEvent',{
+                        id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
+                        addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
+                        costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
+                        datetimeEvent1: rowData.datetimeEvent1, labelEvent1: rowData.labelEvent1,
+                        labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal} )}
+                        style={stylesMenuPhoto.contManagCont}>
+                        <Text style={stylesMenuPhoto.txtManagCont}>{rowData.labelEvent1} {rowData.labelEvent2}</Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Địa điểm: {rowData.addressEvent}</Text>
+                        <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                    </TouchableOpacity>): null} 
+                    {(rowData.title === "Tạo sự kiện" && rowData.userId !== userLogin)?
+                    (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailEventView',{
                         id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
                         addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
                         costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,

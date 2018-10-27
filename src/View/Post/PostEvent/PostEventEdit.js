@@ -26,6 +26,7 @@ export default class PostEventEdit extends Component {
             checkedEvent1: false, checkedEvent2: false,
            labelErrorTitle: false, labelErrorAddress: false,
             labelErrorTime: false, labelErrorLessTime: false,
+            userId: this.props.navigation.state.params.userId
         }
         this.itemRef = FirebaseApp.database();
       }
@@ -133,7 +134,7 @@ export default class PostEventEdit extends Component {
                         })
 
                     this.props.navigation.navigate('PostDetailEvent',{
-                        userId: key,
+                        id: this.state.id, userId: this.state.userId,
                         numberModal: this.state.numberModal, costEvent: this.state.costEvent,
                         labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
                         contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,

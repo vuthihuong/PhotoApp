@@ -44,6 +44,8 @@ import PostModalEdit from './src/View/Post/PostModal/PostModalEdit'
 import PostPhotoEdit from './src/View/Post/PostPhoto/PostPhotoEdit'
 import PostEventEdit from './src/View/Post/PostEvent/PostEventEdit'
 
+import PostDetailEventView from './src/View/Post/PostEvent/PostDetailEventView'
+
 
 
 const instructions = Platform.select({
@@ -137,6 +139,9 @@ const Mainapp = createStackNavigator({
     },
     PostEventEdit: { 
         screen: PostEventEdit
+    },
+    PostDetailEventView: { 
+        screen: PostDetailEventView
     }
     },{
       headerMode:'none'
