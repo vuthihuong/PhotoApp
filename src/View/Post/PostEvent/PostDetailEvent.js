@@ -7,6 +7,8 @@ import {
 
 import gobackIcon from '../../../assets/img/info/goback.png'
 import edit from '../../../assets/img/pose/edit.png'
+import comment from '../../../assets/img/post/comment.png'
+import like from '../../../assets/img/post/like.png'
 
 export default class PostDetailEvent extends Component {
     editPostEvent(){ 
@@ -25,12 +27,11 @@ export default class PostDetailEvent extends Component {
     }
     render(){
         return(
-        //   <ScrollView style={{flex:1, backgroundColor: 'white'}}>
+          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesPostDtailEvent.container}>
                 <View style={stylesPostDtailEvent.title}>
                     <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
-                         <Image source={gobackIcon} style={{width: 20, height: 20,
-                                     marginLeft: 15, tintColor: '#EE3B3B'}}/>
+                         <Image source={gobackIcon} style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
                     <View style={{justifyContent:'center', alignItems:'center'}}>
                          <Text style={{fontSize: 20, color: '#EE3B3B'}}>
@@ -38,8 +39,7 @@ export default class PostDetailEvent extends Component {
                          {this.props.navigation.state.params.labelEvent2}</Text>
                     </View>
                     <TouchableOpacity  onPress={() => this.editPostEvent()}>
-                        <Image source={edit} style={{width: 25, height: 25, marginRight: 15,
-                                    tintColor: '#EE3B3B'}}/>
+                        <Image source={edit} style={{width: 25, height: 25, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
                     
                 </View>
@@ -75,45 +75,76 @@ export default class PostDetailEvent extends Component {
                    
                    
                 </View>
+                <View style={stylesPostDtailEvent.btnViewEvent}>
+                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                        <Image source={like} style={{width: 15, height: 15,  tintColor: 'black', marginRight: 5}}/>
+                        <Text style={{color: 'black'}}>11</Text>
+                    </TouchableOpacity>
+                    <View style={{flexDirection: 'row'}}>
+                        <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                            <Text style={{color:'black', marginRight: 5}}>2</Text>
+                            <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                            <Text style={{color:'black', marginRight: 5}}>100000</Text>
+                            <Text style={{color:'black'}}>người tham gia</Text>
+                        </TouchableOpacity>
+                    </View>
+                    
+                   
+                </View>
                 <View style={stylesPostDtailEvent.btnSubmit}>
-                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmPhoto} >
-                        <Text style={{ textAlign:"center", color: 'white', marginRight: 10}}>Số người tham gia</Text>
-                        <Text style={{ textAlign:"center", color: 'white'}}>10</Text>
+                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                        <Image source={like} style={{width: 20, height: 20,  tintColor: 'black', marginRight: 5}}/>
+                        <Text style={{color: 'black'}}>Thích</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                         <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
+                         <Text style={{color:'black'}}>Bình luận</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent} >
+                        <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
                     </TouchableOpacity>
                    
                 </View>
             </View>
-        //   </ScrollView>
+           </ScrollView>
         )
     }
 }
 
 stylesPostDtailEvent = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: 'white',
+        flex: 1,  backgroundColor: 'white', marginRight: 15, marginLeft: 15
     },
 
     title: {
-        flexDirection: 'row', justifyContent: 'space-between',
-        marginTop: 15
+        flexDirection: 'row', justifyContent: 'space-between',  marginTop: 15
     },
 
     content: {
-        marginLeft: 25, marginRight: 25, marginTop: 30
+       marginTop: 30
     },
     txtPostDetailPhoto: {
         color: 'black'
     },
     btnSubmit: {
-        flex:2,
-        // flexDirection:'row',
-        justifyContent: 'center',
-        alignItems:'center'
+        flexDirection:'row',
+        justifyContent: 'space-between', paddingTop: 20,
+        alignItems:'center', marginTop: 10, borderTopWidth: 1, borderTopColor: 'gray'
        
     },
-    btnConfirmPhoto: {
+    btnViewEvent: {
+        flexDirection:'row',
+        justifyContent: 'space-between', paddingTop: 10,
+        alignItems:'center', marginTop: 30, borderTopWidth: 1, borderTopColor: 'gray'
+       
+    },
+
+    btnConfirmEvent1: { 
         flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-         height: 30, width: 330,
-        borderRadius: 10, backgroundColor: '#EE3B3B'}
+    },
+    btnConfirmEvent: {
+        flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+         height: 25, width: 100, borderColor: 'black', borderWidth:1,  borderRadius: 10}
 })

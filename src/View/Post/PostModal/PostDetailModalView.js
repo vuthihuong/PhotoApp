@@ -10,7 +10,7 @@ import edit from '../../../assets/img/pose/edit.png'
 import comment from '../../../assets/img/post/comment.png'
 import like from '../../../assets/img/post/like.png'
 
-export default class PostDetailModal extends Component {
+export default class PostDetailModalView extends Component {
     editPostModal(){ 
         this.props.navigation.navigate('PostModalEdit', { 
             id: this.props.navigation.state.params.id,
@@ -36,56 +36,56 @@ export default class PostDetailModal extends Component {
     render(){
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
-            <View style={stylesPostDetailModal.container}>
-                <View style={stylesPostDetailModal.title}>
+            <View style={stylesPostDetailModalView.container}>
+                <View style={stylesPostDetailModalView.title}>
                     <TouchableOpacity  onPress={() => this.props.navigation.goBack()}>
                         <Image source={gobackIcon} style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
-                    <View style={{justifyContent:'center', alignItems:'center'}}>
+                    <View style={{justifyContent:'center', alignItems:'center',flex:1}}>
                         <Text style={{fontSize: 20, color: '#EE3B3B'}}>
                                 Tìm mẫu ảnh</Text>
                     </View>
-                    <TouchableOpacity  onPress={() => this.editPostModal()}>
+                    {/* <TouchableOpacity  onPress={() => this.editPostModal()}>
                         <Image source={edit} style={{width: 25, height: 25, tintColor: '#EE3B3B'}}/>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     
                 </View>
-                <View style={stylesPostDetailModal.content}>
+                <View style={stylesPostDetailModalView.content}>
                     {(this.props.navigation.state.params.boy != ''
                         || this.props.navigation.state.params.girl != '' )?  
-                        <Text style={stylesPostDetailModal.txtPostDetailModal}>
+                        <Text style={stylesPostDetailModalView.txtPostDetailModal}>
                             Tìm mẫu: {this.props.navigation.state.params.boy}
                                     {this.props.navigation.state.params.girl}</Text>: null }
                  
                     
                     {this.props.navigation.state.params.content != ''?  
-                        <Text style={stylesPostDetailModal.txtPostDetailModal}>
+                        <Text style={stylesPostDetailModalView.txtPostDetailModal}>
                             Nội dung: {this.props.navigation.state.params.content}</Text>: null }
 
                     {this.props.navigation.state.params.value !== ''?  
-                        <Text style={stylesPostDetailModal.txtPostDetailModal}>
+                        <Text style={stylesPostDetailModalView.txtPostDetailModal}>
                             Địa điểm: {this.props.navigation.state.params.value} </Text>: null }
 
                     {(this.props.navigation.state.params.datetime != '' 
                         && this.props.navigation.state.params.datetime1 != '')?  
-                        <Text style={stylesPostDetailModal.txtPostDetailModal}>
+                        <Text style={stylesPostDetailModalView.txtPostDetailModal}>
                             Thời gian: Từ {this.props.navigation.state.params.datetime} đến {this.props.navigation.state.params.datetime1}</Text>: null }
 
                     {(this.props.navigation.state.params.circle1 != ''
                             && this.props.navigation.state.params.circle2 != '' 
                             && this.props.navigation.state.params.circle3 != ''
                             || this.props.navigation.state.params.height != '')?                    
-                            <Text style={stylesPostDetailModal.txtPostDetailModal}>
+                            <Text style={stylesPostDetailModalView.txtPostDetailModal}>
                                 Yêu cầu:</Text>: null }
                     {(this.props.navigation.state.params.circle1 != ''&& this.props.navigation.state.params.circle2 != '' 
                             && this.props.navigation.state.params.circle3 != '')?   
-                            <Text style={stylesPostDetailModal.txtPostDetailModal}>
+                            <Text style={stylesPostDetailModalView.txtPostDetailModal}>
                                 Số đo: {this.props.navigation.state.params.circle1} -
                                          {this.props.navigation.state.params.circle2} -
                                          {this.props.navigation.state.params.circle3} 
                             </Text>: null }
                     {this.props.navigation.state.params.height != ''?
-                            <Text style={stylesPostDetailModal.txtPostDetailModal}>
+                            <Text style={stylesPostDetailModalView.txtPostDetailModal}>
                                 Chiều cao: {this.props.navigation.state.params.height}
                              </Text>: null }
 
@@ -95,7 +95,7 @@ export default class PostDetailModal extends Component {
                             || this.props.navigation.state.params.labelRightModal4 !== ''
                             || this.props.navigation.state.params.labelRightModal5 !== ''
                         )?
-                        <Text style={stylesPostDetailModal.txtPostDetailModal}>
+                        <Text style={stylesPostDetailModalView.txtPostDetailModal}>
                                 Quyền lợi: {this.props.navigation.state.params.labelRightModal1}
                                             {this.props.navigation.state.params.labelRightModal2}
                                             {this.props.navigation.state.params.labelRightModal3}
@@ -105,21 +105,21 @@ export default class PostDetailModal extends Component {
                             </Text>: null }
 
                     {this.props.navigation.state.params.cost != ''?
-                             <Text style={stylesPostDetailModal.txtPostDetailModal}>
+                             <Text style={stylesPostDetailModalView.txtPostDetailModal}>
                                  Tiền công: {this.props.navigation.state.params.cost}</Text>: null }
                     <Text>{this.props.navigation.state.params.label}</Text>
                 </View>
-                <View style={stylesPostDetailModal.btnViewModal}>
-                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
+                <View style={stylesPostDetailModalView.btnViewModal}>
+                    <TouchableOpacity style={stylesPostDetailModalView.btnConfirmModal1} >
                         <Image source={like} style={{width: 15, height: 15,  tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color: 'black'}}>11</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row'}}>
-                        <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
+                        <TouchableOpacity style={stylesPostDetailModalView.btnConfirmModal1} >
                             <Text style={{color:'black', marginRight: 5}}>2</Text>
                             <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
+                        <TouchableOpacity style={stylesPostDetailModalView.btnConfirmModal1} >
                             <Text style={{color:'black', marginRight: 5}}>100000</Text>
                             <Text style={{color:'black'}}>người tham gia</Text>
                         </TouchableOpacity>
@@ -127,16 +127,16 @@ export default class PostDetailModal extends Component {
                     
                    
                 </View>
-                <View style={stylesPostDetailModal.btnSubmit}>
-                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
+                <View style={stylesPostDetailModalView.btnSubmit}>
+                    <TouchableOpacity style={stylesPostDetailModalView.btnConfirmModal1} >
                         <Image source={like} style={{width: 20, height: 20,  tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color: 'black'}}>Thích</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
+                    <TouchableOpacity style={stylesPostDetailModalView.btnConfirmModal1} >
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
+                    <TouchableOpacity style={stylesPostDetailModalView.btnConfirmModal1} >
                         <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
                     </TouchableOpacity>
                    
@@ -147,13 +147,13 @@ export default class PostDetailModal extends Component {
     }
 }
 
-stylesPostDetailModal = StyleSheet.create({
+stylesPostDetailModalView = StyleSheet.create({
     container: {
         flex: 1, backgroundColor: 'white', marginRight: 15, marginLeft: 15
     },
 
     title: {
-        flexDirection: 'row', justifyContent: 'space-between',  marginTop: 15
+        flexDirection: 'row', justifyContent: 'space-around',  marginTop: 15
     },
 
     content: {

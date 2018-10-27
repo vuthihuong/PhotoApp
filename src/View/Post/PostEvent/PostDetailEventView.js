@@ -33,15 +33,15 @@ export default class PostDetailEventView extends Component {
                     <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
                          <Image source={gobackIcon} style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
-                    <View style={{justifyContent:'center', alignItems:'center'}}>
+                    <View style={{justifyContent:'center', alignItems:'center', flex:1}}>
                          <Text style={{fontSize: 20, color: '#EE3B3B'}}>
                          {this.props.navigation.state.params.labelEvent1}
                          {this.props.navigation.state.params.labelEvent2}</Text>
                     </View>
-                    <TouchableOpacity  onPress={() => this.editPostEvent()}>
+                    {/* <TouchableOpacity  onPress={() => this.editPostEvent()}>
                         <Image source={edit} style={{width: 25, height: 25,  tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
-                    
+                     */}
                 </View>
                 <View style={stylesPostDtailEventView.content}>
                     {this.props.navigation.state.params.contentEvent != '' ?
@@ -111,8 +111,7 @@ stylesPostDtailEventView = StyleSheet.create({
     },
 
     title: {
-        flexDirection: 'row', justifyContent: 'space-between',
-        marginTop: 15
+        flexDirection: 'row', justifyContent: 'space-around', marginTop: 15
     },
 
     content: {
