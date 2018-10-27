@@ -20,6 +20,7 @@ export default class PostDetailEvent extends Component {
             addressEventEdit: this.props.navigation.state.params.addressEvent,
             datetimeEventEdit: this.props.navigation.state.params.datetimeEvent, 
             datetimeEventEdit1: this.props.navigation.state.params.datetimeEvent1,
+            userId: this.props.navigation.state.params.userId
         })
     }
     render(){

@@ -24,7 +24,7 @@ export default class PostEventEdit extends Component {
             datetimeEvent: this.props.navigation.state.params.datetimeEventEdit, 
             datetimeEvent1: this.props.navigation.state.params.datetimeEventEdit1,
             checkedEvent1: false, checkedEvent2: false,
-            labelEvent1:'', labelEvent2: '', labelErrorTitle: false, labelErrorAddress: false,
+           labelErrorTitle: false, labelErrorAddress: false,
             labelErrorTime: false, labelErrorLessTime: false,
         }
         this.itemRef = FirebaseApp.database();

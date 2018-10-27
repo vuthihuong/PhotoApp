@@ -53,8 +53,10 @@ export default class MenuPhoto extends Component {
         })
         if(url === 'PostModal/'){ 
             this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
+                
                 var childData = dataSnapshot.val();
                 items.push({ 
+                    id: dataSnapshot.key,
                     userId: (childData.userId), title: childData.title,
                     content: childData.content, cost: childData.cost, girl: childData.girl,
                     datetime: childData.datetime, datetime1: childData.datetime1,
@@ -73,6 +75,7 @@ export default class MenuPhoto extends Component {
             this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
                 var childData = dataSnapshot.val();
                 items.push({ 
+                    id: dataSnapshot.key,
                     userId: (childData.userId), title: childData.title,
                     contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
                     datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
@@ -87,6 +90,7 @@ export default class MenuPhoto extends Component {
             this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
                 var childData = dataSnapshot.val();
                 items.push({ 
+                    id: dataSnapshot.key,
                     userId: (childData.userId), title: childData.title,
                     addressEvent: childData.addressEvent, contentEvent: childData.contentEvent,
                     costEvent: childData.costEvent, datetimeEvent: childData.datetimeEvent,
