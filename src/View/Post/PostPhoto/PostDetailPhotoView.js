@@ -33,8 +33,8 @@ export default class PostDetailPhotoView extends Component {
                     <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
                          <Image source={gobackIcon} style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
                     </TouchableOpacity>
-                    <View style={{justifyContent:'center', alignItems:'center'}}>
-                         <Text style={{fontSize: 20, color: '#EE3B3B', flex: 1}}>
+                    <View style={{justifyContent:'center', alignItems:'center', flex: 1}}>
+                         <Text style={{fontSize: 20, color: '#EE3B3B', }}>
                                 Tìm nháy ảnh</Text>
                     </View>
                     {/* <TouchableOpacity  onPress={() => this.editPostPhoto()}>
@@ -89,7 +89,7 @@ export default class PostDetailPhotoView extends Component {
                     
                    
                 </View>
-                <View style={c.btnSubmit}>
+                <View style={stylesPostDePhotoView.btnSubmit}>
                     <TouchableOpacity style={stylesPostDePhotoView.btnConfirmPhoto1} >
                         <Image source={like} style={{width: 20, height: 20,  tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color: 'black'}}>Thích</Text>
@@ -137,10 +137,10 @@ stylesPostDePhotoView = StyleSheet.create({
        
     },
 
-    btnConfirmPhoto: { 
+    btnConfirmPhoto1: { 
         flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
     },
-    btnConfirmPhoto1: {
+    btnConfirmPhoto: {
         flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
          height: 25, width: 100, borderColor: 'black', borderWidth:1,  borderRadius: 10}
 })
