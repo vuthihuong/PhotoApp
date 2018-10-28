@@ -15,7 +15,7 @@ export default class PostPhoto extends Component {
             date: '', time: '00:00', datetimePhoto: '', selectedHours: 0, selectedMinutes: 0,
             datetimePhoto1: '', selectedHours1: 0, selectedMinutes1: 0, contentPhoto: '', costPhoto:'',
             labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, labelErrorTime: false,
-            valueCategoryPhoto1: '', valuePlacePhoto: '', labelErrorLessTime: false
+            valueCategoryPhoto1: '', valuePlacePhoto: '', labelErrorLessTime: false, id: ''
         }
         this.itemRef = FirebaseApp.database();
       }

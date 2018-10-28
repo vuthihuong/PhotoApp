@@ -47,6 +47,8 @@ export default class ManagePost extends Component{
     componentWillMount(){ 
         var items  = [];
             this.actGetData('PostModal/', items);
+            this.actGetData('PostPhoto/', items);
+            this.actGetData('PostEvent/', items);
     }
       render() {
        return(
