@@ -76,11 +76,11 @@ export default class PostDetailEvent extends Component {
                    
                 </View>
                 <View style={stylesPostDtailEvent.btnViewEvent}>
-                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                    {/* <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
                         <Image source={like} style={{width: 15, height: 15,  tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color: 'black'}}>11</Text>
-                    </TouchableOpacity>
-                    <View style={{flexDirection: 'row'}}>
+                    </TouchableOpacity> */}
+                    {/* <View style={{flexDirection: 'row'}}> */}
                         <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
                             <Text style={{color:'black', marginRight: 5}}>2</Text>
                             <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
@@ -89,15 +89,15 @@ export default class PostDetailEvent extends Component {
                             <Text style={{color:'black', marginRight: 5}}>100000</Text>
                             <Text style={{color:'black'}}>người tham gia</Text>
                         </TouchableOpacity>
-                    </View>
+                    {/* </View> */}
                     
                    
                 </View>
                 <View style={stylesPostDtailEvent.btnSubmit}>
-                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                    {/* <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
                         <Image source={like} style={{width: 20, height: 20,  tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color: 'black'}}>Thích</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>

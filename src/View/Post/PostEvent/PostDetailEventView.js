@@ -9,6 +9,7 @@ import gobackIcon from '../../../assets/img/info/goback.png'
 import edit from '../../../assets/img/pose/edit.png'
 import comment from '../../../assets/img/post/comment.png'
 import like from '../../../assets/img/post/like.png'
+import commentOk from '../../../assets/img/post/commentOk.png'
 
 export default class PostDetailEventView extends Component {
     editPostEvent(){ 
@@ -67,11 +68,11 @@ export default class PostDetailEventView extends Component {
                         Chi phí: {this.props.navigation.state.params.costEvent}</Text>: null }
                 </View>
                 <View style={stylesPostDtailEventView.btnViewEvent}>
-                    <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
+                    {/* <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
                         <Image source={like} style={{width: 15, height: 15,  tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color: 'black'}}>11</Text>
-                    </TouchableOpacity>
-                    <View style={{flexDirection: 'row'}}>
+                    </TouchableOpacity> */}
+                    {/* <View style={{flexDirection: 'row'}}> */}
                         <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
                             <Text style={{color:'black', marginRight: 5}}>2</Text>
                             <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
@@ -80,15 +81,15 @@ export default class PostDetailEventView extends Component {
                             <Text style={{color:'black', marginRight: 5}}>100000</Text>
                             <Text style={{color:'black'}}>người tham gia</Text>
                         </TouchableOpacity>
-                    </View>
+                    {/* </View> */}
                     
                    
                 </View>
                 <View style={stylesPostDtailEventView.btnSubmit}>
-                    <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
+                    {/* <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
                         <Image source={like} style={{width: 20, height: 20,  tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color: 'black'}}>Thích</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
@@ -97,6 +98,19 @@ export default class PostDetailEventView extends Component {
                         <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
                     </TouchableOpacity>
                    
+                </View>
+                <View style={stylesPostDtailEventView.txtComment}>
+                    <TextInput underlineColorAndroid='transparent' style={stylesPostDtailEventView.commentEvent}
+                         multiline={true}
+                    />
+                    <View style={{alignItems: 'flex-end', marginTop: -40, justifyContent: 'flex-end'}}>
+                        <TouchableOpacity >
+                            <Image source={commentOk} 
+                            //  resizeMode = 'stretch'
+                             style={{width: 45, height: 45, tintColor: 'black'}}/>
+                        </TouchableOpacity>
+                    </View>
+                    
                 </View>
             </View>
            </ScrollView>
@@ -138,5 +152,12 @@ stylesPostDtailEventView = StyleSheet.create({
     },
     btnConfirmEvent: {
         flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-         height: 25, width: 100, borderColor: 'black', borderWidth:1,  borderRadius: 10}
+         height: 25, width: 100, borderColor: 'black', borderWidth:1,  borderRadius: 10
+        },
+    txtComment: { 
+        borderColor: 'gray', borderRadius: 10, borderWidth: 1, height: 45, marginTop: 20
+    },
+    commentEvent: { 
+        width: 280, height: 40
+    }
 })
