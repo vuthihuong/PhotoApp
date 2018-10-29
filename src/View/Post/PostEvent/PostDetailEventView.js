@@ -17,7 +17,7 @@ export default class PostDetailEventView extends Component {
     constructor(props){
         super(props)
         this.state = {
-         commentEventDetail: '', changeCommentEvent: false, changeStatusPart: false, keyChangeStatusPart: '',
+         commentEventDetail: '', changeCommentEvent: false, changeStatusPart: false,
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
@@ -131,10 +131,7 @@ export default class PostDetailEventView extends Component {
         FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').push({ 
             userId: userKey
-        }).then((snap) => { this.setState({  
-            keyChangeStatusPart: snap.key })
         })
-
     }
     btnChangeNotParticipate(){ 
         this.setState({
@@ -144,8 +141,14 @@ export default class PostDetailEventView extends Component {
             countParticipate:countParticipate - 1
         })
         FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
-        .child('StatusParticipateCol').child(this.state.keyChangeStatusPart).remove();
-
+        .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
+        .on('value', (function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                 key = childSnapshot.key;
+            })
+        }))
+        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+        .child('StatusParticipateCol').child(key).remove();
     }
     render(){
         return(
