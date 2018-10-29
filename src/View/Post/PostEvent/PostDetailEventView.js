@@ -17,7 +17,7 @@ export default class PostDetailEventView extends Component {
     constructor(props){
         super(props)
         this.state = {
-            commentEventDetail: '', changeCommentEvent: false, 
+         commentEventDetail: '', changeCommentEvent: false, changeStatusPart: false, keyChangeStatusPart: '',
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
@@ -42,8 +42,24 @@ export default class PostDetailEventView extends Component {
           snapshot.forEach(function(childSnapshot) {
                          let childData = childSnapshot.val();
                          countCommentEvent = childData.countCommentEvent;
+                         countParticipate = childData.countParticipate;
             }) 
         })
+
+        
+
+        {FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id)
+        .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
+        .on('value', function (snapshot) {
+                if(snapshot.exists()){  a = 'exist' }
+                else { a = 'notExist'}
+        })}
+        if(a === 'exist'){ 
+            this.setState({ changeStatusPart: true})
+        }
+        else if(a === 'notExist'){ 
+            this.setState({ changeStatusPart: false})
+        }
 
         var items  = [];
             this.actGetData('PostEvent/'+this.props.navigation.state.params.id, items);
@@ -105,6 +121,32 @@ export default class PostDetailEventView extends Component {
             })
         }
     }
+    btnChangeParticipate(){ 
+        this.setState({
+            changeStatusPart: true
+        })
+        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+            countParticipate:countParticipate + 1
+        })
+        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+        .child('StatusParticipateCol').push({ 
+            userId: userKey
+        }).then((snap) => { this.setState({  
+            keyChangeStatusPart: snap.key })
+        })
+
+    }
+    btnChangeNotParticipate(){ 
+        this.setState({
+            changeStatusPart: false
+        })
+        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+            countParticipate:countParticipate - 1
+        })
+        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+        .child('StatusParticipateCol').child(this.state.keyChangeStatusPart).remove();
+
+    }
     render(){
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -150,10 +192,10 @@ export default class PostDetailEventView extends Component {
                     {/* <View style={{flexDirection: 'row'}}> */}
                         <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
                             <Text style={{color:'black', marginRight: 5}}>{countCommentEvent}</Text>
-                            <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
+                            <Text style={{color:'black', marginRight: 5}}>bình luận</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
-                            <Text style={{color:'black', marginRight: 5}}>100000</Text>
+                            <Text style={{color:'black', marginRight: 5}}>{countParticipate}</Text>
                             <Text style={{color:'black'}}>người tham gia</Text>
                         </TouchableOpacity>
                     {/* </View> */}
@@ -172,10 +214,18 @@ export default class PostDetailEventView extends Component {
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent} >
-                        <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
-                    </TouchableOpacity>
-                   
+                    {this.state.changeStatusPart === true?       
+                        <TouchableOpacity style={[stylesPostDtailEventView.btnConfirmEvent,{height:35}]} 
+                            // onChange = {(changeParticipate) => this.setState(changeParticipate)}
+                            onPress={() => this.btnChangeNotParticipate()}>
+                            <Text style={{ textAlign:"center", color: 'black'}}>Đã gửi yêu cầu tham gia</Text>
+                        </TouchableOpacity>:null}
+                    {this.state.changeStatusPart === false  ?
+                        <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent} 
+                            // onChange = {(changeParticipate) => this.setState(changeParticipate)}
+                            onPress={() => this.btnChangeParticipate()}>
+                                <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
+                        </TouchableOpacity>:null }  
                 </View>
                 {this.state.changeCommentEvent === true?
                 (<View>
