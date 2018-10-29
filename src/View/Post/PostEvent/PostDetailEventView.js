@@ -17,19 +17,26 @@ export default class PostDetailEventView extends Component {
     constructor(props){
         super(props)
         this.state = {
-            commentEventDetail: '',
+            commentEventDetail: '', changeCommentEvent: false, 
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
+        this.itemRef = FirebaseApp.database();
     }
 
     componentWillMount() {
+        // lấy userkey và avatarSource của tài khoản login
         tmp = FirebaseApp.auth().currentUser.email
         FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
                    .on('value', function (snapshot) {
           snapshot.forEach(function(childSnapshot) {
                          userKey = childSnapshot.key;
+                         let childData = childSnapshot.val();
+                         avatarSource = childData.avatarSource;
+                         username = childData.username;
+                         
           })  
         })
+        // lấy số lượng comment của bài post
         FirebaseApp.database().ref('PostEvent').orderByKey().equalTo(this.props.navigation.state.params.id)
                    .on('value', function (snapshot) {
           snapshot.forEach(function(childSnapshot) {
@@ -37,8 +44,25 @@ export default class PostDetailEventView extends Component {
                          countCommentEvent = childData.countCommentEvent;
             }) 
         })
-        
+
+        var items  = [];
+            this.actGetData('PostEvent/'+this.props.navigation.state.params.id, items);
     }
+    // danh sách comment của bài post
+    actGetData(url, items=[]){ 
+            this.itemRef.ref(url).child('comment').on('child_added', (dataSnapshot)=> { 
+                var childData = dataSnapshot.val();
+                items.push({ 
+                   userKey: childData.userKey, contentComment: childData.contentComment,
+                   avatarSource: childData.avatarSource, username: childData.username
+                })
+                this.setState({ 
+                    dataSource: this.state.dataSource.cloneWithRows(items)
+                });
+            });
+        }
+        
+    
     editPostEvent(){ 
         this.props.navigation.navigate('PostEventEdit', { 
             id: this.props.navigation.state.params.id, title: this.props.navigation.state.params.title,
@@ -54,10 +78,13 @@ export default class PostDetailEventView extends Component {
         })
     }
     submitCommentEvent(){ 
+        // comment bài post và lưu vào csdl
         if(this.state.commentEventDetail !== ''){
-            FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id).child('comment').push({ 
+            FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id).child('comment')
+            .push({ 
                 userKey: userKey, 
-                contentComment: this.state.commentEventDetail
+                contentComment: this.state.commentEventDetail,
+                avatarSource: avatarSource, username: username
             })
            
             FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
@@ -65,6 +92,18 @@ export default class PostDetailEventView extends Component {
             })
             this.setState({ commentEventDetail: ''})
          }
+    }
+    btnCommentEvent(){ 
+        if(this.state.changeCommentEvent == true){ 
+            this.setState({
+                changeCommentEvent: false
+            })
+        }
+        else if(this.state.changeCommentEvent == false){ 
+            this.setState({ 
+                changeCommentEvent: true
+            })
+        }
     }
     render(){
         return(
@@ -110,7 +149,7 @@ export default class PostDetailEventView extends Component {
                     </TouchableOpacity> */}
                     {/* <View style={{flexDirection: 'row'}}> */}
                         <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
-                            <Text style={{color:'black', marginRight: 5}}>2</Text>
+                            <Text style={{color:'black', marginRight: 5}}>{countCommentEvent}</Text>
                             <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
@@ -126,7 +165,10 @@ export default class PostDetailEventView extends Component {
                         <Image source={like} style={{width: 20, height: 20,  tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color: 'black'}}>Thích</Text>
                     </TouchableOpacity> */}
-                    <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
+                    <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} 
+                        onChange = {(changeCommentEvent) => this.setState(changeCommentEvent)}
+                        onPress={() => this.btnCommentEvent()}>
+                        
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
                     </TouchableOpacity>
@@ -135,20 +177,40 @@ export default class PostDetailEventView extends Component {
                     </TouchableOpacity>
                    
                 </View>
-                <View style={stylesPostDtailEventView.txtComment}>
-                    <TextInput underlineColorAndroid='transparent' style={stylesPostDtailEventView.commentEvent}
-                         multiline={true} value={this.state.commentEventDetail}
-                         onChangeText={(commentEventDetail) => this.setState({ commentEventDetail })}
-                    />
-                    <View style={{alignItems: 'flex-end', marginTop: -40, justifyContent: 'flex-end'}}>
-                        <TouchableOpacity onPress={()=> this.submitCommentEvent()}>
-                            <Image source={commentOk} style={{width: 45, height: 45, tintColor: 'black'}}/>
-                        </TouchableOpacity>
+                {this.state.changeCommentEvent === true?
+                (<View>
+                    <View style={stylesPostDtailEventView.txtComment}>
+                        <TextInput underlineColorAndroid='transparent' style={stylesPostDtailEventView.commentEvent}
+                            multiline={true} value={this.state.commentEventDetail}
+                            onChangeText={(commentEventDetail) => this.setState({ commentEventDetail })}
+                        />
+                        <View style={{alignItems: 'flex-end', marginTop: -40, justifyContent: 'flex-end'}}>
+                            <TouchableOpacity onPress={()=> this.submitCommentEvent()}>
+                                <Image source={commentOk} style={{width: 45, height: 45, tintColor: 'black'}}/>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-                <View>
-
-                </View>
+                </View>) : null}
+                {this.state.changeCommentEvent === true?
+                 <View style={stylesPostDtailEventView.txtedComment}>
+                    <ListView 
+                        contentContainerStyle={{flexDirection: 'row',flexWrap:'wrap', 
+                                justifyContent: 'space-between'}}
+                        dataSource = {this.state.dataSource}
+                            renderRow = {(rowData)=> 
+                        <View style={stylesPostDtailEventView.txtedComment1}>
+                            <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity onPress={()=> this.submitCommentEvent()} >
+                                    <Image source={rowData.avatarSource} style={{width: 30, height: 30, tintColor: 'black'}}/>
+                                </TouchableOpacity>
+                                <Text style={{marginLeft: 10, marginRight: 10, color: 'blue'}}>{rowData.username}</Text>
+                            </View>
+                            <View style={{paddingRight: 10}}>
+                            <Text style={stylesPostDtailEventView.commentEvent}> {rowData.contentComment}</Text>
+                            </View>
+                        </View> }
+                    />
+                </View>: null}
             </View>
            </ScrollView>
         )
@@ -158,7 +220,7 @@ export default class PostDetailEventView extends Component {
 stylesPostDtailEventView = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white', marginRight: 20, marginLeft: 20
+        backgroundColor: 'white', marginRight: 20, marginLeft: 20, marginBottom: 20
     },
 
     title: {
@@ -194,7 +256,13 @@ stylesPostDtailEventView = StyleSheet.create({
     txtComment: { 
         borderColor: 'gray', borderRadius: 10, borderWidth: 1, height: 45, marginTop: 20
     },
+    txtedComment: { 
+        marginTop: 15, flexDirection: 'row'
+    },
+    txtedComment1: { 
+       flexDirection: 'row'
+    },
     commentEvent: { 
-        width: 280, height: 40
+        width: 280, height: 40, color: 'black', paddingRight: 5
     }
 })
