@@ -93,7 +93,16 @@ export default class PostDetailEventView extends Component {
                 });
             });
         }
-        
+        componentDidMount() { 
+            this.setState({ 
+                _isMounted: true
+            })
+        }
+        componentWillUnmount(){ 
+            this.setState({ 
+                _isMounted: false
+            })
+        }
     
     editPostEvent(){ 
         this.props.navigation.navigate('PostEventEdit', { 
