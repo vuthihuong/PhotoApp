@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text,
     View, Image, TextInput,
-    TouchableOpacity, ScrollView
+    TouchableOpacity, ScrollView, ListView
 } from 'react-native';
 
 import gobackIcon from '../../../assets/img/info/goback.png'
@@ -11,7 +11,34 @@ import comment from '../../../assets/img/post/comment.png'
 import like from '../../../assets/img/post/like.png'
 import commentOk from '../../../assets/img/post/commentOk.png'
 
+import {FirebaseApp} from './../../../Controller/FirebaseConfig' 
+
 export default class PostDetailEventView extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            commentEventDetail: '',
+            dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+        }
+    }
+
+    componentWillMount() {
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         userKey = childSnapshot.key;
+          })  
+        })
+        FirebaseApp.database().ref('PostEvent').orderByKey().equalTo(this.props.navigation.state.params.id)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         let childData = childSnapshot.val();
+                         countCommentEvent = childData.countCommentEvent;
+            }) 
+        })
+        
+    }
     editPostEvent(){ 
         this.props.navigation.navigate('PostEventEdit', { 
             id: this.props.navigation.state.params.id, title: this.props.navigation.state.params.title,
@@ -26,6 +53,19 @@ export default class PostDetailEventView extends Component {
             userId: this.props.navigation.state.params.userId
         })
     }
+    submitCommentEvent(){ 
+        if(this.state.commentEventDetail !== ''){
+            FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id).child('comment').push({ 
+                userKey: userKey, 
+                contentComment: this.state.commentEventDetail
+            })
+           
+            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+                countCommentEvent:countCommentEvent + 1
+            })
+            this.setState({ commentEventDetail: ''})
+         }
+    }
     render(){
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -39,10 +79,6 @@ export default class PostDetailEventView extends Component {
                          {this.props.navigation.state.params.labelEvent1}
                          {this.props.navigation.state.params.labelEvent2}</Text>
                     </View>
-                    {/* <TouchableOpacity  onPress={() => this.editPostEvent()}>
-                        <Image source={edit} style={{width: 25, height: 25,  tintColor: '#EE3B3B'}}/>
-                    </TouchableOpacity>
-                     */}
                 </View>
                 <View style={stylesPostDtailEventView.content}>
                     {this.props.navigation.state.params.contentEvent != '' ?
@@ -101,16 +137,17 @@ export default class PostDetailEventView extends Component {
                 </View>
                 <View style={stylesPostDtailEventView.txtComment}>
                     <TextInput underlineColorAndroid='transparent' style={stylesPostDtailEventView.commentEvent}
-                         multiline={true}
+                         multiline={true} value={this.state.commentEventDetail}
+                         onChangeText={(commentEventDetail) => this.setState({ commentEventDetail })}
                     />
                     <View style={{alignItems: 'flex-end', marginTop: -40, justifyContent: 'flex-end'}}>
-                        <TouchableOpacity >
-                            <Image source={commentOk} 
-                            //  resizeMode = 'stretch'
-                             style={{width: 45, height: 45, tintColor: 'black'}}/>
+                        <TouchableOpacity onPress={()=> this.submitCommentEvent()}>
+                            <Image source={commentOk} style={{width: 45, height: 45, tintColor: 'black'}}/>
                         </TouchableOpacity>
                     </View>
-                    
+                </View>
+                <View>
+
                 </View>
             </View>
            </ScrollView>

@@ -17,9 +17,7 @@ export default class PostEvent extends Component {
             datetimeEvent: '', datetimeEvent1: '',  contentEvent: '', costEvent:'', addressEvent: '',
             checkedEvent1: false, checkedEvent2: false, numberModal: '', id: '',
             labelEvent1:'', labelEvent2: '', labelErrorTitle: false, labelErrorAddress: false,
-            labelErrorTime: false, labelErrorLessTime: false,
-           
-        
+            labelErrorTime: false, labelErrorLessTime: false, countCommentEvent: 0
         }
         this.itemRef = FirebaseApp.database();
       }
@@ -150,7 +148,7 @@ export default class PostEvent extends Component {
                     })
 
                     this.itemRef.ref('PostEvent').push({
-                        title: 'Tạo sự kiện',
+                        title: 'Tạo sự kiện', countCommentEvent: this.state.countCommentEvent,
                         userId: key, numberModal: this.state.numberModal, costEvent: this.state.costEvent,
                         labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
                         contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,
@@ -159,7 +157,7 @@ export default class PostEvent extends Component {
                                                      id: snap.key })
                              if(this.state.id !== ''){ 
                                 this.props.navigation.navigate('PostDetailEvent',{
-                                    id: this.state.id, userId: key, title:'Tạo sự kiện',
+                                    id: this.state.id, userId: key, title:'Tạo sự kiện', countCommentEvent: this.state.countCommentEvent,
                                     numberModal: this.state.numberModal, costEvent: this.state.costEvent,
                                     labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
                                     contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,
