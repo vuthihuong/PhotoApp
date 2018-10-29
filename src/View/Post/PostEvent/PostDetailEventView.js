@@ -17,7 +17,8 @@ export default class PostDetailEventView extends Component {
     constructor(props){
         super(props)
         this.state = {
-         commentEventDetail: '', changeCommentEvent: false, changeStatusPart: false,
+         commentEventDetail: '', changeCommentEvent: false, changeStatusPart: false, changeLike: false, 
+         colorLike: 'black',
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
@@ -43,12 +44,13 @@ export default class PostDetailEventView extends Component {
                          let childData = childSnapshot.val();
                          countCommentEvent = childData.countCommentEvent;
                          countParticipate = childData.countParticipate;
+                         countLike = childData.countLike;
             }) 
         })
 
         
 
-        {FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id)
+    {FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
         .on('value', function (snapshot) {
                 if(snapshot.exists()){  a = 'exist' }
@@ -60,6 +62,20 @@ export default class PostDetailEventView extends Component {
         else if(a === 'notExist'){ 
             this.setState({ changeStatusPart: false})
         }
+    
+    {FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id)
+        .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
+        .on('value', function (snapshot) {
+                if(snapshot.exists()){  aLike = 'exist' }
+                else { aLike = 'notExist'}
+        })}
+        if(aLike === 'exist'){ 
+            this.setState({ changeLike: true, colorLike: 'blue'})
+        }
+        else if(aLike === 'notExist'){ 
+            this.setState({ changeLike: false, colorLike: 'black'})
+        }
+
 
         var items  = [];
             this.actGetData('PostEvent/'+this.props.navigation.state.params.id, items);
@@ -123,7 +139,7 @@ export default class PostDetailEventView extends Component {
     }
     btnChangeParticipate(){ 
         this.setState({
-            changeStatusPart: true
+            changeStatusPart: true, 
         })
         FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
             countParticipate:countParticipate + 1
@@ -135,7 +151,7 @@ export default class PostDetailEventView extends Component {
     }
     btnChangeNotParticipate(){ 
         this.setState({
-            changeStatusPart: false
+            changeStatusPart: false, 
         })
         FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
             countParticipate:countParticipate - 1
@@ -144,11 +160,43 @@ export default class PostDetailEventView extends Component {
         .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
         .on('value', (function (snapshot) {
             snapshot.forEach(function(childSnapshot) {
-                 key = childSnapshot.key;
+                 keyStatusPart = childSnapshot.key;
             })
         }))
         FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
-        .child('StatusParticipateCol').child(key).remove();
+        .child('StatusParticipateCol').child(keyStatusPart).remove();
+    }
+
+    btnChangeLike(){ 
+        if(this.state.changeLike === false){ 
+            this.setState({
+                changeLike: true, colorLike: 'blue'
+            })
+            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+                countLike:countLike + 1
+            })
+            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+            .child('LikePostEvent').push({ 
+                userId: userKey
+            })
+        }
+        else if(this.state.changeLike === true){ 
+            this.setState({
+                changeLike: false, colorLike: 'black'
+            })
+            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+                countLike:countLike - 1
+            })
+            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+            .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
+            .on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                     keyLike = childSnapshot.key;
+                })
+            }))
+            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+            .child('LikePostEvent').child(keyLike).remove();
+        }
     }
     render(){
         return(
@@ -188,30 +236,31 @@ export default class PostDetailEventView extends Component {
                         Chi phí: {this.props.navigation.state.params.costEvent}</Text>: null }
                 </View>
                 <View style={stylesPostDtailEventView.btnViewEvent}>
-                    {/* <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
-                        <Image source={like} style={{width: 15, height: 15,  tintColor: 'black', marginRight: 5}}/>
-                        <Text style={{color: 'black'}}>11</Text>
-                    </TouchableOpacity> */}
-                    {/* <View style={{flexDirection: 'row'}}> */}
+                    <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
+                        <Image source={like} style={{width: 15, height: 15,  tintColor: this.state.colorLike, marginRight: 5}}/>
+                        <Text style={{color: 'black'}}>{countLike}</Text>
+                    </TouchableOpacity>
+                    <View style={{flexDirection: 'row'}}>
                         <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
                             <Text style={{color:'black', marginRight: 5}}>{countCommentEvent}</Text>
-                            <Text style={{color:'black', marginRight: 5}}>bình luận</Text>
+                            <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
                             <Text style={{color:'black', marginRight: 5}}>{countParticipate}</Text>
                             <Text style={{color:'black'}}>người tham gia</Text>
                         </TouchableOpacity>
-                    {/* </View> */}
+                    </View>
                     
                    
                 </View>
                 <View style={stylesPostDtailEventView.btnSubmit}>
-                    {/* <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} >
-                        <Image source={like} style={{width: 20, height: 20,  tintColor: 'black', marginRight: 5}}/>
-                        <Text style={{color: 'black'}}>Thích</Text>
-                    </TouchableOpacity> */}
                     <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} 
-                        onChange = {(changeCommentEvent) => this.setState(changeCommentEvent)}
+                      onPress={() => this.btnChangeLike()}>
+                        <Image source={like} style={{width: 20, height: 20,  tintColor: this.state.colorLike, marginRight: 5}}/>
+                        <Text style={{color: this.state.colorLike}}>Thích</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} 
+                        // onChange = {(changeCommentEvent) => this.setState(changeCommentEvent)}
                         onPress={() => this.btnCommentEvent()}>
                         
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>

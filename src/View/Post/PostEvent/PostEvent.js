@@ -15,9 +15,9 @@ export default class PostEvent extends Component {
         super(props)
         this.state = {
             datetimeEvent: '', datetimeEvent1: '',  contentEvent: '', costEvent:'', addressEvent: '',
-            checkedEvent1: false, checkedEvent2: false, numberModal: '', id: '',
+            checkedEvent1: false, checkedEvent2: false, numberModal: '', id: '', countLike: 0,
             labelEvent1:'', labelEvent2: '', labelErrorTitle: false, labelErrorAddress: false,
-            labelErrorTime: false, labelErrorLessTime: false, countCommentEvent: 0
+            labelErrorTime: false, labelErrorLessTime: false, countCommentEvent: 0, countParticipate: 0,
         }
         this.itemRef = FirebaseApp.database();
       }
@@ -149,6 +149,7 @@ export default class PostEvent extends Component {
 
                     this.itemRef.ref('PostEvent').push({
                         title: 'Tạo sự kiện', countCommentEvent: this.state.countCommentEvent,
+                        countParticipate: this.state.countParticipate, countLike: this.state.countLike,
                         userId: key, numberModal: this.state.numberModal, costEvent: this.state.costEvent,
                         labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
                         contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,
@@ -162,6 +163,7 @@ export default class PostEvent extends Component {
                                     labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
                                     contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,
                                     datetimeEvent: this.state.datetimeEvent, datetimeEvent1: this.state.datetimeEvent1,
+                                    countParticipate: this.state.countParticipate, countLike: this.state.countLike
                                 })
                              }
                              this.setState({ 
