@@ -19,8 +19,8 @@ export default class PostModal extends Component {
         super(props)
         this.state = {
             datetime: '',  datetime1: '',  id: '',  height:'', cost: '',  boy: '', girl: '',  value: '',
-            checkedGenderModal1: false, checkedGenderModal2: false,
-            checkedRightModal1: false, checkedRightModal2: false,
+            checkedGenderModal1: false, checkedGenderModal2: false, countLike: 0,
+            checkedRightModal1: false, checkedRightModal2: false, countCommentEvent: 0, countParticipate: 0,
             checkedRightModal3: false, checkedRightModal4: false, checkedRightModal5: false,
             content: '', place:'', circle1: '', circle2:'', circle3:'', labelRightModal5: '',
             labelRightModal1: '', labelRightModal2: '', labelRightModal3: '', labelRightModal4: '', 
@@ -156,6 +156,16 @@ export default class PostModal extends Component {
         // );
         return {tabBarLabel}
     }
+    componentDidMount() { 
+        this.setState({ 
+            _isMounted: true
+        })
+    }
+    componentWillUnmount(){ 
+        this.setState({ 
+            _isMounted: false
+        })
+    }
    
     createPostModal(){ 
         const reg =/^\+?[0-9][\d]*$/;
@@ -220,12 +230,12 @@ export default class PostModal extends Component {
       else if((this.state.checkedGenderModal1 === true || this.state.checkedGenderModal2 === true)
                 && this.state.value !== '' && this.state.datetime !== '' && this.state.datetime1 !== '') {
         if(this.state.checkedRightModal5 === false){
-                if(this.state.datetime === '' || this.state.datetime1 === ''){ 
-                    this.setState({ 
-                        labelErrortimeModal: true, labelErrorLessTimeModal: false
-                    })
-                }
-                else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
+                // if(this.state.datetime === '' || this.state.datetime1 === ''){ 
+                //     this.setState({ 
+                //         labelErrortimeModal: true, labelErrorLessTimeModal: false
+                //     })
+                // }
+                // else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
                     if(this.state.datetime >= this.state.datetime1){ 
                         this.setState({ 
                             labelErrorLessTimeModal: true, labelErrortimeModal: false
@@ -237,7 +247,8 @@ export default class PostModal extends Component {
                         })
                     this.itemRef.ref('PostModal').push({
                         userId: key, title: "Tìm mẫu ảnh",
-                        content: this.state.content, cost: this.state.cost,
+                        content: this.state.content, cost: this.state.cost, countCommentEvent: this.state.countCommentEvent,
+                        countParticipate: this.state.countParticipate, countLike: this.state.countLike,
                         datetime: this.state.datetime, datetime1: this.state.datetime1,
                         labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
                         labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
@@ -256,7 +267,8 @@ export default class PostModal extends Component {
                                     labelRightModal2: this.state.labelRightModal2,
                                     labelRightModal3: this.state.labelRightModal3,
                                     labelRightModal4: this.state.labelRightModal4,
-                                    labelRightModal5: this.state.labelRightModal5,
+                                    labelRightModal5: this.state.labelRightModal5, countCommentEvent: this.state.countCommentEvent,
+                                    countParticipate: this.state.countParticipate, countLike: this.state.countLike,
                                     circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
                                     })
                             }
@@ -270,21 +282,21 @@ export default class PostModal extends Component {
                                     labelErrorLessTimeModal: false, labelErrortimeModal: false, labelErrorCostModal: false
                                 })
                         })
-                    }
+                    
                 }
             }
         }
         else if(this.state.checkedRightModal5 === true){ 
             if(this.state.cost === '' || reg.test(this.state.cost) === false ){ 
               
-                if(this.state.datetime === '' || this.state.datetime1 === ''){ 
-                    this.setState({ 
-                        labelErrortimeModal: true, labelErrorLessTimeModal: false,
-                        labelErrorCostModal: true,  labelErrorAddressModal: false, 
-                        labelErrorGenderModal: false, 
-                    })
-                }
-                else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
+                // if(this.state.datetime === '' || this.state.datetime1 === ''){ 
+                //     this.setState({ 
+                //         labelErrortimeModal: true, labelErrorLessTimeModal: false,
+                //         labelErrorCostModal: true,  labelErrorAddressModal: false, 
+                //         labelErrorGenderModal: false, 
+                //     })
+                // }
+                // else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
                     if(this.state.datetime >= this.state.datetime1){ 
                         this.setState({ 
                             labelErrorLessTimeModal: true, labelErrortimeModal: false,
@@ -299,17 +311,17 @@ export default class PostModal extends Component {
                             labelErrorGenderModal: false, 
                         })
                     }
-                }
+                
                
             }
-            else if(this.state.cost !== '' && reg.test(this.state.cost )=== true ){
-                if(this.state.datetime === '' || this.state.datetime1 === ''){ 
-                    this.setState({ 
-                        labelErrortimeModal: true,  labelErrorCostModal: false,  
-                        labelErrorAddressModal: false, labelErrorGenderModal: false, 
-                    })
-                }
-                else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
+            else if(reg.test(this.state.cost )=== true ){
+                // if(this.state.datetime === '' || this.state.datetime1 === ''){ 
+                //     this.setState({ 
+                //         labelErrortimeModal: true,  labelErrorCostModal: false,  
+                //         labelErrorAddressModal: false, labelErrorGenderModal: false, 
+                //     })
+                // }
+                // else if(this.state.datetime !== '' && this.state.datetime1 !== ''){ 
                     if(this.state.datetime >= this.state.datetime1){ 
                         this.setState({ 
                             labelErrorLessTimeModal: true, labelErrortimeModal: false,
@@ -358,7 +370,7 @@ export default class PostModal extends Component {
                             })
                         })
                     }
-                }
+                
             }
             }  
         }
