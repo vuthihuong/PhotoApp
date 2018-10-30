@@ -200,12 +200,12 @@ export default class PostModal extends Component {
       else if((this.state.checkedGenderModal1 === true || this.state.checkedGenderModal2 === true)
                 && this.state.value !== '' && this.state.datetime !== '' && this.state.datetime1 !== '') {
         if(this.state.checkedRightModal5 === false){
-                if(this.state.datetime === '' || this.state.datetime1 === ''){ 
-                    this.setState({ 
-                        labelErrortimeModal: true
-                    })
-                }
-                else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
+                // if(this.state.datetime === '' || this.state.datetime1 === ''){ 
+                //     this.setState({ 
+                //         labelErrortimeModal: true
+                //     })
+                // }
+                // else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
                     if(this.state.datetime >= this.state.datetime1){ 
                         this.setState({ 
                             labelErrorLessTimeModal: true, labelErrortimeModal: false
@@ -246,21 +246,21 @@ export default class PostModal extends Component {
                         checkedRightModal4: false, checkedRightModal5: false,   labelErrorAddressModal: false,
                          labelErrorGenderModal: false,  labelErrorLessTimeModal: false, labelErrortimeModal: false
                     })
-                 }  
+                  
             }
                
          }
         else if(this.state.checkedRightModal5 === true){ 
             if(this.state.cost === '' || reg.test(this.state.cost) === false ){ 
               
-                if(this.state.datetime === '' || this.state.datetime1 === ''){ 
-                    this.setState({ 
-                        labelErrortimeModal: true, labelErrorLessTimeModal: false,
-                        labelErrorCostModal: true,  labelErrorAddressModal: false, 
-                        labelErrorGenderModal: false, 
-                    })
-                }
-                else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
+                // if(this.state.datetime === '' || this.state.datetime1 === ''){ 
+                //     this.setState({ 
+                //         labelErrortimeModal: true, labelErrorLessTimeModal: false,
+                //         labelErrorCostModal: true,  labelErrorAddressModal: false, 
+                //         labelErrorGenderModal: false, 
+                //     })
+                // }
+                // else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
                     if(this.state.datetime >= this.state.datetime1){ 
                         this.setState({ 
                             labelErrorLessTimeModal: true, labelErrortimeModal: false,
@@ -275,17 +275,17 @@ export default class PostModal extends Component {
                             labelErrorGenderModal: false, 
                         })
                     }
-                }
+                
                
             }
             else if(this.state.cost !== '' && reg.test(this.state.cost )=== true ){
-                if(this.state.datetime === '' || this.state.datetime1 === ''){ 
-                    this.setState({ 
-                        labelErrortimeModal: true,  labelErrorCostModal: false,  
-                        labelErrorAddressModal: false, labelErrorGenderModal: false, 
-                    })
-                }
-                else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
+                // if(this.state.datetime === '' || this.state.datetime1 === ''){ 
+                //     this.setState({ 
+                //         labelErrortimeModal: true,  labelErrorCostModal: false,  
+                //         labelErrorAddressModal: false, labelErrorGenderModal: false, 
+                //     })
+                // }
+                // else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
                     if(this.state.datetime >= this.state.datetime1){ 
                         this.setState({ 
                             labelErrorLessTimeModal: true, labelErrortimeModal: false,
@@ -327,7 +327,7 @@ export default class PostModal extends Component {
                             labelErrorCostModal: false,  labelErrorAddressModal: false, 
                             labelErrorGenderModal: false, 
                         })
-                    }
+                    
                 }
              }
         }
