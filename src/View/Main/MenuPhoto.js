@@ -227,22 +227,6 @@ export default class MenuPhoto extends Component {
                     </View>
                 </View>}
             />
-             <View style={stylesMenuPhoto.bodyManaCont}>
-                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal')}
-                     style={stylesMenuPhoto.contManagCont}>
-                         <Text style={stylesMenuPhoto.txtManagCont}>Nguyễn Thu Vân có bài viết mới</Text>
-                         {/* <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ 8h - 20/8/2018 đến 16h ngày 20/8/2018</Text> */}
-                  
-                 </TouchableOpacity>
-                 <View style={ stylesMenuPhoto.txtConfirm }>
-                     <TouchableOpacity>
-                         <Text style={[stylesMenuPhoto.txtManagCont, {color: 'blue'}]}>Tham gia</Text>
-                    </TouchableOpacity>
-                     <TouchableOpacity>
-                         <Text style={[stylesMenuPhoto.txtManagCont,{color:'#EE3B3B'}]}>Hủy</Text>
-                    </TouchableOpacity>
-                 </View>
-             </View>
            </View>
           </ScrollView>
         );

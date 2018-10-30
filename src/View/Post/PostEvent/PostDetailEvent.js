@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, Text, View, Image, TextInput, ListView, TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, TextInput, ListView, TouchableOpacity, ScrollView,
 } from 'react-native';
+import CheckBox from 'react-native-checkbox';
 
 import gobackIcon from '../../../assets/img/info/goback.png'
 import edit from '../../../assets/img/pose/edit.png'
@@ -15,8 +16,9 @@ export default class PostDetailEvent extends Component {
         super(props)
         this.state = {
          commentEventDetail: '', changeCommentEvent: false, changeStatusPart: false, changeLike: false, 
-         colorLike: 'black',
+         colorLike: 'black', changeListParticipate: false,
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+            dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
     }
@@ -46,6 +48,7 @@ export default class PostDetailEvent extends Component {
     }
     componentWillMount() {
         // lấy userkey và avatarSource của tài khoản login
+       
         tmp = FirebaseApp.auth().currentUser.email
         FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
                    .on('value', function (snapshot) {
@@ -93,9 +96,10 @@ export default class PostDetailEvent extends Component {
         }
         var items  = [];
             this.actGetData('PostEvent/'+this.props.navigation.state.params.id, items);
+        
     }
     // danh sách comment của bài post
-    actGetData(url, items=[]){ 
+        actGetData(url, items=[]){ 
             this.itemRef.ref(url).child('comment').on('child_added', (dataSnapshot)=> { 
                 var childData = dataSnapshot.val();
                 items.push({ 
@@ -104,6 +108,17 @@ export default class PostDetailEvent extends Component {
                 })
                 this.setState({ 
                     dataSource: this.state.dataSource.cloneWithRows(items)
+                });
+            });
+        }
+        actGetData1(url, listItems=[]){ 
+            this.itemRef.ref(url).child('StatusParticipateCol').on('child_added', (dataSnapshot)=> { 
+                var childData = dataSnapshot.val();
+                listItems.push({ 
+                   userId : childData.userId, username: childData.username
+                })
+                this.setState({ 
+                    dataSource1: this.state.dataSource1.cloneWithRows(listItems)
                 });
             });
         }
@@ -145,7 +160,7 @@ export default class PostDetailEvent extends Component {
             })
             FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
             .child('StatusParticipateCol').push({ 
-                userId: userKey
+                userId: userKey, username: username
             })
         }
         btnChangeNotParticipate(){ 
@@ -197,6 +212,21 @@ export default class PostDetailEvent extends Component {
                 .child('LikePostEvent').child(keyLike).remove();
             }
         }
+        btnListParticipate(){ 
+            if(this.state.changeListParticipate == true){ 
+                this.setState({
+                    changeListParticipate: false
+                })
+            }
+            else if(this.state.changeListParticipate == false){ 
+                this.setState({ 
+                    changeListParticipate: true
+                })
+                var items = [];
+            this.actGetData1('PostEvent/'+ this.props.navigation.state.params.id, items);
+            }
+
+        }
     render(){
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -243,9 +273,6 @@ export default class PostDetailEvent extends Component {
                     {this.props.navigation.state.params.costEvent != '' ?
                         <Text style={stylesPostDtailEvent.txtPostDetailPhoto}>
                         Chi phí: {this.props.navigation.state.params.costEvent}</Text>: null }
-                  
-                   
-                   
                 </View>
                 <View style={stylesPostDtailEvent.btnViewEvent}>
                     <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
@@ -255,16 +282,37 @@ export default class PostDetailEvent extends Component {
                     <View style={{flexDirection: 'row'}}>
                         <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
                             <Text style={{color:'black', marginRight: 5}}>{countCommentEvent}</Text>
-                            <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
+                            <Text style={{color:'black', marginRight: 5}}>bình luận</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
                             <Text style={{color:'black', marginRight: 5}}>{countParticipate}</Text>
                             <Text style={{color:'black'}}>người tham gia</Text>
                         </TouchableOpacity>
                     </View>
-                    
-                   
                 </View>
+                {/* <View style={stylesPostDtailEvent.btnSubmit}>
+                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} 
+                        onPress={() => this.btnChangeLike()}>
+                        <Image source={like} style={{width: 20, height: 20,  tintColor: this.state.colorLike, marginRight: 5}}/>
+                        <Text style={{color: this.state.colorLike}}>Thích</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} 
+                        onPress={() => this.btnCommentEvent()}>
+                        <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
+                        <Text style={{color:'black'}}>Bình luận</Text>
+                   </TouchableOpacity>
+                    {this.state.changeStatusPart === true?       
+                        <TouchableOpacity style={[stylesPostDtailEvent.btnConfirmEvent,{height:35}]}
+                            onPress={() => this.btnChangeNotParticipate()}>
+                            <Text style={{ textAlign:"center", color: 'black'}}>Đã gửi yêu cầu tham gia</Text>
+                        </TouchableOpacity>:null}
+                    {this.state.changeStatusPart === false  ?
+                        <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent} 
+                            onPress={() => this.btnChangeParticipate()}>
+                                <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
+                        </TouchableOpacity>:null }  
+                </View> */}
+
                 <View style={stylesPostDtailEvent.btnSubmit}>
                     <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} 
                         onPress={() => this.btnChangeLike()}>
@@ -276,25 +324,15 @@ export default class PostDetailEvent extends Component {
                         <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color:'black'}}>Bình luận</Text>
                    </TouchableOpacity>
-                    {/* <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent} >
-                        <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
-                    </TouchableOpacity> */}
-
-                    {this.state.changeStatusPart === true?       
-                        <TouchableOpacity style={[stylesPostDtailEvent.btnConfirmEvent,{height:35}]} 
-                            // onChange = {(changeParticipate) => this.setState(changeParticipate)}
-                            onPress={() => this.btnChangeNotParticipate()}>
-                            <Text style={{ textAlign:"center", color: 'black'}}>Đã gửi yêu cầu tham gia</Text>
-                        </TouchableOpacity>:null}
-                    {this.state.changeStatusPart === false  ?
-                        <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent} 
-                            // onChange = {(changeParticipate) => this.setState(changeParticipate)}
-                            onPress={() => this.btnChangeParticipate()}>
-                                <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
-                        </TouchableOpacity>:null }  
-                   
+                        
+                    <TouchableOpacity style={[stylesPostDtailEvent.btnConfirmEvent,{height:35}]}
+                        onPress={() => this.btnChangeNotParticipate()}>
+                        <Text style={{ textAlign:"center", color: 'black'}}>Gửi yêu cầu trực tiếp</Text>
+                    </TouchableOpacity> 
                 </View>
 
+
+                
                 {this.state.changeCommentEvent === true?
                 (<View>
                     <View style={stylesPostDtailEvent.txtComment}>
@@ -329,6 +367,51 @@ export default class PostDetailEvent extends Component {
                         </View> }
                     />
                 </View>: null}
+                <View style={{marginTop: 25}}>
+                    <TouchableOpacity  onPress={() => this.btnListParticipate()}> 
+                        <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách yêu cầu tham gia</Text>
+                    </TouchableOpacity>
+                </View>
+                {this.state.changeListParticipate === true? 
+                <View style={[stylesPostDtailEvent.btnViewEvent, {marginTop: 10}]}>
+                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                        <Text style={{color: 'black'}}>Tên người tham gia</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                        <Text style={{color:'black', marginRight: 5, marginLeft: 45}}>Đồng ý</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
+                         <Text style={{color:'black'}}>Từ chối</Text>
+                    </TouchableOpacity>
+                </View>: null}
+                {this.state.changeListParticipate === true? 
+                (
+                    <ListView
+                        contentContainerStyle={{flexWrap:'wrap'}}
+                        dataSource = {this.state.dataSource1}
+                            renderRow = {(rowData)=> 
+                        <View style={stylesPostDtailEvent.listEventPart}>
+                            <TouchableOpacity style={stylesPostDtailEvent.listHeadParticipate} >
+                                <Text style={{color: 'black'}}>{rowData.username}</Text>
+                            </TouchableOpacity>
+                            <CheckBox
+                                    label=''
+                                    labelStyle={{color: 'black'}}
+                                    checked={this.state.checkedGenderModal1}
+                                    checkboxStyle = {stylesPostDtailEvent.txtBoxPostModal}
+                                    onChange={(checked) => {this.checkGenderModal1()}} 
+                                    />
+                                <CheckBox
+                                    label=''
+                                    labelStyle={{color: 'black'}}
+                                    checked={this.state.checkedGenderModal2}
+                                    checkboxStyle = {stylesPostDtailEvent.txtBoxPostModal}
+                                    onChange={(checked) => {this.checkGenderModal2()}} 
+                                    />
+                        </View>}
+                    />
+                ): null}
+               
             </View>
            </ScrollView>
         )
@@ -337,7 +420,7 @@ export default class PostDetailEvent extends Component {
 
 stylesPostDtailEvent = StyleSheet.create({
     container: {
-        flex: 1,  backgroundColor: 'white', marginRight: 15, marginLeft: 15
+        flex: 1,  backgroundColor: 'white', marginRight: 15, marginLeft: 15, marginBottom: 20
     },
 
     title: {
@@ -360,7 +443,9 @@ stylesPostDtailEvent = StyleSheet.create({
         flexDirection:'row',
         justifyContent: 'space-between', paddingTop: 10,
         alignItems:'center', marginTop: 30, borderTopWidth: 1, borderTopColor: 'gray'
-       
+    },
+    listEventPart: { 
+        flexDirection: 'row', justifyContent: 'space-between', marginTop: 20
     },
 
     btnConfirmEvent1: { 
@@ -369,6 +454,9 @@ stylesPostDtailEvent = StyleSheet.create({
     btnConfirmEvent: {
         flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
          height: 25, width: 100, borderColor: 'black', borderWidth:1,  borderRadius: 10
+    },
+    listHeadParticipate: { 
+        flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: 180
     },
     txtComment: { 
         borderColor: 'gray', borderRadius: 10, borderWidth: 1, height: 45, marginTop: 20
@@ -381,6 +469,10 @@ stylesPostDtailEvent = StyleSheet.create({
     },
     commentEvent: { 
         width: 280, height: 40, color: 'black', paddingRight: 5
-    }
+    },
+    txtBoxPostModal: {
+        width:15, height: 15, marginRight: 15
+    },
+
         
 })

@@ -104,21 +104,21 @@ export default class PostDetailEventView extends Component {
             })
         }
     
-    editPostEvent(){ 
-        this.props.navigation.navigate('PostEventEdit', { 
-            id: this.props.navigation.state.params.id, title: this.props.navigation.state.params.title,
-            numberModalEdit: this.props.navigation.state.params.numberModal, 
-            costEventEdit: this.props.navigation.state.params.costEvent,
-            labelEventEdit1: this.props.navigation.state.params.labelEvent1,  
-            labelEventEdit2: this.props.navigation.state.params.labelEvent2,
-            contentEventEdit: this.props.navigation.state.params.contentEvent, 
-            addressEventEdit: this.props.navigation.state.params.addressEvent,
-            datetimeEventEdit: this.props.navigation.state.params.datetimeEvent, 
-            datetimeEventEdit1: this.props.navigation.state.params.datetimeEvent1,
-            userId: this.props.navigation.state.params.userId
-        })
-    }
-    submitCommentEvent(){ 
+    // editPostEvent(){ 
+    //     this.props.navigation.navigate('PostEventEdit', { 
+    //         id: this.props.navigation.state.params.id, title: this.props.navigation.state.params.title,
+    //         numberModalEdit: this.props.navigation.state.params.numberModal, 
+    //         costEventEdit: this.props.navigation.state.params.costEvent,
+    //         labelEventEdit1: this.props.navigation.state.params.labelEvent1,  
+    //         labelEventEdit2: this.props.navigation.state.params.labelEvent2,
+    //         contentEventEdit: this.props.navigation.state.params.contentEvent, 
+    //         addressEventEdit: this.props.navigation.state.params.addressEvent,
+    //         datetimeEventEdit: this.props.navigation.state.params.datetimeEvent, 
+    //         datetimeEventEdit1: this.props.navigation.state.params.datetimeEvent1,
+    //         userId: this.props.navigation.state.params.userId
+    //     })
+    // }
+    submitCommentEventView(){ 
         // comment bài post và lưu vào csdl
         if(this.state.commentEventDetail !== ''){
             FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id).child('comment')
@@ -134,7 +134,7 @@ export default class PostDetailEventView extends Component {
             this.setState({ commentEventDetail: ''})
          }
     }
-    btnCommentEvent(){ 
+    btnCommentEventView(){ 
         if(this.state.changeCommentEvent == true){ 
             this.setState({
                 changeCommentEvent: false
@@ -146,7 +146,7 @@ export default class PostDetailEventView extends Component {
             })
         }
     }
-    btnChangeParticipate(){ 
+    btnChangeParticipateView(){ 
         this.setState({
             changeStatusPart: true, 
         })
@@ -155,10 +155,10 @@ export default class PostDetailEventView extends Component {
         })
         FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').push({ 
-            userId: userKey
+            userId: userKey, username: username
         })
     }
-    btnChangeNotParticipate(){ 
+    btnChangeNotParticipateView(){ 
         this.setState({
             changeStatusPart: false, 
         })
@@ -176,7 +176,7 @@ export default class PostDetailEventView extends Component {
         .child('StatusParticipateCol').child(keyStatusPart).remove();
     }
 
-    btnChangeLike(){ 
+    btnChangeLikeView(){ 
         if(this.state.changeLike === false){ 
             this.setState({
                 changeLike: true, colorLike: 'blue'
@@ -264,13 +264,13 @@ export default class PostDetailEventView extends Component {
                 </View>
                 <View style={stylesPostDtailEventView.btnSubmit}>
                     <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} 
-                      onPress={() => this.btnChangeLike()}>
+                      onPress={() => this.btnChangeLikeView()}>
                         <Image source={like} style={{width: 20, height: 20,  tintColor: this.state.colorLike, marginRight: 5}}/>
                         <Text style={{color: this.state.colorLike}}>Thích</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} 
                         // onChange = {(changeCommentEvent) => this.setState(changeCommentEvent)}
-                        onPress={() => this.btnCommentEvent()}>
+                        onPress={() => this.btnCommentEventView()}>
                         
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
@@ -278,13 +278,13 @@ export default class PostDetailEventView extends Component {
                     {this.state.changeStatusPart === true?       
                         <TouchableOpacity style={[stylesPostDtailEventView.btnConfirmEvent,{height:35}]} 
                             // onChange = {(changeParticipate) => this.setState(changeParticipate)}
-                            onPress={() => this.btnChangeNotParticipate()}>
+                            onPress={() => this.btnChangeNotParticipateView()}>
                             <Text style={{ textAlign:"center", color: 'black'}}>Đã gửi yêu cầu tham gia</Text>
                         </TouchableOpacity>:null}
                     {this.state.changeStatusPart === false  ?
                         <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent} 
                             // onChange = {(changeParticipate) => this.setState(changeParticipate)}
-                            onPress={() => this.btnChangeParticipate()}>
+                            onPress={() => this.btnChangeParticipateView()}>
                                 <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
                         </TouchableOpacity>:null }  
                 </View>
@@ -296,7 +296,7 @@ export default class PostDetailEventView extends Component {
                             onChangeText={(commentEventDetail) => this.setState({ commentEventDetail })}
                         />
                         <View style={{alignItems: 'flex-end', marginTop: -40, justifyContent: 'flex-end'}}>
-                            <TouchableOpacity onPress={()=> this.submitCommentEvent()}>
+                            <TouchableOpacity onPress={()=> this.submitCommentEventView()}>
                                 <Image source={commentOk} style={{width: 45, height: 45, tintColor: 'black'}}/>
                             </TouchableOpacity>
                         </View>
@@ -311,7 +311,9 @@ export default class PostDetailEventView extends Component {
                             renderRow = {(rowData)=> 
                         <View style={stylesPostDtailEventView.txtedComment1}>
                             <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity onPress={()=> this.submitCommentEvent()} >
+                                <TouchableOpacity 
+                                // onPress={()=> this.submitCommentEventView()} 
+                                >
                                     <Image source={rowData.avatarSource} style={{width: 30, height: 30, tintColor: 'black'}}/>
                                 </TouchableOpacity>
                                 <Text style={{marginLeft: 10, marginRight: 10, color: 'blue'}}>{rowData.username}</Text>
