@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, Text,
-    View, Image, TextInput,
-    TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView, ListView
 } from 'react-native';
 
 import gobackIcon from '../../../assets/img/info/goback.png'
 import edit from '../../../assets/img/pose/edit.png' 
 import comment from '../../../assets/img/post/comment.png'
 import like from '../../../assets/img/post/like.png'
+import commentOk from '../../../assets/img/post/commentOk.png'
+
+import {FirebaseApp} from './../../../Controller/FirebaseConfig'
 
 export default class PostDetailModal extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+         commentModalDetail: '', changeCommentModal: false, changeStatusPartModal: false, changeLikeModal: false, 
+         colorLikeModal: 'black',
+            dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+        }
+        this.itemRef = FirebaseApp.database();
+    }
     editPostModal(){ 
         this.props.navigation.navigate('PostModalEdit', { 
             id: this.props.navigation.state.params.id,
@@ -32,6 +42,175 @@ export default class PostDetailModal extends Component {
             girlEdit: this.props.navigation.state.params.girl
         });
     }
+    componentWillMount() {
+        // lấy userkey và avatarSource của tài khoản login
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         userKey = childSnapshot.key;
+                         let childData = childSnapshot.val();
+                         avatarSource = childData.avatarSource;
+                         username = childData.username;
+                         
+          })  
+        })
+        // lấy số lượng comment của bài post
+        FirebaseApp.database().ref('PostModal').orderByKey().equalTo(this.props.navigation.state.params.id)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         let childData = childSnapshot.val();
+                         countCommentEvent = childData.countCommentEvent;
+                         countParticipate = childData.countParticipate;
+                         countLike = childData.countLike;
+            }) 
+        })
+
+        
+
+    {FirebaseApp.database().ref('PostModal').child(this.props.navigation.state.params.id)
+        .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
+        .on('value', function (snapshot) {
+                if(snapshot.exists()){  a = 'exist' }
+                else { a = 'notExist'}
+        })}
+        if(a === 'exist'){ 
+            this.setState({ changeStatusPartModal:  true})
+        }
+        else if(a === 'notExist'){ 
+            this.setState({ changeStatusPartModal:  false})
+        }
+    
+    {FirebaseApp.database().ref('PostModal').child(this.props.navigation.state.params.id)
+        .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
+        .on('value', function (snapshot) {
+                if(snapshot.exists()){  aLike = 'exist' }
+                else { aLike = 'notExist'}
+        })}
+        if(aLike === 'exist'){ 
+            this.setState({ changeLikeModal: true, colorLikeModal: 'blue'})
+        }
+        else if(aLike === 'notExist'){ 
+            this.setState({ changeLikeModal: false, colorLikeModal: 'black'})
+        }
+
+
+        var items  = [];
+            this.actGetData('PostModal/'+this.props.navigation.state.params.id, items);
+    }
+    // danh sách comment của bài post
+    actGetData(url, items=[]){ 
+            this.itemRef.ref(url).child('comment').on('child_added', (dataSnapshot)=> { 
+                var childData = dataSnapshot.val();
+                items.push({ 
+                   userKey: childData.userKey, contentComment: childData.contentComment,
+                   avatarSource: childData.avatarSource, username: childData.username
+                })
+                this.setState({ 
+                    dataSource: this.state.dataSource.cloneWithRows(items)
+                });
+            });
+        }
+        componentDidMount() { 
+            this.setState({ 
+                _isMounted: true
+            })
+        }
+        componentWillUnmount(){ 
+            this.setState({ 
+                _isMounted: false
+            })
+        }
+
+        submitCommentModal(){ 
+            // comment bài post và lưu vào csdl
+            if(this.state.commentModalDetail !== ''){
+                FirebaseApp.database().ref('PostModal').child(this.props.navigation.state.params.id).child('comment')
+                .push({ 
+                    userKey: userKey, 
+                    contentComment: this.state.commentModalDetail,
+                    avatarSource: avatarSource, username: username
+                })
+               
+                FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
+                    countCommentEvent:countCommentEvent + 1
+                })
+                this.setState({ commentModalDetail: ''})
+             }
+        }
+        btnCommentModal(){ 
+            if(this.state.changeCommentModal == true){ 
+                this.setState({
+                    changeCommentModal: false
+                })
+            }
+            else if(this.state.changeCommentModal == false){ 
+                this.setState({ 
+                    changeCommentModal: true
+                })
+            }
+        }
+        btnChangeParticipateModal(){ 
+            this.setState({
+                changeStatusPartModal: true, 
+            })
+            FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
+                countParticipate:countParticipate + 1
+            })
+            FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+            .child('StatusParticipateCol').push({ 
+                userId: userKey, username: username
+            })
+        }
+        btnChangeNotParticipateModal(){ 
+            this.setState({
+                changeStatusPartModal: false, 
+            })
+            FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
+                countParticipate:countParticipate - 1
+            })
+            FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+            .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
+            .on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                     keyStatusPart = childSnapshot.key;
+                })
+            }))
+            FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+            .child('StatusParticipateCol').child(keyStatusPart).remove();
+        }
+    
+        btnChangeLikeModal(){ 
+            if(this.state.changeLikeModal === false){ 
+                this.setState({
+                    changeLikeModal: true, colorLikeModal: 'blue'
+                })
+                FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
+                    countLike:countLike + 1
+                })
+                FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+                .child('LikePostEvent').push({ 
+                    userId: userKey
+                })
+            }
+            else if(this.state.changeLikeModal === true){ 
+                this.setState({
+                    changeLikeModal: false, colorLikeModal: 'black'
+                })
+                FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
+                    countLike:countLike - 1
+                })
+                FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+                .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
+                .on('value', (function (snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                         keyLike = childSnapshot.key;
+                    })
+                }))
+                FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+                .child('LikePostEvent').child(keyLike).remove();
+            }
+        }
     
     render(){
         return(
@@ -111,16 +290,16 @@ export default class PostDetailModal extends Component {
                 </View>
                 <View style={stylesPostDetailModal.btnViewModal}>
                     <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
-                        <Image source={like} style={{width: 15, height: 15,  tintColor: 'black', marginRight: 5}}/>
-                        <Text style={{color: 'black'}}>11</Text>
+                        <Image source={like} style={{width: 15, height: 15,  tintColor: this.state.countLike, marginRight: 5}}/>
+                        <Text style={{color: 'black'}}>{countLike}</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row'}}>
                         <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
-                            <Text style={{color:'black', marginRight: 5}}>2</Text>
+                            <Text style={{color:'black', marginRight: 5}}>{countCommentEvent}</Text>
                             <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
-                            <Text style={{color:'black', marginRight: 5}}>100000</Text>
+                            <Text style={{color:'black', marginRight: 5}}>{countParticipate}</Text>
                             <Text style={{color:'black'}}>người tham gia</Text>
                         </TouchableOpacity>
                     </View>
@@ -128,19 +307,69 @@ export default class PostDetailModal extends Component {
                    
                 </View>
                 <View style={stylesPostDetailModal.btnSubmit}>
-                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
-                        <Image source={like} style={{width: 20, height: 20,  tintColor: 'black', marginRight: 5}}/>
-                        <Text style={{color: 'black'}}>Thích</Text>
+                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} 
+                        onPress={() => this.btnChangeLikeModal()}>
+                        <Image source={like} style={{width: 20, height: 20,  tintColor: this.state.colorLikeModal, marginRight: 5}}/>
+                        <Text style={{color: this.state.colorLikeModal}}>Thích</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
+                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} 
+                        onPress={() => this.btnCommentModal()}>
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
+                    {/* <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
                         <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+                    {this.state.changeStatusPartModal === true?       
+                        <TouchableOpacity style={[stylesPostDetailModal.btnConfirmModal1,{height:35}]} 
+                            // onChange = {(changeParticipate) => this.setState(changeParticipate)}
+                            onPress={() => this.btnChangeNotParticipateModal()}>
+                            <Text style={{ textAlign:"center", color: 'blue'}}>Đã gửi yêu cầu tham gia</Text>
+                        </TouchableOpacity>:null}
+                    {this.state.changeStatusPartModal === false  ?
+                        <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} 
+                            // onChange = {(changeParticipate) => this.setState(changeParticipate)}
+                            onPress={() => this.btnChangeParticipateModal()}>
+                                <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
+                        </TouchableOpacity>:null } 
                    
                 </View>
+                {this.state.changeCommentModal === true?
+                (<View>
+                    <View style={stylesPostDetailModal.txtComment}>
+                        <TextInput underlineColorAndroid='transparent' style={stylesPostDetailModal.commentEvent}
+                            multiline={true} value={this.state.commentModalDetail}
+                            onChangeText={(commentModalDetail) => this.setState({ commentModalDetail })}
+                        />
+                        <View style={{alignItems: 'flex-end', marginTop: -40, justifyContent: 'flex-end'}}>
+                            <TouchableOpacity onPress={()=> this.submitCommentModal()}>
+                                <Image source={commentOk} style={{width: 45, height: 45, tintColor: 'black'}}/>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>) : null}
+                {this.state.changeCommentModal === true?
+                 <View style={stylesPostDetailModal.txtedComment}>
+                    <ListView 
+                        contentContainerStyle={{flexDirection: 'row',flexWrap:'wrap', 
+                                justifyContent: 'space-between'}}
+                        dataSource = {this.state.dataSource}
+                            renderRow = {(rowData)=> 
+                        <View style={stylesPostDetailModal.txtedComment1}>
+                            <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity 
+                                // onPress={()=> this.submitCommentEventView()} 
+                                >
+                                    <Image source={rowData.avatarSource} style={{width: 30, height: 30, tintColor: 'black'}}/>
+                                </TouchableOpacity>
+                                <Text style={{marginLeft: 10, marginRight: 10, color: 'blue'}}>{rowData.username}</Text>
+                            </View>
+                            <View style={{paddingRight: 10}}>
+                            <Text style={stylesPostDetailModal.commentEvent}> {rowData.contentComment}</Text>
+                            </View>
+                        </View> }
+                    />
+                </View>: null}
             </View>
            </ScrollView>
         )
@@ -178,5 +407,18 @@ stylesPostDetailModal = StyleSheet.create({
     },
     btnConfirmModal: {
         flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-         height: 25, width: 100, borderColor: 'black', borderWidth:1,  borderRadius: 10}
+         height: 25, width: 100, borderColor: 'black', borderWidth:1,  borderRadius: 10
+    },
+    txtComment: { 
+        borderColor: 'gray', borderRadius: 10, borderWidth: 1, height: 45, marginTop: 20
+    },
+    txtedComment: { 
+        marginTop: 15, flexDirection: 'row'
+    },
+    txtedComment1: { 
+       flexDirection: 'row'
+    },
+    commentEvent: { 
+        width: 250, height: 40, color: 'black', paddingRight: 5
+    }
 })

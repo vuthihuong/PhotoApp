@@ -468,7 +468,7 @@ stylesPostDtailEvent = StyleSheet.create({
        flexDirection: 'row'
     },
     commentEvent: { 
-        width: 280, height: 40, color: 'black', paddingRight: 5
+        width: 250, height: 40, color: 'black', paddingRight: 5
     },
     txtBoxPostModal: {
         width:15, height: 15, marginRight: 15

@@ -419,6 +419,6 @@ stylesPostDetailModalView = StyleSheet.create({
        flexDirection: 'row'
     },
     commentEvent: { 
-        width: 280, height: 40, color: 'black', paddingRight: 5
+        width: 250, height: 40, color: 'black', paddingRight: 5
     }
 })
