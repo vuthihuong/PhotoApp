@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, Text,
-    View, Image, TextInput,
-    TouchableOpacity, ScrollView
+    StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView, ListView
 } from 'react-native';
 
 import gobackIcon from '../../../assets/img/info/goback.png'
 import edit from '../../../assets/img/pose/edit.png'
 import comment from '../../../assets/img/post/comment.png'
 import like from '../../../assets/img/post/like.png'
+import commentOk from '../../../assets/img/post/commentOk.png'
+
+import {FirebaseApp} from './../../../Controller/FirebaseConfig'
 
 export default class PostDetailPhoto extends Component {
-    
+    constructor(props){
+        super(props)
+        this.state = {
+         commentPhotoDetail: '', changeCommentPhoto: false, changeStatusPartPhoto: false, changeLikePhoto: false, 
+         colorLikePhoto: 'black',
+            dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+        }
+        this.itemRef = FirebaseApp.database();
+    }
     editPostPhoto(){ 
         this.props.navigation.navigate('PostPhotoEdit', { 
             id: this.props.navigation.state.params.id,
@@ -24,6 +33,175 @@ export default class PostDetailPhoto extends Component {
             costPhotoEdit: this.props.navigation.state.params.costPhoto,
         })
     }
+    componentWillMount() {
+        // lấy userkey và avatarSource của tài khoản login
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         userKey = childSnapshot.key;
+                         let childData = childSnapshot.val();
+                         avatarSource = childData.avatarSource;
+                         username = childData.username;
+                         
+          })  
+        })
+        // lấy số lượng comment của bài post
+        FirebaseApp.database().ref('PostPhoto').orderByKey().equalTo(this.props.navigation.state.params.id)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         let childData = childSnapshot.val();
+                         countCommentEvent = childData.countCommentEvent;
+                         countParticipate = childData.countParticipate;
+                         countLike = childData.countLike;
+            }) 
+        })
+
+        
+
+    {FirebaseApp.database().ref('PostPhoto').child(this.props.navigation.state.params.id)
+        .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
+        .on('value', function (snapshot) {
+                if(snapshot.exists()){  a = 'exist' }
+                else { a = 'notExist'}
+        })}
+        if(a === 'exist'){ 
+            this.setState({ changeStatusPartPhoto:  true})
+        }
+        else if(a === 'notExist'){ 
+            this.setState({ changeStatusPartPhoto:  false})
+        }
+    
+    {FirebaseApp.database().ref('PostPhoto').child(this.props.navigation.state.params.id)
+        .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
+        .on('value', function (snapshot) {
+                if(snapshot.exists()){  aLike = 'exist' }
+                else { aLike = 'notExist'}
+        })}
+        if(aLike === 'exist'){ 
+            this.setState({ changeLikePhoto: true, colorLikePhoto: 'blue'})
+        }
+        else if(aLike === 'notExist'){ 
+            this.setState({ changeLikePhoto: false, colorLikePhoto: 'black'})
+        }
+
+
+        var items  = [];
+            this.actGetData('PostPhoto/'+this.props.navigation.state.params.id, items);
+    }
+    // danh sách comment của bài post
+    actGetData(url, items=[]){ 
+            this.itemRef.ref(url).child('comment').on('child_added', (dataSnapshot)=> { 
+                var childData = dataSnapshot.val();
+                items.push({ 
+                   userKey: childData.userKey, contentComment: childData.contentComment,
+                   avatarSource: childData.avatarSource, username: childData.username
+                })
+                this.setState({ 
+                    dataSource: this.state.dataSource.cloneWithRows(items)
+                });
+            });
+        }
+        componentDidMount() { 
+            this.setState({ 
+                _isMounted: true
+            })
+        }
+        componentWillUnmount(){ 
+            this.setState({ 
+                _isMounted: false
+            })
+        }
+
+        submitCommentPhoto(){ 
+            // comment bài post và lưu vào csdl
+            if(this.state.commentPhotoDetail !== ''){
+                FirebaseApp.database().ref('PostPhoto').child(this.props.navigation.state.params.id).child('comment')
+                .push({ 
+                    userKey: userKey, 
+                    contentComment: this.state.commentPhotoDetail,
+                    avatarSource: avatarSource, username: username
+                })
+               
+                FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id).update({ 
+                    countCommentEvent:countCommentEvent + 1
+                })
+                this.setState({ commentPhotoDetail: ''})
+             }
+        }
+        btnCommentPhoto(){ 
+            if(this.state.changeCommentPhoto == true){ 
+                this.setState({
+                    changeCommentPhoto: false
+                })
+            }
+            else if(this.state.changeCommentPhoto == false){ 
+                this.setState({ 
+                    changeCommentPhoto: true
+                })
+            }
+        }
+        btnChangeParticipatePhoto(){ 
+            this.setState({
+                changeStatusPartPhoto: true, 
+            })
+            FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id).update({ 
+                countParticipate:countParticipate + 1
+            })
+            FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+            .child('StatusParticipateCol').push({ 
+                userId: userKey, username: username
+            })
+        }
+        btnChangeNotParticipatePhoto(){ 
+            this.setState({
+                changeStatusPartPhoto: false, 
+            })
+            FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id).update({ 
+                countParticipate:countParticipate - 1
+            })
+            FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+            .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
+            .on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                     keyStatusPart = childSnapshot.key;
+                })
+            }))
+            FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+            .child('StatusParticipateCol').child(keyStatusPart).remove();
+        }
+    
+        btnChangeLikePhoto(){ 
+            if(this.state.changeLikePhoto === false){ 
+                this.setState({
+                    changeLikePhoto: true, colorLikePhoto: 'blue'
+                })
+                FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id).update({ 
+                    countLike:countLike + 1
+                })
+                FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+                .child('LikePostEvent').push({ 
+                    userId: userKey
+                })
+            }
+            else if(this.state.changeLikePhoto === true){ 
+                this.setState({
+                    changeLikePhoto: false, colorLikePhoto: 'black'
+                })
+                FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id).update({ 
+                    countLike:countLike - 1
+                })
+                FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+                .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
+                .on('value', (function (snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                         keyLike = childSnapshot.key;
+                    })
+                }))
+                FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+                .child('LikePostEvent').child(keyLike).remove();
+            }
+        }
 
     render(){
         return(
@@ -72,16 +250,16 @@ export default class PostDetailPhoto extends Component {
                 </View>
                 <View style={stylesPostDePhoto.btnViewPhoto}>
                     <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto1} >
-                        <Image source={like} style={{width: 15, height: 15,  tintColor: 'black', marginRight: 5}}/>
-                        <Text style={{color: 'black'}}>11</Text>
+                        <Image source={like} style={{width: 15, height: 15,  tintColor: this.state.colorLikePhoto, marginRight: 5}}/>
+                        <Text style={{color: 'black'}}>{countLike}</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row'}}>
                         <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto1} >
-                            <Text style={{color:'black', marginRight: 5}}>2</Text>
+                            <Text style={{color:'black', marginRight: 5}}>{countCommentEvent}</Text>
                             <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto1} >
-                            <Text style={{color:'black', marginRight: 5}}>100000</Text>
+                            <Text style={{color:'black', marginRight: 5}}>{countParticipate}</Text>
                             <Text style={{color:'black'}}>người tham gia</Text>
                         </TouchableOpacity>
                     </View>
@@ -89,19 +267,69 @@ export default class PostDetailPhoto extends Component {
                    
                 </View>
                 <View style={stylesPostDePhoto.btnSubmit}>
-                    <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto1} >
-                        <Image source={like} style={{width: 20, height: 20,  tintColor: 'black', marginRight: 5}}/>
-                        <Text style={{color: 'black'}}>Thích</Text>
+                    <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto1}
+                        onPress={() => this.btnChangeLikePhoto()} >
+                        <Image source={like} style={{width: 20, height: 20,  tintColor: this.state.colorLikePhoto, marginRight: 5}}/>
+                        <Text style={{color: this.state.colorLikePhoto}}>Thích</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto1} >
+                    <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto1} 
+                        onPress={() => this.btnCommentPhoto()}>
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto} >
+                    {/* <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto} >
                         <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+                     {this.state.changeStatusPartPhoto === true?       
+                        <TouchableOpacity style={stylesPostDePhoto.btnConfirmModal1} 
+                            // onChange = {(changeParticipate) => this.setState(changeParticipate)}
+                            onPress={() => this.btnChangeNotParticipatePhoto()}>
+                            <Text style={{ textAlign:"center", color: 'blue'}}>Đã gửi yêu cầu tham gia</Text>
+                        </TouchableOpacity>:null}
+                    {this.state.changeStatusPartPhoto === false  ?
+                        <TouchableOpacity style={stylesPostDePhoto.btnConfirmModal1} 
+                            // onChange = {(changeParticipate) => this.setState(changeParticipate)}
+                            onPress={() => this.btnChangeParticipatePhoto()}>
+                                <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
+                        </TouchableOpacity>:null } 
                    
                 </View>
+                {this.state.changeCommentPhoto === true?
+                (<View>
+                    <View style={stylesPostDePhoto.txtComment}>
+                        <TextInput underlineColorAndroid='transparent' style={stylesPostDePhoto.commentEvent}
+                            multiline={true} value={this.state.commentPhotoDetail}
+                            onChangeText={(commentPhotoDetail) => this.setState({ commentPhotoDetail })}
+                        />
+                        <View style={{alignItems: 'flex-end', marginTop: -40, justifyContent: 'flex-end'}}>
+                            <TouchableOpacity onPress={()=> this.submitCommentPhoto()}>
+                                <Image source={commentOk} style={{width: 45, height: 45, tintColor: 'black'}}/>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>) : null}
+                {this.state.changeCommentPhoto === true?
+                 <View style={stylesPostDePhoto.txtedComment}>
+                    <ListView 
+                        contentContainerStyle={{flexDirection: 'row',flexWrap:'wrap', 
+                                justifyContent: 'space-between'}}
+                        dataSource = {this.state.dataSource}
+                            renderRow = {(rowData)=> 
+                        <View style={stylesPostDePhoto.txtedComment1}>
+                            <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity 
+                                // onPress={()=> this.submitCommentEventView()} 
+                                >
+                                    <Image source={rowData.avatarSource} style={{width: 30, height: 30, tintColor: 'black'}}/>
+                                </TouchableOpacity>
+                                <Text style={{marginLeft: 10, marginRight: 10, color: 'blue'}}>{rowData.username}</Text>
+                            </View>
+                            <View style={{paddingRight: 10}}>
+                            <Text style={stylesPostDePhoto.commentEvent}> {rowData.contentComment}</Text>
+                            </View>
+                        </View> }
+                    />
+                </View>: null}
             </View>
           </ScrollView>
         )
@@ -141,5 +369,18 @@ stylesPostDePhoto = StyleSheet.create({
     },
     btnConfirmPhoto: {
         flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-         height: 25, width: 100, borderColor: 'black', borderWidth:1,  borderRadius: 10}
+         height: 25, width: 100, borderColor: 'black', borderWidth:1,  borderRadius: 10
+    },
+    txtComment: { 
+        borderColor: 'gray', borderRadius: 10, borderWidth: 1, height: 45, marginTop: 20
+    },
+    txtedComment: { 
+        marginTop: 15, flexDirection: 'row'
+    },
+    txtedComment1: { 
+       flexDirection: 'row'
+    },
+    commentEvent: { 
+        width: 250, height: 40, color: 'black', paddingRight: 5
+    }
 })

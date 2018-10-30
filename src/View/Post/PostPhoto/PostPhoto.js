@@ -15,7 +15,8 @@ export default class PostPhoto extends Component {
             date: '', time: '00:00', datetimePhoto: '', selectedHours: 0, selectedMinutes: 0,
             datetimePhoto1: '', selectedHours1: 0, selectedMinutes1: 0, contentPhoto: '', costPhoto:'',
             labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, labelErrorTime: false,
-            valueCategoryPhoto1: '', valuePlacePhoto: '', labelErrorLessTime: false, id: ''
+            valueCategoryPhoto1: '', valuePlacePhoto: '', labelErrorLessTime: false, id: '', countLike: 0,
+            countCommentEvent: 0, countParticipate: 0,
         }
         this.itemRef = FirebaseApp.database();
       }
@@ -134,7 +135,8 @@ export default class PostPhoto extends Component {
                         labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, 
                     })
                     this.itemRef.ref('PostPhoto').push({
-                        userId: key, title: "Tìm nháy ảnh",
+                        userId: key, title: "Tìm nháy ảnh", countCommentEvent: this.state.countCommentEvent,
+                        countParticipate: this.state.countParticipate, countLike: this.state.countLike,
                         valueCategoryPhoto1: this.state.valueCategoryPhoto1,
                         contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
                         datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
@@ -144,13 +146,12 @@ export default class PostPhoto extends Component {
                                                      id: snap.key })
                              if(this.state.id !== ''){ 
                                 this.props.navigation.navigate('PostDetailPhoto',{
-                                    id: this.state.id, userId: key,
+                                    id: this.state.id, userId: key, countCommentEvent: this.state.countCommentEvent,
+                                    countParticipate: this.state.countParticipate, countLike: this.state.countLike,
                                     valueCategoryPhoto1: this.state.valueCategoryPhoto1,
-                                    contentPhoto: this.state.contentPhoto,
+                                    contentPhoto: this.state.contentPhoto,  costPhoto: this.state.costPhoto,
                                     valuePlacePhoto: this.state.valuePlacePhoto,
-                                    datetimePhoto: this.state.datetimePhoto,
-                                    datetimePhoto1: this.state.datetimePhoto1,
-                                    costPhoto: this.state.costPhoto,
+                                    datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
                                 })
                              }
                              this.setState({ 
