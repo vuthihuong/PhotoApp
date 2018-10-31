@@ -48,6 +48,9 @@ import PostDetailEventView from './src/View/Post/PostEvent/PostDetailEventView'
 import PostDetailModalView from './src/View/Post/PostModal/PostDetailModalView'
 import PostDetailPhotoView from './src/View/Post/PostPhoto/PostDetailPhotoView'
 
+import ListPostModal from './src/View/Post/PostModal/ListPostModal'
+import ListDirectPostModal from './src/View/Post/PostModal/ListDirectPostModal'
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -149,6 +152,12 @@ const Mainapp = createStackNavigator({
     },
     PostDetailPhotoView: { 
         screen: PostDetailPhotoView
+    },
+    ListPostModal: { 
+        screen: ListPostModal
+    },
+    ListDirectPostModal: { 
+        screen: ListDirectPostModal
     }
     },{
       headerMode:'none'

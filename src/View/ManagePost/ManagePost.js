@@ -5,6 +5,7 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, L
 import {FirebaseApp} from './../../Controller/FirebaseConfig' 
 
 export default class ManagePost extends Component{
+  
     constructor(props) {
  
         super(props);
@@ -37,7 +38,7 @@ export default class ManagePost extends Component{
     }
     actGetData1(url, items=[]){ 
         this.itemRef.ref(url).orderByChild("userId").equalTo(userKey).on('child_added', (dataSnapshot)=> { 
-            var keyModal = dataSnapshot.key;
+             keyModal = dataSnapshot.key;
             var childData = dataSnapshot.val();
               items.push({ 
                 userId: (childData.userId), title: childData.title, id: keyModal,
@@ -56,7 +57,7 @@ export default class ManagePost extends Component{
     }
     actGetData2(url, items=[]){ 
         this.itemRef.ref(url).orderByChild("userId").equalTo(userKey).on('child_added', (dataSnapshot)=> { 
-            var keyPhoto = dataSnapshot.key;
+             keyPhoto = dataSnapshot.key;
             var childData = dataSnapshot.val();
               items.push({ 
                 userId: (childData.userId), title: childData.title, id: keyPhoto,
@@ -71,7 +72,7 @@ export default class ManagePost extends Component{
     }
     actGetData3(url, items=[]){ 
         this.itemRef.ref(url).orderByChild("userId").equalTo(userKey).on('child_added', (dataSnapshot)=> { 
-           var keyEvent =  dataSnapshot.key
+            keyEvent =  dataSnapshot.key
             var childData = dataSnapshot.val();
               items.push({ 
                 userId: (childData.userId), title: childData.title, id: keyEvent,
