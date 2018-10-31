@@ -290,7 +290,7 @@ export default class PostDetailEvent extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-                {/* <View style={stylesPostDtailEvent.btnSubmit}>
+                <View style={stylesPostDtailEvent.btnSubmit}>
                     <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} 
                         onPress={() => this.btnChangeLike()}>
                         <Image source={like} style={{width: 20, height: 20,  tintColor: this.state.colorLike, marginRight: 5}}/>
@@ -311,9 +311,9 @@ export default class PostDetailEvent extends Component {
                             onPress={() => this.btnChangeParticipate()}>
                                 <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
                         </TouchableOpacity>:null }  
-                </View> */}
+                </View>
 
-                <View style={stylesPostDtailEvent.btnSubmit}>
+                {/* <View style={stylesPostDtailEvent.btnSubmit}>
                     <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} 
                         onPress={() => this.btnChangeLike()}>
                         <Image source={like} style={{width: 20, height: 20,  tintColor: this.state.colorLike, marginRight: 5}}/>
@@ -329,7 +329,7 @@ export default class PostDetailEvent extends Component {
                         onPress={() => this.btnChangeNotParticipate()}>
                         <Text style={{ textAlign:"center", color: 'black'}}>Gửi yêu cầu trực tiếp</Text>
                     </TouchableOpacity> 
-                </View>
+                </View> */}
 
 
                 

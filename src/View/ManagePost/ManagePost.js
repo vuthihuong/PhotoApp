@@ -9,7 +9,9 @@ export default class ManagePost extends Component{
  
         super(props);
         this.state = { 
-            dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+            dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+            dataSource2: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+            dataSource3: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
       
         YellowBox.ignoreWarnings([
@@ -19,43 +21,77 @@ export default class ManagePost extends Component{
        this.itemRef = FirebaseApp.database();
        
       }  
-      actGetData(url, items=[]){ 
+    componentWillMount(){ 
         tmp = FirebaseApp.auth().currentUser.email
         FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
                    .on('value', function (snapshot) {
           snapshot.forEach(function(childSnapshot) {
-                         key = childSnapshot.key;
+                         userKey = childSnapshot.key;
           })  
         })
-        this.itemRef.ref(url).orderByChild("userId").equalTo(key).on('child_added', (dataSnapshot)=> { 
+        var itemsModal  = []; var itemsPhoto =[]; var itemsEvent = [];
+            this.actGetData1('PostModal/', itemsModal);
+            this.actGetData2('PostPhoto/', itemsPhoto);
+            this.actGetData3('PostEvent/', itemsEvent);
+    }
+    actGetData1(url, items=[]){ 
+        this.itemRef.ref(url).orderByChild("userId").equalTo(userKey).on('child_added', (dataSnapshot)=> { 
+            var keyModal = dataSnapshot.key;
             var childData = dataSnapshot.val();
               items.push({ 
-                userId: (childData.userId), title: childData.title,
+                userId: (childData.userId), title: childData.title, id: keyModal,
                 content: childData.content, cost: childData.cost, girl: childData.girl,
                 datetime: childData.datetime, datetime1: childData.datetime1,
                 value: childData.value,  height: childData.height, boy: childData.boy, 
                 labelRightModal1: childData.labelRightModal1, labelRightModal2: childData.labelRightModal2,
                 labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
-                labelRightModal5: childData.labelRightModal5,
+                labelRightModal5: childData.labelRightModal5, 
                 circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3, 
               })
               this.setState({ 
-                dataSource: this.state.dataSource.cloneWithRows(items)
+                dataSource1: this.state.dataSource1.cloneWithRows(items)
               });
           });
     }
-    componentWillMount(){ 
-        var items  = [];
-            this.actGetData('PostModal/', items);
-            this.actGetData('PostPhoto/', items);
-            this.actGetData('PostEvent/', items);
+    actGetData2(url, items=[]){ 
+        this.itemRef.ref(url).orderByChild("userId").equalTo(userKey).on('child_added', (dataSnapshot)=> { 
+            var keyPhoto = dataSnapshot.key;
+            var childData = dataSnapshot.val();
+              items.push({ 
+                userId: (childData.userId), title: childData.title, id: keyPhoto,
+                contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto, 
+                datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
+                valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+              })
+              this.setState({ 
+                dataSource2: this.state.dataSource2.cloneWithRows(items)
+              });
+          });
     }
+    actGetData3(url, items=[]){ 
+        this.itemRef.ref(url).orderByChild("userId").equalTo(userKey).on('child_added', (dataSnapshot)=> { 
+           var keyEvent =  dataSnapshot.key
+            var childData = dataSnapshot.val();
+              items.push({ 
+                userId: (childData.userId), title: childData.title, id: keyEvent,
+                contentEvent: childData.contentEvent, costEvent: childData.costEvent,
+                datetimeEvent: childData.datetimeEvent, datetimeEvent1: childData.datetimeEvent1,
+                addressEvent: childData.addressEvent, labelEvent1: childData.labelEvent1, labelEvent2: childData.labelEvent2,
+                numberModal: childData.numberModal
+              })
+              this.setState({ 
+                dataSource3: this.state.dataSource3.cloneWithRows(items)
+              });
+          });
+    }
+    
       render() {
        return(
         <ScrollView style={{flex:1, backgroundColor: 'white'}}>
           <View style = { stylesManagCont.containerManagCont }>
+            <Text style={{color: 'black', fontWeight: 'bold'}}>Các bài tìm mẫu ảnh</Text>
             <ListView 
-                    dataSource = {this.state.dataSource}
+                    dataSource = {this.state.dataSource1}
                     renderRow = {(rowData)=> 
                         <View style={stylesManagCont.bodyManaCont}>
                             <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal',
@@ -67,12 +103,65 @@ export default class ManagePost extends Component{
                                 labelRightModal2: rowData.labelRightModal2,
                                 labelRightModal3: rowData.labelRightModal3,
                                 labelRightModal4: rowData.labelRightModal4,
-                                labelRightModal5: rowData.labelRightModal5,
+                                labelRightModal5: rowData.labelRightModal5, 
                                 circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,} )}
                                 style={stylesManagCont.contManagCont}>
                                     <Text style={stylesManagCont.txtManagCont}>{rowData.title} {rowData.boy} {rowData.girl} </Text>
                                     <Text style={stylesManagCont.txtManagCont}>{rowData.value}</Text>
-                                    <Text style={stylesManagCont.txtManagCont}>{rowData.datetime} - {rowData.datetime}</Text>
+                                    <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime}</Text>
+                            </TouchableOpacity>
+                            <View style={ stylesManagCont.txtConfirm }>
+                                {/* <TouchableOpacity>
+                                    <Text style={[stylesManagCont.txtManagCont,{color:'blue'}]}>Đang tìm</Text>
+                                </TouchableOpacity> */}
+                                <TouchableOpacity>
+                                    <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Xóa</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                                        }
+                />
+                <Text style={{color: 'black', fontWeight: 'bold'}}>Các bài sự kiện</Text>
+            <ListView 
+                    dataSource = {this.state.dataSource3}
+                    renderRow = {(rowData)=> 
+                        <View style={stylesManagCont.bodyManaCont}>
+                            <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailEvent',
+                               { id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
+                                contentEvent: rowData.contentEvent, costEvent: rowData.costEvent,
+                                datetimeEvent: rowData.datetimeEvent, datetimeEvent1: rowData.datetimeEvent1,
+                                addressEvent: rowData.addressEvent, labelEvent1: rowData.labelEvent1, 
+                                labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal} )}
+                                style={stylesManagCont.contManagCont}>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.labelEvent1} {rowData.labelEvent2} </Text>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.addressEvent}</Text>
+                                    <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                            </TouchableOpacity>
+                            <View style={ stylesManagCont.txtConfirm }>
+                                {/* <TouchableOpacity>
+                                    <Text style={[stylesManagCont.txtManagCont,{color:'blue'}]}>Đang tìm</Text>
+                                </TouchableOpacity> */}
+                                <TouchableOpacity>
+                                    <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Xóa</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                                        }
+                />
+            <Text style={{color: 'black', fontWeight: 'bold'}}>Các bài tìm nháy ảnh</Text>
+            <ListView 
+                    dataSource = {this.state.dataSource2}
+                    renderRow = {(rowData)=> 
+                        <View style={stylesManagCont.bodyManaCont}>
+                            <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailPhoto',
+                               { id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
+                                contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto, 
+                                datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
+                                valuePlacePhoto: rowData.valuePlacePhoto, valueCategoryPhoto1: rowData.valueCategoryPhoto1} )}
+                                style={stylesManagCont.contManagCont}>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.title} </Text>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.valuePlacePhoto}</Text>
+                                    <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime}</Text>
                             </TouchableOpacity>
                             <View style={ stylesManagCont.txtConfirm }>
                                 {/* <TouchableOpacity>
@@ -94,7 +183,7 @@ const stylesManagCont = StyleSheet.create({
  
  containerManagCont :{
      flex: 1,
-     backgroundColor: 'white', 
+     backgroundColor: 'white', marginTop: 15, marginRight: 15, marginLeft: 15, marginBottom: 15
     
   },
   bodyManaCont: {
@@ -104,7 +193,7 @@ const stylesManagCont = StyleSheet.create({
   },
 
   contManagCont: {
-        marginLeft: 10, width: 280
+        width: 280
   },
  
  txtManagCont: {

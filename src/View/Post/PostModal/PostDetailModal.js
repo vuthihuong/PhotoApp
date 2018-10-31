@@ -290,7 +290,7 @@ export default class PostDetailModal extends Component {
                 </View>
                 <View style={stylesPostDetailModal.btnViewModal}>
                     <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
-                        <Image source={like} style={{width: 15, height: 15,  tintColor: this.state.countLike, marginRight: 5}}/>
+                        <Image source={like} style={{width: 15, height: 15,  tintColor: this.state.colorLikeModal, marginRight: 5}}/>
                         <Text style={{color: 'black'}}>{countLike}</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row'}}>
