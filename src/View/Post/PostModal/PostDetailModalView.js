@@ -16,7 +16,7 @@ export default class PostDetailModalView extends Component {
         super(props)
         this.state = {
          commentModalDetail: '', changeCommentModal: false, changeStatusPartModal: false, changeLikeModal: false, 
-         colorLikeModal: 'black',
+         colorLikeModal: 'black', countLike: 0, countCommentEvent: 0, countParticipate: 0,
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
@@ -57,43 +57,44 @@ export default class PostDetailModalView extends Component {
         })
         // lấy số lượng comment của bài post
         FirebaseApp.database().ref('PostModal').orderByKey().equalTo(this.props.navigation.state.params.id)
-                   .on('value', function (snapshot) {
-          snapshot.forEach(function(childSnapshot) {
+                   .on('value', (function (snapshot) {
+          snapshot.forEach((function(childSnapshot) {
                          let childData = childSnapshot.val();
                          countCommentEvent = childData.countCommentEvent;
                          countParticipate = childData.countParticipate;
                          countLike = childData.countLike;
-            }) 
-        })
+                         this.setState({ 
+                            countCommentEvent : childData.countCommentEvent,
+                            countParticipate : childData.countParticipate,
+                            countLike : childData.countLike
+                         })
+            }).bind(this))
+        }).bind(this))
 
         
 
     {FirebaseApp.database().ref('PostModal').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
-        .on('value', function (snapshot) {
-                if(snapshot.exists()){  a = 'exist' }
-                else { a = 'notExist'}
-        })}
-        if(a === 'exist'){ 
-            this.setState({ changeStatusPartModal:  true})
-        }
-        else if(a === 'notExist'){ 
-            this.setState({ changeStatusPartModal:  false})
-        }
+        .on('value', (function (snapshot) {
+                if(snapshot.exists()){ 
+                    this.setState({ changeStatusPartModal:  true})
+                    }
+                else {
+                    this.setState({ changeStatusPartModal:  false})
+                    }
+        }).bind(this))}
+        
     
     {FirebaseApp.database().ref('PostModal').child(this.props.navigation.state.params.id)
         .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
-        .on('value', function (snapshot) {
-                if(snapshot.exists()){  aLike = 'exist' }
-                else { aLike = 'notExist'}
-        })}
-        if(aLike === 'exist'){ 
-            this.setState({ changeLikeModal: true, colorLikeModal: 'blue'})
-        }
-        else if(aLike === 'notExist'){ 
-            this.setState({ changeLikeModal: false, colorLikeModal: 'black'})
-        }
-
+        .on('value', (function (snapshot) {
+                if(snapshot.exists()){ 
+                    this.setState({ changeLikeModal: true, colorLikeModal: 'blue'})
+                     }
+                else { 
+                    this.setState({ changeLikeModal: false, colorLikeModal: 'black'})
+                }
+        }).bind(this))}
 
         var items  = [];
             this.actGetData('PostModal/'+this.props.navigation.state.params.id, items);
@@ -111,16 +112,6 @@ export default class PostDetailModalView extends Component {
                 });
             });
         }
-        componentDidMount() { 
-            this.setState({ 
-                _isMounted: true
-            })
-        }
-        componentWillUnmount(){ 
-            this.setState({ 
-                _isMounted: false
-            })
-        }
 
         submitCommentModalView(){ 
             // comment bài post và lưu vào csdl
@@ -131,6 +122,7 @@ export default class PostDetailModalView extends Component {
                     contentComment: this.state.commentModalDetail,
                     avatarSource: avatarSource, username: username
                 })
+                this.setState({ countCommentEvent: this.state.countCommentEvent + 1})
                
                 FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
                     countCommentEvent:countCommentEvent + 1
@@ -152,7 +144,7 @@ export default class PostDetailModalView extends Component {
         }
         btnChangeParticipateModalView(){ 
             this.setState({
-                changeStatusPartModal: true, 
+                changeStatusPartModal: true, countParticipate: this.state.countParticipate + 1
             })
             FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
                 countParticipate:countParticipate + 1
@@ -164,7 +156,7 @@ export default class PostDetailModalView extends Component {
         }
         btnChangeNotParticipateModalView(){ 
             this.setState({
-                changeStatusPartModal: false, 
+                changeStatusPartModal: false, countParticipate: this.state.countParticipate - 1
             })
             FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
                 countParticipate:countParticipate - 1
@@ -183,7 +175,7 @@ export default class PostDetailModalView extends Component {
         btnChangeLikeModalView(){ 
             if(this.state.changeLikeModal === false){ 
                 this.setState({
-                    changeLikeModal: true, colorLikeModal: 'blue'
+                    changeLikeModal: true, colorLikeModal: 'blue', countLike: this.state.countLike + 1
                 })
                 FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
                     countLike:countLike + 1
@@ -195,7 +187,7 @@ export default class PostDetailModalView extends Component {
             }
             else if(this.state.changeLikeModal === true){ 
                 this.setState({
-                    changeLikeModal: false, colorLikeModal: 'black'
+                    changeLikeModal: false, colorLikeModal: 'black', countLike: this.state.countLike - 1
                 })
                 FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id).update({ 
                     countLike:countLike - 1
@@ -291,15 +283,15 @@ export default class PostDetailModalView extends Component {
                 <View style={stylesPostDetailModalView.btnViewModal}>
                     <TouchableOpacity style={stylesPostDetailModalView.btnConfirmModal1} >
                         <Image source={like} style={{width: 15, height: 15,  tintColor: this.state.colorLikeModal, marginRight: 5}}/>
-                        <Text style={{color: 'black'}}>{countLike}</Text>
+                        <Text style={{color: 'black'}}>{this.state.countLike}</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row'}}>
                         <TouchableOpacity style={stylesPostDetailModalView.btnConfirmModal1} >
-                            <Text style={{color:'black', marginRight: 5}}>{countCommentEvent}</Text>
+                            <Text style={{color:'black', marginRight: 5}}>{this.state.countCommentEvent}</Text>
                             <Text style={{color:'black', marginRight: 5}}>bình luận *</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={stylesPostDetailModalView.btnConfirmModal1} >
-                            <Text style={{color:'black', marginRight: 5}}>{countParticipate}</Text>
+                            <Text style={{color:'black', marginRight: 5}}>{this.state.countParticipate}</Text>
                             <Text style={{color:'black'}}>người tham gia</Text>
                         </TouchableOpacity>
                     </View>

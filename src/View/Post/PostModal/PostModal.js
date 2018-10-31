@@ -19,8 +19,8 @@ export default class PostModal extends Component {
         super(props)
         this.state = {
             datetime: '',  datetime1: '',  id: '',  height:'', cost: '',  boy: '', girl: '',  value: '',
-            checkedGenderModal1: false, checkedGenderModal2: false, countLike: 0,
-            checkedRightModal1: false, checkedRightModal2: false, countCommentEvent: 0, countParticipate: 0,
+            checkedGenderModal1: false, checkedGenderModal2: false, countLike: 0, countCommentEvent: 0,
+            checkedRightModal1: false, checkedRightModal2: false, countParticipate: 0,
             checkedRightModal3: false, checkedRightModal4: false, checkedRightModal5: false,
             content: '', place:'', circle1: '', circle2:'', circle3:'', labelRightModal5: '',
             labelRightModal1: '', labelRightModal2: '', labelRightModal3: '', labelRightModal4: '', 
@@ -30,15 +30,13 @@ export default class PostModal extends Component {
         this.itemRef = FirebaseApp.database();
       }
     
-      componentWillMount() {
+    componentWillMount() {
         tmp = FirebaseApp.auth().currentUser.email
         FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
                    .on('value', function (snapshot) {
           snapshot.forEach(function(childSnapshot) {
-                         key = childSnapshot.key;
-          })  
+                         key = childSnapshot.key; })  
         })
-        
     }
 
     checkGenderModal1(){
@@ -156,20 +154,9 @@ export default class PostModal extends Component {
         // );
         return {tabBarLabel}
     }
-    componentDidMount() { 
-        this.setState({ 
-            _isMounted: true
-        })
-    }
-    componentWillUnmount(){ 
-        this.setState({ 
-            _isMounted: false
-        })
-    }
    
     createPostModal(){ 
         const reg =/^\+?[0-9][\d]*$/;
-       
         if((this.state.checkedGenderModal1 === false && this.state.checkedGenderModal2 === false)
         || this.state.value === '' || this.state.datetime === '' || this.state.datetime1 === '' ){ 
             if(this.state.checkedGenderModal1 === false && this.state.checkedGenderModal2 === false){ 
@@ -227,159 +214,128 @@ export default class PostModal extends Component {
                 })
             }
         }
-      else if((this.state.checkedGenderModal1 === true || this.state.checkedGenderModal2 === true)
-                && this.state.value !== '' && this.state.datetime !== '' && this.state.datetime1 !== '') {
-        if(this.state.checkedRightModal5 === false){
-                // if(this.state.datetime === '' || this.state.datetime1 === ''){ 
-                //     this.setState({ 
-                //         labelErrortimeModal: true, labelErrorLessTimeModal: false
-                //     })
-                // }
-                // else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
-                    if(this.state.datetime >= this.state.datetime1){ 
-                        this.setState({ 
-                            labelErrorLessTimeModal: true, labelErrortimeModal: false
-                        })
-                    }
-                    else if(this.state.datetime < this.state.datetime1){ 
-                        this.setState({ 
-                            labelErrortimeModal: false, labelErrorLessTimeModal: false
-                        })
-                    this.itemRef.ref('PostModal').push({
-                        userId: key, title: "Tìm mẫu ảnh",
-                        content: this.state.content, cost: this.state.cost, countCommentEvent: this.state.countCommentEvent,
-                        countParticipate: this.state.countParticipate, countLike: this.state.countLike,
-                        datetime: this.state.datetime, datetime1: this.state.datetime1,
-                        labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
-                        labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
-                        labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
-                        circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
-                        value: this.state.value, height: this.state.height, boy: this.state.boy, 
-                        }).then((snap) => { this.setState({  
-                                                    id: snap.key })
-                            if(this.state.id !== ''){ 
-                                this.props.navigation.navigate('PostDetailModal', {
-                                    id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
-                                    content: this.state.content, cost: this.state.cost, girl: this.state.girl,
-                                    datetime: this.state.datetime, datetime1: this.state.datetime1,
-                                    value: this.state.value,  height: this.state.height, boy: this.state.boy, 
-                                    labelRightModal1: this.state.labelRightModal1,
-                                    labelRightModal2: this.state.labelRightModal2,
-                                    labelRightModal3: this.state.labelRightModal3,
-                                    labelRightModal4: this.state.labelRightModal4,
-                                    labelRightModal5: this.state.labelRightModal5, countCommentEvent: this.state.countCommentEvent,
-                                    countParticipate: this.state.countParticipate, countLike: this.state.countLike,
-                                    circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
-                                    })
-                            }
-                                this.setState({ 
-                                    content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
-                                    datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
-                                    labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
-                                    checkedGenderModal1: false, checkedGenderModal2: false,
-                                    checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
-                                    checkedRightModal4: false, checkedRightModal5: false, labelErrorAddressModal: false, labelErrorGenderModal: false,
-                                    labelErrorLessTimeModal: false, labelErrortimeModal: false, labelErrorCostModal: false
-                                })
-                        })
-                    
+        else if((this.state.checkedGenderModal1 === true || this.state.checkedGenderModal2 === true)
+                && this.state.value !== '' && this.state.datetime !== '' && this.state.datetime1 !== '' 
+                && this.state.checkedRightModal5 === false) {
+            if(this.state.datetime >= this.state.datetime1){ 
+                this.setState({ 
+                    labelErrorLessTimeModal: true, labelErrortimeModal: false, 
+                })
+            }
+            else if(this.state.datetime < this.state.datetime1){ 
+            this.setState({ 
+                labelErrortimeModal: false, labelErrorLessTimeModal: false
+            })
+            this.itemRef.ref('PostModal').push({
+                userId: key, title: "Tìm mẫu ảnh",
+                content: this.state.content, cost: this.state.cost, countCommentEvent: this.state.countCommentEvent, 
+                countParticipate: this.state.countParticipate, countLike: this.state.countLike,
+                datetime: this.state.datetime, datetime1: this.state.datetime1,
+                labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
+                labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
+                labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
+                circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
+                value: this.state.value, height: this.state.height, boy: this.state.boy, 
+            }).then((snap) => { this.setState({  
+                    id: snap.key })
+                if(this.state.id !== ''){ 
+                    this.props.navigation.navigate('PostDetailModal', {
+                     id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
+                    content: this.state.content, cost: this.state.cost, girl: this.state.girl,
+                    datetime: this.state.datetime, datetime1: this.state.datetime1,
+                    value: this.state.value,  height: this.state.height, boy: this.state.boy, 
+                    labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
+                    labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
+                    labelRightModal5: this.state.labelRightModal5, countCommentEvent: this.state.countCommentEvent,
+                    countParticipate: this.state.countParticipate, countLike: this.state.countLike,
+                    circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
+                    })
                 }
+                this.setState({ 
+                    content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
+                    datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
+                    labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
+                    checkedGenderModal1: false, checkedGenderModal2: false,
+                    checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
+                    checkedRightModal4: false, checkedRightModal5: false, labelErrorAddressModal: false, labelErrorGenderModal: false,
+                    labelErrorLessTimeModal: false, labelErrortimeModal: false, labelErrorCostModal: false
+                    })
+                })
+                    
             }
+            
         }
-        else if(this.state.checkedRightModal5 === true){ 
-            if(this.state.cost === '' || reg.test(this.state.cost) === false ){ 
-              
-                // if(this.state.datetime === '' || this.state.datetime1 === ''){ 
-                //     this.setState({ 
-                //         labelErrortimeModal: true, labelErrorLessTimeModal: false,
-                //         labelErrorCostModal: true,  labelErrorAddressModal: false, 
-                //         labelErrorGenderModal: false, 
-                //     })
-                // }
-                // else if(this.state.datetime !=='' && this.state.datetime1 !== ''){ 
-                    if(this.state.datetime >= this.state.datetime1){ 
-                        this.setState({ 
-                            labelErrorLessTimeModal: true, labelErrortimeModal: false,
-                            labelErrorCostModal: true,  labelErrorAddressModal: false, 
-                            labelErrorGenderModal: false, 
+        else if((this.state.checkedGenderModal1 === true || this.state.checkedGenderModal2 === true)
+                && this.state.value !== '' && this.state.datetime !== '' && this.state.datetime1 !== '' 
+                && this.state.checkedRightModal5 === true) {
+            if((this.state.cost === '' || reg.test(this.state.cost) === false)
+                && this.state.datetime >= this.state.datetime1){ 
+                    this.setState({ 
+                        labelErrorLessTimeModal: true, labelErrortimeModal: false,
+                        labelErrorCostModal: true,  labelErrorAddressModal: false, labelErrorGenderModal: false, 
                         })
                     }
-                    else if(this.state.datetime < this.state.datetime1){ 
-                        this.setState({ 
-                            labelErrortimeModal: false, labelErrorLessTimeModal: false,
-                            labelErrorCostModal: true,  labelErrorAddressModal: false, 
-                            labelErrorGenderModal: false, 
+            else if((this.state.cost === '' || reg.test(this.state.cost) === false)
+                && this.state.datetime < this.state.datetime1){
+                    this.setState({ 
+                        labelErrorLessTimeModal: false, labelErrortimeModal: false,
+                        labelErrorCostModal: true,  labelErrorAddressModal: false, labelErrorGenderModal: false, 
+                        })
+                }
+            else if((this.state.cost !== '' || reg.test(this.state.cost) === true)
+                && this.state.datetime >= this.state.datetime1){ 
+                    this.setState({ 
+                        labelErrorLessTimeModal: true, labelErrortimeModal: false,
+                        labelErrorCostModal: false,  labelErrorAddressModal: false, labelErrorGenderModal: false, 
                         })
                     }
-                
-               
-            }
-            else if(reg.test(this.state.cost )=== true ){
-                // if(this.state.datetime === '' || this.state.datetime1 === ''){ 
-                //     this.setState({ 
-                //         labelErrortimeModal: true,  labelErrorCostModal: false,  
-                //         labelErrorAddressModal: false, labelErrorGenderModal: false, 
-                //     })
-                // }
-                // else if(this.state.datetime !== '' && this.state.datetime1 !== ''){ 
-                    if(this.state.datetime >= this.state.datetime1){ 
-                        this.setState({ 
-                            labelErrorLessTimeModal: true, labelErrortimeModal: false,
-                            labelErrorCostModal: false,  labelErrorAddressModal: false, 
-                            labelErrorGenderModal: false, 
+            else if((this.state.cost !== '' || reg.test(this.state.cost) === true)
+                && this.state.datetime < this.state.datetime1){
+                    this.setState({ 
+                        labelErrorLessTimeModal: false, labelErrortimeModal: false,
+                        labelErrorCostModal: false,  labelErrorAddressModal: false, labelErrorGenderModal: false, 
                         })
-                    }
-                else if(this.state.datetime < this.state.datetime1){ 
                     this.itemRef.ref('PostModal').push({
-                        userId: key, title: "Tìm mẫu ảnh",
-                        content: this.state.content, cost: this.state.cost,
-                        datetime: this.state.datetime, datetime1: this.state.datetime1,
+                        userId: key, title: "Tìm mẫu ảnh", content: this.state.content, cost: this.state.cost,
+                        datetime: this.state.datetime, datetime1: this.state.datetime1, countCommentEvent: this.state.countCommentEvent, 
+                        countParticipate: this.state.countParticipate, countLike: this.state.countLike,
                         labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
                         labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
                         labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
                         circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
                         value: this.state.value, height: this.state.height, boy: this.state.boy, 
                         }).then((snap) => { this.setState({  
-                                                    id: snap.key })
-                            if(this.state.id !== ''){ 
-                                this.props.navigation.navigate('PostDetailModal', {
-                                    id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
-                                    content: this.state.content, cost: this.state.cost, girl: this.state.girl,
-                                    datetime: this.state.datetime, datetime1: this.state.datetime1,
-                                    value: this.state.value,  height: this.state.height, boy: this.state.boy, 
-                                    labelRightModal1: this.state.labelRightModal1,
-                                    labelRightModal2: this.state.labelRightModal2,
-                                    labelRightModal3: this.state.labelRightModal3,
-                                    labelRightModal4: this.state.labelRightModal4,
-                                    labelRightModal5: this.state.labelRightModal5,
-                                    circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
-                                    })
-                            }
-                            this.setState({ 
-                                content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
-                                datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
-                                labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
-                                checkedGenderModal1: false, checkedGenderModal2: false,
-                                checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
-                                checkedRightModal4: false, checkedRightModal5: false,
-                                labelErrorAddressModal: false, labelErrorGenderModal: false, labelErrorLessTimeModal: false,
-                                labelErrortimeModal: false,  labelErrorCostModal: false,
-                               labelErrorLessTimeModal: false, labelErrorGenderModal: false, 
-                                labelErrorCostModal: false,  labelErrorAddressModal: false, 
-                                    
+                                id: snap.key })
+                        if(this.state.id !== ''){ 
+                            this.props.navigation.navigate('PostDetailModal', {
+                            id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
+                            content: this.state.content, cost: this.state.cost, girl: this.state.girl,
+                            datetime: this.state.datetime, datetime1: this.state.datetime1,
+                            value: this.state.value,  height: this.state.height, boy: this.state.boy, 
+                            labelRightModal1: this.state.labelRightModal1,labelRightModal2: this.state.labelRightModal2,
+                            labelRightModal3: this.state.labelRightModal3,labelRightModal4: this.state.labelRightModal4,
+                            labelRightModal5: this.state.labelRightModal5, countCommentEvent: this.state.countCommentEvent, 
+                            countParticipate: this.state.countParticipate, countLike: this.state.countLike,
+                            circle1: this.state.circle1, circle2: this.state.circle2, circle3: this.state.circle3, 
                             })
-                        })
-                    }
-                
+                        }
+                    this.setState({ 
+                        content:'', cost: '', value: '',  circle1: '', circle2: '', circle3: '', height: '', 
+                        datetime: '', datetime1: '', boy: '', girl: '',  labelRightModal1: '', labelRightModal2: '',
+                        labelRightModal3: '', labelRightModal4: '', labelRightModal5: '', 
+                        checkedGenderModal1: false, checkedGenderModal2: false,
+                        checkedRightModal1: false, checkedRightModal2: false, checkedRightModal3: false,
+                        checkedRightModal4: false, checkedRightModal5: false,
+                        labelErrorAddressModal: false, labelErrorGenderModal: false, labelErrorLessTimeModal: false,
+                        labelErrortimeModal: false,  labelErrorCostModal: false,
+                        labelErrorLessTimeModal: false, labelErrorGenderModal: false, 
+                        labelErrorCostModal: false,  labelErrorAddressModal: false,
+                    })
+                })
             }
-            }  
-        }
-
-        showNoti(){
-            // PushNotification.localNotification({ 
-            //     message: "My notification message"
-            // })
+        }  
     }
+    
 
     render(){
         var data = [];
@@ -587,10 +543,10 @@ export default class PostModal extends Component {
                             style={stylesPostModal.inputWeight}>{this.state.cost}</TextInput>
                     </View>: null}
                     <View style={[stylesPostModal.title, stylesPostModal.buttonCreate]}>
-                        <TouchableOpacity  onPress={() => this.showNoti()}
+                        {/* <TouchableOpacity  onPress={() => this.showNoti()}
                             style={stylesPostModal.txtBtnPostModal}>
                             <Text style={{ textAlign:"center", color: 'white', marginTop: 5}}>Gửi yêu cầu</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                         <TouchableOpacity  onPress={() => this.createPostModal()}
                             style={stylesPostModal.txtBtnPostModal}
                                          >
@@ -659,7 +615,7 @@ stylesPostModal = StyleSheet.create({
     },
    
     txtBtnPostModal: {
-       width: 150, height: 30, borderRadius: 10, 
+       width: 320, height: 30, borderRadius: 10, 
         backgroundColor: '#EE3B3B', 
     }
 })
