@@ -280,18 +280,18 @@ export default class PostDetailPhoto extends Component {
                     {/* <TouchableOpacity style={stylesPostDePhoto.btnConfirmPhoto} >
                         <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
                     </TouchableOpacity> */}
-                     {this.state.changeStatusPartPhoto === true?       
+                     {/* {this.state.changeStatusPartPhoto === true?       
                         <TouchableOpacity style={stylesPostDePhoto.btnConfirmModal1} 
                             // onChange = {(changeParticipate) => this.setState(changeParticipate)}
                             onPress={() => this.btnChangeNotParticipatePhoto()}>
                             <Text style={{ textAlign:"center", color: 'blue'}}>Đã gửi yêu cầu tham gia</Text>
-                        </TouchableOpacity>:null}
-                    {this.state.changeStatusPartPhoto === false  ?
+                        </TouchableOpacity>:null} */}
+                    
                         <TouchableOpacity style={stylesPostDePhoto.btnConfirmModal1} 
-                            // onChange = {(changeParticipate) => this.setState(changeParticipate)}
+                            onChange = {(changeParticipate) => this.setState(changeParticipate)}
                             onPress={() => this.btnChangeParticipatePhoto()}>
-                                <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
-                        </TouchableOpacity>:null } 
+                                <Text style={{ textAlign:"center", color: 'black'}}>Gửi yêu cầu trực tiếp</Text>
+                        </TouchableOpacity> 
                    
                 </View>
                 {this.state.changeCommentPhoto === true?
@@ -330,6 +330,17 @@ export default class PostDetailPhoto extends Component {
                         </View> }
                     />
                 </View>: null}
+                <View style={{marginTop: 25}}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListPostPhoto')}> 
+                        <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách yêu cầu tham gia</Text>
+                    </TouchableOpacity>
+                </View>
+               
+                <View style={{marginTop: 25}}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListDirectPostPhoto')}> 
+                        <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách gửi trực tiếp</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
           </ScrollView>
         )

@@ -50,6 +50,10 @@ import PostDetailPhotoView from './src/View/Post/PostPhoto/PostDetailPhotoView'
 
 import ListPostModal from './src/View/Post/PostModal/ListPostModal'
 import ListDirectPostModal from './src/View/Post/PostModal/ListDirectPostModal'
+import ListPostPhoto from './src/View/Post/PostPhoto/ListPostPhoto'
+import ListDirectPostPhoto from './src/View/Post/PostPhoto/ListDirectPostPhoto'
+import ListPostEvent from './src/View/Post/PostEvent/ListPostEvent'
+import ListDirectPostEvent from './src/View/Post/PostEvent/ListDirectPostEvent'
 
 
 const instructions = Platform.select({
@@ -158,6 +162,18 @@ const Mainapp = createStackNavigator({
     },
     ListDirectPostModal: { 
         screen: ListDirectPostModal
+    },
+    ListPostPhoto: { 
+        screen: ListPostPhoto
+    },
+    ListDirectPostPhoto: { 
+        screen: ListDirectPostPhoto
+    },
+    ListPostEvent: { 
+        screen: ListPostEvent
+    },
+    ListDirectPostEvent: { 
+        screen: ListDirectPostEvent
     }
     },{
       headerMode:'none'

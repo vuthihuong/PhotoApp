@@ -368,49 +368,16 @@ export default class PostDetailEvent extends Component {
                     />
                 </View>: null}
                 <View style={{marginTop: 25}}>
-                    <TouchableOpacity  onPress={() => this.btnListParticipate()}> 
+                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListPostEvent')}> 
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách yêu cầu tham gia</Text>
                     </TouchableOpacity>
                 </View>
-                {this.state.changeListParticipate === true? 
-                <View style={[stylesPostDtailEvent.btnViewEvent, {marginTop: 10}]}>
-                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
-                        <Text style={{color: 'black'}}>Tên người tham gia</Text>
+               
+                <View style={{marginTop: 25}}>
+                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListDirectPostEvent')}> 
+                        <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách gửi trực tiếp</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
-                        <Text style={{color:'black', marginRight: 5, marginLeft: 45}}>Đồng ý</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent1} >
-                         <Text style={{color:'black'}}>Từ chối</Text>
-                    </TouchableOpacity>
-                </View>: null}
-                {this.state.changeListParticipate === true? 
-                (
-                    <ListView
-                        contentContainerStyle={{flexWrap:'wrap'}}
-                        dataSource = {this.state.dataSource1}
-                            renderRow = {(rowData)=> 
-                        <View style={stylesPostDtailEvent.listEventPart}>
-                            <TouchableOpacity style={stylesPostDtailEvent.listHeadParticipate} >
-                                <Text style={{color: 'black'}}>{rowData.username}</Text>
-                            </TouchableOpacity>
-                            <CheckBox
-                                    label=''
-                                    labelStyle={{color: 'black'}}
-                                    checked={this.state.checkedGenderModal1}
-                                    checkboxStyle = {stylesPostDtailEvent.txtBoxPostModal}
-                                    onChange={(checked) => {this.checkGenderModal1()}} 
-                                    />
-                                <CheckBox
-                                    label=''
-                                    labelStyle={{color: 'black'}}
-                                    checked={this.state.checkedGenderModal2}
-                                    checkboxStyle = {stylesPostDtailEvent.txtBoxPostModal}
-                                    onChange={(checked) => {this.checkGenderModal2()}} 
-                                    />
-                        </View>}
-                    />
-                ): null}
+                </View>
                
             </View>
            </ScrollView>
