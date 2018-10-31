@@ -9,6 +9,7 @@ export default class ManagePost extends Component{
  
         super(props);
         this.state = { 
+            statusViewListModal: true, statusViewListPhoto: false, statusViewListEvent: false,
             dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
             dataSource2: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
             dataSource3: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
@@ -84,12 +85,39 @@ export default class ManagePost extends Component{
               });
           });
     }
+    changeStatusListEvent(){ 
+      if(this.state.statusViewListEvent === true){ 
+        this.setState({ statusViewListEvent: false})
+      }
+      else if(this.state.statusViewListEvent === false){ 
+        this.setState({ statusViewListEvent: true})
+      }
+    }
+    changeStatusListModal(){ 
+      if(this.state.statusViewListModal === true){ 
+        this.setState({ statusViewListModal: false})
+      }
+      else if(this.state.statusViewListModal === false){ 
+        this.setState({ statusViewListModal: true})
+      }
+    }
+    changeStatusListPhoto(){ 
+      if(this.state.statusViewListPhoto=== true){ 
+        this.setState({ statusViewListPhoto: false})
+      }
+      else if(this.state.statusViewListPhoto === false){ 
+        this.setState({ statusViewListPhoto: true})
+      }
+    }
     
       render() {
        return(
         <ScrollView style={{flex:1, backgroundColor: 'white'}}>
           <View style = { stylesManagCont.containerManagCont }>
-            <Text style={{color: 'black', fontWeight: 'bold'}}>Các bài tìm mẫu ảnh</Text>
+            <TouchableOpacity onPress={()=> this.changeStatusListModal()}>
+               <Text style={{color: 'black', fontWeight: 'bold'}}>Các bài tìm mẫu ảnh</Text>
+            </TouchableOpacity>
+            {this.state.statusViewListModal === true?
             <ListView 
                     dataSource = {this.state.dataSource1}
                     renderRow = {(rowData)=> 
@@ -118,10 +146,12 @@ export default class ManagePost extends Component{
                                     <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Xóa</Text>
                                 </TouchableOpacity>
                             </View>
-                        </View>
-                                        }
-                />
-                <Text style={{color: 'black', fontWeight: 'bold'}}>Các bài sự kiện</Text>
+                        </View>}
+                />:  null}
+              <TouchableOpacity onPress={()=> this.changeStatusListEvent()}>
+                  <Text style={{color: 'black', fontWeight: 'bold', marginTop: 15}}>Các bài sự kiện</Text>
+              </TouchableOpacity>
+              {this.state.statusViewListEvent === true ?
             <ListView 
                     dataSource = {this.state.dataSource3}
                     renderRow = {(rowData)=> 
@@ -145,10 +175,13 @@ export default class ManagePost extends Component{
                                     <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Xóa</Text>
                                 </TouchableOpacity>
                             </View>
-                        </View>
-                                        }
-                />
-            <Text style={{color: 'black', fontWeight: 'bold'}}>Các bài tìm nháy ảnh</Text>
+                        </View>}
+                />:  null}
+               
+            <TouchableOpacity onPress={()=> this.changeStatusListPhoto()}>
+                <Text style={{color: 'black', fontWeight: 'bold', marginTop: 15}}>Các bài tìm nháy ảnh</Text>
+            </TouchableOpacity>
+           {this.state.statusViewListPhoto === true ?
             <ListView 
                     dataSource = {this.state.dataSource2}
                     renderRow = {(rowData)=> 
@@ -171,9 +204,9 @@ export default class ManagePost extends Component{
                                     <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Xóa</Text>
                                 </TouchableOpacity>
                             </View>
-                        </View>
-                                        }
-                />
+                        </View> }
+                />: null}
+                  
           </View>
          </ScrollView> 
        );
