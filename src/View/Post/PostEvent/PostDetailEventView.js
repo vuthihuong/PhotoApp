@@ -153,7 +153,7 @@ export default class PostDetailEventView extends Component {
         })
         FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').push({ 
-            userId: userKey, username: username
+            userId: userKey, username: username,  statusAgree: false
         })
     }
     btnChangeNotParticipateView(){ 
@@ -184,7 +184,7 @@ export default class PostDetailEventView extends Component {
             })
             FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
             .child('LikePostEvent').push({ 
-                userId: userKey
+                userId: userKey, 
             })
         }
         else if(this.state.changeLike === true){ 

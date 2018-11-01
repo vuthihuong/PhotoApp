@@ -305,15 +305,15 @@ export default class PostDetailEvent extends Component {
                         <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                         <Text style={{color:'black'}}>Bình luận</Text>
                    </TouchableOpacity>
-                    {this.state.changeStatusPart === true?       
+                    {/* {this.state.changeStatusPart === true?       
                         <TouchableOpacity style={[stylesPostDtailEvent.btnConfirmEvent,{height:35}]}
                             onPress={() => this.btnChangeNotParticipate()}>
                             <Text style={{ textAlign:"center", color: 'black'}}>Đã gửi yêu cầu tham gia</Text>
-                        </TouchableOpacity>:null}
+                        </TouchableOpacity>:null} */}
                     {this.state.changeStatusPart === false  ?
-                        <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent} 
-                            onPress={() => this.btnChangeParticipate()}>
-                                <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>
+                        <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent} >
+                             {/* onPress={() => this.btnChangeParticipate()}> */}
+                                <Text style={{ textAlign:"center", color: 'black'}}>Gửi yêu cầu trực tiếp</Text>
                         </TouchableOpacity>:null }  
                 </View>
 
