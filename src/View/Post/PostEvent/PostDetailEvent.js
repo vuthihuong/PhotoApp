@@ -372,7 +372,9 @@ export default class PostDetailEvent extends Component {
                     />
                 </View>: null}
                 <View style={{marginTop: 25}}>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListPostEvent')}> 
+                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListPostEvent', { 
+                        id: this.props.navigation.state.params.id
+                    })}> 
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách yêu cầu tham gia</Text>
                     </TouchableOpacity>
                 </View>

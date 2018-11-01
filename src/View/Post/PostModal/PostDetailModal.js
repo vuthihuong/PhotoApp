@@ -197,6 +197,11 @@ export default class PostDetailModal extends Component {
                 .child('LikePostEvent').child(keyLike).remove();
             }
         }
+    listPostModal(){ 
+        this.props.navigation.navigate('ListPostModal', { 
+            id: this.props.navigation.state.params.id
+        })
+    }
     render(){
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -342,7 +347,7 @@ export default class PostDetailModal extends Component {
                 </View>: null}
 
                 <View style={{marginTop: 25}}>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListPostModal')}> 
+                    <TouchableOpacity  onPress={() => this.listPostModal()}> 
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách yêu cầu tham gia</Text>
                     </TouchableOpacity>
                 </View>
