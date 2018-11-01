@@ -310,11 +310,11 @@ export default class PostDetailEvent extends Component {
                             onPress={() => this.btnChangeNotParticipate()}>
                             <Text style={{ textAlign:"center", color: 'black'}}>Đã gửi yêu cầu tham gia</Text>
                         </TouchableOpacity>:null} */}
-                    {this.state.changeStatusPart === false  ?
+                    {/* {this.state.changeStatusPart === false  ?
                         <TouchableOpacity style={stylesPostDtailEvent.btnConfirmEvent} >
-                             {/* onPress={() => this.btnChangeParticipate()}> */}
+                             onPress={() => this.btnChangeParticipate()}>
                                 <Text style={{ textAlign:"center", color: 'black'}}>Gửi yêu cầu trực tiếp</Text>
-                        </TouchableOpacity>:null }  
+                        </TouchableOpacity>:null }   */}
                 </View>
 
                 {/* <View style={stylesPostDtailEvent.btnSubmit}>
@@ -379,11 +379,11 @@ export default class PostDetailEvent extends Component {
                     </TouchableOpacity>
                 </View>
                
-                <View style={{marginTop: 25}}>
+                {/* <View style={{marginTop: 25}}>
                     <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListDirectPostEvent')}> 
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách gửi trực tiếp</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
                
             </View>
            </ScrollView>

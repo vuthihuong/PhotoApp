@@ -296,9 +296,6 @@ export default class PostPhoto extends Component {
                                 {this.state.costPhoto}</TextInput>
                         </View>
                         <View style={[stylesPostPhoto.title, stylesPostPhoto.buttonCreate]}>
-                            <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}>
-                                <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Gửi yêu cầu</Text>
-                            </TouchableOpacity>
                             <TouchableOpacity style={stylesPostPhoto.txtBtnPostPhoto}
                                     onPress={() => this.createPostPhoto()} >
                                 <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
@@ -354,7 +351,6 @@ export default class PostPhoto extends Component {
              width: 230,
         },
         txtBtnPostPhoto: {
-            width: 150, height: 30, borderRadius: 10, 
-            backgroundColor: '#EE3B3B',
+            width: 330, height: 30, borderRadius: 10,   backgroundColor: '#EE3B3B',
         }
     })

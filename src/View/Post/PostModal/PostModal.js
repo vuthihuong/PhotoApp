@@ -543,19 +543,13 @@ export default class PostModal extends Component {
                             style={stylesPostModal.inputWeight}>{this.state.cost}</TextInput>
                     </View>: null}
                     <View style={[stylesPostModal.title, stylesPostModal.buttonCreate]}>
-                        {/* <TouchableOpacity  onPress={() => this.showNoti()}
-                            style={stylesPostModal.txtBtnPostModal}>
-                            <Text style={{ textAlign:"center", color: 'white', marginTop: 5}}>Gửi yêu cầu</Text>
-                        </TouchableOpacity> */}
                         <TouchableOpacity  onPress={() => this.createPostModal()}
-                            style={stylesPostModal.txtBtnPostModal}
-                                         >
+                            style={{ width: 330, height: 30, borderRadius: 10, 
+                                backgroundColor: '#EE3B3B', }}>
                             <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tạo</Text>
                         </TouchableOpacity>
-                       
-                        </View>
-                  </View>
-               
+                    </View>
+                </View>
                 </View>
             </ScrollView>
            
