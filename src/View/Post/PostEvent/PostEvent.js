@@ -15,7 +15,7 @@ export default class PostEvent extends Component {
         super(props)
         this.state = {
             datetimeEvent: '', datetimeEvent1: '',  contentEvent: '', costEvent:'', addressEvent: '',
-            checkedEvent1: false, checkedEvent2: false, numberModal: '', id: '', countLike: 0,
+            checkedEvent1: false, checkedEvent2: false, numberModal: '', id: '', countLike: 0, currentDay: new Date(),
             labelEvent1:'', labelEvent2: '', labelErrorTitle: false, labelErrorAddress: false,
             labelErrorTime: false, labelErrorLessTime: false, countCommentEvent: 0, countParticipate: 0,
         }
@@ -148,7 +148,9 @@ export default class PostEvent extends Component {
                     })
 
                     this.itemRef.ref('PostEvent').push({
-                        title: 'Tạo sự kiện', countCommentEvent: this.state.countCommentEvent,
+                        title: 'Tạo sự kiện', countCommentEvent: this.state.countCommentEvent, 
+                        datePostEvent : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
+                        timePostEvent: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
                         countParticipate: this.state.countParticipate, countLike: this.state.countLike,
                         userId: key, numberModal: this.state.numberModal, costEvent: this.state.costEvent,
                         labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
@@ -191,9 +193,17 @@ export default class PostEvent extends Component {
           const { selectedHours, selectedMinutes } = this.state;
           return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
+                <View style={stylesPostEvent.headPostEvent}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.pop()}>
+                        <Image source={gobackIcon} 
+                            style={{width: 20, height: 20, marginLeft: 15, marginRight: 90, tintColor: 'white'}}/>
+                    </TouchableOpacity>
+                    <Text style={{ flex: 1,color: 'white', fontSize: 18}}>Tạo sự kiện</Text>
+                </View>
                 <View style={stylesPostEvent.container}>
                     <View style={stylesPostEvent.containerPostEvent}>
-                        <View style={stylesPostEvent.headerPostEvent}>
+                        {/* <View style={stylesPostEvent.headerPostEvent}>
                             <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
                                 <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
                                             tintColor: '#EE3B3B'}}/>
@@ -204,7 +214,7 @@ export default class PostEvent extends Component {
                             </View>
                             <View><Text></Text></View>
                             
-                        </View>
+                        </View> */}
                         {this.state.labelErrorTitle === true? 
                          <View style={stylesPostEvent.title}>
                             <Text style={{color:'red'}}>Bạn chưa chọn tiêu đề</Text></View>: null}
@@ -324,6 +334,11 @@ export default class PostEvent extends Component {
         container: {
             flex:1,
             backgroundColor: 'white'
+        },
+        headPostEvent: { 
+            flexDirection: 'row',  alignItems: 'center',
+            backgroundColor: '#EE3B3B', height: 50, 
+            justifyContent: 'space-around'
         },
         containerPostEvent: { 
             marginRight: 5, marginLeft: 5,

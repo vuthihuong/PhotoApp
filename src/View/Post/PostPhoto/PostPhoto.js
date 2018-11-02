@@ -16,8 +16,8 @@ export default class PostPhoto extends Component {
             datetimePhoto1: '', selectedHours1: 0, selectedMinutes1: 0, contentPhoto: '', costPhoto:'',
             labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, labelErrorTime: false,
             valueCategoryPhoto1: '', valuePlacePhoto: '', labelErrorLessTime: false, id: '', countLike: 0,
-            countCommentEvent: 0, countParticipate: 0,
-        }
+            countCommentEvent: 0, countParticipate: 0,currentDay: new Date()
+        } 
         this.itemRef = FirebaseApp.database();
       }
 
@@ -140,8 +140,9 @@ export default class PostPhoto extends Component {
                         valueCategoryPhoto1: this.state.valueCategoryPhoto1,
                         contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
                         datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
-                        valuePlacePhoto: this.state.valuePlacePhoto
-                       
+                        valuePlacePhoto: this.state.valuePlacePhoto,
+                        datePostPhoto : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
+                        timePostPhoto: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
                         }).then((snap) => { this.setState({  
                                                      id: snap.key })
                              if(this.state.id !== ''){ 
@@ -190,9 +191,17 @@ export default class PostPhoto extends Component {
           const { selectedHours, selectedMinutes } = this.state;
           return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
+                 <View style={stylesPostPhoto.headPostPhoto}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.pop()}>
+                        <Image source={gobackIcon} 
+                            style={{width: 20, height: 20, marginLeft: 15, marginRight: 90, tintColor: 'white'}}/>
+                    </TouchableOpacity>
+                    <Text style={{ flex: 1,color: 'white', fontSize: 18}}>Tìm nháy ảnh</Text>
+                </View>
                 <View style={stylesPostPhoto.container}>
                     <View style={stylesPostPhoto.containerPostPhoto}>
-                        <View style={stylesPostPhoto.headerPostPhoto}>
+                        {/* <View style={stylesPostPhoto.headerPostPhoto}>
                             <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
                                 <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
                                             tintColor: '#EE3B3B'}}/>
@@ -203,7 +212,7 @@ export default class PostPhoto extends Component {
                             </View>
                             <View><Text></Text></View>
                             
-                        </View>
+                        </View> */}
                         {this.state.labelErrorCatg === true?
                             <View style={stylesPostPhoto.title}>
                                 <Text style={{color:'red'}}>Bạn chưa chọn thể loại</Text>
@@ -312,7 +321,11 @@ export default class PostPhoto extends Component {
             flex:1,
             backgroundColor: 'white'
         },
-
+        headPostPhoto: { 
+            flexDirection: 'row',  alignItems: 'center',
+            backgroundColor: '#EE3B3B', height: 50, 
+            justifyContent: 'space-around'
+        },
         containerPostPhoto: { 
             marginRight: 5, marginLeft: 5,
             

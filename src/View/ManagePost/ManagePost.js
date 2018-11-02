@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, ListView,
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, ListView, Alert,
             ScrollView } from 'react-native';
 
 import {FirebaseApp} from './../../Controller/FirebaseConfig' 
@@ -10,7 +10,8 @@ export default class ManagePost extends Component{
  
         super(props);
         this.state = { 
-            statusViewListModal: true, statusViewListPhoto: false, statusViewListEvent: false,
+            statusViewListModal: false, statusViewListPhoto: false, statusViewListEvent: false,
+            errNotPostModal: false, errNotPostPhoto: false, errNotPostEvent: false,
             dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
             dataSource2: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
             dataSource3: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
@@ -49,13 +50,20 @@ export default class ManagePost extends Component{
                 labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
                 labelRightModal5: childData.labelRightModal5, 
                 circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3, 
+                datePostModal: childData.datePostModal, timePostModal: childData.timePostModal
               })
               this.setState({ 
                 dataSource1: this.state.dataSource1.cloneWithRows(items)
               });
           });
+        this.itemRef.ref(url).orderByChild('userId').equalTo(userKey).on('child_removed', (dataSnapshot)=> { 
+            items = items.filter((x)=>x.keyModal !== dataSnapshot.key);
+            this.setState({ 
+                dataSource1: this.state.dataSource1.cloneWithRows(items)
+              });
+        })
     }
-    actGetData2(url, items=[]){ 
+    actGetData2(url, items =[]){ 
         this.itemRef.ref(url).orderByChild("userId").equalTo(userKey).on('child_added', (dataSnapshot)=> { 
              keyPhoto = dataSnapshot.key;
             var childData = dataSnapshot.val();
@@ -63,12 +71,19 @@ export default class ManagePost extends Component{
                 userId: (childData.userId), title: childData.title, id: keyPhoto,
                 contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto, 
                 datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
-                valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+                valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto,
+                datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto
               })
               this.setState({ 
                 dataSource2: this.state.dataSource2.cloneWithRows(items)
               });
           });
+          this.itemRef.ref(url).orderByChild('userId').equalTo(userKey).on('child_removed', (dataSnapshot)=> { 
+            items = items.filter((x)=>x.keyModal !== dataSnapshot.key);
+            this.setState({ 
+                dataSource2: this.state.dataSource2.cloneWithRows(items)
+              });
+        })
     }
     actGetData3(url, items=[]){ 
         this.itemRef.ref(url).orderByChild("userId").equalTo(userKey).on('child_added', (dataSnapshot)=> { 
@@ -79,45 +94,131 @@ export default class ManagePost extends Component{
                 contentEvent: childData.contentEvent, costEvent: childData.costEvent,
                 datetimeEvent: childData.datetimeEvent, datetimeEvent1: childData.datetimeEvent1,
                 addressEvent: childData.addressEvent, labelEvent1: childData.labelEvent1, labelEvent2: childData.labelEvent2,
-                numberModal: childData.numberModal
+                numberModal: childData.numberModal,  
+                datePostEvent: childData.datePostEvent, timePostEvent: childData.timePostEvent
               })
               this.setState({ 
                 dataSource3: this.state.dataSource3.cloneWithRows(items)
               });
           });
+          this.itemRef.ref(url).orderByChild('userId').equalTo(userKey).on('child_removed', (dataSnapshot)=> { 
+            items = items.filter((x)=>x.keyModal !== dataSnapshot.key);
+            this.setState({ 
+                dataSource3: this.state.dataSource3.cloneWithRows(items)
+              });
+        })
     }
     changeStatusListEvent(){ 
       if(this.state.statusViewListEvent === true){ 
-        this.setState({ statusViewListEvent: false})
+        this.setState({ 
+            statusViewListEvent: false, errNotPostEvent: false
+        })
       }
-      else if(this.state.statusViewListEvent === false){ 
-        this.setState({ statusViewListEvent: true})
+      else if(this.state.statusViewListEvent === false  && this.state.dataSource3 !== ''){ 
+        this.setState({
+             statusViewListEvent: true, errNotPostEvent: false
+            })
+      }
+      else if(this.state.statusViewListEvent === false && this.state.dataSource3 === ''){ 
+          this.setState({ 
+              statusViewListEvent: false, errNotPostEvent: true
+          })
       }
     }
     changeStatusListModal(){ 
       if(this.state.statusViewListModal === true){ 
-        this.setState({ statusViewListModal: false})
+        this.setState({ 
+            statusViewListModal: false, errNotPostModal: false
+        })
       }
-      else if(this.state.statusViewListModal === false){ 
-        this.setState({ statusViewListModal: true})
+      else if(this.state.statusViewListModal === false  && this.state.dataSource1 !==''){ 
+        this.setState({
+             statusViewListModal: true, errNotPostModal: false
+            })
+      }
+      else if(this.state.statusViewListModal === false  && this.state.dataSource1 === ''){ 
+        this.setState({
+             statusViewListModal: false, errNotPostModal: true
+            })
       }
     }
     changeStatusListPhoto(){ 
       if(this.state.statusViewListPhoto=== true){ 
-        this.setState({ statusViewListPhoto: false})
+        this.setState({
+             statusViewListPhoto: false, errNotPostPhoto: false
+            })
       }
-      else if(this.state.statusViewListPhoto === false){ 
-        this.setState({ statusViewListPhoto: true})
+      else if(this.state.statusViewListPhoto === false  && this.state.dataSource2 !== ''){ 
+        this.setState({
+             statusViewListPhoto: true, errNotPostPhoto: false
+            })
+      }
+      else if(this.state.statusViewListPhoto === false  && this.state.dataSource2 === ''){ 
+        this.setState({
+             statusViewListPhoto: true, errNotPostPhoto: true
+            })
       }
     }
+    removePostModal(idPostModal){ 
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn muốn xóa bài này không?',
+            [
+              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {
+                FirebaseApp.database().ref('PostModal/').child(idPostModal).remove();
+                var itemsModal = [];
+                this.actGetData1('PostModal/', itemsModal);
+                alert('Bạn đã xóa thành công');
+              }},
+            ],
+            { cancelable: false }
+          )
+    }
+    removePostEvent(idPostEvent){ 
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn muốn xóa bài này không?',
+            [
+              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {
+                FirebaseApp.database().ref('PostEvent/').child(idPostEvent).remove();
+                var itemsEvent = [];
+                this.actGetData3('PostEvent/', itemsEvent);
+                alert('Bạn đã xóa thành công');
+              }},
+            ],
+            { cancelable: false }
+          )
+    }
+    removePostPhoto(idPostPhoto){ 
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn muốn xóa bài này không?',
+            [
+              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {
+                FirebaseApp.database().ref('PostPhoto/').child(idPostPhoto).remove();
+                var itemsPhoto = [];
+                this.actGetData2('PostPhoto/', itemsPhoto);
+                alert('Bạn đã xóa thành công');
+              }},
+            ],
+            { cancelable: false }
+          )
+    }
     
-      render() {
+    render() {
        return(
         <ScrollView style={{flex:1, backgroundColor: 'white'}}>
           <View style = { stylesManagCont.containerManagCont }>
             <TouchableOpacity onPress={()=> this.changeStatusListModal()}>
                <Text style={{color: 'black', fontWeight: 'bold'}}>Các bài tìm mẫu ảnh</Text>
             </TouchableOpacity>
+           
             {this.state.statusViewListModal === true?
             <ListView 
                     dataSource = {this.state.dataSource1}
@@ -136,19 +237,22 @@ export default class ManagePost extends Component{
                                 circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,} )}
                                 style={stylesManagCont.contManagCont}>
                                     <Text style={stylesManagCont.txtManagCont}>{rowData.title} {rowData.boy} {rowData.girl} </Text>
-                                    <Text style={stylesManagCont.txtManagCont}>{rowData.value}</Text>
+                                    <Text style={stylesManagCont.txtManagCont}>Địa điểm: {rowData.value}</Text>
                                     <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime}</Text>
+                                    <Text style={[stylesManagCont.txtManagCont, {fontSize: 10, color:'#FF3030'}]}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
                             </TouchableOpacity>
                             <View style={ stylesManagCont.txtConfirm }>
                                 {/* <TouchableOpacity>
-                                    <Text style={[stylesManagCont.txtManagCont,{color:'blue'}]}>Đang tìm</Text>
+                                    <Text style={[stylesManagCont.txtManagCont,{color:'#FF3030'}]}>Đang tìm</Text>
                                 </TouchableOpacity> */}
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={()=> { this.removePostModal(rowData.id)}}>
                                     <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Xóa</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>}
                 />:  null}
+            {(this.state.errNotPostModal === true && this.state.statusViewListModal === true)?
+            <Text style={{color: "red"}}>Bạn chưa tạo bài tìm mẫu nào.</Text>: null}
               <TouchableOpacity onPress={()=> this.changeStatusListEvent()}>
                   <Text style={{color: 'black', fontWeight: 'bold', marginTop: 15}}>Các bài sự kiện</Text>
               </TouchableOpacity>
@@ -164,21 +268,23 @@ export default class ManagePost extends Component{
                                 addressEvent: rowData.addressEvent, labelEvent1: rowData.labelEvent1, 
                                 labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal} )}
                                 style={stylesManagCont.contManagCont}>
-                                    <Text style={stylesManagCont.txtManagCont}>{rowData.labelEvent1} {rowData.labelEvent2} </Text>
-                                    <Text style={stylesManagCont.txtManagCont}>{rowData.addressEvent}</Text>
+                                    <Text style={stylesManagCont.txtManagCont}>{rowData.labelEvent1}{rowData.labelEvent2} </Text>
+                                    <Text style={stylesManagCont.txtManagCont}>Địa điểm: {rowData.addressEvent}</Text>
                                     <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                                    <Text style={[stylesManagCont.txtManagCont, {fontSize: 10, color:'#FF3030'}]}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                             </TouchableOpacity>
                             <View style={ stylesManagCont.txtConfirm }>
                                 {/* <TouchableOpacity>
-                                    <Text style={[stylesManagCont.txtManagCont,{color:'blue'}]}>Đang tìm</Text>
+                                    <Text style={[stylesManagCont.txtManagCont,{color:'#FF3030'}]}>Đang tìm</Text>
                                 </TouchableOpacity> */}
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={()=> { this.removePostEvent(rowData.id)}}>
                                     <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Xóa</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>}
                 />:  null}
-               
+            {this.state.errNotPostEvent === true?
+            <Text style={{color: "red"}}>Bạn chưa tạo sự kiện nào.</Text>: null}
             <TouchableOpacity onPress={()=> this.changeStatusListPhoto()}>
                 <Text style={{color: 'black', fontWeight: 'bold', marginTop: 15}}>Các bài tìm nháy ảnh</Text>
             </TouchableOpacity>
@@ -194,20 +300,22 @@ export default class ManagePost extends Component{
                                 valuePlacePhoto: rowData.valuePlacePhoto, valueCategoryPhoto1: rowData.valueCategoryPhoto1} )}
                                 style={stylesManagCont.contManagCont}>
                                     <Text style={stylesManagCont.txtManagCont}>{rowData.title} </Text>
-                                    <Text style={stylesManagCont.txtManagCont}>{rowData.valuePlacePhoto}</Text>
-                                    <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime}</Text>
+                                    <Text style={stylesManagCont.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
+                                    <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                                    <Text style={[stylesManagCont.txtManagCont, {fontSize: 10, color:'#FF3030'}]}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
                             </TouchableOpacity>
                             <View style={ stylesManagCont.txtConfirm }>
                                 {/* <TouchableOpacity>
-                                    <Text style={[stylesManagCont.txtManagCont,{color:'blue'}]}>Đang tìm</Text>
+                                    <Text style={[stylesManagCont.txtManagCont,{color:'#FF3030'}]}>Đang tìm</Text>
                                 </TouchableOpacity> */}
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={()=> { this.removePostPhoto(rowData.id)}}>
                                     <Text style={[stylesManagCont.txtManagCont,{color:'#EE3B3B'}]}>Xóa</Text>
                                 </TouchableOpacity>
                             </View>
                         </View> }
                 />: null}
-                  
+         {this.state.errNotPostPhoto === true?
+            <Text style={{color: "red"}}>Bạn chưa tạo bài tìm nháy nào.</Text>: null}
           </View>
          </ScrollView> 
        );

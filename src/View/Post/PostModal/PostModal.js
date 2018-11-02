@@ -20,7 +20,7 @@ export default class PostModal extends Component {
         this.state = {
             datetime: '',  datetime1: '',  id: '',  height:'', cost: '',  boy: '', girl: '',  value: '',
             checkedGenderModal1: false, checkedGenderModal2: false, countLike: 0, countCommentEvent: 0,
-            checkedRightModal1: false, checkedRightModal2: false, countParticipate: 0,
+            checkedRightModal1: false, checkedRightModal2: false, countParticipate: 0, currentDay: new Date(),
             checkedRightModal3: false, checkedRightModal4: false, checkedRightModal5: false,
             content: '', place:'', circle1: '', circle2:'', circle3:'', labelRightModal5: '',
             labelRightModal1: '', labelRightModal2: '', labelRightModal3: '', labelRightModal4: '', 
@@ -230,6 +230,8 @@ export default class PostModal extends Component {
                 userId: key, title: "Tìm mẫu ảnh",
                 content: this.state.content, cost: this.state.cost, countCommentEvent: this.state.countCommentEvent, 
                 countParticipate: this.state.countParticipate, countLike: this.state.countLike,
+                datePostModal : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
+                timePostModal: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
                 datetime: this.state.datetime, datetime1: this.state.datetime1,
                 labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
                 labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
@@ -349,9 +351,18 @@ export default class PostModal extends Component {
         }))
         return (
             <ScrollView style={{flex:1, backgroundColor: 'white'}}> 
+                 <View style={{ flexDirection: 'row',  alignItems: 'center',
+                         backgroundColor: '#EE3B3B', height: 50,   justifyContent: 'space-around'}}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.pop()}>
+                        <Image source={gobackIcon} 
+                            style={{width: 20, height: 20, marginLeft: 15, marginRight: 90, tintColor: 'white'}}/>
+                    </TouchableOpacity>
+                    <Text style={{ flex: 1,color: 'white', fontSize: 18}}>Tìm mẫu ảnh</Text>
+                </View>
                <View style={stylesPostModal.container}>
                   <View style={stylesPostModal.containerPostModal}>
-                    <View style={stylesPostModal.headerPostModal}>
+                    {/* <View style={stylesPostModal.headerPostModal}>
                         <TouchableOpacity  onPress={() => this.props.navigation.pop()}>
                             <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15,
                                         tintColor: '#EE3B3B'}}/>
@@ -362,7 +373,7 @@ export default class PostModal extends Component {
                         </View>
                         <View><Text></Text></View>
                     
-                    </View>
+                    </View> */}
                     {this.state.labelErrorGenderModal === true? 
                         <View style={stylesPostModal.title}>
                             <Text style={{color: 'red'}}>Bạn chưa chọn loại mẫu</Text>
@@ -561,6 +572,11 @@ stylesPostModal = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: 'white'
+    },
+    headPostModal: { 
+        flexDirection: 'row',  alignItems: 'center',
+        backgroundColor: '#EE3B3B', height: 50, 
+        justifyContent: 'space-around'
     },
     containerPostModal: {
         marginRight: 5,

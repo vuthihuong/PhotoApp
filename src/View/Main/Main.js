@@ -18,18 +18,30 @@ import AlbumPose from './AlbumPose'
 import MenuTabBar from './MenuTabBar'
 import Setting from './../Setting/Setting'
 import ManagePost from './../ManagePost/ManagePost'
+import {FirebaseApp} from './../../Controller/FirebaseConfig'
+
 
 import iconInfo from './../../assets/img/info/icon_info.png'
 
 
 import notifi from '../../assets/img/menu/notifi.png'
+import IconNotification from './IconNotification';
 
-
+// var user = FirebaseApp.auth().currentUser;
+// FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(user.email)
+// .on('value', (function (snapshot) {
+// snapshot.forEach(function(childSnapshot) {
+//         var key = childSnapshot.key;
+//         let childData = childSnapshot.val();
+//         username = childData.username
+//         avatarSource = childData.avatarSource
+// })
+// }))
 const InfoCustomerStack = createStackNavigator({
     InfoCustomer: { 
       screen: InfoCustomer, 
       navigationOptions: ({ navigation }) => ({
-        title: 'Phan Thu Phương',
+        title: username,
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTintColor: 'white', 
         headerMode: 'none',
@@ -51,9 +63,7 @@ const MenuStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'TRANG CHỦ',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        headerRight : <TouchableOpacity>
-                         <Image source={notifi} style={{width: 25, height: 25, tintColor: 'white'}} />
-                    </TouchableOpacity> ,
+        headerRight : <IconNotification navigationProps={ navigation }/>,
         headerTitleStyle: {fontSize: 15},
         headerStyle: {
           backgroundColor: '#EE3B3B',    
@@ -188,42 +198,29 @@ const MenuStack = createStackNavigator({
 
  
   const CustomDrawerContent = (props)=> {
+    var user = FirebaseApp.auth().currentUser;
+    FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(user.email)
+    .on('value', (function (snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+            var key = childSnapshot.key;
+            let childData = childSnapshot.val();
+            username = childData.username
+            avatarSource = childData.avatarSource
+    })
+  }))
       return (
           <Container>
-              {/* <Header style={{backgroundColor: '#3a455c', height: 90}}>
-
-              </Header>
-              <Content>
-                  <FlatList 
-                    data={[
-                      'MenuTabbar', 'ListFavorite', 'HistoryContract'
-                    ]}
-
-                    renderItem={({item})=> (
-                      <ListItem>
-                        <Text>{item}</Text>
-                      </ListItem>
-                    )}
-
-                  /> */}
-              {/* </Content> */}
               <Header  style={stylesMain.headDrawer}>
                 <Body style={stylesMain.bodyDrawer}>
                   <TouchableOpacity onPress={() => props.navigation.navigate('InfoCustomer') }>
                        <Image  
-                            source={iconInfo} style={stylesMain.iconHeadDrawer}/>
-                        {/* <Image source={require('./img/logout.png')} style={styles.icon}></Image> */}
-                        <Text style={stylesMain.labelMainDrawer}>Phan Thu Phương</Text>
+                            source={avatarSource} style={stylesMain.iconHeadDrawer}/>
+                        <Text style={stylesMain.labelMainDrawer}>{username}</Text>
                   </TouchableOpacity>
                 </Body> 
               </Header>
               <Content>
                 <DrawerItems {...props} />
-                 {/* <Button
-                style={{backgroundColor: 'white'}}
-                title="Logout"
-                onPress={() => props.navigation.navigate('Login') }/> */}
-               
                <TouchableOpacity  onPress={() => props.navigation.navigate('Login') }>
                   <View style={stylesMain.itemLogout}>
                     <View style={stylesMain.iconContainerLogout}>
@@ -234,9 +231,6 @@ const MenuStack = createStackNavigator({
                   </View>
                 </TouchableOpacity>
               </Content>
-             
-             
-             
           </Container>
       )
   }
@@ -246,29 +240,23 @@ const MenuStack = createStackNavigator({
     InfoCustomer: {
       screen: InfoCustomerStack,
       navigationOptions: {
-        drawerLabel: 'Phan Thu Phương',
+        drawerLabel: '   ',
         headerStyle: {
           backgroundColor: '#EE3B3B',    
-          height: 35,    
-       
-          
-        },
+          height: 35,},
+      },
     },
-  },
   
     MenuTabBar: { 
       screen: MenuStack,
       navigationOptions: {
         // title: 'Trang chủ',
         drawerLabel: 'Trang chủ',
-       
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/menu/house.png')}
-            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
-          />
-        ),
-    }
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
+        ),}
     },
   
     ListFavorite: { 
@@ -278,14 +266,11 @@ const MenuStack = createStackNavigator({
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/info/heart.png')}
-            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
-          />
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
         ),
         headerStyle: {
           backgroundColor: '#EE3B3B',    
-          height: 35,    
-          
-        },
+          height: 35,   },
     },
     },
 
@@ -296,14 +281,11 @@ const MenuStack = createStackNavigator({
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/info/contract.png')}
-            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
-          />
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
         ),
         headerStyle: {
           backgroundColor: '#EE3B3B',    
-          height: 35,    
-          
-        },
+          height: 35,  },
     },
     },
   
@@ -411,7 +393,8 @@ const MenuStack = createStackNavigator({
       justifyContent: 'center', alignItems:'center'
     },
     iconHeadDrawer: {
-      width: 100,height: 100, tintColor: 'white'
+      width: 100,height: 100, 
+      // tintColor: 'white'
     },
     labelMainDrawer: { 
       color: 'white'

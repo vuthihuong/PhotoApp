@@ -18,6 +18,8 @@ import AlbumPose from './AlbumPose'
 import MenuTabBar from './MenuTabBar'
 import Setting from './../Setting/Setting'
 import ManagePost from './../ManagePost/ManagePost'
+import {FirebaseApp} from './../../Controller/FirebaseConfig'
+import IconNotification from './IconNotification';
 
 import iconInfo from './../../assets/img/info/icon_info.png'
 
@@ -29,7 +31,7 @@ const InfoModalStack = createStackNavigator({
     InfoModal: { 
       screen: InfoModal, 
       navigationOptions: ({ navigation }) => ({
-        title: 'Đặng Mỹ Hạnh',
+        title: username,
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTintColor: 'white', 
         headerMode: 'none',
@@ -51,9 +53,7 @@ const MenuStack = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
         title: 'TRANG CHỦ',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-        headerRight : <TouchableOpacity>
-                         <Image source={notifi} style={{width: 25, height: 25, tintColor: 'white'}} />
-                    </TouchableOpacity> ,
+        headerRight : <IconNotification navigationProps={ navigation }/>,
         headerTitleStyle: {fontSize: 15},
         headerStyle: {
           backgroundColor: '#EE3B3B',    
@@ -182,32 +182,25 @@ const MenuStack = createStackNavigator({
 
  
   const CustomDrawerContent = (props)=> {
+    var user = FirebaseApp.auth().currentUser;
+    FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(user.email)
+    .on('value', (function (snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+              var key = childSnapshot.key;
+              let childData = childSnapshot.val();
+              username = childData.username
+              avatarSource = childData.avatarSource
+      })
+    }))
       return (
           <Container>
-              {/* <Header style={{backgroundColor: '#3a455c', height: 90}}>
-
-              </Header>
-              <Content>
-                  <FlatList 
-                    data={[
-                      'MenuTabbar', 'ListFavorite', 'HistoryContract'
-                    ]}
-
-                    renderItem={({item})=> (
-                      <ListItem>
-                        <Text>{item}</Text>
-                      </ListItem>
-                    )}
-
-                  /> */}
-              {/* </Content> */}
               <Header  style={stylesMain.headDrawer}>
                 <Body style={stylesMain.bodyDrawer}>
                   <TouchableOpacity onPress={() => props.navigation.navigate('InfoModal') }>
                        <Image  
-                            source={iconInfo} style={stylesMain.iconHeadDrawer}/>
+                            source={avatarSource} style={stylesMain.iconHeadDrawer}/>
                         {/* <Image source={require('./img/logout.png')} style={styles.icon}></Image> */}
-                        <Text style={stylesMain.labelMainDrawer}>Đặng Mỹ Hạnh</Text>
+                        <Text style={stylesMain.labelMainDrawer}>{username}</Text>
                   </TouchableOpacity>
                 </Body> 
               </Header>
@@ -374,7 +367,7 @@ const MenuStack = createStackNavigator({
       justifyContent: 'center', alignItems:'center'
     },
     iconHeadDrawer: {
-      width: 100,height: 100, tintColor: 'white'
+      width: 100,height: 100, 
     },
     labelMainDrawer: { 
       color: 'white'
