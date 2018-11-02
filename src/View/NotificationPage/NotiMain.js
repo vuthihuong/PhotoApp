@@ -31,10 +31,11 @@ export default class NotiMain extends Component {
             this.actGetData3('PostEvent/', itemsEvent);
     }
     actGetData1(url, items=[]){ 
-        this.itemRef.ref(url).orderByChild("userId").equalTo(userKey).on('child_added', (dataSnapshot)=> { 
+        var items1 = [];
+        this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
              keyModal = dataSnapshot.key;
             var childData = dataSnapshot.val();
-              items.push({ 
+              items1.push({ 
                 userId: (childData.userId), title: childData.title, id: keyModal,
                 content: childData.content, cost: childData.cost, girl: childData.girl,
                 datetime: childData.datetime, datetime1: childData.datetime1,
@@ -44,9 +45,10 @@ export default class NotiMain extends Component {
                 labelRightModal5: childData.labelRightModal5, 
                 circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3, 
               })
-              this.setState({ 
+            items = items1.filter((x)=>x.userId !== userKey);
+            this.setState({ 
                 dataSource1: this.state.dataSource1.cloneWithRows(items)
-              });
+                });
           });
     }
     actGetData2(url, items=[]){ 
@@ -93,10 +95,16 @@ export default class NotiMain extends Component {
                 </View>
                 <View style={stylesNotiMain.container}>
                     <ListView 
+                     enableEmptySections
+                    //  ref="listView"
+                    //  showsHorizontalScrollIndicator={false}
+                    //  showsVerticalScrollIndicator={false}
+                    //  automaticallyAdjustContentInsets={false}
+                    //  {...this.props.options}
                         dataSource = {this.state.dataSource1}
                         renderRow = {(rowData)=> 
                             <View style={stylesNotiMain.bodyNotiMain}>
-                                <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModal',
+                                <TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModalView',
                                 { id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
                                     content: rowData.content, cost: rowData.cost, girl: rowData.girl,
                                     datetime: rowData.datetime, datetime1: rowData.datetime1,

@@ -11,7 +11,7 @@ export default class ManagePost extends Component{
         super(props);
         this.state = { 
             statusViewListModal: false, statusViewListPhoto: false, statusViewListEvent: false,
-            errNotPostModal: false, errNotPostPhoto: false, errNotPostEvent: false,
+            // errNotPostModal: false, errNotPostPhoto: false, errNotPostEvent: false,
             dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
             dataSource2: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
             dataSource3: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
@@ -128,34 +128,24 @@ export default class ManagePost extends Component{
     changeStatusListModal(){ 
       if(this.state.statusViewListModal === true){ 
         this.setState({ 
-            statusViewListModal: false, errNotPostModal: false
+            statusViewListModal: false, 
         })
       }
-      else if(this.state.statusViewListModal === false  && this.state.dataSource1 !==''){ 
+      else if(this.state.statusViewListModal === false ){ 
         this.setState({
-             statusViewListModal: true, errNotPostModal: false
-            })
-      }
-      else if(this.state.statusViewListModal === false  && this.state.dataSource1 === ''){ 
-        this.setState({
-             statusViewListModal: false, errNotPostModal: true
+             statusViewListModal: true, 
             })
       }
     }
     changeStatusListPhoto(){ 
       if(this.state.statusViewListPhoto=== true){ 
         this.setState({
-             statusViewListPhoto: false, errNotPostPhoto: false
+             statusViewListPhoto: false,
             })
       }
-      else if(this.state.statusViewListPhoto === false  && this.state.dataSource2 !== ''){ 
+      else if(this.state.statusViewListPhoto === false ){ 
         this.setState({
-             statusViewListPhoto: true, errNotPostPhoto: false
-            })
-      }
-      else if(this.state.statusViewListPhoto === false  && this.state.dataSource2 === ''){ 
-        this.setState({
-             statusViewListPhoto: true, errNotPostPhoto: true
+             statusViewListPhoto: true,
             })
       }
     }
@@ -251,8 +241,7 @@ export default class ManagePost extends Component{
                             </View>
                         </View>}
                 />:  null}
-            {(this.state.errNotPostModal === true && this.state.statusViewListModal === true)?
-            <Text style={{color: "red"}}>Bạn chưa tạo bài tìm mẫu nào.</Text>: null}
+           
               <TouchableOpacity onPress={()=> this.changeStatusListEvent()}>
                   <Text style={{color: 'black', fontWeight: 'bold', marginTop: 15}}>Các bài sự kiện</Text>
               </TouchableOpacity>
@@ -283,8 +272,7 @@ export default class ManagePost extends Component{
                             </View>
                         </View>}
                 />:  null}
-            {this.state.errNotPostEvent === true?
-            <Text style={{color: "red"}}>Bạn chưa tạo sự kiện nào.</Text>: null}
+           
             <TouchableOpacity onPress={()=> this.changeStatusListPhoto()}>
                 <Text style={{color: 'black', fontWeight: 'bold', marginTop: 15}}>Các bài tìm nháy ảnh</Text>
             </TouchableOpacity>
@@ -314,8 +302,7 @@ export default class ManagePost extends Component{
                             </View>
                         </View> }
                 />: null}
-         {this.state.errNotPostPhoto === true?
-            <Text style={{color: "red"}}>Bạn chưa tạo bài tìm nháy nào.</Text>: null}
+      
           </View>
          </ScrollView> 
        );

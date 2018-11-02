@@ -21,8 +21,15 @@ export default class PostDetailModal extends Component {
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
             dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
+         _isMounted = false
         this.itemRef = FirebaseApp.database();
     }
+    componentDidMount() {
+        this._isMounted = true
+      }
+      componentWillUnmount() {
+        this._isMounted = false
+      }
     editPostModal(){ 
         this.props.navigation.navigate('PostModalEdit', { 
             id: this.props.navigation.state.params.id, contentEdit: this.props.navigation.state.params.content, 

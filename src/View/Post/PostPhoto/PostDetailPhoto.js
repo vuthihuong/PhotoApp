@@ -20,7 +20,14 @@ export default class PostDetailPhoto extends Component {
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
+        _isMounted = false
     }
+    componentDidMount() {
+        this._isMounted = true
+      }
+      componentWillUnmount() {
+        this._isMounted = false
+      }
     editPostPhoto(){ 
         this.props.navigation.navigate('PostPhotoEdit', { 
             id: this.props.navigation.state.params.id,
@@ -98,17 +105,6 @@ export default class PostDetailPhoto extends Component {
                 });
             });
         }
-        componentDidMount() { 
-            this.setState({ 
-                _isMounted: true
-            })
-        }
-        componentWillUnmount(){ 
-            this.setState({ 
-                _isMounted: false
-            })
-        }
-
         submitCommentPhoto(){ 
             // comment bài post và lưu vào csdl
             if(this.state.commentPhotoDetail !== ''){

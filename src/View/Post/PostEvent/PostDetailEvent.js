@@ -22,17 +22,14 @@ export default class PostDetailEvent extends Component {
             dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
+        _isMounted = false
     }
-    componentDidMount() { 
-        this.setState({ 
-            _isMounted: true
-        })
-    }
-    componentWillUnmount(){ 
-        this.setState({ 
-            _isMounted: false
-        })
-    }
+    componentDidMount() {
+        this._isMounted = true
+      }
+      componentWillUnmount() {
+        this._isMounted = false
+      }
     editPostEvent(){ 
         this.props.navigation.navigate('PostEventEdit', { 
             id: this.props.navigation.state.params.id, title: this.props.navigation.state.params.title,

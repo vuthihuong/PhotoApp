@@ -21,7 +21,14 @@ export default class PostDetailPhotoView extends Component {
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
+        _isMounted = false
     }
+    componentDidMount() {
+        this._isMounted = true
+      }
+      componentWillUnmount() {
+        this._isMounted = false
+      }
     
     editPostPhoto(){ 
         this.props.navigation.navigate('PostPhotoEdit', { 
@@ -101,16 +108,6 @@ export default class PostDetailPhotoView extends Component {
                     dataSource: this.state.dataSource.cloneWithRows(items)
                 });
             });
-        }
-        componentDidMount() { 
-            this.setState({ 
-                _isMounted: true
-            })
-        }
-        componentWillUnmount(){ 
-            this.setState({ 
-                _isMounted: false
-            })
         }
 
         submitCommentPhotoView(){ 

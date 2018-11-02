@@ -22,7 +22,14 @@ export default class PostDetailEventView extends Component {
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
+        _isMounted = false
     }
+    componentDidMount() {
+        this._isMounted = true
+      }
+      componentWillUnmount() {
+        this._isMounted = false
+      }
 
     componentWillMount() {
         // lấy userkey và avatarSource của tài khoản login
@@ -90,16 +97,7 @@ export default class PostDetailEventView extends Component {
                 });
             });
         }
-        componentDidMount() { 
-            this.setState({ 
-                _isMounted: true
-            })
-        }
-        componentWillUnmount(){ 
-            this.setState({ 
-                _isMounted: false
-            })
-        }
+     
     
     // editPostEvent(){ 
     //     this.props.navigation.navigate('PostEventEdit', { 
