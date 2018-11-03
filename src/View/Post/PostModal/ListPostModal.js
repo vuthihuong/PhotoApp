@@ -7,13 +7,17 @@ import CheckBox from 'react-native-checkbox';
 import {FirebaseApp} from './../../../Controller/FirebaseConfig'
 
 import gobackIcon from '../../../assets/img/info/goback.png'
-
+var folder = '' ////// all the new folder
+var check_folder1 = []
+var check_folder2 = []
 export default class ListPostModal extends Component {
     constructor(props){
         super(props)
         this.state = {
             checkedAgree: false, checkedNotAgree: false, checkedAllAgree: false,
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+            data:[],
+            check1:[], check2:[]
         }
         this.itemRef = FirebaseApp.database();
     }
@@ -32,49 +36,14 @@ export default class ListPostModal extends Component {
             });
         });
     }
-    checkAgree(){ 
-        if(this.state.checkedAgree === false){ 
-            this.setState({ 
-                checkedAgree: true, checkedNotAgree: false
-            })
-        }
-        else if(this.state.checkedAgree === true){ 
-            this.setState({ 
-                checkedAgree: false
-            })
-        }
-    }
-    checkNotAgree(){ 
-        if(this.state.checkedNotAgree === false){ 
-            this.setState({ 
-                checkedNotAgree: true, checkedAgree: false
-            })
-        }
-        else if(this.state.checkedNotAgree === true){ 
-            this.setState({ 
-                checkedNotAgree: false
-            })
-        }
-    }
     checkAllAgree(){ 
-        if(this.state.checkedAllAgree === false){ 
-            this.setState({ 
-                checkedAllAgree: true, 
-            })
-        }
-        else if(this.state.checkedAgree === true){ 
-            this.setState({ 
-                checkedAllAgree: false
-            })
-        }
+
     }
+  
     render(){ 
         return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
                 <View style={stylesListPostModal.container}>
-                    {/* <View>
-                        <Text style={{color: 'black', fontWeight: 'bold', fontSize: 18}}>Danh sách người đăng ký tham gia</Text>
-                    </View> */}
                     <View style={stylesListPostModal.title}>
                         <TouchableOpacity  onPress={() => this.props.navigation.goBack()}>
                             <Image source={gobackIcon} style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
@@ -99,7 +68,9 @@ export default class ListPostModal extends Component {
                             />
                         </View>
                         <View style={stylesListPostModal.btnConfirmListModal} >
-                            <Text style={{color:'black', marginRight: 10, fontWeight: 'bold'}}>Từ chối</Text>
+                            <TouchableOpacity style={{marginRight: 20}} >
+                                    <Text style={{color: 'black'}}>OK</Text>
+                                </TouchableOpacity>
                             {/* <CheckBox
                                 label=''
                                 labelStyle={{color: 'black'}}
@@ -112,25 +83,64 @@ export default class ListPostModal extends Component {
                     <ListView
                         contentContainerStyle={{flexWrap:'wrap'}}
                         dataSource = {this.state.dataSource}
-                            renderRow = {(rowData)=> 
+                        renderRow={(rowData,rowID,sectionID)=> 
                         <View style={stylesListPostModal.bodyListPostModal}>
                             <TouchableOpacity style={[stylesListPostModal.headListModal, { marginLeft: 10}]} >
                                 <Text style={{color: 'black'}}>{rowData.username}</Text>
                             </TouchableOpacity>
                             <CheckBox
-                                label=''
-                                labelStyle={{color: 'black'}}
-                                checked={this.state.checkedAgree}
-                                checkboxStyle = {[stylesListPostModal.txtBoxListModal,{marginRight: 10}]}
-                                onChange={(checked) => {this.checkAgree()}} 
-                            />
+                                    label=''
+                                    labelBefore={false}
+                                    checked={this.state.check1[sectionID]}
+                                    checkboxStyle = {[stylesListPostEvent.txtBoxListModal,{marginRight: 10}]}
+                                    onChange={(checked) => {this.setState({
+                                        check1:!this.state.check1
+                                                        })
+                                        if(this.state.check1[sectionID] == false){
+                                            this.state.check1[sectionID] = true
+                                            // this.setState({
+                                            //         check1:check_folder1// has to do this because  we cant change the single element in the array
+                                            //         })
+                                                this.state.check2[sectionID] = false
+                                            // this.setState({
+                                            //     check2:check_folder2// has to do this because  we cant change the single element in the array
+                                            //     })
+                            
+                                        }else if(this.state.check1[sectionID] == true){
+                                        this.state.check1[sectionID] = false
+                                            // this.setState({
+                                            //     check1:check_folder1// has to do this because  we cant change the single element in the array
+                                            //             })
+                                                }}}
+                                    />
+                                {/* <TouchableOpacity style={{marginRight: 25}} >
+                                    <Text style={{color: 'black'}}>OK</Text>
+                                </TouchableOpacity> */}
                             <CheckBox
-                                label=''
-                                labelStyle={{color: 'black'}}
-                                checked={this.state.checkedNotAgree}
-                                checkboxStyle = {[stylesListPostModal.txtBoxListModal,{marginRight: 20}]}
-                                onChange={(checked) => {this.checkNotAgree()}} 
-                            />
+                                    label=''
+                                    labelBefore={false}
+                                    checked={this.state.check2[sectionID]}
+                                    checkboxStyle = {[stylesListPostEvent.txtBoxListModal,{marginRight: 10}]}
+                                    onChange={(checked) => {this.setState({
+                                        check2:!this.state.check2
+                                                        })
+                                        if(this.state.check2[sectionID] == false){
+                                            this.state.check2[sectionID] = true
+                                            // this.setState({
+                                            //         check2:check_folder2// has to do this because  we cant change the single element in the array
+                                            //         })
+                                            this.state.check1[sectionID] = false
+                                            // this.setState({
+                                            //     check1:check_folder1// has to do this because  we cant change the single element in the array
+                                            //     })
+                            
+                                        }else if(this.state.check2[sectionID] == true){
+                                            this.state.check2[sectionID] = false
+                                            // this.setState({
+                                            //     check2:check_folder2// has to do this because  we cant change the single element in the array
+                                            //             })
+                                                }}}
+                                    />
                         </View>}/>
                 </View>
             </ScrollView>
@@ -161,5 +171,14 @@ stylesListPostModal = StyleSheet.create({
     }, 
     btnConfirmListModal: { 
         flexDirection: 'row', justifyContent: 'space-between'
-    }
+    },
+    TextStyle:{
+        fontFamily: 'Roboto-Bold',
+        fontSize:15,
+    },
+    approveButton: {
+        bottom:0,
+        left:0,
+        alignItems: 'center',
+        }
 })
