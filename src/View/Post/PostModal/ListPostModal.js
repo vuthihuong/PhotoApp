@@ -42,11 +42,69 @@ export default class ListPostModal extends Component {
                 checkedAllAgree: true, 
                 check1: true
             })
+            var itemsKey = []; 
+            this.itemRef.ref('PostModal/'+this.props.navigation.state.params.id)
+                .child('StatusParticipateCol').on('child_added', (dataSnapshot)=> { 
+                    itemsKey.push({ 
+                        value: dataSnapshot.key
+                    })
+                });
+
+                var finalArray = itemsKey.map(function (obj) {
+                    return obj.value;
+                    });
+               
+            Alert.alert(
+                'Thông báo',
+                'Bạn có chắc chắn đồng ý yêu cầu này không?',
+                [
+                //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                  {text: 'OK', onPress: () => {
+                    finalArray.forEach(element => {
+                        FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+                        .child('StatusParticipateCol').child(element).update({ 
+                                statusAgree: 'đồng ý'
+                        });
+                      });
+                  }},
+                ],
+                { cancelable: false }
+              )
+           
         }
         else if( this.state.checkedAllAgree === true){ 
             this.setState({ 
                 checkedAllAgree: false, check1: false
             })
+            var itemsKey = []; 
+            this.itemRef.ref('PostModal/'+this.props.navigation.state.params.id)
+                .child('StatusParticipateCol').on('child_added', (dataSnapshot)=> { 
+                    itemsKey.push({ 
+                        value: dataSnapshot.key
+                    })
+                });
+
+                var finalArray = itemsKey.map(function (obj) {
+                    return obj.value;
+                    })
+            Alert.alert(
+                'Thông báo',
+                'Bạn có chắc chắn đồng ý yêu cầu này không?',
+                [
+                //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                  {text: 'OK', onPress: () => {
+                    finalArray.forEach(element => {
+                    FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+                        .child('StatusParticipateCol').child(element).update({ 
+                                statusAgree: 'hủy yêu cầu'
+                        });
+                    })
+                  }},
+                ],
+                { cancelable: false }
+              )
         }
     }
     btnAgree(id){
