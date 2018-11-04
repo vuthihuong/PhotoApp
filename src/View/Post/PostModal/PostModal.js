@@ -226,6 +226,19 @@ export default class PostModal extends Component {
             this.setState({ 
                 labelErrortimeModal: false, labelErrorLessTimeModal: false
             })
+            this.itemRef.ref('Post').push({
+                userId: key, title: "Tìm mẫu ảnh",
+                content: this.state.content, cost: this.state.cost, countCommentEvent: this.state.countCommentEvent, 
+                countParticipate: this.state.countParticipate, countLike: this.state.countLike,
+                datePostModal : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
+                timePostModal: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
+                datetime: this.state.datetime, datetime1: this.state.datetime1,
+                labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
+                labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
+                labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
+                circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
+                value: this.state.value, height: this.state.height, boy: this.state.boy, 
+            })
             this.itemRef.ref('PostModal').push({
                 userId: key, title: "Tìm mẫu ảnh",
                 content: this.state.content, cost: this.state.cost, countCommentEvent: this.state.countCommentEvent, 
@@ -297,6 +310,19 @@ export default class PostModal extends Component {
                         labelErrorLessTimeModal: false, labelErrortimeModal: false,
                         labelErrorCostModal: false,  labelErrorAddressModal: false, labelErrorGenderModal: false, 
                         })
+                        this.itemRef.ref('Post').push({
+                            userId: key, title: "Tìm mẫu ảnh",
+                            content: this.state.content, cost: this.state.cost, countCommentEvent: this.state.countCommentEvent, 
+                            countParticipate: this.state.countParticipate, countLike: this.state.countLike,
+                            datePostModal : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
+                            timePostModal: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
+                            datetime: this.state.datetime, datetime1: this.state.datetime1,
+                            labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
+                            labelRightModal3: this.state.labelRightModal3, labelRightModal4: this.state.labelRightModal4,
+                            labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
+                            circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
+                            value: this.state.value, height: this.state.height, boy: this.state.boy, 
+                        }).reverse();
                     this.itemRef.ref('PostModal').push({
                         userId: key, title: "Tìm mẫu ảnh", content: this.state.content, cost: this.state.cost,
                         datetime: this.state.datetime, datetime1: this.state.datetime1, countCommentEvent: this.state.countCommentEvent, 
