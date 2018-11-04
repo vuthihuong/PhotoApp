@@ -199,10 +199,16 @@ export default class ListPostPhoto extends Component {
                                 <Text style={{color: 'black'}}>{rowData.username}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={()=>this.btnAgree(rowData.userId)} >
-                                <Text style={{color: 'black'}}>OK</Text>
+                            {rowData.statusAgree === "gửi yêu cầu" || rowData.statusAgree === "hủy yêu cầu"?
+                                     <Text style={{color: 'black'}}>OK</Text>:
+                                     <Text style={{color: 'blue'}}>OK</Text>
+                                }
                             </TouchableOpacity>
                             <TouchableOpacity onPress ={()=> this.btnNotAgree(rowData.userId)} style={{marginRight: 15}} >
-                                <Text style={{color: 'black'}}>Hủy</Text>
+                            {rowData.statusAgree === "gửi yêu cầu" || rowData.statusAgree === "đồng ý"? 
+                                 <Text style={{color: 'black'}}>Hủy</Text>:
+                                 <Text style={{color: 'red'}}>Hủy</Text>
+                                }
                             </TouchableOpacity>
                         </View>}/>
                 </View>
