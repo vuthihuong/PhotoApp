@@ -16,8 +16,6 @@ export default class ListPostModal extends Component {
         this.state = {
             checkedAgree: false, checkedNotAgree: false, checkedAllAgree: false,
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
-            data:[],
-            check1:[], check2:[]
         }
         this.itemRef = FirebaseApp.database();
     }
@@ -40,7 +38,6 @@ export default class ListPostModal extends Component {
         if(this.state.checkedAllAgree === false){ 
             this.setState({ 
                 checkedAllAgree: true, 
-                check1: true
             })
             var itemsKey = []; 
             this.itemRef.ref('PostModal/'+this.props.navigation.state.params.id)
@@ -75,7 +72,7 @@ export default class ListPostModal extends Component {
         }
         else if( this.state.checkedAllAgree === true){ 
             this.setState({ 
-                checkedAllAgree: false, check1: false
+                checkedAllAgree: false, 
             })
             var itemsKey = []; 
             this.itemRef.ref('PostModal/'+this.props.navigation.state.params.id)
@@ -204,10 +201,18 @@ export default class ListPostModal extends Component {
                                 <Text style={{color: 'black'}}>{rowData.username}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={()=>this.btnAgree(rowData.userId)} >
-                                <Text style={{color: 'black'}}>OK</Text>
+                                {rowData.statusAgree === "gửi yêu cầu" || rowData.statusAgree === "hủy yêu cầu"?
+                                     <Text style={{color: 'black'}}>OK</Text>:
+                                     <Text style={{color: 'blue'}}>OK</Text>
+                                }
+                               
                             </TouchableOpacity>
                             <TouchableOpacity onPress ={()=> this.btnNotAgree(rowData.userId)} style={{marginRight: 15}} >
-                                <Text style={{color: 'black'}}>Hủy</Text>
+                                {rowData.statusAgree === "gửi yêu cầu" || rowData.statusAgree === "đồng ý"? 
+                                 <Text style={{color: 'black'}}>Hủy</Text>:
+                                 <Text style={{color: 'red'}}>Hủy</Text>
+                                }
+                               
                             </TouchableOpacity>
                         </View>}/>
                 </View>
