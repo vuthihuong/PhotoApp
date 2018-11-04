@@ -56,8 +56,6 @@ import ListPostEvent from './src/View/Post/PostEvent/ListPostEvent'
 import ListDirectPostEvent from './src/View/Post/PostEvent/ListDirectPostEvent'
 
 import NotiMain from './src/View/NotificationPage/NotiMain'
-import NotiMainModal from './src/View/NotificationPage/NotiMainModal'
-import NotiMainPhoto from './src/View/NotificationPage/NotiMainPhoto'
 
 
 const instructions = Platform.select({
@@ -182,12 +180,6 @@ const Mainapp = createStackNavigator({
     NotiMain: { 
         screen: NotiMain
     },
-    NotiMainModal: { 
-        screen: NotiMainModal
-    },
-    NotiMainPhoto: { 
-        screen: NotiMainPhoto
-    }
     },{
       headerMode:'none'
     });

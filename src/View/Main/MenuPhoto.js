@@ -259,7 +259,7 @@ export default class MenuPhoto extends Component {
    
   },
   txtManagContColor: { 
-    color: '#FA8072', fontSize: 12
+    color: 'black', fontSize: 12, fontWeight: "bold"
   },
   txtConfirm: {
      width: 70

@@ -50,17 +50,18 @@ export default class ManagePost extends Component{
                 labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
                 labelRightModal5: childData.labelRightModal5, 
                 circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3, 
-                datePostModal: childData.datePostModal, timePostModal: childData.timePostModal
+                datePostModal: childData.datePostModal, timePostModal: childData.timePostModal,
+                
               })
               this.setState({ 
-                dataSource1: this.state.dataSource1.cloneWithRows(items)
-              });
+                dataSource1: this.state.dataSource1.cloneWithRows(items, items.map((row,i)=>i).reverse())
+            });
           });
         this.itemRef.ref(url).orderByChild('userId').equalTo(userKey).on('child_removed', (dataSnapshot)=> { 
             items = items.filter((x)=>x.keyModal !== dataSnapshot.key);
             this.setState({ 
-                dataSource1: this.state.dataSource1.cloneWithRows(items)
-              });
+                dataSource1: this.state.dataSource1.cloneWithRows(items, items.map((row,i)=>i).reverse())
+            });
         })
     }
     actGetData2(url, items =[]){ 
@@ -75,14 +76,14 @@ export default class ManagePost extends Component{
                 datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto
               })
               this.setState({ 
-                dataSource2: this.state.dataSource2.cloneWithRows(items)
-              });
+                dataSource2: this.state.dataSource2.cloneWithRows(items, items.map((row,i)=>i).reverse())
+            });
           });
           this.itemRef.ref(url).orderByChild('userId').equalTo(userKey).on('child_removed', (dataSnapshot)=> { 
             items = items.filter((x)=>x.keyModal !== dataSnapshot.key);
             this.setState({ 
-                dataSource2: this.state.dataSource2.cloneWithRows(items)
-              });
+                dataSource2: this.state.dataSource2.cloneWithRows(items, items.map((row,i)=>i).reverse())
+            });
         })
     }
     actGetData3(url, items=[]){ 
@@ -98,14 +99,14 @@ export default class ManagePost extends Component{
                 datePostEvent: childData.datePostEvent, timePostEvent: childData.timePostEvent
               })
               this.setState({ 
-                dataSource3: this.state.dataSource3.cloneWithRows(items)
-              });
+                dataSource3: this.state.dataSource3.cloneWithRows(items, items.map((row,i)=>i).reverse())
+            });
           });
           this.itemRef.ref(url).orderByChild('userId').equalTo(userKey).on('child_removed', (dataSnapshot)=> { 
             items = items.filter((x)=>x.keyModal !== dataSnapshot.key);
             this.setState({ 
-                dataSource3: this.state.dataSource3.cloneWithRows(items)
-              });
+                dataSource3: this.state.dataSource3.cloneWithRows(items, items.map((row,i)=>i).reverse())
+            });
         })
     }
     changeStatusListEvent(){ 
@@ -229,7 +230,7 @@ export default class ManagePost extends Component{
                                     <Text style={stylesManagCont.txtManagCont}>{rowData.title} {rowData.boy} {rowData.girl} </Text>
                                     <Text style={stylesManagCont.txtManagCont}>Địa điểm: {rowData.value}</Text>
                                     <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime}</Text>
-                                    <Text style={[stylesManagCont.txtManagCont, {fontSize: 10, color:'#FF3030'}]}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
+                                    <Text style={stylesManagCont.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
                             </TouchableOpacity>
                             <View style={ stylesManagCont.txtConfirm }>
                                 {/* <TouchableOpacity>
@@ -260,7 +261,7 @@ export default class ManagePost extends Component{
                                     <Text style={stylesManagCont.txtManagCont}>{rowData.labelEvent1}{rowData.labelEvent2} </Text>
                                     <Text style={stylesManagCont.txtManagCont}>Địa điểm: {rowData.addressEvent}</Text>
                                     <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
-                                    <Text style={[stylesManagCont.txtManagCont, {fontSize: 10, color:'#FF3030'}]}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
+                                    <Text style={stylesManagCont.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                             </TouchableOpacity>
                             <View style={ stylesManagCont.txtConfirm }>
                                 {/* <TouchableOpacity>
@@ -290,7 +291,7 @@ export default class ManagePost extends Component{
                                     <Text style={stylesManagCont.txtManagCont}>{rowData.title} </Text>
                                     <Text style={stylesManagCont.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
                                     <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
-                                    <Text style={[stylesManagCont.txtManagCont, {fontSize: 10, color:'#FF3030'}]}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
+                                    <Text style={stylesManagCont.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
                             </TouchableOpacity>
                             <View style={ stylesManagCont.txtConfirm }>
                                 {/* <TouchableOpacity>
@@ -328,6 +329,9 @@ const stylesManagCont = StyleSheet.create({
  txtManagCont: {
    color: 'black',
   
+ },
+ txtManagContColor: { 
+    color: 'black', fontSize: 12, fontWeight: "bold"
  },
  txtConfirm: {
     width: 70

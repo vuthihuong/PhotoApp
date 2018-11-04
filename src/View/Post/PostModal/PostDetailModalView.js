@@ -158,7 +158,7 @@ export default class PostDetailModalView extends Component {
             })
             FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
             .child('StatusParticipateCol').push({ 
-                userId: userKey, username: username, statusAgree: false
+                userId: userKey, username: username, statusAgree: "gửi yêu cầu"
             })
         }
         btnChangeNotParticipateModalView(){ 
