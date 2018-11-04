@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView, ListView
+    StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView, ListView, Alert
 } from 'react-native';
 import CheckBox from 'react-native-checkbox';
 
@@ -19,7 +19,7 @@ export default class ListPostEvent extends Component {
     }
     componentWillMount(){ 
         var listItems  = [];
-        this.actGetData('PostModal/'+this.props.navigation.state.params.id, listItems);
+        this.actGetData('PostEvent/'+this.props.navigation.state.params.id, listItems);
     }
     actGetData(url, listItems=[]){ 
         this.itemRef.ref(url).child('StatusParticipateCol').on('child_added', (dataSnapshot)=> { 
@@ -32,42 +32,67 @@ export default class ListPostEvent extends Component {
             });
         });
     }
-    checkAgree(){ 
-        if(this.state.checkedAgree === false){ 
-            this.setState({ 
-                checkedAgree: true, checkedNotAgree: false
-            })
-        }
-        else if(this.state.checkedAgree === true){ 
-            this.setState({ 
-                checkedAgree: false
-            })
-        }
-    }
-    checkNotAgree(){ 
-        if(this.state.checkedNotAgree === false){ 
-            this.setState({ 
-                checkedNotAgree: true, checkedAgree: false
-            })
-        }
-        else if(this.state.checkedNotAgree === true){ 
-            this.setState({ 
-                checkedNotAgree: false
-            })
-        }
-    }
     checkAllAgree(){ 
         if(this.state.checkedAllAgree === false){ 
             this.setState({ 
                 checkedAllAgree: true, 
+                check1: true
             })
         }
-        else if(this.state.checkedAgree === true){ 
+        else if( this.state.checkedAllAgree === true){ 
             this.setState({ 
-                checkedAllAgree: false
+                checkedAllAgree: false, check1: false
             })
         }
     }
+    btnAgree(id){
+        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+                    .child('StatusParticipateCol').orderByChild('userId').equalTo(id)
+                .on('value', function (snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+                    idStatusChange = childSnapshot.key;
+                   
+        }) })
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn đồng ý yêu cầu này không?',
+            [
+            //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {
+                FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+                    .child('StatusParticipateCol').child(idStatusChange).update({ 
+                            statusAgree: 'đồng ý'
+                    });
+              }},
+            ],
+            { cancelable: false }
+          )
+    }
+    btnNotAgree(id){ 
+        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+                .child('StatusParticipateCol').orderByChild('userId').equalTo(id)
+            .on('value', function (snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+                idStatusChange = childSnapshot.key;
+            
+        }) })
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn đồng ý hủy yêu cầu này không?',
+            [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {
+                FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+                    .child('StatusParticipateCol').child(idStatusChange).update({ 
+                        statusAgree: 'hủy yêu cầu'
+                });
+              }},
+            ],
+            { cancelable: false }
+          )
+    }
+  
     render(){ 
         return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -113,24 +138,16 @@ export default class ListPostEvent extends Component {
                         contentContainerStyle={{flexWrap:'wrap'}}
                         dataSource = {this.state.dataSource}
                             renderRow = {(rowData)=> 
-                        <View style={stylesListPostEvent.bodyListPostModal}>
+                        <View style={stylesListPostEvent.bodyListPostEvent}>
                             <TouchableOpacity style={[stylesListPostEvent.headListModal, { marginLeft: 10}]} >
                                 <Text style={{color: 'black'}}>{rowData.username}</Text>
                             </TouchableOpacity>
-                            <CheckBox
-                                label=''
-                                labelStyle={{color: 'black'}}
-                                checked={this.state.checkedAgree}
-                                checkboxStyle = {[stylesListPostEvent.txtBoxListModal,{marginRight: 10}]}
-                                onChange={(checked) => {this.checkAgree()}} 
-                            />
-                            <CheckBox
-                                label=''
-                                labelStyle={{color: 'black'}}
-                                checked={this.state.checkedNotAgree}
-                                checkboxStyle = {[stylesListPostEvent.txtBoxListModal,{marginRight: 20}]}
-                                onChange={(checked) => {this.checkNotAgree()}} 
-                            />
+                            <TouchableOpacity onPress={()=>this.btnAgree(rowData.userId)} >
+                                <Text style={{color: 'black'}}>OK</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress ={()=> this.btnNotAgree(rowData.userId)} style={{marginRight: 15}} >
+                                <Text style={{color: 'black'}}>Hủy</Text>
+                            </TouchableOpacity>
                         </View>}/>
                 </View>
             </ScrollView>
@@ -155,7 +172,7 @@ stylesListPostEvent = StyleSheet.create({
     txtBoxListModal: { 
         width: 15, height: 15
     },
-    bodyListPostModal: { 
+    bodyListPostEvent: { 
         flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, paddingBottom: 15,
         borderBottomWidth: 1,  borderBottomColor: 'black',
     }, 

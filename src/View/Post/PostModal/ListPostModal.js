@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView, ListView
+    StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView, ListView, Alert
 } from 'react-native';
 import CheckBox from 'react-native-checkbox';
 
@@ -37,7 +37,64 @@ export default class ListPostModal extends Component {
         });
     }
     checkAllAgree(){ 
-
+        if(this.state.checkedAllAgree === false){ 
+            this.setState({ 
+                checkedAllAgree: true, 
+                check1: true
+            })
+        }
+        else if( this.state.checkedAllAgree === true){ 
+            this.setState({ 
+                checkedAllAgree: false, check1: false
+            })
+        }
+    }
+    btnAgree(id){
+        FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+                    .child('StatusParticipateCol').orderByChild('userId').equalTo(id)
+                .on('value', function (snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+                    idStatusChange = childSnapshot.key;
+                   
+        }) })
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn đồng ý yêu cầu này không?',
+            [
+            //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {
+                FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+                    .child('StatusParticipateCol').child(idStatusChange).update({ 
+                            statusAgree: 'đồng ý'
+                    });
+              }},
+            ],
+            { cancelable: false }
+          )
+    }
+    btnNotAgree(id){ 
+        FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+                .child('StatusParticipateCol').orderByChild('userId').equalTo(id)
+            .on('value', function (snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+                idStatusChange = childSnapshot.key;
+            
+        }) })
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn đồng ý hủy yêu cầu này không?',
+            [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {
+                FirebaseApp.database().ref('PostModal/').child(this.props.navigation.state.params.id)
+                    .child('StatusParticipateCol').child(idStatusChange).update({ 
+                        statusAgree: 'hủy yêu cầu'
+                });
+              }},
+            ],
+            { cancelable: false }
+          )
     }
   
     render(){ 
@@ -83,64 +140,17 @@ export default class ListPostModal extends Component {
                     <ListView
                         contentContainerStyle={{flexWrap:'wrap'}}
                         dataSource = {this.state.dataSource}
-                        renderRow={(rowData,rowID,sectionID)=> 
+                        renderRow={(rowData)=> 
                         <View style={stylesListPostModal.bodyListPostModal}>
                             <TouchableOpacity style={[stylesListPostModal.headListModal, { marginLeft: 10}]} >
                                 <Text style={{color: 'black'}}>{rowData.username}</Text>
                             </TouchableOpacity>
-                            <CheckBox
-                                    label=''
-                                    labelBefore={false}
-                                    checked={this.state.check1[sectionID]}
-                                    checkboxStyle = {[stylesListPostEvent.txtBoxListModal,{marginRight: 10}]}
-                                    onChange={(checked) => {this.setState({
-                                        check1:!this.state.check1
-                                                        })
-                                        if(this.state.check1[sectionID] == false){
-                                            this.state.check1[sectionID] = true
-                                            // this.setState({
-                                            //         check1:check_folder1// has to do this because  we cant change the single element in the array
-                                            //         })
-                                                this.state.check2[sectionID] = false
-                                            // this.setState({
-                                            //     check2:check_folder2// has to do this because  we cant change the single element in the array
-                                            //     })
-                            
-                                        }else if(this.state.check1[sectionID] == true){
-                                        this.state.check1[sectionID] = false
-                                            // this.setState({
-                                            //     check1:check_folder1// has to do this because  we cant change the single element in the array
-                                            //             })
-                                                }}}
-                                    />
-                                {/* <TouchableOpacity style={{marginRight: 25}} >
-                                    <Text style={{color: 'black'}}>OK</Text>
-                                </TouchableOpacity> */}
-                            <CheckBox
-                                    label=''
-                                    labelBefore={false}
-                                    checked={this.state.check2[sectionID]}
-                                    checkboxStyle = {[stylesListPostEvent.txtBoxListModal,{marginRight: 10}]}
-                                    onChange={(checked) => {this.setState({
-                                        check2:!this.state.check2
-                                                        })
-                                        if(this.state.check2[sectionID] == false){
-                                            this.state.check2[sectionID] = true
-                                            // this.setState({
-                                            //         check2:check_folder2// has to do this because  we cant change the single element in the array
-                                            //         })
-                                            this.state.check1[sectionID] = false
-                                            // this.setState({
-                                            //     check1:check_folder1// has to do this because  we cant change the single element in the array
-                                            //     })
-                            
-                                        }else if(this.state.check2[sectionID] == true){
-                                            this.state.check2[sectionID] = false
-                                            // this.setState({
-                                            //     check2:check_folder2// has to do this because  we cant change the single element in the array
-                                            //             })
-                                                }}}
-                                    />
+                            <TouchableOpacity onPress={()=>this.btnAgree(rowData.userId)} >
+                                <Text style={{color: 'black'}}>OK</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress ={()=> this.btnNotAgree(rowData.userId)} style={{marginRight: 15}} >
+                                <Text style={{color: 'black'}}>Hủy</Text>
+                            </TouchableOpacity>
                         </View>}/>
                 </View>
             </ScrollView>
