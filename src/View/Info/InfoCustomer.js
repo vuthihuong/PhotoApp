@@ -129,16 +129,16 @@ export default class InfoCustomer extends Component {
              <View style={stylesInfoCus.containerCus}> 
                <View style={{marginLeft: 15, marginRight: 15}}>
                   <View style={stylesInfoCus.iconInfo}>
-                    <WebImage source={this.state.avatarSource} style={{height: 150, width: 150}} />
+                    <Image source={this.state.avatarSource} style={{height: 150, width: 150}} />
                       <TouchableOpacity onPress={() => this.pickImg()}
                             style={{marginTop: -40, marginLeft: 40}}>
-                          <WebImage source={photo} style={{width: 50, height: 50,}} />
+                          <Image source={photo} style={{width: 50, height: 50,}} />
                       </TouchableOpacity>
                     
                   </View>
                   <View style ={stylesInfoCus.textInput}>
                     {/* <Image source={iconUser} style={{width: 30, height: 30}} /> */}
-                    <WebImage style={{width: 40, height: 40}} source={iconUser}/>
+                    <Image style={{width: 40, height: 40}} source={iconUser}/>
                     <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, width: 200 }}
                         // placeholder='Họ tên'
                         onChangeText={(username) => this.setState({ username })} 
@@ -147,7 +147,7 @@ export default class InfoCustomer extends Component {
 
                   <View style ={stylesInfoCus.textInputMargin}>
                     {/* <Image source={phone} style={{width: 20, height: 20,  marginLeft: 5}} /> */}
-                    <WebImage style={{width: 25, height: 25, marginLeft: 5}} source={phone}/>
+                    <Image style={{width: 25, height: 25, marginLeft: 5}} source={phone}/>
                     <TextInput underlineColorAndroid='transparent' 
                         style={{fontSize: 13, width: 200, marginLeft: 10 }}
                       // placeholder='Điện thoại' 
@@ -157,7 +157,7 @@ export default class InfoCustomer extends Component {
                   </View>
 
                   <View style ={stylesInfoCus.textInputMargin}>
-                    <WebImage source={iconDateBirth} style={{width: 30, height: 30, marginLeft: 5}} />
+                    <Image source={iconDateBirth} style={{width: 30, height: 30, marginLeft: 5}} />
                     <DatePicker
                             date={this.state.date}
                             mode="date"
@@ -180,7 +180,7 @@ export default class InfoCustomer extends Component {
 
                   <View style ={stylesInfoCus.textInputMargin}>
                     {/* <Image source={iconLocation} style={{width: 30, height: 30}} /> */}
-                    <WebImage style={{width: 35, height: 35}} source={iconLocation}/>
+                    <Image style={{width: 35, height: 35}} source={iconLocation}/>
                     <TextInput underlineColorAndroid='transparent' 
                           style={{fontSize: 13, width: 200, marginLeft: 10 }}
                         // placeholder = 'Địa chỉ'
@@ -191,7 +191,7 @@ export default class InfoCustomer extends Component {
 
                   <View style ={stylesInfoCus.textInputMargin}>
                     {/* <Image source={iconGender} style={{width: 30, height: 30}} /> */}
-                    <WebImage style={{width: 35, height: 35, marginLeft: 5}} source={iconGender}/>
+                    <Image style={{width: 35, height: 35, marginLeft: 5}} source={iconGender}/>
                     <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
                               <Dropdown fontSize={13}
                                   inputContainerStyle={{ borderBottomColor: 'transparent' }}

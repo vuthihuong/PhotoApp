@@ -148,15 +148,15 @@ export default class InfoModal extends Component {
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style={stylesInfoModal.containerCus}> 
                <View style={stylesInfoModal.iconInfo}>
-               <WebImage source={this.state.avatarSource} style={{height: 160, width: 160}} />
+               <Image source={this.state.avatarSource} style={{height: 160, width: 160}} />
                   <TouchableOpacity onPress={() => this.pickImg()}
                         style={{marginTop: -40, marginLeft: 45}}>
-                      <WebImage source={photo} style={{width: 50, height: 50,}} />
+                      <Image source={photo} style={{width: 50, height: 50,}} />
                   </TouchableOpacity>
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
-                 <WebImage source={iconUser} style={{width: 40, height: 40}} />
+                 <Image source={iconUser} style={{width: 40, height: 40}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, width: 200 }}
                     placeholder='Họ tên'
                      onChangeText={(username) => this.setState({ username })} 
@@ -164,7 +164,7 @@ export default class InfoModal extends Component {
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
-                 <WebImage source={phone} style={{width: 25, height: 25,  marginLeft: 5}} />
+                 <Image source={phone} style={{width: 25, height: 25,  marginLeft: 5}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 10, width: 200}}
                       // placeholder='Điện thoại'
                        onChangeText={(telephone) => this.setState({ telephone })} 
@@ -172,7 +172,7 @@ export default class InfoModal extends Component {
                </View>
 
                <View style ={stylesInfoModal.textInputMargin}>
-                 <WebImage source={iconDateBirth} style={{width: 30, height: 30, marginLeft: 5}} />
+                 <Image source={iconDateBirth} style={{width: 30, height: 30, marginLeft: 5}} />
                  <DatePicker
                         // style={{width: 200}}
                         date={this.state.date}

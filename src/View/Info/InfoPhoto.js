@@ -129,7 +129,7 @@ export default class InfoPhoto extends Component {
             })
           }   
           save(){ 
-            FirebaseApp.database().ref('Customer/'+key).update({
+            FirebaseApp.database().ref('Customer/').child(key).update({
                username: this.state.username,
                date: this.state.date,
                address: this.state.address,
@@ -208,11 +208,11 @@ export default class InfoPhoto extends Component {
            
             <View style={stylesInfoPhoto.btn}>
                <TouchableOpacity onPress={() => this._alertIndex(index)}>
-                    <WebImage source={editImage} style={{width: 20, height: 20}} />
+                    <Image source={editImage} style={{width: 20, height: 20}} />
                    
                </TouchableOpacity>
                <TouchableOpacity onPress={() => this._alertIndex(index)}>
-                    <WebImage source={deleteImage} style={{width:15, height: 15}} />  
+                    <Image source={deleteImage} style={{width:15, height: 15}} />  
                </TouchableOpacity>
              </View>
           
@@ -222,15 +222,15 @@ export default class InfoPhoto extends Component {
             <View style={stylesInfoPhoto.container}> 
                 <View style = {{marginLeft: 15, marginRight: 15}}>
                     <View style={stylesInfoPhoto.iconInfo}>
-                        <WebImage source={this.state.avatarSource} style={{height: 160, width: 160}} />
+                        <Image source={this.state.avatarSource} style={{height: 160, width: 160}} />
                         <TouchableOpacity onPress={() => this.pickImg()}
                             style={{marginTop: -40, marginLeft: 45}}>
-                            <WebImage source={photo} style={{width: 50, height: 50,}} />
+                            <Image source={photo} style={{width: 50, height: 50,}} />
                         </TouchableOpacity>
                         
                     </View>
                     <View style ={stylesInfoPhoto.textInput}>
-                        <WebImage source={iconUser} style={{width: 40, height: 40}} />
+                        <Image source={iconUser} style={{width: 40, height: 40}} />
                         <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, width: 200 }}
                             placeholder='Họ tên'
                             onChangeText={(username) => this.setState({ username })} 
@@ -238,7 +238,7 @@ export default class InfoPhoto extends Component {
                     </View>
 
                     <View style ={stylesInfoPhoto.textInputMargin}>
-                        <WebImage source={phone} style={{width: 25, height: 25,  marginLeft: 5}} />
+                        <Image source={phone} style={{width: 25, height: 25,  marginLeft: 5}} />
                         <TextInput underlineColorAndroid='transparent'
                                  style={{fontSize: 13, width: 200, marginLeft: 10 }}
                         // placeholder='Điện thoại'
@@ -247,7 +247,7 @@ export default class InfoPhoto extends Component {
                     </View>
 
                     <View style ={stylesInfoPhoto.textInputMargin}>
-                        <WebImage source={iconDateBirth} style={{width: 30, height: 30, marginLeft: 5}} />
+                        <Image source={iconDateBirth} style={{width: 30, height: 30, marginLeft: 5}} />
                         <DatePicker
                             date={this.state.date}
                             mode="date"
@@ -269,7 +269,7 @@ export default class InfoPhoto extends Component {
                     </View>
 
                     <View style ={stylesInfoPhoto.textInputMargin}>
-                        <WebImage source={iconLocation} style={{width: 35, height: 35}} />
+                        <Image source={iconLocation} style={{width: 35, height: 35}} />
                         <TextInput underlineColorAndroid='transparent' 
                             style={{fontSize: 13, width: 200, marginLeft: 5 }}
                         placeholder = 'Địa chỉ'
@@ -278,7 +278,7 @@ export default class InfoPhoto extends Component {
                     </View>
 
                     <View style ={stylesInfoPhoto.textInputMargin}>
-                        <WebImage source={iconGender} style={{width: 35, height: 35}} />
+                        <Image source={iconGender} style={{width: 35, height: 35}} />
                         <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
                                 <Dropdown fontSize={13}
                                     inputContainerStyle={{ borderBottomColor: 'transparent' }}
