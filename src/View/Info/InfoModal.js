@@ -27,9 +27,6 @@ var options = {
     path: 'images'
   }
 };
-
-
-
 export default class InfoModal extends Component {
     constructor(props) {
       super(props);
@@ -39,12 +36,8 @@ export default class InfoModal extends Component {
      ]);
 
       this.state={
-        selected: '',
-        date: '', 
-        username: '', telephone: '', gender: '',
-        addresDist: '', addressCity: '' , address: '',
-        circle1: '', circle2: '', circle3: '',
-        heightt: '', weight: '',
+        selected: '', date: '', username: '', telephone: '', gender: '',addresDist: '', 
+        addressCity: '' , address: '', circle1: '', circle2: '', circle3: '',heightt: '', weight: '',
         avatarSource: require('../../assets/img/info/User.png')
      }
     }
@@ -62,10 +55,10 @@ export default class InfoModal extends Component {
       else if (response.customButton) {
       }
       else {
-        let source = { uri: response.uri };
+        // let source = { uri: response.uri };
     
         // You can also display the image using data:
-        // let source = { uri: 'data:image/png;base64,' + response.data };
+        let source = { uri: 'data:image/png;base64,' + response.data };
     
         this.setState({
           avatarSource: source

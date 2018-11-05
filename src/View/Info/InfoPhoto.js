@@ -33,12 +33,8 @@ var options = {
     path: 'images'
   }
 };
-
-
 export default class InfoPhoto extends Component {
-
     constructor(props) {
-   
       super(props);
     
       YellowBox.ignoreWarnings([
@@ -47,16 +43,7 @@ export default class InfoPhoto extends Component {
      ]);
 
      this.state={
-            selected: '',
-            date: '', 
-            time: '00:00',
-            datetime: '',
-            selectedHours: 0,
-            selectedMinutes: 0, 
-            datetime1: '',
-            selectedHours1: 0,
-            selectedMinutes1: 0,
-            username: '', telephone: '', address: '', gender: '',
+            date: '', username: '', telephone: '', address: '', gender: '',
             tableHead: ['Thể loại', 'Giá', ''],
             tableData: [
               ['Giá chụp đơn', 'Học sinh: 99k/bộ ảnh', 'x'],
@@ -85,10 +72,10 @@ export default class InfoPhoto extends Component {
           else if (response.customButton) {
           }
           else {
-            let source = { uri: response.uri };
+            // let source = { uri: response.uri };
         
             // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+            let source = { uri: 'data:image/jpeg;base64,' + response.data };
         
             this.setState({
               avatarSource: source
@@ -101,7 +88,7 @@ export default class InfoPhoto extends Component {
             FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
                        .on('value', function (snapshot) {
               snapshot.forEach(function(childSnapshot) {
-                             key = childSnapshot.key;
+                             userKey = childSnapshot.key;
                 var childData = childSnapshot.val();
                 // lấy các giá trị trong bảng customer tương ứng với email đăng nhập
                     username1 = (childData.username);
@@ -129,7 +116,7 @@ export default class InfoPhoto extends Component {
             })
           }   
           save(){ 
-            FirebaseApp.database().ref('Customer/').child(key).update({
+            FirebaseApp.database().ref('Customer/').child(userKey).update({
                username: this.state.username,
                date: this.state.date,
                address: this.state.address,
@@ -193,11 +180,7 @@ export default class InfoPhoto extends Component {
               // lấy các giá trị trong bảng customer tương ứng với email đăng nhập
               groupCost = (childData.groupCost);
               value = (childData.value)
-                //   alert(key);
-                //   alert(value);
-                //   alert(groupCost);
                   tableData1.push()
-                //   alert(tableData1);
               })  
           })
           for(var i = 0; i < tableData1.length; i++) {

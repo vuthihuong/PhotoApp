@@ -44,9 +44,7 @@ export default class InfoCustomer extends Component {
      ]);
 
      this.state={
-       selected: '',
-       date: '', 
-       username: '', telephone: '', address: '', gender: '',
+       selected: '', date: '',  username: '', telephone: '', address: '', gender: '',
        avatarSource: require('../../assets/img/info/User.png')
      }
     }
@@ -61,10 +59,10 @@ export default class InfoCustomer extends Component {
         else if (response.customButton) {
         }
         else {
-          let source = { uri: response.uri };
+          // let source = { uri: response.uri };
       
           // You can also display the image using data:
-          // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+          let source = { uri: 'data:image/jpeg;base64,' + response.data };
       
           this.setState({
             avatarSource: source
