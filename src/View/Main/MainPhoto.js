@@ -221,7 +221,7 @@ const ManagePostStack = createStackNavigator({
     InfoPhoto: {
       screen: InfoPhotoStack,
       navigationOptions: {
-        drawerLabel: 'Trần Nam Anh',
+        drawerLabel: '  ',
         headerStyle: {
           backgroundColor: 'white',    
           height: 35,    

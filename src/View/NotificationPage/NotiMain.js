@@ -84,7 +84,7 @@ export default class NotiMain extends Component {
                 <ListView  enableEmptySections
                     dataSource = {this.state.dataSource} renderRow = {(rowData)=> 
                         <View style={stylesNotiMain.bodyNotiMain}>
-                            {(rowData.title === "Tìm mẫu ảnh" && rowData.userId !== userLogin)?
+                            {(rowData.title === "Tìm mẫu ảnh" && rowData.userId !== userKey)?
                             (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailModalView',{
                                 id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
                                 content: rowData.content, cost: rowData.cost, girl: rowData.girl,
@@ -103,7 +103,7 @@ export default class NotiMain extends Component {
                                 <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
                             </TouchableOpacity>): null} 
                         
-                            {(rowData.title === "Tìm nháy ảnh" && rowData.userId !== userLogin)?
+                            {(rowData.title === "Tìm nháy ảnh" && rowData.userId !== userKey)?
                             (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailPhotoView',{
                                 id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
                                 contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
@@ -116,7 +116,7 @@ export default class NotiMain extends Component {
                                 <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
                             </TouchableOpacity>): null} 
                           
-                            {(rowData.title === "Tạo sự kiện" && rowData.userId !== userLogin)?
+                            {(rowData.title === "Tạo sự kiện" && rowData.userId !== userKey)?
                             (<TouchableOpacity  onPress={() => this.props.navigation.navigate('PostDetailEventView',{
                                 id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
                                 addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,

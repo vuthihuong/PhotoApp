@@ -126,7 +126,7 @@ export default class PostEventEdit extends Component {
                     })
                 }
                 else if(this.state.datetimeEvent < this.state.datetimeEvent1){ 
-                    this.itemRef.ref('PostEvent').child(this.props.navigation.state.params.id).update({
+                    this.itemRef.ref('Post').child(this.props.navigation.state.params.id).update({
                         numberModal: this.state.numberModal, costEvent: this.state.costEvent,
                         labelEvent1: this.state.labelEvent1,  labelEvent2: this.state.labelEvent2,
                         contentEvent: this.state.contentEvent, addressEvent: this.state.addressEvent,

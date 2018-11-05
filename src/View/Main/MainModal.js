@@ -233,7 +233,7 @@ const MenuStack = createStackNavigator({
     InfoModal: {
       screen: InfoModalStack,
       navigationOptions: {
-        drawerLabel: 'Đặng Mỹ Hạnh',
+        drawerLabel: '  ',
         headerStyle: {
           backgroundColor: 'white',    
           height: 35,    

@@ -19,7 +19,7 @@ export default class ListPostPhoto extends Component {
     }
     componentWillMount(){ 
         var listItems  = [];
-        this.actGetData('PostPhoto/'+this.props.navigation.state.params.id, listItems);
+        this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
     }
     actGetData(url, listItems=[]){ 
         this.itemRef.ref(url).child('StatusParticipateCol').on('child_added', (dataSnapshot)=> { 
@@ -39,7 +39,7 @@ export default class ListPostPhoto extends Component {
                 check1: true
             })
             var itemsKey = []; 
-            this.itemRef.ref('PostPhoto/'+this.props.navigation.state.params.id)
+            this.itemRef.ref('Post/'+this.props.navigation.state.params.id)
                 .child('StatusParticipateCol').on('child_added', (dataSnapshot)=> { 
                     itemsKey.push({ 
                         value: dataSnapshot.key
@@ -58,7 +58,7 @@ export default class ListPostPhoto extends Component {
                   {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                   {text: 'OK', onPress: () => {
                     finalArray.forEach(element => {
-                        FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+                        FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
                         .child('StatusParticipateCol').child(element).update({ 
                                 statusAgree: 'đồng ý'
                         });
@@ -73,7 +73,7 @@ export default class ListPostPhoto extends Component {
                 checkedAllAgree: false, check1: false
             })
             var itemsKey = []; 
-            this.itemRef.ref('PostPhoto/'+this.props.navigation.state.params.id)
+            this.itemRef.ref('Post/'+this.props.navigation.state.params.id)
                 .child('StatusParticipateCol').on('child_added', (dataSnapshot)=> { 
                     itemsKey.push({ 
                         value: dataSnapshot.key
@@ -91,7 +91,7 @@ export default class ListPostPhoto extends Component {
                   {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                   {text: 'OK', onPress: () => {
                     finalArray.forEach(element => {
-                    FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+                    FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
                         .child('StatusParticipateCol').child(element).update({ 
                                 statusAgree: 'hủy yêu cầu'
                         });
@@ -103,7 +103,7 @@ export default class ListPostPhoto extends Component {
         }
     }
     btnAgree(id){
-        FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+        FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
                     .child('StatusParticipateCol').orderByChild('userId').equalTo(id)
                 .on('value', function (snapshot) {
         snapshot.forEach(function(childSnapshot) {
@@ -117,7 +117,7 @@ export default class ListPostPhoto extends Component {
             //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
               {text: 'OK', onPress: () => {
-                FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+                FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
                     .child('StatusParticipateCol').child(idStatusChange).update({ 
                             statusAgree: 'đồng ý'
                     });
@@ -127,7 +127,7 @@ export default class ListPostPhoto extends Component {
           )
     }
     btnNotAgree(id){ 
-        FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+        FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
                 .child('StatusParticipateCol').orderByChild('userId').equalTo(id)
             .on('value', function (snapshot) {
         snapshot.forEach(function(childSnapshot) {
@@ -140,7 +140,7 @@ export default class ListPostPhoto extends Component {
             [
               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
               {text: 'OK', onPress: () => {
-                FirebaseApp.database().ref('PostPhoto/').child(this.props.navigation.state.params.id)
+                FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
                     .child('StatusParticipateCol').child(idStatusChange).update({ 
                         statusAgree: 'hủy yêu cầu'
                 });
@@ -190,7 +190,7 @@ export default class ListPostPhoto extends Component {
                             /> */}
                         </View>
                     </View>
-                    <ListView
+                    <ListView  enableEmptySections
                         contentContainerStyle={{flexWrap:'wrap'}}
                         dataSource = {this.state.dataSource}
                             renderRow = {(rowData)=> 

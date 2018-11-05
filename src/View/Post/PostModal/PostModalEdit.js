@@ -215,7 +215,7 @@ export default class PostModal extends Component {
                         this.setState({ 
                             labelErrortimeModal: false, labelErrorLessTimeModal: false
                         })
-                    this.itemRef.ref('PostModal').child(this.props.navigation.state.params.id).update({
+                    this.itemRef.ref('Post').child(this.props.navigation.state.params.id).update({
                         content: this.state.content, cost: this.state.cost,
                         datetime: this.state.datetime, datetime1: this.state.datetime1,
                         labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
@@ -294,7 +294,7 @@ export default class PostModal extends Component {
                         })
                     }
                     else if(this.state.datetime < this.state.datetime1){ 
-                        this.itemRef.ref('PostModal').child(this.props.navigation.state.params.id).update({
+                        this.itemRef.ref('Post').child(this.props.navigation.state.params.id).update({
                             content: this.state.content, cost: this.state.cost,
                             datetime: this.state.datetime, datetime1: this.state.datetime1,
                             labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,

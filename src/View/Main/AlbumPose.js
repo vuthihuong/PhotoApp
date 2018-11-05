@@ -13652,7 +13652,7 @@ export default class AlbumPose extends Component{
 
 
                             <View style={{marginTop: 15, flexDirection:'row'}}>
-                                <ListView 
+                                <ListView  enableEmptySections
                                     contentContainerStyle={{flexDirection: 'row',flexWrap:'wrap', 
                                                 justifyContent: 'space-between'}}
                                     dataSource = {this.state.dataSource}

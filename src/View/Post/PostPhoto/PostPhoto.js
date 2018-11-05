@@ -134,17 +134,8 @@ export default class PostPhoto extends Component {
                     this.setState({ 
                         labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, 
                     })
+                  
                     this.itemRef.ref('Post').push({
-                        userId: key, title: "Tìm nháy ảnh", countCommentEvent: this.state.countCommentEvent,
-                        countParticipate: this.state.countParticipate, countLike: this.state.countLike,
-                        valueCategoryPhoto1: this.state.valueCategoryPhoto1,
-                        contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
-                        datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
-                        valuePlacePhoto: this.state.valuePlacePhoto,
-                        datePostPhoto : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
-                        timePostPhoto: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
-                        })
-                    this.itemRef.ref('PostPhoto').push({
                         userId: key, title: "Tìm nháy ảnh", countCommentEvent: this.state.countCommentEvent,
                         countParticipate: this.state.countParticipate, countLike: this.state.countLike,
                         valueCategoryPhoto1: this.state.valueCategoryPhoto1,

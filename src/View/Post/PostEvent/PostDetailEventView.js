@@ -44,7 +44,7 @@ export default class PostDetailEventView extends Component {
           })  
         })
         // lấy số lượng comment của bài post
-        FirebaseApp.database().ref('PostEvent').orderByKey().equalTo(this.props.navigation.state.params.id)
+        FirebaseApp.database().ref('Post').orderByKey().equalTo(this.props.navigation.state.params.id)
                    .on('value', (function (snapshot) {
           snapshot.forEach((function(childSnapshot) {
                          let childData = childSnapshot.val();
@@ -58,7 +58,7 @@ export default class PostDetailEventView extends Component {
                         })
             }).bind(this))
         }).bind(this))
-    FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id)
+    FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
         .on('value', (function (snapshot) {
                 if(snapshot.exists()){ 
@@ -69,7 +69,7 @@ export default class PostDetailEventView extends Component {
                     }
         }).bind(this))
     
-    FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id)
+    FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
         .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
         .on('value', (function (snapshot) {
                 if(snapshot.exists()){ 
@@ -82,7 +82,7 @@ export default class PostDetailEventView extends Component {
 
 
         var items  = [];
-            this.actGetData('PostEvent/'+this.props.navigation.state.params.id, items);
+            this.actGetData('Post/'+this.props.navigation.state.params.id, items);
     }
     // danh sách comment của bài post
     actGetData(url, items=[]){ 
@@ -116,7 +116,7 @@ export default class PostDetailEventView extends Component {
     submitCommentEventView(){ 
         // comment bài post và lưu vào csdl
         if(this.state.commentEventDetail !== ''){
-            FirebaseApp.database().ref('PostEvent').child(this.props.navigation.state.params.id).child('comment')
+            FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id).child('comment')
             .push({ 
                 userKey: userKey, 
                 contentComment: this.state.commentEventDetail,
@@ -124,7 +124,7 @@ export default class PostDetailEventView extends Component {
             })
             this.setState({ countCommentEvent: this.state.countCommentEvent + 1})
            
-            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+            FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id).update({ 
                 countCommentEvent:countCommentEvent + 1
             })
             this.setState({ commentEventDetail: ''})
@@ -146,10 +146,10 @@ export default class PostDetailEventView extends Component {
         this.setState({
             changeStatusPart: true, countParticipate: this.state.countParticipate + 1
         })
-        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+        FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id).update({ 
             countParticipate:countParticipate + 1
         })
-        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+        FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').push({ 
             userId: userKey, username: username,  statusAgree: "gửi yêu cầu"
         })
@@ -158,17 +158,17 @@ export default class PostDetailEventView extends Component {
         this.setState({
             changeStatusPart: false, countParticipate: this.state.countParticipate - 1
         })
-        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+        FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id).update({ 
             countParticipate:countParticipate - 1
         })
-        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+        FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
         .on('value', (function (snapshot) {
             snapshot.forEach(function(childSnapshot) {
                  keyStatusPart = childSnapshot.key;
             })
         }))
-        FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+        FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').child(keyStatusPart).remove();
     }
 
@@ -177,10 +177,10 @@ export default class PostDetailEventView extends Component {
             this.setState({
                 changeLike: true, colorLike: 'blue', countLike: this.state.countLike + 1
             })
-            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+            FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id).update({ 
                 countLike:countLike + 1
             })
-            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+            FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
             .child('LikePostEvent').push({ 
                 userId: userKey, 
             })
@@ -189,17 +189,17 @@ export default class PostDetailEventView extends Component {
             this.setState({
                 changeLike: false, colorLike: 'black', countLike: this.state.countLike - 1
             })
-            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id).update({ 
+            FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id).update({ 
                 countLike:countLike - 1
             })
-            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+            FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
             .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
             .on('value', (function (snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                      keyLike = childSnapshot.key;
                 })
             }))
-            FirebaseApp.database().ref('PostEvent/').child(this.props.navigation.state.params.id)
+            FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
             .child('LikePostEvent').child(keyLike).remove();
         }
     }
@@ -300,7 +300,7 @@ export default class PostDetailEventView extends Component {
                 </View>) : null}
                 {this.state.changeCommentEvent === true?
                  <View style={stylesPostDtailEventView.txtedComment}>
-                    <ListView 
+                    <ListView  enableEmptySections
                         contentContainerStyle={{flexDirection: 'row',flexWrap:'wrap', 
                                 justifyContent: 'space-between'}}
                         dataSource = {this.state.dataSource}
