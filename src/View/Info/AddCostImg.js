@@ -424,7 +424,7 @@ addInfoImg(){
                     </View>  */}
                      {this.state.checkErrCat === true?
                             <Text style={{color: 'red'}}>Bạn chưa chọn thể loại</Text>:null}
-                    <View style={{flexDirection: 'row',}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                        
                         <Text style={{marginRight: 20, color: 'black'}}>Tên thể loại</Text>
                         <View style={{flexDirection: 'row' }}>
@@ -490,16 +490,21 @@ addInfoImg(){
                             </View>
                         </View>
                     </View>
-                    <View style={{ width: 250, marginLeft: 90}}>
+                    <View style={{ width: 250, marginLeft: 100}}>
                         <TextInput placeholder="Thể loại khác"></TextInput>
                     </View>
-                    <TextInput placeholder="Mô tả gói chụp" placeholderTextColor = "black" multiline={true} 
-                         onChangeText={(contentImg) => this.setState({ contentImg })}>
-                         {this.state.contentImg}</TextInput> 
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={{color: 'black', marginTop: 20}}>Mô tả gói chụp</Text>
+                        <TextInput  placeholderTextColor = "black" multiline={true}
+                            style={{width: 250}} 
+                            onChangeText={(contentImg) => this.setState({ contentImg })}>
+                            {this.state.contentImg}</TextInput> 
+                    </View>
+                    
                     {this.state.checkErrTime === true?
                         <Text style={{color: 'red'}}>Bạn chưa chọn thời lượng chụp</Text>:null}   
-                    <View style={{flexDirection: 'row', marginTop: 20 }}>
-                        <Text style={{marginRight: 20, color: 'black'}}>Thời lượng chụp</Text>
+                    <View style={{flexDirection: 'row', marginTop: 20, justifyContent: 'space-between' }}>
+                        <Text style={{marginRight: 20, color: 'black', marginTop: -10}}>{`Thời lượng \n chụp`}</Text>
                         <View style={{flexDirection: 'row' }}>
                             <View>
                                 <CheckBox 
@@ -509,6 +514,8 @@ addInfoImg(){
                                     checked={this.state.checkedTime1}
                                     onChange={(checked) => {this.checkTime1()}} 
                                                 /> 
+                            </View>
+                            <View>
                                  <CheckBox 
                                     label='Theo ngày'
                                     labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
@@ -525,37 +532,53 @@ addInfoImg(){
                      {this.state.checkErrFileImgNum === true?
                             <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
                     {this.state.checkedTime1 === true?
-                    <TextInput placeholder="Giá cho một file chụp" placeholderTextColor = "black"
-                        onChangeText={(costFile) => this.setState({ costFile })}>
-                        {this.state.costFile}</TextInput>:null}
+                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={{color: 'black',marginTop: 20, marginRight: 15}}>{`Giá cho một \nfile chụp`}</Text>
+                         <TextInput  placeholderTextColor = "black" style={{width: 250}}
+                            onChangeText={(costFile) => this.setState({ costFile })}>
+                            {this.state.costFile}</TextInput>
+                    </View>:null}
+                   
 
                     {this.state.checkErrDayImg === true?
                             <Text style={{color: 'red'}}>Bạn chưa nhập giá</Text>:null}
                      {this.state.checkErrDayImgNum === true?
                             <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
                     {this.state.checkedTime2 === true?
-                    <TextInput placeholder="Giá cho một ngày chụp" placeholderTextColor = "black"
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={{color: 'black',marginTop: 20, }}>{` Giá cho một \n ngày chụp`}</Text>
+                        <TextInput placeholderTextColor = "black"  style={{width: 250, }}
                         onChangeText={(costDay) => this.setState({ costDay })}>
-                        {this.state.costDay}</TextInput>:null}
+                        {this.state.costDay}</TextInput>
+                    </View>:null}
+                    
 
                     {this.state.checkErrCountImg === true?
                         <Text style={{color: 'red'}}>Bạn chưa nhập số ảnh photoshop</Text>:null}
                      {this.state.checkErrCountImgNum === true?
                             <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
-                    <TextInput placeholder="Số ảnh photoshop" placeholderTextColor = "black"
-                        onChangeText={(countImgPhoto) => this.setState({ countImgPhoto })}>
-                        {this.state.countImgPhoto}</TextInput> 
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={{color: 'black', marginTop: 20, marginRight: 10}}>{`Số ảnh \nphotoshop`}</Text>
+                        <TextInput  placeholderTextColor = "black"
+                            style={{width: 250}}
+                            onChangeText={(countImgPhoto) => this.setState({ countImgPhoto })}>
+                            {this.state.countImgPhoto}</TextInput> 
+                    </View>
+                   
 
                     {this.state.checkErrAvgImg === true?
                         <Text style={{color: 'red'}}>Bạn chưa nhập giá trung bình một ảnh photoshop</Text>:null}
                     {this.state.checkErrAvgImgNum === true?
                             <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
-                    <TextInput placeholder="Giá trung bình một ảnh photoshop" placeholderTextColor = "black"
-                        onChangeText={(countAvgImg) => this.setState({ countAvgImg })}>
-                        {this.state.countAvgImg}</TextInput>
-                    <Text style={{marginTop: 10, color: 'black'}}>Quyền lợi</Text>
-                    <View style={{flexDirection: 'row', marginLeft: 30 }}>
-                            <View>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={{color:'black', marginTop: 20}}>{`Giá một ảnh \nphotoshop`}</Text>
+                        <TextInput  placeholderTextColor = "black"   style={{width: 250}}
+                            onChangeText={(countAvgImg) => this.setState({ countAvgImg })}>
+                            {this.state.countAvgImg}</TextInput>
+                    </View>
+                    <View style={{flexDirection: 'row', marginTop: 10,}}>
+                        <Text style={{ color: 'black', marginRight: 40}}>Quyền lợi</Text>
+                        <View >
                                 <CheckBox 
                                     label='Có xe đưa đón'
                                     labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
@@ -571,15 +594,6 @@ addInfoImg(){
                                     onChange={(checked) => {this.checkRight5()}} 
                                                 /> 
                                 <CheckBox 
-                                    label='Có hỗ trợ trang phục'
-                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
-                                    checkboxStyle = {{width:15, height: 15}} 
-                                    checked={this.state.checkedRight2}
-                                    onChange={(checked) => {this.checkRight2()}} 
-                                                /> 
-                            </View>
-                            <View>
-                                <CheckBox 
                                     label='Có make up'
                                     labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
                                     checkboxStyle = {{width:15, height: 15}} 
@@ -593,6 +607,13 @@ addInfoImg(){
                                     checked={this.state.checkedRight4}
                                     onChange={(checked) => {this.checkRight4()}} 
                                                 /> 
+                                <CheckBox 
+                                    label='Có hỗ trợ trang phục'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedRight2}
+                                    onChange={(checked) => {this.checkRight2()}} 
+                                                /> 
                         </View>
                     </View>
                     {this.state.checkCostRight === true? 
@@ -600,7 +621,7 @@ addInfoImg(){
                     {this.state.checkCostRightNum === true?
                         <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>: null}
                     {this.state.checkedRight2 === true?
-                    <View style={{ width: 250, marginLeft: 40, marginTop: -10}}>
+                    <View style={{ width: 250, marginLeft: 100, marginTop: -10}}>
                         <TextInput placeholder="Số lượng trang phục" 
                             onChangeText={(labelCostRight) => this.setState({ labelCostRight })}>
                             {this.state.labelCostRight}</TextInput>
