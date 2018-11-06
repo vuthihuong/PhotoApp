@@ -16,7 +16,10 @@ export default class InfoPhoto extends Component {
         labelCat1: '', labelCat2: '', labelCat3: '', labelCat4: '', labelCat5: '', labelCat6: '', 
         labelCat7: '', labelCat8: '', labelCateDiff: '', labelTime1: '', labelTime2: '', 
         contentImg: '', costFile: '', costDay: '', countImgPhoto: '', countAvgImg: '',
-        labelRight1: '', labelRight2: '', labelRight3: '', labelRight4: '', labelRight5: '', labelCostRight: ''
+        labelRight1: '', labelRight2: '', labelRight3: '', labelRight4: '', labelRight5: '', labelCostRight: '',
+        checkErrCat: false, checkErrCountImg: false, checkErrTime: false, checkErrAvgImg: false,
+        checkErrCountImgNum: false, checkErrAvgImgNum: false, checkErrFileImg: false, checkErrFileImgNum: false,
+        checkErrDayImg: false, checkErrDayImgNum: false
      }
 
    }
@@ -217,26 +220,190 @@ checkRight5(){
     }
 }
 addInfoImg(){ 
-    FirebaseApp.database().ref('InfoTableImg').push({ 
-        labelCat1: this.state.labelCat1, labelCat2: this.state.labelCat2, labelCat3: this.state.labelCat3,
-        labelCat4: this.state.labelCat4, labelCat5: this.state.labelCat5, labelCat6: this.state.labelCat6,
-        labelCat7: this.state.labelCat7, labelCat8: this.state.labelCat8, labelCateDiff: this.state.labelCateDiff,
-        contentImg: this.state.contentImg, labelTime1: this.state.labelTime1, labelTime2: this.state.labelTime2,
-        costFile: this.state.costFile, costDay: this.state.costDay, countImgPhoto: this.state.countImgPhoto,
-        countAvgImg: this.state.countAvgImg, labelRight1: this.state.labelRight1, 
-        labelRight2: this.state.labelRight2, labelRight3: this.state.labelRight3, labelRight4: this.state.labelRight4,
-        labelRight5: this.state.labelRight5, labelCostRight: this.state.labelCostRight
-    })
-    this.setState({ 
-        checkedCat1: false, checkedCat2: false, checkedCat3: false, checkedCat4: false, 
-        checkedCat5: false, checkedCat6: false, checkedCat7: false, checkedCat8: false,
-        checkedTime1: false, checkedTime2: false,checkedRight1: false, checkedRight2: false, 
-        checkedRight3: false, checkedRight4: false, checkedRight5: false,
-        labelCat1: '', labelCat2: '', labelCat3: '', labelCat4: '', labelCat5: '', labelCat6: '', 
-        labelCat7: '', labelCat8: '', labelCateDiff: '', labelTime1: '', labelTime2: '', 
-        contentImg: '', costFile: '', costDay: '', countImgPhoto: '', countAvgImg: '',
-        labelRight1: '', labelRight2: '', labelRight3: '', labelRight4: '', labelRight5: '', labelCostRight: ''
-    })
+    const reg =/^\+?[0-9][\d]*$/;
+    if((this.state.labelCat1 === '' && this.state.labelCat2 === '' && this.state.labelCat3 === ''
+      && this.state.labelCat4 === '' && this.state.labelCat5 === '' && this.state.labelCat6 === ''
+      && this.state.labelCat7 === '' && this.state.labelCat8 === '' && this.state.labelCateDiff === '' ) 
+      || this.state.countAvgImg === ''  || this.state.countImgPhoto === '' 
+      || (this.state.checkedTime1 === false && this.state.checkedTime2 === false)){ 
+          if(this.state.labelCat1 === '' && this.state.labelCat2 === '' && this.state.labelCat3 === ''
+          && this.state.labelCat4 === '' && this.state.labelCat5 === '' && this.state.labelCat6 === ''
+          && this.state.labelCat7 === '' && this.state.labelCat8 === '' ){ 
+              this.setState({ 
+                  checkErrCat: true
+              })
+          }
+          else { this.setState({ checkErrCat: false})}
+
+          if(this.state.checkedTime1 === false && this.state.checkedTime2 === false){ 
+              this.setState({ 
+                  checkErrTime: true
+              })
+          }
+          else  if(this.state.checkedTime1 === true || this.state.checkedTime2 === true ) { 
+              this.setState({ checkErrTime: false})
+            }
+          if(this.state.countAvgImg === ''){ 
+              this.setState({ 
+                  checkErrAvgImg: true
+              })
+          }
+          else {this.setState({ checkErrAvgImg: false})}
+          if(this.state.countImgPhoto === ''){ 
+              this.setState({ 
+                  checkErrCountImg: true
+              })
+          }
+          else { this.setState({ checkErrCountImg: false})}
+      }
+    else if((this.state.labelCat1 !== '' || this.state.labelCat2 !== '' || this.state.labelCat3 !== ''
+        || this.state.labelCat4 !== '' || this.state.labelCat5 !== '' || this.state.labelCat6 !== ''
+        || this.state.labelCat7 !== '' || this.state.labelCat8 !== '' || this.state.labelCateDiff !== '' ) 
+        && this.state.countAvgImg !== ''  && this.state.countImgPhoto !== '' 
+        && (this.state.checkedTime1 === true || this.state.checkedTime2 === true)){ 
+           if(this.state.checkedTime1 === true){ 
+               if(this.state.costFile === ''){ 
+                   this.setState({ 
+                       checkErrFileImg: true, checkErrFileImgNum: false
+                   })
+               }
+               else if(reg.test(this.state.costFile) === false){ 
+                   this.setState({ 
+                        checkErrFileImg: false, checkErrFileImgNum: true
+                   })
+               }
+           }
+           if(this.state.checkedTime2 === true){ 
+               if(this.state.costDay === ''){ 
+                    this.setState({ 
+                        checkErrDayImg: true, checkErrDayImgNum: false
+                    })
+               }
+               else if(reg.test(this.state.costDay) === false){ 
+                    this.setState({ 
+                        checkErrDayImg: false, checkErrDayImgNum: true
+                })
+               }
+               
+           }
+           if(reg.test(this.state.countAvgImg) === false){ 
+               this.setState({ 
+                   checkErrAvgImg: false, checkErrAvgImgNum: true
+               })
+           }
+           else if(reg.test(this.state.countAvgImg) === true){ 
+            this.setState({ 
+                checkErrAvgImg: false, checkErrAvgImgNum: false
+            })
+           }
+           if(reg.test(this.state.countImgPhoto)=== false){ 
+               this.setState({ 
+                   checkErrCountImg: false, checkErrCountImgNum: true
+               })
+           }
+           else if(reg.test(this.state.countImgPhoto)=== true){ 
+               this.setState({ 
+                checkErrCountImg: false, checkErrCountImgNum: false
+               })
+           }
+           if(this.state.checkedRight2 === false && reg.test(this.state.countAvgImg) === true
+                && reg.test(this.state.countImgPhoto) === true
+                && (reg.test(this.state.costFile) === true || reg.test(this.state.costDay)===true)){ 
+                    this.setState({ 
+                        checkErrCat: false, checkErrCountImg: false, checkErrTime: false, checkErrAvgImg: false,
+                        checkErrCountImgNum: false, checkErrAvgImgNum: false, checkErrFileImg: false, checkErrFileImgNum: false,
+                        checkErrDayImg: false, checkErrDayImgNum: false
+                    })
+            FirebaseApp.database().ref('InfoTableImg').push({ 
+                labelCat1: this.state.labelCat1, labelCat2: this.state.labelCat2, labelCat3: this.state.labelCat3,
+                labelCat4: this.state.labelCat4, labelCat5: this.state.labelCat5, labelCat6: this.state.labelCat6,
+                labelCat7: this.state.labelCat7, labelCat8: this.state.labelCat8, labelCateDiff: this.state.labelCateDiff,
+                contentImg: this.state.contentImg, labelTime1: this.state.labelTime1, labelTime2: this.state.labelTime2,
+                costFile: this.state.costFile, costDay: this.state.costDay, countImgPhoto: this.state.countImgPhoto,
+                countAvgImg: this.state.countAvgImg, labelRight1: this.state.labelRight1, 
+                labelRight2: this.state.labelRight2, labelRight3: this.state.labelRight3, labelRight4: this.state.labelRight4,
+                labelRight5: this.state.labelRight5, labelCostRight: this.state.labelCostRight
+            })
+            this.setState({ 
+                checkedCat1: false, checkedCat2: false, checkedCat3: false, checkedCat4: false, 
+                checkedCat5: false, checkedCat6: false, checkedCat7: false, checkedCat8: false,
+                checkedTime1: false, checkedTime2: false,checkedRight1: false, checkedRight2: false, 
+                checkedRight3: false, checkedRight4: false, checkedRight5: false,
+                labelCat1: '', labelCat2: '', labelCat3: '', labelCat4: '', labelCat5: '', labelCat6: '', 
+                labelCat7: '', labelCat8: '', labelCateDiff: '', labelTime1: '', labelTime2: '', 
+                contentImg: '', costFile: '', costDay: '', countImgPhoto: '', countAvgImg: '',
+                labelRight1: '', labelRight2: '', labelRight3: '', labelRight4: '', labelRight5: '', labelCostRight: '',
+                checkErrCat: false, checkErrCountImg: false, checkErrTime: false, checkErrAvgImg: false,
+                checkErrCountImgNum: false, checkErrAvgImgNum: false, checkErrFileImg: false, checkErrFileImgNum: false,
+                checkErrDayImg: false, checkErrDayImgNum: false
+            })
+            Alert.alert(
+                'Thông báo',
+                'Bạn đã thêm thông tin thành công',
+                [
+                  {text: 'OK', onPress: () => {
+                    this.props.navigation.pop()
+                  }},
+                ],
+                { cancelable: false }
+              )
+           }
+           else if(this.state.checkedRight2 === true  && reg.test(this.state.countAvgImg) === true
+            && reg.test(this.state.countImgPhoto) === true
+            && (reg.test(this.state.costFile) === true || reg.test(this.state.costDay)===true)){ 
+               if(this.state.labelCostRight === ''){ 
+                   this.setState({ 
+                        checkCostRight: true, checkCostRightNum: false
+                   })
+               }
+               else if(reg.test(this.state.labelCostRight)=== false){ 
+                   this.setState({ 
+                       checkCostRight: false, checkCostRightNum: true
+                   })
+               }
+               else if(reg.test(this.state.labelCostRight) === true){ 
+                   this.setState({ 
+                    checkErrCat: false, checkErrCountImg: false, checkErrTime: false, checkErrAvgImg: false,
+                    checkErrCountImgNum: false, checkErrAvgImgNum: false, checkErrFileImg: false, checkErrFileImgNum: false,
+                    checkErrDayImg: false, checkErrDayImgNum: false
+                   })
+                    FirebaseApp.database().ref('InfoTableImg').push({ 
+                        labelCat1: this.state.labelCat1, labelCat2: this.state.labelCat2, labelCat3: this.state.labelCat3,
+                        labelCat4: this.state.labelCat4, labelCat5: this.state.labelCat5, labelCat6: this.state.labelCat6,
+                        labelCat7: this.state.labelCat7, labelCat8: this.state.labelCat8, labelCateDiff: this.state.labelCateDiff,
+                        contentImg: this.state.contentImg, labelTime1: this.state.labelTime1, labelTime2: this.state.labelTime2,
+                        costFile: this.state.costFile, costDay: this.state.costDay, countImgPhoto: this.state.countImgPhoto,
+                        countAvgImg: this.state.countAvgImg, labelRight1: this.state.labelRight1, 
+                        labelRight2: this.state.labelRight2, labelRight3: this.state.labelRight3, labelRight4: this.state.labelRight4,
+                        labelRight5: this.state.labelRight5, labelCostRight: this.state.labelCostRight,
+                        
+                    })
+                    this.setState({ 
+                        checkedCat1: false, checkedCat2: false, checkedCat3: false, checkedCat4: false, 
+                        checkedCat5: false, checkedCat6: false, checkedCat7: false, checkedCat8: false,
+                        checkedTime1: false, checkedTime2: false,checkedRight1: false, checkedRight2: false, 
+                        checkedRight3: false, checkedRight4: false, checkedRight5: false,
+                        labelCat1: '', labelCat2: '', labelCat3: '', labelCat4: '', labelCat5: '', labelCat6: '', 
+                        labelCat7: '', labelCat8: '', labelCateDiff: '', labelTime1: '', labelTime2: '', 
+                        contentImg: '', costFile: '', costDay: '', countImgPhoto: '', countAvgImg: '',
+                        labelRight1: '', labelRight2: '', labelRight3: '', labelRight4: '', labelRight5: '', labelCostRight: '',
+                        checkErrCat: false, checkErrCountImg: false, checkErrTime: false, checkErrAvgImg: false,
+                        checkErrCountImgNum: false, checkErrAvgImgNum: false, checkErrFileImg: false, checkErrFileImgNum: false,
+                        checkErrDayImg: false, checkErrDayImgNum: false
+                    })
+                    Alert.alert(
+                        'Thông báo',
+                        'Bạn đã thêm thông tin thành công',
+                        [
+                          {text: 'OK', onPress: () => {
+                            this.props.navigation.pop()
+                          }},
+                        ],
+                        { cancelable: false }
+                      )
+               }
+           }
+    }
 }
    render(){ 
        return(
@@ -255,8 +422,11 @@ addInfoImg(){
                         <TextInput placeholder="Tên gói" 
                         placeholderTextColor = "black"></TextInput>
                     </View>  */}
+                     {this.state.checkErrCat === true?
+                            <Text style={{color: 'red'}}>Bạn chưa chọn thể loại</Text>:null}
                     <View style={{flexDirection: 'row',}}>
-                        <Text style={{marginRight: 20, color: 'black', marginTop: -10}}>Tên thể loại</Text>
+                       
+                        <Text style={{marginRight: 20, color: 'black'}}>Tên thể loại</Text>
                         <View style={{flexDirection: 'row' }}>
                             <View>
                                 <CheckBox 
@@ -326,6 +496,8 @@ addInfoImg(){
                     <TextInput placeholder="Mô tả gói chụp" placeholderTextColor = "black" multiline={true} 
                          onChangeText={(contentImg) => this.setState({ contentImg })}>
                          {this.state.contentImg}</TextInput> 
+                    {this.state.checkErrTime === true?
+                        <Text style={{color: 'red'}}>Bạn chưa chọn thời lượng chụp</Text>:null}   
                     <View style={{flexDirection: 'row', marginTop: 20 }}>
                         <Text style={{marginRight: 20, color: 'black'}}>Thời lượng chụp</Text>
                         <View style={{flexDirection: 'row' }}>
@@ -347,19 +519,37 @@ addInfoImg(){
                             </View>
                         </View>
                     </View>
+                  
+                    {this.state.checkErrFileImg === true?
+                            <Text style={{color: 'red'}}>Bạn chưa nhập giá</Text>:null}
+                     {this.state.checkErrFileImgNum === true?
+                            <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
                     {this.state.checkedTime1 === true?
                     <TextInput placeholder="Giá cho một file chụp" placeholderTextColor = "black"
                         onChangeText={(costFile) => this.setState({ costFile })}>
                         {this.state.costFile}</TextInput>:null}
 
+                    {this.state.checkErrDayImg === true?
+                            <Text style={{color: 'red'}}>Bạn chưa nhập giá</Text>:null}
+                     {this.state.checkErrDayImgNum === true?
+                            <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
                     {this.state.checkedTime2 === true?
                     <TextInput placeholder="Giá cho một ngày chụp" placeholderTextColor = "black"
                         onChangeText={(costDay) => this.setState({ costDay })}>
                         {this.state.costDay}</TextInput>:null}
 
+                    {this.state.checkErrCountImg === true?
+                        <Text style={{color: 'red'}}>Bạn chưa nhập số ảnh photoshop</Text>:null}
+                     {this.state.checkErrCountImgNum === true?
+                            <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
                     <TextInput placeholder="Số ảnh photoshop" placeholderTextColor = "black"
                         onChangeText={(countImgPhoto) => this.setState({ countImgPhoto })}>
                         {this.state.countImgPhoto}</TextInput> 
+
+                    {this.state.checkErrAvgImg === true?
+                        <Text style={{color: 'red'}}>Bạn chưa nhập giá trung bình một ảnh photoshop</Text>:null}
+                    {this.state.checkErrAvgImgNum === true?
+                            <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
                     <TextInput placeholder="Giá trung bình một ảnh photoshop" placeholderTextColor = "black"
                         onChangeText={(countAvgImg) => this.setState({ countAvgImg })}>
                         {this.state.countAvgImg}</TextInput>
@@ -405,6 +595,10 @@ addInfoImg(){
                                                 /> 
                         </View>
                     </View>
+                    {this.state.checkCostRight === true? 
+                        <Text style={{color:'red'}}>Bạn chưa nhập số lượng trang phục</Text>:null}
+                    {this.state.checkCostRightNum === true?
+                        <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>: null}
                     {this.state.checkedRight2 === true?
                     <View style={{ width: 250, marginLeft: 40, marginTop: -10}}>
                         <TextInput placeholder="Số lượng trang phục" 
