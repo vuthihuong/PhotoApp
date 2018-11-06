@@ -13,172 +13,220 @@ export default class InfoPhoto extends Component {
         checkedCat5: false, checkedCat6: false, checkedCat7: false, checkedCat8: false,
         checkedTime1: false, checkedTime2: false,checkedRight1: false, checkedRight2: false, 
         checkedRight3: false, checkedRight4: false, checkedRight5: false,
+        labelCat1: '', labelCat2: '', labelCat3: '', labelCat4: '', labelCat5: '', labelCat6: '', 
+        labelCat7: '', labelCat8: '', labelCateDiff: '', labelTime1: '', labelTime2: '', 
+        contentImg: '', costFile: '', costDay: '', countImgPhoto: '', countAvgImg: '',
+        labelRight1: '', labelRight2: '', labelRight3: '', labelRight4: '', labelRight5: '', labelCostRight: ''
      }
 
    }
    checkCat1(){ 
        if(this.state.checkedCat1 === true){ 
            this.setState({ 
-               checkedCat1: false
+               checkedCat1: false, labelCat1: ''
            })
        }
        else if(this.state.checkedCat1 === false){ 
            this.setState({ 
                checkedCat1: true, checkedCat2: false, checkedCat3: false, checkedCat7: false,
-               checkedCat4: false, checkedCat5: false, checkedCat6: false, checkedCat8: false
+               checkedCat4: false, checkedCat5: false, checkedCat6: false, checkedCat8: false,
+               labelCat1: 'Phượng đỏ'
            })
        }
    }
    checkCat2(){ 
     if(this.state.checkedCat2 === true){ 
         this.setState({ 
-            checkedCat2: false
+            checkedCat2: false, labelCat2: ''
         })
     }
     else if(this.state.checkedCat2 === false){ 
         this.setState({ 
             checkedCat2: true, checkedCat1: false, checkedCat3: false,  checkedCat7: false,
-            checkedCat4: false, checkedCat5: false, checkedCat6: false, checkedCat8: false
+            checkedCat4: false, checkedCat5: false, checkedCat6: false, checkedCat8: false,
+            labelCat2: 'Sen mùa hạ'
         })
     }
 }
 checkCat3(){ 
     if(this.state.checkedCat3 === true){ 
         this.setState({ 
-            checkedCat3: false
+            checkedCat3: false, labelCat3: ''
         })
     }
     else if(this.state.checkedCat3 === false){ 
         this.setState({ 
             checkedCat3: true, checkedCat2: false, checkedCat1: false, checkedCat7: false,
-            checkedCat4: false, checkedCat5: false, checkedCat6: false, checkedCat8: false
+            checkedCat4: false, checkedCat5: false, checkedCat6: false, checkedCat8: false,
+            labelCat3: 'Chụp phố Hà Nội'
         })
     }
 }
 checkCat4(){ 
     if(this.state.checkedCat4 === true){ 
         this.setState({ 
-            checkedCat4: false
+            checkedCat4: false, labelCat4: ''
         })
     }
     else if(this.state.checkedCat4 === false){ 
         this.setState({ 
             checkedCat4: true, checkedCat2: false, checkedCat3: false, checkedCat7: false,
-            checkedCat1: false, checkedCat5: false, checkedCat6: false, checkedCat8: false
+            checkedCat1: false, checkedCat5: false, checkedCat6: false, checkedCat8: false,
+            labelCat4: 'Bãi lau'
         })
     }
 }
 checkCat5(){ 
     if(this.state.checkedCat5 === true){ 
         this.setState({ 
-            checkedCat5: false
+            checkedCat5: false, labelCat5: ''
         })
     }
     else if(this.state.checkedCat5 === false){ 
         this.setState({ 
             checkedCat5: true, checkedCat2: false, checkedCat3: false, checkedCat7: false,
-            checkedCat4: false, checkedCat1: false, checkedCat6: false, checkedCat8: false
+            checkedCat4: false, checkedCat1: false, checkedCat6: false, checkedCat8: false,
+            labelCat5: 'Thung lũng hoa'
         })
     }
 }
 checkCat6(){ 
     if(this.state.checkedCat6 === true){ 
         this.setState({ 
-            checkedCat6: false
+            checkedCat6: false, labelCat6: ''
         })
     }
     else if(this.state.checkedCat6 === false){ 
         this.setState({ 
             checkedCat6: true, checkedCat2: false, checkedCat3: false, checkedCat7: false,
-            checkedCat4: false, checkedCat5: false, checkedCat1: false, checkedCat8: false
+            checkedCat4: false, checkedCat5: false, checkedCat1: false, checkedCat8: false,
+            labelCat6: 'Cúc họa mi'
         })
     }
 }
 checkCat7(){ 
     if(this.state.checkedCat7 === true){ 
         this.setState({ 
-            checkedCat7: false
+            checkedCat7: false, labelCat7: ''
         })
     }
     else if(this.state.checkedCat7 === false){ 
         this.setState({ 
             checkedCat7: true, checkedCat2: false, checkedCat3: false, checkedCat6: false,
-            checkedCat4: false, checkedCat5: false, checkedCat1: false, checkedCat8: false
+            checkedCat4: false, checkedCat5: false, checkedCat1: false, checkedCat8: false,
+            labelCat7: 'Ảnh kỷ yếu'
         })
     }
 }
 checkCat8(){ 
     if(this.state.checkedCat8 === true){ 
         this.setState({ 
-            checkedCat8: false
+            checkedCat8: false, labelCat8: ''
         })
     }
     else if(this.state.checkedCat8 === false){ 
         this.setState({ 
             checkedCat8: true, checkedCat2: false, checkedCat3: false, checkedCat6: false,
-            checkedCat4: false, checkedCat5: false, checkedCat1: false, checkedCat7: false
+            checkedCat4: false, checkedCat5: false, checkedCat1: false, checkedCat7: false,
+            labelCat8: 'Ảnh cưới'
         })
     }
 }
 checkTime1(){ 
     if(this.state.checkedTime1 === true){ 
-        this.setState({ checkedTime1: false})
+        this.setState({ 
+            checkedTime1: false, labelTime1: ''
+        })
     }
     else if(this.state.checkedTime1 === false){ 
         this.setState({ 
-            checkedTime1: true, checkedTime2: false
+            checkedTime1: true, checkedTime2: false, labelTime1: 'Theo số file chụp'
         })
     }
 }
 checkTime2(){ 
     if(this.state.checkedTime2 === true){ 
-        this.setState({ checkedTime2: false})
+        this.setState({
+             checkedTime2: false, labelTime2: ''
+            })
     }
     else if(this.state.checkedTime2 === false){ 
         this.setState({ 
-            checkedTime2: true, checkedTime1: false
+            checkedTime2: true, checkedTime1: false, labelTime2: 'Theo ngày'
         })
     }
 }
 checkRight1(){ 
     if(this.state.checkedRight1 === true){ 
-        this.setState({ checkedRight1: false})
+        this.setState({
+             checkedRight1: false, labelRight1: ''
+            })
     }
     else if(this.state.checkedRight1 === false){ 
-        this.setState({ checkedRight1: true})
+        this.setState({ 
+            checkedRight1: true, labelRight1: 'Có xe đưa đón'
+        })
     }
 }
 checkRight2(){ 
     if(this.state.checkedRight2 === true){ 
-        this.setState({ checkedRight2: false})
+        this.setState({ 
+            checkedRight2: false, labelRight2: ''
+        })
     }
     else if(this.state.checkedRight2 === false){ 
-        this.setState({ checkedRight2: true})
+        this.setState({ 
+            checkedRight2: true, labelRight2: 'Có hỗ trợ trang phục'
+        })
     }
 }
 checkRight3(){ 
     if(this.state.checkedRight3 === true){ 
-        this.setState({ checkedRight3: false})
+        this.setState({ 
+            checkedRight3: false, labelRight3: ''
+        })
     }
     else if(this.state.checkedRight3 === false){ 
-        this.setState({ checkedRight3: true})
+        this.setState({ 
+            checkedRight3: true, labelRight3: 'Có make up'
+        })
     }
 }
 checkRight4(){ 
     if(this.state.checkedRight4 === true){ 
-        this.setState({ checkedRight4: false})
+        this.setState({ 
+            checkedRight4: false, labelRight4: ''
+        })
     }
     else if(this.state.checkedRight4 === false){ 
-        this.setState({ checkedRight4: true})
+        this.setState({
+             checkedRight4: true, labelRight4: 'Có in ảnh'
+            })
     }
 }
 checkRight5(){ 
     if(this.state.checkedRight5 === true){ 
-        this.setState({ checkedRight5: false})
+        this.setState({
+             checkedRight5: false, labelRight5: ''
+            })
     }
     else if(this.state.checkedRight5 === false){ 
-        this.setState({ checkedRight5: true})
+        this.setState({
+             checkedRight5: true, labelRight5: 'Được mang trang phục khác'
+            })
     }
+}
+addInfoImg(){ 
+    FirebaseApp.database().ref('InfoTableImg').push({ 
+        labelCat1: this.state.labelCat1, labelCat2: this.state.labelCat2, labelCat3: this.state.labelCat3,
+        labelCat4: this.state.labelCat4, labelCat5: this.state.labelCat5, labelCat6: this.state.labelCat6,
+        labelCat7: this.state.labelCat7, labelCat8: this.state.labelCat8, labelCateDiff: this.state.labelCateDiff,
+        contentImg: this.state.contentImg, labelTime1: this.state.labelTime1, labelTime2: this.state.labelTime2,
+        costFile: this.state.costFile, costDay: this.state.costDay, countImgPhoto: this.state.countImgPhoto,
+        countAvgImg: this.state.countAvgImg, labelRight1: this.state.labelRight1, 
+        labelRight2: this.state.labelRight2, labelRight3: this.state.labelRight3, labelRight4: this.state.labelRight4,
+        labelRight5: this.state.labelRight5, labelCostRight: this.state.labelCostRight
+    })
 }
    render(){ 
        return(
@@ -265,8 +313,9 @@ checkRight5(){
                     <View style={{ width: 250, marginLeft: 90}}>
                         <TextInput placeholder="Thể loại khác"></TextInput>
                     </View>
-                    <TextInput placeholder="Mô tả gói chụp" placeholderTextColor = "black"
-                         multiline={true}></TextInput> 
+                    <TextInput placeholder="Mô tả gói chụp" placeholderTextColor = "black" multiline={true} 
+                         onChangeText={(contentImg) => this.setState({ contentImg })}>
+                         {this.state.contentImg}</TextInput> 
                     <View style={{flexDirection: 'row', marginTop: 20 }}>
                         <Text style={{marginRight: 20, color: 'black'}}>Thời lượng chụp</Text>
                         <View style={{flexDirection: 'row' }}>
@@ -289,11 +338,19 @@ checkRight5(){
                         </View>
                     </View>
                     {this.state.checkedTime1 === true?
-                    <TextInput placeholder="Giá cho một file chụp" placeholderTextColor = "black"></TextInput>:null}
+                    <TextInput placeholder="Giá cho một file chụp" placeholderTextColor = "black"
+                        onChangeText={(costFile) => this.setState({ costFile })}>
+                        {this.state.costFile}</TextInput>:null}
                     {this.state.checkedTime2 === true?
-                    <TextInput placeholder="Giá cho một ngày chụp" placeholderTextColor = "black"></TextInput>: null}
-                    <TextInput placeholder="Số ảnh photoshop" placeholderTextColor = "black"></TextInput> 
-                    <TextInput placeholder="Giá trung bình một ảnh photoshop" placeholderTextColor = "black"></TextInput>
+                    <TextInput placeholder="Giá cho một ngày chụp" placeholderTextColor = "black"
+                         onChangeText={(costDay) => this.setState({ costDay })}>
+                         {this.state.costDay} </TextInput>: null}
+                    <TextInput placeholder="Số ảnh photoshop" placeholderTextColor = "black"
+                        onChangeText={(countImgPhoto) => this.setState({ countImgPhoto })}>
+                        {this.state.countImgPhoto}</TextInput> 
+                    <TextInput placeholder="Giá trung bình một ảnh photoshop" placeholderTextColor = "black"
+                        onChangeText={(countAvgImg) => this.setState({ countAvgImg })}>
+                        {this.state.countAvgImg}</TextInput>
                     <Text style={{marginTop: 10, color: 'black'}}>Quyền lợi</Text>
                     <View style={{flexDirection: 'row', marginLeft: 30 }}>
                             <View>
@@ -338,13 +395,14 @@ checkRight5(){
                     </View>
                     {this.state.checkedRight2 === true?
                     <View style={{ width: 250, marginLeft: 40, marginTop: -10}}>
-                        <TextInput placeholder="Số lượng trang phục" ></TextInput>
+                        <TextInput placeholder="Số lượng trang phục" 
+                            onChangeText={(labelCostRight) => this.setState({ labelCostRight })}>
+                            {this.state.labelCostRight}</TextInput>
                     </View>: null}
                     
                     <View style={stylesAddCostImg.buttonCreate}>
                         <TouchableOpacity style={stylesAddCostImg.btnAdd}
-                            // onPress={() => this.createPostEvent()}
-                            >
+                            onPress={() => this.addInfoImg()} >
                             <Text style={stylesAddCostImg.txtAdd}>Thêm</Text>
                         </TouchableOpacity>
                     </View>
