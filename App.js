@@ -56,6 +56,7 @@ import ListPostEvent from './src/View/Post/PostEvent/ListPostEvent'
 import ListDirectPostEvent from './src/View/Post/PostEvent/ListDirectPostEvent'
 
 import NotiMain from './src/View/NotificationPage/NotiMain'
+import AddCostImg from './src/View/Info/AddCostImg'
 
 
 const instructions = Platform.select({
@@ -179,6 +180,9 @@ const Mainapp = createStackNavigator({
     },
     NotiMain: { 
         screen: NotiMain
+    },
+    AddCostImg: { 
+        screen: AddCostImg
     },
     },{
       headerMode:'none'
