@@ -227,6 +227,16 @@ addInfoImg(){
         labelRight2: this.state.labelRight2, labelRight3: this.state.labelRight3, labelRight4: this.state.labelRight4,
         labelRight5: this.state.labelRight5, labelCostRight: this.state.labelCostRight
     })
+    this.setState({ 
+        checkedCat1: false, checkedCat2: false, checkedCat3: false, checkedCat4: false, 
+        checkedCat5: false, checkedCat6: false, checkedCat7: false, checkedCat8: false,
+        checkedTime1: false, checkedTime2: false,checkedRight1: false, checkedRight2: false, 
+        checkedRight3: false, checkedRight4: false, checkedRight5: false,
+        labelCat1: '', labelCat2: '', labelCat3: '', labelCat4: '', labelCat5: '', labelCat6: '', 
+        labelCat7: '', labelCat8: '', labelCateDiff: '', labelTime1: '', labelTime2: '', 
+        contentImg: '', costFile: '', costDay: '', countImgPhoto: '', countAvgImg: '',
+        labelRight1: '', labelRight2: '', labelRight3: '', labelRight4: '', labelRight5: '', labelCostRight: ''
+    })
 }
    render(){ 
        return(
@@ -341,10 +351,12 @@ addInfoImg(){
                     <TextInput placeholder="Giá cho một file chụp" placeholderTextColor = "black"
                         onChangeText={(costFile) => this.setState({ costFile })}>
                         {this.state.costFile}</TextInput>:null}
+
                     {this.state.checkedTime2 === true?
                     <TextInput placeholder="Giá cho một ngày chụp" placeholderTextColor = "black"
-                         onChangeText={(costDay) => this.setState({ costDay })}>
-                         {this.state.costDay} </TextInput>: null}
+                        onChangeText={(costDay) => this.setState({ costDay })}>
+                        {this.state.costDay}</TextInput>:null}
+
                     <TextInput placeholder="Số ảnh photoshop" placeholderTextColor = "black"
                         onChangeText={(countImgPhoto) => this.setState({ countImgPhoto })}>
                         {this.state.countImgPhoto}</TextInput> 
