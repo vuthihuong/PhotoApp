@@ -101,7 +101,8 @@ export default class EditTableImg extends Component {
            this.setState({ 
                checkedCat1: true, checkedCat2: false, checkedCat3: false, checkedCat7: false,
                checkedCat4: false, checkedCat5: false, checkedCat6: false, checkedCat8: false,
-               labelCat1: 'Phượng đỏ', labelCateDiff: ''
+               labelCat1: 'Phượng đỏ', labelCateDiff: '', labelCat2: '', labelCat3: '', labelCat4: '',
+               labelCat5: '', labelCat6: '', labelCat7: '', labelCat8: ''
            })
        }
    }
@@ -115,7 +116,8 @@ export default class EditTableImg extends Component {
         this.setState({ 
             checkedCat2: true, checkedCat1: false, checkedCat3: false,  checkedCat7: false,
             checkedCat4: false, checkedCat5: false, checkedCat6: false, checkedCat8: false,
-            labelCat2: 'Sen mùa hạ', labelCateDiff: ''
+            labelCat2: 'Sen mùa hạ', labelCateDiff: '', labelCat1: '', labelCat3: '', labelCat4: '',
+            labelCat5: '', labelCat6: '', labelCat7: '', labelCat8: ''
         })
     }
 }
@@ -129,7 +131,8 @@ checkCat3(){
         this.setState({ 
             checkedCat3: true, checkedCat2: false, checkedCat1: false, checkedCat7: false,
             checkedCat4: false, checkedCat5: false, checkedCat6: false, checkedCat8: false,
-            labelCat3: 'Chụp phố Hà Nội', labelCateDiff: ''
+            labelCat3: 'Chụp phố Hà Nội', labelCateDiff: '', labelCat2: '', labelCat1: '', labelCat4: '',
+            labelCat5: '', labelCat6: '', labelCat7: '', labelCat8: ''
         })
     }
 }
@@ -143,7 +146,8 @@ checkCat4(){
         this.setState({ 
             checkedCat4: true, checkedCat2: false, checkedCat3: false, checkedCat7: false,
             checkedCat1: false, checkedCat5: false, checkedCat6: false, checkedCat8: false,
-            labelCat4: 'Bãi lau', labelCateDiff: ''
+            labelCat4: 'Bãi lau', labelCateDiff: '',  labelCat2: '', labelCat3: '', labelCat1: '',
+            labelCat5: '', labelCat6: '', labelCat7: '', labelCat8: ''
         })
     }
 }
@@ -157,7 +161,8 @@ checkCat5(){
         this.setState({ 
             checkedCat5: true, checkedCat2: false, checkedCat3: false, checkedCat7: false,
             checkedCat4: false, checkedCat1: false, checkedCat6: false, checkedCat8: false,
-            labelCat5: 'Thung lũng hoa', labelCateDiff: ''
+            labelCat5: 'Thung lũng hoa', labelCateDiff: '', labelCat2: '', labelCat3: '', labelCat4: '',
+            labelCat1: '', labelCat6: '', labelCat7: '', labelCat8: ''
         })
     }
 }
@@ -171,7 +176,8 @@ checkCat6(){
         this.setState({ 
             checkedCat6: true, checkedCat2: false, checkedCat3: false, checkedCat7: false,
             checkedCat4: false, checkedCat5: false, checkedCat1: false, checkedCat8: false,
-            labelCat6: 'Cúc họa mi', labelCateDiff: ''
+            labelCat6: 'Cúc họa mi', labelCateDiff: '', labelCat2: '', labelCat3: '', labelCat4: '',
+            labelCat5: '', labelCat1: '', labelCat7: '', labelCat8: ''
         })
     }
 }
@@ -185,7 +191,8 @@ checkCat7(){
         this.setState({ 
             checkedCat7: true, checkedCat2: false, checkedCat3: false, checkedCat6: false,
             checkedCat4: false, checkedCat5: false, checkedCat1: false, checkedCat8: false,
-            labelCat7: 'Ảnh kỷ yếu', labelCateDiff: ''
+            labelCat7: 'Ảnh kỷ yếu', labelCateDiff: '', labelCat2: '', labelCat3: '', labelCat4: '',
+            labelCat5: '', labelCat6: '', labelCat1: '', labelCat8: ''
         })
     }
 }
@@ -199,7 +206,8 @@ checkCat8(){
         this.setState({ 
             checkedCat8: true, checkedCat2: false, checkedCat3: false, checkedCat6: false,
             checkedCat4: false, checkedCat5: false, checkedCat1: false, checkedCat7: false,
-            labelCat8: 'Ảnh cưới', labelCateDiff: ''
+            labelCat8: 'Ảnh cưới', labelCateDiff: '', labelCat2: '', labelCat3: '', labelCat4: '',
+            labelCat5: '', labelCat6: '', labelCat7: '', labelCat1: ''
         })
     }
 }
