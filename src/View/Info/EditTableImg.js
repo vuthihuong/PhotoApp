@@ -5,7 +5,7 @@ import {FirebaseApp} from './../../Controller/FirebaseConfig'
 import gobackIcon from './../../assets/img/info/goback.png'
 import CheckBox from 'react-native-checkbox';
 
-export default class AddCostImg extends Component {
+export default class EditTableImg extends Component {
    constructor(props) {
      super(props);
      this.state={
@@ -13,15 +13,83 @@ export default class AddCostImg extends Component {
         checkedCat5: false, checkedCat6: false, checkedCat7: false, checkedCat8: false,
         checkedTime1: false, checkedTime2: false,checkedRight1: false, checkedRight2: false, 
         checkedRight3: false, checkedRight4: false, checkedRight5: false,
-        labelCat1: '', labelCat2: '', labelCat3: '', labelCat4: '', labelCat5: '', labelCat6: '', 
-        labelCat7: '', labelCat8: '', labelCateDiff: '', labelTime1: '', labelTime2: '', 
-        contentImg: '', costFile: '', costDay: '', countImgPhoto: '', countAvgImg: '',
-        labelRight1: '', labelRight2: '', labelRight3: '', labelRight4: '', labelRight5: '', labelCostRight: '',
         checkErrCat: false, checkErrCountImg: false, checkErrTime: false, checkErrAvgImg: false,
         checkErrCountImgNum: false, checkErrAvgImgNum: false, checkErrFileImg: false, checkErrFileImgNum: false,
-        checkErrDayImg: false, checkErrDayImgNum: false, checkErrChoose: false
+        checkErrDayImg: false, checkErrDayImgNum: false, checkErrChoose: false,
+
+        id: this.props.navigation.state.params.id, 
+        contentImg: this.props.navigation.state.params.contentImg, 
+        costDay: this.props.navigation.state.params.costDay,
+        costFile: this.props.navigation.state.params.costFile, 
+        countAvgImg: this.props.navigation.state.params.countAvgImg, 
+        countImgPhoto: this.props.navigation.state.params.countImgPhoto,
+        labelCat1: this.props.navigation.state.params.labelCat1, 
+        labelCat2: this.props.navigation.state.params.labelCat2, 
+        labelCat3: this.props.navigation.state.params.labelCat3,
+        labelCat4: this.props.navigation.state.params.labelCat4, 
+        labelCat5: this.props.navigation.state.params.labelCat5, 
+        labelCat6: this.props.navigation.state.params.labelCat6,
+        labelCat7: this.props.navigation.state.params.labelCat7, 
+        labelCat8: this.props.navigation.state.params.labelCat8, 
+        labelCateDiff: this.props.navigation.state.params.labelCateDiff,
+        labelCostRight: this.props.navigation.state.params.labelCostRight,
+        labelRight1: this.props.navigation.state.params.labelRight1,
+        labelRight2: this.props.navigation.state.params.labelRight2, 
+        labelRight3: this.props.navigation.state.params.labelRight3,
+        labelRight4: this.props.navigation.state.params.labelRight4,
+        labelRight5: this.props.navigation.state.params.labelRight5, 
+        labelTime1: this.props.navigation.state.params.labelTime1,
+        labelTime2: this.props.navigation.state.params.labelTime2
      }
 
+   }
+   componentWillMount(){ 
+       if(this.props.navigation.state.params.labelCat1 !== ''){ 
+           this.setState({ checkedCat1: true})
+       }
+       if(this.props.navigation.state.params.labelCat2 !== ''){ 
+        this.setState({ checkedCat2: true})
+    }
+    if(this.props.navigation.state.params.labelCat3 !== ''){ 
+        this.setState({ checkedCat3: true})
+    }
+    if(this.props.navigation.state.params.labelCat4 !== ''){ 
+        this.setState({ checkedCat4: true})
+    }
+    if(this.props.navigation.state.params.labelCat5 !== ''){ 
+        this.setState({ checkedCat5: true})
+    }
+    if(this.props.navigation.state.params.labelCat6 !== ''){ 
+        this.setState({ checkedCat6: true})
+    }
+    if(this.props.navigation.state.params.labelCat7 !== ''){ 
+        this.setState({ checkedCat7: true})
+    }
+    if(this.props.navigation.state.params.labelCat8 !== ''){ 
+        this.setState({ checkedCat8: true})
+    }
+    if(this.props.navigation.state.params.labelTime1 !== ''){ 
+        this.setState({ checkedTime1: true})
+    }
+    if(this.props.navigation.state.params.labelTime2 !== ''){ 
+        this.setState({ checkedTime2: true})
+    }
+    if(this.props.navigation.state.params.labelRight1 !== ''){ 
+        this.setState({ checkedRight1: true})
+    }
+    if(this.props.navigation.state.params.labelRight2 !== ''){ 
+        this.setState({ checkedRight2: true})
+    }
+    if(this.props.navigation.state.params.labelRight3 !== ''){ 
+        this.setState({ checkedRight3: true})
+    }
+    if(this.props.navigation.state.params.labelRight4 !== ''){ 
+        this.setState({ checkedRight4: true})
+    }
+    if(this.props.navigation.state.params.labelRight5 !== ''){ 
+        this.setState({ checkedRight5: true})
+    }
+    
    }
    checkCat1(){ 
        if(this.state.checkedCat1 === true){ 
@@ -135,7 +203,6 @@ checkCat8(){
         })
     }
 }
-
 checkTime1(){ 
     if(this.state.checkedTime1 === true){ 
         this.setState({ 
@@ -175,7 +242,7 @@ checkRight1(){
 checkRight2(){ 
     if(this.state.checkedRight2 === true){ 
         this.setState({ 
-            checkedRight2: false, labelRight2: '', labelCostRight: ''
+            checkedRight2: false, labelRight2: ''
         })
     }
     else if(this.state.checkedRight2 === false){ 
@@ -220,7 +287,7 @@ checkRight5(){
             })
     }
 }
-addInfoImg(){ 
+editInfoImg(){ 
     const reg =/^\+?[0-9][\d]*$/;
     if((this.state.labelCat1 === '' && this.state.labelCat2 === '' && this.state.labelCat3 === ''
       && this.state.labelCat4 === '' && this.state.labelCat5 === '' && this.state.labelCat6 === ''
@@ -229,9 +296,9 @@ addInfoImg(){
       || (this.state.checkedTime1 === false && this.state.checkedTime2 === false)){ 
           if(this.state.labelCat1 === '' && this.state.labelCat2 === '' && this.state.labelCat3 === ''
           && this.state.labelCat4 === '' && this.state.labelCat5 === '' && this.state.labelCat6 === ''
-          && this.state.labelCat7 === '' && this.state.labelCat8 === '' && this.state.labelCateDiff === ''){ 
+          && this.state.labelCat7 === '' && this.state.labelCat8 === '' ){ 
               this.setState({ 
-                  checkErrCat: true, checkErrChoose: false
+                  checkErrCat: true
               })
           }
           else { this.setState({ checkErrCat: false})}
@@ -257,24 +324,18 @@ addInfoImg(){
           }
           else { this.setState({ checkErrCountImg: false})}
       }
-    else if(((this.state.labelCat1 !== '' || this.state.labelCat2 !== '' || this.state.labelCat3 !== ''
-    || this.state.labelCat4 !== '' || this.state.labelCat5 !== '' || this.state.labelCat6 !== ''
-    || this.state.labelCat7 !== '' || this.state.labelCat8 !== '') && this.state.labelCateDiff !== '' ) 
-    && this.state.countAvgImg !== ''  && this.state.countImgPhoto !== '' 
-    && (this.state.checkedTime1 === true || this.state.checkedTime2 === true)){
-        this.setState({ checkErrChoose: true})
-    }
+      else if(((this.state.labelCat1 !== '' || this.state.labelCat2 !== '' || this.state.labelCat3 !== ''
+      || this.state.labelCat4 !== '' || this.state.labelCat5 !== '' || this.state.labelCat6 !== ''
+      || this.state.labelCat7 !== '' || this.state.labelCat8 !== '') && this.state.labelCateDiff !== '' ) 
+      && this.state.countAvgImg !== ''  && this.state.countImgPhoto !== '' 
+      && (this.state.checkedTime1 === true || this.state.checkedTime2 === true)){
+          this.setState({ checkErrChoose: true})
+      }
     else if((this.state.labelCat1 !== '' || this.state.labelCat2 !== '' || this.state.labelCat3 !== ''
         || this.state.labelCat4 !== '' || this.state.labelCat5 !== '' || this.state.labelCat6 !== ''
         || this.state.labelCat7 !== '' || this.state.labelCat8 !== '' || this.state.labelCateDiff !== '' ) 
         && this.state.countAvgImg !== ''  && this.state.countImgPhoto !== '' 
         && (this.state.checkedTime1 === true || this.state.checkedTime2 === true)){ 
-            if((this.state.labelCat1 !== '' || this.state.labelCat2 !== '' || this.state.labelCat3 !== ''
-            || this.state.labelCat4 !== '' || this.state.labelCat5 !== '' || this.state.labelCat6 !== ''
-            || this.state.labelCat7 !== '' || this.state.labelCat8 !== '') && this.state.labelCateDiff !== '' ){ 
-                this.setState({ checkErrChoose: true, checkErrCat: false})
-            }
-            else { this.setState({checkErrChoose: false})}
            if(this.state.checkedTime1 === true){ 
                if(this.state.costFile === ''){ 
                    this.setState({ 
@@ -328,7 +389,7 @@ addInfoImg(){
                         checkErrCountImgNum: false, checkErrAvgImgNum: false, checkErrFileImg: false, checkErrFileImgNum: false,
                         checkErrDayImg: false, checkErrDayImgNum: false
                     })
-            FirebaseApp.database().ref('InfoTableImg').push({ 
+            FirebaseApp.database().ref('InfoTableImg').child(this.props.navigation.state.params.id).update({ 
                 labelCat1: this.state.labelCat1, labelCat2: this.state.labelCat2, labelCat3: this.state.labelCat3,
                 labelCat4: this.state.labelCat4, labelCat5: this.state.labelCat5, labelCat6: this.state.labelCat6,
                 labelCat7: this.state.labelCat7, labelCat8: this.state.labelCat8, labelCateDiff: this.state.labelCateDiff,
@@ -353,7 +414,7 @@ addInfoImg(){
             })
             Alert.alert(
                 'Thông báo',
-                'Bạn đã thêm thông tin thành công',
+                'Bạn đã chỉnh sửa thông tin thành công',
                 [
                   {text: 'OK', onPress: () => {
                     this.props.navigation.pop()
@@ -381,7 +442,7 @@ addInfoImg(){
                     checkErrCountImgNum: false, checkErrAvgImgNum: false, checkErrFileImg: false, checkErrFileImgNum: false,
                     checkErrDayImg: false, checkErrDayImgNum: false
                    })
-                    FirebaseApp.database().ref('InfoTableImg').push({ 
+                    FirebaseApp.database().ref('InfoTableImg').child(this.props.navigation.state.params.id).update({ 
                         labelCat1: this.state.labelCat1, labelCat2: this.state.labelCat2, labelCat3: this.state.labelCat3,
                         labelCat4: this.state.labelCat4, labelCat5: this.state.labelCat5, labelCat6: this.state.labelCat6,
                         labelCat7: this.state.labelCat7, labelCat8: this.state.labelCat8, labelCateDiff: this.state.labelCateDiff,
@@ -407,7 +468,7 @@ addInfoImg(){
                     })
                     Alert.alert(
                         'Thông báo',
-                        'Bạn đã thêm thông tin thành công',
+                        'Bạn đã chỉnh sửa thông tin thành công',
                         [
                           {text: 'OK', onPress: () => {
                             this.props.navigation.pop()
@@ -507,9 +568,8 @@ addInfoImg(){
                         </View>
                     </View>
                     <View style={{ width: 250, marginLeft: 100}}>
-                        <TextInput placeholder="Thể loại khác" 
-                            onChangeText={(labelCateDiff) =>  this.setState({ labelCateDiff })}>
-                            {this.state.labelCateDiff}</TextInput>
+                        <TextInput placeholder="Thể loại khác" onChangeText={(labelCateDiff) => this.setState({ labelCateDiff })}>
+                            {this.state.labelCateDiff}</TextInput> 
                     </View>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Text style={{color: 'black', marginTop: 20}}>Mô tả gói chụp</Text>
@@ -647,8 +707,8 @@ addInfoImg(){
                     
                     <View style={stylesAddCostImg.buttonCreate}>
                         <TouchableOpacity style={stylesAddCostImg.btnAdd}
-                            onPress={() => this.addInfoImg()} >
-                            <Text style={stylesAddCostImg.txtAdd}>Thêm</Text>
+                            onPress={() => this.editInfoImg()} >
+                            <Text style={stylesAddCostImg.txtAdd}>OK</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

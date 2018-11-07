@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, YellowBox,
-          TextInput,  ScrollView, ImageBackground, Alert } from 'react-native';
+          TextInput,  ScrollView, ImageBackground, Alert, ListView } from 'react-native';
 
 import iconUser from '../../assets/img/info/icon_info.png'
 import phone from '../../assets/img/info/phone.png'
@@ -8,6 +8,7 @@ import iconDateBirth from '../../assets/img/info/icon_date_birth.png'
 import iconLocation from '../../assets/img/info/location.png'
 import iconGender from '../../assets/img/info/gender.png'
 import photo from '../../assets/img/info/photo.png'
+import iconRight from '../../assets/img/info/iconRight.png'
 
 import DatePicker from 'react-native-datepicker'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
@@ -34,9 +35,11 @@ export default class InfoPhoto extends Component {
      ]);
 
      this.state={
-            date: '', username: '', telephone: '', address: '', gender: '',
-            avatarSource: require('../../assets/img/info/User.png')
+            date: '', username: '', telephone: '', address: '', gender: '', tableCostImg: false,
+            avatarSource: require('../../assets/img/info/User.png'),
+            dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
          }
+         this.itemRef = FirebaseApp.database();
     }
    
     pickImg(){ 
@@ -80,7 +83,27 @@ export default class InfoPhoto extends Component {
             username: username1,date: date, address: address,  category: category,
             gender: gender, telephone: telephone, avatarSource: avatarSource
         })
-    }   
+        var listItems  = [];
+        this.actGetData('InfoTableImg/', listItems);
+    }
+    actGetData(url, listItems=[]){ 
+        this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
+        var childData = dataSnapshot.val();
+            listItems.push({ 
+                id: dataSnapshot.key, contentImg: childData.contentImg, costDay: childData.costDay,
+                costFile: childData.costFile, countAvgImg: childData.countAvgImg, countImgPhoto: childData.countImgPhoto,
+                labelCat1: childData.labelCat1, labelCat2: childData.labelCat2, labelCat3: childData.labelCat3,
+                labelCat4: childData.labelCat4, labelCat5: childData.labelCat5, labelCat6: childData.labelCat6,
+                labelCat7: childData.labelCat7, labelCat8: childData.labelCat8, labelCateDiff: childData.labelCateDiff,
+                labelCostRight: childData.labelCostRight, labelRight1: childData.labelRight1,
+                labelRight2: childData.labelRight2, labelRight3: childData.labelRight3, labelRight4: childData.labelRight4,
+                labelRight5: childData.labelRight5, labelTime1: childData.labelTime1, labelTime2: childData.labelTime2
+            })
+        this.setState({ 
+            dataSource: this.state.dataSource.cloneWithRows(listItems)
+            });
+        });
+    }
     save(){ 
         FirebaseApp.database().ref('Customer/').child(userKey).update({
             username: this.state.username,
@@ -109,6 +132,14 @@ export default class InfoPhoto extends Component {
             tmp = tmp.concat(tableData1[i]);
         }
     }
+    showTableCostImg(){ 
+        if(this.state.tableCostImg === false){ 
+            this.setState({ tableCostImg: true})
+        }
+        else if(this.state.tableCostImg === true){ 
+            this.setState({ tableCostImg: false})
+        }
+    }
     render(){
         let data = [{
             value: 'Nam',
@@ -125,7 +156,6 @@ export default class InfoPhoto extends Component {
                             style={{marginTop: -40, marginLeft: 45}}>
                             <Image source={photo} style={{width: 50, height: 50,}} />
                         </TouchableOpacity>
-                        
                     </View>
                     <View style ={stylesInfoPhoto.textInput}>
                         <Image source={iconUser} style={{width: 40, height: 40}} />
@@ -194,16 +224,98 @@ export default class InfoPhoto extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style = {stylesInfoPhoto.infoImage}> 
-                        <Text style={{ fontSize: 13, color: '#EE3B3B',    textDecorationLine: 'underline'}}>
+                        <TouchableOpacity onPress={()=> this.showTableCostImg()}>
+                            <Text style={{ fontSize: 13, color: '#EE3B3B',    textDecorationLine: 'underline'}}>
                                 Bảng giá ảnh</Text>
+                        </TouchableOpacity>
+                       
                     </View>
+                    {this.state.tableCostImg ===  true?
                     <View>
                         <TouchableOpacity onPress={()=> this.props.navigation.navigate('AddCostImg')}>
                             <Text style={{marginTop: 20, borderWidth:1, height: 30, paddingTop: 5,
                                 borderColor: '#4F4F4F', textAlign: 'center',
                                 backgroundColor: '#4F4F4F', color: 'white'}}>Thêm thông tin bảng giá ảnh</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View>:null}
+                     {this.state.tableCostImg ===  true?
+                    <ListView  enableEmptySections
+                        dataSource = {this.state.dataSource}
+                        renderRow = {(rowData)=> 
+                        <View >
+                           <View style={stylesInfoPhoto.bodyManaCont}>
+                                <View  style={stylesInfoPhoto.contManagCont}>
+                                    <Text style={[stylesInfoPhoto.txtManagCont, {fontWeight: 'bold'}]}>
+                                        Gói chụp ảnh {rowData.labelCat1}{rowData.labelCat2}{rowData.labelCat3}{rowData.labelCat4}
+                                        {rowData.labelCat5}{rowData.labelCat6}{rowData.labelCat7}{rowData.labelCat8}{rowData.labelCateDiff}</Text>
+                                    <View style={{marginTop:  10, marginLeft: 15}}>
+                                        {rowData.labelTime1 !== ''? 
+                                            <Text style={stylesInfoPhoto.txtManagCont}>Giá chụp theo file: {rowData.costFile}</Text>:null}
+                                        {rowData.labelTime2 !== ''?
+                                           <Text style={stylesInfoPhoto.txtManagCont}>Giá chụp theo ngày: {rowData.costDay}</Text>:null}
+                                        <Text style={stylesInfoPhoto.txtManagCont}>Giá một ảnh photoshop: {rowData.countAvgImg}</Text>
+                                        <Text style={stylesInfoPhoto.txtManagCont}>Bạn sẽ có: </Text>
+                                        <View style={{flexDirection: 'row'}}>
+                                            <Image source={iconRight} style={stylesInfoPhoto.contentRight} />
+                                            <Text style={stylesInfoPhoto.txtManagCont}>Số ảnh photoshop: {rowData.countImgPhoto}</Text>
+                                        </View>
+                                        {rowData.contentImg !== ''?
+                                             <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoPhoto.contentRight} />
+                                                <Text style={stylesInfoPhoto.txtManagCont}>{rowData.contentImg}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight1 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoPhoto.contentRight} />
+                                                <Text style={stylesInfoPhoto.txtManagCont}>{rowData.labelRight1}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight2 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight}  style={stylesInfoPhoto.contentRight} />
+                                                <Text style={stylesInfoPhoto.txtManagCont}>{rowData.labelRight2}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight2 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoPhoto.contentRight} />
+                                                <Text style={stylesInfoPhoto.txtManagCont}>{rowData.labelCostRight}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight3 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoPhoto.contentRight} />
+                                                <Text style={stylesInfoPhoto.txtManagCont}>{rowData.labelRight3}</Text>
+                                            </View>:null} 
+                                        {rowData.labelRight4 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoPhoto.contentRight}/>
+                                                <Text style={stylesInfoPhoto.txtManagCont}>{rowData.labelRight4}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight5 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoPhoto.contentRight}/>
+                                                <Text style={stylesInfoPhoto.txtManagCont}>{rowData.labelRight5}</Text>
+                                            </View>:null}
+                                    </View>  
+                                </View>
+                                <View style={ stylesInfoPhoto.txtConfirm }>
+                                    <TouchableOpacity onPress={()=>  this.props.navigation.navigate('EditTableImg', {
+                                        id: rowData.id, contentImg: rowData.contentImg, costDay: rowData.costDay,
+                                        costFile: rowData.costFile, countAvgImg: rowData.countAvgImg, countImgPhoto: rowData.countImgPhoto,
+                                        labelCat1: rowData.labelCat1, labelCat2: rowData.labelCat2, labelCat3: rowData.labelCat3,
+                                        labelCat4: rowData.labelCat4, labelCat5: rowData.labelCat5, labelCat6: rowData.labelCat6,
+                                        labelCat7: rowData.labelCat7, labelCat8: rowData.labelCat8, labelCateDiff: rowData.labelCateDiff,
+                                        labelCostRight: rowData.labelCostRight, labelRight1: rowData.labelRight1,
+                                        labelRight2: rowData.labelRight2, labelRight3: rowData.labelRight3, labelRight4: rowData.labelRight4,
+                                        labelRight5: rowData.labelRight5, labelTime1: rowData.labelTime1, labelTime2: rowData.labelTime2
+                                    })}>
+                                        <Text style={stylesInfoPhoto.txtManagContColor}>Sửa</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={()=> { this.removePostModal(rowData.id)}}>
+                                    <Text style={stylesInfoPhoto.txtManagContColor}>Xóa</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>}
+                />:null}
                     <View style = {stylesInfoCus.infoFooter}> 
                         <TouchableOpacity style={[stylesInfoCus.btnInfo, {marginRight: 10}]}
                             onPress={() => this.save()}>
@@ -258,17 +370,27 @@ export default class InfoPhoto extends Component {
         btnInfo: {
             width: 165, height: 30, borderRadius: 10, 
             backgroundColor: '#EE3B3B', marginTop: 40, marginBottom: 15 
-          },
+        },
 
-          containerTable: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-            head: { height: 40, backgroundColor: '#808B97' },
-            text: { margin: 6 },
-            row: { flexDirection: 'row',
-            //  backgroundColor: '#FFF1C1', 
-            },
-            btn: { width: 58, height: 18, 
-                // backgroundColor: '#78B7BB',  borderRadius: 2, 
-                flexDirection: 'row', justifyContent: 'space-around' },
-            btnText: { textAlign: 'center', color: 'black'}
-                })
+        bodyManaCont: {
+            flexDirection: 'row', justifyContent: 'space-between', 
+            borderBottomWidth: 1, borderBottomColor: '#FA8072', paddingBottom: 10,
+            marginTop: 15, 
+        },
+        contManagCont: { 
+            width: 280
+        },
+        txtManagCont: {
+             color: 'black', 
+        },
+        txtManagContColor: { 
+            color: 'black',  textDecorationLine: 'underline', marginTop: 20
+        },
+        txtConfirm: {
+            width: 40
+         },
+        contentRight: { 
+            width: 15, height: 15, marginRight: 10, marginLeft: 15
+        }
+    })
      
