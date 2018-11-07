@@ -18,6 +18,7 @@ import AlbumPose from './AlbumPose'
 import MenuTabBar from './MenuTabBar'
 import Setting from './../Setting/Setting'
 import ManagePost from './../ManagePost/ManagePost'
+import SearchPhoto from './../Search/SearchPhoto'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 
@@ -83,11 +84,32 @@ const MenuStack = createStackNavigator({
     },
   });
 
+  const SearchPhotoStack = createStackNavigator({
+    SearchPhoto: { 
+      screen: SearchPhoto, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Tìm kiếm nhiếp ảnh gia',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerStyle: {
+          backgroundColor: '#EE3B3B'
+        },
+        headerTintColor: 'white', 
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
+        },
+      })
+    },
+  });
+
+
   const ListFavoriteStack = createStackNavigator({
     ListFavorite: { 
       screen: ListFavorite, 
       navigationOptions: ({ navigation }) => ({
-        title: 'Danh sách yêu thích',
+        title: 'Danh sách yêu thích ',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerStyle: {
           backgroundColor: '#EE3B3B'
@@ -240,10 +262,10 @@ const MenuStack = createStackNavigator({
     InfoCustomer: {
       screen: InfoCustomerStack,
       navigationOptions: {
-        drawerLabel: '   ',
+        drawerLabel: '  ',
         headerStyle: {
           backgroundColor: '#EE3B3B',    
-          height: 35,},
+          height: 20,},
       },
     },
   
@@ -258,11 +280,26 @@ const MenuStack = createStackNavigator({
             style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
         ),}
     },
+
+    SearchPhoto: { 
+      screen: SearchPhotoStack,
+      navigationOptions: {
+        drawerLabel: 'Tìm kiếm nhiếp ảnh gia',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/search/search.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
+        ),
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 35,   },
+    },
+    },
   
     ListFavorite: { 
       screen: ListFavoriteStack,
       navigationOptions: {
-        drawerLabel: 'Danh sách yêu thích',
+        drawerLabel: 'Danh sách yêu thích' + '\n' +'nhiếp ảnh gia',
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/info/heart.png')}
@@ -411,11 +448,11 @@ const MenuStack = createStackNavigator({
     },
 
     itemLogout: {
-      flexDirection: 'row',
+      flexDirection: 'row', 
       alignItems: 'center',
     },
     labelLogout: { 
-      margin: 16,
+      margin: 16, marginBottom: 20,
       fontWeight: 'bold',
       color: 'rgba(0, 0, 0, .87)',
     }

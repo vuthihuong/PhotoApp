@@ -53,7 +53,7 @@ export default class SearchPhoto extends Component{
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesPhoto.container}>
-                <View style={stylesPhoto.headGoBack}>
+                {/* <View style={stylesPhoto.headGoBack}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Menu')}>
                         <Image source={gobackIcon} style={{width: 20, height: 20, marginLeft: 15}}/>
                     </TouchableOpacity>
@@ -62,7 +62,7 @@ export default class SearchPhoto extends Component{
                                 Tìm kiếm nhiếp ảnh gia</Text>
                     </View>
                     <View><Text></Text></View>
-                </View>
+                </View> */}
                 <View style ={{justifyContent: 'center',
                                         alignItems: 'center', marginBottom: 20}}>
                     <TextInput  underlineColorAndroid='transparent'
