@@ -140,6 +140,22 @@ export default class InfoPhoto extends Component {
             this.setState({ tableCostImg: false})
         }
     }
+    removePostModal(id){ 
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn muốn xóa không?',
+            [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {
+                FirebaseApp.database().ref('InfoTableImg/').child(id).remove();
+                var listItems  = [];
+                 this.actGetData('InfoTableImg/', listItems);
+                alert('Bạn đã xóa thành công');
+              }},
+            ],
+            { cancelable: false }
+          )
+    }
     render(){
         let data = [{
             value: 'Nam',

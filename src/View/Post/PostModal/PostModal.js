@@ -308,6 +308,8 @@ export default class PostModal extends Component {
                         labelRightModal5: this.state.labelRightModal5, girl: this.state.girl,
                         circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
                         value: this.state.value, height: this.state.height, boy: this.state.boy, 
+                        datePostModal : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
+                        timePostModal: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
                         }).then((snap) => { this.setState({  
                                 id: snap.key })
                         if(this.state.id !== ''){ 

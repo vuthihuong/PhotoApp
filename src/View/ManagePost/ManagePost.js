@@ -122,12 +122,11 @@ export default class ManagePost extends Component{
             'Thông báo',
             'Bạn có chắc chắn muốn xóa bài này không?',
             [
-              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
               {text: 'OK', onPress: () => {
                 FirebaseApp.database().ref('Post/').child(idPostModal).remove();
-                var itemsModal = [];
-                this.actGetData1('Post/', itemsModal);
+               
+                this.actGetData();
                 alert('Bạn đã xóa thành công');
               }},
             ],
@@ -139,12 +138,10 @@ export default class ManagePost extends Component{
             'Thông báo',
             'Bạn có chắc chắn muốn xóa bài này không?',
             [
-              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
               {text: 'OK', onPress: () => {
-                FirebaseApp.database().ref('PostEvent/').child(idPostEvent).remove();
-                var itemsEvent = [];
-                this.actGetData3('PostEvent/', itemsEvent);
+                FirebaseApp.database().ref('Post/').child(idPostEvent).remove();
+                this.actGetData();
                 alert('Bạn đã xóa thành công');
               }},
             ],
@@ -156,12 +153,10 @@ export default class ManagePost extends Component{
             'Thông báo',
             'Bạn có chắc chắn muốn xóa bài này không?',
             [
-              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
               {text: 'OK', onPress: () => {
-                FirebaseApp.database().ref('PostPhoto/').child(idPostPhoto).remove();
-                var itemsPhoto = [];
-                this.actGetData2('PostPhoto/', itemsPhoto);
+                FirebaseApp.database().ref('Post/').child(idPostPhoto).remove();
+                this.actGetData();
                 alert('Bạn đã xóa thành công');
               }},
             ],
