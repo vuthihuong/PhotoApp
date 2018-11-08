@@ -37,6 +37,7 @@ export default class InfoPhoto extends Component {
 
      this.state={
             date: '', username: '', telephone: '', address: '', gender: '', tableCostImg: false,
+            addressCity: '', addresDist: '', home: '',
             avatarSource: require('../../assets/img/info/User.png'),
             checkedCatImg1: false, checkedCatImg2: false, checkedCatImg3: false, checkedCatImg4: false,
             checkedCatImg5: false, checkedCatImg6: false, checkedCatImg7: false, checkedCatImg8: false,
@@ -73,8 +74,8 @@ export default class InfoPhoto extends Component {
                 var childData = childSnapshot.val();
                     username1 = (childData.username);
                     address = (childData.address)
-                    // addresDist = (childData.addresDist)
-                    // addressCity = (childData.addressCity)
+                    addresDist = (childData.addresDist)
+                    addressCity = (childData.addressCity)
                     category = (childData.category)
                     date = (childData.date)
                     email = (childData.email)
@@ -94,11 +95,11 @@ export default class InfoPhoto extends Component {
               })  
             })
         this.setState({
-            username: username1,date: date, address: address,  category: category,
+            username: username1,date: date, address: address,  category: category, addresDist: addresDist,
             gender: gender, telephone: telephone, avatarSource: avatarSource, labelCatImg1: labelCatImg1,
             labelCatImg2: labelCatImg2, labelCatImg5: labelCatImg5, labelCatImg8: labelCatImg8,
             labelCatImg3: labelCatImg3, labelCatImg6: labelCatImg6, labelCatImg9: labelCatImg9,
-            labelCatImg4: labelCatImg4, labelCatImg7: labelCatImg7,
+            labelCatImg4: labelCatImg4, labelCatImg7: labelCatImg7, addressCity: addressCity
         })
         if(labelCatImg1 !== ''){ 
             this.setState({ checkedCatImg1: true})
@@ -180,7 +181,8 @@ export default class InfoPhoto extends Component {
             username: this.state.username,
             date: this.state.date,
             address: this.state.address,
-            //  addressCity: this.state.addressCity,
+             addressCity: this.state.addressCity,
+             addresDist: this.state.addresDist,
             category: this.state.category,
             gender: this.state.gender,
             telephone: this.state.telephone,
@@ -310,6 +312,29 @@ export default class InfoPhoto extends Component {
           }, {
             value: 'Nữ',
           }]
+          let dataCity = []
+          FirebaseApp.database().ref("DataAddress/").on('value', (function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var key = childSnapshot.key;
+                let childData = childSnapshot.val();
+                dataCity.push(childData)
+            });
+           
+        }))
+          let dataTown = []
+
+          var a = this.state.addressCity
+          if(a !== ''){
+            FirebaseApp.database().ref("DataAddressTown/").child(a).on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    dataTown.push(childData)
+                });
+               
+            }))
+          }
+         
         return(
          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesInfoPhoto.container}> 
@@ -360,11 +385,37 @@ export default class InfoPhoto extends Component {
                             />
                     </View>
 
+                     <View style ={stylesInfoPhoto.textInputMargin}>
+                        <Image source={iconLocation} style={{width: 35, height: 35}} />
+                        <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
+                                <Dropdown fontSize={13}
+                                    inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                                    data={dataCity} placeholder= 'Tỉnh/Thành'
+                                    value={this.state.addressCity}
+                                    onChangeText={(addressCity) => { addressCity= this.setState({addressCity}) }}
+                                    />
+                        </View>  
+                    
+                    </View>
+
+                    <View style ={stylesInfoPhoto.textInputMargin}>
+                        <Image source={iconLocation} style={{width: 35, height: 35}} />
+                        <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
+                                <Dropdown fontSize={13}
+                                    inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                                    data={dataTown} placeholder= 'Quận/Huyện'
+                                    value={this.state.addresDist}
+                                    onChangeText={(addresDist) => { addresDist= this.setState({addresDist}) }}
+                                    />
+                        </View>  
+                    
+                    </View>
+
                     <View style ={stylesInfoPhoto.textInputMargin}>
                         <Image source={iconLocation} style={{width: 35, height: 35}} />
                         <TextInput underlineColorAndroid='transparent' 
                             style={{fontSize: 13, width: 200, marginLeft: 5 }}
-                        placeholder = 'Địa chỉ'
+                        placeholder = 'Số nhà'
                         onChangeText={(address) => this.setState({ address })} 
                         value={this.state.address}/> 
                     </View>
@@ -372,7 +423,7 @@ export default class InfoPhoto extends Component {
                     <View style ={stylesInfoPhoto.textInputMargin}>
                         <Image source={iconGender} style={{width: 35, height: 35}} />
                         <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
-                                <Dropdown fontSize={13}
+                                <Dropdown fontSize={13} placeholder= 'Giới tính'
                                     inputContainerStyle={{ borderBottomColor: 'transparent' }}
                                     data={data}
                                     value={this.state.gender}
