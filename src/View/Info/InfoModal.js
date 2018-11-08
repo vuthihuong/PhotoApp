@@ -75,8 +75,8 @@ export default class InfoModal extends Component {
           var childData = childSnapshot.val();
           // lấy các giá trị trong bảng customer tương ứng với email đăng nhập
               username1 = (childData.username);
-              // addresDist = (childData.addresDist)
-              // addressCity = (childData.addressCity)
+              addresDist = (childData.addresDist)
+              addressCity = (childData.addressCity)
               address = (childData.address)
               category = (childData.category)
               date = (childData.date)
@@ -96,8 +96,8 @@ export default class InfoModal extends Component {
       this.setState({
           username: username1,
           date: date,
-          // addresDist: addresDist, 
-          // addressCity: addressCity,
+          addresDist: addresDist, 
+          addressCity: addressCity,
           address: address,
           category: category,
           gender: gender,
@@ -111,8 +111,8 @@ export default class InfoModal extends Component {
       FirebaseApp.database().ref('Customer/'+key).update({
          username: this.state.username,
          date: this.state.date,
-        //  addresDist: this.state.addresDist,
-        //  addressCity: this.state.addressCity,
+         addresDist: this.state.addresDist,
+         addressCity: this.state.addressCity,
         address: this.state.address,
          category: this.state.category,
          gender: this.state.gender,
@@ -137,6 +137,28 @@ export default class InfoModal extends Component {
           }, {
             value: 'Nữ',
           }];
+          let dataCity = []
+          FirebaseApp.database().ref("DataAddress/").on('value', (function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var key = childSnapshot.key;
+                let childData = childSnapshot.val();
+                dataCity.push(childData)
+            });
+           
+        }))
+        let dataTown = []
+
+        var a = this.state.addressCity
+        if(a !== '' && a !== undefined){
+          FirebaseApp.database().ref("DataAddressTown/").child(a).on('value', (function (snapshot) {
+              snapshot.forEach(function(childSnapshot) {
+                  var key = childSnapshot.key;
+                  let childData = childSnapshot.val();
+                  dataTown.push(childData)
+              });
+             
+          }))
+        }
           return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style={stylesInfoModal.containerCus}> 
@@ -159,7 +181,7 @@ export default class InfoModal extends Component {
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={phone} style={{width: 25, height: 25,  marginLeft: 5}} />
                  <TextInput underlineColorAndroid='transparent' style={{fontSize: 13, marginLeft: 10, width: 200}}
-                      // placeholder='Điện thoại'
+                      placeholder='Điện thoại'
                        onChangeText={(telephone) => this.setState({ telephone })} 
                        value={this.state.telephone} />
                </View>
@@ -193,15 +215,50 @@ export default class InfoModal extends Component {
                        value={this.state.addressCity}/>
                </View> */}
                <View style ={stylesInfoModal.textInputMargin}>
+                        <Image source={iconLocation} style={{width: 35, height: 35}} />
+                        <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
+                                <Dropdown fontSize={13}
+                                    inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                                    data={dataCity} placeholder= 'Tỉnh/Thành'
+                                    value={this.state.addressCity}
+                                    onChangeText={(addressCity) => { addressCity= this.setState({addressCity}) }}
+                                    />
+                        </View>  
+                    
+                    </View>
+
+                    <View style ={stylesInfoModal.textInputMargin}>
+                        <Image source={iconLocation} style={{width: 35, height: 35}} />
+                        <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
+                                <Dropdown fontSize={13}
+                                    inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                                    data={dataTown} placeholder= 'Quận/Huyện'
+                                    value={this.state.addresDist}
+                                    onChangeText={(addresDist) => { addresDist= this.setState({addresDist}) }}
+                                    />
+                        </View>  
+                    
+                    </View>
+
+                    <View style ={stylesInfoModal.textInputMargin}>
+                        <Image source={iconLocation} style={{width: 35, height: 35}} />
+                        <TextInput underlineColorAndroid='transparent' 
+                            style={{fontSize: 13, width: 200, marginLeft: 5 }}
+                        placeholder = 'Số nhà'
+                        onChangeText={(address) => this.setState({ address })} 
+                        value={this.state.address}/> 
+                    </View>
+
+               {/* <View style ={stylesInfoModal.textInputMargin}>
                   <TouchableOpacity  onPress={() => this.props.navigation.navigate('AddressMap')}>
-                    {/* <Image source={iconLocation} style={{width: 30, height: 30}} /> */}
-                    {/* <TextInput underlineColorAndroid='transparent' style={{fontSize: 13}}
+                    <Image source={iconLocation} style={{width: 30, height: 30}} />
+                    <TextInput underlineColorAndroid='transparent' style={{fontSize: 13}}
                           onChangeText={(addresDist) => this.setState({ addresDist })} 
-                          value={this.state.addresDist}/> */}
+                          value={this.state.addresDist}/>
                           <Text>Địa chỉ</Text>
                   </TouchableOpacity>
                  
-               </View>
+               </View> */}
 
                <View style ={stylesInfoModal.textInputMargin}>
                  <Image source={iconGender} style={{width: 35, height: 35, marginRight: 5}} />

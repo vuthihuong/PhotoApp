@@ -44,7 +44,7 @@ export default class InfoCustomer extends Component {
      ]);
 
      this.state={
-       selected: '', date: '',  username: '', telephone: '', address: '', gender: '',
+       selected: '', date: '',  username: '', telephone: '', address: '', gender: '', addresDist: '', addressCity: '',
        avatarSource: require('../../assets/img/info/User.png')
      }
     }
@@ -79,8 +79,8 @@ export default class InfoCustomer extends Component {
             // lấy các giá trị trong bảng customer tương ứng với email đăng nhập
                 username1 = (childData.username);
                 address = (childData.address)
-                // addresDist = (childData.addresDist)
-                // addressCity = (childData.addressCity)
+                addresDist = (childData.addresDist)
+                addressCity = (childData.addressCity)
                 category = (childData.category)
                 date = (childData.date)
                 email = (childData.email)
@@ -95,6 +95,8 @@ export default class InfoCustomer extends Component {
             username: username1,
             date: date,
             address: address, 
+            addresDist: addresDist,
+            addressCity: addressCity,
             category: category,
             gender: gender,
             telephone: telephone,
@@ -106,7 +108,8 @@ export default class InfoCustomer extends Component {
            username: this.state.username,
            date: this.state.date,
            address: this.state.address,
-          //  addressCity: this.state.addressCity,
+           addressCity: this.state.addressCity,
+           addresDist: this.state.addresDist,
            category: this.state.category,
            gender: this.state.gender,
            telephone: this.state.telephone,
@@ -121,6 +124,28 @@ export default class InfoCustomer extends Component {
         }, {
           value: 'Nữ',
         }];
+        let dataCity = []
+        FirebaseApp.database().ref("DataAddress/").on('value', (function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+              var key = childSnapshot.key;
+              let childData = childSnapshot.val();
+              dataCity.push(childData)
+          });
+         
+      }))
+      let dataTown = []
+
+      var a = this.state.addressCity
+      if(a !== '' && a !== undefined){
+        FirebaseApp.database().ref("DataAddressTown/").child(a).on('value', (function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var key = childSnapshot.key;
+                let childData = childSnapshot.val();
+                dataTown.push(childData)
+            });
+           
+        }))
+      }
         const imageUri = 'https://placeholdit.imgix.net/~text?txtsize=33&txt=200x150&w=200&h=150'
           return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -148,7 +173,7 @@ export default class InfoCustomer extends Component {
                     <Image style={{width: 25, height: 25, marginLeft: 5}} source={phone}/>
                     <TextInput underlineColorAndroid='transparent' 
                         style={{fontSize: 13, width: 200, marginLeft: 10 }}
-                      // placeholder='Điện thoại' 
+                      placeholder='Điện thoại' 
                       // placeholderStyle={{marginLeft: 15, marginTop: 3 }}
                       onChangeText={(telephone) => this.setState({ telephone })} 
                       value={this.state.telephone}/>
@@ -176,16 +201,50 @@ export default class InfoCustomer extends Component {
                           />
                   </View>
 
-                  <View style ={stylesInfoCus.textInputMargin}>
-                    {/* <Image source={iconLocation} style={{width: 30, height: 30}} /> */}
+                  {/* <View style ={stylesInfoCus.textInputMargin}>
+                    <Image source={iconLocation} style={{width: 30, height: 30}} />
                     <Image style={{width: 35, height: 35}} source={iconLocation}/>
                     <TextInput underlineColorAndroid='transparent' 
                           style={{fontSize: 13, width: 200, marginLeft: 10 }}
-                        // placeholder = 'Địa chỉ'
-                        // placeholderStyle={{ marginTop: 3 }}
+                        placeholder = 'Địa chỉ'
+                        placeholderStyle={{ marginTop: 3 }}
                         onChangeText={(address) => this.setState({ address })} 
                         value={this.state.address}/> 
-                  </View>
+                  </View> */}
+                  <View style ={stylesInfoCus.textInputMargin}>
+                        <Image source={iconLocation} style={{width: 35, height: 35}} />
+                        <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
+                                <Dropdown fontSize={13}
+                                    inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                                    data={dataCity} placeholder= 'Tỉnh/Thành'
+                                    value={this.state.addressCity}
+                                    onChangeText={(addressCity) => { addressCity= this.setState({addressCity}) }}
+                                    />
+                        </View>  
+                    
+                    </View>
+
+                    <View style ={stylesInfoCus.textInputMargin}>
+                        <Image source={iconLocation} style={{width: 35, height: 35}} />
+                        <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
+                                <Dropdown fontSize={13}
+                                    inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                                    data={dataTown} placeholder= 'Quận/Huyện'
+                                    value={this.state.addresDist}
+                                    onChangeText={(addresDist) => { addresDist= this.setState({addresDist}) }}
+                                    />
+                        </View>  
+                    
+                    </View>
+
+                    <View style ={stylesInfoCus.textInputMargin}>
+                        <Image source={iconLocation} style={{width: 35, height: 35}} />
+                        <TextInput underlineColorAndroid='transparent' 
+                            style={{fontSize: 13, width: 200, marginLeft: 5 }}
+                        placeholder = 'Số nhà'
+                        onChangeText={(address) => this.setState({ address })} 
+                        value={this.state.address}/> 
+                    </View>
 
                   <View style ={stylesInfoCus.textInputMargin}>
                     {/* <Image source={iconGender} style={{width: 30, height: 30}} /> */}

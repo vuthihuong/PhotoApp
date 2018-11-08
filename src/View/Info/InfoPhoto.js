@@ -324,7 +324,7 @@ export default class InfoPhoto extends Component {
           let dataTown = []
 
           var a = this.state.addressCity
-          if(a !== ''){
+          if(a !== '' && a !== undefined){
             FirebaseApp.database().ref("DataAddressTown/").child(a).on('value', (function (snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     var key = childSnapshot.key;
@@ -358,7 +358,7 @@ export default class InfoPhoto extends Component {
                         <Image source={phone} style={{width: 25, height: 25,  marginLeft: 5}} />
                         <TextInput underlineColorAndroid='transparent'
                                  style={{fontSize: 13, width: 200, marginLeft: 10 }}
-                        // placeholder='Điện thoại'
+                        placeholder='Điện thoại'
                         onChangeText={(telephone) => this.setState({ telephone })} 
                         value={this.state.telephone}/>
                     </View>
