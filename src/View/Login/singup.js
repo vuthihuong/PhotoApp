@@ -576,7 +576,7 @@ export default class Signup extends Component {
                         avatarSource: avatarSource
                     })
                 }
-                else { 
+                else if(this.state.checkedCategory1 === true) { 
                      this.itemRef.ref('Customer').push({
                          username: name, gender: gender,
                         date: date, email: email, 
@@ -587,6 +587,21 @@ export default class Signup extends Component {
                         password: password,
                         category: category,
                         avatarSource: avatarSource
+                    })
+                }
+                else if(this.state.checkedCategory2 === true){ 
+                    this.itemRef.ref('Customer').push({ 
+                        username: name, gender: gender,
+                        date: date, email: email, 
+                        // addressCity: addressCity,
+                        // addresDist: addresDist,
+                        address: address,
+                        telephone: telephone, 
+                        password: password,
+                        category: category,
+                        avatarSource: avatarSource, 
+                        labelCatImg1: '', labelCatImg3: '', labelCatImg5: '', labelCatImg7: '', labelCatImg9: '',
+                        labelCatImg2: '', labelCatImg4: '', labelCatImg6: '', labelCatImg8: '', 
                     })
                 }
                 

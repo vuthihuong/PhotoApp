@@ -418,7 +418,7 @@ const ManagePostStack = createStackNavigator({
       alignItems: 'center',
     },
     labelLogout: { 
-      margin: 16,
+      margin: 16, marginBottom: 20,
       fontWeight: 'bold',
       color: 'rgba(0, 0, 0, .87)',
     }

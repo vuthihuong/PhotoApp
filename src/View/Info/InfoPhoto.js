@@ -13,13 +13,14 @@ import iconRight from '../../assets/img/info/iconRight.png'
 import DatePicker from 'react-native-datepicker'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 import { Dropdown } from 'react-native-material-dropdown';
+import CheckBox from 'react-native-checkbox';
 var ImagePicker = require('react-native-image-picker');
 
 var options = {
   title: 'Select Avatar',
-  customButtons: [
-    {name: 'fb', title: 'Choose Photo from Facebook'},
-  ],
+//   customButtons: [
+//     {name: 'fb', title: 'Choose Photo from Facebook'},
+//   ],
   storageOptions: {
     skipBackup: true,
     path: 'images'
@@ -37,6 +38,10 @@ export default class InfoPhoto extends Component {
      this.state={
             date: '', username: '', telephone: '', address: '', gender: '', tableCostImg: false,
             avatarSource: require('../../assets/img/info/User.png'),
+            checkedCatImg1: false, checkedCatImg2: false, checkedCatImg3: false, checkedCatImg4: false,
+            checkedCatImg5: false, checkedCatImg6: false, checkedCatImg7: false, checkedCatImg8: false,
+            checkedCatImg9: false, labelCatImg2: '', labelCatImg4: '', labelCatImg6: '', labelCatImg8: '',
+            labelCatImg1: '', labelCatImg3: '', labelCatImg5: '', labelCatImg7: '', labelCatImg9: '',
             dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
          }
          this.itemRef = FirebaseApp.database();
@@ -77,12 +82,78 @@ export default class InfoPhoto extends Component {
                     password = (childData.password)
                     telephone = (childData.telephone)
                     avatarSource = (childData.avatarSource)
+                    labelCatImg1 = (childData.labelCatImg1)
+                    labelCatImg2 = (childData.labelCatImg2)
+                    labelCatImg3 = (childData.labelCatImg3)
+                    labelCatImg4 = (childData.labelCatImg4)
+                    labelCatImg5 = (childData.labelCatImg5)
+                    labelCatImg6 = (childData.labelCatImg6)
+                    labelCatImg7 = (childData.labelCatImg7)
+                    labelCatImg8 = (childData.labelCatImg8)
+                    labelCatImg9 = (childData.labelCatImg9)
               })  
             })
         this.setState({
             username: username1,date: date, address: address,  category: category,
-            gender: gender, telephone: telephone, avatarSource: avatarSource
+            gender: gender, telephone: telephone, avatarSource: avatarSource, labelCatImg1: labelCatImg1,
+            labelCatImg2: labelCatImg2, labelCatImg5: labelCatImg5, labelCatImg8: labelCatImg8,
+            labelCatImg3: labelCatImg3, labelCatImg6: labelCatImg6, labelCatImg9: labelCatImg9,
+            labelCatImg4: labelCatImg4, labelCatImg7: labelCatImg7,
         })
+        if(labelCatImg1 !== ''){ 
+            this.setState({ checkedCatImg1: true})
+        }
+        else if(labelCatImg1 === ''){ 
+            this.setState({checkedCatImg1: false})
+        }
+        if(labelCatImg2 !== ''){ 
+            this.setState({ checkedCatImg2: true})
+        }
+        else if(labelCatImg2 === ''){ 
+            this.setState({checkedCatImg2: false})
+        }
+        if(labelCatImg3 !== ''){ 
+            this.setState({ checkedCatImg3: true})
+        }
+        else if(labelCatImg3 === ''){ 
+            this.setState({checkedCatImg3: false})
+        }
+        if(labelCatImg4 !== ''){ 
+            this.setState({ checkedCatImg4: true})
+        }
+        else if(labelCatImg4 === ''){ 
+            this.setState({checkedCatImg4: false})
+        }
+        if(labelCatImg5 !== ''){ 
+            this.setState({ checkedCatImg5: true})
+        }
+        else if(labelCatImg5 === ''){ 
+            this.setState({checkedCatImg5: false})
+        }
+        if(labelCatImg6 !== ''){ 
+            this.setState({ checkedCatImg6: true})
+        }
+        else if(labelCatImg6 === ''){ 
+            this.setState({checkedCatImg6: false})
+        }
+        if(labelCatImg7 !== ''){ 
+            this.setState({ checkedCatImg7: true})
+        }
+        else if(labelCatImg7 === ''){ 
+            this.setState({checkedCatImg7: false})
+        }
+        if(labelCatImg8 !== ''){ 
+            this.setState({ checkedCatImg8: true})
+        }
+        else if(labelCatImg8 === ''){ 
+            this.setState({checkedCatImg8: false})
+        }
+        if(labelCatImg9 !== ''){ 
+            this.setState({ checkedCatImg9: true})
+        }
+        else if(labelCatImg9 === ''){ 
+            this.setState({checkedCatImg9: false})
+        }
         var listItems  = [];
         this.actGetData('InfoTableImg/', listItems);
     }
@@ -113,7 +184,12 @@ export default class InfoPhoto extends Component {
             category: this.state.category,
             gender: this.state.gender,
             telephone: this.state.telephone,
-            avatarSource: this.state.avatarSource
+            avatarSource: this.state.avatarSource,
+            labelCatImg1: this.state.labelCatImg1, labelCatImg6: this.state.labelCatImg6, 
+            labelCatImg2: this.state.labelCatImg2, labelCatImg7: this.state.labelCatImg7, 
+            labelCatImg3: this.state.labelCatImg3, labelCatImg8: this.state.labelCatImg8, 
+            labelCatImg4: this.state.labelCatImg4, labelCatImg9: this.state.labelCatImg9, 
+            labelCatImg5: this.state.labelCatImg5, 
         });
             Alert.alert('Thay đổi thông tin thành công')
     }
@@ -155,6 +231,78 @@ export default class InfoPhoto extends Component {
             ],
             { cancelable: false }
           )
+    }
+    checkCatImg1(){ 
+        if(this.state.checkedCatImg1 === true){ 
+            this.setState({   checkedCatImg1: false, labelCatImg1: ''  })
+        }
+        else if(this.state.checkedCatImg1 === false){ 
+            this.setState({  checkedCatImg1: true, labelCatImg1: 'Ảnh kỷ yếu'})
+        }
+    }
+    checkCatImg2(){ 
+        if(this.state.checkedCatImg2 === true){ 
+            this.setState({   checkedCatImg2: false, labelCatImg2: ''  })
+        }
+        else if(this.state.checkedCatImg2 === false){ 
+            this.setState({  checkedCatImg2: true, labelCatImg2: 'Ảnh cưới'})
+        }
+    }
+    checkCatImg3(){ 
+        if(this.state.checkedCatImg3 === true){ 
+            this.setState({   checkedCatImg3: false, labelCatImg3: ''  })
+        }
+        else if(this.state.checkedCatImg3 === false){ 
+            this.setState({  checkedCatImg3: true, labelCatImg3: 'Ảnh quảng cáo'})
+        }
+    }
+    checkCatImg4(){ 
+        if(this.state.checkedCatImg4 === true){ 
+            this.setState({   checkedCatImg4: false, labelCatImg4: '' })
+        }
+        else if(this.state.checkedCatImg4 === false){ 
+            this.setState({  checkedCatImg4: true, labelCatImg4: 'Phượng đỏ'})
+        }
+    }
+    checkCatImg5(){ 
+        if(this.state.checkedCatImg5 === true){ 
+            this.setState({   checkedCatImg5: false, labelCatImg5: '' })
+        }
+        else if(this.state.checkedCatImg5 === false){ 
+            this.setState({  checkedCatImg5: true, labelCatImg5: 'Thung lũng hoa'})
+        }
+    }
+    checkCatImg6(){ 
+        if(this.state.checkedCatImg6 === true){ 
+            this.setState({   checkedCatImg6: false, labelCatImg6: ''  })
+        }
+        else if(this.state.checkedCatImg6 === false){ 
+            this.setState({  checkedCatImg6: true, labelCatImg6: 'Sen mùa hạ'})
+        }
+    }
+    checkCatImg7(){ 
+        if(this.state.checkedCatImg7 === true){ 
+            this.setState({   checkedCatImg7: false, labelCatImg7: ''  })
+        }
+        else if(this.state.checkedCatImg7 === false){ 
+            this.setState({  checkedCatImg7: true, labelCatImg7: 'Phố Hà Nội'})
+        }
+    }
+    checkCatImg8(){ 
+        if(this.state.checkedCatImg8 === true){ 
+            this.setState({   checkedCatImg8: false, labelCatImg8: ''  })
+        }
+        else if(this.state.checkedCatImg8 === false){ 
+            this.setState({  checkedCatImg8: true, labelCatImg8: 'Cúc họa mi'})
+        }
+    }
+    checkCatImg9(){ 
+        if(this.state.checkedCatImg9 === true){ 
+            this.setState({   checkedCatImg9: false, labelCatImg9: ''  })
+        }
+        else if(this.state.checkedCatImg9 === false){ 
+            this.setState({  checkedCatImg9: true, labelCatImg9: 'Bãi lau'})
+        }
     }
     render(){
         let data = [{
@@ -232,6 +380,76 @@ export default class InfoPhoto extends Component {
                                     />
                         </View>  
                     
+                    </View>
+                    <Text style={{fontWeight: 'bold', color: 'black', marginTop: 20}}>Nhận chụp các thể loại: </Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 15}}>
+                            <View>
+                                <CheckBox 
+                                    label='Ảnh kỷ yếu'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedCatImg1}
+                                    onChange={(checked) => {this.checkCatImg1()}} 
+                                                /> 
+                                <CheckBox 
+                                    label='Ảnh cưới'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedCatImg2}
+                                    onChange={(checked) => {this.checkCatImg2()}} 
+                                                /> 
+                                <CheckBox 
+                                    label='Ảnh quảng cáo'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedCatImg3}
+                                    onChange={(checked) => {this.checkCatImg3()}} 
+                                                /> 
+                                <CheckBox 
+                                    label='Phượng đỏ'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedCatImg4}
+                                    onChange={(checked) => {this.checkCatImg4()}} 
+                                                /> 
+                                <CheckBox 
+                                    label='Thung lũng hoa'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedCatImg5}
+                                    onChange={(checked) => {this.checkCatImg5()}} 
+                                                /> 
+                            </View>
+                            <View>
+                                <CheckBox 
+                                    label='sen mùa hạ'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedCatImg6}
+                                    onChange={(checked) => {this.checkCatImg6()}} 
+                                                /> 
+                                <CheckBox 
+                                    label='Phố Hà Nội'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedCatImg7}
+                                    onChange={(checked) => {this.checkCatImg7()}} 
+                                                /> 
+                                <CheckBox 
+                                    label='Cúc họa mi'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedCatImg8}
+                                    onChange={(checked) => {this.checkCatImg8()}} 
+                                                /> 
+                                <CheckBox 
+                                    label='Bãi lau'
+                                    labelStyle={{fontSize: 13, marginRight: 10, color:'black'}}
+                                    checkboxStyle = {{width:15, height: 15}} 
+                                    checked={this.state.checkedCatImg9}
+                                    onChange={(checked) => {this.checkCatImg9()}} 
+                                                /> 
+                            </View>
                     </View>
                     <View style = {stylesInfoPhoto.infoImage}> 
                         <TouchableOpacity onPress={()=> {this.props.navigation.navigate('UpImgPhoto')}}>
