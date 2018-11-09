@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import { Dropdown } from 'react-native-material-dropdown';
+import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 import gobackIcon from '../../assets/img/info/goback.png'
 import address from '../../assets/img/info/location.png'
@@ -14,6 +15,25 @@ import category from '../../assets/img/search/category.png'
 import row from '../../assets/img/info/row.png'
 
 export default class SearchPhoto extends Component{
+    constructor(props) {
+        super(props);
+  
+       this.state={
+             addressCity: '', addressDist: '', addSearch: false
+       }
+    }
+    addPress(){ 
+        if(this.state.addSearch === true){ 
+            this.setState({ 
+                addSearch: false
+            })
+        }
+        else if(this.state.addSearch === false){ 
+            this.setState({ 
+                addSearch: true
+            })
+        }
+    }
     render(){
 
         let data = [{
@@ -49,6 +69,29 @@ export default class SearchPhoto extends Component{
           },{
               value: 'Chụp ảnh quảng cáo'
           },];
+
+          let dataCity = []
+          FirebaseApp.database().ref("DataAddress/").on('value', (function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var key = childSnapshot.key;
+                let childData = childSnapshot.val();
+                dataCity.push(childData)
+            });
+           
+        }))
+          let dataTown = []
+
+          var a = this.state.addressCity
+          if(a !== '' && a !== undefined){
+            FirebaseApp.database().ref("DataAddressTown/").child(a).on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    dataTown.push(childData)
+                });
+               
+            }))
+          }
          
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -74,11 +117,10 @@ export default class SearchPhoto extends Component{
                             />
                 </View>
                 <TouchableOpacity 
-                         onPress={() => this.props.navigation.navigate('SearchAddress')}>
-                    {/* > */}
+                        onPress={()=> this.addPress()}>
                     <View style={stylesPhoto.textBodySearch}>
                         <View style ={stylesPhoto.textBody}>
-                            <Image source={address} style={{width: 30, height: 30,
+                            <Image source={address} style={{width: 35, height: 35,
                                     marginTop: 10, marginLeft: -5}} />
                             <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Địa điểm</Text>
                         </View>
@@ -87,6 +129,33 @@ export default class SearchPhoto extends Component{
                                     marginRight: 10, marginTop: 10}} />
                         </View>  
                     </View>
+                    {this.state.addSearch === true?
+                    <View style ={stylesPhoto.textInputMargin}>
+                        <Image source={address} style={{width: 35, height: 35}} />
+                        <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
+                                <Dropdown fontSize={13}
+                                    inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                                    data={dataCity} placeholder= 'Tỉnh/Thành'
+                                    value={this.state.addressCity}
+                                    onChangeText={(addressCity) => { addressCity= this.setState({addressCity}) }}
+                                    />
+                        </View>  
+                    
+                    </View>: null}
+                    {this.state.addSearch === true?
+                    <View style ={stylesPhoto.textInputMargin}>
+                        <Image source={address} style={{width: 35, height: 35}} />
+                        <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
+                                <Dropdown fontSize={13}
+                                    inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                                    data={dataTown} placeholder= 'Quận/Huyện'
+                                    value={this.state.addreaddressDistssCity}
+                                    onChangeText={(addressDist) => { addressCity= this.setState({addressDist}) }}
+                                    />
+                        </View>  
+                    
+                    </View>:null}
+                    
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <View style={stylesPhoto.textBodySearch}>
@@ -172,6 +241,11 @@ stylesPhoto = StyleSheet.create({
         backgroundColor: '#EE3B3B',height: 30, 
         borderRadius: 10, marginLeft: 20, marginTop: 50,
          marginRight: 20
-    }
+    },
+    textInputMargin: {
+        marginTop: 15, borderBottomWidth: 1,
+        borderColor: "gray", flexDirection: 'row',
+        alignItems: 'center',  height:35,  marginLeft: 25,   marginRight: 20,
+    },
 
 })
