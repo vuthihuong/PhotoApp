@@ -93,6 +93,7 @@ export default class InfoModal extends Component {
               
         })  
       })
+
       this.setState({
           username: username1,
           date: date,
@@ -267,7 +268,7 @@ export default class InfoModal extends Component {
                               inputContainerStyle={{ borderBottomColor: 'transparent' }}
                               data={data}
                               value={this.state.gender}
-                              onChangeText={(gender) => { addresDist= this.setState({gender}) }}
+                              onChangeText={(gender) => { gender= this.setState({gender}) }}
                               />
                     </View>  
                 

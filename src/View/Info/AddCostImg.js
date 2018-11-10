@@ -23,6 +23,16 @@ export default class AddCostImg extends Component {
      }
 
    }
+   componentWillMount() {
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                .on('value', function (snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+                        key = childSnapshot.key;
+        })  
+        })
+    
+    }
    checkCat1(){ 
        if(this.state.checkedCat1 === true){ 
            this.setState({ 
@@ -342,7 +352,7 @@ addInfoImg(){
                 labelCat7: this.state.labelCat7, labelCat8: this.state.labelCat8, labelCateDiff: this.state.labelCateDiff,
                 contentImg: this.state.contentImg, labelTime1: this.state.labelTime1, labelTime2: this.state.labelTime2,
                 costFile: this.state.costFile, costDay: this.state.costDay, countImgPhoto: this.state.countImgPhoto,
-                countAvgImg: this.state.countAvgImg, labelRight1: this.state.labelRight1, 
+                countAvgImg: this.state.countAvgImg, labelRight1: this.state.labelRight1, userId: key,
                 labelRight2: this.state.labelRight2, labelRight3: this.state.labelRight3, labelRight4: this.state.labelRight4,
                 labelRight5: this.state.labelRight5, labelCostRight: this.state.labelCostRight
             })
@@ -395,7 +405,7 @@ addInfoImg(){
                         labelCat7: this.state.labelCat7, labelCat8: this.state.labelCat8, labelCateDiff: this.state.labelCateDiff,
                         contentImg: this.state.contentImg, labelTime1: this.state.labelTime1, labelTime2: this.state.labelTime2,
                         costFile: this.state.costFile, costDay: this.state.costDay, countImgPhoto: this.state.countImgPhoto,
-                        countAvgImg: this.state.countAvgImg, labelRight1: this.state.labelRight1, 
+                        countAvgImg: this.state.countAvgImg, labelRight1: this.state.labelRight1, userId: key,
                         labelRight2: this.state.labelRight2, labelRight3: this.state.labelRight3, labelRight4: this.state.labelRight4,
                         labelRight5: this.state.labelRight5, labelCostRight: this.state.labelCostRight,
                         

@@ -59,6 +59,8 @@ import NotiMain from './src/View/NotificationPage/NotiMain'
 import AddCostImg from './src/View/Info/AddCostImg'
 import EditTableImg from './src/View/Info/EditTableImg'
 
+import SearchListPhoto from  './src/View/Search/SearchListPhoto'
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -187,6 +189,9 @@ const Mainapp = createStackNavigator({
     },
     EditTableImg: { 
         screen: EditTableImg
+    },
+    SearchListPhoto: { 
+        screen: SearchListPhoto
     },
     },{
       headerMode:'none'

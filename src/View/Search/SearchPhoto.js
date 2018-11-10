@@ -19,8 +19,9 @@ export default class SearchPhoto extends Component{
         super(props);
   
        this.state={
-             addressCity: '', addressDist: '', addSearch: false
+             addressCity: '', addresDist: '', addSearch: false, valueCat: '', valueCost: ''
        }
+       this.itemRef = FirebaseApp.database();
     }
     addPress(){ 
         if(this.state.addSearch === true){ 
@@ -33,6 +34,13 @@ export default class SearchPhoto extends Component{
                 addSearch: true
             })
         }
+    }
+    btnSearchPhoto(){ 
+        this.props.navigation.navigate('SearchListPhoto', { 
+            addressCity: this.state.addressCity, addresDist: this.state.addresDist,
+            valueCat: this.state.valueCat, valueCost: this.state.valueCost
+        })
+        
     }
     render(){
 
@@ -92,6 +100,9 @@ export default class SearchPhoto extends Component{
                
             }))
           }
+        //   if(a === ''){ 
+        //       dataCity= []
+        //   }
          
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -106,7 +117,7 @@ export default class SearchPhoto extends Component{
                     </View>
                     <View><Text></Text></View>
                 </View> */}
-                <View style ={{justifyContent: 'center',
+                {/* <View style ={{justifyContent: 'center',
                                         alignItems: 'center', marginBottom: 20}}>
                     <TextInput  underlineColorAndroid='transparent'
                                 style={{ height: 40, width: 350, borderWidth: 1, borderColor: '#CFCFCF',
@@ -115,11 +126,11 @@ export default class SearchPhoto extends Component{
                                 placeholder="Tìm kiếm"
                                 onChangeText={(text) => this.setState({ text })}                            
                             />
-                </View>
+                </View> */}
                 <TouchableOpacity 
                         onPress={()=> this.addPress()}>
-                    <View style={stylesPhoto.textBodySearch}>
-                        <View style ={stylesPhoto.textBody}>
+                    <View style={[stylesPhoto.textBodySearch,  {marginTop: 50}]}>
+                        <View style ={[stylesPhoto.textBody,]}>
                             <Image source={address} style={{width: 35, height: 35,
                                     marginTop: 10, marginLeft: -5}} />
                             <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Địa điểm</Text>
@@ -131,7 +142,7 @@ export default class SearchPhoto extends Component{
                     </View>
                     {this.state.addSearch === true?
                     <View style ={stylesPhoto.textInputMargin}>
-                        <Image source={address} style={{width: 35, height: 35}} />
+                        {/* <Image source={address} style={{width: 35, height: 35}} /> */}
                         <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
                                 <Dropdown fontSize={13}
                                     inputContainerStyle={{ borderBottomColor: 'transparent' }}
@@ -144,13 +155,13 @@ export default class SearchPhoto extends Component{
                     </View>: null}
                     {this.state.addSearch === true?
                     <View style ={stylesPhoto.textInputMargin}>
-                        <Image source={address} style={{width: 35, height: 35}} />
+                        {/* <Image source={address} style={{width: 35, height: 35}} /> */}
                         <View style={{ width: 280, height: 90, marginTop: 10, marginLeft: 10 }}>
                                 <Dropdown fontSize={13}
                                     inputContainerStyle={{ borderBottomColor: 'transparent' }}
                                     data={dataTown} placeholder= 'Quận/Huyện'
-                                    value={this.state.addreaddressDistssCity}
-                                    onChangeText={(addressDist) => { addressCity= this.setState({addressDist}) }}
+                                    value={this.state.addresDist}
+                                    onChangeText={(addresDist) => { addresDist= this.setState({addresDist}) }}
                                     />
                         </View>  
                     
@@ -166,8 +177,10 @@ export default class SearchPhoto extends Component{
                            
                         </View>
                         
-                        <View style={{width: 200}}>
-                        <Dropdown  data={data} pickerStyle={{borderWidth: 1, borderColor:'black'}} />
+                        <View style={{width: 250}}>
+                        <Dropdown  data={data} pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                            value={this.state.valueCost}
+                            onChangeText={(valueCost) => { valueCategoryPhoto1= this.setState({valueCost}) }}/>
                         </View>    
                     </View>
                 </TouchableOpacity>
@@ -180,14 +193,17 @@ export default class SearchPhoto extends Component{
                             <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Thể loại</Text>
                         </View>
                         
-                        <View style={{width: 200}}>
-                        <Dropdown  data={theloai} pickerStyle={{borderWidth: 1, borderColor:'black'}} />
+                        <View style={{width: 250}}>
+                        <Dropdown  data={theloai} pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                            value={this.state.valueCat}
+                            onChangeText={(valueCat) => { valueCategoryPhoto1= this.setState({valueCat}) }}/>
                         </View>    
                     </View>
                 </TouchableOpacity>
 
                 <View style={{}}>
-                    <TouchableOpacity style={stylesPhoto.footPhoto}>
+                    <TouchableOpacity style={stylesPhoto.footPhoto}
+                        onPress={()=> this.btnSearchPhoto()}>
                         <Text style={{ textAlign:"center", color: 'white', marginTop: 5 }}>Tìm kiếm</Text>
                     </TouchableOpacity>
                 </View>
@@ -200,7 +216,7 @@ export default class SearchPhoto extends Component{
 stylesPhoto = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: 'white'
+        backgroundColor: 'white', marginLeft: 10, marginRight: 10
     },
     headGoBack: {
         flexDirection: 'row',
