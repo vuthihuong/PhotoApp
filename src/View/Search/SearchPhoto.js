@@ -44,39 +44,25 @@ export default class SearchPhoto extends Component{
     }
     render(){
 
-        let data = [{
-            value: '10k - 50k',
-          }, {
-            value: '50k - 100k',
-          }, {
-            value: '100k - 500k',
-          }, {
-            value: '500k - 1000k',
-          }, {
-            value: '1000k - 5000k',
-          }, {
-            value: '5000k - 10000k',
-          }, {
-            value: '10000k - 30000k',
-          }, {
-            value: '30000k - 50000k',
-          }, {
-            value: '> 50000k',
-          }];
+        let dataCost = [];
+          FirebaseApp.database().ref("DataCostImg/").on('value', (function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var key = childSnapshot.key;
+                let childData = childSnapshot.val();
+                dataCost.push(childData)
+            });
+           
+        }))
 
-          let theloai = [{
-            value: 'Chụp ảnh cá nhân'
-           },{
-          value: 'Chụp ảnh đôi'
-          },{
-              value: 'Chụp ảnh nhóm'
-          },{
-              value: 'Chụp ảnh kỷ yếu'
-          },{
-              value: 'Chụp ảnh cưới'
-          },{
-              value: 'Chụp ảnh quảng cáo'
-          },];
+          let dataCat = [];
+          FirebaseApp.database().ref("DataCatgPostPhoto/").on('value', (function (snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                var key = childSnapshot.key;
+                let childData = childSnapshot.val();
+                dataCat.push(childData)
+            });
+           
+        }))
 
           let dataCity = []
           FirebaseApp.database().ref("DataAddress/").on('value', (function (snapshot) {
@@ -173,13 +159,13 @@ export default class SearchPhoto extends Component{
                         <View style ={stylesPhoto.textBody}>
                             <Image source={dollar} style={{width: 15, height: 20,
                                     marginRight: 10, marginTop: 10}} />
-                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Giá</Text>
+                            <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>Giá</Text> 
                            
                         </View>
                         
                         <View style={{width: 250}}>
-                        <Dropdown  data={data} pickerStyle={{borderWidth: 1, borderColor:'black'}} 
-                            value={this.state.valueCost}
+                        <Dropdown  data={dataCost} pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                            value={this.state.valueCost} fontSize={13}
                             onChangeText={(valueCost) => { valueCategoryPhoto1= this.setState({valueCost}) }}/>
                         </View>    
                     </View>
@@ -194,8 +180,8 @@ export default class SearchPhoto extends Component{
                         </View>
                         
                         <View style={{width: 250}}>
-                        <Dropdown  data={theloai} pickerStyle={{borderWidth: 1, borderColor:'black'}} 
-                            value={this.state.valueCat}
+                        <Dropdown  data={dataCat} pickerStyle={{borderWidth: 1, borderColor:'black'}} 
+                            value={this.state.valueCat} fontSize={13}
                             onChangeText={(valueCat) => { valueCategoryPhoto1= this.setState({valueCat}) }}/>
                         </View>    
                     </View>

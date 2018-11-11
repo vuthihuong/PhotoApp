@@ -21,6 +21,7 @@ export default class PostEvent extends Component {
     componentWillMount(){ 
         this.actGetData1(items=[])
         this.actGetData2(items=[])
+        this.actGetData3(items=[])
     }
 
     actGetData1(items=[]){ 
@@ -64,9 +65,17 @@ export default class PostEvent extends Component {
           });
     }
     actGetData3(items=[]){ 
-        this.itemRef.ref('Customer').orderByChild('addressCity')
-            .equal(this.props.navigation.state.params.addressCity).on('child_added', (dataSnapshot)=> { 
+        this.itemRef.ref('Customer').on('child_added', (dataSnapshot)=> { 
             var childData = dataSnapshot.val();
+            if(childData.labelCatImg1 === this.props.navigation.state.params.valueCat 
+                || childData.labelCatImg2 === this.props.navigation.state.params.valueCat
+                || childData.labelCatImg3 === this.props.navigation.state.params.valueCat
+                || childData.labelCatImg4 === this.props.navigation.state.params.valueCat
+                || childData.labelCatImg5 === this.props.navigation.state.params.valueCat
+                || childData.labelCatImg6 === this.props.navigation.state.params.valueCat
+                || childData.labelCatImg7 === this.props.navigation.state.params.valueCat
+                || childData.labelCatImg8 === this.props.navigation.state.params.valueCat
+                || childData.labelCatImg9 === this.props.navigation.state.params.valueCat ){ 
               items.push({ 
                 id: dataSnapshot.key,
                 addressCity: childData.addressCity, addresDist: childData.addresDist,
@@ -77,12 +86,45 @@ export default class PostEvent extends Component {
                 labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
                 labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
                 labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
-              })
+              })}
               this.setState({ 
-                dataSource3: this.state.dataSource.cloneWithRows(items)
+                dataSource3: this.state.dataSource3.cloneWithRows(items)
               });
           });
     }
+    listUser(){ 
+        var items = [];
+        this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot)=> { 
+            var childData = dataSnapshot.val();
+            if(childData.costFile === this.props.navigation.state.params.valueCost){ 
+              items.push({ 
+                userId: childData.userId
+              })}
+          });
+          var finalArray = itemsKey.map(function (obj) {
+            return obj.value;
+            })
+            finalArray.forEach(element => {
+                FirebaseApp.database().ref('Customer/').child(element).on('child_added', (dataSnapshot)=> { 
+                    var childData = dataSnapshot.val();
+                    if(childData.addresDist === this.props.navigation.state.params.addresDist ){ 
+                      items.push({ 
+                        id: dataSnapshot.key,
+                        addressCity: childData.addressCity, addresDist: childData.addresDist,
+                        address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                        dateofbirth: childData.date, email: childData.email, gender: childData.gender,
+                        labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                        labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                        labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                        labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                        labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                      })}
+                      this.setState({ 
+                        dataSource2: this.state.dataSource2.cloneWithRows(items)
+                      });
+                  });
+            })
+        }
     render(){ 
         return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -125,6 +167,33 @@ export default class PostEvent extends Component {
                     />
                     <ListView  enableEmptySections
                         dataSource = {this.state.dataSource2}
+                        renderRow = {(rowData)=> 
+                        <View>
+                            <View style={stylesSearchListPhoto.bodyManaCont}>
+                                <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',
+                                { id: dataSnapshot.key,
+                                addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                dateofbirth: childData.date, email: childData.email, gender: childData.gender,
+                                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username} )}
+                                style={stylesSearchListPhoto.contManagCont}>
+                                    <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
+                                    <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
+                                </TouchableOpacity>
+                                <View style={ stylesSearchListPhoto.txtConfirm }>
+                                    <TouchableOpacity onPress={()=> { this.removePostModal(rowData.id)}}>
+                                     <Image source={heart} style={{height: 20, width: 20, tintColor: '#EE3B3B', marginTop: 10}} />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>  
+                        </View>}
+                    />
+                    <ListView  enableEmptySections
+                        dataSource = {this.state.dataSource3}
                         renderRow = {(rowData)=> 
                         <View>
                             <View style={stylesSearchListPhoto.bodyManaCont}>
