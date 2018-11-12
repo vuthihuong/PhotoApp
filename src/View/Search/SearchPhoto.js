@@ -40,6 +40,9 @@ export default class SearchPhoto extends Component{
             addressCity: this.state.addressCity, addresDist: this.state.addresDist,
             valueCat: this.state.valueCat, valueCost: this.state.valueCost
         })
+        this.setState({ 
+            addressCity:'', addresDist: '', valueCat: '', valueCost:''
+        })
         
     }
     render(){
