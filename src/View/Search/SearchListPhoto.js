@@ -28,7 +28,7 @@ export default class PostEvent extends Component {
         this.itemRef.ref('Customer').on('child_added', (dataSnapshot)=> { 
             var childData = dataSnapshot.val();
             if(childData.addressCity === this.props.navigation.state.params.addressCity 
-                && this.props.navigation.state.params.addressCity !== '' ){ 
+                && this.props.navigation.state.params.addressCity !== '' && childData.category === 'Nháy ảnh' ){ 
               items.push({ 
                 id: dataSnapshot.key,
                 addressCity: childData.addressCity, addresDist: childData.addresDist,
@@ -51,7 +51,7 @@ export default class PostEvent extends Component {
             if(childData.addressCity === this.props.navigation.state.params.addressCity 
                 && childData.addresDist === this.props.navigation.state.params.addresDist
                 && this.props.navigation.state.params.addressCity !== '' 
-                && this.props.navigation.state.params.addresDist !== ''  ){ 
+                && this.props.navigation.state.params.addresDist !== ''  && childData.category === 'Nháy ảnh'  ){ 
               items.push({ 
                 id: dataSnapshot.key,
                 addressCity: childData.addressCity, addresDist: childData.addresDist,
@@ -71,7 +71,7 @@ export default class PostEvent extends Component {
     actGetData3(items=[]){ 
         this.itemRef.ref('Customer').on('child_added', (dataSnapshot)=> { 
             var childData = dataSnapshot.val();
-            if( this.props.navigation.state.params.valueCat !== ''
+            if( this.props.navigation.state.params.valueCat !== ''  && childData.category === 'Nháy ảnh'
             && ( childData.labelCatImg1 === this.props.navigation.state.params.valueCat 
                 || childData.labelCatImg2 === this.props.navigation.state.params.valueCat
                 || childData.labelCatImg3 === this.props.navigation.state.params.valueCat
