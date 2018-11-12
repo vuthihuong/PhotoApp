@@ -162,7 +162,7 @@ export default class InfoPhoto extends Component {
         this.itemRef.ref(url).on('child_added', (dataSnapshot)=> { 
         var childData = dataSnapshot.val();
             listItems.push({ 
-                id: dataSnapshot.key, contentImg: childData.contentImg, costDay: childData.costDay,
+                id: dataSnapshot.key, contentImg: childData.contentImg, costDay: childData.costDay, userId: childData.userId,
                 costFile: childData.costFile, countAvgImg: childData.countAvgImg, countImgPhoto: childData.countImgPhoto,
                 labelCat1: childData.labelCat1, labelCat2: childData.labelCat2, labelCat3: childData.labelCat3,
                 labelCat4: childData.labelCat4, labelCat5: childData.labelCat5, labelCat6: childData.labelCat6,
@@ -528,6 +528,7 @@ export default class InfoPhoto extends Component {
                         dataSource = {this.state.dataSource}
                         renderRow = {(rowData)=> 
                         <View >
+                            {rowData.userId === userKey?
                            <View style={stylesInfoPhoto.bodyManaCont}>
                                 <View  style={stylesInfoPhoto.contManagCont}>
                                     <Text style={[stylesInfoPhoto.txtManagCont, {fontWeight: 'bold'}]}>
@@ -598,7 +599,7 @@ export default class InfoPhoto extends Component {
                                     <Text style={stylesInfoPhoto.txtManagContColor}>Xóa</Text>
                                     </TouchableOpacity>
                                 </View>
-                            </View>
+                            </View>: null}
                         </View>}
                 />:null}
                     <View style = {stylesInfoCus.infoFooter}> 

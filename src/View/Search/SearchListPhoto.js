@@ -22,6 +22,7 @@ export default class PostEvent extends Component {
         this.actGetData1(items=[])
         this.actGetData2(items=[])
         this.actGetData3(items=[])
+        this.actGetData4(items=[])
     }
 
     actGetData1(items=[]){ 
@@ -97,6 +98,142 @@ export default class PostEvent extends Component {
               });
           });
     }
+    actGetData4(items = []){
+        if( this.props.navigation.state.params.valueCost !== '' 
+                &&  this.props.navigation.state.params.valueCat === '' 
+                &&  this.props.navigation.state.params.addresDist === '' 
+                &&  this.props.navigation.state.params.addressCity === ''
+                 ){ 
+                    var tmpWord = this.props.navigation.state.params.valueCost;
+                    if(tmpWord.includes('Nhỏ hơn') === true && tmpWord.includes('triệu') === false){ 
+                        var word = tmpWord.split(' ');
+                        var word1 = word[2];
+                        var word2 = word[3];
+                        var itemsTmp = [];
+                        var wordCompare = word1.concat(word2);
+                        this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot)=> { 
+                            var childData = dataSnapshot.val();
+                            if( childData.costFile !== '' && childData.costFile < wordCompare ){ 
+                                itemsTmp.push({ 
+                                  value : childData.userId
+                                })}
+                            else if(childData.costDay !== '' && childData.costDay < wordCompare){ 
+                                  itemsTmp.push({ 
+                                      value : childData.userId
+                                    })
+                              }
+                              var finalArray = itemsTmp.map(function (obj) {
+                                return obj.value;
+                              })
+                              finalArray.forEach(element => {
+                                FirebaseApp.database().ref('Customer').child(element).on('value', (dataSnapshot)=> { 
+                                    var childData = dataSnapshot.val();
+                                    items.push({ 
+                                        id: dataSnapshot.key,
+                                        addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                        address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                        dateofbirth: childData.date, email: childData.email, gender: childData.gender,
+                                        labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                                        labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                        labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                        labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                        labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                                      })
+                                      this.setState({ 
+                                        dataSource4: this.state.dataSource4.cloneWithRows(items)
+                                      });
+                                  });
+                            })
+                             
+                          });
+                    }
+                    else if(tmpWord.includes('Nhỏ hơn') === true && tmpWord.includes('triệu') === true){ 
+                        var word = tmpWord.split(' ');
+                        var word1 = word[2];
+                        var itemsTmp = [];
+                        var wordCompare = word1.concat('000000');
+                        this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot)=> { 
+                            var childData = dataSnapshot.val();
+                            if( childData.costFile !== '' && childData.costFile <= wordCompare ){ 
+                              itemsTmp.push({ 
+                                value : childData.userId
+                              })}
+                            else if(childData.costDay !== '' && childData.costDay <= wordCompare){ 
+                                itemsTmp.push({ 
+                                    value : childData.userId
+                                  })
+                            }
+                              var finalArray = itemsTmp.map(function (obj) {
+                                return obj.value;
+                              })
+                              finalArray.forEach(element => {
+                                FirebaseApp.database().ref('Customer').child(element).on('value', (dataSnapshot)=> { 
+                                    var childData = dataSnapshot.val();
+                                    items.push({ 
+                                        id: dataSnapshot.key,
+                                        addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                        address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                        dateofbirth: childData.date, email: childData.email, gender: childData.gender,
+                                        labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                                        labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                        labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                        labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                        labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                                      })
+                                      this.setState({ 
+                                        dataSource4: this.state.dataSource4.cloneWithRows(items)
+                                      });
+                                  });
+                            })
+                             
+                          });
+                    }
+                    else if(tmpWord.includes('Từ') === true && tmpWord.includes('triệu') === true){ 
+                        var word = tmpWord.split(' ');
+                        var word1 = word[1];
+                        var itemsTmp = [];
+                        var wordCompare = word1.concat('000000');
+                        this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot)=> { 
+                            var childData = dataSnapshot.val();
+                            if( childData.costFile !== '' && childData.costFile >= wordCompare ){ 
+                              itemsTmp.push({ 
+                                value : childData.userId
+                              })}
+                            else if(childData.costDay !== '' && childData.costDay >= wordCompare){ 
+                                itemsTmp.push({ 
+                                    value : childData.userId
+                                  })
+                            }
+                              var finalArray = itemsTmp.map(function (obj) {
+                                return obj.value;
+                              })
+                              
+                              finalArray.forEach(element => {
+                                  alert(element);
+                                FirebaseApp.database().ref('Customer').child(element).on('value', (dataSnapshot)=> { 
+                                    var childData = dataSnapshot.val();
+                                    items.push({ 
+                                        id: dataSnapshot.key,
+                                        addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                        address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                        dateofbirth: childData.date, email: childData.email, gender: childData.gender,
+                                        labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                                        labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                        labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                        labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                        labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                                      })
+                                      this.setState({ 
+                                        dataSource4: this.state.dataSource4.cloneWithRows(items)
+                                      });
+                                  });
+                            })
+                             
+                          });
+                    }
+                }
+        
+    }
     listUser(){ 
         var items = [];
         this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot)=> { 
@@ -112,7 +249,6 @@ export default class PostEvent extends Component {
             finalArray.forEach(element => {
                 FirebaseApp.database().ref('Customer/').child(element).on('child_added', (dataSnapshot)=> { 
                     var childData = dataSnapshot.val();
-                    if(childData.addresDist === this.props.navigation.state.params.addresDist ){ 
                       items.push({ 
                         id: dataSnapshot.key,
                         addressCity: childData.addressCity, addresDist: childData.addresDist,
@@ -123,9 +259,9 @@ export default class PostEvent extends Component {
                         labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
                         labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
                         labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
-                      })}
+                      })
                       this.setState({ 
-                        dataSource2: this.state.dataSource2.cloneWithRows(items)
+                        dataSource4: this.state.dataSource4.cloneWithRows(items)
                       });
                   });
             })
@@ -199,6 +335,33 @@ export default class PostEvent extends Component {
                     />
                     <ListView  enableEmptySections
                         dataSource = {this.state.dataSource3}
+                        renderRow = {(rowData)=> 
+                        <View>
+                            <View style={stylesSearchListPhoto.bodyManaCont}>
+                                <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',
+                                { id: dataSnapshot.key,
+                                addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                dateofbirth: childData.date, email: childData.email, gender: childData.gender,
+                                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username} )}
+                                style={stylesSearchListPhoto.contManagCont}>
+                                    <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
+                                    <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
+                                </TouchableOpacity>
+                                <View style={ stylesSearchListPhoto.txtConfirm }>
+                                    <TouchableOpacity onPress={()=> { this.removePostModal(rowData.id)}}>
+                                     <Image source={heart} style={{height: 20, width: 20, tintColor: '#EE3B3B', marginTop: 10}} />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>  
+                        </View>}
+                    />
+                    <ListView  enableEmptySections
+                        dataSource = {this.state.dataSource4}
                         renderRow = {(rowData)=> 
                         <View>
                             <View style={stylesSearchListPhoto.bodyManaCont}>
