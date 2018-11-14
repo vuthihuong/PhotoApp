@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, ListView,
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, ListView, Alert,
         ScrollView, TextInput } from 'react-native';
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
@@ -77,17 +77,33 @@ export default class PostEvent extends Component {
                 && childData.addresDist === this.props.navigation.state.params.addresDist
                 && this.props.navigation.state.params.addressCity !== '' 
                 && this.props.navigation.state.params.addresDist !== ''  && childData.category === 'Nháy ảnh'  ){ 
-              items.push({ 
-                id: dataSnapshot.key,
-                addressCity: childData.addressCity, addresDist: childData.addresDist,
-                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                date: childData.date, email: childData.email, gender: childData.gender,
-                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
-                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
-              })}
+                    FirebaseApp.database().ref('Customer').child(dataSnapshot.key)
+                    .child('ListUserLove').orderByChild('userId').equalTo(userKey)
+                    .on('value', (function (snapshot) {
+                        if(snapshot.exists()){ 
+                            items.push({colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
+                                keyLove: snapshot.key, countLove: childData.countLove,
+                            addressCity: childData.addressCity, addresDist: childData.addresDist,
+                            address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                            date: childData.date, email: childData.email, gender: childData.gender,
+                            labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                            labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                            labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                            labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                            labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username})
+                             }
+                        else { 
+                            items.push({colorLovePhoto: 'black', id: dataSnapshot.key, countLove: childData.countLove,
+                            addressCity: childData.addressCity, addresDist: childData.addresDist,
+                            address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                            date: childData.date, email: childData.email, gender: childData.gender,
+                            labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                            labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                            labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                            labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                            labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username})
+                        }
+                }).bind(this))}
               this.setState({ 
                 dataSource2: this.state.dataSource2.cloneWithRows(items)
               });
@@ -257,36 +273,50 @@ export default class PostEvent extends Component {
             .child('ListUserLove').push({
                 colorLovePhoto: '#EE3B3B', userId: id
             })
+            alert('Đã thêm nhiếp ảnh gia vào danh sách yêu thích của bạn');
             // this.actGetData1(items = []);
         }
         else if(colorLovePhoto === '#EE3B3B'){
-            //cập nhật lại số lượng yêu thích nháy ảnh
-            FirebaseApp.database().ref('Customer').child(id) .update({
-                countLove: countLove - 1
-            })
+            Alert.alert(
+                'Thông báo',
+                'Bạn có chắc chắn muốn xóa nhiếp ảnh gia này khỏi danh sách yêu thích?',
+                [
+                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                  {text: 'OK', onPress: () => {
+                    //cập nhật lại số lượng yêu thích nháy ảnh
 
-            // xóa đi user đã thích nháy ảnh trong bảng nháy ảnh
-            FirebaseApp.database().ref('Customer').child(id)
-            .child('ListUserLove').orderByChild('userId').equalTo(userKey)
-            .on('value', (function (snapshot) {
-                snapshot.forEach(function(childSnapshot) {
-                     keyLoveCustomer = childSnapshot.key;
+                FirebaseApp.database().ref('Customer').child(id) .update({
+                    countLove: countLove - 1
                 })
-            }))
-            FirebaseApp.database().ref('Customer').child(id)
-            .child('ListUserLove').child(keyLoveCustomer).remove();
 
-           //xóa đi nháy ảnh mà user đã thích trong bảng người dùng
-             FirebaseApp.database().ref('Customer').child(userKey)
-            .child('ListUserLove').orderByChild('userId').equalTo(id)
-            .on('value', (function (snapshot) {
-                snapshot.forEach(function(childSnapshot) {
-                    keyLovePhoto = childSnapshot.key;
-                })
-            }))
-            FirebaseApp.database().ref('Customer').child(userKey)
-            .child('ListUserLove').child(keyLovePhoto).remove();
-            this.actGetData1(items = []);
+                // xóa đi user đã thích nháy ảnh trong bảng nháy ảnh
+                FirebaseApp.database().ref('Customer').child(id)
+                .child('ListUserLove').orderByChild('userId').equalTo(userKey)
+                .on('value', (function (snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        keyLoveCustomer = childSnapshot.key;
+                    })
+                }))
+                FirebaseApp.database().ref('Customer').child(id)
+                .child('ListUserLove').child(keyLoveCustomer).remove();
+
+            //xóa đi nháy ảnh mà user đã thích trong bảng người dùng
+                FirebaseApp.database().ref('Customer').child(userKey)
+                .child('ListUserLove').orderByChild('userId').equalTo(id)
+                .on('value', (function (snapshot) {
+                    snapshot.forEach(function(childSnapshot) {
+                        keyLovePhoto = childSnapshot.key;
+                    })
+                }))
+                FirebaseApp.database().ref('Customer').child(userKey)
+                .child('ListUserLove').child(keyLovePhoto).remove();
+                alert('Đã xóa nhiếp ảnh gia khỏi danh sách yêu thích của bạn.')
+                this.actGetData1(items = []);
+                  
+                  }},
+                ],
+                { cancelable: false }
+              )
         }
     }
    
@@ -319,7 +349,7 @@ export default class PostEvent extends Component {
                                     labelCatImg7: rowData.labelCatImg7, labelCatImg8: rowData.labelCatImg8,
                                     labelCatImg9: rowData.labelCatImg9, telephone: rowData.telephone, username: rowData.username} )}
                                 style={stylesSearchListPhoto.contManagCont}>
-                                    <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} - {rowData.colorLovePhoto} </Text>
+                                    <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist} </Text>
                                 </TouchableOpacity>
                                 <View style={ stylesSearchListPhoto.txtConfirm }>
@@ -337,7 +367,7 @@ export default class PostEvent extends Component {
                         <View>
                             <View style={stylesSearchListPhoto.bodyManaCont}>
                                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',
-                                { id: rowData.id,
+                                { id: rowData.id, countLove: rowData.countLove,
                                     addressCity: rowData.addressCity, addresDist: rowData.addresDist,
                                     address: rowData.address, avatarSource: rowData.avatarSource, category: rowData.category,
                                     date: rowData.date, email: rowData.email, gender: rowData.gender,
@@ -351,8 +381,9 @@ export default class PostEvent extends Component {
                                     <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                 </TouchableOpacity>
                                 <View style={ stylesSearchListPhoto.txtConfirm }>
-                                    <TouchableOpacity onPress={()=> { this.removePostModal(rowData.id)}}>
-                                     <Image source={heart} style={{height: 20, width: 20, tintColor: '#EE3B3B', marginTop: 10}} />
+                                <TouchableOpacity onPress={()=> { 
+                                        this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)}}>
+                                        <Image source={heart} style={{height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLovePhoto}} />
                                     </TouchableOpacity>
                                 </View>
                             </View>  
