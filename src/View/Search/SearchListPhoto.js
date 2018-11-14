@@ -19,6 +19,13 @@ export default class PostEvent extends Component {
         this.itemRef = FirebaseApp.database();
     }
     componentWillMount(){ 
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         userKey = childSnapshot.key;
+          }) 
+        })
         this.actGetData1(items=[])
         this.actGetData2(items=[])
         this.actGetData3(items=[])
@@ -29,18 +36,35 @@ export default class PostEvent extends Component {
         this.itemRef.ref('Customer').on('child_added', (dataSnapshot)=> { 
             var childData = dataSnapshot.val();
             if(childData.addressCity === this.props.navigation.state.params.addressCity 
-                && this.props.navigation.state.params.addressCity !== '' && childData.category === 'Nháy ảnh' ){ 
-              items.push({ 
-                id: dataSnapshot.key,
-                addressCity: childData.addressCity, addresDist: childData.addresDist,
-                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                date: childData.date, email: childData.email, gender: childData.gender,
-                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
-                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
-              })}
+                && this.props.navigation.state.params.addressCity !== '' && childData.category === 'Nháy ảnh' ){
+                    FirebaseApp.database().ref('Customer').child(dataSnapshot.key)
+                    .child('ListUserLove').orderByChild('userId').equalTo(userKey)
+                    .on('value', (function (snapshot) {
+                        if(snapshot.exists()){ 
+                            items.push({colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
+                                keyLove: snapshot.key, countLove: childData.countLove,
+                            addressCity: childData.addressCity, addresDist: childData.addresDist,
+                            address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                            date: childData.date, email: childData.email, gender: childData.gender,
+                            labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                            labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                            labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                            labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                            labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username})
+                             }
+                        else { 
+                            items.push({colorLovePhoto: 'black', id: dataSnapshot.key, countLove: childData.countLove,
+                            addressCity: childData.addressCity, addresDist: childData.addresDist,
+                            address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                            date: childData.date, email: childData.email, gender: childData.gender,
+                            labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                            labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                            labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                            labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                            labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username})
+                        }
+                }).bind(this))
+            }
               this.setState({ 
                 dataSource1: this.state.dataSource1.cloneWithRows(items)
               });
@@ -217,6 +241,54 @@ export default class PostEvent extends Component {
             }
         }
     }
+    lovePhoto(id, colorLovePhoto, countLove){ 
+        if(colorLovePhoto === 'black'){ 
+            //cập nhật số lượng yêu thích nháy ảnh trong bảng nháy ảnh
+            FirebaseApp.database().ref('Customer').child(id) .update({
+                countLove: countLove + 1
+            })
+            // thêm user đã thích nháy ảnh vào bảng của nháy ảnh
+            FirebaseApp.database().ref('Customer').child(id)
+            .child('ListUserLove').push({
+                colorLovePhoto: '#EE3B3B', userId: userKey
+            })
+            //thêm nháy ảnh đã thích vào bảng của user
+            FirebaseApp.database().ref('Customer').child(userKey)
+            .child('ListUserLove').push({
+                colorLovePhoto: '#EE3B3B', userId: id
+            })
+            // this.actGetData1(items = []);
+        }
+        else if(colorLovePhoto === '#EE3B3B'){
+            //cập nhật lại số lượng yêu thích nháy ảnh
+            FirebaseApp.database().ref('Customer').child(id) .update({
+                countLove: countLove - 1
+            })
+
+            // xóa đi user đã thích nháy ảnh trong bảng nháy ảnh
+            FirebaseApp.database().ref('Customer').child(id)
+            .child('ListUserLove').orderByChild('userId').equalTo(userKey)
+            .on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                     keyLoveCustomer = childSnapshot.key;
+                })
+            }))
+            FirebaseApp.database().ref('Customer').child(id)
+            .child('ListUserLove').child(keyLoveCustomer).remove();
+
+           //xóa đi nháy ảnh mà user đã thích trong bảng người dùng
+             FirebaseApp.database().ref('Customer').child(userKey)
+            .child('ListUserLove').orderByChild('userId').equalTo(id)
+            .on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    keyLovePhoto = childSnapshot.key;
+                })
+            }))
+            FirebaseApp.database().ref('Customer').child(userKey)
+            .child('ListUserLove').child(keyLovePhoto).remove();
+            this.actGetData1(items = []);
+        }
+    }
    
     render(){ 
         return(
@@ -238,7 +310,7 @@ export default class PostEvent extends Component {
                             <View style={stylesSearchListPhoto.bodyManaCont}>
                                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',
                                 { id: rowData.id,
-                                    addressCity: rowData.addressCity, addresDist: rowData.addresDist,
+                                    addressCity: rowData.addressCity, addresDist: rowData.addresDist, countLove: rowData.countLove,
                                     address: rowData.address, avatarSource: rowData.avatarSource, category: rowData.category,
                                     date: rowData.date, email: rowData.email, gender: rowData.gender,
                                     labelCatImg1: rowData.labelCatImg1, labelCatImg2: rowData.labelCatImg2, 
@@ -247,12 +319,13 @@ export default class PostEvent extends Component {
                                     labelCatImg7: rowData.labelCatImg7, labelCatImg8: rowData.labelCatImg8,
                                     labelCatImg9: rowData.labelCatImg9, telephone: rowData.telephone, username: rowData.username} )}
                                 style={stylesSearchListPhoto.contManagCont}>
-                                    <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
+                                    <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} - {rowData.colorLovePhoto} </Text>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist} </Text>
                                 </TouchableOpacity>
                                 <View style={ stylesSearchListPhoto.txtConfirm }>
-                                    <TouchableOpacity onPress={()=> { this.removePostModal(rowData.id)}}>
-                                        <Image source={heart} style={{height: 20, width: 20, marginTop: 10, tintColor: '#EE3B3B'}} />
+                                    <TouchableOpacity onPress={()=> { 
+                                        this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)}}>
+                                        <Image source={heart} style={{height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLovePhoto}} />
                                     </TouchableOpacity>
                                 </View>
                             </View> : null} 

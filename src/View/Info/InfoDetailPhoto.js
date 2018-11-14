@@ -24,13 +24,6 @@ export default class InfoDetailPhoto extends Component{
     constructor(props) {
         super(props);
         this.state = {
-          tableHead: ['Thể loại', 'Giá', 'Mô tả'],
-          tableData: [
-            ['Giá chụp đơn', 'Học sinh: 99k/bộ ảnh'],
-            ['Giá chụp đôi', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
-            ['Giá chụp nhóm', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
-            ['Giá ảnh cưới', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
-          ],
           dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
           dataSource2: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
@@ -105,7 +98,7 @@ export default class InfoDetailPhoto extends Component{
                                 </View>
                                 <View style={{flexDirection: 'row'}}>
                                     <Image source={like} style={{width: 15, height: 15, marginLeft: 5}}/>
-                                     <Text style={{marginTop: -3, marginLeft: 5}}>1</Text>
+                                     <Text style={{marginTop: -3, marginLeft: 5}}>{this.props.navigation.state.params.countLove}</Text>
                                 </View>
                             </View>
                             <View>
