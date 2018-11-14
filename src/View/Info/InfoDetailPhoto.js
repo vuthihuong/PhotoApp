@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity, ScrollView
+    StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, ListView
 } from 'react-native'
+import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 import { Table, Row, Rows, Col, Cols } from 'react-native-table-component';
 
@@ -29,9 +30,39 @@ export default class InfoDetailPhoto extends Component{
             ['Giá chụp đôi', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
             ['Giá chụp nhóm', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
             ['Giá ảnh cưới', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
-          ]
+          ],
+          dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
+        this.itemRef = FirebaseApp.database();
       }
+      componentWillMount(){ 
+        this.actGetData1(items=[], this.props.navigation.state.params.id )
+        // this.actGetData2(items=[])
+        // this.actGetData3(items=[])
+        // this.actGetData4(items=[])
+    }
+    actGetData1(items=[], id){ 
+        this.itemRef.ref('Customer').orderByKey().equalTo(id).on('child_added', (dataSnapshot)=> { 
+            var childData = dataSnapshot.val();
+            // if(childData.addressCity === this.props.navigation.state.params.addressCity 
+            //     && this.props.navigation.state.params.addressCity !== '' && childData.category === 'Nháy ảnh' ){ 
+              items.push({ 
+                id: dataSnapshot.key,
+                addressCity: childData.addressCity, addresDist: childData.addresDist,
+                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                date: childData.date, email: childData.email, gender: childData.gender,
+                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+              })
+            // }
+              this.setState({ 
+                dataSource1: this.state.dataSource1.cloneWithRows(items)
+              });
+          });
+    }
     render(){
         const state = this.state;
         return(
@@ -78,8 +109,8 @@ export default class InfoDetailPhoto extends Component{
                     <View style={{flexDirection:'row'}}>
                         <Image source={address} style={{width: 30, height: 30, marginTop: -5}} />
                         <Text style={{fontSize: 13, color: 'black'}}>
-                            {this.props.navigation.state.params.address},
-                            {this.props.navigation.state.params.addressCity}
+                            {this.props.navigation.state.params.address}, 
+                            {this.props.navigation.state.params.addressCity},
                             {this.props.navigation.state.params.addresDist}</Text>
                      </View>
 
@@ -88,38 +119,57 @@ export default class InfoDetailPhoto extends Component{
                         <Text style={{fontSize: 13, color: 'black'}}>Nhận chụp ảnh các thể loại:</Text>
                         
                     </View>
-
-                     <View style={stylesInfoDetailPhoto.textBody}>
-                        <View>
+                    <ListView  enableEmptySections
+                        dataSource = {this.state.dataSource1}
+                        renderRow = {(rowData)=> 
+                        <View style = {{marginLeft: 30, marginTop: 15}}>
+                            {rowData.labelCatImg1 !== ''?
                             <View style={{flexDirection:'row'}}>
                                 <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
-                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh cá nhân</Text>
-                            </View>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg1}</Text>
+                            </View>:null}
+                            {rowData.labelCatImg2 !== ''?
                             <View style={{flexDirection:'row'}}>
                                 <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
-                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh đôi</Text>
-                            </View>
-                            <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>   
-                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh nhóm</Text>
-                            </View>
-                        </View>
-                        <View>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg2}</Text>
+                            </View>:null}
+                            {rowData.labelCatImg3 !== ''?
                             <View style={{flexDirection:'row'}}>
                                 <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
-                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh kỷ yếu</Text>
-                            </View>
+                                    <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg3}</Text>
+                            </View>:null}
+                            {rowData.labelCatImg4 !== ''?
                             <View style={{flexDirection:'row'}}>
                                 <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
-                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh cưới</Text>
-                            </View>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg4}</Text>
+                            </View>:null}
+                            {rowData.labelCatImg5 !== ''?
                             <View style={{flexDirection:'row'}}>
                                 <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
-                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>Chụp ảnh quảng cáo</Text>
-                            </View>
-                        </View>
-                     </View>
-
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg5}</Text>
+                            </View>:null}
+                            {rowData.labelCatImg6 !== ''?
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg6}</Text>
+                            </View>:null}
+                            {rowData.labelCatImg7 !== ''?
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg7}</Text>
+                            </View>:null}
+                            {rowData.labelCatImg8 !== ''?
+                            <View style={{flexDirection:'row'}}>
+                                 <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg8}</Text>
+                            </View>:null}
+                            {rowData.labelCatImg9 !== ''?
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg9}</Text>
+                            </View>:null}
+                        </View>}
+                    />
                       <View style ={stylesInfoDetailPhoto.textBody}>
                         <TouchableOpacity>
                                 <Text style={{fontSize: 13, color: '#EE3B3B', textDecorationLine: 'underline',}}>
@@ -194,6 +244,6 @@ stylesInfoDetailPhoto = StyleSheet.create({
         },
     textTbl: {
          margin: 6 , color: 'black',
-        }
+    },
 
 })
