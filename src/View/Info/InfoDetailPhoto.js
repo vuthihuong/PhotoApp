@@ -16,7 +16,7 @@ import iconGender from '../../assets/img/info/gender.png'
 import dateBirth from '../../assets/img/info/icon_date_birth.png'
 import address from '../../assets/img/info/location.png'
 import photoIcon from '../../assets/img/info/photoDetail.png'
-import right from '../../assets/img/info/iconRight.png'
+import iconRight from '../../assets/img/info/iconRight.png'
 import contract from '../../assets/img/info/contract.png'
 import gobackIcon from '../../assets/img/info/goback.png'
 
@@ -32,20 +32,19 @@ export default class InfoDetailPhoto extends Component{
             ['Giá ảnh cưới', ' Khách hàng được nhận lại toàn bộ ảnh gốc, 20 ảnh PTS và tặng 10 ảnh in 13 x 18 Ép Lamina'],
           ],
           dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+          dataSource2: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
         }
         this.itemRef = FirebaseApp.database();
       }
       componentWillMount(){ 
         this.actGetData1(items=[], this.props.navigation.state.params.id )
-        // this.actGetData2(items=[])
+        this.actGetData2(items=[], this.props.navigation.state.params.id )
         // this.actGetData3(items=[])
         // this.actGetData4(items=[])
     }
     actGetData1(items=[], id){ 
         this.itemRef.ref('Customer').orderByKey().equalTo(id).on('child_added', (dataSnapshot)=> { 
             var childData = dataSnapshot.val();
-            // if(childData.addressCity === this.props.navigation.state.params.addressCity 
-            //     && this.props.navigation.state.params.addressCity !== '' && childData.category === 'Nháy ảnh' ){ 
               items.push({ 
                 id: dataSnapshot.key,
                 addressCity: childData.addressCity, addresDist: childData.addresDist,
@@ -57,9 +56,27 @@ export default class InfoDetailPhoto extends Component{
                 labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
                 labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
               })
-            // }
               this.setState({ 
                 dataSource1: this.state.dataSource1.cloneWithRows(items)
+              });
+          });
+    }
+
+    actGetData2(items=[], id){ 
+        this.itemRef.ref('InfoTableImg').orderByChild('userId').equalTo(id).on('child_added', (dataSnapshot)=> { 
+            var childData = dataSnapshot.val();
+              items.push({ 
+                id: dataSnapshot.key, contentImg: childData.contentImg, costDay: childData.costDay, userId: childData.userId,
+                costFile: childData.costFile, countAvgImg: childData.countAvgImg, countImgPhoto: childData.countImgPhoto,
+                labelCat1: childData.labelCat1, labelCat2: childData.labelCat2, labelCat3: childData.labelCat3,
+                labelCat4: childData.labelCat4, labelCat5: childData.labelCat5, labelCat6: childData.labelCat6,
+                labelCat7: childData.labelCat7, labelCat8: childData.labelCat8, labelCateDiff: childData.labelCateDiff,
+                labelCostRight: childData.labelCostRight, labelRight1: childData.labelRight1,
+                labelRight2: childData.labelRight2, labelRight3: childData.labelRight3, labelRight4: childData.labelRight4,
+                labelRight5: childData.labelRight5, labelTime1: childData.labelTime1, labelTime2: childData.labelTime2
+              })
+              this.setState({ 
+                dataSource2: this.state.dataSource2.cloneWithRows(items)
               });
           });
     }
@@ -125,47 +142,47 @@ export default class InfoDetailPhoto extends Component{
                         <View style = {{marginLeft: 30, marginTop: 15}}>
                             {rowData.labelCatImg1 !== ''?
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Image source={iconRight} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
                                 <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg1}</Text>
                             </View>:null}
                             {rowData.labelCatImg2 !== ''?
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Image source={iconRight} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
                                 <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg2}</Text>
                             </View>:null}
                             {rowData.labelCatImg3 !== ''?
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Image source={iconRight} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
                                     <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg3}</Text>
                             </View>:null}
                             {rowData.labelCatImg4 !== ''?
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Image source={iconRight} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
                                 <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg4}</Text>
                             </View>:null}
                             {rowData.labelCatImg5 !== ''?
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Image source={iconRight} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
                                 <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg5}</Text>
                             </View>:null}
                             {rowData.labelCatImg6 !== ''?
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Image source={iconRight} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
                                 <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg6}</Text>
                             </View>:null}
                             {rowData.labelCatImg7 !== ''?
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Image source={iconRight} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
                                 <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg7}</Text>
                             </View>:null}
                             {rowData.labelCatImg8 !== ''?
                             <View style={{flexDirection:'row'}}>
-                                 <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                 <Image source={iconRight} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
                                 <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg8}</Text>
                             </View>:null}
                             {rowData.labelCatImg9 !== ''?
                             <View style={{flexDirection:'row'}}>
-                                <Image source={right} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
+                                <Image source={iconRight} style={stylesInfoDetailPhoto.imgCheckInfoPhoto}/>
                                 <Text style={stylesInfoDetailPhoto.txtCheckInfoPhoto}>{rowData.labelCatImg9}</Text>
                             </View>:null}
                         </View>}
@@ -181,21 +198,67 @@ export default class InfoDetailPhoto extends Component{
                         <Text style={{fontSize: 13, color: '#EE3B3B', 
                             textDecorationLine: 'underline',}}>Bảng giá ảnh</Text>
                     </View>
-                    <View style={stylesInfoDetailPhoto.tbl}>
-                        <Table borderStyle={{borderWidth: 1, borderColor: 'black', marginRight: 15}}>
-                            <Row data={state.tableHead} widthArr={[90,230]} 
-                                    textStyle={{color: 'black', textAlign: 'center'}} 
-                                // style={styles.head} style={styles.text}/
-                                />
-                            <Rows data={state.tableData} widthArr={[90,230]} 
-                                    textStyle={{color: 'black',textAlign: 'center'}} 
-                                    // style={styles.text}
-                                    >
-                                    
-                            </Rows>
-                        </Table>
-                    </View>
-                </View>
+                     <ListView  enableEmptySections
+                        dataSource = {this.state.dataSource2}
+                        renderRow = {(rowData)=> 
+                        <View >
+                           <View style={stylesInfoDetailPhoto.bodyManaCont}>
+                                <View  style={stylesInfoDetailPhoto.contManagCont}>
+                                    <Text style={[stylesInfoDetailPhoto.txtManagCont, {fontWeight: 'bold'}]}>
+                                        Gói chụp ảnh {rowData.labelCat1}{rowData.labelCat2}{rowData.labelCat3}{rowData.labelCat4}
+                                        {rowData.labelCat5}{rowData.labelCat6}{rowData.labelCat7}{rowData.labelCat8}{rowData.labelCateDiff}</Text>
+                                    <View style={{marginTop:  10, marginLeft: 15}}>
+                                        {rowData.labelTime1 !== ''? 
+                                            <Text style={stylesInfoDetailPhoto.txtManagCont}>Giá chụp theo file: {rowData.costFile}</Text>:null}
+                                        {rowData.labelTime2 !== ''?
+                                           <Text style={stylesInfoDetailPhoto.txtManagCont}>Giá chụp theo ngày: {rowData.costDay}</Text>:null}
+                                        <Text style={stylesInfoDetailPhoto.txtManagCont}>Giá một ảnh photoshop: {rowData.countAvgImg}</Text>
+                                        <Text style={stylesInfoDetailPhoto.txtManagCont}>Bạn sẽ có: </Text>
+                                        <View style={{flexDirection: 'row'}}>
+                                            <Image source={iconRight} style={stylesInfoDetailPhoto.contentRight} />
+                                            <Text style={stylesInfoDetailPhoto.txtManagCont}>Số ảnh photoshop: {rowData.countImgPhoto}</Text>
+                                        </View>
+                                        {rowData.contentImg !== ''?
+                                             <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoDetailPhoto.contentRight} />
+                                                <Text style={stylesInfoDetailPhoto.txtManagCont}>{rowData.contentImg}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight1 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoDetailPhoto.contentRight} />
+                                                <Text style={stylesInfoDetailPhoto.txtManagCont}>{rowData.labelRight1}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight2 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight}  style={stylesInfoDetailPhoto.contentRight} />
+                                                <Text style={stylesInfoDetailPhoto.txtManagCont}>{rowData.labelRight2}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight2 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoDetailPhoto.contentRight} />
+                                                <Text style={stylesInfoDetailPhoto.txtManagCont}>{rowData.labelCostRight}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight3 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoDetailPhoto.contentRight} />
+                                                <Text style={stylesInfoDetailPhoto.txtManagCont}>{rowData.labelRight3}</Text>
+                                            </View>:null} 
+                                        {rowData.labelRight4 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoDetailPhoto.contentRight}/>
+                                                <Text style={stylesInfoDetailPhoto.txtManagCont}>{rowData.labelRight4}</Text>
+                                            </View>:null}
+                                        {rowData.labelRight5 !== ''?
+                                            <View style={{flexDirection: 'row'}}>
+                                                <Image source={iconRight} style={stylesInfoDetailPhoto.contentRight}/>
+                                                <Text style={stylesInfoDetailPhoto.txtManagCont}>{rowData.labelRight5}</Text>
+                                            </View>:null}
+                                    </View>  
+                                </View>
+                            </View>
+                        </View>}
+                />
+            </View>
            
         </ScrollView>
            
@@ -245,5 +308,22 @@ stylesInfoDetailPhoto = StyleSheet.create({
     textTbl: {
          margin: 6 , color: 'black',
     },
+    bodyManaCont: {
+        flexDirection: 'row', justifyContent: 'space-between', 
+        borderBottomWidth: 1, borderBottomColor: '#FA8072', paddingBottom: 10,
+        marginTop: 15, 
+    },
+    contManagCont: { 
+        width: 300
+    },
+    txtManagCont: {
+        color: 'black', 
+   },
+   txtManagContColor: { 
+       color: 'black',  textDecorationLine: 'underline', marginTop: 20
+   },
+   contentRight: { 
+    width: 15, height: 15, marginRight: 10, marginLeft: 15, tintColor: '#EE3B3B'
+}
 
 })
