@@ -313,7 +313,7 @@ export default class PostDetailPhoto extends Component {
                                 <TouchableOpacity 
                                 // onPress={()=> this.submitCommentEventView()} 
                                 >
-                                    <Image source={rowData.avatarSource} style={{width: 30, height: 30, tintColor: 'black'}}/>
+                                    <Image source={rowData.avatarSource} style={{width: 30, height: 30}}/>
                                 </TouchableOpacity>
                                 <Text style={{marginLeft: 10, marginRight: 10, color: 'blue'}}>{rowData.username}</Text>
                             </View>

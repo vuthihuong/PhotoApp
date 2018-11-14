@@ -86,9 +86,9 @@ export default class InfoDetailPhoto extends Component{
                     <Text style={{ flex: 1,color: 'white', fontSize: 18}}>{this.props.navigation.state.params.username}</Text>
                 </View>
                 <View style={stylesInfoDetailPhoto.headDetailPhoto}>
-                    <Image source={iconInfo} style={{width: 70, height: 70, tintColor: '#EE3B3B'}}/>
+                    <Image source={this.props.navigation.state.params.avatarSource} style={{width: 70, height: 70}}/>
                     <View style={stylesInfoDetailPhoto.proDetail} >
-                        <Text style={{color: 'black'}}>{this.props.navigation.state.params.username}</Text>
+                        <Text style={{color: 'black', marginLeft: 5}}>{this.props.navigation.state.params.username}</Text>
                         <View style={{flexDirection:'row'}}>
                             <View>
                                 <View style={{flexDirection: 'row'}}>
@@ -98,7 +98,8 @@ export default class InfoDetailPhoto extends Component{
                                 </View>
                                 <View style={{flexDirection: 'row'}}>
                                     <Image source={like} style={{width: 15, height: 15, marginLeft: 5}}/>
-                                     <Text style={{marginTop: -3, marginLeft: 5}}>{this.props.navigation.state.params.countLove}</Text>
+                                     <Text style={{marginTop: -3, marginLeft: 5, color: 'black'}}>
+                                        {this.props.navigation.state.params.countLove}</Text>
                                 </View>
                             </View>
                             <View>
@@ -109,7 +110,7 @@ export default class InfoDetailPhoto extends Component{
                                 </View>
                                 <View style={{flexDirection: 'row'}}>
                                     <Image source={contract} style={{width: 20, height: 20, }}/>
-                                    <Text style={{ marginLeft: 5}}>1</Text>
+                                    <Text style={{ marginLeft: 5, color: 'black'}}>1</Text>
                                 </View>
                             </View>
                         </View>
@@ -119,9 +120,12 @@ export default class InfoDetailPhoto extends Component{
                     <View style={{flexDirection:'row'}}>
                         <Image source={address} style={{width: 30, height: 30, marginTop: -5}} />
                         <Text style={{fontSize: 13, color: 'black'}}>
-                            {this.props.navigation.state.params.address}, 
-                            {this.props.navigation.state.params.addressCity},
-                            {this.props.navigation.state.params.addresDist}</Text>
+                            {this.props.navigation.state.params.address !== ''? 
+                            this.props.navigation.state.params.address + ', ':null}
+                            {this.props.navigation.state.params.addresDist !== ''?
+                            this.props.navigation.state.params.addresDist + ', ':null}
+                            {this.props.navigation.state.params.addressCity !== ''?
+                            this.props.navigation.state.params.addressCity :null}</Text>
                      </View>
 
                      <View style ={stylesInfoDetailPhoto.textBody}>

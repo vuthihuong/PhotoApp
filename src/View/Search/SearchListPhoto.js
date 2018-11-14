@@ -122,17 +122,33 @@ export default class PostEvent extends Component {
                 || childData.labelCatImg7 === this.props.navigation.state.params.valueCat
                 || childData.labelCatImg8 === this.props.navigation.state.params.valueCat
                 || childData.labelCatImg9 === this.props.navigation.state.params.valueCat )){ 
-              items.push({ 
-                id: dataSnapshot.key,
-                addressCity: childData.addressCity, addresDist: childData.addresDist,
-                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                date: childData.date, email: childData.email, gender: childData.gender,
-                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
-                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
-              })}
+                    FirebaseApp.database().ref('Customer').child(dataSnapshot.key)
+                    .child('ListUserLove').orderByChild('userId').equalTo(userKey)
+                    .on('value', (function (snapshot) {
+                        if(snapshot.exists()){ 
+                            items.push({colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
+                                keyLove: snapshot.key, countLove: childData.countLove,
+                            addressCity: childData.addressCity, addresDist: childData.addresDist,
+                            address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                            date: childData.date, email: childData.email, gender: childData.gender,
+                            labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                            labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                            labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                            labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                            labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username})
+                             }
+                        else { 
+                            items.push({colorLovePhoto: 'black', id: dataSnapshot.key, countLove: childData.countLove,
+                            addressCity: childData.addressCity, addresDist: childData.addresDist,
+                            address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                            date: childData.date, email: childData.email, gender: childData.gender,
+                            labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
+                            labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                            labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                            labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                            labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username})
+                        }
+                }).bind(this))}
               this.setState({ 
                 dataSource3: this.state.dataSource3.cloneWithRows(items)
               });
@@ -381,7 +397,7 @@ export default class PostEvent extends Component {
                                     <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                 </TouchableOpacity>
                                 <View style={ stylesSearchListPhoto.txtConfirm }>
-                                <TouchableOpacity onPress={()=> { 
+                                    <TouchableOpacity onPress={()=> { 
                                         this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)}}>
                                         <Image source={heart} style={{height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLovePhoto}} />
                                     </TouchableOpacity>
@@ -395,7 +411,7 @@ export default class PostEvent extends Component {
                         <View>
                             <View style={stylesSearchListPhoto.bodyManaCont}>
                                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',
-                                { id: rowData.id,
+                                { id: rowData.id, countLove: rowData.countLove,
                                     addressCity: rowData.addressCity, addresDist: rowData.addresDist,
                                     address: rowData.address, avatarSource: rowData.avatarSource, category: rowData.category,
                                     date: rowData.date, email: rowData.email, gender: rowData.gender,
@@ -409,8 +425,9 @@ export default class PostEvent extends Component {
                                     <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                 </TouchableOpacity>
                                 <View style={ stylesSearchListPhoto.txtConfirm }>
-                                    <TouchableOpacity onPress={()=> { this.removePostModal(rowData.id)}}>
-                                     <Image source={heart} style={{height: 20, width: 20, tintColor: '#EE3B3B', marginTop: 10}} />
+                                    <TouchableOpacity onPress={()=> { 
+                                        this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)}}>
+                                        <Image source={heart} style={{height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLovePhoto}} />
                                     </TouchableOpacity>
                                 </View>
                             </View>  

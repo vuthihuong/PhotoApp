@@ -358,7 +358,7 @@ export default class PostDetailEvent extends Component {
                         <View style={stylesPostDtailEvent.txtedComment1}>
                             <View style={{flexDirection: 'row'}}>
                                 <TouchableOpacity onPress={()=> this.submitCommentEvent()} >
-                                    <Image source={rowData.avatarSource} style={{width: 30, height: 30, tintColor: 'black'}}/>
+                                    <Image source={rowData.avatarSource} style={{width: 30, height: 30}}/>
                                 </TouchableOpacity>
                                 <Text style={{marginLeft: 10, marginRight: 10, color: 'blue'}}>{rowData.username}</Text>
                             </View>
