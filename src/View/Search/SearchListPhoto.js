@@ -98,6 +98,7 @@ export default class PostEvent extends Component {
               });
           });
     }
+    
     actGetData4(items = []){
         if( this.props.navigation.state.params.valueCost !== '' 
             &&  this.props.navigation.state.params.valueCat === '' 
@@ -108,19 +109,16 @@ export default class PostEvent extends Component {
             if(tmpWord.includes('Nhỏ hơn') === true && tmpWord.includes('triệu') === false){ 
                 var word = tmpWord.split(' ');
                 var word1 = word[2];
-                var word2 = word[3];
                 var itemsTmp = [];
-                var wordCompare = word1.concat(word2);
+                var wordCompare = word1.concat('000');
                 this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot)=> { 
                     var childData = dataSnapshot.val();
-                    if( childData.costDay <= wordCompare && childData.costFile <= wordCompare ){ 
-                        itemsTmp.push({ 
-                            value : childData.userId
-                        })
+                    if(childData.costDay <= wordCompare && childData.costFile <= wordCompare ){ 
+                        itemsTmp.push(
+                             childData.userId
+                        )
                     }
-                    var finalArray = itemsTmp.map(function (obj) {
-                        return obj.value;
-                    })
+                    let finalArray = itemsTmp.filter((v,i) => itemsTmp.indexOf(v) === i)
                     finalArray.forEach(element => {
                     FirebaseApp.database().ref('Customer').child(element).once('value', (dataSnapshot)=> { 
                         var childData = dataSnapshot.val();
@@ -139,7 +137,8 @@ export default class PostEvent extends Component {
                             dataSource4: this.state.dataSource4.cloneWithRows(items)
                         });
                     });
-                })         
+                    })
+                             
                 });
             }
             else if(tmpWord.includes('Nhỏ hơn') === true && tmpWord.includes('triệu') === true){ 
@@ -150,13 +149,11 @@ export default class PostEvent extends Component {
                 this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot)=> { 
                     var childData = dataSnapshot.val();
                     if(childData.costDay <= wordCompare && childData.costFile <= wordCompare ){ 
-                        itemsTmp.push({ 
-                             value : childData.userId
-                        })
-                    }
-                    var finalArray = itemsTmp.map(function (obj) {
-                        return obj.value;
-                    })
+                        itemsTmp.push(
+                            childData.userId
+                       )
+                   }
+                   let finalArray = itemsTmp.filter((v,i) => itemsTmp.indexOf(v) === i)
                     finalArray.forEach(element => {
                     FirebaseApp.database().ref('Customer').child(element).once('value', (dataSnapshot)=> { 
                         var childData = dataSnapshot.val();
@@ -186,14 +183,17 @@ export default class PostEvent extends Component {
                 var wordCompare = word1.concat('000000');
                 this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot)=> { 
                     var childData = dataSnapshot.val();
-                    if( childData.costDay >= wordCompare && childData.costFile >= wordCompare ){ 
-                        itemsTmp.push({ 
-                            value : childData.userId
-                        })
-                    }
-                    var finalArray = itemsTmp.map(function (obj) {
-                        return obj.value;
-                    })  
+                    if(childData.costFile !== '' && childData.costFile >= wordCompare){ 
+                        itemsTmp.push(
+                            childData.userId
+                       )
+                   }
+                   if(childData.costDay !== '' && childData.costDay >= wordCompare){
+                    itemsTmp.push(
+                        childData.userId
+                   )
+                   }
+                   let finalArray = itemsTmp.filter((v,i) => itemsTmp.indexOf(v) === i)
                     finalArray.forEach(element => {
                     FirebaseApp.database().ref('Customer').child(element).once('value', (dataSnapshot)=> { 
                         var childData = dataSnapshot.val();
@@ -237,15 +237,15 @@ export default class PostEvent extends Component {
                             {(this.props.navigation.state.params.addresDist === '' )?
                             <View style={stylesSearchListPhoto.bodyManaCont}>
                                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',
-                                { id: dataSnapshot.key,
-                                addressCity: childData.addressCity, addresDist: childData.addresDist,
-                                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                                dateofbirth: childData.date, email: childData.email, gender: childData.gender,
-                                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
-                                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username} )}
+                                { id: rowData.key,
+                                    addressCity: rowData.addressCity, addresDist: rowData.addresDist,
+                                    address: rowData.address, avatarSource: rowData.avatarSource, category: rowData.category,
+                                    dateofbirth: rowData.date, email: rowData.email, gender: rowData.gender,
+                                    labelCatImg1: rowData.labelCatImg1, labelCatImg2: rowData.labelCatImg2, 
+                                    labelCatImg3: rowData.labelCatImg3, labelCatImg4: rowData.labelCatImg4,
+                                    labelCatImg5: rowData.labelCatImg4, labelCatImg6: rowData.labelCatImg6,
+                                    labelCatImg7: rowData.labelCatImg7, labelCatImg8: rowData.labelCatImg8,
+                                    labelCatImg9: rowData.labelCatImg9, telephone: rowData.telephone, username: rowData.username} )}
                                 style={stylesSearchListPhoto.contManagCont}>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist} </Text>
@@ -264,15 +264,15 @@ export default class PostEvent extends Component {
                         <View>
                             <View style={stylesSearchListPhoto.bodyManaCont}>
                                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',
-                                { id: dataSnapshot.key,
-                                addressCity: childData.addressCity, addresDist: childData.addresDist,
-                                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                                dateofbirth: childData.date, email: childData.email, gender: childData.gender,
-                                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
-                                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username} )}
+                                { id: rowData.key,
+                                    addressCity: rowData.addressCity, addresDist: rowData.addresDist,
+                                    address: rowData.address, avatarSource: rowData.avatarSource, category: rowData.category,
+                                    dateofbirth: rowData.date, email: rowData.email, gender: rowData.gender,
+                                    labelCatImg1: rowData.labelCatImg1, labelCatImg2: rowData.labelCatImg2, 
+                                    labelCatImg3: rowData.labelCatImg3, labelCatImg4: rowData.labelCatImg4,
+                                    labelCatImg5: rowData.labelCatImg4, labelCatImg6: rowData.labelCatImg6,
+                                    labelCatImg7: rowData.labelCatImg7, labelCatImg8: rowData.labelCatImg8,
+                                    labelCatImg9: rowData.labelCatImg9, telephone: rowData.telephone, username: rowData.username} )}
                                 style={stylesSearchListPhoto.contManagCont}>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
@@ -291,15 +291,15 @@ export default class PostEvent extends Component {
                         <View>
                             <View style={stylesSearchListPhoto.bodyManaCont}>
                                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',
-                                { id: dataSnapshot.key,
-                                addressCity: childData.addressCity, addresDist: childData.addresDist,
-                                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                                dateofbirth: childData.date, email: childData.email, gender: childData.gender,
-                                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
-                                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username} )}
+                                { id: rowData.key,
+                                    addressCity: rowData.addressCity, addresDist: rowData.addresDist,
+                                    address: rowData.address, avatarSource: rowData.avatarSource, category: rowData.category,
+                                    dateofbirth: rowData.date, email: rowData.email, gender: rowData.gender,
+                                    labelCatImg1: rowData.labelCatImg1, labelCatImg2: rowData.labelCatImg2, 
+                                    labelCatImg3: rowData.labelCatImg3, labelCatImg4: rowData.labelCatImg4,
+                                    labelCatImg5: rowData.labelCatImg4, labelCatImg6: rowData.labelCatImg6,
+                                    labelCatImg7: rowData.labelCatImg7, labelCatImg8: rowData.labelCatImg8,
+                                    labelCatImg9: rowData.labelCatImg9, telephone: rowData.telephone, username: rowData.username} )}
                                 style={stylesSearchListPhoto.contManagCont}>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
@@ -318,15 +318,15 @@ export default class PostEvent extends Component {
                         <View>
                             <View style={stylesSearchListPhoto.bodyManaCont}>
                                 <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',
-                                { id: dataSnapshot.key,
-                                addressCity: childData.addressCity, addresDist: childData.addresDist,
-                                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                                dateofbirth: childData.date, email: childData.email, gender: childData.gender,
-                                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
-                                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username} )}
+                                { id: rowData.key,
+                                    addressCity: rowData.addressCity, addresDist: rowData.addresDist,
+                                    address: rowData.address, avatarSource: rowData.avatarSource, category: rowData.category,
+                                    dateofbirth: rowData.date, email: rowData.email, gender: rowData.gender,
+                                    labelCatImg1: rowData.labelCatImg1, labelCatImg2: rowData.labelCatImg2, 
+                                    labelCatImg3: rowData.labelCatImg3, labelCatImg4: rowData.labelCatImg4,
+                                    labelCatImg5: rowData.labelCatImg4, labelCatImg6: rowData.labelCatImg6,
+                                    labelCatImg7: rowData.labelCatImg7, labelCatImg8: rowData.labelCatImg8,
+                                    labelCatImg9: rowData.labelCatImg9, telephone: rowData.telephone, username: rowData.username} )}
                                 style={stylesSearchListPhoto.contManagCont}>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
                                     <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>

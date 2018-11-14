@@ -17,6 +17,7 @@ import address from '../../assets/img/info/location.png'
 import photoIcon from '../../assets/img/info/photoDetail.png'
 import right from '../../assets/img/info/iconRight.png'
 import contract from '../../assets/img/info/contract.png'
+import gobackIcon from '../../assets/img/info/goback.png'
 
 export default class InfoDetailPhoto extends Component{
     constructor(props) {
@@ -34,25 +35,25 @@ export default class InfoDetailPhoto extends Component{
     render(){
         const state = this.state;
         return(
-          <ScrollView style={{flex:1, backgroundColor: 'white'}}>
-              <View style={stylesInfoDetailPhoto.container}>
-                <View>
-                    <TouchableOpacity onPress={() => this.props.navigation.goBack() }>
-                        <Image source={require('./../../assets/img/info/goback.png')}
-                            style={{width: 20, height: 20, marginTop: 15, marginLeft: 10}}
-                        />
+            <ScrollView style={{flex:1, backgroundColor: 'white'}}>
+                <View style={stylesInfoDetailPhoto.headInfoDetaiPhoto}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.pop()}>
+                        <Image source={gobackIcon} 
+                            style={{width: 20, height: 20, marginLeft: 15, marginRight: 90, tintColor: 'white'}}/>
                     </TouchableOpacity>
-                   
+                    <Text style={{ flex: 1,color: 'white', fontSize: 18}}>{this.props.navigation.state.params.username}</Text>
                 </View>
                 <View style={stylesInfoDetailPhoto.headDetailPhoto}>
                     <Image source={iconInfo} style={{width: 70, height: 70, tintColor: '#EE3B3B'}}/>
                     <View style={stylesInfoDetailPhoto.proDetail} >
-                        <Text style={{color: 'black'}}>Trần Nam Anh</Text>
+                        <Text style={{color: 'black'}}>{this.props.navigation.state.params.username}</Text>
                         <View style={{flexDirection:'row'}}>
                             <View>
                                 <View style={{flexDirection: 'row'}}>
                                     <Image source={iconGender} style={{width: 30, height: 30,}} />
-                                    <Text style={{fontSize: 13, color: 'black',marginTop: 5}}>Nam</Text>
+                                    <Text style={{fontSize: 13, color: 'black',marginTop: 5}}>
+                                        {this.props.navigation.state.params.gender}</Text>
                                 </View>
                                 <View style={{flexDirection: 'row'}}>
                                     <Image source={like} style={{width: 15, height: 15, marginLeft: 5}}/>
@@ -62,7 +63,8 @@ export default class InfoDetailPhoto extends Component{
                             <View>
                                 <View style={{flexDirection: 'row'}}>
                                     <Image source={dateBirth} style={{width: 20, height: 20, marginTop: 5, }} />
-                                    <Text style={{fontSize: 13, color: 'black',marginTop: 7}}>19/8/1995</Text>
+                                    <Text style={{fontSize: 13, color: 'black',marginTop: 7}}>
+                                    {this.props.navigation.state.params.date}</Text>
                                 </View>
                                 <View style={{flexDirection: 'row'}}>
                                     <Image source={contract} style={{width: 20, height: 20, }}/>
@@ -75,7 +77,10 @@ export default class InfoDetailPhoto extends Component{
                 <View style={stylesInfoDetailPhoto.bodyDetailPhoto}>
                     <View style={{flexDirection:'row'}}>
                         <Image source={address} style={{width: 30, height: 30, marginTop: -5}} />
-                        <Text style={{fontSize: 13, color: 'black'}}>152 Phố Huế, Hai Bà Trưng, Hà Nội</Text>
+                        <Text style={{fontSize: 13, color: 'black'}}>
+                            {this.props.navigation.state.params.address},
+                            {this.props.navigation.state.params.addressCity}
+                            {this.props.navigation.state.params.addresDist}</Text>
                      </View>
 
                      <View style ={stylesInfoDetailPhoto.textBody}>
@@ -141,7 +146,7 @@ export default class InfoDetailPhoto extends Component{
                         </Table>
                     </View>
                 </View>
-            </View>
+           
         </ScrollView>
            
         )
@@ -152,6 +157,10 @@ stylesInfoDetailPhoto = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: "white"
+    },
+    headInfoDetaiPhoto: { 
+        flexDirection: 'row',  alignItems: 'center', backgroundColor: '#EE3B3B', height: 50, 
+        justifyContent: 'space-around'
     },
     headDetailPhoto: {
         justifyContent: 'center',

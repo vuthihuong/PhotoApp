@@ -573,7 +573,7 @@ export default class Signup extends Component {
                         category: category, circle1: circle1,
                         circle2: circle2, circle3: circle3,
                         heightt: heightt, weight: weight,
-                        avatarSource: avatarSource
+                        avatarSource: avatarSource, countLove: 0
                     })
                 }
                 else if(this.state.checkedCategory1 === true) { 
@@ -585,7 +585,7 @@ export default class Signup extends Component {
                         address: address,
                         telephone: telephone, 
                         password: password,
-                        category: category,
+                        category: category, countLove: 0,
                         avatarSource: avatarSource
                     })
                 }
@@ -598,7 +598,7 @@ export default class Signup extends Component {
                         address: address,
                         telephone: telephone, 
                         password: password,
-                        category: category,
+                        category: category, countLove: 0,
                         avatarSource: avatarSource, 
                         labelCatImg1: '', labelCatImg3: '', labelCatImg5: '', labelCatImg7: '', labelCatImg9: '',
                         labelCatImg2: '', labelCatImg4: '', labelCatImg6: '', labelCatImg8: '', 
