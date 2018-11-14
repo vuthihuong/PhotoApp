@@ -4,11 +4,6 @@ import {
 } from 'react-native'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
-import { Table, Row, Rows, Col, Cols } from 'react-native-table-component';
-
-
-// import { CheckBox } from 'react-native-elements'
-
 import iconInfo from '../../assets/img/info/iconInfo.png'
 import like from '../../assets/img/info/heart.png'
 import comment from '../../assets/img/info/comment.png'
