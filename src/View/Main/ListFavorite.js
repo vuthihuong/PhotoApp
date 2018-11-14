@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, ListView,
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, ListView, Alert,
         ScrollView } from 'react-native';
 import {Icon, Button, Container, Header, Content} from 'native-base'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
@@ -19,8 +19,7 @@ export default class ListFavorite extends Component {
        'Warning: componentWillReceiveProps is deprecated',
      ]);
      this.state = {
-        dataSource1: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
-        dataSource2: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
+        dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
       }
       this.itemRef = FirebaseApp.database();
     }
@@ -32,9 +31,9 @@ export default class ListFavorite extends Component {
                          userKey = childSnapshot.key;
           }) 
         })
-      this.actGetData1(items=[] )
+      this.actGetData(items=[] )
   }
-  actGetData1(items=[]){ 
+  actGetData(items=[]){ 
     this.itemRef.ref('Customer').orderByChild('category').equalTo('Nháy ảnh').on('child_added', (dataSnapshot)=> { {
         var childData = dataSnapshot.val();
         FirebaseApp.database().ref('Customer').child(dataSnapshot.key)
@@ -54,16 +53,79 @@ export default class ListFavorite extends Component {
                         }
                     }).bind(this))}
                     this.setState({ 
-                        dataSource1: this.state.dataSource1.cloneWithRows(items)
+                        dataSource: this.state.dataSource.cloneWithRows(items)
                     });
     })
 }
+lovePhoto(id, colorLovePhoto, countLove){ 
+    if(colorLovePhoto === 'black'){ 
+        //cập nhật số lượng yêu thích nháy ảnh trong bảng nháy ảnh
+        FirebaseApp.database().ref('Customer').child(id) .update({
+            countLove: countLove + 1
+        })
+        // thêm user đã thích nháy ảnh vào bảng của nháy ảnh
+        FirebaseApp.database().ref('Customer').child(id)
+        .child('ListUserLove').push({
+            colorLovePhoto: '#EE3B3B', userId: userKey
+        })
+        //thêm nháy ảnh đã thích vào bảng của user
+        FirebaseApp.database().ref('Customer').child(userKey)
+        .child('ListUserLove').push({
+            colorLovePhoto: '#EE3B3B', userId: id
+        })
+        alert('Đã thêm nhiếp ảnh gia vào danh sách yêu thích của bạn');
+        // this.actGetData1(items = []);
+    }
+    else if(colorLovePhoto === '#EE3B3B'){
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn muốn xóa nhiếp ảnh gia này khỏi danh sách yêu thích?',
+            [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {
+                //cập nhật lại số lượng yêu thích nháy ảnh
+
+            FirebaseApp.database().ref('Customer').child(id) .update({
+                countLove: countLove - 1
+            })
+
+            // xóa đi user đã thích nháy ảnh trong bảng nháy ảnh
+            FirebaseApp.database().ref('Customer').child(id)
+            .child('ListUserLove').orderByChild('userId').equalTo(userKey)
+            .on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    keyLoveCustomer = childSnapshot.key;
+                })
+            }))
+            FirebaseApp.database().ref('Customer').child(id)
+            .child('ListUserLove').child(keyLoveCustomer).remove();
+
+        //xóa đi nháy ảnh mà user đã thích trong bảng người dùng
+            FirebaseApp.database().ref('Customer').child(userKey)
+            .child('ListUserLove').orderByChild('userId').equalTo(id)
+            .on('value', (function (snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    keyLovePhoto = childSnapshot.key;
+                })
+            }))
+            FirebaseApp.database().ref('Customer').child(userKey)
+            .child('ListUserLove').child(keyLovePhoto).remove();
+            alert('Đã xóa nhiếp ảnh gia khỏi danh sách yêu thích của bạn.')
+            this.actGetData(items = []);
+              
+              }},
+            ],
+            { cancelable: false }
+          )
+    }
+}
+
     render() {
         return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
               <View style = {stylesFavor.container}>
                 <ListView  enableEmptySections
-                    dataSource = {this.state.dataSource1}
+                    dataSource = {this.state.dataSource}
                     renderRow = {(rowData)=> 
                     <View style={stylesFavor.bodyManaCont}>
                         <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',{ 
