@@ -16,7 +16,7 @@ export default class PostPhoto extends Component {
             datetimePhoto1: '', selectedHours1: 0, selectedMinutes1: 0, contentPhoto: '', costPhoto:'',
             labelErrorAddress: false, labelErrorCatg: false, labelErrorCost: false, labelErrorTime: false,
             valueCategoryPhoto1: '', valuePlacePhoto: '', labelErrorLessTime: false, id: '', countLike: 0,
-            countCommentEvent: 0, countParticipate: 0,currentDay: new Date()
+            countCommentEvent: 0, countParticipate: 0, countSendReq: 0, currentDay: new Date()
         } 
         this.itemRef = FirebaseApp.database();
       }
@@ -138,19 +138,19 @@ export default class PostPhoto extends Component {
                     this.itemRef.ref('Post').push({
                         userId: key, title: "Tìm nháy ảnh", countCommentEvent: this.state.countCommentEvent,
                         countParticipate: this.state.countParticipate, countLike: this.state.countLike,
-                        valueCategoryPhoto1: this.state.valueCategoryPhoto1,
+                        countSendReq: this.state.countSendReq ,valueCategoryPhoto1: this.state.valueCategoryPhoto1, 
                         contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
                         datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
                         valuePlacePhoto: this.state.valuePlacePhoto,
                         datePostPhoto : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
                         timePostPhoto: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
                         }).then((snap) => { this.setState({  
-                                                     id: snap.key })
+                                                     id: snap.key }) // id của bài viết tạo ra
                              if(this.state.id !== ''){ 
                                 this.props.navigation.navigate('PostDetailPhoto',{
                                     id: this.state.id, userId: key, countCommentEvent: this.state.countCommentEvent,
                                     countParticipate: this.state.countParticipate, countLike: this.state.countLike,
-                                    valueCategoryPhoto1: this.state.valueCategoryPhoto1,
+                                    countSendReq: this.state.countSendReq ,valueCategoryPhoto1: this.state.valueCategoryPhoto1,
                                     contentPhoto: this.state.contentPhoto,  costPhoto: this.state.costPhoto,
                                     valuePlacePhoto: this.state.valuePlacePhoto,
                                     datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,

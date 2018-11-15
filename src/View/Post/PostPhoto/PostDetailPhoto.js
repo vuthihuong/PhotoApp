@@ -198,6 +198,11 @@ export default class PostDetailPhoto extends Component {
                 .child('LikePostEvent').child(keyLike).remove();
             }
         }
+        sendRequired(){ 
+            this.props.navigation.navigate('ListSendRequiredPhoto', { 
+                id: this.props.navigation.state.params.id // id của bài viết
+            })
+        }
 
     render(){
         return(
@@ -285,7 +290,7 @@ export default class PostDetailPhoto extends Component {
                     
                         <TouchableOpacity style={stylesPostDePhoto.btnConfirmModal1} 
                             onChange = {(changeParticipate) => this.setState(changeParticipate)}
-                            onPress={() => this.btnChangeParticipatePhoto()}>
+                            onPress={() => this.sendRequired()}>
                                 <Text style={{ textAlign:"center", color: 'black'}}>Gửi yêu cầu trực tiếp</Text>
                         </TouchableOpacity> 
                    
