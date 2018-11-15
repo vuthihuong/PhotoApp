@@ -212,7 +212,8 @@ export default class PostDetailEventView extends Component {
                 snapshot.forEach(function(dataSnapshot) {
                     var childData = dataSnapshot.val();
                     id= dataSnapshot.key, //id là userKey của nháy ảnh
-                    countLove= childData.countLove, 
+                    countLove= childData.countLove, heightt = childData.heightt,
+                    circle1 = childData.circle1, circle2 = childData.circle2, circle3 = childData.circle3,
                     addressCity= childData.addressCity, addresDist= childData.addresDist,
                     address= childData.address, avatarSource= childData.avatarSource, category= childData.category,
                     date= childData.date, email= childData.email, gender= childData.gender,
@@ -222,18 +223,49 @@ export default class PostDetailEventView extends Component {
                     labelCatImg7= childData.labelCatImg7, labelCatImg8= childData.labelCatImg8,
                     labelCatImg9= childData.labelCatImg9, telephone= childData.telephone, username= childData.username
               }) 
-               this.props.navigation.navigate('InfoDetailPhoto', { 
-                id: id, //id là userKey của nháy ảnh
-                countLove: countLove, 
-                addressCity: addressCity, addresDist: addresDist,
-                address: address, avatarSource: avatarSource, category: category,
-                date: date, email: email, gender: gender,
-                labelCatImg1: labelCatImg1, labelCatImg2: labelCatImg2, 
-                labelCatImg3: labelCatImg3, labelCatImg4: labelCatImg4,
-                labelCatImg5: labelCatImg4, labelCatImg6: labelCatImg6,
-                labelCatImg7: labelCatImg7, labelCatImg8: labelCatImg8,
-                labelCatImg9: labelCatImg9, telephone: telephone, username: username
-              })
+            if(category === "Người thuê chụp ảnh"){ 
+                this.props.navigation.navigate('InfoDetailCustomer', { 
+                    id: id, //id là userKey của nháy ảnh
+                    countLove: countLove, heightt: heightt, circle1: circle1, circle2: circle2, circle3: circle3,
+                    addressCity: addressCity, addresDist: addresDist,
+                    address: address, avatarSource: avatarSource, category: category,
+                    date: date, email: email, gender: gender,
+                    labelCatImg1: labelCatImg1, labelCatImg2: labelCatImg2, 
+                    labelCatImg3: labelCatImg3, labelCatImg4: labelCatImg4,
+                    labelCatImg5: labelCatImg4, labelCatImg6: labelCatImg6,
+                    labelCatImg7: labelCatImg7, labelCatImg8: labelCatImg8,
+                    labelCatImg9: labelCatImg9, telephone: telephone, username: username
+                  })
+            }
+            else if(category === 'Nháy ảnh'){ 
+                this.props.navigation.navigate('InfoDetailPhoto', { 
+                    id: id, //id là userKey của nháy ảnh
+                    countLove: countLove, heightt: heightt, circle1: circle1, circle2: circle2, circle3: circle3,
+                    addressCity: addressCity, addresDist: addresDist,
+                    address: address, avatarSource: avatarSource, category: category,
+                    date: date, email: email, gender: gender,
+                    labelCatImg1: labelCatImg1, labelCatImg2: labelCatImg2, 
+                    labelCatImg3: labelCatImg3, labelCatImg4: labelCatImg4,
+                    labelCatImg5: labelCatImg4, labelCatImg6: labelCatImg6,
+                    labelCatImg7: labelCatImg7, labelCatImg8: labelCatImg8,
+                    labelCatImg9: labelCatImg9, telephone: telephone, username: username
+                  })
+            }
+            else if(category === "Mẫu ảnh"){ 
+                this.props.navigation.navigate('InfoDetailModal', { 
+                    id: id, //id là userKey của nháy ảnh
+                    countLove: countLove, heightt: heightt, circle1: circle1, circle2: circle2, circle3: circle3,
+                    addressCity: addressCity, addresDist: addresDist,
+                    address: address, avatarSource: avatarSource, category: category,
+                    date: date, email: email, gender: gender,
+                    labelCatImg1: labelCatImg1, labelCatImg2: labelCatImg2, 
+                    labelCatImg3: labelCatImg3, labelCatImg4: labelCatImg4,
+                    labelCatImg5: labelCatImg4, labelCatImg6: labelCatImg6,
+                    labelCatImg7: labelCatImg7, labelCatImg8: labelCatImg8,
+                    labelCatImg9: labelCatImg9, telephone: telephone, username: username
+                  })
+            }
+              
         }).bind(this))
     }
     render(){

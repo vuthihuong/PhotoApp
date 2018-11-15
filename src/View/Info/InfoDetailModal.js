@@ -3,8 +3,6 @@ import {
     StyleSheet, View, Text, Image, TouchableOpacity, ScrollView
 } from 'react-native'
 
-import { Table, Row, Rows, Col, Cols } from 'react-native-table-component';
-
 
 // import { CheckBox } from 'react-native-elements'
 
@@ -16,7 +14,6 @@ import address from '../../assets/img/info/location.png'
 
 export default class InfoDetailModal extends Component{
     render(){
-        const state = this.state;
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesInfoDetailModal.container}>
