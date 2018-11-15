@@ -35,6 +35,7 @@ import PostTabBar from './src/View/Post/PostTabBar'
 
 import MainModal from './src/View/Main/MainModal'
 import InfoDetailModal from './src/View/Info/InfoDetailModal'
+import InfoDetailCustomer from './src/View/Info/InfoDetailCustomer'
 
 import UpImgModal from './src/View/Upload/UpImgModal'
 import UpImgPhoto from './src/View/Upload/UpImgPhoto'
@@ -125,6 +126,9 @@ const Mainapp = createStackNavigator({
     },
     InfoDetailModal: { 
         screen: InfoDetailModal
+    },
+    InfoDetailCustomer: { 
+        screen: InfoDetailCustomer
     },
     PostModal: { 
         screen: PostModal
