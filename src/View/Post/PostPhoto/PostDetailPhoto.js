@@ -208,6 +208,36 @@ export default class PostDetailPhoto extends Component {
             id: this.props.navigation.state.params.id // id của bài viết
         })
     }
+    showInfoPhoto(userId){ 
+        FirebaseApp.database().ref('Customer').orderByKey().equalTo(userId)
+            .on('value',(function (snapshot) {
+                snapshot.forEach(function(dataSnapshot) {
+                    var childData = dataSnapshot.val();
+                    id= dataSnapshot.key, //id là userKey của nháy ảnh
+                    countLove= childData.countLove, 
+                    addressCity= childData.addressCity, addresDist= childData.addresDist,
+                    address= childData.address, avatarSource= childData.avatarSource, category= childData.category,
+                    date= childData.date, email= childData.email, gender= childData.gender,
+                    labelCatImg1= childData.labelCatImg1, labelCatImg2= childData.labelCatImg2, 
+                    labelCatImg3= childData.labelCatImg3, labelCatImg4= childData.labelCatImg4,
+                    labelCatImg5= childData.labelCatImg4, labelCatImg6= childData.labelCatImg6,
+                    labelCatImg7= childData.labelCatImg7, labelCatImg8= childData.labelCatImg8,
+                    labelCatImg9= childData.labelCatImg9, telephone= childData.telephone, username= childData.username
+              }) 
+               this.props.navigation.navigate('InfoDetailPhoto', { 
+                id: id, //id là userKey của nháy ảnh
+                countLove: countLove, 
+                addressCity: addressCity, addresDist: addresDist,
+                address: address, avatarSource: avatarSource, category: category,
+                date: date, email: email, gender: gender,
+                labelCatImg1: labelCatImg1, labelCatImg2: labelCatImg2, 
+                labelCatImg3: labelCatImg3, labelCatImg4: labelCatImg4,
+                labelCatImg5: labelCatImg4, labelCatImg6: labelCatImg6,
+                labelCatImg7: labelCatImg7, labelCatImg8: labelCatImg8,
+                labelCatImg9: labelCatImg9, telephone: telephone, username: username
+              })
+        }).bind(this))
+    }
     render(){
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>  
@@ -321,16 +351,15 @@ export default class PostDetailPhoto extends Component {
                         dataSource = {this.state.dataSource}
                             renderRow = {(rowData)=> 
                         <View style={stylesPostDePhoto.txtedComment1}>
-                            <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity 
-                                // onPress={()=> this.submitCommentEventView()} 
-                                >
+                            <TouchableOpacity onPress={() => this.showInfoPhoto(rowData.userKey)}>
+                                <View style={{flexDirection: 'row'}}>
                                     <Image source={rowData.avatarSource} style={{width: 30, height: 30}}/>
-                                </TouchableOpacity>
-                                <Text style={{marginLeft: 10, marginRight: 10, color: 'blue'}}>{rowData.username}</Text>
-                            </View>
+                                    <Text style={{marginLeft: 10, marginRight: 10, color: 'blue'}}>{rowData.username}</Text>
+                                </View>
+                            </TouchableOpacity>
+                           
                             <View style={{paddingRight: 10}}>
-                            <Text style={stylesPostDePhoto.commentEvent}> {rowData.contentComment}</Text>
+                                <Text style={stylesPostDePhoto.commentEvent}> {rowData.contentComment}</Text>
                             </View>
                         </View> }
                     />
