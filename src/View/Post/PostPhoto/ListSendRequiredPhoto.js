@@ -3,6 +3,8 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, L
         ScrollView } from 'react-native';
 import {Icon, Button, Container, Header, Content} from 'native-base'
 import {FirebaseApp} from './../../../Controller/FirebaseConfig'
+import CheckBox from 'react-native-checkbox';
+
 
 import iconInfo from '../../../assets/img/info/iconInfo.png'
 import heart from '../../../assets/img/info/heart.png'
@@ -19,6 +21,7 @@ export default class ListSendRequiredPhoto extends Component {
        'Warning: componentWillReceiveProps is deprecated',
      ]);
      this.state = {
+        checkedAllAgree: false,
         dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
       }
       this.itemRef = FirebaseApp.database();
@@ -135,6 +138,11 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
           )
     }
 }
+    checkAllAgree(){ 
+        // if(this.state.checkedAllAgree === false){ 
+
+        // }
+    }
 
 
     render() {
@@ -149,6 +157,21 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
                     <Text style={{ flex: 1,color: 'white', fontSize: 18}}>Danh sách gửi yêu cầu trực tiếp</Text>
                 </View>
               <View style = {stylesSendRePhoto.container}>
+                <View style={stylesSendRePhoto.headColModal}>
+                        <View style={stylesSendRePhoto.headListModal}>
+                            <Text style={{color: 'black', fontWeight: 'bold', marginLeft: 10}}>Tên nhiếp ảnh gia</Text>
+                        </View>
+                        <View style={stylesSendRePhoto.btnConfirmListModal} >
+                            <Text style={{color:'black', marginRight: 10, fontWeight: 'bold'}}>Trạng thái</Text>
+                            <CheckBox
+                                label=''
+                                labelStyle={{color: 'black'}}
+                                checked={this.state.checkedAllAgree}
+                                checkboxStyle = {[stylesSendRePhoto.txtBoxListModal, {marginTop: 5, marginRight: 20}]}
+                                onChange={(checked) => {this.checkAllAgree()}} 
+                            />
+                        </View>
+                    </View>
                 <ListView  enableEmptySections
                     dataSource = {this.state.dataSource}
                     renderRow = {(rowData)=> 
@@ -164,7 +187,7 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
                             labelCatImg7: rowData.labelCatImg7, labelCatImg8: rowData.labelCatImg8,
                             labelCatImg9: rowData.labelCatImg9, telephone: rowData.telephone, username: rowData.username} )}
                             style={stylesSendRePhoto.contManagCont}>
-                            <View >
+                            <View style={{marginLeft: 20}}>
                                 <Text style={{color: 'black', fontWeight: 'bold'}}>{rowData.username}</Text>
                                 <View style={stylesSendRePhoto.likeperson}>
                                     <Image source ={heart} style={stylesSendRePhoto.imgFavor} />
@@ -174,7 +197,7 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
                                 </View>
                             </View>
                         </TouchableOpacity>
-                        <View style={ stylesSendRePhoto.txtConfirm }>
+                        <View style={{marginRight: 20}}>
                             <TouchableOpacity onPress={()=> { 
                                 this.sendReq(rowData.id, rowData.colorSendReq, rowData.username, rowData.countSendReq)}}>
                                 {/* <Image source={heart} style={{height: 20, width: 20, marginTop: 10, tintColor: rowData.colorSendReq}} /> */}
@@ -196,6 +219,19 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
         flexDirection: 'row',  alignItems: 'center',
         backgroundColor: '#EE3B3B', height: 50, 
         justifyContent: 'space-around'
+    },
+    headColModal: { 
+        flexDirection: 'row', justifyContent: 'space-between', paddingTop: 15, paddingBottom: 15,
+        borderBottomWidth: 1, borderTopWidth: 1, borderBottomColor: 'black', borderTopColor: 'black'
+    },
+    headListModal: { 
+        width: 160, 
+    },
+    btnConfirmListModal: { 
+        flexDirection: 'row', justifyContent: 'space-between'
+    },
+    txtBoxListModal: { 
+        width: 15, height: 15
     },
     likeperson: {
         flexDirection: 'row',
