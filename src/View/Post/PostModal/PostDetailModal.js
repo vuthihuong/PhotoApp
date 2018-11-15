@@ -213,6 +213,11 @@ export default class PostDetailModal extends Component {
             id: this.props.navigation.state.params.id
         })
     }
+    sendRequired(){ 
+        this.props.navigation.navigate('ListSendRequiredPhoto', { 
+            id: this.props.navigation.state.params.id
+        })
+    }
     render(){
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -316,7 +321,8 @@ export default class PostDetailModal extends Component {
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={stylesPostDetailModal.btnConfirmModal1} >
+                    <TouchableOpacity onPress={()=> this.sendRequired()}
+                        style={stylesPostDetailModal.btnConfirmModal1} >
                         <Text style={{ textAlign:"center", color: 'black'}}>Gửi trực tiếp yêu cầu</Text>
                     </TouchableOpacity>
                 </View>

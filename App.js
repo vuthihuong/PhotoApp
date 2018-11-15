@@ -61,6 +61,8 @@ import EditTableImg from './src/View/Info/EditTableImg'
 
 import SearchListPhoto from  './src/View/Search/SearchListPhoto'
 
+import ListSendRequiredPhoto from './src/View/Post/PostPhoto/ListSendRequiredPhoto'
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -192,6 +194,9 @@ const Mainapp = createStackNavigator({
     },
     SearchListPhoto: { 
         screen: SearchListPhoto
+    },
+    ListSendRequiredPhoto: { 
+        screen: ListSendRequiredPhoto
     },
     },{
       headerMode:'none'

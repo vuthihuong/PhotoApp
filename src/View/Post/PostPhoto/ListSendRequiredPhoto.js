@@ -97,7 +97,7 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
         // thêm nháy ảnh đã gửi trong bài post
         FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
         .child('ListSendReq').push({
-            colorSendReq: '#EE3B3B', userId: id, statusSendReq: 'Đã gửi yêu cầu'
+            colorSendReq: '#EE3B3B', userId: id, statusSendReq: 'Đã gửi yêu cầu', username: username
         })
         this.actGetData(items = []);
               

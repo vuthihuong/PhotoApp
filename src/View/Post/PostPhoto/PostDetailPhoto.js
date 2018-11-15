@@ -198,12 +198,16 @@ export default class PostDetailPhoto extends Component {
                 .child('LikePostEvent').child(keyLike).remove();
             }
         }
-        sendRequired(){ 
-            this.props.navigation.navigate('ListSendRequiredPhoto', { 
-                id: this.props.navigation.state.params.id // id của bài viết
-            })
-        }
-
+     sendRequired(){ 
+        this.props.navigation.navigate('ListSendRequiredPhoto', { 
+             id: this.props.navigation.state.params.id // id của bài viết
+        })
+    }
+    listSendReq(){ 
+        this.props.navigation.navigate('ListDirectPostPhoto', { 
+            id: this.props.navigation.state.params.id // id của bài viết
+        })
+    }
     render(){
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>  
@@ -340,7 +344,7 @@ export default class PostDetailPhoto extends Component {
                 </View>
                
                 <View style={{marginTop: 25}}>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListDirectPostPhoto')}> 
+                    <TouchableOpacity  onPress={() => this.listSendReq()}> 
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách gửi trực tiếp</Text>
                     </TouchableOpacity>
                 </View>
