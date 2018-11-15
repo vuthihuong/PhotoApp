@@ -25,7 +25,7 @@ export default class InfoDetailPhoto extends Component{
         this.itemRef = FirebaseApp.database();
       }
       componentWillMount(){ 
-        this.actGetData1(items=[], this.props.navigation.state.params.id )
+        this.actGetData1(items=[], this.props.navigation.state.params.id ) // id là key của user
         this.actGetData2(items=[], this.props.navigation.state.params.id )
         // this.actGetData3(items=[])
         // this.actGetData4(items=[])

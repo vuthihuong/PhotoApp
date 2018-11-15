@@ -115,6 +115,36 @@ export default class ListDirectPostPhoto extends Component {
             this.setState({ checkedAllAgree: false})
         }
     }
+    showInfoPhoto(userId){ 
+        FirebaseApp.database().ref('Customer').orderByKey().equalTo(userId)
+            .on('value',(function (snapshot) {
+                snapshot.forEach(function(dataSnapshot) {
+                    var childData = dataSnapshot.val();
+                    id= dataSnapshot.key, //id là userKey của nháy ảnh
+                    countLove= childData.countLove, 
+                    addressCity= childData.addressCity, addresDist= childData.addresDist,
+                    address= childData.address, avatarSource= childData.avatarSource, category= childData.category,
+                    date= childData.date, email= childData.email, gender= childData.gender,
+                    labelCatImg1= childData.labelCatImg1, labelCatImg2= childData.labelCatImg2, 
+                    labelCatImg3= childData.labelCatImg3, labelCatImg4= childData.labelCatImg4,
+                    labelCatImg5= childData.labelCatImg4, labelCatImg6= childData.labelCatImg6,
+                    labelCatImg7= childData.labelCatImg7, labelCatImg8= childData.labelCatImg8,
+                    labelCatImg9= childData.labelCatImg9, telephone= childData.telephone, username= childData.username
+              }) 
+               this.props.navigation.navigate('InfoDetailPhoto', { 
+                id: id, //id là userKey của nháy ảnh
+                countLove: countLove, 
+                addressCity: addressCity, addresDist: addresDist,
+                address: address, avatarSource: avatarSource, category: category,
+                date: date, email: email, gender: gender,
+                labelCatImg1: labelCatImg1, labelCatImg2: labelCatImg2, 
+                labelCatImg3: labelCatImg3, labelCatImg4: labelCatImg4,
+                labelCatImg5: labelCatImg4, labelCatImg6: labelCatImg6,
+                labelCatImg7: labelCatImg7, labelCatImg8: labelCatImg8,
+                labelCatImg9: labelCatImg9, telephone: telephone, username: username
+              })
+        }).bind(this))
+    }
    
     render(){ 
         return(
@@ -149,7 +179,8 @@ export default class ListDirectPostPhoto extends Component {
                         dataSource = {this.state.dataSource}
                             renderRow = {(rowData)=> 
                         <View style={stylesListDirPhoto.bodyListPostPhoto}>
-                            <TouchableOpacity style={[stylesListDirPhoto.headListModal, { marginLeft: 10}]} >
+                            <TouchableOpacity onPress={() => this.showInfoPhoto(rowData.userId)}
+                                style={[stylesListDirPhoto.headListModal, { marginLeft: 10}]} >
                                 <Text style={{color: 'black', marginRight: 20}}>{rowData.username}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={()=> {

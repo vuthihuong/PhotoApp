@@ -157,7 +157,7 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
                     <Text style={{ flex: 1,color: 'white', fontSize: 18}}>Danh sách gửi yêu cầu trực tiếp</Text>
                 </View>
               <View style = {stylesSendRePhoto.container}>
-                <View style={stylesSendRePhoto.headColModal}>
+               {/*  <View style={stylesSendRePhoto.headColModal}>
                         <View style={stylesSendRePhoto.headListModal}>
                             <Text style={{color: 'black', fontWeight: 'bold', marginLeft: 10}}>Tên nhiếp ảnh gia</Text>
                         </View>
@@ -171,7 +171,7 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
                                 onChange={(checked) => {this.checkAllAgree()}} 
                             />
                         </View>
-                    </View>
+                    </View> */}
                 <ListView  enableEmptySections
                     dataSource = {this.state.dataSource}
                     renderRow = {(rowData)=> 
