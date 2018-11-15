@@ -102,10 +102,13 @@ export default class PostDetailEvent extends Component {
         actGetData(url, items=[]){ 
             this.itemRef.ref(url).child('comment').on('child_added', (dataSnapshot)=> { 
                 var childData = dataSnapshot.val();
-                items.push({ 
-                   userKey: childData.userKey, contentComment: childData.contentComment,
-                   avatarSource: childData.avatarSource, username: childData.username
+                this.itemRef.ref('Customer').child(childData.userKey).on('value',(snapshot)=>{
+                    items.push({ 
+                        userKey: childData.userKey, contentComment: childData.contentComment,
+                        avatarSource: snapshot.val().avatarSource, username: childData.username
+                     })
                 })
+                
                 this.setState({ 
                     dataSource: this.state.dataSource.cloneWithRows(items)
                 });
