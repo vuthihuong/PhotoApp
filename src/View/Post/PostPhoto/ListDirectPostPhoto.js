@@ -78,6 +78,43 @@ export default class ListDirectPostPhoto extends Component {
             { cancelable: false }
           )
     }
+    checkAllAgree(){ 
+        if(this.state.checkedAllAgree === false){ 
+            this.setState({ checkedAllAgree: true})
+            var itemsKey = []; 
+            FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+            .child('ListSendReq').on('child_added', (dataSnapshot)=> { 
+                itemsKey.push(
+                    dataSnapshot.key
+                )
+            });
+            Alert.alert(
+                'Thông báo',
+                'Bạn có chắc chắn hủy tất cả các yêu cầu đã gửi?',
+                [
+                //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                  {text: 'OK', onPress: () => {
+                    itemsKey.forEach(element => {
+                        FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
+                        .child('ListSendReq').child(element).remove()
+                      });
+                      FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
+                       .update({ countSendReq: 0})
+                      
+                      alert('Hủy yêu cầu thành công');
+                      this.setState({ checkedAllAgree: false})
+                      var listItems  = [];
+                      this.actGetData(listItems);
+                  }},
+                ],
+                { cancelable: false }
+              )
+        }
+        else if(this.state.checkedAllAgree === true){ 
+            this.setState({ checkedAllAgree: false})
+        }
+    }
    
     render(){ 
         return(
