@@ -267,10 +267,21 @@ export default class ListPostEvent extends Component {
                         dataSource = {this.state.dataSource}
                             renderRow = {(rowData)=> 
                         <View style={stylesListPostEvent.bodyListPostEvent}>
-                            <TouchableOpacity  onPress={()=> this.showInfoEvent(rowData.userId)} 
-                                style={[stylesListPostEvent.headListModal, { marginLeft: 10}]} >
-                                <Text style={{color: 'black'}}>{rowData.username}</Text>
-                            </TouchableOpacity>
+                            <View>
+                                <TouchableOpacity  onPress={()=> this.showInfoEvent(rowData.userId)} 
+                                    style={[stylesListPostEvent.headListModal, { marginLeft: 10}]} >
+                                    <Text style={{color: 'black'}}>{rowData.username}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity 
+                                //  onPress={()=> this.showInfoEvent(rowData.userId)} 
+                                    style={[stylesListPostEvent.headListModal, { marginLeft: 10}]} >
+                                    {rowData.statusAgree === "đồng ý" ?
+                                        <Text style={{color: 'black', fontSize: 12, fontStyle: 'italic'}}>
+                                        Gửi tin nhắn</Text>:null}
+                                    
+                                </TouchableOpacity>
+                            </View>
+                            
                             <TouchableOpacity onPress={()=>this.btnAgree(rowData.userId)} >
                             {rowData.statusAgree === "gửi yêu cầu" || rowData.statusAgree === "hủy yêu cầu"?
                                      <Text style={{color: 'black'}}>OK</Text>:

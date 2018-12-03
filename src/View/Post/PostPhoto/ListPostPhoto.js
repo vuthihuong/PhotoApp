@@ -266,10 +266,19 @@ export default class ListPostPhoto extends Component {
                         dataSource = {this.state.dataSource}
                             renderRow = {(rowData)=> 
                         <View style={stylesListPostPhoto.bodyListPostPhoto}>
-                            <TouchableOpacity  onPress={()=> this.showInfoPhoto(rowData.userId)} 
-                                style={[stylesListPostPhoto.headListModal, { marginLeft: 10}]} >
-                                <Text style={{color: 'black'}}>{rowData.username}</Text>
-                            </TouchableOpacity>
+                            <View>
+                                <TouchableOpacity  onPress={()=> this.showInfoPhoto(rowData.userId)} 
+                                    style={[stylesListPostPhoto.headListModal, { marginLeft: 10}]} >
+                                    <Text style={{color: 'black'}}>{rowData.username}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity 
+                                //  onPress={()=> this.showInfoPhoto(rowData.userId)} 
+                                    style={[stylesListPostPhoto.headListModal, { marginLeft: 10}]} >
+                                {rowData.statusAgree === "đồng ý" ? 
+                                    <Text style={{color: 'black', fontSize: 12, fontStyle: 'italic'}}>Gửi tin nhắn</Text>:null}
+                                </TouchableOpacity>
+                            </View>
+                            
                             <TouchableOpacity onPress={()=>this.btnAgree(rowData.userId)} >
                             {rowData.statusAgree === "gửi yêu cầu" || rowData.statusAgree === "hủy yêu cầu"?
                                      <Text style={{color: 'black'}}>OK</Text>:
