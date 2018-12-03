@@ -15,13 +15,13 @@ const ManageContract = createMaterialTopTabNavigator({
     ContractGenerate: {
         screen: ContractGenerate,
         navigationOptions: {
-            title: 'Hợp đồng đã tạo'
+            title: 'Các bài viết đã gửi yêu cầu'
         }
     },
     HistoryContract: {
         screen: HistoryContract,
         navigationOptions: {
-            title: 'Lịch sử hợp đồng'
+            title: 'Các bài viết đã được đồng ý'
         }
     },
   }, {

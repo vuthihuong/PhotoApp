@@ -166,7 +166,7 @@ const MenuStack = createStackNavigator({
     ManageContract: { 
       screen: ManageContract, 
       navigationOptions: ({ navigation }) => ({
-        title: 'Quản lý hợp đồng',
+        title: 'Quản lý bài viết',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTintColor: 'white', 
         headerStyle: {
@@ -361,7 +361,7 @@ const MenuStack = createStackNavigator({
     ManageContract: {
       screen: ManageContractStack,
       navigationOptions: {
-        drawerLabel: 'Quản lý hợp đồng',
+        drawerLabel: 'Quản lý bài viết',
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/info/manaContract.png')}
