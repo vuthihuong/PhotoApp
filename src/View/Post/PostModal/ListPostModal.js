@@ -64,6 +64,8 @@ export default class ListPostModal extends Component {
                                 statusAgree: 'đồng ý'
                         });
                       });
+                      var listItems  = [];
+                    this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
                   }},
                 ],
                 { cancelable: false }
@@ -98,6 +100,8 @@ export default class ListPostModal extends Component {
                                 statusAgree: 'hủy yêu cầu'
                         });
                     })
+                    var listItems  = [];
+                    this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
                   }},
                 ],
                 { cancelable: false }
@@ -123,6 +127,8 @@ export default class ListPostModal extends Component {
                     .child('StatusParticipateCol').child(idStatusChange).update({ 
                             statusAgree: 'đồng ý'
                     });
+                    var listItems  = [];
+                    this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
               }},
             ],
             { cancelable: false }
@@ -146,6 +152,8 @@ export default class ListPostModal extends Component {
                     .child('StatusParticipateCol').child(idStatusChange).update({ 
                         statusAgree: 'hủy yêu cầu'
                 });
+                var listItems  = [];
+                this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
               }},
             ],
             { cancelable: false }

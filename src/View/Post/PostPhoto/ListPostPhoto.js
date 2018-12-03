@@ -20,6 +20,7 @@ export default class ListPostPhoto extends Component {
     componentWillMount(){ 
         var listItems  = [];
         this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
+      
     }
     actGetData(url, listItems=[]){ 
         this.itemRef.ref(url).child('StatusParticipateCol').on('child_added', (dataSnapshot)=> { 
@@ -63,6 +64,8 @@ export default class ListPostPhoto extends Component {
                                 statusAgree: 'đồng ý'
                         });
                       });
+                      var listItems  = [];
+                      this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
                   }},
                 ],
                 { cancelable: false }
@@ -96,6 +99,8 @@ export default class ListPostPhoto extends Component {
                                 statusAgree: 'hủy yêu cầu'
                         });
                     })
+                    var listItems  = [];
+                    this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
                   }},
                 ],
                 { cancelable: false }
@@ -121,6 +126,8 @@ export default class ListPostPhoto extends Component {
                     .child('StatusParticipateCol').child(idStatusChange).update({ 
                             statusAgree: 'đồng ý'
                     });
+                    var listItems  = [];
+                    this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
               }},
             ],
             { cancelable: false }
@@ -144,6 +151,8 @@ export default class ListPostPhoto extends Component {
                     .child('StatusParticipateCol').child(idStatusChange).update({ 
                         statusAgree: 'hủy yêu cầu'
                 });
+                var listItems  = [];
+                this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
               }},
             ],
             { cancelable: false }
