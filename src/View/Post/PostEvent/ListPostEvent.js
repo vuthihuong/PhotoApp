@@ -18,6 +18,18 @@ export default class ListPostEvent extends Component {
         this.itemRef = FirebaseApp.database();
     }
     componentWillMount(){ 
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+                   .on('value', function (snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+                         userKey = childSnapshot.key;
+                         let childData = childSnapshot.val();
+                         avatarSource = childData.avatarSource;
+                         namePost = childData.username;
+                         
+          })  
+        })
+
         var listItems  = [];
         this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
     }
@@ -220,6 +232,11 @@ export default class ListPostEvent extends Component {
               
         }).bind(this))
     }
+    sendMessEvent(userView){ 
+        this.props.navigation.navigate('ChatPerson', { 
+            userPost: userKey, userView: userView, nameView: namePost
+        })
+    }
   
     render(){ 
         return(
@@ -272,8 +289,7 @@ export default class ListPostEvent extends Component {
                                     style={[stylesListPostEvent.headListModal, { marginLeft: 10}]} >
                                     <Text style={{color: 'black'}}>{rowData.username}</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity 
-                                //  onPress={()=> this.showInfoEvent(rowData.userId)} 
+                                <TouchableOpacity onPress={()=> this.sendMessEvent(rowData.userId)} 
                                     style={[stylesListPostEvent.headListModal, { marginLeft: 10}]} >
                                     {rowData.statusAgree === "đồng ý" ?
                                         <Text style={{color: 'black', fontSize: 12, fontStyle: 'italic'}}>

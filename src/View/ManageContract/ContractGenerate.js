@@ -127,63 +127,11 @@ export default class ContractGenerate extends Component {
             })
         }
     }
-    removePostModal(idPostModal) {
-        Alert.alert(
-            'Thông báo',
-            'Bạn có chắc chắn muốn xóa bài này không?',
-            [
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                {
-                    text: 'OK', onPress: () => {
-                        this.itemRef.ref('Post/').child(idPostModal).remove();
-
-                        this.actGetData();
-                        alert('Bạn đã xóa thành công');
-                    }
-                },
-            ],
-            { cancelable: false }
-        )
-    }
-    removePostEvent(idPostEvent) {
-        Alert.alert(
-            'Thông báo',
-            'Bạn có chắc chắn muốn xóa bài này không?',
-            [
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                {
-                    text: 'OK', onPress: () => {
-                        this.itemRef.ref('Post/').child(idPostEvent).remove();
-                        this.actGetData();
-                        alert('Bạn đã xóa thành công');
-                    }
-                },
-            ],
-            { cancelable: false }
-        )
-    }
-    removePostPhoto(idPostPhoto) {
-        Alert.alert(
-            'Thông báo',
-            'Bạn có chắc chắn muốn xóa bài này không?',
-            [
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                {
-                    text: 'OK', onPress: () => {
-                        this.itemRef.ref('Post/').child(idPostPhoto).remove();
-                        this.actGetData();
-                        alert('Bạn đã xóa thành công');
-                    }
-                },
-            ],
-            { cancelable: false }
-        )
-    }
-
+   
     render() {
         return (
             <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
-                <View style={stylesManagCont.containerManagCont}>
+                <View style={stylesContractGenerate.containerManagCont}>
                     <TouchableOpacity onPress={() => this.changeStatusListModal()}>
                         <Text style={{ color: 'black', fontWeight: 'bold' }}>Các bài tìm mẫu ảnh</Text>
                     </TouchableOpacity>
@@ -194,8 +142,8 @@ export default class ContractGenerate extends Component {
                             renderRow={(rowData) =>
                                 <View >
                                     {(rowData.title === "Tìm mẫu ảnh") ?
-                                        <View style={stylesManagCont.bodyManaCont}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModal',
+                                        <View style={stylesContractGenerate.bodyManaCont}>
+                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModalView',
                                                 {
                                                     id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
                                                     content: rowData.content, cost: rowData.cost, girl: rowData.girl,
@@ -207,23 +155,12 @@ export default class ContractGenerate extends Component {
                                                     labelRightModal4: rowData.labelRightModal4,
                                                     labelRightModal5: rowData.labelRightModal5,
                                                     circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,
-                                                })}
-                                                style={stylesManagCont.contManagCont}>
-                                                <Text style={stylesManagCont.txtManagCont}>{rowData.title} {rowData.boy} {rowData.girl} </Text>
-                                                <Text style={stylesManagCont.txtManagCont}>Địa điểm: {rowData.value}</Text>
-                                                <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime}</Text>
-                                                <Text style={stylesManagCont.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
+                                                })} >
+                                                <Text style={stylesContractGenerate.txtManagCont}>{rowData.title} {rowData.boy} {rowData.girl} </Text>
+                                                <Text style={stylesContractGenerate.txtManagCont}>Địa điểm: {rowData.value}</Text>
+                                                <Text style={stylesContractGenerate.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime}</Text>
+                                                <Text style={stylesContractGenerate.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
                                             </TouchableOpacity>
-                                            <View style={stylesManagCont.txtConfirm}>
-                                                {/* <TouchableOpacity>
-                                        <Text style={[stylesManagCont.txtManagCont,{color:'#FF3030'}]}>Đang tìm</Text>
-                                    </TouchableOpacity> */}
-                                                <TouchableOpacity
-                                                //  onPress={()=> { this.removePostModal(rowData.id)}}
-                                                >
-                                                    <Text style={{ color: '#EE3B3B' }}>Đã gửi {"\n"}yêu cầu</Text>
-                                                </TouchableOpacity>
-                                            </View>
                                         </View> : null}
                                 </View>}
                         /> : null}
@@ -237,31 +174,20 @@ export default class ContractGenerate extends Component {
                             renderRow={(rowData) =>
                                 <View >
                                     {(rowData.title === "Tạo sự kiện") ?
-                                        <View style={stylesManagCont.bodyManaCont}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent',
+                                        <View style={stylesContractGenerate.bodyManaCont}>
+                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEventView',
                                                 {
                                                     id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
                                                     contentEvent: rowData.contentEvent, costEvent: rowData.costEvent,
                                                     datetimeEvent: rowData.datetimeEvent, datetimeEvent1: rowData.datetimeEvent1,
                                                     addressEvent: rowData.addressEvent, labelEvent1: rowData.labelEvent1,
                                                     labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal
-                                                })}
-                                                style={stylesManagCont.contManagCont}>
-                                                <Text style={stylesManagCont.txtManagCont}>{rowData.labelEvent1}{rowData.labelEvent2} </Text>
-                                                <Text style={stylesManagCont.txtManagCont}>Địa điểm: {rowData.addressEvent}</Text>
-                                                <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
-                                                <Text style={stylesManagCont.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
+                                                })}>
+                                                <Text style={stylesContractGenerate.txtManagCont}>{rowData.labelEvent1}{rowData.labelEvent2} </Text>
+                                                <Text style={stylesContractGenerate.txtManagCont}>Địa điểm: {rowData.addressEvent}</Text>
+                                                <Text style={stylesContractGenerate.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                                                <Text style={stylesContractGenerate.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                                             </TouchableOpacity>
-                                            <View style={stylesManagCont.txtConfirm}>
-                                                {/* <TouchableOpacity>
-                                            <Text style={[stylesManagCont.txtManagCont,{color:'#FF3030'}]}>Đang tìm</Text>
-                                        </TouchableOpacity> */}
-                                                <TouchableOpacity
-                                                // onPress={()=> { this.removePostEvent(rowData.id)}}
-                                                >
-                                                    <Text style={{ color: '#EE3B3B' }}>Đã gửi {"\n"}yêu cầu</Text>
-                                                </TouchableOpacity>
-                                            </View>
                                         </View> : null}
                                 </View>}
                         /> : null}
@@ -275,30 +201,19 @@ export default class ContractGenerate extends Component {
                             renderRow={(rowData) =>
                                 <View >
                                     {(rowData.title === "Tìm nháy ảnh") ?
-                                        <View style={stylesManagCont.bodyManaCont}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhoto',
+                                        <View style={stylesContractGenerate.bodyManaCont}>
+                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhotoView',
                                                 {
                                                     id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
                                                     contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
                                                     datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
                                                     valuePlacePhoto: rowData.valuePlacePhoto, valueCategoryPhoto1: rowData.valueCategoryPhoto1
-                                                })}
-                                                style={stylesManagCont.contManagCont}>
-                                                <Text style={stylesManagCont.txtManagCont}>{rowData.title} </Text>
-                                                <Text style={stylesManagCont.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
-                                                <Text style={stylesManagCont.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
-                                                <Text style={stylesManagCont.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
+                                                })}>
+                                                <Text style={stylesContractGenerate.txtManagCont}>{rowData.title} </Text>
+                                                <Text style={stylesContractGenerate.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
+                                                <Text style={stylesContractGenerate.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                                                <Text style={stylesContractGenerate.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
                                             </TouchableOpacity>
-                                            <View style={stylesManagCont.txtConfirm}>
-                                                {/* <TouchableOpacity>
-                                    <Text style={[stylesManagCont.txtManagCont,{color:'#FF3030'}]}>Đang tìm</Text>
-                                </TouchableOpacity> */}
-                                                <TouchableOpacity
-                                                // onPress={()=> { this.removePostPhoto(rowData.id)}}
-                                                >
-                                                    <Text style={{ color: '#EE3B3B' }}>Đã gửi {"\n"}yêu cầu</Text>
-                                                </TouchableOpacity>
-                                            </View>
                                         </View> : null}
                                 </View>}
                         /> : null}
@@ -308,7 +223,7 @@ export default class ContractGenerate extends Component {
         );
     }
 }
-const stylesManagCont = StyleSheet.create({
+const stylesContractGenerate = StyleSheet.create({
 
     containerManagCont: {
         flex: 1,
@@ -323,11 +238,6 @@ const stylesManagCont = StyleSheet.create({
     bodyManaContMall: {
         flexDirection: 'row', justifyContent: 'space-between',
     },
-
-    contManagCont: {
-        width: 290
-    },
-
     txtManagCont: {
         color: 'black',
 
