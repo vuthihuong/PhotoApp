@@ -337,13 +337,13 @@ export default class PostDetailEventView extends Component {
                          <Text style={{color:'black'}}>Bình luận</Text>
                     </TouchableOpacity>
                     {this.state.changeStatusPart === true?       
-                        <TouchableOpacity style={[stylesPostDtailEventView.btnConfirmEvent,{height:35}]} 
+                        <TouchableOpacity style={[stylesPostDtailEventView.btnConfirmEvent1,{height:35}]} 
                             // onChange = {(changeParticipate) => this.setState(changeParticipate)}
                             onPress={() => this.btnChangeNotParticipateView()}>
-                            <Text style={{ textAlign:"center", color: 'black'}}>Đã gửi yêu cầu tham gia</Text>
+                            <Text style={{ textAlign:"center", color: 'blue'}}>Đã gửi yêu cầu tham gia</Text>
                         </TouchableOpacity>:null}
                     {this.state.changeStatusPart === false  ?
-                        <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent} 
+                        <TouchableOpacity style={stylesPostDtailEventView.btnConfirmEvent1} 
                             // onChange = {(changeParticipate) => this.setState(changeParticipate)}
                             onPress={() => this.btnChangeParticipateView()}>
                                 <Text style={{ textAlign:"center", color: 'black'}}>Tham gia</Text>

@@ -79,7 +79,7 @@ export default class PostDetailModalView extends Component {
         }).bind(this))
 
         
-
+//lấy trạng thái tham gia của user với bài viết
     {FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
         .child('StatusParticipateCol').orderByChild('userId').equalTo(userKey)
         .on('value', (function (snapshot) {
@@ -91,7 +91,7 @@ export default class PostDetailModalView extends Component {
                     }
         }).bind(this))}
         
-    
+    //lấy trạng thái like của user với bài post
     {FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
         .child('LikePostEvent').orderByChild('userId').equalTo(userKey)
         .on('value', (function (snapshot) {
