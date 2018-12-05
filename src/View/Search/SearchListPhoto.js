@@ -195,8 +195,8 @@ export default class PostEvent extends Component {
                                 if (count === 1) {
                                     FirebaseApp.database().ref('Customer').child(dataSnapshot.key)
                                         .child('ListUserLove').orderByChild('userId').equalTo(userKey)
-                                        .on('value', (function (snapshot) {
-                                            if (snapshot.exists()) {
+                                        .on('value', (function (snapshotChild) {
+                                            if (snapshotChild.exists()) {
                                                 items.push({
                                                     colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
                                                     keyLove: snapshot.key, countLove: childData.countLove,
@@ -237,7 +237,6 @@ export default class PostEvent extends Component {
                 var word1 = word[2];
                 var wordCompare = word1.concat('000000');
                 wordCompare = parseInt(wordCompare, 10)
-                alert(wordCompare)
                 this.itemRef.ref('Customer').on('child_added', ((dataSnapshot) => {
                     var childData = dataSnapshot.val();
                     if (childData.category === "Nháy ảnh") {
@@ -250,8 +249,8 @@ export default class PostEvent extends Component {
                                 if (count === 1) {
                                     FirebaseApp.database().ref('Customer').child(dataSnapshot.key)
                                         .child('ListUserLove').orderByChild('userId').equalTo(userKey)
-                                        .on('value', (function (snapshot) {
-                                            if (snapshot.exists()) {
+                                        .on('value', (function (snapshotChild) {
+                                            if (snapshotChild.exists()) {
                                                 items.push({
                                                     colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
                                                     keyLove: snapshot.key, countLove: childData.countLove,
@@ -304,8 +303,8 @@ export default class PostEvent extends Component {
                                 if (count === 1) {
                                     FirebaseApp.database().ref('Customer').child(dataSnapshot.key)
                                         .child('ListUserLove').orderByChild('userId').equalTo(userKey)
-                                        .on('value', (function (snapshot) {
-                                            if (snapshot.exists()) {
+                                        .on('value', (function (snapshotChild) {
+                                            if (snapshotChild.exists()) {
                                                 items.push({
                                                     colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
                                                     keyLove: snapshot.key, countLove: childData.countLove,
@@ -536,8 +535,8 @@ export default class PostEvent extends Component {
                                         <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
-                                        <TouchableOpacity onPress={() => { this.removePostModal(rowData.id) }}>
-                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: '#EE3B3B', marginTop: 10 }} />
+                                        <TouchableOpacity onPress={() => {   this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove) }}>
+                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto, marginTop: 10 }} />
                                         </TouchableOpacity>
                                     </View>
                                 </View>
