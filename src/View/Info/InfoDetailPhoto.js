@@ -51,11 +51,11 @@ export default class InfoDetailPhoto extends Component{
     }
 
     actGetData2(items=[], id){ 
-        this.itemRef.ref('InfoTableImg').orderByChild('userId').equalTo(id).on('child_added', (dataSnapshot)=> { 
+        this.itemRef.ref('InfoTableImg').child(id).orderByChild('userId').equalTo(id).on('child_added', (dataSnapshot)=> { 
             var childData = dataSnapshot.val();
               items.push({ 
-                id: dataSnapshot.key, contentImg: childData.contentImg, costDay: childData.costDay, userId: childData.userId,
-                costFile: childData.costFile, countAvgImg: childData.countAvgImg, countImgPhoto: childData.countImgPhoto,
+                id: dataSnapshot.key, contentImg: childData.contentImg, cost: childData.cost, userId: childData.userId,
+                costTxt: childData.costTxt, countAvgImg: childData.countAvgImg, countImgPhoto: childData.countImgPhoto,
                 labelCat1: childData.labelCat1, labelCat2: childData.labelCat2, labelCat3: childData.labelCat3,
                 labelCat4: childData.labelCat4, labelCat5: childData.labelCat5, labelCat6: childData.labelCat6,
                 labelCat7: childData.labelCat7, labelCat8: childData.labelCat8, labelCateDiff: childData.labelCateDiff,
@@ -91,22 +91,27 @@ export default class InfoDetailPhoto extends Component{
                                     <Text style={{fontSize: 13, color: 'black',marginTop: 5}}>
                                         {this.props.navigation.state.params.gender}</Text>
                                 </View>
-                                <View style={{flexDirection: 'row'}}>
+                                {/* <View style={{flexDirection: 'row'}}>
                                     <Image source={like} style={{width: 15, height: 15, marginLeft: 5}}/>
                                      <Text style={{marginTop: -3, marginLeft: 5, color: 'black'}}>
                                         {this.props.navigation.state.params.countLove}</Text>
-                                </View>
-                            </View>
-                            <View>
+                                </View> */}
                                 <View style={{flexDirection: 'row'}}>
                                     <Image source={dateBirth} style={{width: 20, height: 20, marginTop: 5, }} />
                                     <Text style={{fontSize: 13, color: 'black',marginTop: 7}}>
                                     {this.props.navigation.state.params.date}</Text>
                                 </View>
-                                <View style={{flexDirection: 'row'}}>
+                            </View>
+                            <View>
+                                {/* <View style={{flexDirection: 'row'}}>
+                                    <Image source={dateBirth} style={{width: 20, height: 20, marginTop: 5, }} />
+                                    <Text style={{fontSize: 13, color: 'black',marginTop: 7}}>
+                                    {this.props.navigation.state.params.date}</Text>
+                                </View> */}
+                                {/* <View style={{flexDirection: 'row'}}>
                                     <Image source={contract} style={{width: 20, height: 20, }}/>
                                     <Text style={{ marginLeft: 5, color: 'black'}}>1</Text>
-                                </View>
+                                </View> */}
                             </View>
                         </View>
                     </View>
@@ -201,9 +206,9 @@ export default class InfoDetailPhoto extends Component{
                                         {rowData.labelCat5}{rowData.labelCat6}{rowData.labelCat7}{rowData.labelCat8}{rowData.labelCateDiff}</Text>
                                     <View style={{marginTop:  10, marginLeft: 15}}>
                                         {rowData.labelTime1 !== ''? 
-                                            <Text style={stylesInfoDetailPhoto.txtManagCont}>Giá chụp theo file: {rowData.costFile}</Text>:null}
+                                            <Text style={stylesInfoDetailPhoto.txtManagCont}>Giá chụp theo file: {rowData.cost}</Text>:null}
                                         {rowData.labelTime2 !== ''?
-                                           <Text style={stylesInfoDetailPhoto.txtManagCont}>Giá chụp theo ngày: {rowData.costDay}</Text>:null}
+                                           <Text style={stylesInfoDetailPhoto.txtManagCont}>Giá chụp theo ngày: {rowData.cost}</Text>:null}
                                         <Text style={stylesInfoDetailPhoto.txtManagCont}>Giá một ảnh photoshop: {rowData.countAvgImg}</Text>
                                         <Text style={stylesInfoDetailPhoto.txtManagCont}>Bạn sẽ có: </Text>
                                         <View style={{flexDirection: 'row'}}>
