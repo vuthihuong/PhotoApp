@@ -551,7 +551,7 @@ export default class PostModal extends Component {
                     </View>: null }
                 {this.state.checkedRightModal5 === true ?
                     <View style={stylesPostModal.title}>
-                        <Text style={stylesPostModal.boxPostModal}>Tiền công</Text>
+                        <Text style={stylesPostModal.boxPostModal}>Tiền công (VNĐ)</Text>
                         <TextInput  
                              keyboardType='numeric'
                             onChangeText={(cost) => this.setState({ cost })}

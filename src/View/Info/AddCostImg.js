@@ -569,7 +569,7 @@ addInfoImg(){
                             <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
                     {this.state.checkedTime1 === true?
                      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <Text style={{color: 'black',marginTop: 20, marginRight: 15}}>{`Giá cho một \nfile chụp`}</Text>
+                        <Text style={{color: 'black',marginTop: 20, marginRight: 15}}>{`Giá cho một \nfile chụp (VNĐ)`}</Text>
                          <TextInput  placeholderTextColor = "black" style={{width: 250}}
                             onChangeText={(costFile) => this.setState({ costFile })}>
                             {this.state.costFile}</TextInput>
@@ -582,7 +582,7 @@ addInfoImg(){
                             <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
                     {this.state.checkedTime2 === true?
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <Text style={{color: 'black',marginTop: 20, }}>{` Giá cho một \n ngày chụp`}</Text>
+                        <Text style={{color: 'black',marginTop: 20, }}>{` Giá cho một \n ngày chụp (VNĐ)`}</Text>
                         <TextInput placeholderTextColor = "black"  style={{width: 250, }}
                         onChangeText={(costDay) => this.setState({ costDay })}>
                         {this.state.costDay}</TextInput>
@@ -607,7 +607,7 @@ addInfoImg(){
                     {this.state.checkErrAvgImgNum === true?
                             <Text style={{color: 'red'}}>Chỉ nhập giá trị số</Text>:null}
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <Text style={{color:'black', marginTop: 20}}>{`Giá một ảnh \nphotoshop`}</Text>
+                        <Text style={{color:'black', marginTop: 20}}>{`Giá một ảnh \nphotoshop (VNĐ)`}</Text>
                         <TextInput  placeholderTextColor = "black"   style={{width: 250}}
                             onChangeText={(countAvgImg) => this.setState({ countAvgImg })}>
                             {this.state.countAvgImg}</TextInput>

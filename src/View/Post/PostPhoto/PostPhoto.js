@@ -299,7 +299,7 @@ export default class PostPhoto extends Component {
                                     <Text style={{color: 'red'}}>Vui lòng nhập giá trị dương</Text>
                              </View>: null}
                         <View style={stylesPostPhoto.title}>
-                            <Text style={{marginRight:10, color:'black', marginTop: 15 }}>Tiền công</Text>
+                            <Text style={{marginRight:10, color:'black', marginTop: 15 }}>Tiền công (VNĐ)</Text>
                             <TextInput  multiline={true} 
                                 style={[stylesPostPhoto.txtCostPhoto,{ marginTop: -10}]} 
                                 onChangeText={(costPhoto) => this.setState({costPhoto})}>
