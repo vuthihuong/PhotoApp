@@ -181,9 +181,8 @@ export default class PostEvent extends Component {
             if (tmpWord.includes('Nhỏ hơn') === true && tmpWord.includes('triệu') === false) {
                 var word = tmpWord.split(' ');
                 var word1 = word[2];
-                var itemsTmp = [];
-
                 var wordCompare = word1.concat('000');
+                wordCompare = parseInt(wordCompare, 10)
                 this.itemRef.ref('Customer').on('child_added', ((dataSnapshot) => {
                     var childData = dataSnapshot.val();
                     if (childData.category === "Nháy ảnh") {
@@ -229,90 +228,118 @@ export default class PostEvent extends Component {
                                         dataSource4: this.state.dataSource4.cloneWithRows(items)
                                     })
                                 }
-
-
-
-                            }).bind(this));
-
-
-
+                            }).bind(this))
                     }
-
                 }).bind(this));
             }
             else if (tmpWord.includes('Nhỏ hơn') === true && tmpWord.includes('triệu') === true) {
                 var word = tmpWord.split(' ');
                 var word1 = word[2];
-                var itemsTmp = [];
                 var wordCompare = word1.concat('000000');
-                this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot) => {
+                wordCompare = parseInt(wordCompare, 10)
+                alert(wordCompare)
+                this.itemRef.ref('Customer').on('child_added', ((dataSnapshot) => {
                     var childData = dataSnapshot.val();
-                    if (childData.costDay <= wordCompare && childData.costFile <= wordCompare) {
-                        itemsTmp.push(
-                            childData.userId
-                        )
+                    if (childData.category === "Nháy ảnh") {
+                        var count = 0;
+                        this.itemRef.ref('InfoTableImg').child(dataSnapshot.key)
+                            .on("child_added", (function (snapshot) {
+                                if (snapshot.val().cost <= wordCompare) {
+                                    count = count + 1
+                                }
+                                if (count === 1) {
+                                    FirebaseApp.database().ref('Customer').child(dataSnapshot.key)
+                                        .child('ListUserLove').orderByChild('userId').equalTo(userKey)
+                                        .on('value', (function (snapshot) {
+                                            if (snapshot.exists()) {
+                                                items.push({
+                                                    colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
+                                                    keyLove: snapshot.key, countLove: childData.countLove,
+                                                    addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                                    address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                                    date: childData.date, email: childData.email, gender: childData.gender,
+                                                    labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2,
+                                                    labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                                    labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                                    labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                                    labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                                                })
+                                            }
+                                            else {
+                                                items.push({
+                                                    colorLovePhoto: 'black', id: dataSnapshot.key, countLove: childData.countLove,
+                                                    addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                                    address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                                    date: childData.date, email: childData.email, gender: childData.gender,
+                                                    labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2,
+                                                    labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                                    labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                                    labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                                    labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                                                })
+                                            }
+                                        }).bind(this))
+                                    this.setState({
+                                        dataSource4: this.state.dataSource4.cloneWithRows(items)
+                                    })
+                                }
+                            }).bind(this))
                     }
-                    let finalArray = itemsTmp.filter((v, i) => itemsTmp.indexOf(v) === i)
-                    finalArray.forEach(element => {
-                        FirebaseApp.database().ref('Customer').child(element).once('value', (dataSnapshot) => {
-                            var childData = dataSnapshot.val();
-                            items.push({
-                                id: dataSnapshot.key,
-                                addressCity: childData.addressCity, addresDist: childData.addresDist,
-                                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                                date: childData.date, email: childData.email, gender: childData.gender,
-                                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2,
-                                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
-                            })
-                            this.setState({
-                                dataSource4: this.state.dataSource4.cloneWithRows(items)
-                            });
-                        });
-                    })
-
-                });
+                }).bind(this));
             }
             else if (tmpWord.includes('Từ') === true && tmpWord.includes('triệu') === true) {
                 var word = tmpWord.split(' ');
                 var word1 = word[1];
-                var itemsTmp = [];
                 var wordCompare = word1.concat('000000');
-                this.itemRef.ref('InfoTableImg').on('child_added', (dataSnapshot) => {
+                wordCompare = parseInt(wordCompare, 10)
+                this.itemRef.ref('Customer').on('child_added', ((dataSnapshot) => {
                     var childData = dataSnapshot.val();
-                    if (childData.costFile !== '' && childData.costFile >= wordCompare) {
-                        itemsTmp.push(
-                            childData.userId
-                        )
+                    if (childData.category === "Nháy ảnh") {
+                        var count = 0;
+                        this.itemRef.ref('InfoTableImg').child(dataSnapshot.key)
+                            .on("child_added", (function (snapshot) {
+                                if (snapshot.val().cost >= wordCompare) {
+                                    count = count + 1
+                                }
+                                if (count === 1) {
+                                    FirebaseApp.database().ref('Customer').child(dataSnapshot.key)
+                                        .child('ListUserLove').orderByChild('userId').equalTo(userKey)
+                                        .on('value', (function (snapshot) {
+                                            if (snapshot.exists()) {
+                                                items.push({
+                                                    colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
+                                                    keyLove: snapshot.key, countLove: childData.countLove,
+                                                    addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                                    address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                                    date: childData.date, email: childData.email, gender: childData.gender,
+                                                    labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2,
+                                                    labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                                    labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                                    labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                                    labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                                                })
+                                            }
+                                            else {
+                                                items.push({
+                                                    colorLovePhoto: 'black', id: dataSnapshot.key, countLove: childData.countLove,
+                                                    addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                                    address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                                    date: childData.date, email: childData.email, gender: childData.gender,
+                                                    labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2,
+                                                    labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                                    labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                                    labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                                    labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                                                })
+                                            }
+                                        }).bind(this))
+                                    this.setState({
+                                        dataSource4: this.state.dataSource4.cloneWithRows(items)
+                                    })
+                                }
+                            }).bind(this))
                     }
-                    if (childData.costDay !== '' && childData.costDay >= wordCompare) {
-                        itemsTmp.push(
-                            childData.userId
-                        )
-                    }
-                    let finalArray = itemsTmp.filter((v, i) => itemsTmp.indexOf(v) === i)
-                    finalArray.forEach(element => {
-                        FirebaseApp.database().ref('Customer').child(element).once('value', (dataSnapshot) => {
-                            var childData = dataSnapshot.val();
-                            items.push({
-                                id: dataSnapshot.key,
-                                addressCity: childData.addressCity, addresDist: childData.addresDist,
-                                address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                                date: childData.date, email: childData.email, gender: childData.gender,
-                                labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2,
-                                labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                                labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                                labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                                labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
-                            })
-                            this.setState({
-                                dataSource4: this.state.dataSource4.cloneWithRows(items)
-                            });
-                        });
-                    })
-                });
+                }).bind(this));
             }
         }
     }
