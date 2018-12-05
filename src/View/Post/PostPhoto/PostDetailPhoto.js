@@ -50,6 +50,7 @@ export default class PostDetailPhoto extends Component {
                          let childData = childSnapshot.val();
                          avatarSource = childData.avatarSource;
                          username = childData.username;
+                         category = childData.category
                          
           })  
         })
@@ -353,12 +354,12 @@ export default class PostDetailPhoto extends Component {
                             onPress={() => this.btnChangeNotParticipatePhoto()}>
                             <Text style={{ textAlign:"center", color: 'blue'}}>Đã gửi yêu cầu tham gia</Text>
                         </TouchableOpacity>:null} */}
-                    
+                        {category !== "Nháy ảnh" ?
                         <TouchableOpacity style={stylesPostDePhoto.btnConfirmModal1} 
                             onChange = {(changeParticipate) => this.setState(changeParticipate)}
                             onPress={() => this.sendRequired()}>
                                 <Text style={{ textAlign:"center", color: 'black'}}>Gửi yêu cầu trực tiếp</Text>
-                        </TouchableOpacity> 
+                        </TouchableOpacity> :null}
                    
                 </View>
                 {this.state.changeCommentPhoto === true?
@@ -403,12 +404,12 @@ export default class PostDetailPhoto extends Component {
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách yêu cầu tham gia</Text>
                     </TouchableOpacity>
                 </View>
-               
+               {category !== "Nháy ảnh" ?
                 <View style={{marginTop: 25}}>
                     <TouchableOpacity  onPress={() => this.listSendReq()}> 
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách gửi trực tiếp</Text>
                     </TouchableOpacity>
-                </View>
+                </View>: null}
             </View>
           </ScrollView>
         )

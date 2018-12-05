@@ -383,10 +383,10 @@ export default class PostDetailModal extends Component {
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=> this.sendRequired()}
+                    {/* <TouchableOpacity onPress={()=> this.sendRequired()}
                         style={stylesPostDetailModal.btnConfirmModal1} >
                         <Text style={{ textAlign:"center", color: 'black'}}>Gửi trực tiếp yêu cầu</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
                 {this.state.changeCommentModal === true?
                 (<View>
@@ -429,11 +429,11 @@ export default class PostDetailModal extends Component {
                     </TouchableOpacity>
                 </View>
                
-                <View style={{marginTop: 25}}>
+                {/* <View style={{marginTop: 25}}>
                     <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListDirectPostModal')}> 
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách gửi trực tiếp</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>
            </ScrollView>
         )

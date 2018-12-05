@@ -179,13 +179,21 @@ export default class ListDirectPostPhoto extends Component {
                         dataSource = {this.state.dataSource}
                             renderRow = {(rowData)=> 
                         <View style={stylesListDirPhoto.bodyListPostPhoto}>
-                            <TouchableOpacity onPress={() => this.showInfoPhoto(rowData.userId)}
-                                style={[stylesListDirPhoto.headListModal, { marginLeft: 10}]} >
-                                <Text style={{color: 'black', marginRight: 20}}>{rowData.username}</Text>
-                            </TouchableOpacity>
+                            <View>
+                                <TouchableOpacity onPress={() => this.showInfoPhoto(rowData.userId)}
+                                    style={[stylesListDirPhoto.headListModal, { marginLeft: 10}]} >
+                                    <Text style={{color: 'black', marginRight: 20}}>{rowData.username}</Text>
+                                </TouchableOpacity>
+                                {rowData.statusSendReq === "Đã đồng ý" ?
+                                <TouchableOpacity onPress={() => this.showInfoPhoto(rowData.userId)}
+                                    style={[stylesListDirPhoto.headListModal, { marginLeft: 10}]} >
+                                    <Text style={{color: 'black', marginRight: 20, fontStyle: 'italic'}}>Gửi tin nhắn</Text>
+                                </TouchableOpacity>: null}
+                            </View>
+                           
                             <TouchableOpacity onPress={()=> {
                                 this.sendReqPhoto(rowData.userId, rowData.username, rowData.countSendReq)}} >
-                                     <Text style={{color: rowData.colorSendReq,  marginRight: 20}}>Đã gửi yêu cầu</Text>
+                                     <Text style={{color: rowData.colorSendReq,  marginRight: 20}}>{rowData.statusSendReq}</Text>
                             </TouchableOpacity>
                         </View>}/>
                 </View>
