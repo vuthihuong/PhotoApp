@@ -13,6 +13,7 @@ export default class PostRequest extends Component {
         super(props);
         this.state = {
             statusViewListModal: false, statusViewListPhoto: false, statusViewListEvent: false,
+            checkedAgree: false, checkedNotAgree: false,
             dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
         }
 
@@ -29,6 +30,7 @@ export default class PostRequest extends Component {
             .on('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
                     userKey = childSnapshot.key;
+                    nameView = childSnapshot.val().username;
                 })
             })
         this.actGetData();
@@ -40,13 +42,17 @@ export default class PostRequest extends Component {
             this.itemRef.ref('Post').child(dataSnapshot.key).child('ListSendReq').orderByChild('userId')
                 .equalTo(userKey).on('value', (function (snapshot) {
                     if (snapshot.exists()) {
-                        items.push({
-                            id: dataSnapshot.key,
-                            userId: (childData.userId), title: childData.title,
-                            contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
-                            datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto,
-                            datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
-                            valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+                        snapshot.forEach(function (childSnapshot) {
+                            var childDataSnap = childSnapshot.val()
+                            items.push({
+                                id: dataSnapshot.key, statusSendReq: childDataSnap.statusSendReq,
+                                userId: (childData.userId), title: childData.title,
+                                contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
+                                datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto,
+                                datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
+                                valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+                            })
+
                         })
                         this.setState({
                             dataSource: this.state.dataSource.cloneWithRows(items, items.map((row, i) => i).reverse())
@@ -97,14 +103,68 @@ export default class PostRequest extends Component {
             })
         }
     }
-    sendReqAgree(userId, id){ 
-        
+    sendReqAgree(userId, id) {
+        FirebaseApp.database().ref('Post/').child(id)
+            .child('ListSendReq').orderByChild('userId').equalTo(userKey)
+            .on('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    idStatusSendReq = childSnapshot.key;
+
+                })
+            })
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn đồng ý yêu cầu này không?',
+            [
+                //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                {
+                    text: 'OK', onPress: () => {
+                        FirebaseApp.database().ref('Post/').child(id)
+                            .child('ListSendReq').child(idStatusSendReq).update({
+                                statusSendReq: 'Đã đồng ý'
+                            });
+                        this.actGetData();
+                    }
+                },
+            ],
+            { cancelable: false }
+        )
     }
 
-    sendReqNotAgree(userId, id){ 
+    sendReqNotAgree(userId, id) {
+        FirebaseApp.database().ref('Post/').child(id)
+            .child('ListSendReq').orderByChild('userId').equalTo(userKey)
+            .on('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    idStatusSendReq = childSnapshot.key;
 
+                })
+            })
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn đồng ý yêu cầu này không?',
+            [
+                //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                {
+                    text: 'OK', onPress: () => {
+                        FirebaseApp.database().ref('Post/').child(id)
+                            .child('ListSendReq').child(idStatusSendReq).update({
+                                statusSendReq: 'Đã bị hủy yêu cầu'
+                            });
+                        this.actGetData();
+                    }
+                },
+            ],
+            { cancelable: false }
+        )
     }
-
+    sendMess(userId) {
+        this.props.navigation.navigate('ChatPerson', {
+            userPost: userId, userView: userKey, nameView: nameView,
+        })
+    }
     render() {
         return (
             <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -119,7 +179,7 @@ export default class PostRequest extends Component {
                                         contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
                                         datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
                                         valuePlacePhoto: rowData.valuePlacePhoto, valueCategoryPhoto1: rowData.valueCategoryPhoto1
-                                        })}
+                                    })}
                                         style={stylesPostRequest.contManagCont}>
                                         <Text style={stylesPostRequest.txtManagCont}>{rowData.title} </Text>
                                         <Text style={stylesPostRequest.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
@@ -128,12 +188,24 @@ export default class PostRequest extends Component {
                                     </TouchableOpacity>
                                     <View style={stylesPostRequest.txtConfirm}>
                                         <TouchableOpacity onPress={() => { this.sendReqAgree(rowData.userId, rowData.id) }}>
-                                            <Text style={{ color: 'black', marginTop: 15}}>Đồng ý</Text>
+                                            {rowData.statusSendReq === "gửi yêu cầu" || rowData.statusSendReq === "Đã bị hủy yêu cầu" ?
+                                                <Text style={{ color: 'black' }}>Đồng ý</Text> :
+                                                <View>
+                                                    <Text style={{ color: 'blue' }}>Đồng ý</Text>
+                                                    <TouchableOpacity onPress={() => this.sendMess(rowData.userId)} >
+                                                        <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
+                                                    </TouchableOpacity>
+                                                </View>
+
+                                            }
                                         </TouchableOpacity>
                                     </View>
                                     <View style={stylesPostRequest.txtConfirm}>
                                         <TouchableOpacity onPress={() => { this.sendReqNotAgree(rowData.userId, rowData.id) }}>
-                                            <Text style={{ color: 'black', marginTop: 15}}>Từ chối</Text>
+                                            {rowData.statusSendReq === "gửi yêu cầu" || rowData.statusSendReq === "Đã đồng ý" ?
+                                                <Text style={{ color: 'black' }}>Từ chối</Text> :
+                                                <Text style={{ color: 'red' }}>Từ chối</Text>
+                                            }
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -167,8 +239,8 @@ const stylesPostRequest = StyleSheet.create({
     },
     txtConfirm: {
         width: 70
-    }, 
-    contManagCont: { 
+    },
+    contManagCont: {
         width: 200
     }
 
