@@ -37,52 +37,22 @@ export default class PostRequest extends Component {
         var items = [];
         this.itemRef.ref('Post').on('child_added', ((dataSnapshot) => {
             var childData = dataSnapshot.val();
-            this.itemRef.ref('Post').child(dataSnapshot.key).child('StatusParticipateCol').orderByChild('userId')
+            this.itemRef.ref('Post').child(dataSnapshot.key).child('ListSendReq').orderByChild('userId')
                 .equalTo(userKey).on('value', (function (snapshot) {
                     if (snapshot.exists()) {
-                        this.itemRef.ref('Post').child(dataSnapshot.key).child('StatusParticipateCol').orderByChild('statusAgree')
-                            .equalTo('gửi yêu cầu').on('value', (function (snapshotChild) {
-                                if (snapshotChild.exists()) {
-                                    if (childData.title === "Tìm mẫu ảnh"){
-                                        items.push({
-                                            id: dataSnapshot.key,
-                                            userId: (childData.userId), title: childData.title,
-                                            content: childData.content, cost: childData.cost, girl: childData.girl,
-                                            datetime: childData.datetime, datetime1: childData.datetime1,
-                                            value: childData.value, height: childData.height, boy: childData.boy,
-                                            labelRightModal1: childData.labelRightModal1, labelRightModal2: childData.labelRightModal2,
-                                            labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
-                                            labelRightModal5: childData.labelRightModal5,
-                                            circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3,
-                                            datePostModal: childData.datePostModal, timePostModal: childData.timePostModal
-                                        })
-                                    }
-                                    else if (childData.title === "Tìm nháy ảnh"){
-                                        items.push({
-                                            id: dataSnapshot.key,
-                                            userId: (childData.userId), title: childData.title,
-                                            contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
-                                            datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto,
-                                            datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
-                                            valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
-                                        })
-                                    }
-                                    else if (childData.title === "Tạo sự kiện") {
-                                        items.push({
-                                            id: dataSnapshot.key,
-                                            userId: (childData.userId), title: childData.title,
-                                            addressEvent: childData.addressEvent, contentEvent: childData.contentEvent,
-                                            costEvent: childData.costEvent, datetimeEvent: childData.datetimeEvent,
-                                            datetimeEvent1: childData.datetimeEvent1, labelEvent1: childData.labelEvent1,
-                                            labelEvent2: childData.labelEvent2, numberModal: childData.numberModal,
-                                            datePostEvent: childData.datePostEvent, timePostEvent: childData.timePostEvent
-                                        })
-                                    }
-                                    this.setState({
-                                        dataSource: this.state.dataSource.cloneWithRows(items, items.map((row, i) => i).reverse())
-                                    });
-                                }
-                            }).bind(this))}
+                        items.push({
+                            id: dataSnapshot.key,
+                            userId: (childData.userId), title: childData.title,
+                            contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
+                            datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto,
+                            datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
+                            valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+                        })
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(items, items.map((row, i) => i).reverse())
+                        });
+                    }
+
                 }).bind(this))
         }).bind(this))
     }
@@ -127,97 +97,47 @@ export default class PostRequest extends Component {
             })
         }
     }
-   
+    sendReqAgree(userId, id){ 
+        
+    }
+
+    sendReqNotAgree(userId, id){ 
+
+    }
+
     render() {
         return (
             <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
                 <View style={stylesPostRequest.containerManagCont}>
-                    <TouchableOpacity onPress={() => this.changeStatusListModal()}>
-                        <Text style={{ color: 'black', fontWeight: 'bold' }}>Các bài tìm mẫu ảnh</Text>
-                    </TouchableOpacity>
-
-                    {this.state.statusViewListModal === true ?
-                        <ListView enableEmptySections
-                            dataSource={this.state.dataSource}
-                            renderRow={(rowData) =>
-                                <View >
-                                    {(rowData.title === "Tìm mẫu ảnh") ?
-                                        <View style={stylesPostRequest.bodyManaCont}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModalView',
-                                                {
-                                                    id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
-                                                    content: rowData.content, cost: rowData.cost, girl: rowData.girl,
-                                                    datetime: rowData.datetime, datetime1: rowData.datetime1,
-                                                    value: rowData.value, height: rowData.height, boy: rowData.boy,
-                                                    labelRightModal1: rowData.labelRightModal1,
-                                                    labelRightModal2: rowData.labelRightModal2,
-                                                    labelRightModal3: rowData.labelRightModal3,
-                                                    labelRightModal4: rowData.labelRightModal4,
-                                                    labelRightModal5: rowData.labelRightModal5,
-                                                    circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,
-                                                })} >
-                                                <Text style={stylesPostRequest.txtManagCont}>{rowData.title} {rowData.boy} {rowData.girl} </Text>
-                                                <Text style={stylesPostRequest.txtManagCont}>Địa điểm: {rowData.value}</Text>
-                                                <Text style={stylesPostRequest.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime}</Text>
-                                                <Text style={stylesPostRequest.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
-                                            </TouchableOpacity>
-                                        </View> : null}
-                                </View>}
-                        /> : null}
-
-                    <TouchableOpacity onPress={() => this.changeStatusListEvent()}>
-                        <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 15 }}>Các bài sự kiện</Text>
-                    </TouchableOpacity>
-                    {this.state.statusViewListEvent === true ?
-                        <ListView enableEmptySections
-                            dataSource={this.state.dataSource}
-                            renderRow={(rowData) =>
-                                <View >
-                                    {(rowData.title === "Tạo sự kiện") ?
-                                        <View style={stylesPostRequest.bodyManaCont}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEventView',
-                                                {
-                                                    id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
-                                                    contentEvent: rowData.contentEvent, costEvent: rowData.costEvent,
-                                                    datetimeEvent: rowData.datetimeEvent, datetimeEvent1: rowData.datetimeEvent1,
-                                                    addressEvent: rowData.addressEvent, labelEvent1: rowData.labelEvent1,
-                                                    labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal
-                                                })}>
-                                                <Text style={stylesPostRequest.txtManagCont}>{rowData.labelEvent1}{rowData.labelEvent2} </Text>
-                                                <Text style={stylesPostRequest.txtManagCont}>Địa điểm: {rowData.addressEvent}</Text>
-                                                <Text style={stylesPostRequest.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
-                                                <Text style={stylesPostRequest.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
-                                            </TouchableOpacity>
-                                        </View> : null}
-                                </View>}
-                        /> : null}
-
-                    <TouchableOpacity onPress={() => this.changeStatusListPhoto()}>
-                        <Text style={{ color: 'black', fontWeight: 'bold', marginTop: 15 }}>Các bài tìm nháy ảnh</Text>
-                    </TouchableOpacity>
-                    {this.state.statusViewListPhoto === true ?
-                        <ListView enableEmptySections
-                            dataSource={this.state.dataSource}
-                            renderRow={(rowData) =>
-                                <View >
-                                    {(rowData.title === "Tìm nháy ảnh") ?
-                                        <View style={stylesPostRequest.bodyManaCont}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhotoView',
-                                                {
-                                                    id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
-                                                    contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
-                                                    datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
-                                                    valuePlacePhoto: rowData.valuePlacePhoto, valueCategoryPhoto1: rowData.valueCategoryPhoto1
-                                                })}>
-                                                <Text style={stylesPostRequest.txtManagCont}>{rowData.title} </Text>
-                                                <Text style={stylesPostRequest.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
-                                                <Text style={stylesPostRequest.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
-                                                <Text style={stylesPostRequest.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
-                                            </TouchableOpacity>
-                                        </View> : null}
-                                </View>}
-                        /> : null}
-
+                    <ListView enableEmptySections
+                        dataSource={this.state.dataSource}
+                        renderRow={(rowData) =>
+                            <View >
+                                <View style={stylesPostRequest.bodyManaCont}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhotoView', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
+                                        contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
+                                        datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
+                                        valuePlacePhoto: rowData.valuePlacePhoto, valueCategoryPhoto1: rowData.valueCategoryPhoto1
+                                        })}
+                                        style={stylesPostRequest.contManagCont}>
+                                        <Text style={stylesPostRequest.txtManagCont}>{rowData.title} </Text>
+                                        <Text style={stylesPostRequest.txtManagCont}>Địa điểm: {rowData.valuePlacePhoto}</Text>
+                                        <Text style={stylesPostRequest.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                                        <Text style={stylesPostRequest.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
+                                    </TouchableOpacity>
+                                    <View style={stylesPostRequest.txtConfirm}>
+                                        <TouchableOpacity onPress={() => { this.sendReqAgree(rowData.userId, rowData.id) }}>
+                                            <Text style={{ color: 'black', marginTop: 15}}>Đồng ý</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={stylesPostRequest.txtConfirm}>
+                                        <TouchableOpacity onPress={() => { this.sendReqNotAgree(rowData.userId, rowData.id) }}>
+                                            <Text style={{ color: 'black', marginTop: 15}}>Từ chối</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>} />
                 </View>
             </ScrollView>
         );
@@ -247,6 +167,9 @@ const stylesPostRequest = StyleSheet.create({
     },
     txtConfirm: {
         width: 70
+    }, 
+    contManagCont: { 
+        width: 200
     }
 
 })
