@@ -148,7 +148,7 @@ export default class PostEvent extends Component {
                     })
                     this.itemRef.ref('Post').push({
                         title: 'Tạo sự kiện', countCommentEvent: this.state.countCommentEvent, 
-                        datePostEvent : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
+                        datePostEvent : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+1+"/"+this.state.currentDay.getFullYear(),
                         timePostEvent: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
                         countParticipate: this.state.countParticipate, countLike: this.state.countLike,
                         userId: key, numberModal: this.state.numberModal, costEvent: this.state.costEvent,

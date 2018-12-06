@@ -142,7 +142,7 @@ export default class PostPhoto extends Component {
                         contentPhoto: this.state.contentPhoto, costPhoto: this.state.costPhoto,
                         datetimePhoto: this.state.datetimePhoto, datetimePhoto1: this.state.datetimePhoto1,
                         valuePlacePhoto: this.state.valuePlacePhoto,
-                        datePostPhoto : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth()+"/"+this.state.currentDay.getFullYear(),
+                        datePostPhoto : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth() + 1+"/"+this.state.currentDay.getFullYear(),
                         timePostPhoto: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
                         }).then((snap) => { this.setState({  
                                                      id: snap.key }) // id của bài viết tạo ra
