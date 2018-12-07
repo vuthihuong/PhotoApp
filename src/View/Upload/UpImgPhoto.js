@@ -7,6 +7,7 @@ import lock from '../../assets/img/info/lock.png'
 import pick from './../Main/AlbumImg'
 import photo from '../../assets/img/info/photo.png'
 var ImagePicker = require('react-native-image-picker');
+import WebImage from 'react-native-web-image'
 
 var options = {
     title: 'Select Avatar',
@@ -44,7 +45,7 @@ export default class UpImgPhoto extends Component {
         this.itemRef.ref('AlbumImg').child(userKey).on('child_added', (dataSnapshot) => {
             var childData = dataSnapshot.val();
             listItems.push({
-                avatarSource: childData.avatarSource
+                uri: childData.uri
             })
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(listItems)
@@ -63,12 +64,12 @@ export default class UpImgPhoto extends Component {
             else if (response.customButton) {
             }
             else {
-                let source = { uri: 'data:image/jpeg;base64,' + response.data };
+                let source = 'data:image/jpeg;base64,' + response.data;
                 this.setState({
                     avatarSource: source
                 });
                 this.itemRef.ref('AlbumImg/' + userKey).push({
-                    avatarSource: source
+                    uri: source
                 })
             }
         })
@@ -96,24 +97,19 @@ export default class UpImgPhoto extends Component {
                             style={{ marginTop: -35 }}>
                             <Image source={photo} style={{ width: 50, height: 50, }} />
                         </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text style={{ color: 'black' }}>Thêm</Text>
-                        </TouchableOpacity>
                     </View>
-                    <View style={stylesUpImgPhoto.showImg}>
-                        {img}
-                    </View>
-                    <ListView enableEmptySections
-                        contentContainerStyle={{ flexWrap: 'wrap' }}
-                        dataSource={this.state.dataSource}
-                        renderRow={(rowData) =>
-                            <View style={stylesListPostPhoto.bodyListPostPhoto}>
-                                <View>
-                                    <Image source={rowData.avatarSource} />
+                    <View style={stylesListPostPhoto.bodyListPostPhoto}>
+                        <ListView enableEmptySections
+                            contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
+                            dataSource={this.state.dataSource}
+                            renderRow={(rowData) =>
+                                <View style={{ marginRight: 15, marginLeft: 15, marginBottom: 15 }}>
+                                    <Image source={{ uri: `${rowData.uri}` }} resizeMode={'cover'} style={{ height: 160, width: 160 }} />
                                 </View>
-                            </View>} />
+                            } />
+                    </View>
                 </View>
-            </ScrollView>
+            </ScrollView >
         );
     }
 }
@@ -133,6 +129,9 @@ stylesUpImgPhoto = StyleSheet.create({
     body: {
         alignItems: 'center',
         marginTop: 50
+    },
+    bodyListPostPhoto: {
+        marginLeft: 15, marginRight: 15
     },
     showImg: {
         marginTop: 40, marginRight: 15, marginLeft: 15
