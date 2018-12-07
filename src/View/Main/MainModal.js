@@ -8,7 +8,7 @@ import { createDrawerNavigator, DrawerItems, } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation'
 
 import Menu from './Menu'
-import HamburgerIcon from './HamburgerIcon'
+import HamburgerIcon from './HamburgerIcon' 
 import ListFavorite from './ListFavorite'
 import InfoModal from '../Info/InfoModal'
 // import HistoryContract from './HistoryContract'
@@ -20,6 +20,7 @@ import Setting from './../Setting/Setting'
 import ManagePost from './../ManagePost/ManagePost'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 import IconNotification from './IconNotification';
+import SearchPhoto from './../Search/SearchPhoto'
 
 import iconInfo from './../../assets/img/info/icon_info.png'
 
@@ -63,6 +64,26 @@ const MenuStack = createStackNavigator({
         },
         headerTintColor: 'white',   
         borderHeaderBottomColor: '#EE3B3B'        
+      })
+    },
+  });
+
+  const SearchPhotoStack = createStackNavigator({
+    SearchPhoto: { 
+      screen: SearchPhoto, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Tìm kiếm nhiếp ảnh gia',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerStyle: {
+          backgroundColor: '#EE3B3B'
+        },
+        headerTintColor: 'white', 
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
+        },
       })
     },
   });
@@ -256,6 +277,21 @@ const MenuStack = createStackNavigator({
           />
         ),
     }
+    },
+
+    SearchPhoto: { 
+      screen: SearchPhotoStack,
+      navigationOptions: {
+        drawerLabel: 'Tìm kiếm nhiếp ảnh gia',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/search/search.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
+        ),
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 35,   },
+    },
     },
   
     ListFavorite: { 

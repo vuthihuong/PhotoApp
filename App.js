@@ -63,6 +63,8 @@ import EditTableImg from './src/View/Info/EditTableImg'
 import SearchListPhoto from  './src/View/Search/SearchListPhoto'
 
 import ListSendRequiredPhoto from './src/View/Post/PostPhoto/ListSendRequiredPhoto'
+import ChatPerson from './src/View/ManageContract/ChatPerson'
+import AlbumImgInfo from './src/View/Upload/AlbumImgInfo'
 
 
 const instructions = Platform.select({
@@ -202,6 +204,12 @@ const Mainapp = createStackNavigator({
     ListSendRequiredPhoto: { 
         screen: ListSendRequiredPhoto
     },
+    ChatPerson: { 
+        screen:  ChatPerson
+    },
+    AlbumImgInfo: { 
+        screen:  AlbumImgInfo
+    }
     },{
       headerMode:'none'
     });
