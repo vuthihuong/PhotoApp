@@ -68,6 +68,11 @@ export default class InfoDetailPhoto extends Component{
               });
           });
     }
+    showAlbumImg(){ 
+        this.props.navigation.navigate('AlbumImgInfo', { 
+            id: this.props.navigation.state.params.id, //id là userKey của nháy ảnh
+        })
+    }
     render(){
         const state = this.state;
         return(
@@ -185,7 +190,7 @@ export default class InfoDetailPhoto extends Component{
                         </View>}
                     />
                       <View style ={stylesInfoDetailPhoto.textBody}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress = {()=> this.showAlbumImg()}>
                                 <Text style={{fontSize: 13, color: '#EE3B3B', textDecorationLine: 'underline',}}>
                                     Album ảnh</Text>
                         </TouchableOpacity>

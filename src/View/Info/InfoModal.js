@@ -308,7 +308,7 @@ export default class InfoModal extends Component {
                 
                </View> */}
                <View style = {[stylesInfoModal.infoFooter,{marginTop: 15}]}> 
-                    <TouchableOpacity onPress={()=> {this.props.navigation.navigate('UpImgModal')}}>
+                    <TouchableOpacity onPress={()=> {this.props.navigation.navigate('UpImgPhoto')}}>
                       <Text style={{fontSize: 13, color: '#EE3B3B', 
                                 textDecorationLine: 'underline',}}>Album ảnh</Text>
                     </TouchableOpacity>
