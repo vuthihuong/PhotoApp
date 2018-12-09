@@ -297,7 +297,7 @@ const MenuStack = createStackNavigator({
     ListFavorite: { 
       screen: ListFavoriteStack,
       navigationOptions: {
-        drawerLabel: 'Danh sách yêu thích',
+        drawerLabel: 'Danh sách yêu thích' + '\n' +'nhiếp ảnh gia',
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/info/heart.png')}
