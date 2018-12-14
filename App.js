@@ -61,6 +61,8 @@ import AddCostImg from './src/View/Info/AddCostImg'
 import EditTableImg from './src/View/Info/EditTableImg'
 
 import SearchListPhoto from  './src/View/Search/SearchListPhoto'
+import SearchListModal from './src/View/Search/SearchListModal'
+import SearchModal from './src/View/Search/SearchModal'
 
 import ListSendRequiredPhoto from './src/View/Post/PostPhoto/ListSendRequiredPhoto'
 import ChatPerson from './src/View/ManageContract/ChatPerson'
@@ -113,6 +115,12 @@ const Mainapp = createStackNavigator({
     },
     SearchPhoto: {
         screen: SearchPhoto
+    },
+    SearchModal: {
+        screen: SearchModal
+    },
+    SearchListModal: {
+        screen: SearchListModal
     },
     PostDetailPhoto: {
         screen: PostDetailPhoto

@@ -19,6 +19,7 @@ import MenuTabBar from './MenuTabBar'
 import Setting from './../Setting/Setting'
 import ManagePost from './../ManagePost/ManagePost'
 import SearchPhoto from './../Search/SearchPhoto'
+import SearchModal from '../Search/SearchModal'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 
@@ -89,6 +90,26 @@ const MenuStack = createStackNavigator({
       screen: SearchPhoto, 
       navigationOptions: ({ navigation }) => ({
         title: 'Tìm kiếm nhiếp ảnh gia',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerStyle: {
+          backgroundColor: '#EE3B3B'
+        },
+        headerTintColor: 'white', 
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
+        },
+      })
+    },
+  });
+
+  const SearchModelStack = createStackNavigator({
+    SearchModal: { 
+      screen: SearchModal, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Tìm kiếm mẫu ảnh',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerStyle: {
           backgroundColor: '#EE3B3B'
@@ -285,6 +306,21 @@ const MenuStack = createStackNavigator({
       screen: SearchPhotoStack,
       navigationOptions: {
         drawerLabel: 'Tìm kiếm nhiếp ảnh gia',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/search/search.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
+        ),
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 35,   },
+    },
+    },
+
+    SearchModel: { 
+      screen: SearchModelStack,
+      navigationOptions: {
+        drawerLabel: 'Tìm kiếm mẫu ảnh',
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/search/search.png')}

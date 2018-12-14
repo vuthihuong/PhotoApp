@@ -63,8 +63,7 @@ export default class InfoDetailModal extends Component{
                         {/* <Image source={address} style={{width: 30, height: 30, marginTop: -5}} /> */}
                     <Text style={{fontSize: 13, color: 'black', marginLeft: 10}}>
                     Số đo 3 vòng: {this.props.navigation.state.params.circle1} -
-                     {this.props.navigation.state.params.circle2}
-                    - {this.props.navigation.state.params.circle3}</Text>
+                     {this.props.navigation.state.params.circle2} - {this.props.navigation.state.params.circle3}</Text>
                 </View>
                 <View style={{flexDirection:'row'}}>
                     {/* <Image source={height} style={{width: 15, height: 15, marginTop: -5}} /> */}
