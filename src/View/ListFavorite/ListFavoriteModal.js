@@ -122,13 +122,13 @@ sendReq(userIdModal, usernameModal){
                 text: 'OK', onPress: () => {
                     this.itemRef.ref('Customer').child(userKey)
                     .child('ListSendReqModal').push({ 
-                        userId: userIdModal, statusAgree: 'Gửi yêu cầu,', usernameModal: usernameModal,
+                        userId: userIdModal, statusAgree: 'Gửi yêu cầu', usernameModal: usernameModal,
                         date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
                         hour: new Date().getHours() + ":" + new Date().getMinutes()
                     });
                     this.itemRef.ref('Customer').child(userIdModal)
                     .child('ListSendReqModal').push({ 
-                        userId: userKey, statusAgree: 'Gửi yêu cầu,', 
+                        userId: userKey, statusAgree: 'Gửi yêu cầu', 
                         date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
                         hour: new Date().getHours() + ":" + new Date().getMinutes()
                     });

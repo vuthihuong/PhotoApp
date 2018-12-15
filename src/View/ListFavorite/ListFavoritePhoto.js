@@ -125,13 +125,13 @@ sendReq(userIdPhoto, usernamePhoto){
                 text: 'OK', onPress: () => {
                     this.itemRef.ref('Customer').child(userKey)
                     .child('ListSendReqPhoto').push({ 
-                        userId: userIdPhoto, statusAgree: 'Gửi yêu cầu,', usernamePhoto: usernamePhoto,
+                        userId: userIdPhoto, statusAgree: 'Gửi yêu cầu', usernamePhoto: usernamePhoto,
                         date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
                         hour: new Date().getHours() + ":" + new Date().getMinutes()
                     });
                     this.itemRef.ref('Customer').child(userIdPhoto)
                     .child('ListSendReqPhoto').push({ 
-                        userId: userKey, statusAgree: 'Gửi yêu cầu,', 
+                        userId: userKey, statusAgree: 'Gửi yêu cầu', 
                         date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
                         hour: new Date().getHours() + ":" + new Date().getMinutes()
                     });

@@ -18,6 +18,7 @@ import ManagePost from './../ManagePost/ManagePost'
 import SearchPhoto from './../Search/SearchPhoto'
 import SearchModal from '../Search/SearchModal'
 import ListFavorite from './../ListFavorite/ListFavorite'
+import ManageSendReq from  './../ManageSendReq/ManageSendReq'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 
@@ -160,22 +161,22 @@ const MenuStack = createStackNavigator({
     },
   });
 
-  // const HistoryContractStack = createStackNavigator({
-  //   HistoryContract: { 
-  //     screen: HistoryContract, 
-  //     navigationOptions: ({ navigation }) => ({
-  //       title: 'Lịch sử hợp đồng',
-  //       headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-  //       headerTintColor: 'white', 
-  //       headerStyle: {
-  //         backgroundColor: '#EE3B3B',    
-  //         height: 45,    
-  //         elevation: 0,
-  //         shadowOpacity: 0
-  //       },
-  //     })
-  //   },
-  // });
+  const ManageSendReqStack = createStackNavigator({
+    ManageSendReq: { 
+      screen: ManageSendReq, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Quản lý gửi yêu cầu',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerTintColor: 'white', 
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
+        },
+      })
+    },
+  });
 
   const ManageContractStack = createStackNavigator({
     ManageContract: { 
@@ -392,6 +393,23 @@ const MenuStack = createStackNavigator({
       screen: ManageContractStack,
       navigationOptions: {
         drawerLabel: 'Quản lý bài viết',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/info/manaContract.png')}
+            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 35,    
+          
+        },
+      },
+    },
+    ManageSendReq: {
+      screen: ManageSendReqStack,
+      navigationOptions: {
+        drawerLabel: 'Quản lý gửi yêu cầu'+ '\n'+ 'trực tiếp',
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/info/manaContract.png')}
