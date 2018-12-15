@@ -9,10 +9,7 @@ import { createStackNavigator } from 'react-navigation'
 
 import Menu from './Menu'
 import HamburgerIcon from './HamburgerIcon'
-import ListFavorite from './ListFavorite'
 import InfoCustomer from '../Info/InfoCustomer'
-// import HistoryContract from './HistoryContract'
-// import ManageContract from './ManageContract'
 import ManageContract from './../ManageContract/ManageContract'
 import AlbumPose from './AlbumPose'
 import MenuTabBar from './MenuTabBar'
@@ -20,13 +17,10 @@ import Setting from './../Setting/Setting'
 import ManagePost from './../ManagePost/ManagePost'
 import SearchPhoto from './../Search/SearchPhoto'
 import SearchModal from '../Search/SearchModal'
+import ListFavorite from './../ListFavorite/ListFavorite'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 
-import iconInfo from './../../assets/img/info/icon_info.png'
-
-
-import notifi from '../../assets/img/menu/notifi.png'
 import IconNotification from './IconNotification';
 
 // var user = FirebaseApp.auth().currentUser;
@@ -335,7 +329,7 @@ const MenuStack = createStackNavigator({
     ListFavorite: { 
       screen: ListFavoriteStack,
       navigationOptions: {
-        drawerLabel: 'Danh sách yêu thích' + '\n' +'nhiếp ảnh gia',
+        drawerLabel: 'Danh sách yêu thích',
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/info/heart.png')}

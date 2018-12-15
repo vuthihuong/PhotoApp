@@ -42,7 +42,7 @@ export default class SearchListModal extends Component {
                     .on('value', (function (snapshot) {
                         if (snapshot.exists()) {
                             items.push({
-                                colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
+                                colorLoveModal: '#EE3B3B', id: dataSnapshot.key,
                                 keyLove: snapshot.key, countLove: childData.countLove,
                                 addressCity: childData.addressCity, addresDist: childData.addresDist,
                                 address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
@@ -53,7 +53,7 @@ export default class SearchListModal extends Component {
                         }
                         else {
                             items.push({
-                                colorLovePhoto: 'black', id: dataSnapshot.key, countLove: childData.countLove,
+                                colorLoveModal: 'black', id: dataSnapshot.key, countLove: childData.countLove,
                                 addressCity: childData.addressCity, addresDist: childData.addresDist,
                                 address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
                                 date: childData.date, email: childData.email, gender: childData.gender,
@@ -80,7 +80,7 @@ export default class SearchListModal extends Component {
                     .on('value', (function (snapshot) {
                         if (snapshot.exists()) {
                             items.push({
-                                colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
+                                colorLoveModal: '#EE3B3B', id: dataSnapshot.key,
                                 keyLove: snapshot.key, countLove: childData.countLove,
                                 addressCity: childData.addressCity, addresDist: childData.addresDist,
                                 address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
@@ -91,7 +91,7 @@ export default class SearchListModal extends Component {
                         }
                         else {
                             items.push({
-                                colorLovePhoto: 'black', id: dataSnapshot.key, countLove: childData.countLove,
+                                colorLoveModal: 'black', id: dataSnapshot.key, countLove: childData.countLove,
                                 addressCity: childData.addressCity, addresDist: childData.addresDist,
                                 address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
                                 date: childData.date, email: childData.email, gender: childData.gender,
@@ -125,7 +125,7 @@ export default class SearchListModal extends Component {
                             .on('value', (function (snapshot) {
                                 if (snapshot.exists()) {
                                     items.push({
-                                        colorLovePhoto: '#EE3B3B', id: dataSnapshot.key,
+                                        colorLoveModal: '#EE3B3B', id: dataSnapshot.key,
                                         keyLove: snapshot.key, countLove: childData.countLove,
                                         addressCity: childData.addressCity, addresDist: childData.addresDist,
                                         address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
@@ -136,7 +136,7 @@ export default class SearchListModal extends Component {
                                 }
                                 else {
                                     items.push({
-                                        colorLovePhoto: 'black', id: dataSnapshot.key, countLove: childData.countLove,
+                                        colorLoveModal: 'black', id: dataSnapshot.key, countLove: childData.countLove,
                                         addressCity: childData.addressCity, addresDist: childData.addresDist,
                                         address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
                                         date: childData.date, email: childData.email, gender: childData.gender,
@@ -153,8 +153,8 @@ export default class SearchListModal extends Component {
             })
         }
     }
-    lovePhoto(id, colorLovePhoto, countLove) {
-        if (colorLovePhoto === 'black') {
+    lovePhoto(id, colorLoveModal, countLove) {
+        if (colorLoveModal === 'black') {
             //cập nhật số lượng yêu thích mẫu ảnh trong bảng mẫu ảnh
             FirebaseApp.database().ref('Customer').child(id).update({
                 countLove:   countLove + 1
@@ -162,17 +162,17 @@ export default class SearchListModal extends Component {
             // thêm user đã thích mẫu ảnh vào bảng của mẫu ảnh
             FirebaseApp.database().ref('Customer').child(id)
                 .child('ListUserLoveModel').push({
-                    colorLovePhoto: '#EE3B3B', userId: userKey
+                    colorLoveModal: '#EE3B3B', userId: userKey
                 })
             //thêm mẫu ảnh đã thích vào bảng của user
             FirebaseApp.database().ref('Customer').child(userKey)
                 .child('ListUserLoveModel').push({
-                    colorLovePhoto: '#EE3B3B', userId: id
+                    colorLoveModal: '#EE3B3B', userId: id
                 })
             alert('Đã thêm mẫu ảnh vào danh sách yêu thích của bạn');
             // this.actGetData1(items = []);
         }
-        else if (colorLovePhoto === '#EE3B3B') {
+        else if (colorLoveModal === '#EE3B3B') {
             Alert.alert(
                 'Thông báo',
                 'Bạn có chắc chắn muốn xóa mẫu ảnh này khỏi danh sách yêu thích?',
@@ -273,9 +273,9 @@ export default class SearchListModal extends Component {
                                         <View style={stylesSearchListModel.txtConfirm}>
                                             <TouchableOpacity style={{ alignItems: 'center' }}
                                                 onPress={() => {
-                                                    this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
+                                                    this.lovePhoto(rowData.id, rowData.colorLoveModal, rowData.countLove)
                                                 }}>
-                                                <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
+                                                <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLoveModal }} />
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username) }}>
                                                 <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
@@ -305,9 +305,9 @@ export default class SearchListModal extends Component {
                                     <View style={stylesSearchListModel.txtConfirm}>
                                         <TouchableOpacity style={{ alignItems: 'center' }}
                                             onPress={() => {
-                                                this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
+                                                this.lovePhoto(rowData.id, rowData.colorLoveModal, rowData.countLove)
                                             }}>
-                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
+                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLoveModal }} />
                                         </TouchableOpacity>
                                         <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username) }}>
                                             <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
@@ -337,8 +337,8 @@ export default class SearchListModal extends Component {
                                     </TouchableOpacity>
                                     <View style={stylesSearchListModel.txtConfirm}>
                                         <TouchableOpacity style={{ alignItems: 'center' }}
-                                            onPress={() => { this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove) }}>
-                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
+                                            onPress={() => { this.lovePhoto(rowData.id, rowData.colorLoveModal, rowData.countLove) }}>
+                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLoveModal }} />
                                         </TouchableOpacity>
                                         <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username) }}>
                                             <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
