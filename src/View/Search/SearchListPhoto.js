@@ -9,7 +9,7 @@ import gobackIcon from '../../assets/img/info/goback.png'
 import heart from '../../assets/img/info/heart.png'
 
 
-export default class PostEvent extends Component {
+export default class SearchListPhoto extends Component {
     constructor(props) {
         super();
         this.state = {
@@ -397,7 +397,10 @@ export default class PostEvent extends Component {
                             FirebaseApp.database().ref('Customer').child(userKey)
                                 .child('ListUserLove').child(keyLovePhoto).remove();
                             alert('Đã xóa nhiếp ảnh gia khỏi danh sách yêu thích của bạn.')
-                            this.actGetData1(items = []);
+                            this.actGetData1(items = [])
+                            this.actGetData2(items = [])
+                            this.actGetData3(items = [])
+                            this.actGetData4(items = [])
 
                         }
                     },
@@ -405,6 +408,25 @@ export default class PostEvent extends Component {
                 { cancelable: false }
             )
         }
+    }
+    sendReq(userIdPhoto, usernamePhoto){ 
+        // alert(new Date().getDate() + "/" + new Date().getMonth() + 1 + "/" + new Date().getFullYear());
+        this.itemRef.ref('Customer').child(userKey).child('ListSendReqPhoto').orderByChild('userId')
+        .equalTo(userIdPhoto).on('value', (function (snapshotChild) {
+            if (snapshotChild.exists()) {
+                alert('Bạn đã gửi yêu cầu cho nhiếp ảnh gia '+usernamePhoto)
+            }
+            else { 
+                this.itemRef.ref('Customer').child(userKey)
+                .child('ListSendReqPhoto').push({ 
+                    userId: userIdPhoto, statusAgree: 'Gửi yêu cầu,', usernamePhoto: usernamePhoto
+                });
+                this.itemRef.ref('Customer').child(userIdPhoto)
+                .child('ListSendReqPhoto').push({ 
+                    userId: userKey, statusAgree: 'Gửi yêu cầu,', 
+                });
+            }
+        }).bind(this))
     }
 
     render() {
@@ -442,10 +464,14 @@ export default class PostEvent extends Component {
                                             <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist} </Text>
                                         </TouchableOpacity>
                                         <View style={stylesSearchListPhoto.txtConfirm}>
-                                            <TouchableOpacity onPress={() => {
-                                                this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
-                                            }}>
-                                                <Image source={heart} style={{ height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLovePhoto }} />
+                                            <TouchableOpacity style = {{alignItems: 'center'}}
+                                                onPress={() => {
+                                                    this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
+                                                }}>
+                                                <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
+                                            </TouchableOpacity>
+                                            <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username)}}>
+                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
                                             </TouchableOpacity>
                                         </View>
                                     </View> : null}
@@ -473,11 +499,15 @@ export default class PostEvent extends Component {
                                         <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
-                                        <TouchableOpacity onPress={() => {
-                                            this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
-                                        }}>
-                                            <Image source={heart} style={{ height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLovePhoto }} />
+                                        <TouchableOpacity style = {{alignItems: 'center'}}
+                                            onPress={() => {
+                                                this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
+                                            }}>
+                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
                                         </TouchableOpacity>
+                                        <TouchableOpacity  onPress={() => { this.sendReq(rowData.id, rowData.username)}}>
+                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
+                                            </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>}
@@ -504,11 +534,15 @@ export default class PostEvent extends Component {
                                         <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
-                                        <TouchableOpacity onPress={() => {
-                                            this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
-                                        }}>
-                                            <Image source={heart} style={{ height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLovePhoto }} />
+                                        <TouchableOpacity style = {{alignItems: 'center'}}
+                                            onPress={() => {
+                                                this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
+                                            }}>
+                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
                                         </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username)}}>
+                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
+                                            </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>}
@@ -535,9 +569,13 @@ export default class PostEvent extends Component {
                                         <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
-                                        <TouchableOpacity onPress={() => {   this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove) }}>
-                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto, marginTop: 10 }} />
+                                        <TouchableOpacity  style = {{alignItems: 'center'}}
+                                            onPress={() => {   this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove) }}>
+                                                <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
                                         </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username)}}>
+                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
+                                            </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>}

@@ -30,7 +30,6 @@ export default class SearchListModal extends Component {
         this.actGetData1(items = [])
         this.actGetData2(items = [])
         this.actGetData3(items = [])
-        this.actGetData4(items = [])
     }
 
     actGetData1(items = []) {
@@ -156,60 +155,62 @@ export default class SearchListModal extends Component {
     }
     lovePhoto(id, colorLovePhoto, countLove) {
         if (colorLovePhoto === 'black') {
-            //cập nhật số lượng yêu thích nháy ảnh trong bảng nháy ảnh
+            //cập nhật số lượng yêu thích mẫu ảnh trong bảng mẫu ảnh
             FirebaseApp.database().ref('Customer').child(id).update({
-                countLove: countLove + 1
+                countLove:   countLove + 1
             })
-            // thêm user đã thích nháy ảnh vào bảng của nháy ảnh
+            // thêm user đã thích mẫu ảnh vào bảng của mẫu ảnh
             FirebaseApp.database().ref('Customer').child(id)
-                .child('ListUserLove').push({
+                .child('ListUserLoveModel').push({
                     colorLovePhoto: '#EE3B3B', userId: userKey
                 })
-            //thêm nháy ảnh đã thích vào bảng của user
+            //thêm mẫu ảnh đã thích vào bảng của user
             FirebaseApp.database().ref('Customer').child(userKey)
-                .child('ListUserLove').push({
+                .child('ListUserLoveModel').push({
                     colorLovePhoto: '#EE3B3B', userId: id
                 })
-            alert('Đã thêm nhiếp ảnh gia vào danh sách yêu thích của bạn');
+            alert('Đã thêm mẫu ảnh vào danh sách yêu thích của bạn');
             // this.actGetData1(items = []);
         }
         else if (colorLovePhoto === '#EE3B3B') {
             Alert.alert(
                 'Thông báo',
-                'Bạn có chắc chắn muốn xóa nhiếp ảnh gia này khỏi danh sách yêu thích?',
+                'Bạn có chắc chắn muốn xóa mẫu ảnh này khỏi danh sách yêu thích?',
                 [
                     { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                     {
                         text: 'OK', onPress: () => {
-                            //cập nhật lại số lượng yêu thích nháy ảnh
+                            //cập nhật lại số lượng yêu thích mẫu ảnh
 
                             FirebaseApp.database().ref('Customer').child(id).update({
                                 countLove: countLove - 1
                             })
 
-                            // xóa đi user đã thích nháy ảnh trong bảng nháy ảnh
+                            // xóa đi user đã thích mẫu ảnh trong bảng mẫu ảnh
                             FirebaseApp.database().ref('Customer').child(id)
-                                .child('ListUserLove').orderByChild('userId').equalTo(userKey)
+                                .child('ListUserLoveModel').orderByChild('userId').equalTo(userKey)
                                 .on('value', (function (snapshot) {
                                     snapshot.forEach(function (childSnapshot) {
                                         keyLoveCustomer = childSnapshot.key;
                                     })
                                 }))
                             FirebaseApp.database().ref('Customer').child(id)
-                                .child('ListUserLove').child(keyLoveCustomer).remove();
+                                .child('ListUserLoveModel').child(keyLoveCustomer).remove();
 
-                            //xóa đi nháy ảnh mà user đã thích trong bảng người dùng
+                            //xóa đi mẫu ảnh mà user đã thích trong bảng người dùng
                             FirebaseApp.database().ref('Customer').child(userKey)
-                                .child('ListUserLove').orderByChild('userId').equalTo(id)
+                                .child('ListUserLoveModel').orderByChild('userId').equalTo(id)
                                 .on('value', (function (snapshot) {
                                     snapshot.forEach(function (childSnapshot) {
                                         keyLovePhoto = childSnapshot.key;
                                     })
                                 }))
                             FirebaseApp.database().ref('Customer').child(userKey)
-                                .child('ListUserLove').child(keyLovePhoto).remove();
-                            alert('Đã xóa nhiếp ảnh gia khỏi danh sách yêu thích của bạn.')
-                            this.actGetData1(items = []);
+                                .child('ListUserLoveModel').child(keyLovePhoto).remove();
+                            alert('Đã xóa máy ảnh khỏi danh sách yêu thích của bạn.')
+                            this.actGetData1(items = [])
+                            this.actGetData2(items = [])
+                            this.actGetData3(items = [])
 
                         }
                     },
