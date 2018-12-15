@@ -134,23 +134,26 @@ export default class SendReq extends Component {
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 {
                     text: 'OK', onPress: () => {
-                        this.itemRef.ref('Customer').child(userIdPhoto).child('ListSendReqPhoto')
-                            .orderByChild('userId').equalTo(userKey)
-                            .on('value', function (snapshot) {
-                                snapshot.forEach(function (childSnapshot) {
-                                    var a = childSnapshot.key
-                                })
-                                this.itemRef.ref('Customer').child(userIdPhoto).child('ListSendReqPhoto')
-                                    .child(a).remove();
+                        FirebaseApp.database().ref('Customer').child(userIdPhoto)
+                        .child('ListSendReqPhoto').orderByChild('userId').equalTo(userKey)
+                        .on('value', (function (snapshot) {
+                            snapshot.forEach(function(childSnapshot) {
+                                keySendPhoto1 = childSnapshot.key;
                             })
-                        this.itemRef.ref('Customer').child(userKey).child('ListSendReqPhoto')
-                            .orderByChild('userId').equalTo(userIdPhoto)
-                            .on('value', (function (snapshot) {
-                                snapshot.forEach(function (childSnapshot) {
-                                    this.itemRef.ref('Customer').child(userKey).child('ListSendReqPhoto')
-                                        .child(childSnapshot.key).remove();
-                                }).bind(this)
-                            }).bind(this));
+                        }))
+                        FirebaseApp.database().ref('Customer').child(userIdPhoto)
+                        .child('ListSendReqPhoto').child(keySendPhoto1).remove();
+
+                        FirebaseApp.database().ref('Customer').child(userKey)
+                        .child('ListSendReqPhoto').orderByChild('userId').equalTo(userIdPhoto)
+                        .on('value', (function (snapshot) {
+                            snapshot.forEach(function(childSnapshot) {
+                                keySendPhoto2 = childSnapshot.key;
+                            })
+                        }))
+                        FirebaseApp.database().ref('Customer').child(userKey)
+                        .child('ListSendReqPhoto').child(keySendPhoto2).remove();
+                        this.actGetData1();
                         alert('Bạn đã xóa yêu cầu thành công.');
                     }
                 },
@@ -166,22 +169,26 @@ export default class SendReq extends Component {
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 {
                     text: 'OK', onPress: () => {
-                        this.itemRef.ref('Customer').child(userIdModal).child('ListSendReqModal')
-                            .orderByChild('userId').equalTo(userKey)
-                            .on('value', (function (snapshot) {
-                                snapshot.forEach(function (childSnapshot) {
-                                    this.itemRef.ref('Customer').child(userIdModal).child('ListSendReqModal')
-                                        .child(childSnapshot.key).remove();
-                                }).bind(this)
-                            }).bind(this));
-                        this.itemRef.ref('Customer').child(userKey).child('ListSendReqModal')
-                            .orderByChild('userId').equalTo(userIdModal)
-                            .on('value', (function (snapshot) {
-                                snapshot.forEach(function (childSnapshot) {
-                                    this.itemRef.ref('Customer').child(userKey).child('ListSendReqModal')
-                                        .child(childSnapshot.key).remove();
-                                }).bind(this)
-                            }).bind(this));
+                        FirebaseApp.database().ref('Customer').child(userIdModal)
+                        .child('ListSendReqModal').orderByChild('userId').equalTo(userKey)
+                        .on('value', (function (snapshot) {
+                            snapshot.forEach(function(childSnapshot) {
+                                keySendModal1 = childSnapshot.key;
+                            })
+                        }))
+                        FirebaseApp.database().ref('Customer').child(userIdModal)
+                        .child('ListSendReqModal').child(keySendModal1).remove();
+
+                        FirebaseApp.database().ref('Customer').child(userKey)
+                        .child('ListSendReqModal').orderByChild('userId').equalTo(userIdModal)
+                        .on('value', (function (snapshot) {
+                            snapshot.forEach(function(childSnapshot) {
+                                keySendModal2 = childSnapshot.key;
+                            })
+                        }))
+                        FirebaseApp.database().ref('Customer').child(userKey)
+                        .child('ListSendReqModal').child(keySendModal2).remove();
+                        this.actGetData2();
                         alert('Bạn đã xóa yêu cầu thành công.');
                     }
                 },
