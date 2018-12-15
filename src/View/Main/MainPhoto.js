@@ -10,8 +10,7 @@ import MenuPhoto from './MenuPhoto'
 import HamburgerIcon from './HamburgerIcon'
 
 import InfoPhoto from '../Info/InfoPhoto'
-// import HistoryContract from './HistoryContract'
-// import ManageContract from './ManageContract'
+import ListFavoriteModal from './../ListFavorite/ListFavoriteModal'
 import ManageContract from './../ManageContract/ManageContract'
 import AlbumPose from './AlbumPose'
 import MenuPhotoTabBar from './MenuPhotoTabBar'
@@ -20,10 +19,7 @@ import ManagePost from './../ManagePost/ManagePost'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 import IconNotification from './IconNotification';
 import ManageRequest from './../ManageRequest/ManageRequest'
-
-
-import notifi from '../../assets/img/menu/notifi.png'
-import iconInfo from './../../assets/img/info/icon_info.png'
+import SearchModal from './../Search/SearchModal'
 
 const InfoPhotoStack = createStackNavigator({
     InfoPhoto: { 
@@ -65,26 +61,45 @@ const MenuPhotoStack = createStackNavigator({
   },
 });
 
+const SearchModalStack = createStackNavigator({
+  SearchModal: { 
+    screen: SearchModal, 
+    navigationOptions: ({ navigation }) => ({
+      title: 'Tìm kiếm mẫu ảnh',
+      headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+      headerStyle: {
+        backgroundColor: '#EE3B3B'
+      },
+      headerTintColor: 'white', 
+      headerStyle: {
+        backgroundColor: '#EE3B3B',    
+        height: 45,    
+        elevation: 0,
+        shadowOpacity: 0
+      },
+    })
+  },
+});
 
-
-//   const ListFavoriteStack = createStackNavigator({
-//     ListFavorite: { 
-//       screen: ListFavorite, 
-//       navigationOptions: ({ navigation }) => ({
-//         title: 'Danh sách yêu thích',
-//         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-//         headerStyle: {
-//           backgroundColor: 'white'
-//         },
-//         headerTintColor: '#EE3B3B', 
-//         headerStyle: {
-//           backgroundColor: 'white',    
-//           height: 35,    
-          
-//         },
-//       })
-//     },
-//   });
+const ListFavoriteStack = createStackNavigator({
+  ListFavoriteModal: { 
+    screen: ListFavoriteModal, 
+    navigationOptions: ({ navigation }) => ({
+      title: 'Danh sách yêu thích mẫu ảnh',
+      headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+      headerStyle: {
+        backgroundColor: '#EE3B3B'
+      },
+      headerTintColor: 'white', 
+      headerStyle: {
+        backgroundColor: '#EE3B3B',    
+        height: 45,    
+        elevation: 0,
+        shadowOpacity: 0
+      },
+    })
+  },
+});
 
 const ManagePostStack = createStackNavigator({
   ManagePost: { 
@@ -263,6 +278,40 @@ const ManagePostStack = createStackNavigator({
     }
     },
 
+    SearchModal: { 
+      screen: SearchModalStack,
+      navigationOptions: {
+        drawerLabel: 'Tìm kiếm mẫu ảnh',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/search/search.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
+        ),
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 35,   },
+    },
+    },
+  
+
+    ListFavoriteModal: { 
+      screen: ListFavoriteStack,
+      navigationOptions: {
+        drawerLabel: 'Danh sách yêu thích' + '\n' +'mẫu ảnh',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/info/heart.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
+    },
+    },
+
     ManagePost: { 
       screen: ManagePostStack,
       navigationOptions: {
@@ -281,23 +330,7 @@ const ManagePostStack = createStackNavigator({
     },
     },
   
-    // ListFavorite: { 
-    //   screen: ListFavoriteStack,
-    //   navigationOptions: {
-    //     drawerLabel: 'Danh sách yêu thích',
-    //     drawerIcon: () => (
-    //       <Image
-    //         source={require('../../assets/img/info/heart.png')}
-    //         style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
-    //       />
-    //     ),
-    //     headerStyle: {
-    //       backgroundColor: 'white',    
-    //       height: 35,    
-          
-    //     },
-    // },
-    // },
+   
   
     // AlbumPose: { 
     //   screen: AlbumPoseStack,

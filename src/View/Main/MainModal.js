@@ -9,10 +9,8 @@ import { createStackNavigator } from 'react-navigation'
 
 import Menu from './Menu'
 import HamburgerIcon from './HamburgerIcon' 
-import ListFavorite from './ListFavorite'
+import ListFavoritePhoto from './../ListFavorite/ListFavoritePhoto'
 import InfoModal from '../Info/InfoModal'
-// import HistoryContract from './HistoryContract'
-// import ManageContract from './ManageContract'
 import ManageContract from './../ManageContract/ManageContract'
 import AlbumPose from './AlbumPose'
 import MenuTabBar from './MenuTabBar'
@@ -89,8 +87,8 @@ const MenuStack = createStackNavigator({
   });
 
   const ListFavoriteStack = createStackNavigator({
-    ListFavorite: { 
-      screen: ListFavorite, 
+    ListFavoritePhoto: { 
+      screen: ListFavoritePhoto, 
       navigationOptions: ({ navigation }) => ({
         title: 'Danh sách yêu thích',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
@@ -294,7 +292,7 @@ const MenuStack = createStackNavigator({
     },
     },
   
-    ListFavorite: { 
+    ListFavoritePhoto: { 
       screen: ListFavoriteStack,
       navigationOptions: {
         drawerLabel: 'Danh sách yêu thích' + '\n' +'nhiếp ảnh gia',
