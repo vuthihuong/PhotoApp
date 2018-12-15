@@ -114,6 +114,34 @@ lovePhoto(id, colorLovePhoto, countLove){
           )
     }
 }
+sendReq(userIdPhoto, usernamePhoto){ 
+    var dateOfMonth = new Date().getMonth() + 1;
+    Alert.alert(
+        'Thông báo',
+        'Bạn có chắc chắn muốn gửi yêu cầu cho nhiếp ảnh gia '+usernamePhoto +' không?',
+        [
+            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+            {
+                text: 'OK', onPress: () => {
+                    this.itemRef.ref('Customer').child(userKey)
+                    .child('ListSendReqPhoto').push({ 
+                        userId: userIdPhoto, statusAgree: 'Gửi yêu cầu,', usernamePhoto: usernamePhoto,
+                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                        hour: new Date().getHours() + ":" + new Date().getMinutes()
+                    });
+                    this.itemRef.ref('Customer').child(userIdPhoto)
+                    .child('ListSendReqPhoto').push({ 
+                        userId: userKey, statusAgree: 'Gửi yêu cầu,', 
+                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                        hour: new Date().getHours() + ":" + new Date().getMinutes()
+                    });
+                    alert('Bạn đã gửi yêu cầu thành công.');
+                }
+            },
+        ],
+        { cancelable: false }
+    )
+}
 
     render() {
         return(
@@ -145,9 +173,14 @@ lovePhoto(id, colorLovePhoto, countLove){
                             </View>
                         </TouchableOpacity>
                         <View style={ stylesFavorPhoto.txtConfirm }>
-                            <TouchableOpacity onPress={()=> { 
+                            <TouchableOpacity style={{ alignItems: 'center' }}
+                                onPress={()=> { 
                                 this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)}}>
                                 <Image source={heart} style={{height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLovePhoto}} />
+                             </TouchableOpacity>
+                             <TouchableOpacity onPress={()=> { 
+                                this.sendReq(rowData.id, rowData.username)}}>
+                                <Text style={{color: 'black', fontStyle: "italic"  }}>Gửi yêu cầu</Text>
                              </TouchableOpacity>
                         </View>
                     </View>}
