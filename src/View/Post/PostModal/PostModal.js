@@ -226,12 +226,12 @@ export default class PostModal extends Component {
             this.setState({ 
                 labelErrortimeModal: false, labelErrorLessTimeModal: false
             })
-           
+            var dateOfMonth = new Date().getMonth() + 1;
             this.itemRef.ref('Post').push({
                 userId: key, title: "Tìm mẫu ảnh",
                 content: this.state.content, cost: this.state.cost, countCommentEvent: this.state.countCommentEvent, 
                 countParticipate: this.state.countParticipate, countLike: this.state.countLike, 
-                datePostModal : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth() + 1 +"/"+this.state.currentDay.getFullYear(),
+                datePostModal : this.state.currentDay.getDate()+"/"+dateOfMonth +"/"+this.state.currentDay.getFullYear(),
                 timePostModal: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
                 datetime: this.state.datetime, datetime1: this.state.datetime1, countSendReq: this.state.countSendReq,
                 labelRightModal1: this.state.labelRightModal1, labelRightModal2: this.state.labelRightModal2,
@@ -298,7 +298,7 @@ export default class PostModal extends Component {
                         labelErrorLessTimeModal: false, labelErrortimeModal: false,
                         labelErrorCostModal: false,  labelErrorAddressModal: false, labelErrorGenderModal: false, 
                         })
-                       
+                        var dateOfMonth = new Date().getMonth() + 1;
                     this.itemRef.ref('Post').push({
                         userId: key, title: "Tìm mẫu ảnh", content: this.state.content, cost: this.state.cost,
                         datetime: this.state.datetime, datetime1: this.state.datetime1, countCommentEvent: this.state.countCommentEvent, 
@@ -308,7 +308,7 @@ export default class PostModal extends Component {
                         labelRightModal5: this.state.labelRightModal5, girl: this.state.girl, countSendReq: this.state.countSendReq,
                         circle1: this.state.circle1, circle2: this.state.circle2,  circle3: this.state.circle3, 
                         value: this.state.value, height: this.state.height, boy: this.state.boy, 
-                        datePostModal : this.state.currentDay.getDay()+"/"+this.state.currentDay.getMonth() + 1 +"/"+this.state.currentDay.getFullYear(),
+                        datePostModal : this.state.currentDay.getDate()+"/"+dateOfMonth +"/"+this.state.currentDay.getFullYear(),
                         timePostModal: this.state.currentDay.getHours()+":"+this.state.currentDay.getMinutes(),
                         }).then((snap) => { this.setState({  
                                 id: snap.key })

@@ -219,24 +219,33 @@ export default class SearchListModal extends Component {
             )
         }
     }
-    sendReq(userIdPhoto, usernamePhoto) {
-        // alert(new Date().getDate() + "/" + new Date().getMonth() + 1 + "/" + new Date().getFullYear());
-        this.itemRef.ref('Customer').child(userKey).child('ListSendReqPhoto').orderByChild('userId')
-            .equalTo(userIdPhoto).on('value', (function (snapshotChild) {
-                if (snapshotChild.exists()) {
-                    alert('Bạn đã gửi yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
-                }
-                else {
-                    this.itemRef.ref('Customer').child(userKey)
-                        .child('ListSendReqPhoto').push({
-                            userId: userIdPhoto, statusAgree: 'Gửi yêu cầu,', usernamePhoto: usernamePhoto
+    sendReq(userIdModal, usernameModal){ 
+        var dateOfMonth = new Date().getMonth() + 1;
+        Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn muốn gửi yêu cầu cho mẫu ảnh '+usernameModal +' không?',
+            [
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                {
+                    text: 'OK', onPress: () => {
+                        this.itemRef.ref('Customer').child(userKey)
+                        .child('ListSendReqModal').push({ 
+                            userId: userIdModal, statusAgree: 'Gửi yêu cầu,', usernameModal: usernameModal,
+                            date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                            hour: new Date().getHours() + ":" + new Date().getMinutes()
                         });
-                    this.itemRef.ref('Customer').child(userIdPhoto)
-                        .child('ListSendReqPhoto').push({
-                            userId: userKey, statusAgree: 'Gửi yêu cầu,',
+                        this.itemRef.ref('Customer').child(userIdModal)
+                        .child('ListSendReqModal').push({ 
+                            userId: userKey, statusAgree: 'Gửi yêu cầu,', 
+                            date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                            hour: new Date().getHours() + ":" + new Date().getMinutes()
                         });
-                }
-            }).bind(this))
+                        alert('Bạn đã gửi yêu cầu thành công.');
+                    }
+                },
+            ],
+            { cancelable: false }
+        )
     }
 
     render() {
