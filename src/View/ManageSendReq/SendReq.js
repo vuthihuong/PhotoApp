@@ -44,24 +44,21 @@ export default class SendReq extends Component {
                     .child('ListSendReqPhoto').orderByChild('userId').equalTo(dataSnapshot.key)
                     .on('value', (function (snapshot1) {
                         if (snapshot1.exists()) {
-                            FirebaseApp.database().ref('Customer').child(userKey)
-                                .child('ListSendReqPhoto').orderByChild('statusAgree').equalTo("Gửi yêu cầu")
-                                .on('value', (function (snapshot) {
-                                    if (snapshot.exists()) {
-                                        items.push({
-                                            id: dataSnapshot.key, keyLove: snapshot.key, countLove: childData.countLove,
-                                            addressCity: childData.addressCity, addresDist: childData.addresDist,
-                                            address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                                            date: childData.date, email: childData.email, gender: childData.gender,
-                                            labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2,
-                                            labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                                            labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                                            labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                                            labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
-                                        })
-                                    }
-
-                                }).bind(this))
+                            snapshot1.forEach(function (childSnapshot1) {
+                                if(childSnapshot1.val().statusAgree === "Đã gửi yêu cầu"){ 
+                                    items.push({
+                                        id: dataSnapshot.key, countLove: childData.countLove,
+                                        addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                        address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                        date: childData.date, email: childData.email, gender: childData.gender,
+                                        labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2,
+                                        labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                        labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                        labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                        labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                                    })
+                                }
+                            })
                         }
                     }).bind(this))
             }
@@ -78,21 +75,21 @@ export default class SendReq extends Component {
                     .child('ListSendReqModal').orderByChild('userId').equalTo(dataSnapshot.key)
                     .on('value', (function (snapshot1) {
                         if (snapshot1.exists()) {
-                            FirebaseApp.database().ref('Customer').child(userKey)
-                                .child('ListSendReqModal').orderByChild('statusAgree').equalTo("Gửi yêu cầu")
-                                .on('value', (function (snapshot) {
-                                    if (snapshot.exists()) {
-                                        items.push({
-                                            id: dataSnapshot.key, keyLove: snapshot.key, countLove: childData.countLove,
-                                            addressCity: childData.addressCity, addresDist: childData.addresDist,
-                                            address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
-                                            date: childData.date, email: childData.email, gender: childData.gender,
-                                            telephone: childData.telephone, username: childData.username, heightt: childData.heightt,
-                                            circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3
-                                        })
-                                    }
-
-                                }).bind(this))
+                            snapshot1.forEach(function (childSnapshot1) {
+                                if(childSnapshot1.val().statusAgree === "Đã gửi yêu cầu"){ 
+                                    items.push({
+                                        id: dataSnapshot.key, countLove: childData.countLove,
+                                        addressCity: childData.addressCity, addresDist: childData.addresDist,
+                                        address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
+                                        date: childData.date, email: childData.email, gender: childData.gender,
+                                        labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2,
+                                        labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
+                                        labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
+                                        labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
+                                        labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username
+                                    })
+                                }
+                            })
                         }
                     }).bind(this))
             }
@@ -138,7 +135,10 @@ export default class SendReq extends Component {
                         .child('ListSendReqPhoto').orderByChild('userId').equalTo(userKey)
                         .on('value', (function (snapshot) {
                             snapshot.forEach(function(childSnapshot) {
-                                keySendPhoto1 = childSnapshot.key;
+                                if(childSnapshot.val().statusAgree === "Đã gửi yêu cầu"){ 
+                                    keySendPhoto1 = childSnapshot.key;
+                                }
+                                
                             })
                         }))
                         FirebaseApp.database().ref('Customer').child(userIdPhoto)
@@ -146,9 +146,11 @@ export default class SendReq extends Component {
 
                         FirebaseApp.database().ref('Customer').child(userKey)
                         .child('ListSendReqPhoto').orderByChild('userId').equalTo(userIdPhoto)
-                        .on('value', (function (snapshot) {
-                            snapshot.forEach(function(childSnapshot) {
-                                keySendPhoto2 = childSnapshot.key;
+                        .on('value', (function (snapshot1) {
+                            snapshot1.forEach(function(childSnapshot1) {
+                                if(childSnapshot1.val().statusAgree === "Đã gửi yêu cầu"){ 
+                                    keySendPhoto2 = childSnapshot1.key;
+                                }
                             })
                         }))
                         FirebaseApp.database().ref('Customer').child(userKey)
@@ -171,9 +173,11 @@ export default class SendReq extends Component {
                     text: 'OK', onPress: () => {
                         FirebaseApp.database().ref('Customer').child(userIdModal)
                         .child('ListSendReqModal').orderByChild('userId').equalTo(userKey)
-                        .on('value', (function (snapshot) {
-                            snapshot.forEach(function(childSnapshot) {
-                                keySendModal1 = childSnapshot.key;
+                        .on('value', (function (snapshot2) {
+                            snapshot2.forEach(function(childSnapshot2) {
+                                if(childSnapshot2.val().statusAgree === "Đã gửi yêu cầu"){ 
+                                    keySendModal1 = childSnapshot2.key;
+                                }
                             })
                         }))
                         FirebaseApp.database().ref('Customer').child(userIdModal)
@@ -181,9 +185,11 @@ export default class SendReq extends Component {
 
                         FirebaseApp.database().ref('Customer').child(userKey)
                         .child('ListSendReqModal').orderByChild('userId').equalTo(userIdModal)
-                        .on('value', (function (snapshot) {
-                            snapshot.forEach(function(childSnapshot) {
-                                keySendModal2 = childSnapshot.key;
+                        .on('value', (function (snapshot3) {
+                            snapshot3.forEach(function(childSnapshot3) {
+                                if(childSnapshot3.val().statusAgree === "Đã gửi yêu cầu"){ 
+                                    keySendModal2 = childSnapshot3.key;
+                                }
                             })
                         }))
                         FirebaseApp.database().ref('Customer').child(userKey)

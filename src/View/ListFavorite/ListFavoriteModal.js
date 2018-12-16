@@ -113,31 +113,73 @@ loveModal(id, colorLoveModal, countLove){
 }
 sendReq(userIdModal, usernameModal){ 
     var dateOfMonth = new Date().getMonth() + 1;
-    Alert.alert(
-        'Thông báo',
-        'Bạn có chắc chắn muốn gửi yêu cầu cho mẫu ảnh '+usernameModal +' không?',
-        [
-            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-            {
-                text: 'OK', onPress: () => {
-                    this.itemRef.ref('Customer').child(userKey)
-                    .child('ListSendReqModal').push({ 
-                        userId: userIdModal, statusAgree: 'Gửi yêu cầu', usernameModal: usernameModal,
-                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                        hour: new Date().getHours() + ":" + new Date().getMinutes()
-                    });
-                    this.itemRef.ref('Customer').child(userIdModal)
-                    .child('ListSendReqModal').push({ 
-                        userId: userKey, statusAgree: 'Gửi yêu cầu', 
-                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                        hour: new Date().getHours() + ":" + new Date().getMinutes()
-                    });
-                    alert('Bạn đã gửi yêu cầu thành công.');
-                }
-            },
-        ],
-        { cancelable: false }
-    )
+    this.itemRef.ref('Customer').child(userKey).child('ListSendReqModal').orderByChild('userId')
+        .equalTo(userIdModal).on('value', (function (snapshotChild) {
+            if (snapshotChild.exists()) {
+                snapshotChild.forEach(function(snapshotChild1){ 
+                    if(snapshotChild1.val().statusAgree === "Đã gửi yêu cầu"){ 
+                        alert('Bạn đã gửi yêu cầu cho mẫu ảnh ' + usernameModal)
+                    }
+                    else { 
+                        Alert.alert(
+                            'Thông báo',
+                            'Bạn có chắc chắn muốn gửi yêu cầu cho mẫu ảnh ' +usernamePhoto+ ' không?',
+                            [
+                                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                                {
+                                    text: 'OK', onPress: () => {
+                                        this.itemRef.ref('Customer').child(userKey)
+                                        .child('ListSendReqModal').push({
+                                            userId: userIdModal, statusAgree: 'Đã gửi yêu cầu', usernameModal: usernameModal,
+                                            date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                            hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                        });
+                                    this.itemRef.ref('Customer').child(userIdModal)
+                                        .child('ListSendReqModal').push({
+                                            userId: userKey, statusAgree: 'Đã gửi yêu cầu',
+                                            date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                            hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                        });
+                                         alert('Bạn đã gửi thành công yêu cầu cho mẫu ảnh ' + usernameModal)
+                                      
+                                    }
+                                },
+                            ],
+                            { cancelable: false }
+                        )
+                    }
+                })
+                
+            }
+            else {
+                Alert.alert(
+                    'Thông báo',
+                    'Bạn có chắc chắn muốn gửi yêu cầu cho mẫu ảnh ' +usernameModal+ ' không?',
+                    [
+                        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                        {
+                            text: 'OK', onPress: () => {
+                                this.itemRef.ref('Customer').child(userKey)
+                                .child('ListSendReqModal').push({
+                                    userId: userIdModal, statusAgree: 'Đã gửi yêu cầu', usernameModal: usernameModal,
+                                    date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                    hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                });
+                            this.itemRef.ref('Customer').child(userIdModal)
+                                .child('ListSendReqModal').push({
+                                    userId: userKey, statusAgree: 'Đã gửi yêu cầu',
+                                    date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                    hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                });
+                                 alert('Bạn đã gửi thành công yêu cầu cho mẫu ảnh ' + usernameModal)
+                              
+                            }
+                        },
+                    ],
+                    { cancelable: false }
+                )
+            }
+        }).bind(this))
 }
 
     render() {
