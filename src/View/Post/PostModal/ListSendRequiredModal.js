@@ -83,7 +83,7 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
         FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id) .update({
             countSendReq:   countSendReq + 1
         })
-        // thêm nháy ảnh đã gửi trong bài post
+        // thêm mẫu ảnh đã gửi trong bài post
         FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
         .child('ListSendReq').push({
             colorSendReq: '#EE3B3B', userId: id, statusSendReq: 'Đã gửi yêu cầu', username: username
