@@ -55,6 +55,7 @@ export default class PostDetailModal extends Component {
                          let childData = childSnapshot.val();
                          avatarSource = childData.avatarSource;
                          username = childData.username;
+                         category = childData.category
           })  
         })
         // lấy số lượng comment của bài post
@@ -214,9 +215,13 @@ export default class PostDetailModal extends Component {
         })
     }
     sendRequired(){ 
-        this.props.navigation.navigate('ListSendRequiredPhoto', { 
+        this.props.navigation.navigate('ListSendRequiredModal', { 
             id: this.props.navigation.state.params.id
         })
+    }
+    listSendReq(){ 
+        this.props.navigation.navigate('ListDirectPostModal', 
+                        {id: this.props.navigation.state.params.id})
     }
     showInfoPhoto(userId){ 
         FirebaseApp.database().ref('Customer').orderByKey().equalTo(userId)
@@ -383,10 +388,11 @@ export default class PostDetailModal extends Component {
                          <Image source={comment} style={{width: 20, height: 20, tintColor: 'black', marginRight: 5}}/>
                          <Text style={{color:'black'}}>Bình luận</Text>
                     </TouchableOpacity>
-                    {/* <TouchableOpacity onPress={()=> this.sendRequired()}
+                    {category !== "Mẫu ảnh" ?
+                    <TouchableOpacity onPress={()=> this.sendRequired()}
                         style={stylesPostDetailModal.btnConfirmModal1} >
                         <Text style={{ textAlign:"center", color: 'black'}}>Gửi trực tiếp yêu cầu</Text>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>:null}
                 </View>
                 {this.state.changeCommentModal === true?
                 (<View>
@@ -428,12 +434,12 @@ export default class PostDetailModal extends Component {
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách yêu cầu tham gia</Text>
                     </TouchableOpacity>
                 </View>
-               
-                {/* <View style={{marginTop: 25}}>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListDirectPostModal')}> 
+                {category !== "Mẫu ảnh" ?
+                <View style={{marginTop: 25}}>
+                    <TouchableOpacity  onPress={() => this.listSendReq()}> 
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách gửi trực tiếp</Text>
                     </TouchableOpacity>
-                </View> */}
+                </View>:null}
             </View>
            </ScrollView>
         )

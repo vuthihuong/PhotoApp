@@ -7,9 +7,6 @@ import CheckBox from 'react-native-checkbox';
 import {FirebaseApp} from './../../../Controller/FirebaseConfig'
 
 import gobackIcon from '../../../assets/img/info/goback.png'
-var folder = '' ////// all the new folder
-var check_folder1 = []
-var check_folder2 = []
 export default class ListPostModal extends Component {
     constructor(props){
         super(props)

@@ -4,12 +4,9 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, L
 import {FirebaseApp} from './../../../Controller/FirebaseConfig'
 
 import heart from '../../../assets/img/info/heart.png'
-import comment from '../../../assets/img/info/contract.png'
 import gobackIcon from '../../../assets/img/info/goback.png'
 
-
-
-export default class ListSendRequiredPhoto extends Component {
+export default class ListSendRequiredModal extends Component {
     constructor(props) {
       super(props);
       YellowBox.ignoreWarnings([
@@ -17,7 +14,6 @@ export default class ListSendRequiredPhoto extends Component {
        'Warning: componentWillReceiveProps is deprecated',
      ]);
      this.state = {
-        checkedAllAgree: false,
         dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=> r1 !== r2}),
       }
       this.itemRef = FirebaseApp.database();
@@ -42,10 +38,10 @@ export default class ListSendRequiredPhoto extends Component {
     
   }
   actGetData(items=[]){ 
-    this.itemRef.ref('Customer').orderByChild('category').equalTo('Nháy ảnh').on('child_added', (dataSnapshot)=> { {
+    this.itemRef.ref('Customer').orderByChild('category').equalTo('Mẫu ảnh').on('child_added', (dataSnapshot)=> { {
         var childData = dataSnapshot.val();
         FirebaseApp.database().ref('Customer').child(userKey)
-          .child('ListUserLove').orderByChild('userId').equalTo(dataSnapshot.key)
+          .child('ListUserLoveModel').orderByChild('userId').equalTo(dataSnapshot.key)
           .on('value', (function (snapshot1) {
             if(snapshot1.exists()){ 
                 FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
@@ -53,31 +49,25 @@ export default class ListSendRequiredPhoto extends Component {
                   .on('value', (function (snapshot) {
                     if(snapshot.exists()){ 
                         items.push({
-                            colorSendReq: '#EE3B3B', id: dataSnapshot.key, //id là userKey của nháy ảnh
+                            colorSendReq: '#EE3B3B', id: dataSnapshot.key, //id là userKey của mẫu ảnh
                             keyLove: snapshot.key, countLove: childData.countLove, 
                             textSendReq: 'Đã gửi yêu cầu', countSendReq: countSendReq,
                             addressCity: childData.addressCity, addresDist: childData.addresDist,
                             address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
                             date: childData.date, email: childData.email, gender: childData.gender,
-                            labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
-                            labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                            labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                            labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                            labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username})
+                            telephone: childData.telephone, username: childData.username, heightt: childData.heightt,
+                            circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3})
                     }
                     else { 
                         items.push({
-                            colorSendReq: 'black', id: dataSnapshot.key, //id là userKey của nháy ảnh
+                            colorSendReq: 'black', id: dataSnapshot.key, //id là userKey của mẫu ảnh
                             keyLove: snapshot.key, countLove: childData.countLove,
                             textSendReq: 'Gửi yêu cầu', countSendReq: countSendReq,
                             addressCity: childData.addressCity, addresDist: childData.addresDist,
                             address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
                             date: childData.date, email: childData.email, gender: childData.gender,
-                            labelCatImg1: childData.labelCatImg1, labelCatImg2: childData.labelCatImg2, 
-                            labelCatImg3: childData.labelCatImg3, labelCatImg4: childData.labelCatImg4,
-                            labelCatImg5: childData.labelCatImg4, labelCatImg6: childData.labelCatImg6,
-                            labelCatImg7: childData.labelCatImg7, labelCatImg8: childData.labelCatImg8,
-                            labelCatImg9: childData.labelCatImg9, telephone: childData.telephone, username: childData.username})
+                            telephone: childData.telephone, username: childData.username, heightt: childData.heightt,
+                            circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3})
                         }
                 }).bind(this))}
             }).bind(this))
@@ -100,12 +90,12 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
         })
         this.actGetData(items = []);
               
-        alert('Đã gửi yêu cầu cho nhiếp ảnh gia ' + username);
+        alert('Đã gửi yêu cầu cho mẫu ảnh ' + username);
     }
     else if(colorSendReq === '#EE3B3B'){
         Alert.alert(
             'Thông báo',
-            'Bạn có chắc chắn muốn hủy gửi yêu cầu đến nhiếp ảnh gia ' + username + ' không?',
+            'Bạn có chắc chắn muốn hủy gửi yêu cầu đến mẫu ảnh ' + username + ' không?',
             [
               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
               {text: 'OK', onPress: () => {
@@ -125,7 +115,7 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
             FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
             .child('ListSendReq').child(keyPhoto).remove();
       
-            alert('Đã hủy gửi yêu cầu cho nhiếp ảnh gia ' + username)
+            alert('Đã hủy gửi yêu cầu cho mẫu ảnh ' + username)
             this.actGetData(items = []);
               
               }},
@@ -134,17 +124,11 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
           )
     }
 }
-    checkAllAgree(){ 
-        // if(this.state.checkedAllAgree === false){ 
-
-        // }
-    }
-
 
     render() {
         return(
             <ScrollView style={{flex:1, backgroundColor: 'white'}}>
-                <View style={stylesSendRePhoto.headListSendRequired}>
+                <View style={stylesSendReModal.headListSendRequired}>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.pop()}>
                         <Image source={gobackIcon} 
@@ -152,51 +136,30 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
                     </TouchableOpacity>
                     <Text style={{ flex: 1,color: 'white', fontSize: 18}}>Danh sách gửi yêu cầu trực tiếp</Text>
                 </View>
-              <View style = {stylesSendRePhoto.container}>
-               {/*  <View style={stylesSendRePhoto.headColModal}>
-                        <View style={stylesSendRePhoto.headListModal}>
-                            <Text style={{color: 'black', fontWeight: 'bold', marginLeft: 10}}>Tên nhiếp ảnh gia</Text>
-                        </View>
-                        <View style={stylesSendRePhoto.btnConfirmListModal} >
-                            <Text style={{color:'black', marginRight: 10, fontWeight: 'bold'}}>Trạng thái</Text>
-                            <CheckBox
-                                label=''
-                                labelStyle={{color: 'black'}}
-                                checked={this.state.checkedAllAgree}
-                                checkboxStyle = {[stylesSendRePhoto.txtBoxListModal, {marginTop: 5, marginRight: 20}]}
-                                onChange={(checked) => {this.checkAllAgree()}} 
-                            />
-                        </View>
-                    </View> */}
+              <View style = {stylesSendReModal.container}>
                 <ListView  enableEmptySections
                     dataSource = {this.state.dataSource}
                     renderRow = {(rowData)=> 
-                    <View style={stylesSendRePhoto.bodyManaCont}>
-                        <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailPhoto',{ 
+                    <View style={stylesSendReModal.bodyManaCont}>
+                        <TouchableOpacity  onPress={() => this.props.navigation.navigate('InfoDetailModal',{ 
                             id: rowData.id,  countLove: rowData.countLove,
                             addressCity: rowData.addressCity, addresDist: rowData.addresDist,
                             address: rowData.address, avatarSource: rowData.avatarSource, category: rowData.category,
                             date: rowData.date, email: rowData.email, gender: rowData.gender,
-                            labelCatImg1: rowData.labelCatImg1, labelCatImg2: rowData.labelCatImg2, 
-                            labelCatImg3: rowData.labelCatImg3, labelCatImg4: rowData.labelCatImg4,
-                            labelCatImg5: rowData.labelCatImg4, labelCatImg6: rowData.labelCatImg6,
-                            labelCatImg7: rowData.labelCatImg7, labelCatImg8: rowData.labelCatImg8,
-                            labelCatImg9: rowData.labelCatImg9, telephone: rowData.telephone, username: rowData.username} )}
-                            style={stylesSendRePhoto.contManagCont}>
+                            telephone: rowData.telephone, username: rowData.username, heightt: childData.heightt,
+                            circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3} )}
+                            style={stylesSendReModal.contManagCont}>
                             <View style={{marginLeft: 20}}>
                                 <Text style={{color: 'black', fontWeight: 'bold'}}>{rowData.username}</Text>
-                                <View style={stylesSendRePhoto.likeperson}>
-                                    <Image source ={heart} style={stylesSendRePhoto.imgFavor} />
+                                <View style={stylesSendReModal.likeperson}>
+                                    <Image source ={heart} style={stylesSendReModal.imgFavor} />
                                     <Text style={{marginTop: 10, color: 'black'}}>{rowData.countLove}</Text>
-                                    <Image source ={comment} style={[stylesSendRePhoto.imgFavor,{marginLeft: 20}]} />
-                                    <Text style={{marginTop: 10, color: 'black'}}>1</Text>
                                 </View>
                             </View>
                         </TouchableOpacity>
                         <View style={{marginRight: 20}}>
                             <TouchableOpacity onPress={()=> { 
                                 this.sendReq(rowData.id, rowData.colorSendReq, rowData.username, rowData.countSendReq)}}>
-                                {/* <Image source={heart} style={{height: 20, width: 20, marginTop: 10, tintColor: rowData.colorSendReq}} /> */}
                                 <Text style={{ color: rowData.colorSendReq, marginTop: 10}}>{rowData.textSendReq}</Text>
                              </TouchableOpacity>
                         </View>
@@ -206,7 +169,7 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
         </ScrollView> 
     )}
     }
- const stylesSendRePhoto = StyleSheet.create({
+ const stylesSendReModal = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: 'white',  marginRight: 20, marginLeft: 20, marginBottom: 15

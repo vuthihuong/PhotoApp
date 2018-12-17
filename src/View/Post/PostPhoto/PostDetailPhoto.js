@@ -199,7 +199,7 @@ export default class PostDetailPhoto extends Component {
                 .child('LikePostEvent').child(keyLike).remove();
             }
         }
-     sendRequired(){ 
+    sendRequired(){ 
         this.props.navigation.navigate('ListSendRequiredPhoto', { 
              id: this.props.navigation.state.params.id // id của bài viết
         })
@@ -208,6 +208,11 @@ export default class PostDetailPhoto extends Component {
         this.props.navigation.navigate('ListDirectPostPhoto', { 
             id: this.props.navigation.state.params.id // id của bài viết
         })
+    }
+    listPostPhoto(){ 
+        this.props.navigation.navigate('ListPostPhoto' ,{ 
+            id: this.props.navigation.state.params.id
+       })
     }
     showInfoPhoto(userId){ 
         FirebaseApp.database().ref('Customer').orderByKey().equalTo(userId)
@@ -398,9 +403,7 @@ export default class PostDetailPhoto extends Component {
                     />
                 </View>: null}
                 <View style={{marginTop: 25}}>
-                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ListPostPhoto' ,{ 
-                         id: this.props.navigation.state.params.id
-                    })}> 
+                    <TouchableOpacity  onPress={() => this.listPostPhoto()}> 
                         <Text style={{color: 'black', fontWeight: 'bold'}}>Danh sách yêu cầu tham gia</Text>
                     </TouchableOpacity>
                 </View>
