@@ -19,11 +19,7 @@ import ManagePost from './../ManagePost/ManagePost'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 import IconNotification from './IconNotification';
 import SearchPhoto from './../Search/SearchPhoto'
-
-import iconInfo from './../../assets/img/info/icon_info.png'
-
-
-import notifi from '../../assets/img/menu/notifi.png'
+import ManageRequest from './../ManageRequest/ManageRequest'
 
 
 const InfoModalStack = createStackNavigator({
@@ -148,6 +144,23 @@ const MenuStack = createStackNavigator({
       screen: ManageContract, 
       navigationOptions: ({ navigation }) => ({
         title: 'Quản lý bài viết',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerTintColor: 'white', 
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
+        },
+      })
+    },
+  });
+
+  const ManageRequestStack = createStackNavigator({
+    ManageRequest: { 
+      screen: ManageRequest, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Quản lý các yêu cầu trực tiếp',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTintColor: 'white', 
         headerStyle: {
@@ -349,6 +362,23 @@ const MenuStack = createStackNavigator({
       screen: ManageContractStack,
       navigationOptions: {
         drawerLabel: 'Quản lý bài viết',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/info/manaContract.png')}
+            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: 'white',    
+          height: 35,    
+          
+        },
+      },
+    },
+    ManageRequest: {
+      screen: ManageRequestStack,
+      navigationOptions: {
+        drawerLabel: 'Quản lý yêu cầu trực tiếp',
         drawerIcon: () => (
           <Image
             source={require('../../assets/img/info/manaContract.png')}

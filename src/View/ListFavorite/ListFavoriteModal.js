@@ -24,6 +24,10 @@ export default class ListFavoriteModal extends Component {
                    .on('value', function (snapshot) {
           snapshot.forEach(function(childSnapshot) {
                          userKey = childSnapshot.key;
+                         let childData = childSnapshot.val();
+                         avatarSource = childData.avatarSource;
+                         nameView = childData.username;
+                         categoryView = childData.category;
           }) 
         })
       this.actGetData(items=[] )
@@ -181,6 +185,23 @@ sendReq(userIdModal, usernameModal){
             }
         }).bind(this))
 }
+sendMess(userModal, username, category){ 
+   this.itemRef.ref('ListChat').child(userKey).orderByChild('userId').equalTo(userModal)
+   .on('value', (function (snapshot) {
+       if(snapshot.exists() === false){
+        this.itemRef.ref('ListChat').child(userKey).push({ 
+            userId: userModal, username: username, category: category
+        })
+        this.itemRef.ref('ListChat').child(userModal).push({ 
+            userId: userKey, username: nameView, category: categoryView
+        })
+       }}).bind(this))
+      
+    this.props.navigation.navigate('ChatPersonReq', {
+        userPost: userKey, userView: userModal, nameView: nameView
+      })
+    
+}
 
     render() {
         return(
@@ -215,8 +236,8 @@ sendReq(userIdModal, usernameModal){
                                 <Image source={heart} style={{height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLoveModal}} />
                              </TouchableOpacity>
                              <TouchableOpacity onPress={()=> { 
-                                this.sendReq(rowData.id, rowData.username)}}>
-                                <Text style={{color: 'black', fontStyle: "italic"  }}>Gửi yêu cầu</Text>
+                                this.sendMess(rowData.id, rowData.username, rowData.category)}}>
+                                <Text style={{color: 'black', fontStyle: "italic"  }}>Gửi tin nhắn</Text>
                              </TouchableOpacity>
                         </View>
                     </View>}

@@ -19,6 +19,7 @@ import SearchPhoto from './../Search/SearchPhoto'
 import SearchModal from '../Search/SearchModal'
 import ListFavorite from './../ListFavorite/ListFavorite'
 import ManageSendReq from  './../ManageSendReq/ManageSendReq'
+import ListPersonReq from './../ManageSendReq/ListPersonReq'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 
@@ -161,11 +162,27 @@ const MenuStack = createStackNavigator({
     },
   });
 
-  const ManageSendReqStack = createStackNavigator({
-    ManageSendReq: { 
-      screen: ManageSendReq, 
+  // const ManageSendReqStack = createStackNavigator({
+  //   ManageSendReq: { 
+  //     screen: ManageSendReq, 
+  //     navigationOptions: ({ navigation }) => ({
+  //       title: 'Quản lý gửi yêu cầu',
+  //       headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+  //       headerTintColor: 'white', 
+  //       headerStyle: {
+  //         backgroundColor: '#EE3B3B',    
+  //         height: 45,    
+  //         elevation: 0,
+  //         shadowOpacity: 0
+  //       },
+  //     })
+  //   },
+  // });
+  const ListPersonReqStack = createStackNavigator({
+    ListPersonReq: { 
+      screen: ListPersonReq, 
       navigationOptions: ({ navigation }) => ({
-        title: 'Quản lý gửi yêu cầu',
+        title: 'Quản lý tin nhắn',
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTintColor: 'white', 
         headerStyle: {
@@ -406,14 +423,32 @@ const MenuStack = createStackNavigator({
         },
       },
     },
-    ManageSendReq: {
-      screen: ManageSendReqStack,
+    // ManageSendReq: {
+    //   screen: ManageSendReqStack,
+    //   navigationOptions: {
+    //     drawerLabel: 'Quản lý gửi yêu cầu'+ '\n'+ 'trực tiếp',
+    //     drawerIcon: () => (
+    //       <Image
+    //         source={require('../../assets/img/info/manaContract.png')}
+    //         style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+    //       />
+    //     ),
+    //     headerStyle: {
+    //       backgroundColor: '#EE3B3B',    
+    //       height: 35,    
+          
+    //     },
+    //   },
+    // },
+
+    ListPersonReq: {
+      screen: ListPersonReqStack,
       navigationOptions: {
-        drawerLabel: 'Quản lý gửi yêu cầu'+ '\n'+ 'trực tiếp',
+        drawerLabel: 'Quản lý tin nhắn',
         drawerIcon: () => (
           <Image
-            source={require('../../assets/img/info/manaContract.png')}
-            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+            source={require('../../assets/img/search/messenger.png')}
+            style={{width: 25, height: 25, tintColor: '#EE3B3B'}}
           />
         ),
         headerStyle: {

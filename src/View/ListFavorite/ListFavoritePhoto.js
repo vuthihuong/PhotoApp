@@ -26,6 +26,10 @@ export default class ListFavoritePhoto extends Component {
             .on('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
                     userKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    avatarSource = childData.avatarSource;
+                    nameView = childData.username;
+                    categoryView = childData.category
                 })
             })
         this.actGetData(items = [])
@@ -127,32 +131,32 @@ export default class ListFavoritePhoto extends Component {
         this.itemRef.ref('Customer').child(userKey).child('ListSendReqPhoto').orderByChild('userId')
             .equalTo(userIdPhoto).on('value', (function (snapshotChild) {
                 if (snapshotChild.exists()) {
-                    snapshotChild.forEach(function(snapshotChild1){ 
-                        if(snapshotChild1.val().statusAgree === "Đã gửi yêu cầu"){ 
+                    snapshotChild.forEach(function (snapshotChild1) {
+                        if (snapshotChild1.val().statusAgree === "Đã gửi yêu cầu") {
                             alert('Bạn đã gửi yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
                         }
-                        else { 
+                        else {
                             Alert.alert(
                                 'Thông báo',
-                                'Bạn có chắc chắn muốn gửi yêu cầu cho nhiếp ảnh gia ' +usernamePhoto+ ' không?',
+                                'Bạn có chắc chắn muốn gửi yêu cầu cho nhiếp ảnh gia ' + usernamePhoto + ' không?',
                                 [
                                     { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                                     {
                                         text: 'OK', onPress: () => {
                                             this.itemRef.ref('Customer').child(userKey)
-                                            .child('ListSendReqPhoto').push({
-                                                userId: userIdPhoto, statusAgree: 'Đã gửi yêu cầu', usernamePhoto: usernamePhoto,
-                                                date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                                hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                            });
-                                        this.itemRef.ref('Customer').child(userIdPhoto)
-                                            .child('ListSendReqPhoto').push({
-                                                userId: userKey, statusAgree: 'Đã gửi yêu cầu',
-                                                date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                                hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                            });
-                                             alert('Bạn đã gửi thành công yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
-                                          
+                                                .child('ListSendReqPhoto').push({
+                                                    userId: userIdPhoto, statusAgree: 'Đã gửi yêu cầu', usernamePhoto: usernamePhoto,
+                                                    date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                                    hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                                });
+                                            this.itemRef.ref('Customer').child(userIdPhoto)
+                                                .child('ListSendReqPhoto').push({
+                                                    userId: userKey, statusAgree: 'Đã gửi yêu cầu',
+                                                    date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                                    hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                                });
+                                            alert('Bạn đã gửi thành công yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
+
                                         }
                                     },
                                 ],
@@ -160,30 +164,30 @@ export default class ListFavoritePhoto extends Component {
                             )
                         }
                     })
-                    
+
                 }
                 else {
                     Alert.alert(
                         'Thông báo',
-                        'Bạn có chắc chắn muốn gửi yêu cầu cho nhiếp ảnh gia ' +usernamePhoto+ ' không?',
+                        'Bạn có chắc chắn muốn gửi yêu cầu cho nhiếp ảnh gia ' + usernamePhoto + ' không?',
                         [
                             { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                             {
                                 text: 'OK', onPress: () => {
                                     this.itemRef.ref('Customer').child(userKey)
-                                    .child('ListSendReqPhoto').push({
-                                        userId: userIdPhoto, statusAgree: 'Đã gửi yêu cầu', usernamePhoto: usernamePhoto,
-                                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                        hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                    });
-                                this.itemRef.ref('Customer').child(userIdPhoto)
-                                    .child('ListSendReqPhoto').push({
-                                        userId: userKey, statusAgree: 'Đã gửi yêu cầu',
-                                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                        hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                    });
-                                     alert('Bạn đã gửi thành công yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
-                                  
+                                        .child('ListSendReqPhoto').push({
+                                            userId: userIdPhoto, statusAgree: 'Đã gửi yêu cầu', usernamePhoto: usernamePhoto,
+                                            date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                            hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                        });
+                                    this.itemRef.ref('Customer').child(userIdPhoto)
+                                        .child('ListSendReqPhoto').push({
+                                            userId: userKey, statusAgree: 'Đã gửi yêu cầu',
+                                            date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                            hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                        });
+                                    alert('Bạn đã gửi thành công yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
+
                                 }
                             },
                         ],
@@ -192,6 +196,24 @@ export default class ListFavoritePhoto extends Component {
                 }
             }).bind(this))
     }
+    sendMess(userPhoto, username, category) {
+        this.itemRef.ref('ListChat').child(userKey).orderByChild('userId').equalTo(userPhoto)
+            .on('value', (function (snapshot) {
+                if (snapshot.exists() === false) {
+                    this.itemRef.ref('ListChat').child(userKey).push({
+                        userId: userPhoto, username: username, category: category
+                    })
+                    this.itemRef.ref('ListChat').child(userPhoto).push({
+                        userId: userKey, username: nameView, category: categoryView
+                    })
+                }
+            }).bind(this))
+        
+        this.props.navigation.navigate('ChatPersonReq', {
+            userPost: userKey, userView: userPhoto, nameView: nameView
+        })
+    }
+
 
     render() {
         return (
@@ -231,9 +253,9 @@ export default class ListFavoritePhoto extends Component {
                                         <Image source={heart} style={{ height: 20, width: 20, marginTop: 10, tintColor: rowData.colorLovePhoto }} />
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => {
-                                        this.sendReq(rowData.id, rowData.username)
+                                        this.sendMess(rowData.id, rowData.username, rowData.category)
                                     }}>
-                                        <Text style={{ color: 'black', fontStyle: "italic" }}>Gửi yêu cầu</Text>
+                                        <Text style={{ color: 'black', fontStyle: "italic" }}>Gửi tin nhắn</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>}

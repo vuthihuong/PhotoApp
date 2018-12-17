@@ -25,6 +25,10 @@ export default class SearchListModal extends Component {
             .on('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
                     userKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    avatarSource = childData.avatarSource;
+                    nameView = childData.username;
+                    categoryView = childData.category
                 })
             })
         this.actGetData1(items = [])
@@ -106,7 +110,7 @@ export default class SearchListModal extends Component {
             });
         });
     }
- 
+
 
     actGetData3(items = []) {
         if (this.props.navigation.state.params.valueHeight !== ''
@@ -125,7 +129,7 @@ export default class SearchListModal extends Component {
                             .on('value', (function (snapshot) {
                                 if (snapshot.exists()) {
                                     items.push({
-                                        colorLoveModal: '#EE3B3B', id: dataSnapshot.key,
+                                        colorLoveModal: '#EE3B3B', id: dataSnapshot.key, // id của mẫu ảnh
                                         keyLove: snapshot.key, countLove: childData.countLove,
                                         addressCity: childData.addressCity, addresDist: childData.addresDist,
                                         address: childData.address, avatarSource: childData.avatarSource, category: childData.category,
@@ -157,7 +161,7 @@ export default class SearchListModal extends Component {
         if (colorLoveModal === 'black') {
             //cập nhật số lượng yêu thích mẫu ảnh trong bảng mẫu ảnh
             FirebaseApp.database().ref('Customer').child(id).update({
-                countLove:   countLove + 1
+                countLove: countLove + 1
             })
             // thêm user đã thích mẫu ảnh vào bảng của mẫu ảnh
             FirebaseApp.database().ref('Customer').child(id)
@@ -219,77 +223,24 @@ export default class SearchListModal extends Component {
             )
         }
     }
-    sendReq(userIdModal, usernameModal){ 
-        var dateOfMonth = new Date().getMonth() + 1;
-        this.itemRef.ref('Customer').child(userKey).child('ListSendReqModal').orderByChild('userId')
-            .equalTo(userIdModal).on('value', (function (snapshotChild) {
-                if (snapshotChild.exists()) {
-                    snapshotChild.forEach(function(snapshotChild1){ 
-                        if(snapshotChild1.val().statusAgree === "Đã gửi yêu cầu"){ 
-                            alert('Bạn đã gửi yêu cầu cho mẫu ảnh ' + usernameModal)
-                        }
-                        else { 
-                            Alert.alert(
-                                'Thông báo',
-                                'Bạn có chắc chắn muốn gửi yêu cầu cho mẫu ảnh ' +usernamePhoto+ ' không?',
-                                [
-                                    { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                                    {
-                                        text: 'OK', onPress: () => {
-                                            this.itemRef.ref('Customer').child(userKey)
-                                            .child('ListSendReqModal').push({
-                                                userId: userIdModal, statusAgree: 'Đã gửi yêu cầu', usernameModal: usernameModal,
-                                                date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                                hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                            });
-                                        this.itemRef.ref('Customer').child(userIdModal)
-                                            .child('ListSendReqModal').push({
-                                                userId: userKey, statusAgree: 'Đã gửi yêu cầu',
-                                                date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                                hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                            });
-                                             alert('Bạn đã gửi thành công yêu cầu cho mẫu ảnh ' + usernameModal)
-                                          
-                                        }
-                                    },
-                                ],
-                                { cancelable: false }
-                            )
-                        }
+    sendMess(userModal, username, category) {
+        this.itemRef.ref('ListChat').child(userKey).orderByChild('userId').equalTo(userModal)
+            .on('value', (function (snapshot) {
+                if (snapshot.exists() === false) {
+                    this.itemRef.ref('ListChat').child(userKey).push({
+                        userId: userModal, username: username, category: category
                     })
-                    
-                }
-                else {
-                    Alert.alert(
-                        'Thông báo',
-                        'Bạn có chắc chắn muốn gửi yêu cầu cho mẫu ảnh ' +usernameModal+ ' không?',
-                        [
-                            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                            {
-                                text: 'OK', onPress: () => {
-                                    this.itemRef.ref('Customer').child(userKey)
-                                    .child('ListSendReqModal').push({
-                                        userId: userIdModal, statusAgree: 'Đã gửi yêu cầu', usernameModal: usernameModal,
-                                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                        hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                    });
-                                this.itemRef.ref('Customer').child(userIdModal)
-                                    .child('ListSendReqModal').push({
-                                        userId: userKey, statusAgree: 'Đã gửi yêu cầu',
-                                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                        hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                    });
-                                     alert('Bạn đã gửi thành công yêu cầu cho mẫu ảnh ' + usernameModal)
-                                  
-                                }
-                            },
-                        ],
-                        { cancelable: false }
-                    )
+                    this.itemRef.ref('ListChat').child(userModal).push({
+                        userId: userKey, username: nameView, category: categoryView
+                    })
                 }
             }).bind(this))
-    }
 
+        this.props.navigation.navigate('ChatPersonReq', {
+            userPost: userKey, userView: userModal, nameView: nameView
+        })
+
+    }
     render() {
         return (
             <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -328,8 +279,8 @@ export default class SearchListModal extends Component {
                                                 }}>
                                                 <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLoveModal }} />
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username) }}>
-                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
+                                            <TouchableOpacity onPress={() => { this.sendMess(rowData.id, rowData.username, rowData.category) }}>
+                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
                                             </TouchableOpacity>
                                         </View>
                                     </View> : null}
@@ -360,14 +311,14 @@ export default class SearchListModal extends Component {
                                             }}>
                                             <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLoveModal }} />
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username) }}>
-                                            <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
+                                        <TouchableOpacity onPress={() => { this.sendMess(rowData.id, rowData.username, rowData.category) }}>
+                                            <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>}
                     />
-                    
+
                     <ListView enableEmptySections
                         dataSource={this.state.dataSource3}
                         renderRow={(rowData) =>
@@ -391,8 +342,9 @@ export default class SearchListModal extends Component {
                                             onPress={() => { this.lovePhoto(rowData.id, rowData.colorLoveModal, rowData.countLove) }}>
                                             <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLoveModal }} />
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username) }}>
-                                            <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
+                                        <TouchableOpacity
+                                            onPress={() => { this.sendMess(rowData.id, rowData.username, rowData.category) }}>
+                                            <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>

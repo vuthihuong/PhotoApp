@@ -6,7 +6,7 @@ import {
 import { FirebaseApp } from './../../Controller/FirebaseConfig'
 
 
-export default class SendRequest extends Component {
+export default class ListPersonReq extends Component {
     constructor(props) {
         super(props);
         YellowBox.ignoreWarnings([
@@ -44,26 +44,26 @@ export default class SendRequest extends Component {
     }
     sendMess(userId) {
         this.props.navigation.navigate('ChatPersonReq', {
-            userPost: userId, userView: userKey, nameView: nameView
+            userPost: userKey, userView: userId, nameView: nameView
         })
     }
 
     render() {
         return (
             <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
-                <View style={stylesSendRequest.container}>
+                <View style={stylesListPersonReq.container}>
                     <ListView enableEmptySections
                         dataSource={this.state.dataSource}
                         renderRow={(rowData) =>
-                            <View style={stylesSendRequest.bodyManaCont}>
+                            <View style={stylesListPersonReq.bodyManaCont}>
                                 <TouchableOpacity
-                                    style={stylesSendRequest.contManagCont}>
+                                    style={stylesListPersonReq.contManagCont}>
                                     <View >
                                         <Text style={{ color: 'black', fontWeight: 'bold' }}>{rowData.username}</Text>
                                         <Text style={{ color: 'black', fontSize: 12 }}>{rowData.category}</Text>
                                     </View>
                                 </TouchableOpacity>
-                                <View style={stylesSendRequest.txtConfirm}>
+                                <View style={stylesListPersonReq.txtConfirm}>
                                     <TouchableOpacity onPress={() => {this.sendMess(rowData.userId)}}>
                                         <Text style={{ color: 'black', fontStyle: "italic" }}>Gửi tin nhắn</Text>
                                     </TouchableOpacity>
@@ -75,7 +75,7 @@ export default class SendRequest extends Component {
         )
     }
 }
-const stylesSendRequest = StyleSheet.create({
+const stylesListPersonReq = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white', marginRight: 20, marginLeft: 20, marginBottom: 15

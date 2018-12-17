@@ -67,6 +67,8 @@ import SearchModal from './src/View/Search/SearchModal'
 import ListSendRequiredPhoto from './src/View/Post/PostPhoto/ListSendRequiredPhoto'
 import ChatPerson from './src/View/ManageContract/ChatPerson'
 import AlbumImgInfo from './src/View/Upload/AlbumImgInfo'
+import ChatPersonReq from './src/View/ManageSendReq/ChatPersonReq'
+import ListPersonReq from './src/View/ManageSendReq/ListPersonReq'
 
 
 const instructions = Platform.select({
@@ -217,6 +219,12 @@ const Mainapp = createStackNavigator({
     },
     AlbumImgInfo: { 
         screen:  AlbumImgInfo
+    },
+    ChatPersonReq: { 
+        screen:  ChatPersonReq
+    },
+    ListPersonReq: { 
+        screen:  ListPersonReq
     }
     },{
       headerMode:'none'

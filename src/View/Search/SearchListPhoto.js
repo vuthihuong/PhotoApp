@@ -26,6 +26,10 @@ export default class SearchListPhoto extends Component {
             .on('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
                     userKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    avatarSource = childData.avatarSource;
+                    nameView = childData.username;
+                    categoryView = childData.category;
                 })
             })
         this.actGetData1(items = [])
@@ -409,69 +413,69 @@ export default class SearchListPhoto extends Component {
             )
         }
     }
-    sendReq(userIdPhoto, usernamePhoto){ 
+    sendReq(userIdPhoto, usernamePhoto) {
         var dateOfMonth = new Date().getMonth() + 1;
         this.itemRef.ref('Customer').child(userKey).child('ListSendReqPhoto').orderByChild('userId')
             .equalTo(userIdPhoto).on('value', (function (snapshotChild) {
                 if (snapshotChild.exists()) {
-                    snapshotChild.forEach(function(snapshotChild1){ 
-                        if(snapshotChild1.val().statusAgree === "Đã gửi yêu cầu"){ 
+                    snapshotChild.forEach(function (snapshotChild1) {
+                        if (snapshotChild1.val().statusAgree === "Đã gửi yêu cầu") {
                             alert('Bạn đã gửi yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
                         }
-                        else { 
+                        else {
                             Alert.alert(
                                 'Thông báo',
-                                'Bạn có chắc chắn muốn gửi yêu cầu cho nhiếp ảnh gia ' +usernamePhoto+ ' không?',
+                                'Bạn có chắc chắn muốn gửi yêu cầu cho nhiếp ảnh gia ' + usernamePhoto + ' không?',
                                 [
                                     { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                                     {
                                         text: 'OK', onPress: () => {
                                             this.itemRef.ref('Customer').child(userKey)
-                                            .child('ListSendReqPhoto').push({
-                                                userId: userIdPhoto, statusAgree: 'Đã gửi yêu cầu', usernamePhoto: usernamePhoto,
-                                                date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                                hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                            });
-                                        this.itemRef.ref('Customer').child(userIdPhoto)
-                                            .child('ListSendReqPhoto').push({
-                                                userId: userKey, statusAgree: 'Đã gửi yêu cầu',
-                                                date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                                hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                            });
-                                             alert('Bạn đã gửi thành công yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
-                                          
+                                                .child('ListSendReqPhoto').push({
+                                                    userId: userIdPhoto, statusAgree: 'Đã gửi yêu cầu', usernamePhoto: usernamePhoto,
+                                                    date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                                    hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                                });
+                                            this.itemRef.ref('Customer').child(userIdPhoto)
+                                                .child('ListSendReqPhoto').push({
+                                                    userId: userKey, statusAgree: 'Đã gửi yêu cầu',
+                                                    date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                                    hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                                });
+                                            alert('Bạn đã gửi thành công yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
+
                                         }
                                     },
                                 ],
                                 { cancelable: false }
                             )
-                           
+
                         }
                     })
-                    
+
                 }
                 else {
                     Alert.alert(
                         'Thông báo',
-                        'Bạn có chắc chắn muốn gửi yêu cầu cho nhiếp ảnh gia ' +usernamePhoto+ ' không?',
+                        'Bạn có chắc chắn muốn gửi yêu cầu cho nhiếp ảnh gia ' + usernamePhoto + ' không?',
                         [
                             { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                             {
                                 text: 'OK', onPress: () => {
                                     this.itemRef.ref('Customer').child(userKey)
-                                    .child('ListSendReqPhoto').push({
-                                        userId: userIdPhoto, statusAgree: 'Đã gửi yêu cầu', usernamePhoto: usernamePhoto,
-                                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                        hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                    });
-                                this.itemRef.ref('Customer').child(userIdPhoto)
-                                    .child('ListSendReqPhoto').push({
-                                        userId: userKey, statusAgree: 'Đã gửi yêu cầu',
-                                        date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
-                                        hour: new Date().getHours() + ":" + new Date().getMinutes()
-                                    });
-                                     alert('Bạn đã gửi thành công yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
-                                  
+                                        .child('ListSendReqPhoto').push({
+                                            userId: userIdPhoto, statusAgree: 'Đã gửi yêu cầu', usernamePhoto: usernamePhoto,
+                                            date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                            hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                        });
+                                    this.itemRef.ref('Customer').child(userIdPhoto)
+                                        .child('ListSendReqPhoto').push({
+                                            userId: userKey, statusAgree: 'Đã gửi yêu cầu',
+                                            date: new Date().getDate() + "/" + dateOfMonth + "/" + new Date().getFullYear(),
+                                            hour: new Date().getHours() + ":" + new Date().getMinutes()
+                                        });
+                                    alert('Bạn đã gửi thành công yêu cầu cho nhiếp ảnh gia ' + usernamePhoto)
+
                                 }
                             },
                         ],
@@ -479,6 +483,23 @@ export default class SearchListPhoto extends Component {
                     )
                 }
             }).bind(this))
+    }
+    sendMess(userPhoto, username, category) {
+        this.itemRef.ref('ListChat').child(userKey).orderByChild('userId').equalTo(userPhoto)
+            .on('value', (function (snapshot) {
+                if (snapshot.exists() === false) {
+                    this.itemRef.ref('ListChat').child(userKey).push({
+                        userId: userPhoto, username: username, category: category
+                    })
+                    this.itemRef.ref('ListChat').child(userPhoto).push({
+                        userId: userKey, username: userView, category: categoryView
+                    })
+                }
+            }).bind(this))
+        
+        this.props.navigation.navigate('ChatPersonReq', {
+            userPost: userKey, userView: userPhoto, nameView: nameView
+        })
     }
 
     render() {
@@ -516,14 +537,14 @@ export default class SearchListPhoto extends Component {
                                             <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist} </Text>
                                         </TouchableOpacity>
                                         <View style={stylesSearchListPhoto.txtConfirm}>
-                                            <TouchableOpacity style = {{alignItems: 'center'}}
+                                            <TouchableOpacity style={{ alignItems: 'center' }}
                                                 onPress={() => {
                                                     this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
                                                 }}>
                                                 <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username)}}>
-                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
+                                            <TouchableOpacity onPress={() => { this.sendMess(rowData.id, rowData.username, rowData.category) }}>
+                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
                                             </TouchableOpacity>
                                         </View>
                                     </View> : null}
@@ -551,15 +572,15 @@ export default class SearchListPhoto extends Component {
                                         <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
-                                        <TouchableOpacity style = {{alignItems: 'center'}}
+                                        <TouchableOpacity style={{ alignItems: 'center' }}
                                             onPress={() => {
                                                 this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
                                             }}>
                                             <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
                                         </TouchableOpacity>
-                                        <TouchableOpacity  onPress={() => { this.sendReq(rowData.id, rowData.username)}}>
-                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
-                                            </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => { this.senMess(rowData.id) }}>
+                                            <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>}
@@ -586,15 +607,15 @@ export default class SearchListPhoto extends Component {
                                         <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
-                                        <TouchableOpacity style = {{alignItems: 'center'}}
+                                        <TouchableOpacity style={{ alignItems: 'center' }}
                                             onPress={() => {
                                                 this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove)
                                             }}>
                                             <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username)}}>
-                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
-                                            </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => { this.sendMess(rowData.id, rowData.userView, rowData.category) }}>
+                                            <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>}
@@ -621,13 +642,13 @@ export default class SearchListPhoto extends Component {
                                         <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
-                                        <TouchableOpacity  style = {{alignItems: 'center'}}
-                                            onPress={() => {   this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove) }}>
-                                                <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
+                                        <TouchableOpacity style={{ alignItems: 'center' }}
+                                            onPress={() => { this.lovePhoto(rowData.id, rowData.colorLovePhoto, rowData.countLove) }}>
+                                            <Image source={heart} style={{ height: 20, width: 20, tintColor: rowData.colorLovePhoto }} />
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => { this.sendReq(rowData.id, rowData.username)}}>
-                                                <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi yêu cầu</Text>
-                                            </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => { this.sendMess(rowData.id, rowData.username, rowData.category) }}>
+                                            <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>}
