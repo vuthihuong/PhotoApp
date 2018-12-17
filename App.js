@@ -51,8 +51,10 @@ import PostDetailPhotoView from './src/View/Post/PostPhoto/PostDetailPhotoView'
 
 import ListPostModal from './src/View/Post/PostModal/ListPostModal'
 import ListDirectPostModal from './src/View/Post/PostModal/ListDirectPostModal'
+import ListSendRequiredModal from './src/View/Post/PostModal/ListSendRequiredModal'
 import ListPostPhoto from './src/View/Post/PostPhoto/ListPostPhoto'
 import ListDirectPostPhoto from './src/View/Post/PostPhoto/ListDirectPostPhoto'
+import ListSendRequiredPhoto from './src/View/Post/PostPhoto/ListSendRequiredPhoto'
 import ListPostEvent from './src/View/Post/PostEvent/ListPostEvent'
 import ListDirectPostEvent from './src/View/Post/PostEvent/ListDirectPostEvent'
 
@@ -64,7 +66,7 @@ import SearchListPhoto from  './src/View/Search/SearchListPhoto'
 import SearchListModal from './src/View/Search/SearchListModal'
 import SearchModal from './src/View/Search/SearchModal'
 
-import ListSendRequiredPhoto from './src/View/Post/PostPhoto/ListSendRequiredPhoto'
+
 import ChatPerson from './src/View/ManageContract/ChatPerson'
 import AlbumImgInfo from './src/View/Upload/AlbumImgInfo'
 import ChatPersonReq from './src/View/ManageSendReq/ChatPersonReq'
@@ -213,6 +215,9 @@ const Mainapp = createStackNavigator({
     },
     ListSendRequiredPhoto: { 
         screen: ListSendRequiredPhoto
+    },
+    ListSendRequiredModal: { 
+        screen: ListSendRequiredModal
     },
     ChatPerson: { 
         screen:  ChatPerson

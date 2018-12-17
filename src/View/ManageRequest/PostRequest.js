@@ -207,7 +207,7 @@ export default class PostRequest extends Component {
                                         </TouchableOpacity>
                                         <View style={stylesPostRequest.txtConfirm}>
                                             <TouchableOpacity onPress={() => { this.sendReqAgree(rowData.userId, rowData.id) }}>
-                                                {rowData.statusSendReq === "gửi yêu cầu" || rowData.statusSendReq === "Đã bị hủy yêu cầu" ?
+                                                {rowData.statusSendReq === "Đã gửi yêu cầu" || rowData.statusSendReq === "Đã bị hủy yêu cầu" ?
                                                     <Text style={{ color: 'black' }}>Đồng ý</Text> :
                                                     <View>
                                                         <Text style={{ color: 'blue' }}>Đồng ý</Text>
@@ -221,7 +221,7 @@ export default class PostRequest extends Component {
                                         </View>
                                         <View style={stylesPostRequest.txtConfirm}>
                                             <TouchableOpacity onPress={() => { this.sendReqNotAgree(rowData.userId, rowData.id) }}>
-                                                {rowData.statusSendReq === "gửi yêu cầu" || rowData.statusSendReq === "Đã đồng ý" ?
+                                                {rowData.statusSendReq === "Đã gửi yêu cầu" || rowData.statusSendReq === "Đã đồng ý" ?
                                                     <Text style={{ color: 'black' }}>Từ chối</Text> :
                                                     <Text style={{ color: 'red' }}>Từ chối</Text>
                                                 }
@@ -251,7 +251,7 @@ export default class PostRequest extends Component {
                                         </TouchableOpacity>
                                         <View style={stylesPostRequest.txtConfirm}>
                                             <TouchableOpacity onPress={() => { this.sendReqAgree(rowData.userId, rowData.id) }}>
-                                                {rowData.statusSendReq === "gửi yêu cầu" || rowData.statusSendReq === "Đã bị hủy yêu cầu" ?
+                                                {rowData.statusSendReq === "Đã gửi yêu cầu" || rowData.statusSendReq === "Đã bị hủy yêu cầu" ?
                                                     <Text style={{ color: 'black' }}>Đồng ý</Text> :
                                                     <View>
                                                         <Text style={{ color: 'blue' }}>Đồng ý</Text>
@@ -265,7 +265,7 @@ export default class PostRequest extends Component {
                                         </View>
                                         <View style={stylesPostRequest.txtConfirm}>
                                             <TouchableOpacity onPress={() => { this.sendReqNotAgree(rowData.userId, rowData.id) }}>
-                                                {rowData.statusSendReq === "gửi yêu cầu" || rowData.statusSendReq === "Đã đồng ý" ?
+                                                {rowData.statusSendReq === "Đã gửi yêu cầu" || rowData.statusSendReq === "Đã đồng ý" ?
                                                     <Text style={{ color: 'black' }}>Từ chối</Text> :
                                                     <Text style={{ color: 'red' }}>Từ chối</Text>
                                                 }
