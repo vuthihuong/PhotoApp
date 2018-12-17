@@ -199,16 +199,19 @@ export default class PostDetailPhoto extends Component {
                 .child('LikePostEvent').child(keyLike).remove();
             }
         }
+        //hành động gửi yêu cầu trực tiếp
     sendRequired(){ 
         this.props.navigation.navigate('ListSendRequiredPhoto', { 
              id: this.props.navigation.state.params.id // id của bài viết
         })
     }
+    //danh sách đã gửi yêu cầu trực tiếp
     listSendReq(){ 
         this.props.navigation.navigate('ListDirectPostPhoto', { 
             id: this.props.navigation.state.params.id // id của bài viết
         })
     }
+    //danh sách đăng ký tham gia
     listPostPhoto(){ 
         this.props.navigation.navigate('ListPostPhoto' ,{ 
             id: this.props.navigation.state.params.id
