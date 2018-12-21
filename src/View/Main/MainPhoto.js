@@ -212,6 +212,8 @@ const ManagePostStack = createStackNavigator({
 
   const CustomDrawerContent = (props)=> {
     var user = FirebaseApp.auth().currentUser;
+    var avatarSource = '';
+    var username = '';
     FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(user.email)
     .on('value', (function (snapshot) {
       snapshot.forEach(function(childSnapshot) {
@@ -235,7 +237,15 @@ const ManagePostStack = createStackNavigator({
             </Header>
             <Content>
               <DrawerItems {...props} />
-              <TouchableOpacity  onPress={() => props.navigation.navigate('Login') }>
+              <TouchableOpacity  
+                  onPress={() =>
+                    //  props.navigation.navigate('Login') 
+                  FirebaseApp.auth().signOut().then(function() {
+                    this.props.navigation.navigate('Loading')
+                  }).catch(function(error) {
+                    // An error happened.
+                  })}
+                  >
                   <View style={stylesMainPhoto.itemLogout}>
                     <View style={stylesMainPhoto.iconContainerLogout}>
                       <Image source={require('./../../assets/img/login/logout.png')} 

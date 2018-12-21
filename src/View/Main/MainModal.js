@@ -215,6 +215,8 @@ const MenuStack = createStackNavigator({
  
   const CustomDrawerContent = (props)=> {
     var user = FirebaseApp.auth().currentUser;
+    var avatarSource = '';
+    var username = '';
     FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(user.email)
     .on('value', (function (snapshot) {
       snapshot.forEach(function(childSnapshot) {
@@ -243,13 +245,20 @@ const MenuStack = createStackNavigator({
                 title="Logout"
                 onPress={() => props.navigation.navigate('Login') }/> */}
                
-               <TouchableOpacity  onPress={() => props.navigation.navigate('Login') }>
+               <TouchableOpacity  
+                    onPress={() => 
+                    // props.navigation.navigate('Login') 
+                    FirebaseApp.auth().signOut().then(function() {
+                      this.props.navigation.navigate('Loading')
+                    }).catch(function(error) {
+                      // An error happened.
+                    })}>
                   <View style={stylesMain.itemLogout}>
                     <View style={stylesMain.iconContainerLogout}>
                       <Image source={require('./../../assets/img/login/logout.png')} 
                               style={stylesMain.iconLogout}></Image>
                     </View>
-                    <Text style={stylesMain.labelLogout}>Đăng xuât</Text>
+                    <Text style={stylesMain.labelLogout}>Đăng xuất</Text>
                   </View>
                 </TouchableOpacity>
               </Content>
