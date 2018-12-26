@@ -574,7 +574,13 @@ export default class Signup extends Component {
                         circle2: circle2, circle3: circle3,
                         heightt: heightt, weight: weight,
                         avatarSource: avatarSource, countLove: 0
+                    }).then((snap)=> { 
+                        this.itemRef.ref('NotifiMain').child(snap.key).set({ 
+                            countNotifi: 0, 
+                            status: 'old'
+                        })
                     })
+
                 }
                 else if(this.state.checkedCategory1 === true) { 
                      this.itemRef.ref('Customer').push({

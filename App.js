@@ -19,6 +19,7 @@ import ResetPass from './src/View/Info/ResetPass'
 import ListFavorite from './src/View/Main/ListFavorite'
 import InfoDetailPhoto from './src/View/Info/InfoDetailPhoto'
 import ForgotPass from './src/View/Login/forgotPass'
+import Loading from './src/View/Login/loading'
 
 import MainPhoto from './src/View/Main/MainPhoto'
 import SearchAddress from './src/View/Search/SearchAddress'
@@ -82,6 +83,9 @@ const instructions = Platform.select({
 
 
 const Mainapp = createStackNavigator({
+    Loading: { 
+        screen: Loading
+    },
     Login: {
         screen: Login,
         //  navigationOptions: {

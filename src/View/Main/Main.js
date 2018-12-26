@@ -39,7 +39,7 @@ const InfoCustomerStack = createStackNavigator({
     InfoCustomer: { 
       screen: InfoCustomer, 
       navigationOptions: ({ navigation }) => ({
-        title: username,
+        title: this.props.navigation.state.params.userId,
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTintColor: 'white', 
         headerMode: 'none',
@@ -269,7 +269,9 @@ const MenuStack = createStackNavigator({
           <Container>
               <Header  style={stylesMain.headDrawer}>
                 <Body style={stylesMain.bodyDrawer}>
-                  <TouchableOpacity onPress={() => props.navigation.navigate('InfoCustomer') }>
+                  <TouchableOpacity onPress={() => props.navigation.navigate('InfoCustomer', { 
+                    username: username
+                  }) }>
                        <Image  
                             source={avatarSource} style={stylesMain.iconHeadDrawer}
                             />
@@ -283,7 +285,7 @@ const MenuStack = createStackNavigator({
                   //  props.navigation.navigate('Login') 
                 
                   FirebaseApp.auth().signOut().then(function() {
-                    this.props.navigation.navigate('Loading')
+                    this.props.navigation.navigate('Login')
                   }).catch(function(error) {
                     // An error happened.
                   });

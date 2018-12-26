@@ -241,7 +241,7 @@ const ManagePostStack = createStackNavigator({
                   onPress={() =>
                     //  props.navigation.navigate('Login') 
                   FirebaseApp.auth().signOut().then(function() {
-                    this.props.navigation.navigate('Loading')
+                    this.props.navigation.navigate('Login')
                   }).catch(function(error) {
                     // An error happened.
                   })}
