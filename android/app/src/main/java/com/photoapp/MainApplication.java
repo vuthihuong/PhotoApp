@@ -1,10 +1,11 @@
 package com.photoapp;
 
 import android.app.Application;
-
 import com.facebook.react.ReactApplication;
 import org.vovkasm.WebImage.WebImagePackage;
 import com.imagepicker.ImagePickerPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -15,7 +16,7 @@ import com.RNFetchBlob.RNFetchBlobPackage;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends Application  implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -29,8 +30,10 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new WebImagePackage(),
             new ImagePickerPackage(),
-           new MapsPackage(),
-           new RNFetchBlobPackage()   
+            new RNFetchBlobPackage(),
+            new FIRMessagingPackage(),
+            new WebImagePackage(),
+           new MapsPackage()
       );
     }
 
