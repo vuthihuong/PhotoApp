@@ -108,7 +108,7 @@ export default class MenuPhoto extends Component {
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
            <View style = { stylesMenuPhoto.containerManagCont }>
-             <View style={stylesMenuPhoto.bodyBtnToggle}>
+             {/* <View style={stylesMenuPhoto.bodyBtnToggle}>
                 <View style={stylesMenuPhoto.btnToggle}>
                     <Text style={[stylesMenuPhoto.txtManagCont]}>Trạng thái {this.state.status}</Text>
                     <ToggleSwitch
@@ -119,7 +119,7 @@ export default class MenuPhoto extends Component {
                         onToggle={ (isOn) => this.change() } />
                 </View>
                 
-            </View>
+            </View> */}
 
             <ListView  enableEmptySections
             //   showsHorizontalScrollIndicator={true}
@@ -214,14 +214,14 @@ export default class MenuPhoto extends Component {
                         <Text style={stylesMenuPhoto.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
                         <Text style={stylesMenuPhoto.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                     </TouchableOpacity>): null} 
-                    <View style={ stylesMenuPhoto.txtConfirm }>
+                    {/* <View style={ stylesMenuPhoto.txtConfirm }>
                         <TouchableOpacity>
                             <Text style={[stylesMenuPhoto.txtManagCont, {color: 'blue'}]}>OK</Text>
                         </TouchableOpacity>
                         <TouchableOpacity>
                             <Text style={[stylesMenuPhoto.txtManagCont,{color:'#EE3B3B'}]}>Hủy</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </View>}
             />
            </View>
@@ -243,7 +243,7 @@ export default class MenuPhoto extends Component {
    },
  
    contManagCont: {
-         marginLeft: 10, width: 280
+         marginLeft: 10, width: 330
    },
    bodyBtnToggle: { 
         borderBottomWidth: 1, borderBottomColor: '#FA8072', paddingBottom: 10,

@@ -19,7 +19,7 @@ const MenuPhotoTabBar = createMaterialTopTabNavigator({
      PostTabBar: {
         screen: PostTabBar,
         navigationOptions: {
-            title: 'Tạo sự kiện'
+            title: 'Đăng bài'
         }
     }, 
   }, {
