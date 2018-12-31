@@ -179,6 +179,10 @@ export default class PostPhoto extends Component {
                                             })
                                     }
                                 }).bind(this))
+                                 FirebaseApp.database().ref('Post').child(id).child('tokenCmt')
+                                    .child(userKey).set({
+                                        userKey: userKey
+                                    })
                                 this.props.navigation.navigate('PostDetailPhoto', {
                                     id: this.state.id, userId: userKey, countCommentEvent: this.state.countCommentEvent,
                                     countParticipate: this.state.countParticipate, countLike: this.state.countLike,

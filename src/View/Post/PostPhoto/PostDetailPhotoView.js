@@ -225,7 +225,8 @@ export default class PostDetailPhotoView extends Component {
             })
             FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
                 .child('LikePostEvent').push({
-                    userId: userKey
+                    userId: userKey,
+                    username: username
                 })
 
             FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
@@ -274,7 +275,10 @@ export default class PostDetailPhotoView extends Component {
                         .orderByChild('userId').equalTo(userKey)
                         .once('value', (function (snapshott) {
                             snapshott.forEach(function (childSnapshott) {
-                                keyLikeNotifi = childSnapshott.key;
+                                if(childSnapshott.val().title === "Like"){ 
+                                    keyLikeNotifi = childSnapshott.key;
+                                }
+                              
                             })
                             FirebaseApp.database().ref('NotifiMain/').child(snapshotUser.val().userId)
                                 .child(keyLikeNotifi).remove();
