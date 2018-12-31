@@ -196,6 +196,26 @@ export default class PostDetailPhotoView extends Component {
             .child('StatusParticipateCol').push({
                 userId: userKey, username: username, statusAgree: "gửi yêu cầu"
             })
+        FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+            .once('value', (function (snapshotUser) {
+                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId).push({
+                    id: this.props.navigation.state.params.id, //mã bài viết
+                    title: "Participate",
+                    userId: userKey,
+                    contentPost: 'Tìm nhiếp ảnh gia',
+                    username: username
+                })
+                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                    .once('value', (snapshot1) => {
+                        countNotifi = snapshot1.val().countNotifi
+                        FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                            .update({
+                                status: 'new',
+                                countNotifi: countNotifi + 1
+                            })
+                    })
+
+            }).bind(this))
     }
     btnChangeNotParticipatePhotoView() {
         this.setState({
@@ -213,6 +233,41 @@ export default class PostDetailPhotoView extends Component {
             }))
         FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
             .child('StatusParticipateCol').child(keyStatusPart).remove();
+        
+            FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+            .once('value', (function (snapshotUser) {
+
+                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                    .orderByChild('userId').equalTo(userKey)
+                    .once('value', (function (snapshott) {
+                        snapshott.forEach(function (childSnapshott) {
+                            if(childSnapshott.val().title === "Participate"){ 
+                                keyPartNotifi = childSnapshott.key;
+                            }
+                          
+                        })
+                        FirebaseApp.database().ref('NotifiMain/').child(snapshotUser.val().userId)
+                            .child(keyPartNotifi).remove();
+                    }).bind(this))
+                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                    .once('value', (snapshot1) => {
+                        countNotifi = snapshot1.val().countNotifi
+                        if (countNotifi >= 2) {
+                            FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                                .update({
+                                    status: 'new',
+                                    countNotifi: countNotifi - 1
+                                })
+                        }
+                        else if (countNotifi < 2) {
+                            FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                                .update({
+                                    status: 'old',
+                                    countNotifi: countNotifi - 1
+                                })
+                        }
+                    })
+            }).bind(this))
     }
 
     btnChangeLikePhotoView() {
