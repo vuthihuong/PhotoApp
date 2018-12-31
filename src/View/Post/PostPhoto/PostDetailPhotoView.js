@@ -8,6 +8,7 @@ import edit from '../../../assets/img/pose/edit.png'
 import comment from '../../../assets/img/post/comment.png'
 import like from '../../../assets/img/post/like.png'
 import commentOk from '../../../assets/img/post/commentOk.png'
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from "react-native-fcm";
 
 import {FirebaseApp} from './../../../Controller/FirebaseConfig'
 
@@ -52,8 +53,16 @@ export default class PostDetailPhotoView extends Component {
                          let childData = childSnapshot.val();
                          avatarSource = childData.avatarSource;
                          username = childData.username;
+                        
                          
           })  
+        })
+        this.itemRef.ref('NotifiMain').child(userKey).on('value', (snapshot) => {
+            var childData = snapshot.val();
+            this.setState({
+                status: childData.status,
+                countNotifi: childData.countNotifi
+            })
         })
         // lấy số lượng comment của bài post
         FirebaseApp.database().ref('Post').orderByKey().equalTo(this.props.navigation.state.params.id)
@@ -184,6 +193,28 @@ export default class PostDetailPhotoView extends Component {
                 .child('LikePostEvent').push({ 
                     userId: userKey
                 })
+
+                FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+                .once('value', (function (snapshotUser) {
+                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId).push({
+                        id: this.props.navigation.state.params.id, //mã bài viết
+                        title: "Like",
+                        userId: userKey,
+                        contentPost: 'Tìm nhiếp ảnh gia',
+                        usernameLike: username
+                    })
+                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                    .once('value', (snapshot1) => {
+                    countNotifi = snapshot1.val().countNotifi
+                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                        .update({
+                            status: 'new',
+                            countNotifi: countNotifi + 1 
+                        })
+                })
+               
+            }).bind(this))
+             
             }
             else if(this.state.changeLikePhoto === true){ 
                 this.setState({
@@ -201,6 +232,38 @@ export default class PostDetailPhotoView extends Component {
                 }))
                 FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
                 .child('LikePostEvent').child(keyLike).remove();
+
+                FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+                .once('value', (function (snapshotUser) {
+                    
+                     FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                    .orderByChild('userId').equalTo(userKey)
+                    .once('value',  (function (snapshott) {
+                        snapshott.forEach(function(childSnapshott) {
+                              keyLikeNotifi = childSnapshott.key;
+                        })
+                        FirebaseApp.database().ref('NotifiMain/').child(snapshotUser.val().userId)
+                        .child(keyLikeNotifi).remove();
+                    }).bind(this))
+                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                    .once('value', (snapshot1) => {
+                    countNotifi = snapshot1.val().countNotifi
+                    if(countNotifi >=2){ 
+                        FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                        .update({
+                            status: 'new',
+                            countNotifi: countNotifi - 1 
+                        })
+                    }
+                    else if(countNotifi < 2){ 
+                        FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                        .update({
+                            status: 'old',
+                            countNotifi: countNotifi - 1 
+                        })
+                    }
+                    })
+                }).bind(this))
             }
         }
     showInfoPhoto(userId){ 
@@ -276,7 +339,7 @@ export default class PostDetailPhotoView extends Component {
                     </TouchableOpacity>
                     <View style={{justifyContent:'center', alignItems:'center', flex: 1}}>
                          <Text style={{fontSize: 20, color: '#EE3B3B', }}>
-                                Tìm nháy ảnh</Text>
+                                Tìm nhiếp ảnh gia</Text>
                     </View>
                     {/* <TouchableOpacity  onPress={() => this.editPostPhoto()}>
                         <Image source={edit} style={{width: 25, height: 25, marginRight: 15,

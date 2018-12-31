@@ -45,7 +45,7 @@ export default class PostPhoto extends Component {
 
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state;
-        let tabBarLabel = 'Tìm nháy ảnh';
+        let tabBarLabel = 'Tìm nhiếp ảnh gia';
         return { tabBarLabel }
     }
     createPostPhoto() {
@@ -174,7 +174,7 @@ export default class PostPhoto extends Component {
                                                 FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key)
                                                     .update({
                                                         status: 'new',
-                                                        countNotifi: countNotifi + 1
+                                                        countNotifi: countNotifi + 1 
                                                     })
                                             })
                                     }
@@ -231,7 +231,7 @@ export default class PostPhoto extends Component {
                         <Image source={gobackIcon}
                             style={{ width: 20, height: 20, marginLeft: 15, marginRight: 90, tintColor: 'white' }} />
                     </TouchableOpacity>
-                    <Text style={{ flex: 1, color: 'white', fontSize: 18 }}>Tìm nháy ảnh</Text>
+                    <Text style={{ flex: 1, color: 'white', fontSize: 18 }}>Tìm nhiếp ảnh gia</Text>
                 </View>
                 <View style={stylesPostPhoto.container}>
                     <View style={stylesPostPhoto.containerPostPhoto}>
@@ -384,9 +384,9 @@ const stylesPostPhoto = StyleSheet.create({
         borderWidth: 1
     },
     txtCostPhoto: {
-        width: 230,
+        width: 210,
     },
     txtBtnPostPhoto: {
-        width: 330, height: 30, borderRadius: 10, backgroundColor: '#EE3B3B',
+        width: 320, height: 30, borderRadius: 10, backgroundColor: '#EE3B3B',
     }
 })
