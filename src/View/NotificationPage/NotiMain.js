@@ -80,7 +80,7 @@ export default class NotiMain extends Component {
                             var childData = dataSnapshot1.val();
                             if (childData.title === "Tìm mẫu ảnh") {
                                 items.push({ title1: childData1.title, contentPost: childData1.contentPost,
-                                    id: dataSnapshot.key, userLike: childData1.userId, usernameLike: childData1.usernameLike,
+                                    id: childData1.id, userLike: childData1.userId, usernameLike: childData1.usernameLike,
                                     userId: (childData.userId), title: childData.title,
                                     content: childData.content, cost: childData.cost, girl: childData.girl,
                                     datetime: childData.datetime, datetime1: childData.datetime1,
@@ -94,7 +94,7 @@ export default class NotiMain extends Component {
                             }
                             else if (childData.title === "Tìm nháy ảnh" ) {
                                 items.push({ title1: childData1.title, contentPost: childData1.contentPost,
-                                    id: dataSnapshot.key, userLike: childData1.userId, usernameLike: childData1.usernameLike,
+                                    id: childData1.id, userLike: childData1.userId, usernameLike: childData1.usernameLike,
                                     userId: (childData.userId), title: childData.title,
                                     contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
                                     datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto,
@@ -104,7 +104,7 @@ export default class NotiMain extends Component {
                             }
                             else if (childData.title === "Tạo sự kiện") {
                                 items.push({ title1: childData1.title, contentPost: childData1.contentPost,
-                                    id: dataSnapshot.key, userLike: childData1.userId, usernameLike: childData1.usernameLike,
+                                    id: childData1.id, userLike: childData1.userId, usernameLike: childData1.usernameLike,
                                     userId: (childData.userId), title: childData.title,
                                     addressEvent: childData.addressEvent, contentEvent: childData.contentEvent,
                                     costEvent: childData.costEvent, datetimeEvent: childData.datetimeEvent,
@@ -187,7 +187,7 @@ export default class NotiMain extends Component {
                                         <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                                     </TouchableOpacity>) : null}
                                     {(rowData.title1 === "Like" && rowData.contentPost ==="Tìm mẫu ảnh") ?
-                                    (<TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModalView', {
+                                    (<TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModal', {
                                         id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
                                         content: rowData.content, cost: rowData.cost, girl: rowData.girl,
                                         datetime: rowData.datetime, datetime1: rowData.datetime1,
@@ -207,7 +207,7 @@ export default class NotiMain extends Component {
                                     </TouchableOpacity>) : null}
 
                                 {(rowData.title1 === "Like" && rowData.contentPost === 'Tìm nhiếp ảnh gia') ?
-                                    (<TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhotoView', {
+                                    (<TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhoto', {
                                         id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
                                         contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
                                         datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
@@ -220,7 +220,7 @@ export default class NotiMain extends Component {
                                     </TouchableOpacity>) : null}
 
                                 {(rowData.title1 === "Like" && rowData.contentPost === "Tạo sự kiện") ?
-                                    (<TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEventView', {
+                                    (<TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent', {
                                         id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
                                         addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
                                         costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
