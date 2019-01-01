@@ -240,12 +240,13 @@ export default class PostDetailPhotoView extends Component {
                 FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
                     .orderByChild('userId').equalTo(userKey)
                     .once('value', (function (snapshott) {
-                        snapshott.forEach(function (childSnapshott) {
-                            if(childSnapshott.val().title === "Participate"){ 
+                        snapshott.forEach((function (childSnapshott) {
+                            if(childSnapshott.val().title === "Participate" 
+                                && childSnapshott.val().id === this.props.navigation.state.params.id){ 
                                 keyPartNotifi = childSnapshott.key;
                             }
                           
-                        })
+                        }).bind(this))
                         FirebaseApp.database().ref('NotifiMain/').child(snapshotUser.val().userId)
                             .child(keyPartNotifi).remove();
                     }).bind(this))
@@ -329,12 +330,13 @@ export default class PostDetailPhotoView extends Component {
                     FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
                         .orderByChild('userId').equalTo(userKey)
                         .once('value', (function (snapshott) {
-                            snapshott.forEach(function (childSnapshott) {
-                                if(childSnapshott.val().title === "Like"){ 
+                            snapshott.forEach((function (childSnapshott) {
+                                if(childSnapshott.val().title === "Like" 
+                                    && childSnapshott.val().id === this.props.navigation.state.params.id){ 
                                     keyLikeNotifi = childSnapshott.key;
                                 }
                               
-                            })
+                            }).bind(this))
                             FirebaseApp.database().ref('NotifiMain/').child(snapshotUser.val().userId)
                                 .child(keyLikeNotifi).remove();
                         }).bind(this))

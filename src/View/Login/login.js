@@ -7,6 +7,7 @@ import {
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
 import { YellowBox } from 'react-native';
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from "react-native-fcm";
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 console.ignoredYellowBox = [ 'Setting a timer' ];
 
@@ -28,21 +29,29 @@ export  default  class Login extends Component {
                 FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(this.state.email)
                     .on('value', (function (snapshot) {
                     snapshot.forEach(function(childSnapshot) {
-                            var key = childSnapshot.key;
+                             key = childSnapshot.key;
                             let childData = childSnapshot.val();
                             category1 = (childData.category)
                     })
                     var user = FirebaseApp.auth().currentUser;
                     // alert(user.emailVerified);
-                    if(category1 === "Người thuê chụp ảnh" && user.emailVerified === true){
-                        this.props.navigation.navigate('Main')
+                    if(user){ 
+                        if(category1 === "Người thuê chụp ảnh" && user.emailVerified === true){
+                            this.props.navigation.navigate('Main')
+                        }
+                        else if(category1 === "Nháy ảnh" && user.emailVerified === true){
+                            this.props.navigation.navigate('MainPhoto')
+                        }
+                        else if(category1 === "Mẫu ảnh" && user.emailVerified === true){
+                            this.props.navigation.navigate('MainModal')
+                        }
                     }
-                    else if(category1 === "Nháy ảnh" && user.emailVerified === true){
-                        this.props.navigation.navigate('MainPhoto')
-                    }
-                    else if(category1 === "Mẫu ảnh" && user.emailVerified === true){
-                        this.props.navigation.navigate('MainModal')
-                    }
+                   
+                    FCM.requestPermissions();
+
+                    FCM.getFCMToken().then(token => {
+                        FirebaseApp.database().ref('tokenFCM').child(key).set({token: token})
+                    });
                    this.setState({ 
                        email: '', password: ''
                    })
