@@ -121,7 +121,7 @@ export default class PostRequest extends Component {
             })
         }
     }
-    sendReqAgree(userId, id) {
+    sendReqAgree(userId, id) { //userId là ng đăng bài viết, id là bài viết
         FirebaseApp.database().ref('Post/').child(id)
             .child('ListSendReq').orderByChild('userId').equalTo(userKey)
             .on('value', function (snapshot) {
@@ -142,6 +142,22 @@ export default class PostRequest extends Component {
                             .child('ListSendReq').child(idStatusSendReq).update({
                                 statusSendReq: 'Đã đồng ý'
                             });
+                            FirebaseApp.database().ref('NotifiMain').child(userId).push({
+                                id: this.props.navigation.state.params.id, //mã bài viết
+                                title: "SendPostAgreeReq",
+                                userId: userKey,
+                                contentPost: 'Tìm nhiếp ảnh gia',
+                                username: nameView
+                            })
+                            FirebaseApp.database().ref('NotifiMain').child(userId)
+                                .once('value', (snapshot1) => {
+                                    countNotifi = snapshot1.val().countNotifi
+                                    FirebaseApp.database().ref('NotifiMain').child(userId)
+                                        .update({
+                                            status: 'new',
+                                            countNotifi: countNotifi + 1
+                                        })
+                                })
                         this.actGetData();
                     }
                 },
@@ -171,6 +187,22 @@ export default class PostRequest extends Component {
                             .child('ListSendReq').child(idStatusSendReq).update({
                                 statusSendReq: 'Đã bị hủy yêu cầu'
                             });
+                            FirebaseApp.database().ref('NotifiMain').child(userId).push({
+                                id: this.props.navigation.state.params.id, //mã bài viết
+                                title: "SendPostNotAgreeReq",
+                                userId: userKey,
+                                contentPost: 'Tìm nhiếp ảnh gia',
+                                username: nameView
+                            })
+                            FirebaseApp.database().ref('NotifiMain').child(userId)
+                                .once('value', (snapshot1) => {
+                                    countNotifi = snapshot1.val().countNotifi
+                                    FirebaseApp.database().ref('NotifiMain').child(userId)
+                                        .update({
+                                            status: 'new',
+                                            countNotifi: countNotifi + 1
+                                        })
+                                })
                         this.actGetData();
                     }
                 },

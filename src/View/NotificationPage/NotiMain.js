@@ -49,7 +49,7 @@ export default class NotiMain extends Component {
                                     datePostModal: childData.datePostModal, timePostModal: childData.timePostModal
                                 })
                             }
-                            else if (childData.title === "Tìm nháy ảnh" ) {
+                            else if (childData.title === "Tìm nháy ảnh") {
                                 items.push({
                                     id: dataSnapshot.key, tmp: 'Bài viết',
                                     userId: (childData.userId), title: childData.title,
@@ -304,6 +304,144 @@ export default class NotiMain extends Component {
                         }
                     })
                 }
+                else if (childData1.title === "SendPostReq") {
+                    this.itemRef.ref('Post').child(childData1.id).on('value', (dataSnapshot1) => {
+                        {
+                            var childData = dataSnapshot1.val();
+                            if (childData.title === "Tìm mẫu ảnh") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    id: childData1.id, userLike: childData1.userId, usernameSendPost: childData1.username,
+                                    userId: (childData.userId), title: childData.title,
+                                    content: childData.content, cost: childData.cost, girl: childData.girl,
+                                    datetime: childData.datetime, datetime1: childData.datetime1,
+                                    value: childData.value, height: childData.height, boy: childData.boy,
+                                    labelRightModal1: childData.labelRightModal1, labelRightModal2: childData.labelRightModal2,
+                                    labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
+                                    labelRightModal5: childData.labelRightModal5, tmp: 'SendPostReq',
+                                    circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3,
+                                    datePostModal: childData.datePostModal, timePostModal: childData.timePostModal
+                                })
+                            }
+                            else if (childData.title === "Tìm nháy ảnh") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    id: childData1.id, userLike: childData1.userId, usernameSendPost: childData1.username,
+                                    userId: (childData.userId), title: childData.title, tmp: 'SendPostReq',
+                                    contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
+                                    datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto,
+                                    datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
+                                    valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+                                })
+                            }
+                            else if (childData.title === "Tạo sự kiện") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    id: childData1.id, userLike: childData1.userId, usernameSendPost: childData1.username,
+                                    userId: (childData.userId), title: childData.title, tmp: 'SendPostReq',
+                                    addressEvent: childData.addressEvent, contentEvent: childData.contentEvent,
+                                    costEvent: childData.costEvent, datetimeEvent: childData.datetimeEvent,
+                                    datetimeEvent1: childData.datetimeEvent1, labelEvent1: childData.labelEvent1,
+                                    labelEvent2: childData.labelEvent2, numberModal: childData.numberModal,
+                                    datePostEvent: childData.datePostEvent, timePostEvent: childData.timePostEvent
+                                })
+                            }
+
+                        }
+                    })
+                }
+                else if (childData1.title === "SendPostAgreeReq") {
+                    this.itemRef.ref('Post').child(childData1.id).on('value', (dataSnapshot1) => {
+                        {
+                            var childData = dataSnapshot1.val();
+                            if (childData.title === "Tìm mẫu ảnh") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    id: childData1.id, userLike: childData1.userId, usernameSendPostAgree: childData1.username,
+                                    userId: (childData.userId), title: childData.title,
+                                    content: childData.content, cost: childData.cost, girl: childData.girl,
+                                    datetime: childData.datetime, datetime1: childData.datetime1,
+                                    value: childData.value, height: childData.height, boy: childData.boy,
+                                    labelRightModal1: childData.labelRightModal1, labelRightModal2: childData.labelRightModal2,
+                                    labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
+                                    labelRightModal5: childData.labelRightModal5, tmp: 'SendPostAgreeReq',
+                                    circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3,
+                                    datePostModal: childData.datePostModal, timePostModal: childData.timePostModal
+                                })
+                            }
+                            else if (childData.title === "Tìm nháy ảnh") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    id: childData1.id, userLike: childData1.userId, usernameSendPostAgree: childData1.username,
+                                    userId: (childData.userId), title: childData.title, tmp: 'SendPostAgreeReq',
+                                    contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
+                                    datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto,
+                                    datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
+                                    valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+                                })
+                            }
+                            else if (childData.title === "Tạo sự kiện") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    id: childData1.id, userLike: childData1.userId, usernameSendPostAgree: childData1.username,
+                                    userId: (childData.userId), title: childData.title, tmp: 'SendPostAgreeReq',
+                                    addressEvent: childData.addressEvent, contentEvent: childData.contentEvent,
+                                    costEvent: childData.costEvent, datetimeEvent: childData.datetimeEvent,
+                                    datetimeEvent1: childData.datetimeEvent1, labelEvent1: childData.labelEvent1,
+                                    labelEvent2: childData.labelEvent2, numberModal: childData.numberModal,
+                                    datePostEvent: childData.datePostEvent, timePostEvent: childData.timePostEvent
+                                })
+                            }
+
+                        }
+                    })
+                }
+                else if (childData1.title === "SendPostNotAgreeReq") {
+                    this.itemRef.ref('Post').child(childData1.id).on('value', (dataSnapshot1) => {
+                        {
+                            var childData = dataSnapshot1.val();
+                            if (childData.title === "Tìm mẫu ảnh") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    id: childData1.id, userLike: childData1.userId, usernameSendPostNotAgree: childData1.username,
+                                    userId: (childData.userId), title: childData.title,
+                                    content: childData.content, cost: childData.cost, girl: childData.girl,
+                                    datetime: childData.datetime, datetime1: childData.datetime1,
+                                    value: childData.value, height: childData.height, boy: childData.boy,
+                                    labelRightModal1: childData.labelRightModal1, labelRightModal2: childData.labelRightModal2,
+                                    labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
+                                    labelRightModal5: childData.labelRightModal5, tmp: 'SendPostNotAgreeReq',
+                                    circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3,
+                                    datePostModal: childData.datePostModal, timePostModal: childData.timePostModal
+                                })
+                            }
+                            else if (childData.title === "Tìm nháy ảnh") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    id: childData1.id, userLike: childData1.userId, usernameSendPostNotAgree: childData1.username,
+                                    userId: (childData.userId), title: childData.title, tmp: 'SendPostNotAgreeReq',
+                                    contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
+                                    datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto,
+                                    datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
+                                    valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+                                })
+                            }
+                            else if (childData.title === "Tạo sự kiện") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    id: childData1.id, userLike: childData1.userId, usernameSendPostNotAgree: childData1.username,
+                                    userId: (childData.userId), title: childData.title, tmp: 'SendPostNotAgreeReq',
+                                    addressEvent: childData.addressEvent, contentEvent: childData.contentEvent,
+                                    costEvent: childData.costEvent, datetimeEvent: childData.datetimeEvent,
+                                    datetimeEvent1: childData.datetimeEvent1, labelEvent1: childData.labelEvent1,
+                                    labelEvent2: childData.labelEvent2, numberModal: childData.numberModal,
+                                    datePostEvent: childData.datePostEvent, timePostEvent: childData.timePostEvent
+                                })
+                            }
+
+                        }
+                    })
+                }
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(items, items.map((row, i) => i).reverse())
                 });
@@ -419,99 +557,99 @@ export default class NotiMain extends Component {
                                         <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
                                         <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                                     </TouchableOpacity> : null}
-                                
-                                    {(rowData.title1 === "Comment" && rowData.contentPost === "Tìm mẫu ảnh" && rowData.userPost === userKey) ?
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModal', {
-                                            id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
-                                            content: rowData.content, cost: rowData.cost, girl: rowData.girl,
-                                            datetime: rowData.datetime, datetime1: rowData.datetime1,
-                                            value: rowData.value, height: rowData.height, boy: rowData.boy,
-                                            labelRightModal1: rowData.labelRightModal1,
-                                            labelRightModal2: rowData.labelRightModal2,
-                                            labelRightModal3: rowData.labelRightModal3,
-                                            labelRightModal4: rowData.labelRightModal4,
-                                            labelRightModal5: rowData.labelRightModal5,
-                                            circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,
-                                        })}
-                                            style={stylesNotiMain.contManagCont}>
 
-                                            <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận về bài viết tìm mẫu tại {rowData.value} của bạn</Text>
-                                            <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
-                                            <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
-                                        </TouchableOpacity> : null}
-                                    {(rowData.title1 === "Comment" && rowData.contentPost === "Tìm mẫu ảnh" && rowData.userPost !== userKey) ?
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModalView', {
-                                            id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
-                                            content: rowData.content, cost: rowData.cost, girl: rowData.girl,
-                                            datetime: rowData.datetime, datetime1: rowData.datetime1,
-                                            value: rowData.value, height: rowData.height, boy: rowData.boy,
-                                            labelRightModal1: rowData.labelRightModal1,
-                                            labelRightModal2: rowData.labelRightModal2,
-                                            labelRightModal3: rowData.labelRightModal3,
-                                            labelRightModal4: rowData.labelRightModal4,
-                                            labelRightModal5: rowData.labelRightModal5,
-                                            circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,
-                                        })}
-                                            style={stylesNotiMain.contManagCont}>
+                                {(rowData.title1 === "Comment" && rowData.contentPost === "Tìm mẫu ảnh" && rowData.userPost === userKey) ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModal', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
+                                        content: rowData.content, cost: rowData.cost, girl: rowData.girl,
+                                        datetime: rowData.datetime, datetime1: rowData.datetime1,
+                                        value: rowData.value, height: rowData.height, boy: rowData.boy,
+                                        labelRightModal1: rowData.labelRightModal1,
+                                        labelRightModal2: rowData.labelRightModal2,
+                                        labelRightModal3: rowData.labelRightModal3,
+                                        labelRightModal4: rowData.labelRightModal4,
+                                        labelRightModal5: rowData.labelRightModal5,
+                                        circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
 
-                                            <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận về bài viết tìm mẫu tại {rowData.value} mà bạn quan tâm</Text>
-                                            <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
-                                            <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
-                                        </TouchableOpacity> : null}
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận về bài viết tìm mẫu tại {rowData.value} của bạn</Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
+                                    </TouchableOpacity> : null}
+                                {(rowData.title1 === "Comment" && rowData.contentPost === "Tìm mẫu ảnh" && rowData.userPost !== userKey) ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModalView', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
+                                        content: rowData.content, cost: rowData.cost, girl: rowData.girl,
+                                        datetime: rowData.datetime, datetime1: rowData.datetime1,
+                                        value: rowData.value, height: rowData.height, boy: rowData.boy,
+                                        labelRightModal1: rowData.labelRightModal1,
+                                        labelRightModal2: rowData.labelRightModal2,
+                                        labelRightModal3: rowData.labelRightModal3,
+                                        labelRightModal4: rowData.labelRightModal4,
+                                        labelRightModal5: rowData.labelRightModal5,
+                                        circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
 
-                                    {(rowData.title1 === "Comment" && rowData.contentPost === 'Tìm nhiếp ảnh gia' && rowData.userPost === userKey) ?
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhoto', {
-                                            id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
-                                            contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
-                                            datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
-                                            valueCategoryPhoto1: rowData.valueCategoryPhoto1, valuePlacePhoto: rowData.valuePlacePhoto
-                                        })}
-                                            style={stylesNotiMain.contManagCont}>
-                                            <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận bài viết tìm nhiếp ảnh gia tại {rowData.valuePlacePhoto} của bạn </Text>
-                                            <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
-                                            <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
-                                        </TouchableOpacity> : null}
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận về bài viết tìm mẫu tại {rowData.value} mà bạn quan tâm</Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
+                                    </TouchableOpacity> : null}
 
-                                    {(rowData.title1 === "Comment" && rowData.contentPost === 'Tìm nhiếp ảnh gia' && rowData.userPost !== userKey) ?
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhotoView', {
-                                            id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
-                                            contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
-                                            datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
-                                            valueCategoryPhoto1: rowData.valueCategoryPhoto1, valuePlacePhoto: rowData.valuePlacePhoto
-                                        })}
-                                            style={stylesNotiMain.contManagCont}>
-                                            <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận bài viết tìm nhiếp ảnh gia tại {rowData.valuePlacePhoto} mà bạn quan tâm </Text>
-                                            <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
-                                            <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
-                                        </TouchableOpacity> : null}
+                                {(rowData.title1 === "Comment" && rowData.contentPost === 'Tìm nhiếp ảnh gia' && rowData.userPost === userKey) ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhoto', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
+                                        contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
+                                        datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
+                                        valueCategoryPhoto1: rowData.valueCategoryPhoto1, valuePlacePhoto: rowData.valuePlacePhoto
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận bài viết tìm nhiếp ảnh gia tại {rowData.valuePlacePhoto} của bạn </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
+                                    </TouchableOpacity> : null}
 
-                                    {(rowData.title1 === "Comment" && rowData.contentPost === "Tạo sự kiện" && rowData.userPost === userKey) ?
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent', {
-                                            id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
-                                            addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
-                                            costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
-                                            datetimeEvent1: rowData.datetimeEvent1, labelEvent1: rowData.labelEvent1,
-                                            labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal
-                                        })}
-                                            style={stylesNotiMain.contManagCont}>
-                                            <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận về bài viết {rowData.labelEvent1} {rowData.labelEvent2} tại {rowData.addressEvent} của bạn </Text>
-                                            <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
-                                            <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
-                                        </TouchableOpacity> : null}
-                                    {(rowData.title1 === "Comment" && rowData.contentPost === "Tạo sự kiện" && rowData.userPost !== userKey) ?
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent', {
-                                            id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
-                                            addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
-                                            costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
-                                            datetimeEvent1: rowData.datetimeEvent1, labelEvent1: rowData.labelEvent1,
-                                            labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal
-                                        })}
-                                            style={stylesNotiMain.contManagCont}>
-                                            <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận về bài viết {rowData.labelEvent1} {rowData.labelEvent2} tại {rowData.addressEvent} mà bạn quan tâm </Text>
-                                            <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
-                                            <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
-                                        </TouchableOpacity> : null}
-                                        {(rowData.title1 === "Participate" && rowData.contentPost === "Tìm mẫu ảnh") ?
+                                {(rowData.title1 === "Comment" && rowData.contentPost === 'Tìm nhiếp ảnh gia' && rowData.userPost !== userKey) ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhotoView', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
+                                        contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
+                                        datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
+                                        valueCategoryPhoto1: rowData.valueCategoryPhoto1, valuePlacePhoto: rowData.valuePlacePhoto
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận bài viết tìm nhiếp ảnh gia tại {rowData.valuePlacePhoto} mà bạn quan tâm </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "Comment" && rowData.contentPost === "Tạo sự kiện" && rowData.userPost === userKey) ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
+                                        addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
+                                        costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
+                                        datetimeEvent1: rowData.datetimeEvent1, labelEvent1: rowData.labelEvent1,
+                                        labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận về bài viết {rowData.labelEvent1} {rowData.labelEvent2} tại {rowData.addressEvent} của bạn </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
+                                    </TouchableOpacity> : null}
+                                {(rowData.title1 === "Comment" && rowData.contentPost === "Tạo sự kiện" && rowData.userPost !== userKey) ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
+                                        addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
+                                        costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
+                                        datetimeEvent1: rowData.datetimeEvent1, labelEvent1: rowData.labelEvent1,
+                                        labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameCmt} đã bình luận về bài viết {rowData.labelEvent1} {rowData.labelEvent2} tại {rowData.addressEvent} mà bạn quan tâm </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
+                                    </TouchableOpacity> : null}
+                                {(rowData.title1 === "Participate" && rowData.contentPost === "Tìm mẫu ảnh") ?
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModal', {
                                         id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
                                         content: rowData.content, cost: rowData.cost, girl: rowData.girl,
@@ -557,7 +695,7 @@ export default class NotiMain extends Component {
                                         <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
                                         <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                                     </TouchableOpacity> : null}
-                                    {(rowData.title1 === "Agree Participate" && rowData.contentPost === "Tìm mẫu ảnh") ?
+                                {(rowData.title1 === "Agree Participate" && rowData.contentPost === "Tìm mẫu ảnh") ?
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModalView', {
                                         id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
                                         content: rowData.content, cost: rowData.cost, girl: rowData.girl,
@@ -603,7 +741,7 @@ export default class NotiMain extends Component {
                                         <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
                                         <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                                     </TouchableOpacity> : null}
-                                    {(rowData.title1 === "Not Agree Participate" && rowData.contentPost === "Tìm mẫu ảnh") ?
+                                {(rowData.title1 === "Not Agree Participate" && rowData.contentPost === "Tìm mẫu ảnh") ?
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModalView', {
                                         id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
                                         content: rowData.content, cost: rowData.cost, girl: rowData.girl,
@@ -646,6 +784,145 @@ export default class NotiMain extends Component {
                                     })}
                                         style={stylesNotiMain.contManagCont}>
                                         <Text style={stylesNotiMain.txtManagCont}>{rowData.usernamePartNotAgree} đã từ chối đăng ký tham gia sự kiện {rowData.labelEvent1} {rowData.labelEvent2} tại {rowData.addressEvent} của bạn </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "SendPostReq" && rowData.contentPost === "Tìm mẫu ảnh") ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModalView', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
+                                        content: rowData.content, cost: rowData.cost, girl: rowData.girl,
+                                        datetime: rowData.datetime, datetime1: rowData.datetime1,
+                                        value: rowData.value, height: rowData.height, boy: rowData.boy,
+                                        labelRightModal1: rowData.labelRightModal1,
+                                        labelRightModal2: rowData.labelRightModal2,
+                                        labelRightModal3: rowData.labelRightModal3,
+                                        labelRightModal4: rowData.labelRightModal4,
+                                        labelRightModal5: rowData.labelRightModal5,
+                                        circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPost} đã gửi yêu cầu tìm mẫu ảnh tới bạn qua bài viết Tìm mẫu tại {rowData.value}</Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "SendPostReq" && rowData.contentPost === 'Tìm nhiếp ảnh gia') ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhotoView', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
+                                        contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
+                                        datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
+                                        valueCategoryPhoto1: rowData.valueCategoryPhoto1, valuePlacePhoto: rowData.valuePlacePhoto
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPost} đã gửi yêu cầu tìm nhiếp ảnh gia qua bài viết Tìm nhiếp ảnh gia tại {rowData.valuePlacePhoto} </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "SendPostReq" && rowData.contentPost === "Tạo sự kiện") ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEventView', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
+                                        addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
+                                        costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
+                                        datetimeEvent1: rowData.datetimeEvent1, labelEvent1: rowData.labelEvent1,
+                                        labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPost} đã đăng ký tham gia sự kiện {rowData.labelEvent1} {rowData.labelEvent2} tại {rowData.addressEvent} của bạn </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
+                                    </TouchableOpacity> : null}
+                                {(rowData.title1 === "SendPostAgreeReq" && rowData.contentPost === "Tìm mẫu ảnh") ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModal', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
+                                        content: rowData.content, cost: rowData.cost, girl: rowData.girl,
+                                        datetime: rowData.datetime, datetime1: rowData.datetime1,
+                                        value: rowData.value, height: rowData.height, boy: rowData.boy,
+                                        labelRightModal1: rowData.labelRightModal1,
+                                        labelRightModal2: rowData.labelRightModal2,
+                                        labelRightModal3: rowData.labelRightModal3,
+                                        labelRightModal4: rowData.labelRightModal4,
+                                        labelRightModal5: rowData.labelRightModal5,
+                                        circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPostAgree} đã đồng ý làm mẫu ảnh qua yêu cầu bài viết tìm mẫu mà bạn đã gửi</Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "SendPostAgreeReq" && rowData.contentPost === 'Tìm nhiếp ảnh gia') ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhoto', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
+                                        contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
+                                        datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
+                                        valueCategoryPhoto1: rowData.valueCategoryPhoto1, valuePlacePhoto: rowData.valuePlacePhoto
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPostAgree} đã đồng ý làm nhiếp ảnh gia qua yêu cầu bài viết tìm nhiếp ảnh gia mà bạn đã gửi </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "SendPostAgreeReq" && rowData.contentPost === "Tạo sự kiện") ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEventView', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
+                                        addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
+                                        costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
+                                        datetimeEvent1: rowData.datetimeEvent1, labelEvent1: rowData.labelEvent1,
+                                        labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPostAgree} đã đồng ý yêu cầu tham gia sự kiện {rowData.labelEvent1} {rowData.labelEvent2} tại {rowData.addressEvent} của bạn </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
+                                    </TouchableOpacity> : null}
+                                {(rowData.title1 === "SendPostNotAgreeReq" && rowData.contentPost === "Tìm mẫu ảnh") ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailModal', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm mẫu ảnh",
+                                        content: rowData.content, cost: rowData.cost, girl: rowData.girl,
+                                        datetime: rowData.datetime, datetime1: rowData.datetime1,
+                                        value: rowData.value, height: rowData.height, boy: rowData.boy,
+                                        labelRightModal1: rowData.labelRightModal1,
+                                        labelRightModal2: rowData.labelRightModal2,
+                                        labelRightModal3: rowData.labelRightModal3,
+                                        labelRightModal4: rowData.labelRightModal4,
+                                        labelRightModal5: rowData.labelRightModal5,
+                                        circle1: rowData.circle1, circle2: rowData.circle2, circle3: rowData.circle3,
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPostNotAgree} đã từ chối làm mẫu ảnh qua yêu cầu bài viết tìm mẫu ảnh mà bạn đã gửi</Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "SendPostNotAgreeReq" && rowData.contentPost === 'Tìm nhiếp ảnh gia') ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhoto', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
+                                        contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
+                                        datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
+                                        valueCategoryPhoto1: rowData.valueCategoryPhoto1, valuePlacePhoto: rowData.valuePlacePhoto
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPostNotAgree} đã từ chối làm nhiếp ảnh gia qua yêu cầu bài viết tìm nhiếp ảnh gia bạn đã gửi </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "SendPostNotAgreeReq" && rowData.contentPost === "Tạo sự kiện") ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent', {
+                                        id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
+                                        addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
+                                        costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
+                                        datetimeEvent1: rowData.datetimeEvent1, labelEvent1: rowData.labelEvent1,
+                                        labelEvent2: rowData.labelEvent2, numberModal: rowData.numberModal
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPostNotAgree} đã từ chối đăng ký tham gia sự kiện {rowData.labelEvent1} {rowData.labelEvent2} tại {rowData.addressEvent} của bạn </Text>
                                         <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
                                         <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                                     </TouchableOpacity> : null}
