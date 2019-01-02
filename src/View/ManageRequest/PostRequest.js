@@ -143,7 +143,7 @@ export default class PostRequest extends Component {
                                 statusSendReq: 'Đã đồng ý'
                             });
                             FirebaseApp.database().ref('NotifiMain').child(userId).push({
-                                id: this.props.navigation.state.params.id, //mã bài viết
+                                id: id, //mã bài viết
                                 title: "SendPostAgreeReq",
                                 userId: userKey,
                                 contentPost: 'Tìm nhiếp ảnh gia',
@@ -188,7 +188,7 @@ export default class PostRequest extends Component {
                                 statusSendReq: 'Đã bị hủy yêu cầu'
                             });
                             FirebaseApp.database().ref('NotifiMain').child(userId).push({
-                                id: this.props.navigation.state.params.id, //mã bài viết
+                                id: id, //mã bài viết
                                 title: "SendPostNotAgreeReq",
                                 userId: userKey,
                                 contentPost: 'Tìm nhiếp ảnh gia',

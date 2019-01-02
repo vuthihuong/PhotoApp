@@ -39,7 +39,7 @@ export default class IconNotification extends Component {
     render() {   
       return (
         <View style={{flexDirection: 'row'}}>  
-         {this.state.status === "new"?
+         {(this.state.status === "new" && this.state.countNotifi > 0)?
           <TouchableOpacity style={{flexDirection: 'row'}}
               onPress={this.toggleDrawer.bind(this)} >
             <Text style={{marginBottom: 25, color: 'white', marginLeft: 15}}>{this.state.countNotifi}</Text>
