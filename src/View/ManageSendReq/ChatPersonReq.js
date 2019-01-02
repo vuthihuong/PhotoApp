@@ -46,6 +46,42 @@ export default class ChatPersonReq extends Component {
         this.itemRef.ref('ChatPersonReq').child(userPost).child(userView).push({
             userId: userKey, txtMess: messenger, nameView: nameView
         })
+        if(userKey === userView){ 
+            FirebaseApp.database().ref('NotifiMain').child(userPost).push({
+                title: "Messenger",
+                userId: userKey,
+                contentPost: 'Tìm nhiếp ảnh gia',
+                username: name
+            })
+           
+            FirebaseApp.database().ref('NotifiMain').child(userPost)
+                .once('value', (snapshot1) => {
+                    countNotifi = snapshot1.val().countNotifi
+                    FirebaseApp.database().ref('NotifiMain').child(userPost)
+                        .update({
+                            status: 'new',
+                            countNotifi: countNotifi + 1
+                        })
+                })
+        }
+        else if(userKey === userPost){ 
+            FirebaseApp.database().ref('NotifiMain').child(userView).push({
+                title: "Messenger",
+                userId: userKey,
+                contentPost: 'Tìm nhiếp ảnh gia',
+                username: name
+            })
+           
+            FirebaseApp.database().ref('NotifiMain').child(userView)
+                .once('value', (snapshot1) => {
+                    countNotifi = snapshot1.val().countNotifi
+                    FirebaseApp.database().ref('NotifiMain').child(userView)
+                        .update({
+                            status: 'new',
+                            countNotifi: countNotifi + 1
+                        })
+                })
+        }
         this.setState({ mess: '' })
         var listItems = [];
         this.actGetData('ChatPersonReq/' + this.props.navigation.state.params.userPost, listItems);

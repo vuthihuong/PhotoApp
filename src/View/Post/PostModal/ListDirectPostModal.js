@@ -145,7 +145,7 @@ export default class ListDirectPostModal extends Component {
     }
     sendMess(userView) {
         this.props.navigation.navigate('ChatPerson', {
-            userPost: userKey, userView: userView, nameView: nameView,
+            userPost: userKey, userView: userView, nameView: nameView, idPost: this.props.navigation.state.params.id
         })
     }
 

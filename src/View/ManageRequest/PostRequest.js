@@ -210,9 +210,9 @@ export default class PostRequest extends Component {
             { cancelable: false }
         )
     }
-    sendMess(userId) {
+    sendMess(userId, id) {
         this.props.navigation.navigate('ChatPerson', {
-            userPost: userId, userView: userKey, nameView: nameView,
+            userPost: userId, userView: userKey, nameView: nameView, idPost: id
         })
     }
     render() {
@@ -243,7 +243,7 @@ export default class PostRequest extends Component {
                                                     <Text style={{ color: 'black' }}>Đồng ý</Text> :
                                                     <View>
                                                         <Text style={{ color: 'blue' }}>Đồng ý</Text>
-                                                        <TouchableOpacity onPress={() => this.sendMess(rowData.userId)} >
+                                                        <TouchableOpacity onPress={() => this.sendMess(rowData.userId, rowData.id)} >
                                                             <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
                                                         </TouchableOpacity>
                                                     </View>
@@ -287,7 +287,7 @@ export default class PostRequest extends Component {
                                                     <Text style={{ color: 'black' }}>Đồng ý</Text> :
                                                     <View>
                                                         <Text style={{ color: 'blue' }}>Đồng ý</Text>
-                                                        <TouchableOpacity onPress={() => this.sendMess(rowData.userId)} >
+                                                        <TouchableOpacity onPress={() => this.sendMess(rowData.userId, rowData.id)} >
                                                             <Text style={{ color: 'black', fontStyle: 'italic' }}>Gửi tin nhắn</Text>
                                                         </TouchableOpacity>
                                                     </View>

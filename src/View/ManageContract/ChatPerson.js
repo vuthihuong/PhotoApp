@@ -24,7 +24,7 @@ export default class ChatPerson extends Component {
                     let childData = childSnapshot.val();
                     avatarSource = childData.avatarSource;
                     name = childData.username;
-
+                    
                 })
             })
         var listItems = [];
@@ -34,7 +34,7 @@ export default class ChatPerson extends Component {
         this.itemRef.ref(url).child(this.props.navigation.state.params.userView).on('child_added', (dataSnapshot) => {
             var childData = dataSnapshot.val();
             listItems.push({
-                userId: childData.userId, nameView: childData.nameView, txtMess: childData.txtMess
+                userId: childData.userId, nameView: childData.nameView, txtMess: childData.txtMess, idPost: childData.idPost
             })
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(listItems)
@@ -44,8 +44,49 @@ export default class ChatPerson extends Component {
     sendMessage(userPost, userView, nameView) {
         var messenger = this.state.mess;
         this.itemRef.ref('ChatPerson').child(userPost).child(userView).push({
-            userId: userKey, txtMess: messenger, nameView: nameView
+            userId: userKey, txtMess: messenger, nameView: nameView,  idPost: this.props.navigation.state.params.idPost
         })
+        if(userKey === userView){ 
+            FirebaseApp.database().ref('NotifiMain').child(userPost).push({
+                title: "MessengerPost",
+                userId: userKey,
+                contentPost: 'Tìm nhiếp ảnh gia',
+                username: name,
+                idPost: this.props.navigation.state.params.idPost
+            })
+           
+            FirebaseApp.database().ref('NotifiMain').child(userPost)
+                .once('value', (snapshot1) => {
+                    countNotifi = snapshot1.val().countNotifi
+                    FirebaseApp.database().ref('NotifiMain').child(userPost)
+                        .update({
+                            status: 'new',
+                            countNotifi: countNotifi + 1
+                        })
+                })
+        }
+        else if(userKey === userPost){ 
+            FirebaseApp.database().ref('NotifiMain').child(userView).push({
+                title: "MessengerPost",
+                userId: userKey,
+                contentPost: 'Tìm nhiếp ảnh gia',
+                username: name,
+                idPost: this.props.navigation.state.params.idPost
+            })
+           
+            FirebaseApp.database().ref('NotifiMain').child(userView)
+                .once('value', (snapshot1) => {
+                    countNotifi = snapshot1.val().countNotifi
+                    FirebaseApp.database().ref('NotifiMain').child(userView)
+                        .update({
+                            status: 'new',
+                            countNotifi: countNotifi + 1
+                        })
+                })
+        }
+           
+       
+        
         this.setState({ mess: '' })
         var listItems = [];
         this.actGetData('ChatPerson/' + this.props.navigation.state.params.userPost, listItems);
@@ -63,7 +104,8 @@ export default class ChatPerson extends Component {
                         <Image source={gobackIcon}
                             style={{ width: 20, height: 20, marginLeft: 15, marginRight: 90, tintColor: 'white' }} />
                     </TouchableOpacity>
-                    <Text style={{ flex: 1, color: 'white', fontSize: 18 }}>Tin nhắn</Text>
+                    <Text style={{ flex: 1, color: 'white', fontSize: 18 }}>
+                        Tin nhắn</Text>
                 </View>
 
                 <View style={stylesChatPerson.container}>

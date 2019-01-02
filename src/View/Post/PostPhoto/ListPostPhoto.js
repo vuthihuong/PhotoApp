@@ -279,7 +279,7 @@ export default class ListPostPhoto extends Component {
     }
     sendMessPhoto(userView) {
         this.props.navigation.navigate('ChatPerson', {
-            userPost: userKey, userView: userView, nameView: namePost
+            userPost: userKey, userView: userView, nameView: namePost, idPost: this.props.navigation.state.params.id
         })
     }
     render() {

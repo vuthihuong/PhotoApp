@@ -232,7 +232,7 @@ export default class ListPostModal extends Component {
     }
     sendMess(userView){ 
         this.props.navigation.navigate('ChatPerson', { 
-            userPost: userKey, userView: userView, nameView: namePost, 
+            userPost: userKey, userView: userView, nameView: namePost, idPost: this.props.navigation.state.params.id
         })
     }
   
