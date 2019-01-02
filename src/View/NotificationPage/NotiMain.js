@@ -637,7 +637,7 @@ export default class NotiMain extends Component {
                                         <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                                     </TouchableOpacity> : null}
                                 {(rowData.title1 === "Comment" && rowData.contentPost === "Tạo sự kiện" && rowData.userPost !== userKey) ?
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent', {
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEventView', {
                                         id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
                                         addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
                                         costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
@@ -762,7 +762,7 @@ export default class NotiMain extends Component {
                                     </TouchableOpacity> : null}
 
                                 {(rowData.title1 === "Not Agree Participate" && rowData.contentPost === 'Tìm nhiếp ảnh gia') ?
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhoto', {
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailPhotoView', {
                                         id: rowData.id, userId: rowData.userId, title: "Tìm nháy ảnh",
                                         contentPhoto: rowData.contentPhoto, costPhoto: rowData.costPhoto,
                                         datetimePhoto: rowData.datetimePhoto, datetimePhoto1: rowData.datetimePhoto1,
@@ -775,7 +775,7 @@ export default class NotiMain extends Component {
                                     </TouchableOpacity> : null}
 
                                 {(rowData.title1 === "Not Agree Participate" && rowData.contentPost === "Tạo sự kiện") ?
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent', {
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEventView', {
                                         id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
                                         addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
                                         costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
@@ -868,7 +868,7 @@ export default class NotiMain extends Component {
                                     </TouchableOpacity> : null}
 
                                 {(rowData.title1 === "SendPostAgreeReq" && rowData.contentPost === "Tạo sự kiện") ?
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEventView', {
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PostDetailEvent', {
                                         id: rowData.id, userId: rowData.userId, title: "Tạo sự kiện",
                                         addressEvent: rowData.addressEvent, contentEvent: rowData.contentEvent,
                                         costEvent: rowData.costEvent, datetimeEvent: rowData.datetimeEvent,
