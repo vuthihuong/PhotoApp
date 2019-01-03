@@ -20,13 +20,14 @@ import {FirebaseApp} from './../../Controller/FirebaseConfig'
 import IconNotification from './IconNotification';
 import SearchPhoto from './../Search/SearchPhoto'
 import ManageRequest from './../ManageRequest/ManageRequest'
+import PostTabBar from  './../Post/PostTabBar'
 
 
 const InfoModalStack = createStackNavigator({
     InfoModal: { 
       screen: InfoModal, 
       navigationOptions: ({ navigation }) => ({
-        title: username,
+        title: "Thông tin cá nhân",
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTintColor: 'white', 
         headerMode: 'none',
@@ -58,6 +59,22 @@ const MenuStack = createStackNavigator({
         },
         headerTintColor: 'white',   
         borderHeaderBottomColor: '#EE3B3B'        
+      })
+    },
+  });
+  const PostTabBarStack = createStackNavigator({
+    PostTabBar: { 
+      screen: PostTabBar, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Đăng bài',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerTintColor: 'white', 
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
+        },
       })
     },
   });
@@ -302,6 +319,38 @@ const MenuStack = createStackNavigator({
         ),
     }
     },
+    AlbumPose: { 
+      screen: AlbumPoseStack,
+      navigationOptions: {
+        // title: 'Trang chủ',
+        drawerLabel: 'Cách tạo dáng',
+        drawerIcon: ({ tintColor }) => (
+        <Image
+          source={require('../../assets/img/pose/pose.png')}
+          style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+        />
+      ),
+    },
+    },
+     PostTabBar: {
+      screen: PostTabBarStack,
+      navigationOptions: {
+        drawerLabel: 'Đăng bài',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/info/contract.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 35,    
+          
+        },
+      },
+    },
+
+  
 
     SearchPhoto: { 
       screen: SearchPhotoStack,
@@ -377,8 +426,8 @@ const MenuStack = createStackNavigator({
         drawerLabel: 'Quản lý bài viết',
         drawerIcon: () => (
           <Image
-            source={require('../../assets/img/info/manaContract.png')}
-            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+            source={require('../../assets/img/info/contract.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
           />
         ),
         headerStyle: {
@@ -394,7 +443,7 @@ const MenuStack = createStackNavigator({
         drawerLabel: 'Quản lý yêu cầu trực tiếp',
         drawerIcon: () => (
           <Image
-            source={require('../../assets/img/info/manaContract.png')}
+            source={require('../../assets/img/pose/send.png')}
             style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
           />
         ),

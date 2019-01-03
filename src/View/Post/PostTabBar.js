@@ -1,80 +1,20 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity,TextInput, ScrollView} from 'react-native';
-import CheckBox from 'react-native-checkbox';
+import { StyleSheet, View, Text, TouchableOpacity,TextInput} from 'react-native';
+import { FirebaseApp } from './../../Controller/FirebaseConfig'
 
 class PostTabBar extends Component { 
     constructor(props){
         super(props)
-        this.state = {
-            checkedPostModal: false, checkedPostPhoto: false, checkedPostEvent: false,
-
-        }
     }
-    checkPostModal(){ 
-        if(this.state.checkedPostModal === true){ 
-            this.setState({
-                checkedPostModal: false
+    componentWillMount() {
+        tmp = FirebaseApp.auth().currentUser.email
+        FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(tmp)
+            .on('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    userKey = childSnapshot.key;
+                    category = childSnapshot.val().category;
+                })
             })
-        }
-        else if(this.state.checkedPostModal === false){ 
-            this.setState({ 
-                checkedPostModal: true
-            });
-            this.setState({ 
-                checkedPostEvent: false
-            });
-            this.setState({ 
-                checkedPostPhoto: false
-            });
-        }
-    }
-    checkPostPhoto(){ 
-        if(this.state.checkedPostPhoto === true){ 
-            this.setState({
-                checkedPostPhoto: false
-            })
-        }
-        else if(this.state.checkedPostPhoto === false){ 
-            this.setState({ 
-                checkedPostPhoto: true
-            });
-            this.setState({ 
-                checkedPostEvent: false
-            });
-            this.setState({ 
-                checkedPostModal: false
-            });
-        }
-    }
-    checkPostEvent(){ 
-        if(this.state.checkedPostEvent === true){ 
-            this.setState({
-                checkedPostEvent: false
-            })
-        }
-        else if(this.state.checkedPostEvent === false){ 
-            this.setState({ 
-                checkedPostEvent: true
-            });
-            this.setState({ 
-                checkedPostPhoto: false
-            });
-            this.setState({ 
-                checkedPostModal: false
-            });
-        }
-    }
-
-    checkPost(){ 
-        if(this.state.checkedPostModal === true){ 
-            this.props.navigation.navigate('PostModal')
-        }
-        else if(this.state.checkedPostPhoto === true){ 
-            this.props.navigation.navigate('PostPhoto')
-        }
-        else if(this.state.checkedPostEvent === true){ 
-            this.props.navigation.navigate('PostEvent')
-        }
     }
     render(){ 
         return( 
@@ -89,47 +29,20 @@ class PostTabBar extends Component {
                 </View>
                 <View style={stylesPostTabBar.bodyPostTabBar}>
                     <View>
+                        {(category === "Người thuê chụp ảnh" || category === "Nháy ảnh")?
                         <TouchableOpacity onPress={() =>  this.props.navigation.navigate('PostModal')} >
                             <Text style={stylesPostTabBar.txtCheckbox}>Tìm người mẫu</Text>
-                            {/* <CheckBox 
-                                    label='Tìm người mẫu'
-                                    labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
-                                    checkboxStyle = {{width:20, height: 20}} 
-                                    checked={this.state.checkedPostModal}
-                                    onChange={(checked) => {this.checkPostModal()}} 
-                                    /> */}
-                        </TouchableOpacity>
+                        </TouchableOpacity>:null}
+                         {(category === "Người thuê chụp ảnh" || category === "Mẫu ảnh")?
                         <TouchableOpacity onPress={() =>  this.props.navigation.navigate('PostPhoto')} >
                             <Text style={stylesPostTabBar.txtCheckbox}>Tìm nhiếp ảnh gia</Text>
-                            {/* <CheckBox 
-                                    label='Tìm người mẫu'
-                                    labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
-                                    checkboxStyle = {{width:20, height: 20}} 
-                                    checked={this.state.checkedPostModal}
-                                    onChange={(checked) => {this.checkPostModal()}} 
-                                    /> */}
-                        </TouchableOpacity>
+                        </TouchableOpacity>:null}
                         <TouchableOpacity onPress={() =>  this.props.navigation.navigate('PostEvent')} >
                             <Text style={stylesPostTabBar.txtCheckbox}>Tạo sự kiện</Text>
-                            {/* <CheckBox 
-                                    label='Tìm người mẫu'
-                                    labelStyle={{fontSize: 18, marginRight: 13, color:'black'}}
-                                    checkboxStyle = {{width:20, height: 20}} 
-                                    checked={this.state.checkedPostModal}
-                                    onChange={(checked) => {this.checkPostModal()}} 
-                                    /> */}
                         </TouchableOpacity>
                     </View>
                    
                 </View>
-                {/* <View style={stylesPostTabBar.tailPostTabBar}>
-                    <TouchableOpacity onPress={() => this.checkPost()}
-                        style={stylesPostTabBar.btnSubmitPostTabBar}
-                        >
-                        <Text style={{textAlign:'center',marginTop:5,color:'white'}} >OK</Text>
-                    </TouchableOpacity>
-                </View> */}
-                
             </View>
         )
     }

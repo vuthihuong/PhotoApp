@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
-import { createDrawerNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation'
-import { createBottomTabNavigator} from 'react-navigation'
+
 import { createMaterialTopTabNavigator} from 'react-navigation'
 
 
-import HamburgerIcon from './HamburgerIcon'
-import Event from './Event'
 import AlbumPose from './AlbumPose'
 import PostTabBar from './../Post/PostTabBar'
 import Menu from './Menu'
+import SearchPhoto from './../Search/SearchPhoto'
 
 
 // let routeConfigs = {
@@ -54,15 +51,15 @@ import Menu from './Menu'
 
 
 const MenuTabBar = createMaterialTopTabNavigator({
-    Menu: {
-        screen: Menu
+    SearchPhoto: {
+        screen: SearchPhoto,
+        navigationOptions: {
+            title: 'Tìm kiếm nhiếp ảnh gia'
+        }
     },
     AlbumPose: {
         screen: AlbumPose
     },
-    // Event: {
-    //     screen: Event
-    // }, 
      PostTabBar: {
         screen: PostTabBar,
         navigationOptions: {

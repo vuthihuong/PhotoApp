@@ -19,7 +19,7 @@ import ManagePost from './../ManagePost/ManagePost'
 import SearchPhoto from './../Search/SearchPhoto'
 import SearchModal from '../Search/SearchModal'
 import ListFavorite from './../ListFavorite/ListFavorite'
-import ManageSendReq from  './../ManageSendReq/ManageSendReq'
+import PostTabBar from  './../Post/PostTabBar'
 import ListPersonReq from './../ManageSendReq/ListPersonReq'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
 
@@ -40,7 +40,7 @@ const InfoCustomerStack = createStackNavigator({
     InfoCustomer: { 
       screen: InfoCustomer, 
       navigationOptions: ({ navigation }) => ({
-        title: this.props.navigation.state.params.userId,
+        title: "Thông tin cá nhân",
         headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
         headerTintColor: 'white', 
         headerMode: 'none',
@@ -163,22 +163,22 @@ const MenuStack = createStackNavigator({
     },
   });
 
-  // const ManageSendReqStack = createStackNavigator({
-  //   ManageSendReq: { 
-  //     screen: ManageSendReq, 
-  //     navigationOptions: ({ navigation }) => ({
-  //       title: 'Quản lý gửi yêu cầu',
-  //       headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
-  //       headerTintColor: 'white', 
-  //       headerStyle: {
-  //         backgroundColor: '#EE3B3B',    
-  //         height: 45,    
-  //         elevation: 0,
-  //         shadowOpacity: 0
-  //       },
-  //     })
-  //   },
-  // });
+  const PostTabBarStack = createStackNavigator({
+    PostTabBar: { 
+      screen: PostTabBar, 
+      navigationOptions: ({ navigation }) => ({
+        title: 'Đăng bài',
+        headerLeft : <HamburgerIcon navigationProps={ navigation }/>,
+        headerTintColor: 'white', 
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 45,    
+          elevation: 0,
+          shadowOpacity: 0
+        },
+      })
+    },
+  });
   const ListPersonReqStack = createStackNavigator({
     ListPersonReq: { 
       screen: ListPersonReq, 
@@ -334,6 +334,37 @@ const MenuStack = createStackNavigator({
             style={{width: 20, height: 20, tintColor: '#EE3B3B'}}/>
         ),}
     },
+    AlbumPose: { 
+      screen: AlbumPoseStack,
+      navigationOptions: {
+        // title: 'Trang chủ',
+        drawerLabel: 'Cách tạo dáng',
+        drawerIcon: ({ tintColor }) => (
+        <Image
+          source={require('../../assets/img/pose/pose.png')}
+          style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+        />
+      ),
+    },
+    },
+     PostTabBar: {
+      screen: PostTabBarStack,
+      navigationOptions: {
+        drawerLabel: 'Đăng bài',
+        drawerIcon: () => (
+          <Image
+            source={require('../../assets/img/info/contract.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
+          />
+        ),
+        headerStyle: {
+          backgroundColor: '#EE3B3B',    
+          height: 35,    
+          
+        },
+      },
+    },
+
 
     SearchPhoto: { 
       screen: SearchPhotoStack,
@@ -395,19 +426,6 @@ const MenuStack = createStackNavigator({
     },
     },
   
-    // AlbumPose: { 
-    //   screen: AlbumPoseStack,
-    //   navigationOptions: {
-    //     // title: 'Trang chủ',
-    //     drawerLabel: 'Cách tạo dáng',
-    //     // drawerIcon: ({ tintColor }) => (
-    //     // <Image
-    //     //   source={home}
-    //     //   style={[{width: 30, height: 30}, {tintColor: tintColor}]}
-    //     // />
-    //   // ),
-    // },
-    // },
   
     // HistoryContract: { 
     //   screen: HistoryContractStack,
@@ -433,8 +451,8 @@ const MenuStack = createStackNavigator({
         drawerLabel: 'Quản lý bài viết',
         drawerIcon: () => (
           <Image
-            source={require('../../assets/img/info/manaContract.png')}
-            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+            source={require('../../assets/img/info/contract.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
           />
         ),
         headerStyle: {
@@ -444,24 +462,7 @@ const MenuStack = createStackNavigator({
         },
       },
     },
-    // ManageSendReq: {
-    //   screen: ManageSendReqStack,
-    //   navigationOptions: {
-    //     drawerLabel: 'Quản lý gửi yêu cầu'+ '\n'+ 'trực tiếp',
-    //     drawerIcon: () => (
-    //       <Image
-    //         source={require('../../assets/img/info/manaContract.png')}
-    //         style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
-    //       />
-    //     ),
-    //     headerStyle: {
-    //       backgroundColor: '#EE3B3B',    
-    //       height: 35,    
-          
-    //     },
-    //   },
-    // },
-
+   
     ListPersonReq: {
       screen: ListPersonReqStack,
       navigationOptions: {

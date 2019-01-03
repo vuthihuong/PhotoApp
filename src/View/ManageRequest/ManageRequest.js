@@ -21,7 +21,7 @@ const ManageRequest = createMaterialTopTabNavigator({
     SendRequest: {
         screen: SendRequest,
         navigationOptions: {
-            title: 'Nhân yêu cầu trực tiếp'
+            title: 'Quản lý tin nhắn'
         }
     },
   }, {
