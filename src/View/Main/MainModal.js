@@ -220,10 +220,11 @@ const MenuStack = createStackNavigator({
     FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(user.email)
     .on('value', (function (snapshot) {
       snapshot.forEach(function(childSnapshot) {
-              var key = childSnapshot.key;
+               key = childSnapshot.key;
               let childData = childSnapshot.val();
-              username = childData.username
-              avatarSource = childData.avatarSource
+              username = childData.username;
+              avatarSource = childData.avatarSource;
+              token = childData.token;
       })
     }))
       return (
@@ -246,13 +247,16 @@ const MenuStack = createStackNavigator({
                 onPress={() => props.navigation.navigate('Login') }/> */}
                
                <TouchableOpacity  
-                    onPress={() => 
+                    onPress={() => {
                     // props.navigation.navigate('Login') 
+                    FirebaseApp.database().ref('tokenFCM').child(key).child('token').remove();
                     FirebaseApp.auth().signOut().then(function() {
-                      this.props.navigation.navigate('Login')
+                      this.props.navigation.navigate('Loading')
                     }).catch(function(error) {
                       // An error happened.
-                    })}>
+                    })
+                    
+                    }}>
                   <View style={stylesMain.itemLogout}>
                     <View style={stylesMain.iconContainerLogout}>
                       <Image source={require('./../../assets/img/login/logout.png')} 

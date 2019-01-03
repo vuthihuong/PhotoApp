@@ -21,6 +21,7 @@ export default class NotiMain extends Component {
             .on('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
                     userKey = childSnapshot.key;
+                    nameMess = childSnapshot.val().username
                 })
             })
         this.actGetData();
@@ -984,7 +985,7 @@ export default class NotiMain extends Component {
                                     </TouchableOpacity> : null}
                                     {(rowData.title1 === "MessengerPost" && rowData.contentPost === "Tìm mẫu ảnh") ?
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatPerson', {
-                                        userPost: rowData.userPost, userView: rowData.userView, nameView: rowData.nameView, idPost: rowData.idPost,
+                                        userPost: rowData.userPost, userView: rowData.userView, nameView: nameMess, idPost: rowData.idPost,
                                     })}
                                         style={stylesNotiMain.contManagCont}>
 
@@ -995,7 +996,7 @@ export default class NotiMain extends Component {
 
                                 {(rowData.title1 === "MessengerPost" && rowData.contentPost === 'Tìm nhiếp ảnh gia') ?
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatPerson', {
-                                        userPost: rowData.userPost, userView: rowData.userView, nameView: rowData.nameView, idPost: rowData.idPost,
+                                        userPost: rowData.userPost, userView: rowData.userView, nameView: nameMess, idPost: rowData.idPost,
                                     })}
                                         style={stylesNotiMain.contManagCont}>
                                         <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameMessPost} đã gửi cho bạn một tin nhắn qua bài viết tìm nhiếp ảnh gia tại {rowData.valuePlacePhoto} </Text>
@@ -1005,7 +1006,7 @@ export default class NotiMain extends Component {
 
                                 {(rowData.title1 === "MessengerPost" && rowData.contentPost === "Tạo sự kiện") ?
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatPerson', {
-                                        userPost: rowData.userPost, userView: rowData.userView, nameView: rowData.nameView, idPost: rowData.idPost
+                                        userPost: rowData.userPost, userView: rowData.userView, nameView: nameMess, idPost: rowData.idPost
                                     })}
                                         style={stylesNotiMain.contManagCont}>
                                         <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameMessPost} đã gửi cho bạn một tin nhắn qua bài viết tham gia sự kiện tại {rowData.addressEvent} </Text>
@@ -1014,7 +1015,7 @@ export default class NotiMain extends Component {
                                     </TouchableOpacity> : null}
                                     {(rowData.title1 === "Messenger") ?
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatPersonReq', {
-                                        userPost: rowData.userPost, userView: rowData.userView, nameView: rowData.nameView
+                                        userPost: rowData.userPost, userView: rowData.userView, nameView: nameMess
                                     })}
                                         style={stylesNotiMain.contManagCont}>
                                         <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameMess} đã gửi cho bạn một tin nhắn</Text>

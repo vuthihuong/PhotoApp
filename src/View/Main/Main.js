@@ -6,6 +6,7 @@ import {Container, Header, Icon, Content, Left, Body, Right, List, ListItem} fro
 import { createDrawerNavigator, DrawerItems, } from 'react-navigation';
 
 import { createStackNavigator } from 'react-navigation'
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from "react-native-fcm";
 
 import Menu from './Menu'
 import HamburgerIcon from './HamburgerIcon'
@@ -259,10 +260,11 @@ const MenuStack = createStackNavigator({
     FirebaseApp.database().ref('Customer').orderByChild("email").equalTo(user.email)
     .on('value', (function (snapshot) {
     snapshot.forEach(function(childSnapshot) {
-            var key = childSnapshot.key;
+             key = childSnapshot.key;
             let childData = childSnapshot.val();
-            username = childData.username
-            avatarSource = childData.avatarSource
+            username = childData.username;
+            avatarSource = childData.avatarSource;
+            token = childData.token;
     })
   }))
       return (
@@ -281,14 +283,17 @@ const MenuStack = createStackNavigator({
               </Header>
               <Content>
                 <DrawerItems {...props} />
-               <TouchableOpacity  onPress={() =>{ 
+               <TouchableOpacity asnyc onPress={ () =>{ 
                   //  props.navigation.navigate('Login') 
-                
+                  FirebaseApp.database().ref('tokenFCM').child(key).child('token').remove();
                   FirebaseApp.auth().signOut().then(function() {
-                    this.props.navigation.navigate('Login')
+                   
+                    this.props.navigation.navigate('Loading')
                   }).catch(function(error) {
                     // An error happened.
                   });
+                 
+                
                }
                
                  
