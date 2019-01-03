@@ -442,6 +442,55 @@ export default class NotiMain extends Component {
                         }
                     })
                 }
+                else if (childData1.title === "MessengerPost") {
+                    this.itemRef.ref('Post').child(childData1.idPost).on('value', (dataSnapshot1) => {
+                        {
+                            var childData = dataSnapshot1.val();
+                            if (childData.title === "Tìm mẫu ảnh") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    userPost: childData1.userPost, userView: childData1.userView, nameView: childData1.nameView,
+                                    id: childData1.id, userLike: childData1.userId, usernameMessPost: childData1.username,
+                                    userId: (childData.userId), title: childData.title, idPost: childData1.idPost,
+                                    content: childData.content, cost: childData.cost, girl: childData.girl,
+                                    datetime: childData.datetime, datetime1: childData.datetime1,
+                                    value: childData.value, height: childData.height, boy: childData.boy,
+                                    labelRightModal1: childData.labelRightModal1, labelRightModal2: childData.labelRightModal2,
+                                    labelRightModal3: childData.labelRightModal3, labelRightModal4: childData.labelRightModal4,
+                                    labelRightModal5: childData.labelRightModal5, tmp: 'MessengerPost',
+                                    circle1: childData.circle1, circle2: childData.circle2, circle3: childData.circle3,
+                                    datePostModal: childData.datePostModal, timePostModal: childData.timePostModal
+                                })
+                            }
+                            else if (childData.title === "Tìm nháy ảnh") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    userPost: childData1.userPost, userView: childData1.userView, nameView: childData1.nameView,
+                                    id: childData1.id, userLike: childData1.userId, usernameMessPost: childData1.username,
+                                    userId: (childData.userId), title: childData.title, tmp: 'MessengerPost', idPost: childData1.idPost,
+                                    contentPhoto: childData.contentPhoto, costPhoto: childData.costPhoto,
+                                    datePostPhoto: childData.datePostPhoto, timePostPhoto: childData.timePostPhoto,
+                                    datetimePhoto: childData.datetimePhoto, datetimePhoto1: childData.datetimePhoto1,
+                                    valueCategoryPhoto1: childData.valueCategoryPhoto1, valuePlacePhoto: childData.valuePlacePhoto
+                                })
+                            }
+                            else if (childData.title === "Tạo sự kiện") {
+                                items.push({
+                                    title1: childData1.title, contentPost: childData1.contentPost,
+                                    userPost: childData1.userPost, userView: childData1.userView, nameView: childData1.nameView,
+                                    id: childData1.id, userLike: childData1.userId, usernameMessPost: childData1.username,
+                                    userId: (childData.userId), title: childData.title, tmp: 'MessengerPost', idPost: childData1.idPost,
+                                    addressEvent: childData.addressEvent, contentEvent: childData.contentEvent,
+                                    costEvent: childData.costEvent, datetimeEvent: childData.datetimeEvent,
+                                    datetimeEvent1: childData.datetimeEvent1, labelEvent1: childData.labelEvent1,
+                                    labelEvent2: childData.labelEvent2, numberModal: childData.numberModal,
+                                    datePostEvent: childData.datePostEvent, timePostEvent: childData.timePostEvent
+                                })
+                            }
+
+                        }
+                    })
+                }
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(items, items.map((row, i) => i).reverse())
                 });
@@ -923,6 +972,36 @@ export default class NotiMain extends Component {
                                     })}
                                         style={stylesNotiMain.contManagCont}>
                                         <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameSendPostNotAgree} đã từ chối đăng ký tham gia sự kiện {rowData.labelEvent1} {rowData.labelEvent2} tại {rowData.addressEvent} của bạn </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
+                                    </TouchableOpacity> : null}
+                                    {(rowData.title1 === "MessengerPost" && rowData.contentPost === "Tìm mẫu ảnh") ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatPerson', {
+                                        userPost: rowData.userPost, userView: rowData.userView, nameView: rowData.nameView, idPost: rowData.idPost,
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameMessPost} đã gửi cho bạn một tin nhắn qua bài viết tìm mẫu ảnh tại {rowData.value}</Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetime} đến {rowData.datetime1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostModal} lúc {rowData.timePostModal}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "MessengerPost" && rowData.contentPost === 'Tìm nhiếp ảnh gia') ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatPerson', {
+                                        userPost: rowData.userPost, userView: rowData.userView, nameView: rowData.nameView, idPost: rowData.idPost,
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameMessPost} đã gửi cho bạn một tin nhắn qua bài viết tìm nhiếp ảnh gia tại {rowData.valuePlacePhoto} </Text>
+                                        <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimePhoto} đến {rowData.datetimePhoto1}</Text>
+                                        <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostPhoto} lúc {rowData.timePostPhoto}</Text>
+                                    </TouchableOpacity> : null}
+
+                                {(rowData.title1 === "MessengerPost" && rowData.contentPost === "Tạo sự kiện") ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatPerson', {
+                                        userPost: rowData.userPost, userView: rowData.userView, nameView: rowData.nameView, idPost: rowData.idPost
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameMessPost} đã gửi cho bạn một tin nhắn qua bài viết tham gia sự kiện tại {rowData.addressEvent} </Text>
                                         <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
                                         <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
                                     </TouchableOpacity> : null}

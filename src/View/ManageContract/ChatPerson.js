@@ -41,18 +41,21 @@ export default class ChatPerson extends Component {
             });
         });
     }
-    sendMessage(userPost, userView, nameView) {
+    sendMessage(userPost, userView, nameView, idPost) {
         var messenger = this.state.mess;
         this.itemRef.ref('ChatPerson').child(userPost).child(userView).push({
-            userId: userKey, txtMess: messenger, nameView: nameView,  idPost: this.props.navigation.state.params.idPost
+            userId: userKey, txtMess: messenger, nameView: nameView,  idPost: idPost
         })
         if(userKey === userView){ 
             FirebaseApp.database().ref('NotifiMain').child(userPost).push({
                 title: "MessengerPost",
                 userId: userKey,
+                userPost: userPost,
+                userView: userView,
+                nameView: nameView,
                 contentPost: 'Tìm nhiếp ảnh gia',
                 username: name,
-                idPost: this.props.navigation.state.params.idPost
+                idPost: idPost
             })
            
             FirebaseApp.database().ref('NotifiMain').child(userPost)
@@ -69,9 +72,12 @@ export default class ChatPerson extends Component {
             FirebaseApp.database().ref('NotifiMain').child(userView).push({
                 title: "MessengerPost",
                 userId: userKey,
+                userPost: userPost,
+                userView: userView,
+                nameView: nameView,
                 contentPost: 'Tìm nhiếp ảnh gia',
                 username: name,
-                idPost: this.props.navigation.state.params.idPost
+                idPost: idPost
             })
            
             FirebaseApp.database().ref('NotifiMain').child(userView)
@@ -136,8 +142,9 @@ export default class ChatPerson extends Component {
                                 style={{ width: 300, marginRight: 15 }}
                                 onChangeText={(mess) => this.setState({ mess })} />
                             <TouchableOpacity
-                                onPress={() => this.sendMessage(this.props.navigation.state.params.userPost,
-                                    this.props.navigation.state.params.userView, this.props.navigation.state.params.nameView)}>
+                                onPress={() => this.sendMessage(this.props.navigation.state.params.userPost, 
+                                    this.props.navigation.state.params.userView, this.props.navigation.state.params.nameView, 
+                                    this.props.navigation.state.params.idPost)}>
                                 <Text style={{ color: 'black', marginTop: 25 }}>Enter</Text>
                             </TouchableOpacity>
                         </View>
