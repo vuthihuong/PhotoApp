@@ -50,6 +50,9 @@ export default class ChatPersonReq extends Component {
             FirebaseApp.database().ref('NotifiMain').child(userPost).push({
                 title: "Messenger",
                 userId: userKey,
+                userPost: userPost,
+                userView: userView,
+                nameView: nameView,
                 contentPost: 'Tìm nhiếp ảnh gia',
                 username: name
             })
@@ -68,6 +71,9 @@ export default class ChatPersonReq extends Component {
             FirebaseApp.database().ref('NotifiMain').child(userView).push({
                 title: "Messenger",
                 userId: userKey,
+                userPost: userPost,
+                userView: userView,
+                nameView: nameView,
                 contentPost: 'Tìm nhiếp ảnh gia',
                 username: name
             })

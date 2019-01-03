@@ -491,6 +491,13 @@ export default class NotiMain extends Component {
                         }
                     })
                 }
+                else if (childData1.title === "Messenger") {
+                    items.push({
+                        title1: childData1.title, contentPost: childData1.contentPost,
+                        userPost: childData1.userPost, userView: childData1.userView, nameView: childData1.nameView,
+                        id: childData1.id, userLike: childData1.userId, usernameMess: childData1.username, tmp:"Messenger"
+                    })
+                }
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(items, items.map((row, i) => i).reverse())
                 });
@@ -1004,6 +1011,13 @@ export default class NotiMain extends Component {
                                         <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameMessPost} đã gửi cho bạn một tin nhắn qua bài viết tham gia sự kiện tại {rowData.addressEvent} </Text>
                                         <Text style={stylesNotiMain.txtManagCont}>Thời gian từ {rowData.datetimeEvent} đến {rowData.datetimeEvent1}</Text>
                                         <Text style={stylesNotiMain.txtManagContColor}>Bài đăng ngày {rowData.datePostEvent} lúc {rowData.timePostEvent}</Text>
+                                    </TouchableOpacity> : null}
+                                    {(rowData.title1 === "Messenger") ?
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatPersonReq', {
+                                        userPost: rowData.userPost, userView: rowData.userView, nameView: rowData.nameView
+                                    })}
+                                        style={stylesNotiMain.contManagCont}>
+                                        <Text style={stylesNotiMain.txtManagCont}>{rowData.usernameMess} đã gửi cho bạn một tin nhắn</Text>
                                     </TouchableOpacity> : null}
                             </View>} />
 
