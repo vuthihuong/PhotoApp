@@ -443,8 +443,8 @@ const MenuStack = createStackNavigator({
         drawerLabel: 'Quản lý yêu cầu trực tiếp',
         drawerIcon: () => (
           <Image
-            source={require('../../assets/img/pose/send.png')}
-            style={{width: 30, height: 30, tintColor: '#EE3B3B'}}
+            source={require('../../assets/img/pose/arrow-send.png')}
+            style={{width: 20, height: 20, tintColor: '#EE3B3B'}}
           />
         ),
         headerStyle: {

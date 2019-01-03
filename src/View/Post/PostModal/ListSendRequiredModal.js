@@ -24,6 +24,7 @@ export default class ListSendRequiredModal extends Component {
                    .on('value', function (snapshot) {
           snapshot.forEach(function(childSnapshot) {
                          userKey = childSnapshot.key;
+                         userSend = childSnapshot.val().username;
           }) 
         })
 
@@ -86,11 +87,29 @@ sendReq(id, colorSendReq, username, countSendReq){ // id là userKey của nháy
         // thêm mẫu ảnh đã gửi trong bài post
         FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
         .child('ListSendReq').push({
-            colorSendReq: '#EE3B3B', userId: id, statusSendReq: 'Đã gửi yêu cầu', username: username
+            colorSendReq: '#EE3B3B', userId: id, statusSendReq: 'Đã gửi yêu cầu', username: username,
+            usernameSend: userSend, userIdSend: userKey
         })
         this.actGetData(items = []);
               
         alert('Đã gửi yêu cầu cho mẫu ảnh ' + username);
+        FirebaseApp.database().ref('NotifiMain').child(id).push({
+            id: this.props.navigation.state.params.id, //mã bài viết
+            title: "SendPostReq",
+            userId: userKey,
+            contentPost: 'Tìm mẫu ảnh',
+            username: userSend
+        })
+        FirebaseApp.database().ref('NotifiMain').child(id)
+            .once('value', (snapshot1) => {
+                countNotifi = snapshot1.val().countNotifi
+                FirebaseApp.database().ref('NotifiMain').child(id)
+                    .update({
+                        status: 'new',
+                        countNotifi: countNotifi + 1
+                    })
+            })
+
     }
     else if(colorSendReq === '#EE3B3B'){
         Alert.alert(

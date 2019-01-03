@@ -70,6 +70,7 @@ export default class PostDetailModalView extends Component {
                          countCommentEvent = childData.countCommentEvent;
                          countParticipate = childData.countParticipate;
                          countLike = childData.countLike;
+                         userPost = childData.userId;
                          this.setState({ 
                             countCommentEvent : childData.countCommentEvent,
                             countParticipate : childData.countParticipate,
@@ -137,6 +138,39 @@ export default class PostDetailModalView extends Component {
                 FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id).update({ 
                     countCommentEvent:countCommentEvent + 1
                 })
+                FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id).child('tokenCmt')
+                .child(userKey).set({
+                    userKey: userKey
+                })
+
+            FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+                .child('tokenCmt').once('value', (allToken) => {
+                    if (allToken.val()) {
+                        token = Object.keys(allToken.val());
+                        token.forEach(element => {
+                            if(element !== userKey){ 
+                                FirebaseApp.database().ref('NotifiMain').child(element).push({
+                                    id: this.props.navigation.state.params.id, //mã bài viết
+                                    title: "Comment",
+                                    userId: userKey,
+                                    contentPost: 'Tìm mẫu ảnh',
+                                    usernameCmt: username,
+                                    userPost: userPost
+                                })
+                                FirebaseApp.database().ref('NotifiMain').child(element)
+                                    .once('value', (snapshot1) => {
+                                        countNotifi = snapshot1.val().countNotifi
+                                        FirebaseApp.database().ref('NotifiMain').child(element)
+                                            .update({
+                                                status: 'new',
+                                                countNotifi: countNotifi + 1
+                                            })
+                                    })
+                            }
+                        })
+
+                    }
+                })
                 this.setState({ commentModalDetail: ''})
              }
         }
@@ -163,6 +197,26 @@ export default class PostDetailModalView extends Component {
             .child('StatusParticipateCol').push({ 
                 userId: userKey, username: username, statusAgree: "gửi yêu cầu"
             })
+            FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+            .once('value', (function (snapshotUser) {
+                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId).push({
+                    id: this.props.navigation.state.params.id, //mã bài viết
+                    title: "Participate",
+                    userId: userKey,
+                    contentPost: 'Tìm mẫu ảnh',
+                    username: username
+                })
+                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                    .once('value', (snapshot1) => {
+                        countNotifi = snapshot1.val().countNotifi
+                        FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                            .update({
+                                status: 'new',
+                                countNotifi: countNotifi + 1
+                            })
+                    })
+
+            }).bind(this))
         }
         btnChangeNotParticipateModalView(){ 
             this.setState({
@@ -180,6 +234,42 @@ export default class PostDetailModalView extends Component {
             }))
             FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
             .child('StatusParticipateCol').child(keyStatusPart).remove();
+
+            FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+            .once('value', (function (snapshotUser) {
+
+                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                    .orderByChild('userId').equalTo(userKey)
+                    .once('value', (function (snapshott) {
+                        snapshott.forEach((function (childSnapshott) {
+                            if(childSnapshott.val().title === "Participate" 
+                                && childSnapshott.val().id === this.props.navigation.state.params.id){ 
+                                keyPartNotifi = childSnapshott.key;
+                            }
+                          
+                        }).bind(this))
+                        FirebaseApp.database().ref('NotifiMain/').child(snapshotUser.val().userId)
+                            .child(keyPartNotifi).remove();
+                    }).bind(this))
+                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                    .once('value', (snapshot1) => {
+                        countNotifi = snapshot1.val().countNotifi
+                        if (countNotifi >= 2) {
+                            FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                                .update({
+                                    status: 'new',
+                                    countNotifi: countNotifi - 1
+                                })
+                        }
+                        else if (countNotifi < 2) {
+                            FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                                .update({
+                                    status: 'old',
+                                    countNotifi: countNotifi - 1
+                                })
+                        }
+                    })
+            }).bind(this))
         }
     
         btnChangeLikeModalView(){ 
@@ -194,6 +284,26 @@ export default class PostDetailModalView extends Component {
                 .child('LikePostEvent').push({ 
                     userId: userKey
                 })
+                FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+                .once('value', (function (snapshotUser) {
+                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId).push({
+                        id: this.props.navigation.state.params.id, //mã bài viết
+                        title: "Like",
+                        userId: userKey,
+                        contentPost: 'Tìm mẫu ảnh',
+                        usernameLike: username
+                    })
+                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                        .once('value', (snapshot1) => {
+                            countNotifi = snapshot1.val().countNotifi
+                            FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                                .update({
+                                    status: 'new',
+                                    countNotifi: countNotifi + 1
+                                })
+                        })
+
+                }).bind(this))
             }
             else if(this.state.changeLikeModal === true){ 
                 this.setState({
@@ -211,6 +321,42 @@ export default class PostDetailModalView extends Component {
                 }))
                 FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id)
                 .child('LikePostEvent').child(keyLike).remove();
+                FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+                .once('value', (function (snapshotUser) {
+
+                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                        .orderByChild('userId').equalTo(userKey)
+                        .once('value', (function (snapshott) {
+                            snapshott.forEach((function (childSnapshott) {
+                                if(childSnapshott.val().title === "Like" 
+                                    && childSnapshott.val().id === this.props.navigation.state.params.id){ 
+                                    keyLikeNotifi = childSnapshott.key;
+                                }
+                              
+                            }).bind(this))
+                            FirebaseApp.database().ref('NotifiMain/').child(snapshotUser.val().userId)
+                                .child(keyLikeNotifi).remove();
+                        }).bind(this))
+                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                        .once('value', (snapshot1) => {
+                            countNotifi = snapshot1.val().countNotifi
+                            if (countNotifi >= 2) {
+                                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                                    .update({
+                                        status: 'new',
+                                        countNotifi: countNotifi - 1
+                                    })
+                            }
+                            else if (countNotifi < 2) {
+                                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.val().userId)
+                                    .update({
+                                        status: 'old',
+                                        countNotifi: countNotifi - 1
+                                    })
+                            }
+                        })
+                }).bind(this))
+        
             }
         }
     showInfoPhoto(userId){ 

@@ -304,13 +304,13 @@ export default class ListPostPhoto extends Component {
                         </View>
                         <View style={stylesListPostPhoto.btnConfirmListModal} >
                             <Text style={{ color: 'black', marginRight: 10, fontWeight: 'bold' }}>Đồng ý</Text>
-                            <CheckBox
+                            {/* <CheckBox
                                 label=''
                                 labelStyle={{ color: 'black' }}
                                 checked={this.state.checkedAllAgree}
                                 checkboxStyle={[stylesListPostPhoto.txtBoxListModal, { marginTop: 5 }]}
                                 onChange={(checked) => { this.checkAllAgree() }}
-                            />
+                            /> */}
                         </View>
                         <View style={stylesListPostPhoto.btnConfirmListModal} >
                             <Text style={{ color: 'black', marginRight: 10, fontWeight: 'bold' }}>Từ chối</Text>

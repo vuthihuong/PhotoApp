@@ -89,6 +89,13 @@ export default class PostEvent extends Component {
                          key = childSnapshot.key;
           })  
         })
+        this.itemRef.ref('NotifiMain').child(key).on('value', (snapshot) => {
+            var childData = snapshot.val();
+            this.setState({
+                status: childData.status,
+                countNotifi: childData.countNotifi
+            })
+        })
         
     }
     createPostEvent(){ 
@@ -159,6 +166,29 @@ export default class PostEvent extends Component {
                         }).then((snap) => { this.setState({  
                                                      id: snap.key })
                              if(this.state.id !== ''){ 
+                                var id = this.state.id;
+                                FirebaseApp.database().ref('Customer').on('child_added', (function (snapshotUser) {
+                                    if (snapshotUser.key !== key) {
+                                        FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key).child(id).set({
+                                            id: id,
+                                            title: "Bài viết",
+                                            userId: key
+                                        })
+                                        FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key)
+                                            .once('value', (snapshot1) => {
+                                                countNotifi = snapshot1.val().countNotifi
+                                                FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key)
+                                                    .update({
+                                                        status: 'new',
+                                                        countNotifi: countNotifi + 1 
+                                                    })
+                                            })
+                                    }
+                                }).bind(this))
+                                 FirebaseApp.database().ref('Post').child(id).child('tokenCmt')
+                                    .child(key).set({
+                                        userKey: key
+                                    })
                                 this.props.navigation.navigate('PostDetailEvent',{
                                     id: this.state.id, userId: key, title:'Tạo sự kiện', countCommentEvent: this.state.countCommentEvent,
                                     numberModal: this.state.numberModal, costEvent: this.state.costEvent,

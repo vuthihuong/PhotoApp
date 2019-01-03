@@ -22,7 +22,7 @@ export default class PostModal extends Component {
             checkedGenderModal1: false, checkedGenderModal2: false, countLike: 0, countCommentEvent: 0,
             checkedRightModal1: false, checkedRightModal2: false, countParticipate: 0, currentDay: new Date(),
             checkedRightModal3: false, checkedRightModal4: false, checkedRightModal5: false, countSendReq: 0,
-            content: '', place:'', circle1: '', circle2:'', circle3:'', labelRightModal5: '',
+            content: '', place:'', circle1: '', circle2:'', circle3:'', labelRightModal5: '',  countNotifi: 0,
             labelRightModal1: '', labelRightModal2: '', labelRightModal3: '', labelRightModal4: '', 
             labelErrorCostModal:false, labelErrorCircleModal: false, labelErrorAddressModal: false,
             labelErrorGenderModal: false, labelErrortimeModal: false, labelErrorLessTimeModal: false
@@ -36,6 +36,14 @@ export default class PostModal extends Component {
                    .on('value', function (snapshot) {
           snapshot.forEach(function(childSnapshot) {
                          key = childSnapshot.key; })  
+        })
+
+        this.itemRef.ref('NotifiMain').child(key).on('value', (snapshot) => {
+            var childData = snapshot.val();
+            this.setState({
+                status: childData.status,
+                countNotifi: childData.countNotifi
+            })
         })
     }
 
@@ -242,6 +250,29 @@ export default class PostModal extends Component {
             }).then((snap) => { this.setState({  // id là key của bài viết
                     id: snap.key })
                 if(this.state.id !== ''){ 
+                    var id = this.state.id;
+                    FirebaseApp.database().ref('Customer').on('child_added', (function (snapshotUser) {
+                        if (snapshotUser.key !== key && snapshotUser.val().category === "Mẫu ảnh") {
+                            FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key).child(id).set({
+                                id: id,
+                                title: "Bài viết",
+                                userId: key
+                            })
+                            FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key)
+                                .once('value', (snapshot1) => {
+                                    countNotifi = snapshot1.val().countNotifi
+                                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key)
+                                        .update({
+                                            status: 'new',
+                                            countNotifi: countNotifi + 1 
+                                        })
+                                })
+                        }
+                    }).bind(this))
+                     FirebaseApp.database().ref('Post').child(id).child('tokenCmt')
+                        .child(key).set({
+                            userKey: key
+                        })
                     this.props.navigation.navigate('PostDetailModal', {
                      id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
                     content: this.state.content, cost: this.state.cost, girl: this.state.girl,
@@ -313,6 +344,29 @@ export default class PostModal extends Component {
                         }).then((snap) => { this.setState({  
                                 id: snap.key })
                         if(this.state.id !== ''){ 
+                              var id = this.state.id;
+                            FirebaseApp.database().ref('Customer').on('child_added', (function (snapshotUser) {
+                                if (snapshotUser.key !== key && snapshotUser.val().category === "Mẫu ảnh") {
+                                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key).child(id).set({
+                                        id: id,
+                                        title: "Bài viết",
+                                        userId: key
+                                    })
+                                    FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key)
+                                        .once('value', (snapshot1) => {
+                                            countNotifi = snapshot1.val().countNotifi
+                                            FirebaseApp.database().ref('NotifiMain').child(snapshotUser.key)
+                                                .update({
+                                                    status: 'new',
+                                                    countNotifi: countNotifi + 1 
+                                                })
+                                        })
+                                }
+                            }).bind(this))
+                             FirebaseApp.database().ref('Post').child(id).child('tokenCmt')
+                                .child(key).set({
+                                    userKey: key
+                                })
                             this.props.navigation.navigate('PostDetailModal', {
                             id: this.state.id, userId: key, title: "Tìm mẫu ảnh",
                             content: this.state.content, cost: this.state.cost, girl: this.state.girl,

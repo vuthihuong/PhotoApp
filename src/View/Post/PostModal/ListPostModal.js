@@ -138,6 +138,23 @@ export default class ListPostModal extends Component {
                     });
                     var listItems  = [];
                     this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
+
+                    FirebaseApp.database().ref('NotifiMain').child(id).push({
+                        id: this.props.navigation.state.params.id, //mã bài viết
+                        title: "Agree Participate",
+                        userId: userKey,
+                        contentPost: 'Tìm mẫu ảnh',
+                        username: namePost
+                    })
+                    FirebaseApp.database().ref('NotifiMain').child(id)
+                        .once('value', (snapshot1) => {
+                            countNotifi = snapshot1.val().countNotifi
+                            FirebaseApp.database().ref('NotifiMain').child(id)
+                                .update({
+                                    status: 'new',
+                                    countNotifi: countNotifi + 1
+                                })
+                        })
               }},
             ],
             { cancelable: false }
@@ -163,6 +180,22 @@ export default class ListPostModal extends Component {
                 });
                 var listItems  = [];
                 this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
+                FirebaseApp.database().ref('NotifiMain').child(id).push({
+                    id: this.props.navigation.state.params.id, //mã bài viết
+                    title: "Not Agree Participate",
+                    userId: userKey,
+                    contentPost: 'Tìm mẫu ảnh',
+                    username: namePost
+                })
+                FirebaseApp.database().ref('NotifiMain').child(id)
+                    .once('value', (snapshot1) => {
+                        countNotifi = snapshot1.val().countNotifi
+                        FirebaseApp.database().ref('NotifiMain').child(id)
+                            .update({
+                                status: 'new',
+                                countNotifi: countNotifi + 1
+                            })
+                    })
               }},
             ],
             { cancelable: false }

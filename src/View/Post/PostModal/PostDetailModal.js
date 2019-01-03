@@ -66,6 +66,7 @@ export default class PostDetailModal extends Component {
                          countCommentEvent = childData.countCommentEvent;
                             countParticipate = childData.countParticipate;
                             countLike = childData.countLike
+                            userPost = childData.userId;
                         this.setState({ 
                             countCommentEvent : childData.countCommentEvent,
                             countParticipate : childData.countParticipate,
@@ -132,6 +133,39 @@ export default class PostDetailModal extends Component {
                
                 FirebaseApp.database().ref('Post/').child(this.props.navigation.state.params.id).update({ 
                     countCommentEvent:countCommentEvent+1
+                })
+                FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id).child('tokenCmt')
+                .child(userKey).set({
+                    userKey: userKey
+                })
+
+            FirebaseApp.database().ref('Post').child(this.props.navigation.state.params.id)
+                .child('tokenCmt').once('value', (allToken) => {
+                    if (allToken.val()) {
+                        token = Object.keys(allToken.val());
+                        token.forEach(element => {
+                            if (element !== userKey) {
+                                FirebaseApp.database().ref('NotifiMain').child(element).push({
+                                    id: this.props.navigation.state.params.id, //mã bài viết
+                                    title: "Comment",
+                                    userId: userKey,
+                                    contentPost: 'Tìm mẫu ảnh',
+                                    usernameCmt: username,
+                                    userPost: userPost
+                                })
+                                FirebaseApp.database().ref('NotifiMain').child(element)
+                                    .once('value', (snapshot1) => {
+                                        countNotifi = snapshot1.val().countNotifi
+                                        FirebaseApp.database().ref('NotifiMain').child(element)
+                                            .update({
+                                                status: 'new',
+                                                countNotifi: countNotifi + 1
+                                            })
+                                    })
+                            }
+                        })
+
+                    }
                 })
                 this.setState({ commentModalDetail: ''})
              }

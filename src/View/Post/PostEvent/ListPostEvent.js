@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView, ListView, Alert
 } from 'react-native';
-import CheckBox from 'react-native-checkbox';
 
 import {FirebaseApp} from './../../../Controller/FirebaseConfig'
 
@@ -139,6 +138,22 @@ export default class ListPostEvent extends Component {
                     });
                     var listItems  = [];
                     this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
+                    FirebaseApp.database().ref('NotifiMain').child(id).push({
+                        id: this.props.navigation.state.params.id, //mã bài viết
+                        title: "Agree Participate",
+                        userId: userKey,
+                        contentPost: 'Tạo sự kiện',
+                        username: namePost
+                    })
+                    FirebaseApp.database().ref('NotifiMain').child(id)
+                        .once('value', (snapshot1) => {
+                            countNotifi = snapshot1.val().countNotifi
+                            FirebaseApp.database().ref('NotifiMain').child(id)
+                                .update({
+                                    status: 'new',
+                                    countNotifi: countNotifi + 1
+                                })
+                        })
               }},
             ],
             { cancelable: false }
@@ -164,6 +179,22 @@ export default class ListPostEvent extends Component {
                 });
                 var listItems  = [];
                 this.actGetData('Post/'+this.props.navigation.state.params.id, listItems);
+                FirebaseApp.database().ref('NotifiMain').child(id).push({
+                    id: this.props.navigation.state.params.id, //mã bài viết
+                    title: "Not Agree Participate",
+                    userId: userKey,
+                    contentPost: 'Tạo sự kiện',
+                    username: namePost
+                })
+                FirebaseApp.database().ref('NotifiMain').child(id)
+                    .once('value', (snapshot1) => {
+                        countNotifi = snapshot1.val().countNotifi
+                        FirebaseApp.database().ref('NotifiMain').child(id)
+                            .update({
+                                status: 'new',
+                                countNotifi: countNotifi + 1
+                            })
+                    })
               }},
             ],
             { cancelable: false }
@@ -260,13 +291,13 @@ export default class ListPostEvent extends Component {
                         </View>
                         <View style={stylesListPostEvent.btnConfirmListModal} >
                             <Text style={{color:'black', marginRight: 10, fontWeight: 'bold'}}>Đồng ý</Text>
-                            <CheckBox
+                            {/* <CheckBox
                                 label=''
                                 labelStyle={{color: 'black'}}
                                 checked={this.state.checkedAllAgree}
                                 checkboxStyle = {[stylesListPostEvent.txtBoxListModal, {marginTop: 5}]}
                                 onChange={(checked) => {this.checkAllAgree()}} 
-                            />
+                            /> */}
                         </View>
                         <View style={stylesListPostEvent.btnConfirmListModal} >
                             <Text style={{color:'black', marginRight: 10, fontWeight: 'bold'}}>Từ chối</Text>
