@@ -303,7 +303,7 @@ export default class ListPostPhoto extends Component {
                             <Text style={{ color: 'black', fontWeight: 'bold' }}>Tên người tham gia</Text>
                         </View>
                         <View style={stylesListPostPhoto.btnConfirmListModal} >
-                            <Text style={{ color: 'black', marginRight: 10, fontWeight: 'bold' }}>Đồng ý</Text>
+                            <Text style={{ color: 'black', fontWeight: 'bold' }}>Đồng ý</Text>
                             {/* <CheckBox
                                 label=''
                                 labelStyle={{ color: 'black' }}

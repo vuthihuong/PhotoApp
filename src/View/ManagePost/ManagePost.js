@@ -28,6 +28,7 @@ export default class ManagePost extends Component{
                    .on('value', function (snapshot) {
           snapshot.forEach(function(childSnapshot) {
                          userKey = childSnapshot.key;
+                         category = childSnapshot.val().category
           })  
         })
             this.actGetData();
@@ -168,9 +169,10 @@ export default class ManagePost extends Component{
        return(
         <ScrollView style={{flex:1, backgroundColor: 'white'}}>
           <View style = { stylesManagCont.containerManagCont }>
+          {(category === "Người thuê chụp ảnh" || category === "Nháy ảnh")?
             <TouchableOpacity onPress={()=> this.changeStatusListModal()}>
                <Text style={{color: 'black', fontWeight: 'bold'}}>Các bài tìm mẫu ảnh</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>:null}
            
             {this.state.statusViewListModal === true?
             <ListView  enableEmptySections
@@ -241,10 +243,10 @@ export default class ManagePost extends Component{
                             </View>:null}
                         </View>}
                 /> : null}
-           
+           {(category === "Người thuê chụp ảnh" || category === "Mẫu ảnh")?
             <TouchableOpacity onPress={()=> this.changeStatusListPhoto()}>
                 <Text style={{color: 'black', fontWeight: 'bold', marginTop: 15}}>Các bài tìm nháy ảnh</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>:null}
            {this.state.statusViewListPhoto === true ?
             <ListView   enableEmptySections
                     dataSource = {this.state.dataSource}

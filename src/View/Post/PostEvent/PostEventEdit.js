@@ -278,9 +278,9 @@ export default class PostEventEdit extends Component {
                                 
                         </View>
                         <View style={[stylesPostEvent.title, stylesPostEvent.buttonCreate]}>
-                            <TouchableOpacity style={stylesPostEvent.btnPostEvent}>
+                            {/* <TouchableOpacity style={stylesPostEvent.btnPostEvent}>
                                 <Text style={stylesPostEvent.txtBtnEvent}>Gửi yêu cầu</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                             <TouchableOpacity style={stylesPostEvent.btnPostEvent}
                                 onPress={() => this.editPostEvent()}>
                                 <Text style={stylesPostEvent.txtBtnEvent}>Tạo</Text>
@@ -330,7 +330,7 @@ export default class PostEventEdit extends Component {
             borderColor: 'black',   borderWidth: 1
         },
         btnPostEvent: {
-            width: 150, height: 30, borderRadius: 10, 
+            width: 330, height: 30, borderRadius: 10, 
             backgroundColor: '#EE3B3B'
          },
         txtBtnEvent: {

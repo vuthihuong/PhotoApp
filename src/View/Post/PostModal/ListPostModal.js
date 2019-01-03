@@ -287,14 +287,14 @@ export default class ListPostModal extends Component {
                             <Text style={{color: 'black', fontWeight: 'bold'}}>Tên người tham gia</Text>
                         </View>
                         <View style={stylesListPostModal.btnConfirmListModal} >
-                            <Text style={{color:'black', marginRight: 10, fontWeight: 'bold'}}>Đồng ý</Text>
-                            <CheckBox
+                            <Text style={{color:'black', fontWeight: 'bold'}}>Đồng ý</Text>
+                            {/* <CheckBox
                                 label=''
                                 labelStyle={{color: 'black'}}
                                 checked={this.state.checkedAllAgree}
                                 checkboxStyle = {[stylesListPostModal.txtBoxListModal, {marginTop: 5}]}
                                 onChange={(checked) => {this.checkAllAgree()}} 
-                            />
+                            /> */}
                         </View>
                         <View style={stylesListPostModal.btnConfirmListModal} >
                             <TouchableOpacity style={{marginRight: 20}} >
