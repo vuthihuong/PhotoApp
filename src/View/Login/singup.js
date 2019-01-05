@@ -634,19 +634,6 @@ export default class Signup extends Component {
         }
        
     render() {   
-        let data = [{
-            value: 'Hà Nội',
-          }, {
-            value: 'Hải Dương',
-          }, {
-            value: 'Hải Phòng',
-          }, {
-            value: 'Quảng Ninh',
-          }, {
-            value: 'Nam Định',
-          }, {
-            value: 'Hồ Chí Minh',
-          }];
         return (
             <View style={stylesSignUp.container}>
                 <View style={stylesSignUp.headerSignup}>
