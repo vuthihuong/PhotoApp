@@ -6,7 +6,6 @@ import {
 
 import { Dropdown } from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker'
-import CheckBox from 'react-native-checkbox';
 import gobackIcon from '../../../assets/img/info/goback.png'
 import { FirebaseApp } from './../../../Controller/FirebaseConfig'
 
