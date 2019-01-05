@@ -354,12 +354,12 @@ export default class SearchListPhoto extends Component {
             })
             // thêm user đã thích nháy ảnh vào bảng của nháy ảnh
             FirebaseApp.database().ref('Customer').child(id)
-                .child('ListUserLove').push({
+                .child('ListUserLove').child(userKey).set({
                     colorLovePhoto: '#EE3B3B', userId: userKey
                 })
             //thêm nháy ảnh đã thích vào bảng của user
             FirebaseApp.database().ref('Customer').child(userKey)
-                .child('ListUserLove').push({
+                .child('ListUserLove').child(id).set({
                     colorLovePhoto: '#EE3B3B', userId: id
                 })
             alert('Đã thêm nhiếp ảnh gia vào danh sách yêu thích của bạn');

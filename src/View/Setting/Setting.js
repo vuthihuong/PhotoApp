@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native'
+import { FirebaseApp } from './../../Controller/FirebaseConfig'
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from "react-native-fcm";
 
 export default class Setting extends Component {
     constructor() {
@@ -15,8 +17,13 @@ export default class Setting extends Component {
       change1(){
           if(this.state.isOn1 === false){ 
               this.setState({
-                  isOn1: true
+                  isOn1: true, 
               })
+              FCM.requestPermissions();
+
+              FCM.getFCMToken().then(token => {
+                FirebaseApp.database().ref('tokenPostEvent').child(token).set({token: token})
+              });
           }
           else if(this.state.isOn1 === true){ 
               this.setState({
@@ -29,6 +36,11 @@ export default class Setting extends Component {
                 this.setState({
                     isOn2: true
                 })
+                FCM.requestPermissions();
+
+                FCM.getFCMToken().then(token => {
+                    FirebaseApp.database().ref('tokenPostPhoto').child(token).set({token: token})
+                });
             }
             else if(this.state.isOn2 === true){ 
                 this.setState({
@@ -41,6 +53,11 @@ export default class Setting extends Component {
             this.setState({
                 isOn3: true
             })
+            FCM.requestPermissions();
+
+            FCM.getFCMToken().then(token => {
+                FirebaseApp.database().ref('tokenPostModal').child(token).set({token: token})
+            });
         }
         else if(this.state.isOn3 === true){ 
             this.setState({
