@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert} from 'react-native'
 import {FirebaseApp} from './../../Controller/FirebaseConfig'
+import firebase from '@firebase/app'
 
 import gobackIcon from '../../assets/img/info/goback.png'
 import lock from '../../assets/img/info/lock.png'
@@ -29,28 +30,60 @@ export default class ResetPass extends Component {
         })
     }
     save(){ 
-        let user = FirebaseApp.auth().currentUser;
-            if((this.state.oldPass === oldPass) && (this.state.reNewPass === this.state.newPass) 
-                        && this.state.newPass.length >=6){
-                user.updatePassword(this.state.newPass).then(() => {
-                        // Update successful.
-                        }, (error) => {
-                        // An error happened.
-                        });
-                    FirebaseApp.database().ref('Customer/'+key).update({
-                        password: this.state.newPass
-                    });
-                Alert.alert('Thay đổi thông tin thành công')
-            }
-            else if(this.state.oldPass !== oldPass){ 
-                Alert.alert('Nhập mật khẩu cũ không đúng')
-            }
-            else if( this.state.reNewPass !== this.state.newPass){ 
-                Alert.alert("Nhập xác nhận mật khẩu không trùng khớp mật khẩu mới")
-            }
-            else if(this.state.newPass.length < 6){ 
-                Alert.alert("Mật khẩu có ít nhất 6 ký tự")
-            }
+        const currentPass = this.state.oldPass
+        if(currentPass !== ''){ 
+            const emailCred  = firebase.auth.EmailAuthProvider.credential(
+                firebase.auth().currentUser.email, currentPass);
+                FirebaseApp.auth().currentUser.reauthenticateWithCredential(emailCred)
+                .then(() => {
+                // User successfully reauthenticated.
+                if( this.state.reNewPass !== this.state.newPass){ 
+                    Alert.alert("Nhập xác nhận mật khẩu không trùng khớp mật khẩu mới")
+                }
+                else if(this.state.newPass.length < 6){ 
+                    Alert.alert("Nhập mật khẩu mới có ít nhất 6 ký tự")
+                }
+                else {
+                    const newPass = this.state.newPass
+                    Alert.alert('Thay đổi thông tin thành công')
+                     FirebaseApp.auth().currentUser.updatePassword(newPass);
+                      this.setState({ 
+                            oldPass: '', newPass: '', reNewPass: ''
+                        })
+                }
+               
+                })
+                .catch(error => {
+                        Alert.alert('Nhập mật khẩu cũ không đúng')
+                })
+        }
+        else if(currentPass === '' || this.state.newPass === '' || this.state.reNewPass === '') { 
+            alert('Chưa nhập đầy đủ thông tin')
+        }
+       
+        
+        // let user = FirebaseApp.auth().currentUser;
+        //     if((this.state.oldPass === oldPass) && (this.state.reNewPass === this.state.newPass) 
+        //                 && this.state.newPass.length >=6){
+        //         user.updatePassword(this.state.newPass).then(() => {
+        //                 // Update successful.
+        //                 }, (error) => {
+        //                 // An error happened.
+        //                 });
+        //             FirebaseApp.database().ref('Customer/'+key).update({
+        //                 password: this.state.newPass
+        //             });
+        //         Alert.alert('Thay đổi thông tin thành công')
+        //     }
+        //     else if(this.state.oldPass !== oldPass){ 
+        //         Alert.alert('Nhập mật khẩu cũ không đúng')
+        //     }
+        //     else if( this.state.reNewPass !== this.state.newPass){ 
+        //         Alert.alert("Nhập xác nhận mật khẩu không trùng khớp mật khẩu mới")
+        //     }
+        //     else if(this.state.newPass.length < 6){ 
+        //         Alert.alert("Mật khẩu có ít nhất 6 ký tự")
+        //     }
 
            
       }

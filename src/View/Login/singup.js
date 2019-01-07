@@ -569,7 +569,6 @@ export default class Signup extends Component {
                         addressCity: addressCity,
                         addresDist: addresDist,
                         telephone: telephone,
-                        password: password,
                         category: category, circle1: circle1,
                         circle2: circle2, circle3: circle3,
                         heightt: heightt, weight: weight,
@@ -590,7 +589,6 @@ export default class Signup extends Component {
                         addresDist: addresDist,
                         address: address,
                         telephone: telephone, 
-                        password: password,
                         category: category, countLove: 0,
                         avatarSource: avatarSource
                     })
@@ -603,7 +601,6 @@ export default class Signup extends Component {
                         addresDist: addresDist,
                         address: address,
                         telephone: telephone, 
-                        password: password,
                         category: category, countLove: 0,
                         avatarSource: avatarSource, 
                         labelCatImg1: '', labelCatImg3: '', labelCatImg5: '', labelCatImg7: '', labelCatImg9: '',
