@@ -6,7 +6,7 @@ import {
 
 // import { CheckBox } from 'react-native-elements'
 
-import iconInfo from '../../assets/img/info/iconInfo.png'
+import iconUser from '../../assets/img/info/icon_info.png'
 import like from '../../assets/img/info/heart.png'
 import iconGender from '../../assets/img/info/gender.png'
 import dateBirth from '../../assets/img/info/icon_date_birth.png'
@@ -28,30 +28,29 @@ export default class InfoDetailCustomer extends Component{
             <View style={stylesInfoDetailModal.container}>
                
                 <View style={stylesInfoDetailModal.headDetailPhoto}>
-                    <Image source={this.props.navigation.state.params.avatarSource} style={{width: 70, height: 70}}/>
-                    <View style={stylesInfoDetailModal.proDetail} >
-                        <Text style={{color: 'black', marginLeft: 5}}>{this.props.navigation.state.params.username}</Text>
-                         <View>
-                            <View style={{flexDirection: 'row'}}>
-                                <Image source={iconGender} style={{width: 30, height: 30,}} />
-                                <Text style={{fontSize: 13, color: 'black',marginTop: 5}}>{this.props.navigation.state.params.gender}</Text>
-                            </View>
-                              
-                        </View>
-                        <View>
-                            <View style={{flexDirection: 'row'}}>
-                                <Image source={dateBirth} style={{width: 20, height: 20, marginTop: 5, }} />
-                                <Text style={{fontSize: 13, color: 'black',marginTop: 7}}>{this.props.navigation.state.params.date}</Text>
-                            </View>
-                                
-                        </View>
-                      
-                    </View>
+                    <Image source={this.props.navigation.state.params.avatarSource} style={{width: 150, height: 150}}/>                 
                 </View>
                 <View style={stylesInfoDetailModal.bodyDetailPhoto}>
-                    <View style={{flexDirection:'row'}}>
-                        <Image source={address} style={{width: 30, height: 30, marginTop: -5}} />
-                        <Text style={{fontSize: 13, color: 'black'}}>
+                     <View style={{flexDirection:'row', marginTop: 10}}>
+                        <Image style={{width: 40, height: 40, marginRight: 10}} source={iconUser}/>
+                        <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>
+                             {this.props.navigation.state.params.username}
+                        </Text>
+                     </View>
+                     <View style={{flexDirection:'row', marginTop: 10}}>
+                        <Image source={iconGender} style={{width: 40, height: 40, marginRight: 10}} />
+                        <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>
+                             {this.props.navigation.state.params.gender}
+                        </Text>
+                     </View>
+                     <View style={{flexDirection:'row', marginTop: 10}}>
+                            <Image source={dateBirth} style={{width: 40, height: 40, marginTop: -5, marginRight: 10}} />
+                            <Text style={{fontSize: 13, color: 'black',marginTop: 7}}>
+                                {this.props.navigation.state.params.date}</Text>
+                     </View>
+                    <View style={{flexDirection:'row', marginTop: 10}}>
+                        <Image source={address} style={{width: 40, height: 40, marginRight: 10}} />
+                        <Text style={{fontSize: 13, color: 'black', marginTop: 10}}>
                         {this.props.navigation.state.params.address !== ''? 
                             this.props.navigation.state.params.address + ', ':null}
                             {this.props.navigation.state.params.addresDist !== ''?
@@ -59,18 +58,6 @@ export default class InfoDetailCustomer extends Component{
                             {this.props.navigation.state.params.addressCity !== ''?
                             this.props.navigation.state.params.addressCity :null}
                         </Text>
-                     </View>
-                     <View style={{flexDirection:'row'}}>
-                        {/* <Image source={address} style={{width: 30, height: 30, marginTop: -5}} /> */}
-                        <Text style={{fontSize: 13, color: 'black', marginLeft: 10}}>Số đo 3 vòng</Text>
-                     </View>
-                     <View style={{flexDirection:'row'}}>
-                        {/* <Image source={height} style={{width: 15, height: 15, marginTop: -5}} /> */}
-                        <Text style={{fontSize: 13, color: 'black', marginLeft: 10}}>Chiều cao</Text>
-                     </View>
-                     <View style={{flexDirection:'row'}}>
-                        {/* <Image source={weight} style={{width: 30, height: 30, marginTop: -5}} /> */}
-                        <Text style={{fontSize: 13, color: 'black', marginLeft: 10}}>Cân nặng</Text>
                      </View>
                 </View>
             </View>
@@ -97,30 +84,6 @@ stylesInfoDetailModal = StyleSheet.create({
     },
     bodyDetailPhoto: {
         marginLeft: 20, marginTop: 20
-    },
-    textBody: {
-        flexDirection: 'row',
-       marginTop: 10, marginRight: 5
-    },
-    imgCheckInfoPhoto: {
-        width: 15, height: 15, marginLeft: 20, tintColor: '#EE3B3B'
-    },
-    txtCheckInfoPhoto: {
-        fontSize: 13, color: 'black', marginLeft: 20, 
-},
-    price: {
-        alignItems: 'center',
-        marginTop: 20
-    },
-    tbl: { 
-          paddingTop: 20,
-          marginBottom: 20, marginRight: 10
-    },
-    headTbl: {
-         height: 40,
-        },
-    textTbl: {
-         margin: 6 , color: 'black',
-        }
+    }
 
 })
