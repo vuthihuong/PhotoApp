@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, YellowBox,
-            ScrollView, TextInput, ListView
+            ScrollView, TextInput, ListView, TouchableWithoutFeedback 
     } from 'react-native';
+    import ImageCarousel from 'react-native-image-carousel';
 
 import { Dropdown } from 'react-native-material-dropdown';
 import CheckBox from 'react-native-checkbox';
@@ -13657,9 +13658,12 @@ export default class AlbumPose extends Component{
                                                 justifyContent: 'space-between'}}
                                     dataSource = {this.state.dataSource}
                                     renderRow = {(rowData)=> 
-                                        <View>
-                                            <WebImage source= {{uri: `${rowData.url}`}}   resizeMode={'cover'}  style={{height: 160, width: 160, marginBottom:10, flex:1}} />
-                                        </View>
+                                       <ImageCarousel >
+                                         <Image style={{height: 300, width: 350, marginBottom:10, flex:1}}
+                                           source={{ uri: `${rowData.url}`, height: 100 }}
+                                           resizeMode={'cover'}
+                                         />
+                                     </ImageCarousel>
                                     }
                                 />
                             </View>
