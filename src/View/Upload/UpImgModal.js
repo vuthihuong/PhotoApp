@@ -26,7 +26,7 @@ export default class UpImgModal extends Component {
         let img = this.state.avatarSource = null? null:
         <Image 
            source={this.state.avatarSource}
-           style={{width: 125, height: 125}} />
+           style={{height: 110, width: 105}} />
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
             <View style={stylesUpImgModal.container}>

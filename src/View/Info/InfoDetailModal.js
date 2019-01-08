@@ -14,6 +14,11 @@ import address from '../../assets/img/info/location.png'
 import gobackIcon from '../../assets/img/info/goback.png'
 
 export default class InfoDetailModal extends Component{
+     showAlbumImg(){ 
+        this.props.navigation.navigate('AlbumImgInfo', { 
+            id: this.props.navigation.state.params.id, //id là userKey của nháy ảnh
+        })
+    }
     render(){
         return(
           <ScrollView style={{flex:1, backgroundColor: 'white'}}>
@@ -70,6 +75,12 @@ export default class InfoDetailModal extends Component{
                     <Text style={{fontSize: 13, color: 'black', marginLeft: 10}}>
                     Chiều cao: {this.props.navigation.state.params.heightt} (cm)</Text>
                 </View>
+                    <TouchableOpacity onPress = {()=> this.showAlbumImg()}
+                        style={{ alignItems: 'center',}}>
+                        <Text style={{fontSize: 13, color: '#EE3B3B', textDecorationLine: 'underline', 
+                         marginTop: 20}}>
+                                    Album ảnh</Text>
+                    </TouchableOpacity>
             </View>
         </View>
     </ScrollView>
