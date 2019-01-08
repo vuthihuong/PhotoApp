@@ -85,7 +85,6 @@ export default class InfoCustomer extends Component {
                 date = (childData.date)
                 email = (childData.email)
                 gender = (childData.gender)
-                password = (childData.password)
                 telephone = (childData.telephone)
                 avatarSource = (childData.avatarSource)
                 

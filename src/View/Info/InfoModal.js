@@ -82,7 +82,6 @@ export default class InfoModal extends Component {
               date = (childData.date)
               email = (childData.email)
               gender = (childData.gender)
-              password = (childData.password)
               telephone = (childData.telephone)
               circle1 = (childData.circle1)
               circle2 = (childData.circle2)

@@ -21,8 +21,6 @@ export default class ResetPass extends Component {
                    .on('value', function (snapshot) {
           snapshot.forEach(function(childSnapshot) {
                          key = childSnapshot.key;
-            var childData = childSnapshot.val();
-                oldPass = childData.password
           })  
         })
         this.setState({

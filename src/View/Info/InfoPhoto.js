@@ -83,7 +83,6 @@ export default class InfoPhoto extends Component {
                     date = (childData.date)
                     email = (childData.email)
                     gender = (childData.gender)
-                    password = (childData.password)
                     telephone = (childData.telephone)
                     avatarSource = (childData.avatarSource)
                     labelCatImg1 = (childData.labelCatImg1)
