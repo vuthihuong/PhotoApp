@@ -35,10 +35,17 @@ export default class SearchPhoto extends Component {
         }
     }
     btnSearchPhoto() {
-        this.props.navigation.navigate('SearchListPhoto', {
-            addressCity: this.state.addressCity, addresDist: this.state.addresDist,
-            valueCat: this.state.valueCat, valueCost: this.state.valueCost
-        })
+         if(this.state.addressCity === '' && this.state.addresDist === ''
+            && this.state.valueCat === '' && this.state.valueCost === ''){ 
+            alert('Chọn ít nhất một trong các trường dữ liệu')
+        }
+        else { 
+            this.props.navigation.navigate('SearchListPhoto', {
+                addressCity: this.state.addressCity, addresDist: this.state.addresDist,
+                valueCat: this.state.valueCat, valueCost: this.state.valueCost
+            })
+        }
+       
         this.setState({
             addressCity: '', addresDist: '', valueCat: '', valueCost: ''
         })

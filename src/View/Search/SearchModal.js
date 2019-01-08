@@ -33,10 +33,16 @@ export default class SearchModal extends Component {
         }
     }
     btnSearchModal() {
-        this.props.navigation.navigate('SearchListModal', {
-            addressCity: this.state.addressCity, addresDist: this.state.addresDist,
-            valueHeight: this.state.valueHeight
-        })
+        if(this.state.addressCity === '' && this.state.addresDist === '' && this.state.valueHeight === ''){ 
+            alert('Chọn ít nhất một trong các trường dữ liệu')
+        }
+        else { 
+            this.props.navigation.navigate('SearchListModal', {
+                addressCity: this.state.addressCity, addresDist: this.state.addresDist,
+                valueHeight: this.state.valueHeight
+            })
+        }
+       
         this.setState({
             addressCity: '', addresDist: '',  valueHeight: ''
         })
