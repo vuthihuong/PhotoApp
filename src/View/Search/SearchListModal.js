@@ -270,7 +270,7 @@ export default class SearchListModal extends Component {
                                             })}
                                             style={stylesSearchListModel.contManagCont}>
                                             <Text style={stylesSearchListModel.txtManagCont}>{rowData.username} </Text>
-                                            <Text style={stylesSearchListModel.txtManagCont}>Địa điểm: {rowData.addresDist} </Text>
+                                            {/* <Text style={stylesSearchListModel.txtManagCont}>Địa điểm: {rowData.addresDist} </Text> */}
                                         </TouchableOpacity>
                                         <View style={stylesSearchListModel.txtConfirm}>
                                             <TouchableOpacity style={{ alignItems: 'center' }}
@@ -302,7 +302,7 @@ export default class SearchListModal extends Component {
                                         })}
                                         style={stylesSearchListModel.contManagCont}>
                                         <Text style={stylesSearchListModel.txtManagCont}>{rowData.username} </Text>
-                                        <Text style={stylesSearchListModel.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
+                                        {/* <Text style={stylesSearchListModel.txtManagCont}>Địa điểm: {rowData.addresDist}</Text> */}
                                     </TouchableOpacity>
                                     <View style={stylesSearchListModel.txtConfirm}>
                                         <TouchableOpacity style={{ alignItems: 'center' }}
@@ -335,7 +335,7 @@ export default class SearchListModal extends Component {
                                         })}
                                         style={stylesSearchListModel.contManagCont}>
                                         <Text style={stylesSearchListModel.txtManagCont}>{rowData.username} </Text>
-                                        <Text style={stylesSearchListModel.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
+                                        {/* <Text style={stylesSearchListModel.txtManagCont}>Địa điểm: {rowData.addresDist}</Text> */}
                                     </TouchableOpacity>
                                     <View style={stylesSearchListModel.txtConfirm}>
                                         <TouchableOpacity style={{ alignItems: 'center' }}
@@ -374,6 +374,6 @@ stylesSearchListModel = StyleSheet.create({
         color: 'black', fontSize: 12, fontWeight: "bold"
     },
     txtManagCont: {
-        color: 'black'
+        color: 'black', marginTop: 15
     }
 })

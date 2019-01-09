@@ -223,9 +223,9 @@ sendMess(userModal, username, category){
                                 <Text style={{color: 'black', fontWeight: 'bold'}}>{rowData.username}</Text>
                                 <View style={stylesFavorModal.likeperson}>
                                     <Image source ={heart} style={stylesFavorModal.imgFavor} />
-                                    <Text style={{marginTop: 10, color: 'black'}}>{rowData.countLove}</Text>
+                                    {/* <Text style={{marginTop: 10, color: 'black'}}>{rowData.countLove}</Text>
                                     <Image source ={comment} style={[stylesFavorModal.imgFavor,{marginLeft: 20}]} />
-                                    <Text style={{marginTop: 10, color: 'black'}}>1</Text>
+                                    <Text style={{marginTop: 10, color: 'black'}}>1</Text> */}
                                 </View>
                             </View>
                         </TouchableOpacity>

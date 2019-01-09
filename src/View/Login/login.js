@@ -74,7 +74,7 @@ export  default  class Login extends Component {
                         <TextInput  
                         // placeholderTextColor="black" underlineColorAndroid='black'
                             style={stylesLogin.textInputLogin}
-                            placeholder="Nhập số điện thoại"
+                            placeholder="Nhập email"
                             // onChangeText={(name) => this.setState({ name })}  
                             onChangeText={(email) => this.setState({ email })}     
                             value={this.state.email}                           

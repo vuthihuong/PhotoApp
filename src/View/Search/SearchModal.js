@@ -140,7 +140,7 @@ export default class SearchModal extends Component {
                                      marginRight: 10, marginTop: 10 }} />
                                 <Text style={{ fontSize: 13, color: 'black', marginTop: 10 }}>Chiều cao</Text>
                             </View>
-                            <View style={{ width: 250 }}>
+                            <View style={{ width: 240, marginLeft: 10 }}>
                                 <Dropdown data={dataHeight} pickerStyle={{ borderWidth: 1, borderColor: 'black' }}
                                     value={this.state.valueHeight} fontSize={13}
                                     onChangeText={(valueHeight) => { valueHeight = this.setState({ valueHeight }) }} />

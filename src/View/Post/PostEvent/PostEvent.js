@@ -341,7 +341,7 @@ export default class PostEvent extends Component {
                             </View>
                             <View style={stylesPostEvent.title}>
                                 <Text style={[stylesPostEvent.txtPostEvent]}>Chi phí tham gia (VNĐ)</Text>
-                                <TextInput  style={{width: 230, marginTop: -10}}
+                                <TextInput  style={{width: 150, marginTop: -10}}
                                 onChangeText={(costEvent) => this.setState({ costEvent })} >
                                 {this.state.costEvent}</TextInput>
                                 

@@ -591,6 +591,11 @@ export default class Signup extends Component {
                         telephone: telephone, 
                         category: category, countLove: 0,
                         avatarSource: avatarSource
+                    }).then((snap)=> { 
+                        this.itemRef.ref('NotifiMain').child(snap.key).set({ 
+                            countNotifi: 0, 
+                            status: 'old'
+                        })
                     })
                 }
                 else if(this.state.checkedCategory2 === true){ 
@@ -605,6 +610,11 @@ export default class Signup extends Component {
                         avatarSource: avatarSource, 
                         labelCatImg1: '', labelCatImg3: '', labelCatImg5: '', labelCatImg7: '', labelCatImg9: '',
                         labelCatImg2: '', labelCatImg4: '', labelCatImg6: '', labelCatImg8: '', 
+                    }).then((snap)=> { 
+                        this.itemRef.ref('NotifiMain').child(snap.key).set({ 
+                            countNotifi: 0, 
+                            status: 'old'
+                        })
                     })
                 }
                 

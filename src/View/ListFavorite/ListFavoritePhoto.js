@@ -240,8 +240,8 @@ export default class ListFavoritePhoto extends Component {
                                         <View style={stylesFavorPhoto.likeperson}>
                                             <Image source={heart} style={stylesFavorPhoto.imgFavor} />
                                             <Text style={{ marginTop: 10, color: 'black' }}>{rowData.countLove}</Text>
-                                            <Image source={comment} style={[stylesFavorPhoto.imgFavor, { marginLeft: 20 }]} />
-                                            <Text style={{ marginTop: 10, color: 'black' }}>1</Text>
+                                            {/* <Image source={comment} style={[stylesFavorPhoto.imgFavor, { marginLeft: 20 }]} />
+                                            <Text style={{ marginTop: 10, color: 'black' }}>1</Text> */}
                                         </View>
                                     </View>
                                 </TouchableOpacity>

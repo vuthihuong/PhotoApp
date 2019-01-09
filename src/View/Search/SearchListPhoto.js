@@ -534,7 +534,7 @@ export default class SearchListPhoto extends Component {
                                             })}
                                             style={stylesSearchListPhoto.contManagCont}>
                                             <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
-                                            <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist} </Text>
+                                            {/* <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist} </Text> */}
                                         </TouchableOpacity>
                                         <View style={stylesSearchListPhoto.txtConfirm}>
                                             <TouchableOpacity style={{ alignItems: 'center' }}
@@ -569,7 +569,7 @@ export default class SearchListPhoto extends Component {
                                         })}
                                         style={stylesSearchListPhoto.contManagCont}>
                                         <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
-                                        <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
+                                        {/* <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text> */}
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
                                         <TouchableOpacity style={{ alignItems: 'center' }}
@@ -604,7 +604,7 @@ export default class SearchListPhoto extends Component {
                                         })}
                                         style={stylesSearchListPhoto.contManagCont}>
                                         <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
-                                        <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
+                                        {/* <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text> */}
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
                                         <TouchableOpacity style={{ alignItems: 'center' }}
@@ -639,7 +639,7 @@ export default class SearchListPhoto extends Component {
                                         })}
                                         style={stylesSearchListPhoto.contManagCont}>
                                         <Text style={stylesSearchListPhoto.txtManagCont}>{rowData.username} </Text>
-                                        <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text>
+                                        {/* <Text style={stylesSearchListPhoto.txtManagCont}>Địa điểm: {rowData.addresDist}</Text> */}
                                     </TouchableOpacity>
                                     <View style={stylesSearchListPhoto.txtConfirm}>
                                         <TouchableOpacity style={{ alignItems: 'center' }}
@@ -677,6 +677,6 @@ stylesSearchListPhoto = StyleSheet.create({
         color: 'black', fontSize: 12, fontWeight: "bold"
     },
     txtManagCont: {
-        color: 'black'
+        color: 'black', marginTop: 15
     }
 })

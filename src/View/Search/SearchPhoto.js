@@ -143,7 +143,7 @@ export default class SearchPhoto extends Component {
                                      marginRight: 10, marginTop: 10 }} />
                                 <Text style={{ fontSize: 13, color: 'black', marginTop: 10 }}>Giá</Text>
                             </View>
-                            <View style={{ width: 250 }}>
+                            <View style={{ width: 240, marginLeft: 10 }}>
                                 <Dropdown data={dataCost} pickerStyle={{ borderWidth: 1, borderColor: 'black' }}
                                     value={this.state.valueCost} fontSize={13}
                                     onChangeText={(valueCost) => { valueCategoryPhoto1 = this.setState({ valueCost }) }} />
@@ -157,7 +157,7 @@ export default class SearchPhoto extends Component {
                                     width: 20, height: 20, marginRight: 10, marginTop: 10 }} />
                                 <Text style={{ fontSize: 13, color: 'black', marginTop: 10 }}>Thể loại</Text>
                             </View>
-                            <View style={{ width: 250 }}>
+                            <View style={{ width: 240, marginLeft: 10 }}>
                                 <Dropdown data={dataCat} pickerStyle={{ borderWidth: 1, borderColor: 'black' }}
                                     value={this.state.valueCat} fontSize={13}
                                     onChangeText={(valueCat) => { valueCategoryPhoto1 = this.setState({ valueCat }) }} />
